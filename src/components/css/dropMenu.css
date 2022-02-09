@@ -1,0 +1,237 @@
+.dropMenu {
+  position: relative;
+  box-sizing: border-box;
+}
+.dropMenu .menu-select-filter:before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  top: 7px;
+  left: 4px;
+  border-radius: 100%;
+  position: absolute;
+  background-color: #787885;
+}
+.dropMenu .color-91d100:before {
+  background-color: #91d100;
+}
+.dropMenu .color-515151:before {
+  background-color: #515151;
+}
+.dropMenu .color-fd7777:before {
+  background-color: #fd7777;
+}
+.dropMenu .color-e2d317:before {
+  background-color: #e2d317;
+}
+.dropMenu .color-c6b922:before {
+  background-color: #c6b922;
+}
+.dropMenu .color-928c42:before {
+  background-color: #928c42;
+}
+.dropMenu .color-2c8b11:before {
+  background-color: #2c8b11;
+}
+.dropMenu .color-00CC00:before {
+  background-color: #00cc00;
+}
+.dropMenu .color-da291c:before {
+  background-color: #da291c;
+}
+.dropMenu .color-FF0000:before {
+  background-color: #ff0000;
+}
+.dropMenu .color-form:before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  border-radius: 2px;
+  left: 0;
+  opacity: 0.75;
+  bottom: 0px;
+}
+.dropMenu .color-form {
+  position: relative;
+}
+.dropMenu .btnDelete-api-key {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  top: -2px;
+  background-color: transparent;
+  border: none;
+}
+.dropMenu .btnDelete-api-key svg {
+  opacity: 0.7;
+}
+.dropMenu .btn-menu-input {
+  position: absolute;
+  bottom: -35px;
+  width: 100%;
+  display: flex;
+  visibility: hidden;
+  align-items: center;
+  opacity: 0;
+  z-index: 22;
+  height: 33px;
+  background-color: white;
+  box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid #d9d9d9;
+}
+.dropMenu .btn-menu-input input {
+  width: 100%;
+  height: 18px;
+  outline: none;
+  opacity: 0.5;
+  font-weight: 300;
+  border: none;
+}
+.dropMenu .btn-menu-input div {
+  display: inline-block;
+  right: 2px;
+  padding-top: 2px;
+  cursor: default;
+  padding-left: 3px;
+  padding-right: 3px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.dropMenu .btn-menu-input.toggle {
+  visibility: visible;
+  opacity: 1;
+  bottom: 1px;
+  transition: 0.3s;
+}
+.dropMenu .btn-menu {
+  width: max-content;
+  position: relative;
+  cursor: pointer;
+  padding: 6px 5px;
+  display: flex;
+  top: 1px;
+  padding-right: 15px;
+}
+.dropMenu .btn-menu:before {
+  content: "";
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  background-image: url("../../img/arrow-down.svg");
+  right: 1px;
+  top: 10px;
+  opacity: 0.8;
+}
+.dropMenu .btn-menu span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 170px;
+}
+.dropMenu .btn-menu:hover:not(.btnDelete-api-key) {
+  opacity: 0.5;
+}
+.dropMenu .btn-menu.status-crm-btn {
+  width: 180px;
+  padding: 10px;
+}
+.dropMenu .btn-menu.status-crm-btn:before {
+  content: "";
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  right: 18px;
+  top: 13px;
+}
+.dropMenu .another-style {
+  padding: 10px;
+}
+.dropMenu .another-style:before {
+  content: "";
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  right: 11px;
+  top: 13px;
+}
+.dropMenu .another-style.btn-menu {
+  width: inherit;
+}
+.dropMenu .block-menu {
+  position: absolute;
+  top: 0;
+  list-style: none;
+  padding-left: 0;
+  background-color: #ffffff;
+  box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  height: 90px;
+  margin: 0;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 22;
+  overflow-x: hidden;
+}
+.dropMenu .block-menu .simplebar-track.simplebar-vertical {
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+.dropMenu .block-menu .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
+  background: rgba(0, 0, 0, 0.3);
+  width: 3px;
+  border-radius: 5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.dropMenu .block-menu .simplebar-scrollbar.simplebar-visible:before {
+  opacity: 1;
+}
+.dropMenu .block-menu .simplebar-content-wrapper {
+  padding: 0;
+}
+.dropMenu .block-menu-toggle {
+  visibility: visible;
+  opacity: 1;
+  top: 24px;
+  transition: 0.3s;
+}
+.dropMenu .block-menu-another-toggle {
+  visibility: visible;
+  opacity: 1;
+  top: 34px;
+  transition: 0.3s;
+}
+.dropMenu .menu-list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 22px;
+  justify-content: space-between;
+  cursor: pointer;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+.dropMenu .menu-list:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+.dropMenu .menu-list:first-child {
+  margin-top: 3px;
+}
+.dropMenu .menu-list:last-child {
+  margin-bottom: 3px;
+}
+.dropMenu .menu-list span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 600px;
+}

@@ -1,0 +1,27 @@
+.np-ttn-default {
+  margin-top: 15px;
+  border-collapse: collapse;
+}
+.np-ttn-default td {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.8);
+  padding: 0;
+  min-width: 163px;
+  white-space: nowrap;
+  padding-right: 22px;
+}
+.np-ttn-default tr td:last-child {
+  min-width: 190px;
+  max-width: 190px;
+}
+.np-ttn-default td:last-child {
+  font-size: 12px;
+  font-weight: 300;
+}
+.np-ttn-default tr {
+  height: 26px;
+}
+.np-ttn-default tr:last-child td {
+  padding-top: 24px;
+}
