@@ -1,50 +1,158 @@
 .np-auto-order {
-  border-collapse: collapse;
+  border-spacing: 0px;
 }
-.np-auto-order td {
+.np-auto-order tbody tr {
+  height: 40px;
+}
+.np-auto-order tbody tr td {
   font-size: 12px;
   font-weight: 300;
   padding: 0;
   min-width: 200px;
   max-width: 200px;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   border-right: 10px solid white;
   border-bottom: 10px solid white;
   white-space: nowrap;
 }
-.np-auto-order td:nth-child(2) {
-  width: 100%;
+.np-auto-order tbody tr td:nth-child(2) {
+  min-width: 501px;
+  max-width: 501px;
 }
-.np-auto-order td:last-child {
+.np-auto-order tbody tr td:last-child {
   background-color: transparent;
-  min-width: max-content;
+  min-width: 24px;
   padding: 10px 0;
+}
+.np-auto-order tbody tr:last-child td {
+  border-bottom: 12px solid white;
+}
+.np-auto-order thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 .np-auto-order thead tr:first-child {
   height: 26px;
+  background: white;
 }
 .np-auto-order thead th {
   font-size: 14px;
   font-weight: 400;
   min-width: 200px;
   max-width: 200px;
+  padding: 0;
   text-align: left;
   color: rgba(0, 0, 0, 0.8);
   border-right: 10px solid white;
-  border-bottom: 10px solid white;
 }
 .np-auto-order thead th span {
   cursor: help;
 }
+.np-auto-order thead tr:last-child th {
+  padding: 0;
+}
+.np-auto-order thead tr:last-child th .shadow-gradient {
+  position: relative;
+  height: 12px;
+  top: 0px;
+  background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
+}
 .np-auto-order thead th:last-child {
   min-width: max-content;
 }
-.np-auto-order tr {
-  height: 40px;
+.np-auto-order tfoot {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  height: 1px;
+}
+.np-auto-order tfoot td {
+  padding: 0;
+}
+.np-auto-order tfoot td .shadow-gradient {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(360deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
+}
+.np-auto-order .big-btn {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  height: 13.8px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.np-auto-order .big-btn:before {
+  content: "";
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  background-image: url("../../img/arrow-down.svg");
+  right: 10px;
+  top: 14px;
+  opacity: 0.8;
+}
+.np-auto-order .big-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 170px;
+  pointer-events: none;
+}
+.np-auto-order .big-btn div {
+  pointer-events: none;
+}
+.np-auto-order .big-btn .color-91d100:before {
+  background-color: #91d100;
+}
+.np-auto-order .big-btn .color-515151:before {
+  background-color: #515151;
+}
+.np-auto-order .big-btn .color-fd7777:before {
+  background-color: #fd7777;
+}
+.np-auto-order .big-btn .color-e2d317:before {
+  background-color: #e2d317;
+}
+.np-auto-order .big-btn .color-c6b922:before {
+  background-color: #c6b922;
+}
+.np-auto-order .big-btn .color-928c42:before {
+  background-color: #928c42;
+}
+.np-auto-order .big-btn .color-2c8b11:before {
+  background-color: #2c8b11;
+}
+.np-auto-order .big-btn .color-00CC00:before {
+  background-color: #00cc00;
+}
+.np-auto-order .big-btn .color-da291c:before {
+  background-color: #da291c;
+}
+.np-auto-order .big-btn .color-FF0000:before {
+  background-color: #ff0000;
+}
+.np-auto-order .big-btn .color-form:before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  border-radius: 2px;
+  left: 0;
+  opacity: 0.75;
+  bottom: 0px;
+}
+.np-auto-order .big-btn .color-form {
+  position: relative;
+}
+.np-auto-order .big-btn:hover {
+  opacity: 0.5;
 }
 
 .btnDelete {
-  position: relative;
   width: 15px;
   height: 15px;
   padding: 0;
@@ -53,6 +161,7 @@
   top: 1px;
   background-color: transparent;
   border: none;
+  margin-left: 5px;
 }
 .btnDelete svg {
   opacity: 0.7;

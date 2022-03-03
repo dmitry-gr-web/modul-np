@@ -38,7 +38,7 @@
 }
 
 .wrapper-np {
-  margin-top: 25px;
+  margin-top: 21px;
   margin-left: 21px;
   margin-bottom: 16px;
   margin-right: 35px;
@@ -64,6 +64,7 @@
   width: 13px;
   height: 2px;
   top: 8px;
+  border-radius: 2px;
   right: 2px;
   background-color: #333333;
   position: absolute;
@@ -73,6 +74,7 @@
   content: "";
   top: 8px;
   width: 13px;
+  border-radius: 2px;
   height: 2px;
   right: 2px;
   background-color: #333333;
@@ -116,20 +118,24 @@
 
 .np-img {
   float: right;
+  padding-right: 32px;
   margin-top: 10px;
 }
 
 .user-name-cab {
-  margin-top: 31px;
+  margin-top: 25px;
+  margin-bottom: 15px;
   border-collapse: collapse;
 }
 .user-name-cab td {
   font-size: 14px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.8);
   padding: 0;
   min-width: 163px;
   white-space: nowrap;
+}
+.user-name-cab td:first-child {
+  color: rgba(0, 0, 0, 0.8);
   padding-right: 22px;
 }
 .user-name-cab tr td:last-child {
@@ -142,32 +148,101 @@
 .user-name-cab tr {
   height: 26px;
 }
+.user-name-cab tfoot {
+  position: absolute;
+  background: white;
+  height: 0;
+  z-index: 2;
+  transition: 0.2s;
+  box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.15);
+}
 
 .np-body {
   display: flex;
-  margin-top: 10px;
-  height: 445px;
+  margin-top: 23px;
+  height: 438px;
+}
+
+.blockTabel {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  height: 92%;
+  z-index: 2;
+}
+
+.blockTabel2 {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  height: 92%;
+  z-index: 2;
 }
 
 .np-change-order {
-  margin-left: 50px;
+  margin-left: 72px;
+  position: relative;
+}
+
+.np-ttn-scroll {
+  width: 375px;
+  margin-top: 68px;
+}
+.np-ttn-scroll:hover .simplebar-track.simplebar-vertical {
+  opacity: 1;
+}
+.np-ttn-scroll .simplebar-track.simplebar-vertical {
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 5px;
+  margin-top: 0px;
+  margin-bottom: -2px;
+  margin-right: -10px;
+  transition: 0.2s;
+  opacity: 0;
+  border-radius: 5px;
+}
+.np-ttn-scroll .simplebar-track.simplebar-vertical.show-scroll {
+  opacity: 1;
+}
+.np-ttn-scroll .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
+  background: rgba(0, 0, 0, 0.3);
+  width: 5px;
+  border-radius: 5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.np-ttn-scroll .simplebar-scrollbar.simplebar-visible:before {
+  opacity: 1;
+}
+.np-ttn-scroll .simplebar-content-wrapper {
+  padding: 0;
 }
 
 .np-scroll {
-  margin-top: 17px;
-  width: 765px;
+  margin-top: 30px;
+  width: 762px;
+}
+.np-scroll:hover .simplebar-track.simplebar-vertical {
+  opacity: 1;
 }
 .np-scroll .simplebar-track.simplebar-vertical {
   background-color: rgba(0, 0, 0, 0.1);
-  width: 3px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 0;
+  width: 5px;
+  margin-top: 37px;
+  margin-bottom: 12px;
+  margin-right: 1px;
+  transition: 0.2s;
+  opacity: 0;
   border-radius: 5px;
+}
+.np-scroll .show-scroll {
+  opacity: 1;
 }
 .np-scroll .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
   background: rgba(0, 0, 0, 0.3);
-  width: 3px;
+  width: 5px;
   border-radius: 5px;
   left: 0;
   right: 0;
@@ -179,6 +254,10 @@
 }
 .np-scroll .simplebar-content-wrapper {
   padding: 0;
+}
+
+.np-default-setting {
+  position: relative;
 }
 
 .np-default-header div {
@@ -200,22 +279,24 @@
 .np-auto-header {
   display: flex;
   justify-content: space-between;
-  width: 725px;
+  width: 712px;
 }
 .np-auto-header div {
   width: max-content;
   position: relative;
 }
-.np-auto-header div .switches {
-  padding-left: 10px;
-}
 .np-auto-header div .switch-btn {
   position: relative;
   top: 0px;
+  display: inline;
+  margin-left: 0;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-right: 2px;
 }
 .np-auto-header .btn-np-select:after {
   content: "";
-  width: 100%;
+  width: 99%;
   height: 1px;
   position: absolute;
   cursor: default;
@@ -224,12 +305,13 @@
   left: 0;
   border-radius: 2px;
 }
-.np-auto-header .button-order,
-.np-auto-header .button-status {
+.np-auto-header .btn-np-select span:hover {
+  opacity: 1;
+}
+.np-auto-header span {
   cursor: pointer;
 }
-.np-auto-header .button-status:hover,
-.np-auto-header .button-order:hover {
+.np-auto-header span:hover {
   opacity: 0.5;
 }
 
@@ -240,14 +322,14 @@
 }
 
 /* The slider */
-.switches {
-  padding-left: 5px;
+.switch-btn {
+  display: block;
+  height: 10px;
+  width: 18px;
+  margin-left: 5px;
+  cursor: pointer;
 }
-.switches .switch-btn {
-  position: relative;
-  top: 2px;
-}
-.switches .switch {
+.switch-btn .switch {
   position: relative;
   display: inline-block;
   width: 18px;
@@ -255,10 +337,10 @@
   left: 0;
   margin: 0;
 }
-.switches .switch input {
+.switch-btn .switch input {
   display: none;
 }
-.switches .slider {
+.switch-btn .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -269,10 +351,10 @@
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-.switches .slider:hover {
+.switch-btn:hover .slider {
   background: #959595;
 }
-.switches .slider:before {
+.switch-btn .slider:before {
   position: absolute;
   content: "";
   height: 10px;
@@ -284,26 +366,24 @@
   transition: 0.2s;
   box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
 }
-.switches input:checked + .slider:before {
+.switch-btn input:checked + .slider:before {
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
 }
-.switches input:focus + .slider:before {
+.switch-btn input:focus + .slider:before {
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
 }
-.switches input:checked + .slider:before {
-  -webkit-transform: translateX(9px);
-  -ms-transform: translateX(9px);
-  transform: translateX(9px);
+.switch-btn input:checked + .slider:before {
+  transform: translateX(8px);
 }
-.switches input:checked + .slider:hover {
+.switch-btn:hover input:checked + .slider {
   background: #ebebeb;
 }
-.switches .slider.round {
+.switch-btn .slider.round {
   border-radius: 5px;
 }
-.switches .slider.round:before {
+.switch-btn .slider.round:before {
   border-radius: 50%;
 }
 
@@ -372,7 +452,7 @@
   top: 0;
   list-style: none;
   padding-left: 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.15);
   width: 100%;
   height: 100px;
@@ -441,7 +521,7 @@
   right: -5px;
   cursor: pointer;
   float: right;
-  right: 12px;
+  right: 18px;
   position: relative;
 }
 .add-new-np svg {
@@ -454,7 +534,7 @@
 .np-footer {
   justify-content: space-between;
   display: flex;
-  bottom: 20px;
+  margin-bottom: 21px;
 }
 .np-footer button {
   outline: none;
@@ -484,6 +564,7 @@
 .np-footer .save-btn {
   position: relative;
   padding-left: 25px;
+  margin-right: 4px;
 }
 .np-footer .save-btn:before {
   content: "";
@@ -501,7 +582,7 @@
 .np-footer .save-btn:after {
   content: "";
   height: 2px;
-  width: 7px;
+  width: 8px;
   position: absolute;
   background-color: black;
   left: -4px;

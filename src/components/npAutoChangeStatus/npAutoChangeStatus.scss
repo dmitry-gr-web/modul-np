@@ -1,30 +1,46 @@
 .np-auto-status {
-	border-collapse: collapse;
-	td {
-		font-size: 12px;
-		font-weight: 300;
-		padding: 0;
-		min-width: 200px;
-		max-width: 200px;
-		background-color: #f1f1f1;
-		border-right: 10px solid white;
-		border-bottom: 10px solid white;
-		white-space: nowrap;
+	// border-collapse: collapse;
+	border-spacing: 0px;
+	tbody {
+		td {
+			font-size: 12px;
+			font-weight: 300;
+			padding: 0;
+			min-width: 200px;
+			max-width: 200px;
+			background-color: #f1f1f1;
+			border-right: 10px solid white;
+			border-bottom: 10px solid white;
+			white-space: nowrap;
+		}
+		td:nth-child(3) {
+			// width: 100%;
+			min-width: 287px;
+			max-width: 287px;
+		}
+		td:last-child {
+			background-color: transparent;
+			padding: 10px 0;
+			min-width: 24px;
+		}
+		tr {
+			height: 40px;
+		}
+		tr:last-child {
+			td {
+				border-bottom: 12px solid white;
+			}
+		}
 	}
-	td:nth-child(3) {
-		width: 100%;
-	}
-	td:last-child {
-		background-color: transparent;
-		padding: 10px 0;
-		min-width: max-content;
-	}
-	tr {
-		height: 40px;
-	}
+	
 	thead {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+
 		tr:first-child {
 			height: 26px;
+			background:white;
 		}
 		th {
 			font-size: 14px;
@@ -34,15 +50,143 @@
 			max-width: 200px;
 			color: rgb(0, 0, 0, 0.8);
 			border-right: 10px solid white;
-			border-bottom: 10px solid white;
+			// border-bottom: 10px solid white;
 			span {
 				cursor: help;
+			}
+		}
+		tr:last-child {
+			th {
+				padding: 0;
+				.shadow-gradient {
+					position: relative;
+					height: 12px;
+					top: 0px;
+					background: linear-gradient(
+						180deg,
+						white 0%,
+						rgba(255, 255, 255, 0.95) 20%,
+						rgba(255, 255, 255, 0.7) 45%,
+						rgba(255, 255, 255, 0.5) 65%,
+						rgba(255, 255, 255, 0) 100%
+					);
+				}
 			}
 		}
         th:last-child {
             min-width: max-content;
         }
+		
 	}
+	tfoot {
+		position: sticky;
+		bottom: 0;
+		z-index: 1;
+		height: 1px;
+		td {
+			padding: 0;
+			.shadow-gradient {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 12px;
+				// top: -3px;
+				background: linear-gradient(
+					360deg,
+					white 0%,
+					rgba(255, 255, 255, 0.95) 20%,
+					rgba(255, 255, 255, 0.7) 45%,
+					rgba(255, 255, 255, 0.5) 65%,
+					rgba(255, 255, 255, 0) 100%
+				);
+			}
+		}
+	}
+	.big-btn {
+        position: relative;
+        padding: 10px;
+        display: flex;
+		height: 13.8px;
+		cursor: pointer;
+		overflow: hidden;
+		// padding-right: 0;
+        &:before {
+			content: '';
+			width: 10px;
+			height: 5px;
+			position: absolute;
+			background-image: url('../../img/arrow-down.svg');
+			right: 10px;
+			top: 14px;
+			opacity: 0.8;
+		}
+		// &:after {
+		// 	content: '';
+		// 	width: 20px;
+		// 	height: 16px;
+		// 	position: absolute;
+		// 	right:0px;
+		// 	top:10px;
+		// 	background:#f1f1f1;
+		// 	z-index: 1;
+		// }
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 170px;
+            pointer-events: none;
+        }
+		div {
+			pointer-events: none;
+		}
+        .color-91d100:before {
+            background-color: #91d100;
+        }
+        .color-515151:before {
+            background-color: #515151;
+        }
+        .color-fd7777:before {
+            background-color: #fd7777;
+        }
+        .color-e2d317:before {
+            background-color: #e2d317;
+        }
+        .color-c6b922:before {
+            background-color: #c6b922;
+        }
+        .color-928c42:before {
+            background-color: #928c42;
+        }
+        .color-2c8b11:before {
+            background-color: #2c8b11;
+        }
+        .color-00CC00:before {
+            background-color: #00cc00;
+        }
+        .color-da291c:before {
+            background-color: #da291c;
+        }
+        .color-FF0000:before {
+            background-color: #ff0000;
+        }
+        .color-form:before {
+            content: '';
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            border-radius: 2px;
+            left: 0;
+            opacity: 0.75;
+            bottom: 0px;
+        }
+        .color-form {
+            position: relative;
+        }
+        &:hover {
+            opacity: 0.5;
+        }
+    }
 }
 .btnDelete {
 	position: relative;
@@ -54,6 +198,7 @@
 	top: 1px;
 	background-color: transparent;
 	border: none;
+	margin-left: 5px;
 	svg {
 		opacity: 0.7;
 	}

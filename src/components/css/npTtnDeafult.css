@@ -1,27 +1,94 @@
 .np-ttn-default {
-  margin-top: 15px;
   border-collapse: collapse;
 }
-.np-ttn-default td {
+.np-ttn-default thead {
+  position: sticky;
+  top: 0;
+  height: 0;
+  z-index: 1;
+}
+.np-ttn-default thead th {
+  padding: 0;
+}
+.np-ttn-default thead th .shadow-gradient {
+  position: absolute;
+  height: 12px;
+  top: 0px;
+  width: 100%;
+  background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
+}
+.np-ttn-default tfoot {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  height: 0;
+}
+.np-ttn-default tfoot td {
+  padding: 0;
+}
+.np-ttn-default tfoot td .shadow-gradient {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(360deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
+}
+.np-ttn-default tbody td {
   font-size: 14px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.8);
   padding: 0;
   min-width: 163px;
   white-space: nowrap;
+  height: 27px;
+}
+.np-ttn-default tbody td:first-child {
+  color: rgba(0, 0, 0, 0.8);
   padding-right: 22px;
 }
-.np-ttn-default tr td:last-child {
+.np-ttn-default tbody tr td:last-child {
   min-width: 190px;
   max-width: 190px;
 }
-.np-ttn-default td:last-child {
+.np-ttn-default tbody td:last-child {
   font-size: 12px;
   font-weight: 300;
 }
-.np-ttn-default tr {
-  height: 26px;
+.np-ttn-default tbody tr {
+  height: 27px;
 }
-.np-ttn-default tr:last-child td {
-  padding-top: 24px;
+.np-ttn-default tbody tr:last-child td {
+  padding-top: 21px;
+  padding-bottom: 5px;
+}
+.np-ttn-default tbody tr:first-child td {
+  padding-top: 5px;
+}
+.np-ttn-default tbody .medium-btn {
+  width: max-content;
+  position: relative;
+  cursor: pointer;
+  padding: 6px 5px;
+  display: flex;
+  top: 1px;
+  padding-right: 15px;
+}
+.np-ttn-default tbody .medium-btn:before {
+  background-image: url("../../img/arrow-down.svg");
+  content: "";
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  right: 1px;
+  top: 10px;
+  opacity: 0.8;
+}
+.np-ttn-default tbody .medium-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 170px;
+  pointer-events: none;
+}
+.np-ttn-default tbody .medium-btn:hover {
+  opacity: 0.5;
 }

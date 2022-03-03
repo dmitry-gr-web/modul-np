@@ -1,9 +1,13 @@
 import React from 'react';
-import OrderBackList from '../orderBackList/orderBackList';
+import OrderBackList from './orderBackList';
 import './npAutoOrderBack.scss';
 
 const NpAutoOrderBack = (props) => {
-	const arrTooltip = ['Оставшееся количество дней до платного хранения', 'Правило будет применяться только к заказам находящимся в выбранных ниже статусах CRM', 'Удалить'];
+	const arrTooltip = [
+		'Оставшееся количество дней до платного хранения',
+		'Правило будет применяться только к заказам находящимся в выбранных ниже статусах CRM',
+		'Удалить',
+	];
 	function toolTipOn(e, html) {
 		e.stopPropagation();
 		const tooltipBlock = document.getElementById('tooltipBtn');
@@ -18,7 +22,7 @@ const NpAutoOrderBack = (props) => {
 		} else {
 			tooltipBlock.style.fontSize = '14px';
 			tooltipBlock.style.left = posElement.x + 'px';
-			tooltipBlock.style.top = posElement.y + 30 + 'px';
+			tooltipBlock.style.top = posElement.y + 34 + 'px';
 			tooltipBlock.style.animation = 'delay-header 1s forwards';
 		}
 	}
@@ -26,41 +30,72 @@ const NpAutoOrderBack = (props) => {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	function deleteTr(indx) {
-		// console.log(indx);
-		let temp = [...props.trList];
-		// let temp2 = [...props.dataChange.back];
-		if (temp.length !== 1) {
-			temp.splice(indx, 1);
-			// temp2.splice(indx,1);
-		}
-		// console.log(temp);
-		props.setTr(temp);
-		// props.setDataChange(temp2)
+		let temp = [...props.dataChange.data.day];
+		let temp2 = [...props.dataChange.data.status];
+		// let temp = [...props.];
+
+		temp.splice(indx, 1);
+		temp2.splice(indx, 1);
+		props.setIndexTr(0);
+
+		// let memoList = [...props.trList];
+		// memoList.splice(props.trList.length - 1, 1);
+		// props.setTr(memoList);
+
+		props.dataChange.data.day = temp;
+		props.dataChange.data.status = temp2;
+		props.setDataChange({ ...props.dataChange });
+		// console.log(props.dataChange);
+		// props.setDataChange()
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-	// const [dataChange, setDataChange] = useState({
-	// 	back: [],
-	// 	status: []
-	// });
 	return (
 		<table className="np-auto-order">
 			<thead>
 				<tr>
 					<th>
-						<span onMouseEnter={(e) => toolTipOn(e, arrTooltip[0])} onMouseLeave={toolTipOff}>Осталось дней:</span>
+						<span onMouseEnter={(e) => toolTipOn(e, arrTooltip[0])} onMouseLeave={toolTipOff}>
+							Осталось дней:
+						</span>
 					</th>
 					<th>
-						<span onMouseEnter={(e) => toolTipOn(e, arrTooltip[1])} onMouseLeave={toolTipOff}>Применять к статусу:</span>
+						<span onMouseEnter={(e) => toolTipOn(e, arrTooltip[1])} onMouseLeave={toolTipOff}>
+							Применять к статусу:
+						</span>
 					</th>
 					<th></th>
+				</tr>
+				<tr>
+					<th colSpan="3">
+						<div className="shadow-gradient"></div>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
 				{/* {console.log(props.trList)} */}
-				{props.trList.status.map((list, indx) => (
-					<OrderBackList key={list} list={list} day={props.trList.day[indx]} index={indx} deleteTr={() => deleteTr(indx)} arrTooltip={arrTooltip} toolTipOn={toolTipOn} toolTipOff={toolTipOff} {...props} />
+				{props.dataChange.data.day.map((list, indx) => (
+					<OrderBackList
+
+						key={indx}
+						list={list}
+						indexTr={indx}
+						index={indx}
+						deleteTr={() => deleteTr(indx)}
+						arrTooltip={arrTooltip}
+						toolTipOn={toolTipOn}
+						toolTipOff={toolTipOff}
+						{...props}
+					/>
 				))}
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colSpan='3'>
+						<div className="shadow-gradient"></div>
+					</td>
+				</tr>
+				{/* <tr><td colSpan='3'></td></tr> */}
+			</tfoot>
 		</table>
 	);
 };

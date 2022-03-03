@@ -6,7 +6,11 @@ body {
 	background-color: pink;
 	overflow: hidden;
 }
-
+html { 
+	line-height: 1.15;
+	width: 100%;
+	height: 100%;
+}
 @keyframes delay-status {
 	0% {
 		opacity: 0;
@@ -118,6 +122,15 @@ body {
 	width: max-content;
 	max-width: 300px;
 	backdrop-filter: blur(4px);
+	
+}
+
+#tooltipBtn div {
+	display: block !important;
+}
+#tooltipBtn .findUnderline {
+	background: #FFE600;
+    color: black;
 }
 /* .icon-2:before {
     color: white;

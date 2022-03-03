@@ -1,0 +1,379 @@
+@font-face {
+  font-family: "BabelStone Flags";
+  src: local("BabelStone Flags"), local("BabelStoneFlags"), url("./fonts/BabelStoneFlags.woff2") format("woff2"), url("./fonts/BabelStoneFlags.woff") format("woff");
+}
+.flags {
+  font-family: "BabelStone Flags";
+  font-size: 14px;
+  text-shadow: 0 0 0 black;
+}
+
+.warehouse-title {
+  position: relative;
+}
+.warehouse-title:before {
+  position: absolute;
+  content: "";
+  bottom: -2px;
+  width: 141px;
+  height: 4px;
+  background: rgba(81, 81, 81, 0.7);
+  border-radius: 2px;
+}
+
+.warehouse-nav {
+  margin-top: 44px;
+  font-weight: 400;
+}
+.warehouse-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+.warehouse-nav ul li {
+  height: 20px;
+  line-height: 20px;
+  padding-left: 12px;
+  margin-left: 2px;
+  width: 127px;
+}
+.warehouse-nav .select-link {
+  background: rgba(81, 81, 81, 0.7);
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+}
+.warehouse-nav .select-link:before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 20px;
+  left: -2px;
+  background: #515151;
+  border-radius: 2px 0 0 2px;
+}
+
+.warehouse-products {
+  margin-left: 60px;
+  width: 970px;
+}
+.warehouse-products .warehouse-products-title {
+  margin-bottom: 21px;
+  margin-top: 24px;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+}
+.warehouse-products .warehouse-products-title button {
+  outline: none;
+  background: none;
+  border: none;
+  position: absolute;
+  right: -32px;
+}
+.warehouse-products .warehouse-products-title:after {
+  position: absolute;
+  content: "";
+  width: 401px;
+  height: 1px;
+  right: 0;
+  top: 7px;
+  background-color: #000000;
+}
+.warehouse-products .warehouse-products-title:before {
+  position: absolute;
+  content: "";
+  width: 401px;
+  height: 1px;
+  left: 0;
+  top: 7px;
+  background-color: #000000;
+}
+.warehouse-products .scroll-block {
+  width: 50%;
+  padding-bottom: 15px;
+}
+.warehouse-products .scroll-block .simplebar-track.simplebar-horizontal {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 5px;
+  width: 100%;
+  transition: 0.2s;
+  border-radius: 5px;
+}
+.warehouse-products .scroll-block .simplebar-track.simplebar-horizontal .simplebar-scrollbar {
+  top: -1px;
+}
+.warehouse-products .scroll-block .simplebar-track.simplebar-horizontal .simplebar-scrollbar::before {
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  border-radius: 5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.warehouse-products .scroll-block .simplebar-scrollbar.simplebar-visible:before {
+  opacity: 1;
+}
+.warehouse-products .scroll-block .simplebar-content-wrapper {
+  padding: 0;
+}
+.warehouse-products table {
+  border-spacing: 0px;
+}
+.warehouse-products table thead {
+  height: 37px;
+}
+.warehouse-products table thead th {
+  font-weight: 400;
+  font-size: 14px;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  padding-bottom: 17px;
+}
+.warehouse-products table thead th {
+  padding: 0 10px;
+}
+.warehouse-products table tbody td {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 300;
+  height: 20px;
+}
+.warehouse-products table tbody td {
+  padding: 0 10px;
+}
+.warehouse-products table .id-tovara {
+  text-align: center;
+  max-width: 60px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.warehouse-products table .name-tovara {
+  max-width: 172px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.warehouse-products table .nal-ostatok {
+  padding: 0 2px;
+  position: relative;
+}
+.warehouse-products table .nal-rezerv,
+.warehouse-products table .nal-otpr,
+.warehouse-products table .nal-vozvrat {
+  padding: 0 2px;
+  position: relative;
+}
+.warehouse-products table .nal-rezerv div,
+.warehouse-products table .nal-otpr div,
+.warehouse-products table .nal-vozvrat div {
+  text-align: right;
+}
+.warehouse-products table .nal-rezerv div:before,
+.warehouse-products table .nal-otpr div:before,
+.warehouse-products table .nal-vozvrat div:before {
+  content: "";
+  position: absolute;
+  width: calc(100% - 4px);
+  left: 2px;
+  height: 2px;
+  bottom: 2px;
+  border-radius: 2px;
+}
+.warehouse-products table .nal-rezerv div:before {
+  background: rgba(0, 0, 0, 0.2);
+}
+.warehouse-products table .nal-otpr div:before {
+  background: rgba(0, 146, 70, 0.75);
+}
+.warehouse-products table .nal-vozvrat div:before {
+  background: rgba(206, 43, 55, 0.75);
+}
+.warehouse-products table .warehouse-nalichie,
+.warehouse-products table .warehouse-summa {
+  display: flex;
+}
+.warehouse-products table .warehouse-nalichie div,
+.warehouse-products table .warehouse-summa div {
+  margin: 0 2px;
+}
+.warehouse-products table .warehouse-nalichie div:nth-child(2),
+.warehouse-products table .warehouse-summa div:nth-child(2) {
+  position: relative;
+}
+.warehouse-products table .warehouse-nalichie div:nth-child(2):before,
+.warehouse-products table .warehouse-summa div:nth-child(2):before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+.warehouse-products table .warehouse-nalichie div:nth-child(3),
+.warehouse-products table .warehouse-summa div:nth-child(3) {
+  position: relative;
+}
+.warehouse-products table .warehouse-nalichie div:nth-child(3):before,
+.warehouse-products table .warehouse-summa div:nth-child(3):before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0px;
+  background: rgba(0, 146, 70, 0.75);
+  border-radius: 2px;
+}
+.warehouse-products table .warehouse-nalichie div:nth-child(4),
+.warehouse-products table .warehouse-summa div:nth-child(4) {
+  position: relative;
+}
+.warehouse-products table .warehouse-nalichie div:nth-child(4):before,
+.warehouse-products table .warehouse-summa div:nth-child(4):before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0px;
+  background: rgba(206, 43, 55, 0.75);
+  border-radius: 2px;
+}
+.warehouse-products .switch-btn-warehouse {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 10px;
+  left: 0;
+  margin: 0;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.warehouse-products .switch-btn-warehouse input {
+  display: none;
+}
+.warehouse-products .switch-btn-warehouse .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.2s;
+}
+.warehouse-products .switch-btn-warehouse:hover .slider {
+  background: #959595;
+}
+.warehouse-products .switch-btn-warehouse .slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: 0;
+  top: 0;
+  background-color: white;
+  transition: 0.2s;
+  box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+}
+.warehouse-products .switch-btn-warehouse input:checked + .slider:before {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+}
+.warehouse-products .switch-btn-warehouse input:focus + .slider:before {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+}
+.warehouse-products .switch-btn-warehouse input:checked + .slider:before {
+  transform: translateX(8px);
+}
+.warehouse-products .switch-btn-warehouse:hover input:checked + .slider {
+  background: #ebebeb;
+}
+.warehouse-products .switch-btn-warehouse .slider.round {
+  border-radius: 5px;
+}
+.warehouse-products .switch-btn-warehouse .slider.round:before {
+  border-radius: 50%;
+}
+.warehouse-products .logo-mail {
+  margin: 0 3px;
+}
+.warehouse-products .adaptive-switch {
+  padding: 0;
+  transition: 0.2s;
+}
+.warehouse-products .adaptive-switch div {
+  display: flex;
+  visibility: hidden;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  width: 0;
+  transition: 0.2s;
+}
+.warehouse-products .adaptive-switch-on {
+  padding: 0 10px;
+  transition: 0.2s;
+}
+.warehouse-products .adaptive-switch-on div {
+  visibility: visible;
+  width: 85px;
+  transition: 0.2s;
+}
+.warehouse-products .switch-btn-small {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 8px;
+  margin: 0 2px;
+}
+.warehouse-products .switch-btn-small .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.2s;
+}
+.warehouse-products .switch-btn-small:hover .slider {
+  background: #959595;
+}
+.warehouse-products .switch-btn-small .slider:before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  left: 0;
+  top: 0;
+  background-color: white;
+  transition: 0.2s;
+  box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+}
+.warehouse-products .switch-btn-small input:checked + .slider:before {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+}
+.warehouse-products .switch-btn-small input:focus + .slider:before {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+}
+.warehouse-products .switch-btn-small input:checked + .slider:before {
+  transform: translateX(8px);
+}
+.warehouse-products .switch-btn-small:hover input:checked + .slider {
+  background: #ebebeb;
+}
+.warehouse-products .switch-btn-small .slider.round {
+  border-radius: 5px;
+}
+.warehouse-products .switch-btn-small .slider.round:before {
+  border-radius: 50%;
+}
+.warehouse-products .switch-btn-small input {
+  display: none;
+}

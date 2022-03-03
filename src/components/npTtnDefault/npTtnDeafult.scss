@@ -1,29 +1,118 @@
 .np-ttn-default {
-	margin-top: 15px;
 	border-collapse: collapse;
-	td {
-		font-size: 14px;
-		font-weight: 400;
-		color: rgb(0, 0, 0, 0.8);
-		padding: 0;
-		// padding-bottom: 10px;
-		min-width: 163px;
-		white-space: nowrap;
-		padding-right: 22px;
+	thead {
+		position: sticky;
+		top: 0;
+		height: 0;
+		z-index: 1;
+		// background: white;
+
+		th {
+			padding: 0;
+			.shadow-gradient {
+				position: absolute;
+				height: 12px;
+				top: 0px;
+				width: 100%;
+				background: linear-gradient(
+					180deg,
+					white 0%,
+					rgba(255, 255, 255, 0.95) 20%,
+					rgba(255, 255, 255, 0.7) 45%,
+					rgba(255, 255, 255, 0.5) 65%,
+					rgba(255, 255, 255, 0) 100%
+				);
+			}
+		}
 	}
-	tr td:last-child {
-		min-width: 190px;
-		max-width: 190px;
+	tfoot {
+		position: sticky;
+		bottom: 0;
+		z-index: 1;
+		height: 0;
+		td {
+			padding: 0;
+			.shadow-gradient {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 12px;
+				// top: -3px;
+				background: linear-gradient(
+					360deg,
+					white 0%,
+					rgba(255, 255, 255, 0.95) 20%,
+					rgba(255, 255, 255, 0.7) 45%,
+					rgba(255, 255, 255, 0.5) 65%,
+					rgba(255, 255, 255, 0) 100%
+				);
+			}
+		}
 	}
-	td:last-child {
-		font-size: 12px;
-		font-weight: 300;
-		// width: 210px;
+	tbody {
+		td {
+			font-size: 14px;
+			font-weight: 400;
+			// color: rgb(0, 0, 0, 0.8);
+			padding: 0;
+			// padding-bottom: 10px;
+			min-width: 163px;
+			white-space: nowrap;
+			height: 27px;
+			// height: 26px;
+		}
+		td:first-child {
+			color: rgb(0, 0, 0, 0.8);
+			padding-right: 22px;
+		}
+		tr td:last-child {
+			min-width: 190px;
+			max-width: 190px;
+		}
+		td:last-child {
+			font-size: 12px;
+			font-weight: 300;
+			// width: 210px;
+		}
+		tr {
+			height: 27px;
+		}
+		tr:last-child td {
+			padding-top: 21px;
+			padding-bottom: 5px;
+		}
+		tr:first-child td {
+			padding-top: 5px;
+		}
+		.medium-btn {
+			width: max-content;
+			position: relative;
+			cursor: pointer;
+			padding: 6px 5px;
+			display: flex;
+			top: 1px;
+			padding-right: 15px;
+			&:before {
+				background-image: url('../../img/arrow-down.svg');
+				content: '';
+				width: 10px;
+				height: 5px;
+				position: absolute;
+				right: 1px;
+				top: 10px;
+				opacity: 0.8;
+			}
+			span {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				max-width: 170px;
+				pointer-events: none;
+			}
+			&:hover {
+				opacity: 0.5;
+			}
+		}
 	}
-	tr {
-		height: 26px;
-	}
-	tr:last-child td {
-		padding-top: 24px;
-	}
+	
 }
