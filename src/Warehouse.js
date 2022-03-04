@@ -6,7 +6,7 @@ import 'simplebar/dist/simplebar.min.css';
 
 const Warehouse = () => {
 	const [selectLink, setSelectLink] = useState(true);
-	let objProduct = [
+	let [objProduct, setObjProduct] = useState([
 		{
 			status: { all: false, rozetka: false, prom: false, crm: false },
 			id: '5649-1',
@@ -25,8 +25,29 @@ const Warehouse = () => {
 			suma2: 17925.0,
 			suma3: 2924.0,
 			suma4: 655.0,
+			podTovari: [
+				{
+					status: { all: false, rozetka: false, prom: false, crm: false },
+					id: '5649-1',
+					country: '🇺🇦',
+					currency: '₴',
+					name: 'Nano USB 2.0 флешка для установки в компьютеры',
+					attribute: '32 Гб',
+					ostatok: 10,
+					rezerv: 1239,
+					otpr: 2924,
+					vozvrat: 655,
+					zakupka: 157.0,
+					prodazha: 349.0,
+					marzha: 0.0,
+					suma1: 1570.0,
+					suma2: 17925.0,
+					suma3: 2924.0,
+					suma4: 655.0,
+				},
+			],
 		},
-	];
+	]);
 	function formatNumber(number) {
 		let newnum = number
 			.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -55,6 +76,71 @@ const Warehouse = () => {
 	}, [checked]);
 
 	const [switchMenu, setSwitchMenu] = useState(false);
+	function PlusMinusOpen(e) {
+		e.currentTarget.querySelectorAll('button').forEach((x) => {
+			x.style.width = '16px';
+		});
+	}
+	function PlusMinusClose(e) {
+		e.currentTarget.querySelectorAll('button').forEach((x) => {
+			x.style.width = '0px';
+		});
+	}
+	function BtnMinus(e) {
+		let newarr = objProduct.map((x) => {
+			if (x.ostatok !== 0) {
+				return { ...x, ostatok: x.ostatok - 1 };
+			} else {
+				return { ...x };
+			}
+		});
+		// console.log(newarr);
+		setObjProduct(newarr);
+		// e.target.offsetParent.querySelector('input').value = e.target.offsetParent.querySelector('input').value - 1;
+	}
+	function BtnPlus(e) {
+		let newarr = objProduct.map((x) => {
+			return { ...x, ostatok: x.ostatok + 1 };
+		});
+		// console.log(newarr);
+		setObjProduct(newarr);
+		// e.target.offsetParent.querySelector('input').value = e.target.offsetParent.querySelector('input').value - 1;
+	}
+	// let [input , setInput] = useState('');
+	const [focusInput, setFocusInput] = useState(false);
+	function inputChange(e) {
+		setFocusInput(true);
+		// input = objProduct;
+		// input = e.target.value;
+		e.target.value = e.target.value.replace(/[^0-9]/g, '');
+		// setInput(e.target.value)
+		let newarr = objProduct.map((x) => {
+			return { ...x, ostatok: +e.target.value };
+		});
+		setObjProduct(newarr);
+		console.log(e);
+	}
+	function enterInput(e) {
+		// console.log(e)
+		if (e.key === 'Enter') {
+			// e.style.width = e.value.length * 5 + 'px';
+			e.target.style.width = e.target.value.length * 8+ 4+ 'px';
+			console.log('enter');
+			setFocusInput(false);
+			// let newarr = objProduct.map((x) => {
+			// 	return { ...x, ostatok: formatNumber2(e.target.value) };
+			// });
+
+			// setObjProduct(newarr);
+		}
+	}
+	useEffect(() => {
+		document.querySelectorAll('.nal-ostatok input').forEach((x) => {
+			x.style.width = x.value.length * 8 + 'px';
+		
+		});
+		// this.style.width = (this.value.length + 2) * 8 + 'px';
+	}, [objProduct]);
 	return (
 		<div
 			style={{
@@ -179,9 +265,8 @@ const Warehouse = () => {
 											style={
 												!checked ? { opacity: 0.5, textAlign: 'center' } : { textAlign: 'center' }
 											}
-											className="flags"
 										>
-											{x.country}
+											<span className="flags">{x.country}</span>
 										</td>
 										<td
 											style={
@@ -206,14 +291,28 @@ const Warehouse = () => {
 										<th>Закупка</th>
 										<th>Продажа</th>
 										<th>Маржа</th>
-										<th>Сумма</th>
+										<th colSpan={4}>Сумма</th>
 									</tr>
 								</thead>
 								<tbody>
 									{objProduct.map((x) => (
 										<tr>
 											<td className="nal-ostatok" style={!checked ? { opacity: 0.5 } : {}}>
-												<div>{formatNumber2(x.ostatok)}/</div>
+												<div
+													onMouseLeave={PlusMinusClose}
+													onMouseEnter={PlusMinusOpen}
+													style={{ display: 'flex' }}
+												>
+													<button onClick={BtnMinus}></button>
+													{/* {formatNumber2(x.ostatok)} */}
+													<input
+														type="text"
+														value={focusInput ? x.ostatok : formatNumber2(x.ostatok)}
+														onChange={inputChange}
+														onKeyUp={enterInput}
+													/>
+													<button onClick={BtnPlus}></button>/
+												</div>
 												{/* <div className="warehouse-nalichie">
 													/<div>{formatNumber2(x.rezerv)}</div>
 													<div>{formatNumber2(x.otpr)}</div>
@@ -232,12 +331,17 @@ const Warehouse = () => {
 											<td style={!checked ? { opacity: 0.5 } : {}}>{formatNumber(x.zakupka)}</td>
 											<td style={!checked ? { opacity: 0.5 } : {}}>{formatNumber(x.prodazha)}</td>
 											<td style={!checked ? { opacity: 0.5 } : {}}>{formatNumber(x.marzha)}</td>
-											<td style={!checked ? { opacity: 0.5 } : {}}>
-												<div className="warehouse-summa">
-													<div>{formatNumber(x.suma1)}</div>/<div>{formatNumber(x.suma2)}</div>
-													<div>{formatNumber(x.suma3)}</div>
-													<div>{formatNumber(x.suma4)}</div>
-												</div>
+											<td className="summa-suma1" style={!checked ? { opacity: 0.5 } : {}}>
+												<div>{formatNumber(x.ostatok * x.zakupka)}/</div>
+											</td>
+											<td className="summa-suma2" style={!checked ? { opacity: 0.5 } : {}}>
+												<div>{formatNumber(x.suma2)}</div>
+											</td>
+											<td className="summa-suma3" style={!checked ? { opacity: 0.5 } : {}}>
+												<div>{formatNumber(x.suma3)}</div>
+											</td>
+											<td className="summa-suma4" style={!checked ? { opacity: 0.5 } : {}}>
+												<div>{formatNumber(x.suma4)}</div>
 											</td>
 										</tr>
 									))}
