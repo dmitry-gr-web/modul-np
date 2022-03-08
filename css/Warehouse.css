@@ -156,6 +156,34 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.warehouse-products table .name-tovara span {
+  position: relative;
+}
+.warehouse-products table .name-tovara .arrow {
+  margin-left: 13px;
+}
+.warehouse-products table .name-tovara .arrow:before {
+  background-image: url("img/arrow-down.svg");
+  content: "";
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  left: -13px;
+  top: 6px;
+}
+.warehouse-products table .name-tovara .arrowDeg {
+  margin-left: 27px;
+}
+.warehouse-products table .name-tovara .arrowDeg:before {
+  background-image: url("img/arrow-down.svg");
+  content: "";
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  left: -13px;
+  transform: rotate(-90deg);
+  top: 5px;
+}
 .warehouse-products table .nal-ostatok {
   padding: 0 2px;
   position: relative;
@@ -164,6 +192,9 @@
   outline: none;
   border: none;
   padding: 0;
+}
+.warehouse-products table .nal-ostatok input::selection {
+  background-color: #afafb3;
 }
 .warehouse-products table .nal-ostatok button {
   position: relative;

@@ -26,7 +26,7 @@
 			border-radius: 2px;
 			width: 100%;
 			position: absolute;
-			bottom: -1px;
+			bottom: 0px;
 			background-color: grey;
 		}
 	}
@@ -261,10 +261,11 @@
 		&:last-child {
 			margin-bottom: 5px;
 		}
-		span {
+		span:not(.findUnderline) {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			height: 14px;
 			max-width: 600px;
 			pointer-events: none;
 		}

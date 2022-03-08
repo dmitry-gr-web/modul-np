@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './Warehouse.scss';
-import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus } from './img/svg-pack';
+import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus, videoregistrator } from './img/svg-pack';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
+import WarehouseProductList from './components/warehouse/WarehouseProductList';
+import WarehouseProductList2 from './components/warehouse/WarehouseProductList2';
 
 const Warehouse = () => {
 	const [selectLink, setSelectLink] = useState(true);
 	let [objProduct, setObjProduct] = useState([
 		{
-			status: { all: false, rozetka: false, prom: false, crm: false },
+			status: { all: true, rozetka: true, prom: true, crm: true },
 			id: '5649-1',
 			country: '🇺🇦',
 			currency: '₴',
 			name: 'Nano USB 2.0 флешка для установки в компьютеры',
 			attribute: '32 Гб',
+			images: videoregistrator,
 			ostatok: 10,
 			rezerv: 1239,
 			otpr: 2924,
@@ -25,14 +28,31 @@ const Warehouse = () => {
 			suma2: 17925.0,
 			suma3: 2924.0,
 			suma4: 655.0,
-			podTovari: [
+			podProduct: [
 				{
-					status: { all: false, rozetka: false, prom: false, crm: false },
-					id: '5649-1',
-					country: '🇺🇦',
-					currency: '₴',
+					status: { all: true, rozetka: true, prom: true, crm: true },
+					id: '5649-2',
+					images: videoregistrator,
 					name: 'Nano USB 2.0 флешка для установки в компьютеры',
-					attribute: '32 Гб',
+					attribute: '64 Гб',
+					ostatok: 10,
+					rezerv: 1239,
+					otpr: 2924,
+					vozvrat: 655,
+					zakupka: 157.0,
+					prodazha: 349.0,
+					marzha: 0.0,
+					suma1: 1570.0,
+					suma2: 17925.0,
+					suma3: 2924.0,
+					suma4: 655.0,
+				},
+				{
+					status: { all: true, rozetka: true, prom: true, crm: true },
+					id: '5649-6.8',
+					images: videoregistrator,
+					name: 'Nano USB 2.0 флешка для установки в компьютеры',
+					attribute: '128 Гб, Синий',
 					ostatok: 10,
 					rezerv: 1239,
 					otpr: 2924,
@@ -47,99 +67,91 @@ const Warehouse = () => {
 				},
 			],
 		},
+		{
+			status: { all: true, rozetka: true, prom: true, crm: true },
+			id: '5648-0',
+			country: '🇷🇺',
+			currency: '₽',
+			name: 'Чистящее средство VCle что то там средствто',
+			attribute: 'Основной',
+			images: videoregistrator,
+			ostatok: 0,
+			rezerv: 0,
+			otpr: 4,
+			vozvrat: 1,
+			zakupka: 860.0,
+			prodazha: 1260.0,
+			marzha: 400.0,
+			suma1: 0.0,
+			suma2: 11924.0,
+			suma3: 11924.0,
+			suma4: 11924.0,
+		},
 	]);
-	function formatNumber(number) {
-		let newnum = number
-			.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-			.replace(',', '.');
-		return newnum;
-	}
-	function formatNumber2(number) {
-		let newnum = number.toLocaleString('ru-RU', {
-			minimumFractionDigits: 0,
-			maximumFractionDigits: 0,
-		});
-		return newnum;
-	}
-	const [checked, setChecked] = useState(true);
-	useEffect(() => {
-		if (document.querySelector('.switch-btn-warehouse input').checked === false) {
-			document.querySelectorAll('.switch-btn-small').forEach((x) => {
-				x.querySelector('input').checked = false;
-			});
-		} else {
-			document.querySelectorAll('.switch-btn-small').forEach((x) => {
-				x.querySelector('input').checked = true;
-			});
-		}
-		console.log(document.querySelector('.switch-btn-warehouse input').checked);
-	}, [checked]);
 
+	const [checked, setChecked] = useState(true);
+
+	const [podlozhka, setPodlozhka] = useState(false);
 	const [switchMenu, setSwitchMenu] = useState(false);
+	const [focusInput, setFocusInput] = useState(false);
 	function PlusMinusOpen(e) {
 		e.currentTarget.querySelectorAll('button').forEach((x) => {
 			x.style.width = '16px';
 		});
+		e.currentTarget.querySelector('input').select();
+		e.currentTarget.querySelector('input').focus();
 	}
 	function PlusMinusClose(e) {
-		e.currentTarget.querySelectorAll('button').forEach((x) => {
-			x.style.width = '0px';
-		});
-	}
-	function BtnMinus(e) {
-		let newarr = objProduct.map((x) => {
-			if (x.ostatok !== 0) {
-				return { ...x, ostatok: x.ostatok - 1 };
-			} else {
-				return { ...x };
-			}
-		});
-		// console.log(newarr);
-		setObjProduct(newarr);
-		// e.target.offsetParent.querySelector('input').value = e.target.offsetParent.querySelector('input').value - 1;
-	}
-	function BtnPlus(e) {
-		let newarr = objProduct.map((x) => {
-			return { ...x, ostatok: x.ostatok + 1 };
-		});
-		// console.log(newarr);
-		setObjProduct(newarr);
-		// e.target.offsetParent.querySelector('input').value = e.target.offsetParent.querySelector('input').value - 1;
-	}
-	// let [input , setInput] = useState('');
-	const [focusInput, setFocusInput] = useState(false);
-	function inputChange(e) {
-		setFocusInput(true);
-		// input = objProduct;
-		// input = e.target.value;
-		e.target.value = e.target.value.replace(/[^0-9]/g, '');
-		// setInput(e.target.value)
-		let newarr = objProduct.map((x) => {
-			return { ...x, ostatok: +e.target.value };
-		});
-		setObjProduct(newarr);
-		console.log(e);
-	}
-	function enterInput(e) {
-		// console.log(e)
-		if (e.key === 'Enter') {
-			// e.style.width = e.value.length * 5 + 'px';
-			e.target.style.width = e.target.value.length * 8+ 4+ 'px';
-			console.log('enter');
-			setFocusInput(false);
-			// let newarr = objProduct.map((x) => {
-			// 	return { ...x, ostatok: formatNumber2(e.target.value) };
-			// });
-
-			// setObjProduct(newarr);
+		if (!podlozhka) {
+			e.currentTarget.querySelectorAll('button').forEach((x) => {
+				x.style.width = '0px';
+			});
+			e.currentTarget.querySelector('input').blur();
 		}
 	}
+	const [indexInput, setIndexInput] = useState(0);
+	// function numRound(num, precision) {
+	// 	return Math.round(num / precision) * precision;
+	// }
+	function clickPodlozhka() {
+		setPodlozhka(false);
+		setFocusInput(false);
+		document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+			x.style.width = '0px';
+		});
+
+		let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
+
+		if (input.value.length >= 4) {
+			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
+			input.style.width = input.value.length * 8 + 4 + 'px';
+		}
+		if (input.value.length >= 7) {
+			input.style.width = input.value.length * 8 + 8 + 'px';
+		}
+		if (input.value.length < 4) {
+			input.style.width = input.value.length * 8 + 'px';
+		}
+	}
+
 	useEffect(() => {
 		document.querySelectorAll('.nal-ostatok input').forEach((x) => {
-			x.style.width = x.value.length * 8 + 'px';
-		
+			// x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
+			
+			if (x.value.replaceAll(' ', '').length >= 4) {
+				// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
+				x.style.width = x.value.replaceAll(' ', '').length * 8 + 4 + 'px';
+			}
+			if (x.value.replaceAll(' ', '').length >= 7) {
+				x.style.width = x.value.replaceAll(' ', '').length * 8 + 8 + 'px';
+			}
+			if (x.value.replaceAll(' ', '').length < 4) {
+				x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
+			}
+			
+	
 		});
-		// this.style.width = (this.value.length + 2) * 8 + 'px';
+		
 	}, [objProduct]);
 	return (
 		<div
@@ -161,6 +173,13 @@ const Warehouse = () => {
 					cursor: 'default',
 				}}
 			>
+				{podlozhka && (
+					<div
+						className="warehouse-podlozhka"
+						style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 3 }}
+						onClick={clickPodlozhka}
+					></div>
+				)}
 				<aside>
 					<div className="warehouse-title">Склад</div>
 					<nav className="warehouse-nav">
@@ -215,71 +234,16 @@ const Warehouse = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{/* {console.log(objProduct)} */}
-								{objProduct.map((x) => (
-									<tr>
-										<td
-											onMouseEnter={() => setSwitchMenu(true)}
-											onMouseLeave={() => setSwitchMenu(false)}
-											className="adaptive-switch-trigger"
-											style={{ paddingLeft: 0 }}
-										>
-											<label className="switch-btn-warehouse">
-												<input
-													type="checkbox"
-													onChange={() => setChecked(!checked)}
-													defaultChecked={checked}
-												/>
-												<span className="slider round"></span>
-											</label>
-										</td>
-										<td
-											style={!checked ? { opacity: 0.5 } : {}}
-											onMouseEnter={() => setSwitchMenu(true)}
-											onMouseLeave={() => setSwitchMenu(false)}
-											className={
-												switchMenu ? 'adaptive-switch adaptive-switch-on' : 'adaptive-switch'
-											}
-										>
-											<div>
-												<label className="switch-btn-small">
-													<input type="checkbox" />
-													<span className="slider round"></span>
-												</label>
-
-												<label style={{ margin: '0 15px' }} className="switch-btn-small">
-													<input type="checkbox" />
-													<span className="slider round"></span>
-												</label>
-
-												<label className="switch-btn-small">
-													<input type="checkbox" />
-													<span className="slider round"></span>
-												</label>
-											</div>
-										</td>
-										<td className="id-tovara" style={!checked ? { opacity: 0.5 } : {}}>
-											{x.id}
-										</td>
-										<td
-											style={
-												!checked ? { opacity: 0.5, textAlign: 'center' } : { textAlign: 'center' }
-											}
-										>
-											<span className="flags">{x.country}</span>
-										</td>
-										<td
-											style={
-												!checked ? { opacity: 0.5, textAlign: 'center' } : { textAlign: 'center' }
-											}
-										>
-											{x.currency}
-										</td>
-										<td className="name-tovara" style={!checked ? { opacity: 0.5 } : {}}>
-											{x.name}
-										</td>
-										<td style={!checked ? { opacity: 0.5 } : {}}>{x.attribute}</td>
-									</tr>
+								{objProduct.map((x, index) => (
+									<WarehouseProductList
+										index={index}
+										setChecked={setChecked}
+										checked={checked}
+										objProduct={objProduct}
+										switchMenu={switchMenu}
+										setObjProduct={setObjProduct}
+										setSwitchMenu={setSwitchMenu}
+									/>
 								))}
 							</tbody>
 						</table>
@@ -295,55 +259,23 @@ const Warehouse = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{objProduct.map((x) => (
-										<tr>
-											<td className="nal-ostatok" style={!checked ? { opacity: 0.5 } : {}}>
-												<div
-													onMouseLeave={PlusMinusClose}
-													onMouseEnter={PlusMinusOpen}
-													style={{ display: 'flex' }}
-												>
-													<button onClick={BtnMinus}></button>
-													{/* {formatNumber2(x.ostatok)} */}
-													<input
-														type="text"
-														value={focusInput ? x.ostatok : formatNumber2(x.ostatok)}
-														onChange={inputChange}
-														onKeyUp={enterInput}
-													/>
-													<button onClick={BtnPlus}></button>/
-												</div>
-												{/* <div className="warehouse-nalichie">
-													/<div>{formatNumber2(x.rezerv)}</div>
-													<div>{formatNumber2(x.otpr)}</div>
-													<div>{formatNumber2(x.vozvrat)}</div>
-												</div> */}
-											</td>
-											<td className="nal-rezerv" style={!checked ? { opacity: 0.5 } : {}}>
-												<div>{formatNumber2(x.rezerv)}</div>
-											</td>
-											<td className="nal-otpr" style={!checked ? { opacity: 0.5 } : {}}>
-												<div>{formatNumber2(x.otpr)}</div>
-											</td>
-											<td className="nal-vozvrat" style={!checked ? { opacity: 0.5 } : {}}>
-												<div>{formatNumber2(x.vozvrat)}</div>
-											</td>
-											<td style={!checked ? { opacity: 0.5 } : {}}>{formatNumber(x.zakupka)}</td>
-											<td style={!checked ? { opacity: 0.5 } : {}}>{formatNumber(x.prodazha)}</td>
-											<td style={!checked ? { opacity: 0.5 } : {}}>{formatNumber(x.marzha)}</td>
-											<td className="summa-suma1" style={!checked ? { opacity: 0.5 } : {}}>
-												<div>{formatNumber(x.ostatok * x.zakupka)}/</div>
-											</td>
-											<td className="summa-suma2" style={!checked ? { opacity: 0.5 } : {}}>
-												<div>{formatNumber(x.suma2)}</div>
-											</td>
-											<td className="summa-suma3" style={!checked ? { opacity: 0.5 } : {}}>
-												<div>{formatNumber(x.suma3)}</div>
-											</td>
-											<td className="summa-suma4" style={!checked ? { opacity: 0.5 } : {}}>
-												<div>{formatNumber(x.suma4)}</div>
-											</td>
-										</tr>
+									{objProduct.map((x, index) => (
+										<WarehouseProductList2
+											PlusMinusOpen={PlusMinusOpen}
+											PlusMinusClose={PlusMinusClose}
+											setObjProduct={setObjProduct}
+											index={index}
+											podlozhka={podlozhka}
+											setPodlozhka={setPodlozhka}
+											setChecked={setChecked}
+											checked={checked}
+											focusInput={focusInput}
+											setFocusInput={setFocusInput}
+											objProduct={objProduct}
+											switchMenu={switchMenu}
+											setIndexInput={setIndexInput}
+											setSwitchMenu={setSwitchMenu}
+										/>
 									))}
 								</tbody>
 							</table>

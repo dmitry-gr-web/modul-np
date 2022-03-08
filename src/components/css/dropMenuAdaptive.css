@@ -28,7 +28,7 @@
   border-radius: 2px;
   width: 100%;
   position: absolute;
-  bottom: -1px;
+  bottom: 0px;
   background-color: grey;
 }
 .dropMenuAdaptive .color-91d100:before {
@@ -248,10 +248,11 @@
 .dropMenuAdaptive .menu-list:last-child {
   margin-bottom: 5px;
 }
-.dropMenuAdaptive .menu-list span {
+.dropMenuAdaptive .menu-list span:not(.findUnderline) {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  height: 14px;
   max-width: 600px;
   pointer-events: none;
 }
