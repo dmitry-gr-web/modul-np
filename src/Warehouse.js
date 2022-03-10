@@ -8,7 +8,7 @@ import WarehouseProductList2 from './components/warehouse/WarehouseProductList2'
 
 const Warehouse = () => {
 	const [selectLink, setSelectLink] = useState(true);
-	let [objProduct, setObjProduct] = useState([
+	const [objProduct, setObjProduct] = useState([
 		{
 			status: { all: true, rozetka: true, prom: true, crm: true },
 			id: '5649-1',
@@ -87,6 +87,106 @@ const Warehouse = () => {
 			suma3: 11924.0,
 			suma4: 11924.0,
 		},
+		{
+			status: { all: true, rozetka: true, prom: true, crm: true },
+			id: '5648-0',
+			country: '🇷🇺',
+			currency: '₽',
+			name: 'Чистящее средство VCle что то там средствто',
+			attribute: 'Основной',
+			images: videoregistrator,
+			ostatok: 0,
+			rezerv: 0,
+			otpr: 4,
+			vozvrat: 1,
+			zakupka: 860.0,
+			prodazha: 1260.0,
+			marzha: 400.0,
+			suma1: 0.0,
+			suma2: 11924.0,
+			suma3: 11924.0,
+			suma4: 11924.0,
+		},
+		{
+			status: { all: true, rozetka: true, prom: true, crm: true },
+			id: '5648-0',
+			country: '🇷🇺',
+			currency: '₽',
+			name: 'Чистящее средство VCle что то там средствто',
+			attribute: 'Основной',
+			images: videoregistrator,
+			ostatok: 0,
+			rezerv: 0,
+			otpr: 4,
+			vozvrat: 1,
+			zakupka: 860.0,
+			prodazha: 1260.0,
+			marzha: 400.0,
+			suma1: 0.0,
+			suma2: 11924.0,
+			suma3: 11924.0,
+			suma4: 11924.0,
+		},
+		{
+			status: { all: true, rozetka: true, prom: true, crm: true },
+			id: '5648-0',
+			country: '🇷🇺',
+			currency: '₽',
+			name: 'Чистящее средство VCle что то там средствто',
+			attribute: 'Основной',
+			images: videoregistrator,
+			ostatok: 0,
+			rezerv: 0,
+			otpr: 4,
+			vozvrat: 1,
+			zakupka: 860.0,
+			prodazha: 1260.0,
+			marzha: 400.0,
+			suma1: 0.0,
+			suma2: 11924.0,
+			suma3: 11924.0,
+			suma4: 11924.0,
+		},
+		{
+			status: { all: true, rozetka: true, prom: true, crm: true },
+			id: '5648-0',
+			country: '🇷🇺',
+			currency: '₽',
+			name: 'Чистящее средство VCle что то там средствто',
+			attribute: 'Основной',
+			images: videoregistrator,
+			ostatok: 0,
+			rezerv: 0,
+			otpr: 4,
+			vozvrat: 1,
+			zakupka: 860.0,
+			prodazha: 1260.0,
+			marzha: 400.0,
+			suma1: 0.0,
+			suma2: 11924.0,
+			suma3: 11924.0,
+			suma4: 11924.0,
+		},
+		{
+			status: { all: true, rozetka: true, prom: true, crm: true },
+			id: '5648-0',
+			country: '🇷🇺',
+			currency: '₽',
+			name: 'Чистящее средство VCle что то там средствто',
+			attribute: 'Основной',
+			images: videoregistrator,
+			ostatok: 0,
+			rezerv: 0,
+			otpr: 4,
+			vozvrat: 1,
+			zakupka: 860.0,
+			prodazha: 1260.0,
+			marzha: 400.0,
+			suma1: 0.0,
+			suma2: 11924.0,
+			suma3: 11924.0,
+			suma4: 11924.0,
+		},
 	]);
 
 	const [checked, setChecked] = useState(true);
@@ -133,26 +233,19 @@ const Warehouse = () => {
 			input.style.width = input.value.length * 8 + 'px';
 		}
 	}
+	// function search(e) {
+	// 	let newarr = [...objProduct];
+	// 	newarr.filter(x => x.id.includes(e.target.value))
+	// 	// console.log(newarr)
+	// 	setObjProduct(newarr)
+	// }
+	const [inputID , setInputID] = useState('');
+	// function searchText (typeData) {
+	// 	return typeData.toLowerCase().includes(inputID.toLowerCase());
+	// }
 
-	useEffect(() => {
-		document.querySelectorAll('.nal-ostatok input').forEach((x) => {
-			// x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
-			
-			if (x.value.replaceAll(' ', '').length >= 4) {
-				// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-				x.style.width = x.value.replaceAll(' ', '').length * 8 + 4 + 'px';
-			}
-			if (x.value.replaceAll(' ', '').length >= 7) {
-				x.style.width = x.value.replaceAll(' ', '').length * 8 + 8 + 'px';
-			}
-			if (x.value.replaceAll(' ', '').length < 4) {
-				x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
-			}
-			
-	
-		});
-		
-	}, [objProduct]);
+	// let newobj = objProduct.filter(x=> x.id.includes('0'));
+	// console.log(newobj)
 	return (
 		<div
 			style={{
@@ -201,14 +294,14 @@ const Warehouse = () => {
 							<SvGBtnPlus />
 						</button>
 					</div>
-					<div style={{ display: 'flex', maxHeight: 500, overflowY: 'auto', overflowX: 'hidden' }}>
-						<table style={{ width: '50%', paddingBottom: 15 }}>
-							<thead>
+					<SimpleBar style={{ display: 'flex', maxHeight: 150}}>
+						<table style={{ width: '50%', paddingBottom: 15 , height: '100%'}}>
+							<thead className="first-tab-header">
 								<tr>
 									<th
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(false)}
-										style={{ textAlign: 'left', paddingLeft: 0 }}
+										style={{ textAlign: 'left', paddingLeft: 0, paddingRight: 10 }}
 										className="adaptive-switch-trigger"
 									>
 										Статус
@@ -219,6 +312,7 @@ const Warehouse = () => {
 										className={
 											switchMenu ? 'adaptive-switch adaptive-switch-on' : 'adaptive-switch'
 										}
+										style={switchMenu ? { paddingRight: 10 } : {}}
 									>
 										<div>
 											<img className="logo-mail" src={crmLogo} alt="" />
@@ -226,15 +320,28 @@ const Warehouse = () => {
 											<img className="logo-mail" src={promLogo} alt="" />
 										</div>
 									</th>
-									<th>ID</th>
-									<th>Страна</th>
-									<th>Валюта</th>
-									<th>Название </th>
-									<th>Атрибут</th>
+									<th style={{ paddingRight: 10 }}>ID</th>
+									<th style={{ paddingRight: 10 }}>Страна</th>
+									<th style={{ paddingRight: 10 }}>Валюта</th>
+									<th style={{ paddingRight: 15 }}>Название </th>
+									<th style={{ paddingRight: 15 }}>Атрибут</th>
+								</tr>
+								<tr>
+									<th>
+										Поиск
+										
+									</th>
+									<th></th>
+									<th>
+										<div style={{width: '100%'}}>
+											<input onChange={(e) => setInputID(e.target.value)} value={inputID} style={{width: '100%', border: 'none',padding: 0, outline: 'none'}} type="text" />
+										</div>
+									</th>
 								</tr>
 							</thead>
-							<tbody>
-								{objProduct.map((x, index) => (
+							<tbody className="first-tab-body">
+								{objProduct.filter(x => x.id.toLowerCase().includes(inputID.toLowerCase())).map((x, index) => (
+									
 									<WarehouseProductList
 										index={index}
 										setChecked={setChecked}
@@ -244,22 +351,28 @@ const Warehouse = () => {
 										setObjProduct={setObjProduct}
 										setSwitchMenu={setSwitchMenu}
 									/>
+									
 								))}
+								{/* {console.log(objProduct[0]['id'])} */}
 							</tbody>
 						</table>
-						<SimpleBar className="scroll-block" autoHide={false}>
+						<SimpleBar forceVisible="x" className="scroll-block" autoHide={false}>
+						
 							<table>
-								<thead>
+								<thead className="second-tab-header">
 									<tr>
-										<th colSpan={4}>Наличие</th>
+										<th colSpan={4}>	<div class="shadow-left"></div>Наличие</th>
 										<th>Закупка</th>
 										<th>Продажа</th>
 										<th>Маржа</th>
 										<th colSpan={4}>Сумма</th>
 									</tr>
+									<tr>
+										<th> </th>
+									</tr>
 								</thead>
-								<tbody>
-									{objProduct.map((x, index) => (
+								<tbody className="second-tab-body">
+									{objProduct.filter(x => x.id.toLowerCase().includes(inputID.toLowerCase())).map((x, index) => (
 										<WarehouseProductList2
 											PlusMinusOpen={PlusMinusOpen}
 											PlusMinusClose={PlusMinusClose}
@@ -280,7 +393,7 @@ const Warehouse = () => {
 								</tbody>
 							</table>
 						</SimpleBar>
-					</div>
+					</SimpleBar>
 				</div>
 			</div>
 		</div>

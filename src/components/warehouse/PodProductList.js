@@ -100,7 +100,6 @@ const PodProductList = ({
 				onMouseEnter={() => setSwitchMenu(true)}
 				onMouseLeave={() => setSwitchMenu(false)}
 				className="adaptive-switch-trigger"
-				style={{ paddingLeft: 0 }}
 			>
 				<label className="switch-btn-warehouse">
 					<input

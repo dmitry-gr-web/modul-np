@@ -88,6 +88,21 @@
 			background-color: #000000;
 		}
 	}
+	// .shadow-left {
+	// 	position: absolute;
+	// 	bottom: 0;
+	// 	height: 100%;
+	// 	width: 12px;
+	// 	// top: -3px;
+	// 	background: linear-gradient(
+	// 		90deg,
+	// 		white 0%,
+	// 		rgba(255, 255, 255, 0.95) 20%,
+	// 		rgba(255, 255, 255, 0.7) 45%,
+	// 		rgba(255, 255, 255, 0.5) 65%,
+	// 		rgba(255, 255, 255, 0) 100%
+	// 	);
+	// }
 	.scroll-block {
 		width: 50%;
 		padding-bottom: 15px;
@@ -143,10 +158,16 @@
 			padding: 0;
 		}
 	}
+	.simplebar-content {
+		display: flex;
+	}
 	table {
 		border-spacing: 0px;
-		thead {
-			height: 37px;
+		.first-tab-header {
+			// height: 37px;
+			th {
+				height: 20px;
+			}
 			th {
 				font-weight: 400;
 				font-size: 14px;
@@ -155,10 +176,29 @@
 				padding-bottom: 17px;
 			}
 			th {
-				padding: 0 10px;
+				padding: 0;
+			}
+			th:nth-child(3) {
+				max-width: 60px;
+			}
+			th:nth-child(1),
+			th:nth-child(3),
+			th:nth-child(4),
+			th:nth-child(5) {
+				padding-right: 10px;
+			}
+			th:nth-child(6),
+			th:nth-child(7) {
+				padding-right: 15px;
 			}
 		}
-		tbody {
+	
+		thead{
+			position: sticky;
+			z-index: 1;
+			top:0;
+		}
+		.first-tab-body {
 			td {
 				padding: 0;
 				font-size: 14px;
@@ -167,16 +207,69 @@
 				// display: flex;
 			}
 			td {
-				padding: 0 10px;
+				padding: 0;
 			}
-			// td:first-child {
-			// 	padding-left: 0;
-			// }
-			// tr:hover  {
-			// 	background:green;
-			// }
+			td:nth-child(1),
+			td:nth-child(3),
+			td:nth-child(4),
+			td:nth-child(5) {
+				padding-right: 10px;
+			}
+			td:nth-child(6),
+			td:nth-child(7) {
+				padding-right: 15px;
+			}
 		}
-	
+
+		.second-tab-header {
+			// height: 37px;
+			th {
+				height: 20px;
+			}
+			th {
+				font-weight: 400;
+				font-size: 14px;
+				padding: 0;
+				color: rgba(0, 0, 0, 0.65);
+				padding-bottom: 17px;
+			}
+			th {
+				padding: 0;
+			}
+			th:nth-child(1),th:nth-child(2),th:nth-child(3),th:nth-child(4) {
+				padding-right: 15px;
+			}
+		}
+		.second-tab-body {
+			td {
+				padding: 0;
+				font-size: 14px;
+				font-weight: 300;
+				height: 20px;
+			}
+			td {
+				padding: 0;
+			}
+			td:nth-child(1) {
+				padding-right: 3px;
+			}
+			td:nth-child(2),
+			td:nth-child(3) {
+				padding-right: 4px;
+			}
+			td:nth-child(4),
+			td:nth-child(5),
+			td:nth-child(6),
+			td:nth-child(7) {
+				padding-right: 15px;
+			}
+			td:nth-child(8) {
+				padding-right: 3px;
+			}
+			td:nth-child(9),	td:nth-child(10) {
+				padding-right: 4px;
+			}
+		}
 		.id-tovara {
 			text-align: center;
 			max-width: 60px;
@@ -197,8 +290,10 @@
 				&:before {
 					background-image: url('img/arrow-down.svg');
 					content: '';
-					width: 10px;
-					height: 5px;
+					background-repeat: no-repeat;
+					background-size:contain;
+					width: 9px;
+					height: 4px;
 					position: absolute;
 					left: -13px;
 					top: 6px;
@@ -206,12 +301,15 @@
 				}
 			}
 			.arrowDeg {
-				margin-left: 27px;
+				margin-left: 25px;
 				&:before {
 					background-image: url('img/arrow-down.svg');
 					content: '';
-					width: 10px;
-					height: 5px;
+					background-repeat: no-repeat;
+					background-size:contain;
+	
+					width: 9px;
+					height: 4px;
 					position: absolute;
 					left: -13px;
 					transform: rotate(-90deg);
@@ -227,6 +325,7 @@
 				outline: none;
 				border: none;
 				padding: 0;
+				font-weight: 300;
 			}
 			input::selection {
 				// background-color: rgb(71, 74, 81, 0.7);
@@ -258,7 +357,7 @@
 					border-radius: 2px;
 				}
 			}
-			button:last-child {
+			button:nth-child(3) {
 				// position: relative;
 				&:before {
 					content: '';
@@ -266,7 +365,7 @@
 					width: 8px;
 					height: 0px;
 					top: 6px;
-					left: 4px;
+					left: 3px;
 					border: 0.5px solid #636363;
 					border-radius: 2px;
 				}
@@ -276,7 +375,7 @@
 					width: 0px;
 					height: 8px;
 					top: 2px;
-					left: 8px;
+					left: 7px;
 					border: 0.5px solid #636363;
 					border-radius: 2px;
 				}
@@ -297,7 +396,7 @@
 					content: '';
 					position: absolute;
 					width: calc(100% - 4px);
-					left: 2px;
+					left: 0;
 					height: 2px;
 					bottom: 2px;
 
@@ -313,6 +412,7 @@
 		}
 		.nal-vozvrat div:before {
 			background: rgba(206, 43, 55, 0.75);
+			width: calc(100% - 15px);
 		}
 		.summa-suma1 {
 			padding: 0 2px;
@@ -329,7 +429,7 @@
 					content: '';
 					position: absolute;
 					width: calc(100% - 4px);
-					left: 2px;
+					left: 0px;
 					height: 2px;
 					bottom: 2px;
 
@@ -345,89 +445,8 @@
 		}
 		.summa-suma4 div:before {
 			background: rgba(206, 43, 55, 0.75);
+			width: 100%;
 		}
-		// .nal-otpr {
-		// 	padding: 0 2px;
-		// 	position: relative;
-		// 	div {
-		// 		text-align: right;
-		// 		&:before {
-		// 			content: '';
-		// 			position: absolute;
-
-		// 			height: 2px;
-		// 			bottom: 2px;
-		// 			width: calc(100% - 4px);
-		// 			left: 2px;
-		// 			background: rgba(0, 146, 70, 0.75);
-		// 			border-radius: 2px;
-		// 		}
-		// 	}
-		// }
-		// .nal-vozvrat {
-		// 	padding: 0 2px;
-		// 	position: relative;
-		// 	div {
-		// 		text-align: right;
-		// 		&:before {
-		// 			content: '';
-		// 			position: absolute;
-
-		// 			height: 2px;
-		// 			width: calc(100% - 4px);
-		// 			left: 2px;
-		// 			bottom: 2px;
-		// 			background: rgba(206, 43, 55, 0.75);
-		// 			border-radius: 2px;
-		// 		}
-		// 	}
-		// }
-		// .warehouse-nalichie,
-		// .warehouse-summa {
-		// 	display: flex;
-		// 	div {
-		// 		margin: 0 2px;
-		// 	}
-		// 	div:nth-child(2) {
-		// 		position: relative;
-		// 		&:before {
-		// 			content: '';
-		// 			position: absolute;
-		// 			width: 100%;
-		// 			height: 2px;
-		// 			bottom: 0px;
-
-		// 			background: rgba(0, 0, 0, 0.2);
-		// 			border-radius: 2px;
-		// 		}
-		// 	}
-		// 	div:nth-child(3) {
-		// 		position: relative;
-		// 		&:before {
-		// 			content: '';
-		// 			position: absolute;
-		// 			width: 100%;
-		// 			height: 2px;
-		// 			bottom: 0px;
-
-		// 			background: rgba(0, 146, 70, 0.75);
-		// 			border-radius: 2px;
-		// 		}
-		// 	}
-		// 	div:nth-child(4) {
-		// 		position: relative;
-		// 		&:before {
-		// 			content: '';
-		// 			position: absolute;
-		// 			width: 100%;
-		// 			height: 2px;
-		// 			bottom: 0px;
-
-		// 			background: rgba(206, 43, 55, 0.75);
-		// 			border-radius: 2px;
-		// 		}
-		// 	}
-		// }
 	}
 
 	.switch-btn-warehouse {
@@ -506,7 +525,8 @@
 		}
 	}
 	.adaptive-switch-on {
-		padding: 0 10px;
+		padding: 0;
+		padding-right: 10px;
 		transition: 0.2s;
 		div {
 			// display: flex;

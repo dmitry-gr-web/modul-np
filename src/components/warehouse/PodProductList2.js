@@ -1,17 +1,17 @@
-import React, { useEffect,useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const PodProductList2 = ({
 	objProduct,
 	index,
-    index2,
-    PlusMinusOpen,
-    PlusMinusClose,
-    setObjProduct,
+	index2,
+	PlusMinusOpen,
+	PlusMinusClose,
+	setObjProduct,
 	setIndexInput,
 	focusInput,
 	setFocusInput,
 	podlozhka,
-	setPodlozhka
+	setPodlozhka,
 }) => {
 	const [swtichChecked, setSwitchChecked] = useState(
 		objProduct[index].podProduct[index2].status.all
@@ -23,7 +23,7 @@ const PodProductList2 = ({
 			setSwitchChecked(true);
 		}
 	}, [objProduct]);
-    function BtnMinus(e) {
+	function BtnMinus(e) {
 		let newobj = [...objProduct];
 		if (newobj[index].podProduct[index2].ostatok !== 0) {
 			newobj[index].podProduct[index2].ostatok = newobj[index].podProduct[index2].ostatok - 1;
@@ -35,7 +35,7 @@ const PodProductList2 = ({
 		newobj[index].podProduct[index2].ostatok = newobj[index].podProduct[index2].ostatok + 1;
 		setObjProduct(newobj);
 	}
-    function formatNumber(number) {
+	function formatNumber(number) {
 		let newnum = number
 			.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 			.replace(',', '.');
@@ -67,7 +67,7 @@ const PodProductList2 = ({
 	}
 	function enterInput(e) {
 		if (e.key === 'Enter') {
-			if(podlozhka && prev !== objProduct[index].podProduct[index2].ostatok){
+			if (podlozhka && prev !== objProduct[index].podProduct[index2].ostatok) {
 				if (e.target.value.length >= 4) {
 					e.target.style.width = e.target.value.length * 8 + 4 + 'px';
 				}
@@ -80,27 +80,33 @@ const PodProductList2 = ({
 				e.target.blur();
 				console.log('enter');
 				setFocusInput(false);
-				
 			}
 			setPodlozhka(false);
-
 		}
 	}
 	return (
 		<tr>
 			<td className="nal-ostatok" style={!swtichChecked ? { opacity: 0.5 } : {}}>
-				<div onMouseLeave={PlusMinusClose} onMouseEnter={PlusMinusOpen} style={{ display: 'flex' , justifyContent: 'flex-end'}}>
+				<div
+					onMouseLeave={PlusMinusClose}
+					onMouseEnter={PlusMinusOpen}
+					style={{ display: 'flex', justifyContent: 'flex-end' }}
+				>
 					<button onClick={BtnMinus}></button>
 					{/* {formatNumber2(x.ostatok)} */}
 					<input
 						type="text"
-						value={focusInput ? objProduct[index].podProduct[index2].ostatok : formatNumber2(objProduct[index].podProduct[index2].ostatok)}
+						value={
+							focusInput
+								? objProduct[index].podProduct[index2].ostatok
+								: formatNumber2(objProduct[index].podProduct[index2].ostatok)
+						}
 						onChange={inputChange}
 						onKeyUp={enterInput}
 					/>
-					<button onClick={BtnPlus}></button>/
+					<button onClick={BtnPlus}></button>
+					<span style={{ paddingLeft: 3 }}>/</span>
 				</div>
-
 			</td>
 			<td className="nal-rezerv" style={!swtichChecked ? { opacity: 0.5 } : {}}>
 				<div>{formatNumber2(objProduct[index].podProduct[index2].rezerv)}</div>
@@ -111,11 +117,23 @@ const PodProductList2 = ({
 			<td className="nal-vozvrat" style={!swtichChecked ? { opacity: 0.5 } : {}}>
 				<div>{formatNumber2(objProduct[index].podProduct[index2].vozvrat)}</div>
 			</td>
-			<td style={!swtichChecked ? { opacity: 0.5,textAlign:'right' } : {textAlign:'right'}}>{formatNumber(objProduct[index].zakupka)}</td>
-			<td style={!swtichChecked ? { opacity: 0.5,textAlign:'right' } : {textAlign:'right'}}>{formatNumber(objProduct[index].prodazha)}</td>
-			<td style={!swtichChecked ? { opacity: 0.5,textAlign:'right'} : {textAlign:'right'}}>{formatNumber(objProduct[index].marzha)}</td>
+			<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
+				{formatNumber(objProduct[index].zakupka)}
+			</td>
+			<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
+				{formatNumber(objProduct[index].prodazha)}
+			</td>
+			<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
+				{formatNumber(objProduct[index].marzha)}
+			</td>
 			<td className="summa-suma1" style={!swtichChecked ? { opacity: 0.5 } : {}}>
-				<div style={{textAlign: 'right'}}>{formatNumber(objProduct[index].podProduct[index2].ostatok * objProduct[index].podProduct[index2].zakupka)}/</div>
+				<div style={{ textAlign: 'right',display: 'flex', justifyContent: 'end' }}>
+					{formatNumber(
+						objProduct[index].podProduct[index2].ostatok *
+							objProduct[index].podProduct[index2].zakupka
+					)}{' '}
+					<span style={{ paddingLeft: 3 }}>/</span>
+				</div>
 			</td>
 			<td className="summa-suma2" style={!swtichChecked ? { opacity: 0.5 } : {}}>
 				<div>{formatNumber(objProduct[index].podProduct[index2].suma2)}</div>

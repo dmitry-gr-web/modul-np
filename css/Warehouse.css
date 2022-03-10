@@ -118,30 +118,105 @@
 .warehouse-products .scroll-block .simplebar-content-wrapper {
   padding: 0;
 }
+.warehouse-products .simplebar-content {
+  display: flex;
+}
 .warehouse-products table {
   border-spacing: 0px;
 }
-.warehouse-products table thead {
-  height: 37px;
+.warehouse-products table .first-tab-header th {
+  height: 20px;
 }
-.warehouse-products table thead th {
+.warehouse-products table .first-tab-header th {
   font-weight: 400;
   font-size: 14px;
   padding: 0;
   color: rgba(0, 0, 0, 0.65);
   padding-bottom: 17px;
 }
-.warehouse-products table thead th {
-  padding: 0 10px;
+.warehouse-products table .first-tab-header th {
+  padding: 0;
 }
-.warehouse-products table tbody td {
+.warehouse-products table .first-tab-header th:nth-child(3) {
+  max-width: 60px;
+}
+.warehouse-products table .first-tab-header th:nth-child(1),
+.warehouse-products table .first-tab-header th:nth-child(3),
+.warehouse-products table .first-tab-header th:nth-child(4),
+.warehouse-products table .first-tab-header th:nth-child(5) {
+  padding-right: 10px;
+}
+.warehouse-products table .first-tab-header th:nth-child(6),
+.warehouse-products table .first-tab-header th:nth-child(7) {
+  padding-right: 15px;
+}
+.warehouse-products table thead {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+}
+.warehouse-products table .first-tab-body td {
   padding: 0;
   font-size: 14px;
   font-weight: 300;
   height: 20px;
 }
-.warehouse-products table tbody td {
-  padding: 0 10px;
+.warehouse-products table .first-tab-body td {
+  padding: 0;
+}
+.warehouse-products table .first-tab-body td:nth-child(1),
+.warehouse-products table .first-tab-body td:nth-child(3),
+.warehouse-products table .first-tab-body td:nth-child(4),
+.warehouse-products table .first-tab-body td:nth-child(5) {
+  padding-right: 10px;
+}
+.warehouse-products table .first-tab-body td:nth-child(6),
+.warehouse-products table .first-tab-body td:nth-child(7) {
+  padding-right: 15px;
+}
+.warehouse-products table .second-tab-header th {
+  height: 20px;
+}
+.warehouse-products table .second-tab-header th {
+  font-weight: 400;
+  font-size: 14px;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  padding-bottom: 17px;
+}
+.warehouse-products table .second-tab-header th {
+  padding: 0;
+}
+.warehouse-products table .second-tab-header th:nth-child(1), .warehouse-products table .second-tab-header th:nth-child(2), .warehouse-products table .second-tab-header th:nth-child(3), .warehouse-products table .second-tab-header th:nth-child(4) {
+  padding-right: 15px;
+}
+.warehouse-products table .second-tab-body td {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 300;
+  height: 20px;
+}
+.warehouse-products table .second-tab-body td {
+  padding: 0;
+}
+.warehouse-products table .second-tab-body td:nth-child(1) {
+  padding-right: 3px;
+}
+.warehouse-products table .second-tab-body td:nth-child(2),
+.warehouse-products table .second-tab-body td:nth-child(3) {
+  padding-right: 4px;
+}
+.warehouse-products table .second-tab-body td:nth-child(4),
+.warehouse-products table .second-tab-body td:nth-child(5),
+.warehouse-products table .second-tab-body td:nth-child(6),
+.warehouse-products table .second-tab-body td:nth-child(7) {
+  padding-right: 15px;
+}
+.warehouse-products table .second-tab-body td:nth-child(8) {
+  padding-right: 3px;
+}
+.warehouse-products table .second-tab-body td:nth-child(9), .warehouse-products table .second-tab-body td:nth-child(10) {
+  padding-right: 4px;
 }
 .warehouse-products table .id-tovara {
   text-align: center;
@@ -165,20 +240,24 @@
 .warehouse-products table .name-tovara .arrow:before {
   background-image: url("img/arrow-down.svg");
   content: "";
-  width: 10px;
-  height: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 9px;
+  height: 4px;
   position: absolute;
   left: -13px;
   top: 6px;
 }
 .warehouse-products table .name-tovara .arrowDeg {
-  margin-left: 27px;
+  margin-left: 25px;
 }
 .warehouse-products table .name-tovara .arrowDeg:before {
   background-image: url("img/arrow-down.svg");
   content: "";
-  width: 10px;
-  height: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 9px;
+  height: 4px;
   position: absolute;
   left: -13px;
   transform: rotate(-90deg);
@@ -192,6 +271,7 @@
   outline: none;
   border: none;
   padding: 0;
+  font-weight: 300;
 }
 .warehouse-products table .nal-ostatok input::selection {
   background-color: #afafb3;
@@ -218,23 +298,23 @@
   border: 0.5px solid #636363;
   border-radius: 2px;
 }
-.warehouse-products table .nal-ostatok button:last-child:before {
+.warehouse-products table .nal-ostatok button:nth-child(3):before {
   content: "";
   position: absolute;
   width: 8px;
   height: 0px;
   top: 6px;
-  left: 4px;
+  left: 3px;
   border: 0.5px solid #636363;
   border-radius: 2px;
 }
-.warehouse-products table .nal-ostatok button:last-child:after {
+.warehouse-products table .nal-ostatok button:nth-child(3):after {
   content: "";
   position: absolute;
   width: 0px;
   height: 8px;
   top: 2px;
-  left: 8px;
+  left: 7px;
   border: 0.5px solid #636363;
   border-radius: 2px;
 }
@@ -259,7 +339,7 @@
   content: "";
   position: absolute;
   width: calc(100% - 4px);
-  left: 2px;
+  left: 0;
   height: 2px;
   bottom: 2px;
   border-radius: 2px;
@@ -272,6 +352,7 @@
 }
 .warehouse-products table .nal-vozvrat div:before {
   background: rgba(206, 43, 55, 0.75);
+  width: calc(100% - 15px);
 }
 .warehouse-products table .summa-suma1 {
   padding: 0 2px;
@@ -294,7 +375,7 @@
   content: "";
   position: absolute;
   width: calc(100% - 4px);
-  left: 2px;
+  left: 0px;
   height: 2px;
   bottom: 2px;
   border-radius: 2px;
@@ -307,6 +388,7 @@
 }
 .warehouse-products table .summa-suma4 div:before {
   background: rgba(206, 43, 55, 0.75);
+  width: 100%;
 }
 .warehouse-products .switch-btn-warehouse {
   position: relative;
@@ -382,7 +464,8 @@
   transition: 0.2s;
 }
 .warehouse-products .adaptive-switch-on {
-  padding: 0 10px;
+  padding: 0;
+  padding-right: 10px;
   transition: 0.2s;
 }
 .warehouse-products .adaptive-switch-on div {
