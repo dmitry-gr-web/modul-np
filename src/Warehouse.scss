@@ -56,6 +56,7 @@
 	margin-left: 60px;
 	// width: 970px;
 	width: 1150px;
+	position: relative;
 	.warehouse-products-title {
 		margin-bottom: 21px;
 		margin-top: 24px;
@@ -99,6 +100,24 @@
 		z-index: 1;
 		background: linear-gradient(
 			90deg,
+			white 0%,
+			rgba(255, 255, 255, 0.95) 20%,
+			rgba(255, 255, 255, 0.7) 45%,
+			rgba(255, 255, 255, 0.5) 65%,
+			rgba(255, 255, 255, 0) 100%
+		);
+	}
+	.shadow-right {
+		position: absolute;
+
+		height: 200px;
+		top:60px;
+		right:0;
+		width: 12px;
+		// top: -3px;
+		z-index: 5;
+		background: linear-gradient(
+			270deg,
 			white 0%,
 			rgba(255, 255, 255, 0.95) 20%,
 			rgba(255, 255, 255, 0.7) 45%,
@@ -167,7 +186,7 @@
 		border-spacing: 0px;
 		.first-tab-header {
 			// height: 37px;
-			background:white;
+			// background:white;
 			th {
 				height: 20px;
 			}
@@ -178,6 +197,9 @@
 				color: rgba(0, 0, 0, 0.65);
 				padding-bottom: 17px;
 			}
+			// tr:nth-child(2) th {
+			// 	padding-bottom: 12px;
+			// }
 			th {
 				padding: 0;
 			}
@@ -232,6 +254,9 @@
 				height: 20px;
 				// display: flex;
 			}
+			// tr:first-child td {
+			// 	margin-top: 12px;
+			// }
 			td {
 				padding: 0;
 				color:rgba(0, 0, 0, 0.7);
@@ -537,6 +562,7 @@
 		transition: 0.2s left;
 		left:54px;
 		position: sticky;
+		background:white;
 		div {
 			display: flex;
 			visibility: hidden;
@@ -551,6 +577,8 @@
 		padding: 0;
 		padding-right: 10px;
 		transition: 0.2s width;
+		z-index: 1;
+		background:white;
 		div {
 			// display: flex;
 			visibility: visible;

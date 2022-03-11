@@ -16,6 +16,8 @@ const WarehouseProductList = ({
 	focusInput,
 	setFocusInput,
 	setIndexInput,
+	lastIndex,
+	setLastIndex
 
 }) => {
 	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
@@ -233,14 +235,27 @@ const WarehouseProductList = ({
 				}
 			}, 200);
 	}, [objProduct, switchMenu]);
-	function clickTr() {
-		let newobj = [...objProduct];
 	
+	function clickTr(e) {
+		let newobj = [...objProduct];
+		if (e.ctrlKey || e.metaKey) {
 			newobj[index].select = 	!newobj[index].select;
-		
+		} else {
+			if(newobj[index].select !== true){
+				newobj.map(x => x.select = false);
+			} 
+			newobj[index].select = 	!newobj[index].select;
+		}
+		if(e.shiftKey) {
+			// newobj[index].select = true;
+			// newobj.slice(lastIndex, index);
+			newobj.slice(lastIndex, index).map(x => x.select = true);
+		}
+		setLastIndex(index);
 		setObjProduct(newobj);
-		console.log(newobj);
+		console.log(lastIndex, index);
 	}
+
 	return (
 		<>
 			<tr className={objProduct[index].select ? 'select': ''} onClick={clickTr} ref={linkTR}>

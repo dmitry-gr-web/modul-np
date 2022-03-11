@@ -278,6 +278,7 @@ const Warehouse = () => {
 		console.log(width);
 	}, [objProduct, switchMenu]);
 	const linkTR = useRef();
+	const [lastIndex ,setLastIndex] = useState(0);
 	useEffect(() => {
 		let curent = linkTR.current.querySelectorAll('th');
 		let width = [];
@@ -297,6 +298,16 @@ const Warehouse = () => {
 			}
 		}, 200);
 	}, [objProduct, switchMenu]);
+	// document.addEventListener('keydown' , function(e){
+		
+	// 	e.preventDefault();
+	// 	if (e.ctrlKey || e.metaKey && e.code.KeyA) {
+	// 		let newobj = [...objProduct];
+	// 		newobj.map(x => x.select = true);
+	// 		setObjProduct(newobj);
+	// 	}
+
+	// });
 	return (
 		<div
 			style={{
@@ -307,7 +318,7 @@ const Warehouse = () => {
 			}}
 		>
 			<div style={{position: "absolute", top: 0, right:0}}>Выбрано {parseInt(objProduct.filter(x => x.select === true).length) + parseInt(objProduct.map(x=> x.podProduct?.filter(y => y.select === true).length))}</div>
-			{console.log(objProduct.map(x=> x.podProduct?.filter(y => y.select === true).length))}
+		
 			<div
 				style={{
 					marginLeft: 74,
@@ -347,6 +358,7 @@ const Warehouse = () => {
 							<SvGBtnPlus />
 						</button>
 					</div>
+					<div className='shadow-right'></div>
 					<SimpleBar style={{ display: 'flex', maxHeight: 200, maxWidth: 1150 }} autoHide={false}>
 						<table style={{ width: '100%', height: '100%' }}>
 							<thead className="first-tab-header">
@@ -400,7 +412,10 @@ const Warehouse = () => {
 										className={
 											switchMenu ? 'adaptive-switch adaptive-switch-on' : 'adaptive-switch'
 										}
-									></th>
+									>
+											<div>
+			
+										</div></th>
 									<th>
 										<div style={{ width: '100%' }}>
 											<input
@@ -437,6 +452,8 @@ const Warehouse = () => {
 											focusInput={focusInput}
 											setFocusInput={setFocusInput}
 											setIndexInput={setIndexInput}
+											setLastIndex={setLastIndex}
+											lastIndex={lastIndex}
 										/>
 									))}
 								{/* {console.log(objProduct[0]['id'])} */}
