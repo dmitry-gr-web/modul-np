@@ -284,8 +284,17 @@
 				z-index: 1;
 				transition: 0.2s left;
 			}
-			
-
+			td:nth-child(8) {
+				input {
+					color:rgba(0,0,0,0.7);
+				}
+				span {
+					color:rgba(0,0,0,0.5);
+				}
+			}
+			td:nth-child(9),td:nth-child(10),td:nth-child(11) {
+				color:rgba(0,0,0,0.5);
+			}
 			td:nth-child(8) {
 				padding-left: 15px;
 				padding-right: 3px;
@@ -305,6 +314,17 @@
 			}
 			td:nth-child(16),	td:nth-child(17) {
 				padding-right: 4px;
+			}
+			td:nth-child(15){
+				div {
+					color:rgba(0,0,0,0.7);	
+				}
+				span {
+					color:rgba(0,0,0,0.5);
+				}
+			}
+			td:nth-child(16),	td:nth-child(17),td:nth-child(18) {
+				color:rgba(0,0,0,0.5);
 			}
 			tr:hover td {
 				background: grey !important ;

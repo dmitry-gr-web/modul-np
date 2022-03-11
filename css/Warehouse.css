@@ -244,6 +244,15 @@
   z-index: 1;
   transition: 0.2s left;
 }
+.warehouse-products table .first-tab-body td:nth-child(8) input {
+  color: rgba(0, 0, 0, 0.7);
+}
+.warehouse-products table .first-tab-body td:nth-child(8) span {
+  color: rgba(0, 0, 0, 0.5);
+}
+.warehouse-products table .first-tab-body td:nth-child(9), .warehouse-products table .first-tab-body td:nth-child(10), .warehouse-products table .first-tab-body td:nth-child(11) {
+  color: rgba(0, 0, 0, 0.5);
+}
 .warehouse-products table .first-tab-body td:nth-child(8) {
   padding-left: 15px;
   padding-right: 3px;
@@ -263,6 +272,15 @@
 }
 .warehouse-products table .first-tab-body td:nth-child(16), .warehouse-products table .first-tab-body td:nth-child(17) {
   padding-right: 4px;
+}
+.warehouse-products table .first-tab-body td:nth-child(15) div {
+  color: rgba(0, 0, 0, 0.7);
+}
+.warehouse-products table .first-tab-body td:nth-child(15) span {
+  color: rgba(0, 0, 0, 0.5);
+}
+.warehouse-products table .first-tab-body td:nth-child(16), .warehouse-products table .first-tab-body td:nth-child(17), .warehouse-products table .first-tab-body td:nth-child(18) {
+  color: rgba(0, 0, 0, 0.5);
 }
 .warehouse-products table .first-tab-body tr:hover td {
   background: grey !important;

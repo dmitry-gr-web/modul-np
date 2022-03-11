@@ -276,7 +276,7 @@ const WarehouseProductList = ({
 					</label>
 				</td>
 				<td
-					style={!swtichChecked ? { opacity: 0.5 } : {}}
+					style={!swtichChecked ? {  opacity: 0.4 } : {}}
 					onMouseEnter={() => setSwitchMenu(true)}
 					onMouseLeave={() => setSwitchMenu(false)}
 					className={switchMenu ? 'adaptive-switch adaptive-switch-on while2' : 'adaptive-switch while2'}
@@ -318,17 +318,17 @@ const WarehouseProductList = ({
 				</td>
 				<td
 					className="id-tovara while2"
-					style={!swtichChecked ? { opacity: 0.5, textAlign: 'left' } : { textAlign: 'left' }}
+					style={!swtichChecked ? {  opacity: 0.4, textAlign: 'left' } : { textAlign: 'left' }}
 				>
 					{objProduct[index].id}
 				</td>
 				<td className='while2'
-					style={!swtichChecked ? { opacity: 0.5, textAlign: 'center' } : { textAlign: 'center' }}
+					style={!swtichChecked ? {  opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
 				>
 					<span className="flags">{objProduct[index].country}</span>
 				</td>
 				<td className='while2'
-					style={!swtichChecked ? { opacity: 0.5, textAlign: 'center' } : { textAlign: 'center' }}
+					style={!swtichChecked ? {  opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
 				>
 					{objProduct[index].currency}
 				</td>
@@ -336,13 +336,13 @@ const WarehouseProductList = ({
 					className="name-tovara while2"
 					onMouseLeave={tooltipOff}
 					onMouseEnter={tooltipOn}
-					style={!swtichChecked ? { opacity: 0.5 } : {}}
+					style={!swtichChecked ? {  opacity: 0.4 } : {}}
 				>
 					<span className={objProduct[index].podProduct ? 'arrow' : ''}>
 						{objProduct[index].name}
 					</span>
 				</td>
-				<td className='while2' style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className='while2' style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<img
 						style={{ width: 16, height: 16, position: 'absolute' }}
 						src={objProduct[index].images}
@@ -352,7 +352,7 @@ const WarehouseProductList = ({
 						{objProduct[index].attribute}
 					</span>
 				</td>
-				<td className="nal-ostatok" style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className="nal-ostatok" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<div
 						onMouseLeave={PlusMinusClose}
 						onMouseEnter={PlusMinusOpen}
@@ -376,37 +376,37 @@ const WarehouseProductList = ({
 					</div>
 
 				</td>
-				<td className="nal-rezerv" style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className="nal-rezerv" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<div>{formatNumber2(objProduct[index].rezerv)}</div>
 				</td>
-				<td className="nal-otpr" style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className="nal-otpr" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<div>{formatNumber2(objProduct[index].otpr)}</div>
 				</td>
-				<td className="nal-vozvrat" style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className="nal-vozvrat" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<div>{formatNumber2(objProduct[index].vozvrat)}</div>
 				</td>
-				<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
+				<td style={!swtichChecked ? {  opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
 					{formatNumber(objProduct[index].zakupka)}
 				</td>
-				<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
+				<td style={!swtichChecked ? {  opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
 					{formatNumber(objProduct[index].prodazha)}
 				</td>
-				<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
+				<td style={!swtichChecked ? {  opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
 					{formatNumber(objProduct[index].marzha)}
 				</td>
-				<td className="summa-suma1" style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className="summa-suma1" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
 						{formatNumber(objProduct[index].ostatok * objProduct[index].zakupka)}
 						<span style={{paddingLeft:3}}>/</span>
 					</div>
 				</td>
-				<td className="summa-suma2" style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className="summa-suma2" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<div>{formatNumber(objProduct[index].suma2)}</div>
 				</td>
-				<td className="summa-suma3" style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className="summa-suma3" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<div>{formatNumber(objProduct[index].suma3)}</div>
 				</td>
-				<td className="summa-suma4" style={!swtichChecked ? { opacity: 0.5 } : {}}>
+				<td className="summa-suma4" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
 					<div>{formatNumber(objProduct[index].suma4)}</div>
 				</td>
 			</tr>
