@@ -7,6 +7,7 @@ const App = () => {
 	return (
 		<>  
             <button style={{position: "absolute", top: 0}} onClick={() => setBtn(!btn)}>Переключатель</button>
+      
             {!btn ? <ModulNp /> : <Warehouse/>}
 		
 		</>
