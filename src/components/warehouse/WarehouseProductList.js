@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PodProductList from './PodProductList';
 
 const WarehouseProductList = ({
@@ -17,8 +17,8 @@ const WarehouseProductList = ({
 	setFocusInput,
 	setIndexInput,
 	lastIndex,
-	setLastIndex
-
+	setLastIndex,
+	btnMenu,
 }) => {
 	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
 	useEffect(() => {
@@ -108,9 +108,6 @@ const WarehouseProductList = ({
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-	// console.log(objProduct);
-	// const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
-
 	useEffect(() => {
 		if (!objProduct[index].status.all) {
 			setSwitchChecked(false);
@@ -133,7 +130,7 @@ const WarehouseProductList = ({
 		setMemoryInput(newobj[index].ostatok);
 	}
 	function formatNumber(number) {
-			let newnum = number
+		let newnum = number
 			.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 			.replace(',', '.');
 		return newnum;
@@ -147,13 +144,9 @@ const WarehouseProductList = ({
 	}
 	function inputChange(e) {
 		setIndexInput(index);
-		// e.target.style.zIndex = 3;
 		setFocusInput(true);
 		setPodlozhka(true);
 		e.target.value = e.target.value.replace(/[^0-9]/g, '');
-		// let newobj = [...objProduct];
-		// newobj[index].ostatok = +e.target.value;
-		// setObjProduct(newobj);
 		setMemoryInput(e.target.value);
 	}
 	function usePrevious(value) {
@@ -184,19 +177,17 @@ const WarehouseProductList = ({
 			setPodlozhka(false);
 		}
 	}
-	// setMemoryInput(newobj[index].ostatok);
-	useEffect(()=> {
-		if(!podlozhka){
+	useEffect(() => {
+		if (!podlozhka) {
 			let newobj = [...objProduct];
 			newobj[index].ostatok = +memoryInput;
 			setObjProduct(newobj);
 		}
-
-	},[podlozhka]);
+	}, [podlozhka]);
 	useEffect(() => {
 		document.querySelectorAll('.nal-ostatok input').forEach((x) => {
 			// x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
-			
+
 			if (x.value.replaceAll(' ', '').length >= 4) {
 				// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
 				x.style.width = x.value.replaceAll(' ', '').length * 8 + 4 + 'px';
@@ -207,49 +198,42 @@ const WarehouseProductList = ({
 			if (x.value.replaceAll(' ', '').length < 4) {
 				x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
 			}
-			
-	
 		});
-		
 	}, [memoryInput, objProduct]);
 
 	const linkTR = useRef();
 	useEffect(() => {
-
 		let curent = linkTR.current.querySelectorAll('td');
 		let width = [];
 		let res = 0;
-			setTimeout(() => {
-				for (let i = 0; i < 7; i++) {
-					if(!switchMenu) {
-						width.push(curent[i].offsetWidth);
-					} else if (switchMenu) {
-						width.push(curent[i].offsetWidth);
-					}	else if(switchMenu && i === 1) {
-						width.push(0);
-					}
-					curent[i].style.left = res + 'px';
-					res = width.reduce((prev, curr) => prev + curr, 0);
-					curent[0].style.left = '0px';
-					
+		setTimeout(() => {
+			for (let i = 0; i < 7; i++) {
+				if (!switchMenu) {
+					width.push(curent[i].offsetWidth);
+				} else if (switchMenu) {
+					width.push(curent[i].offsetWidth);
+				} else if (switchMenu && i === 1) {
+					width.push(0);
 				}
-			}, 200);
+				curent[i].style.left = res + 7 + 'px';
+				res = width.reduce((prev, curr) => prev + curr, 0);
+				curent[0].style.left = '7px';
+			}
+		}, 200);
 	}, [objProduct, switchMenu]);
-	
+
 	function clickTr(e) {
 		let newobj = [...objProduct];
 		if (e.ctrlKey || e.metaKey) {
-			newobj[index].select = 	!newobj[index].select;
+			newobj[index].select = !newobj[index].select;
 		} else {
-			if(newobj[index].select !== true){
-				newobj.map(x => x.select = false);
-			} 
-			newobj[index].select = 	!newobj[index].select;
+			if (newobj[index].select !== true) {
+				newobj.map((x) => (x.select = false));
+			}
+			newobj[index].select = !newobj[index].select;
 		}
-		if(e.shiftKey) {
-			// newobj[index].select = true;
-			// newobj.slice(lastIndex, index);
-			newobj.slice(lastIndex, index).map(x => x.select = true);
+		if (e.shiftKey) {
+			newobj.slice(lastIndex, index).map((x) => (x.select = true));
 		}
 		setLastIndex(index);
 		setObjProduct(newobj);
@@ -258,7 +242,7 @@ const WarehouseProductList = ({
 
 	return (
 		<>
-			<tr className={objProduct[index].select ? 'select': ''} onClick={clickTr} ref={linkTR}>
+			<tr className={objProduct[index].select ? 'select' : ''} onClick={clickTr} ref={linkTR}>
 				<td
 					onMouseEnter={() => setSwitchMenu(true)}
 					onMouseLeave={() => setSwitchMenu(false)}
@@ -276,10 +260,12 @@ const WarehouseProductList = ({
 					</label>
 				</td>
 				<td
-					style={!swtichChecked ? {  opacity: 0.4 } : {}}
+					style={!swtichChecked ? { opacity: 0.4 } : {}}
 					onMouseEnter={() => setSwitchMenu(true)}
 					onMouseLeave={() => setSwitchMenu(false)}
-					className={switchMenu ? 'adaptive-switch adaptive-switch-on while2' : 'adaptive-switch while2'}
+					className={
+						switchMenu ? 'adaptive-switch adaptive-switch-on while2' : 'adaptive-switch while2'
+					}
 				>
 					<div>
 						<label className="switch-btn-small">
@@ -318,95 +304,104 @@ const WarehouseProductList = ({
 				</td>
 				<td
 					className="id-tovara while2"
-					style={!swtichChecked ? {  opacity: 0.4, textAlign: 'left' } : { textAlign: 'left' }}
+					style={!swtichChecked ? { opacity: 0.4, textAlign: 'left' } : { textAlign: 'left' }}
 				>
 					{objProduct[index].id}
 				</td>
-				<td className='while2'
-					style={!swtichChecked ? {  opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
+				<td
+					className="while2"
+					style={!swtichChecked ? { opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
 				>
 					<span className="flags">{objProduct[index].country}</span>
 				</td>
-				<td className='while2'
-					style={!swtichChecked ? {  opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
+				<td
+					className="while2"
+					style={!swtichChecked ? { opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
 				>
 					{objProduct[index].currency}
 				</td>
-				<td 
+				<td
 					className="name-tovara while2"
 					onMouseLeave={tooltipOff}
 					onMouseEnter={tooltipOn}
-					style={!swtichChecked ? {  opacity: 0.4 } : {}}
+					style={!swtichChecked ? { opacity: 0.4 } : {}}
 				>
 					<span className={objProduct[index].podProduct ? 'arrow' : ''}>
 						{objProduct[index].name}
 					</span>
 				</td>
-				<td className='while2' style={!swtichChecked ? {  opacity: 0.4 } : {}}>
+				<td className="while2" style={!swtichChecked ? { opacity: 0.4 } : {}}>
 					<img
 						style={{ width: 16, height: 16, position: 'absolute' }}
 						src={objProduct[index].images}
 						alt=""
 					/>
-					<span style={{ marginLeft: 20, whiteSpace: 'nowrap' }}>
+					<span
+						style={{
+							marginLeft: 20,
+							whiteSpace: 'nowrap',
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							display: 'block',
+							maxWidth: 85,
+						}}
+					>
 						{objProduct[index].attribute}
 					</span>
 				</td>
-				<td className="nal-ostatok" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
-					<div
-						onMouseLeave={PlusMinusClose}
-						onMouseEnter={PlusMinusOpen}
-						style={{ display: 'flex', justifyContent: 'flex-end' }}
-					>
-						<button onClick={BtnMinus}></button>
-	
+				<td
+					onMouseLeave={PlusMinusClose}
+					onMouseEnter={PlusMinusOpen}
+					className="nal-ostatok"
+					style={!swtichChecked ? { opacity: 0.4 } : {}}
+				>
+					<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+						<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnMinus}></button>
+
 						<input
 							type="text"
-							value={
-								focusInput ? memoryInput : formatNumber2(+memoryInput)
-							}
+							value={focusInput ? memoryInput : formatNumber2(+memoryInput)}
 							onChange={inputChange}
 							onKeyUp={enterInput}
+							maxLength={5}
 							onClick={() => setFocusInput(true)}
 						/>
-						{/* {console.log(memoryInput)}
-						{console.log(formatNumber2(memoryInput))} */}
-						<button onClick={BtnPlus}></button>
-						<span style={{paddingLeft:3}}>/</span>
-					</div>
 
+						<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnPlus}></button>
+						<span style={{ paddingLeft: 3 }}>/</span>
+					</div>
 				</td>
-				<td className="nal-rezerv" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
+				<td className="nal-rezerv" style={!swtichChecked ? { opacity: 0.4 } : {}}>
 					<div>{formatNumber2(objProduct[index].rezerv)}</div>
 				</td>
-				<td className="nal-otpr" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
+				<td className="nal-otpr" style={!swtichChecked ? { opacity: 0.4 } : {}}>
 					<div>{formatNumber2(objProduct[index].otpr)}</div>
 				</td>
-				<td className="nal-vozvrat" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
+				<td className="nal-vozvrat" style={!swtichChecked ? { opacity: 0.4 } : {}}>
 					<div>{formatNumber2(objProduct[index].vozvrat)}</div>
 				</td>
-				<td style={!swtichChecked ? {  opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
+				<td style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
 					{formatNumber(objProduct[index].zakupka)}
 				</td>
-				<td style={!swtichChecked ? {  opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
+				<td style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
 					{formatNumber(objProduct[index].prodazha)}
 				</td>
-				<td style={!swtichChecked ? {  opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
+				<td style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
 					{formatNumber(objProduct[index].marzha)}
 				</td>
-				<td className="summa-suma1" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
+				<td className="summa-suma1" style={!swtichChecked ? { opacity: 0.4 } : {}}>
 					<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
 						{formatNumber(objProduct[index].ostatok * objProduct[index].zakupka)}
-						<span style={{paddingLeft:3}}>/</span>
+						<span style={{ paddingLeft: 3 }}>/</span>
 					</div>
 				</td>
-				<td className="summa-suma2" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
+				<td className="summa-suma2" style={!swtichChecked ? { opacity: 0.4 } : {}}>
 					<div>{formatNumber(objProduct[index].suma2)}</div>
 				</td>
-				<td className="summa-suma3" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
+				<td className="summa-suma3" style={!swtichChecked ? { opacity: 0.4 } : {}}>
 					<div>{formatNumber(objProduct[index].suma3)}</div>
 				</td>
-				<td className="summa-suma4" style={!swtichChecked ? {  opacity: 0.4 } : {}}>
+				<td className="summa-suma4" style={!swtichChecked ? { opacity: 0.4 } : {}}>
 					<div>{formatNumber(objProduct[index].suma4)}</div>
 				</td>
 			</tr>
@@ -423,7 +418,6 @@ const WarehouseProductList = ({
 							setObjProduct={setObjProduct}
 							tooltipOn={tooltipOn}
 							tooltipOff={tooltipOff}
-
 							checked={checked}
 							PlusMinusOpen={PlusMinusOpen}
 							PlusMinusClose={PlusMinusClose}
@@ -432,6 +426,9 @@ const WarehouseProductList = ({
 							focusInput={focusInput}
 							setFocusInput={setFocusInput}
 							setIndexInput={setIndexInput}
+							btnMenu={btnMenu}
+							lastIndex={lastIndex}
+							setLastIndex={setLastIndex}
 						/>
 				  ))
 				: {}}

@@ -4,7 +4,7 @@ import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus, videoregistrator } from './
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import WarehouseProductList from './components/warehouse/WarehouseProductList';
-import WarehouseProductList2 from './components/warehouse/WarehouseProductList2';
+import WarehouseDropMenu from './components/warehouse/WarehouseDropMenu';
 
 const Warehouse = () => {
 	const [selectLink, setSelectLink] = useState(true);
@@ -23,16 +23,18 @@ const Warehouse = () => {
 			vozvrat: 655,
 			zakupka: 157.0,
 			prodazha: 349.0,
-			marzha: 0.0,
+			marzha: 40.0,
 			suma1: 1570.0,
 			suma2: 17925.0,
 			suma3: 2924.0,
 			suma4: 655.0,
-			select:false,
+			select: false,
 			podProduct: [
 				{
 					status: { all: true, rozetka: true, prom: true, crm: true },
 					id: '5649-2',
+					country: '🇺🇦',
+					currency: '₴',
 					images: videoregistrator,
 					name: 'Nano USB 2.0 флешка для установки в компьютеры',
 					attribute: '64 Гб',
@@ -42,16 +44,18 @@ const Warehouse = () => {
 					vozvrat: 655,
 					zakupka: 157.0,
 					prodazha: 349.0,
-					marzha: 0.0,
+					marzha: 25.0,
 					suma1: 1570.0,
 					suma2: 17925.0,
 					suma3: 2924.0,
 					suma4: 655.0,
-					select:false,
+					select: false,
 				},
 				{
 					status: { all: true, rozetka: true, prom: true, crm: true },
 					id: '5649-6.8',
+					country: '🇺🇦',
+					currency: '₴',
 					images: videoregistrator,
 					name: 'Nano USB 2.0 флешка для установки в компьютеры',
 					attribute: '128 Гб, Синий',
@@ -61,12 +65,12 @@ const Warehouse = () => {
 					vozvrat: 655,
 					zakupka: 157.0,
 					prodazha: 349.0,
-					marzha: 0.0,
+					marzha: 20.0,
 					suma1: 1570.0,
 					suma2: 17925.0,
 					suma3: 2924.0,
 					suma4: 655.0,
-					select:false,
+					select: false,
 				},
 			],
 		},
@@ -89,7 +93,7 @@ const Warehouse = () => {
 			suma2: 11924.0,
 			suma3: 11924.0,
 			suma4: 11924.0,
-			select:false,
+			select: false,
 		},
 		{
 			status: { all: true, rozetka: true, prom: true, crm: true },
@@ -110,7 +114,7 @@ const Warehouse = () => {
 			suma2: 11924.0,
 			suma3: 11924.0,
 			suma4: 11924.0,
-			select:false,
+			select: false,
 		},
 		{
 			status: { all: true, rozetka: true, prom: true, crm: true },
@@ -118,7 +122,7 @@ const Warehouse = () => {
 			country: '🇷🇺',
 			currency: '₽',
 			name: 'Чистящее средство VCle что то там средствто',
-			attribute: 'Основной',
+			attribute: 'Основной и дополнительный',
 			images: videoregistrator,
 			ostatok: 10000,
 			rezerv: 0,
@@ -131,7 +135,7 @@ const Warehouse = () => {
 			suma2: 11924.0,
 			suma3: 11924.0,
 			suma4: 11924.0,
-			select:false,
+			select: false,
 		},
 		{
 			status: { all: true, rozetka: true, prom: true, crm: true },
@@ -152,7 +156,7 @@ const Warehouse = () => {
 			suma2: 11924.0,
 			suma3: 11924.0,
 			suma4: 11924.0,
-			select:false,
+			select: false,
 		},
 		{
 			status: { all: true, rozetka: true, prom: true, crm: true },
@@ -173,7 +177,7 @@ const Warehouse = () => {
 			suma2: 11924.0,
 			suma3: 11924.0,
 			suma4: 11924.0,
-			select:false,
+			select: false,
 		},
 		{
 			status: { all: true, rozetka: true, prom: true, crm: true },
@@ -194,7 +198,7 @@ const Warehouse = () => {
 			suma2: 11924.0,
 			suma3: 11924.0,
 			suma4: 11924.0,
-			select:false,
+			select: false,
 		},
 	]);
 
@@ -203,18 +207,21 @@ const Warehouse = () => {
 	const [podlozhka, setPodlozhka] = useState(false);
 	const [switchMenu, setSwitchMenu] = useState(false);
 	const [focusInput, setFocusInput] = useState(false);
+	const [btnMenu, setBtnMenu] = useState(false);
 	function PlusMinusOpen(e) {
-		e.currentTarget.querySelectorAll('button').forEach((x) => {
-			x.style.width = '16px';
-		});
+		setBtnMenu(true);
+		// e.querySelectorAll('button').forEach((x) => {
+		// 	x.style.width = '16px';
+		// });
 		e.currentTarget.querySelector('input').select();
 		e.currentTarget.querySelector('input').focus();
 	}
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
-			e.currentTarget.querySelectorAll('button').forEach((x) => {
-				x.style.width = '0px';
-			});
+			setBtnMenu(false);
+			// e.querySelectorAll('button').forEach((x) => {
+			// 	x.style.width = '0px';
+			// });
 			e.currentTarget.querySelector('input').blur();
 		}
 	}
@@ -225,6 +232,9 @@ const Warehouse = () => {
 	function clickPodlozhka() {
 		setPodlozhka(false);
 		setFocusInput(false);
+		document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
+			x.style.width = '0%';
+		});
 		document.querySelectorAll('.nal-ostatok button').forEach((x) => {
 			x.style.width = '0px';
 		});
@@ -270,15 +280,15 @@ const Warehouse = () => {
 				} else if (switchMenu && i === 1) {
 					width.push(0);
 				}
-				curent[i].style.left = res + 'px';
+				curent[i].style.left = res + 7 + 'px';
 				res = width.reduce((prev, curr) => prev + curr, 0);
-				curent[0].style.left = '0px';
+				curent[0].style.left = '7px';
 			}
 		}, 200);
 		console.log(width);
 	}, [objProduct, switchMenu]);
 	const linkTR = useRef();
-	const [lastIndex ,setLastIndex] = useState(0);
+	const [lastIndex, setLastIndex] = useState(0);
 	useEffect(() => {
 		let curent = linkTR.current.querySelectorAll('th');
 		let width = [];
@@ -292,14 +302,14 @@ const Warehouse = () => {
 				} else if (switchMenu && i === 1) {
 					width.push(0);
 				}
-				curent[i].style.left = res + 'px';
+				curent[i].style.left = res + 7 + 'px';
 				res = width.reduce((prev, curr) => prev + curr, 0);
-				curent[0].style.left = '0px';
+				curent[0].style.left = '7px';
 			}
 		}, 200);
 	}, [objProduct, switchMenu]);
 	// document.addEventListener('keydown' , function(e){
-		
+
 	// 	e.preventDefault();
 	// 	if (e.ctrlKey || e.metaKey && e.code.KeyA) {
 	// 		let newobj = [...objProduct];
@@ -308,6 +318,90 @@ const Warehouse = () => {
 	// 	}
 
 	// });
+	// let suma4 = objProduct.reduce((prev, curr) =>  prev + curr.suma4,0);
+	// console.log(suma4)
+
+	function formatNumber2(number) {
+		let newnum = number.toLocaleString('ru-RU', {
+			minimumFractionDigits: 0,
+			maximumFractionDigits: 0,
+		});
+		return newnum;
+	}
+	function formatNumber(number) {
+		let newnum = number
+			.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+			.replace(',', '.');
+		return newnum;
+	}
+	//rascheti
+	let ostatok =
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0)) +
+		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.ostatok, 0)));
+	let rezerv =
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0)) +
+		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.rezerv, 0)));
+	let otpr =
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0)) +
+		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.otpr, 0)));
+	let vozvrat =
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0)) +
+		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.vozvrat, 0)));
+	let zakupka =
+		parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka, 0)) +
+		parseInt(
+			objProduct.map((x) => x.podProduct?.reduce((prev, curr, _, array) => prev + curr.zakupka, 0))
+		);
+	let prodazha =
+		(parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha, 0)) +
+			parseInt(
+				objProduct.map((x) =>
+					x.podProduct?.reduce((prev, curr, _, array) => prev + curr.prodazha, 0)
+				)
+			)) /
+		(objProduct.length + parseInt(objProduct.map((x) => x.podProduct?.length)));
+	let marzha =
+		(parseInt(objProduct.reduce((prev, curr) => prev + curr.marzha, 0)) +
+			parseInt(
+				objProduct.map((x) => x.podProduct?.reduce((prev, curr, _, array) => prev + curr.marzha, 0))
+			)) /
+		(objProduct.length + parseInt(objProduct.map((x) => x.podProduct?.length)));
+	// console.log(objProduct.length,parseInt(objProduct.map(x => x.podProduct?.length)))
+	// console.log(parseInt(objProduct.map(x => x.podProduct?.reduce(
+	// 	(prev, curr, _, array) => prev + curr.marzha / array.length,
+	// 	0
+	// ))))
+	let suma1 =
+		parseInt(objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)) +
+		parseInt(
+			objProduct.map((x) =>
+				x.podProduct?.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
+			)
+		);
+	// console.log(
+	// 	parseInt(
+	// 		objProduct
+	// 			.map((x) => x.podProduct?.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0))
+
+	// 	)
+	// );
+	let suma2 =
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0)) +
+		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.suma2, 0)));
+	let suma3 =
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0)) +
+		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.suma4, 0)));
+	let suma4 =
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0)) +
+		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.suma4, 0)));
+
+	// console.log(parseInt(objProduct.map((x) =>{ if(x.podProduct !== undefined){
+	// 	return x.podProduct?.reduce((prev, curr) => prev + curr.suma4, 0)}})))
+	// console.log(
+	// 	objProduct
+	// 		.filter((x) => x.podProduct !== undefined)
+	// 		.reduce((prev, curr) => prev + curr.suma4, 0)
+	// );
 	return (
 		<div
 			style={{
@@ -317,8 +411,12 @@ const Warehouse = () => {
 				background: 'white',
 			}}
 		>
-			<div style={{position: "absolute", top: 0, right:0}}>Выбрано {parseInt(objProduct.filter(x => x.select === true).length) + parseInt(objProduct.map(x=> x.podProduct?.filter(y => y.select === true).length))}</div>
-		
+			<div style={{ position: 'absolute', top: 0, right: 0 }}>
+				Выбрано{' '}
+				{parseInt(objProduct.filter((x) => x.select === true).length) +
+					parseInt(objProduct.map((x) => x.podProduct?.filter((y) => y.select === true).length))}
+			</div>
+
 			<div
 				style={{
 					marginLeft: 74,
@@ -330,13 +428,6 @@ const Warehouse = () => {
 					cursor: 'default',
 				}}
 			>
-				{podlozhka && (
-					<div
-						className="warehouse-podlozhka"
-						style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 3 }}
-						onClick={clickPodlozhka}
-					></div>
-				)}
 				<aside>
 					<div className="warehouse-title">Склад</div>
 					<nav className="warehouse-nav">
@@ -358,9 +449,16 @@ const Warehouse = () => {
 							<SvGBtnPlus />
 						</button>
 					</div>
-					<div className='shadow-right'></div>
+					<div className="shadow-right"></div>
 					<SimpleBar style={{ display: 'flex', maxHeight: 200, maxWidth: 1150 }} autoHide={false}>
-						<table style={{ width: '100%', height: '100%' }}>
+						{podlozhka && (
+							<div
+								className="warehouse-podlozhka"
+								style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 3 }}
+								onClick={clickPodlozhka}
+							></div>
+						)}
+						<table style={{ width: '100%', height: '100%', paddingLeft: 7 }}>
 							<thead className="first-tab-header">
 								<tr>
 									<th
@@ -389,9 +487,11 @@ const Warehouse = () => {
 									</th>
 									<th className="while">ID</th>
 									<th className="while">Страна</th>
-									<th className="while">Валюта</th>
+									<th style={{minWidth: 51}} className="while">Валюта</th>
 									<th className="while">Название </th>
-									<th className="while">Атрибут <div className='shadow-left'></div></th>
+									<th className="while">
+										Атрибут <div className="shadow-left"></div>
+									</th>
 									<th colSpan={4}>Наличие</th>
 									<th>Закупка</th>
 									<th>Продажа</th>
@@ -413,9 +513,8 @@ const Warehouse = () => {
 											switchMenu ? 'adaptive-switch adaptive-switch-on' : 'adaptive-switch'
 										}
 									>
-											<div>
-			
-										</div></th>
+										<div></div>
+									</th>
 									<th>
 										<div style={{ width: '100%' }}>
 											<input
@@ -427,10 +526,65 @@ const Warehouse = () => {
 										</div>
 									</th>
 									<th> </th>
-									<th> </th>
-									<th> </th>
-									<th> </th>
-									<th colSpan={11}> </th>
+									<th style={{ textAlign: 'left' }}>
+										<WarehouseDropMenu
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											type={'currency'}
+											objProduct={objProduct}
+										/>
+									</th>
+									<th style={{ textAlign: 'left' }}>
+										<WarehouseDropMenu
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											type={'name'}
+											inputOn={true}
+											objProduct={objProduct}
+										/>
+									</th>
+									<th style={{ textAlign: 'left' }}>
+										<WarehouseDropMenu
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											type={'attribute'}
+											inputOn={true}
+											objProduct={objProduct}
+										/>
+									</th>
+									<th className="nal-ostatok">
+										<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
+											{formatNumber(ostatok)}
+											<span style={{ paddingLeft: 3 }}>/</span>
+										</div>
+									</th>
+									<th className="nal-rezerv">
+										<div>{formatNumber(rezerv)}</div>
+									</th>
+									<th className="nal-otpr">
+										<div>{formatNumber(otpr)}</div>
+									</th>
+									<th className="nal-vozvrat">
+										<div>{formatNumber(vozvrat)}</div>
+									</th>
+									<th style={{ textAlign: 'right' }}>{formatNumber(zakupka)}</th>
+									<th style={{ textAlign: 'right' }}>{formatNumber(prodazha)}</th>
+									<th style={{ textAlign: 'right' }}>{formatNumber(marzha)}</th>
+									<th className="summa-suma1">
+										<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
+											{formatNumber(suma1)}
+											<span style={{ paddingLeft: 3 }}>/</span>
+										</div>
+									</th>
+									<th className="summa-suma2">
+										<div>{formatNumber(suma2)}</div>
+									</th>
+									<th className="summa-suma3">
+										<div>{formatNumber(suma3)}</div>
+									</th>
+									<th className="summa-suma4">
+										<div>{formatNumber(suma4)}</div>
+									</th>
 								</tr>
 							</thead>
 							<tbody className="first-tab-body">
@@ -454,6 +608,8 @@ const Warehouse = () => {
 											setIndexInput={setIndexInput}
 											setLastIndex={setLastIndex}
 											lastIndex={lastIndex}
+											btnMenu={btnMenu}
+											setBtnMenu={setBtnMenu}
 										/>
 									))}
 								{/* {console.log(objProduct[0]['id'])} */}

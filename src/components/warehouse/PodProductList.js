@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const PodProductList = ({
 	objProduct,
@@ -9,7 +9,7 @@ const PodProductList = ({
 	setObjProduct,
 	tooltipOn,
 	tooltipOff,
-
+	btnMenu,
 	checked,
 	PlusMinusOpen,
 	PlusMinusClose,
@@ -18,6 +18,8 @@ const PodProductList = ({
 	focusInput,
 	setFocusInput,
 	setIndexInput,
+	lastIndex,
+	setLastIndex
 }) => {
 	const [swtichChecked, setSwitchChecked] = useState(
 		objProduct[index].podProduct[index2].status.all
@@ -91,18 +93,6 @@ const PodProductList = ({
 			setObjProduct(newobj);
 		}
 	}
-	// useEffect(() => {
-	// 	if (document.querySelector('.switch-btn-warehouse input').checked === false) {
-	// 		document.querySelectorAll('.switch-btn-small').forEach((x) => {
-	// 			x.querySelector('input').checked = false;
-	// 		});
-	// 	} else {
-	// 		document.querySelectorAll('.switch-btn-small').forEach((x) => {
-	// 			x.querySelector('input').checked = true;
-	// 		});
-	// 	}
-	// 	console.log(document.querySelector('.switch-btn-warehouse input').checked);
-	// }, [checked]);
 	useEffect(() => {
 		if (!objProduct[index].podProduct[index2].status.all) {
 			setSwitchChecked(false);
@@ -173,49 +163,46 @@ const PodProductList = ({
 	}
 	const linkTR = useRef();
 	useEffect(() => {
-
 		let curent = linkTR.current.querySelectorAll('td');
 		let width = [];
 		let res = 0;
-			setTimeout(() => {
-				for (let i = 0; i < 7; i++) {
-					// console.log(width.curent[i].offsetWidth)
-					// width.push(curent[i].offsetWidth)
-					// let width = [];
-					// width.push(curent[i].offsetWidth);
-					// if(!switchMenu && i !== 1) {
-					// 	width.push(curent[i].offsetWidth);
-					// }else if (switchMenu && i === 1){
-					// 	width.push(curent[i].offsetWidth);
-					// }else if(!switchMenu && i === 1){
-					// 	width.push(0);
-					// }
-					if(!switchMenu) {
-						width.push(curent[i].offsetWidth);
-					} else if (switchMenu) {
-						width.push(curent[i].offsetWidth);
-					}	else if(switchMenu && i === 1) {
-						width.push(0);
-					}
-					curent[i].style.left = res + 'px';
-					res = width.reduce((prev, curr) => prev + curr, 0);
-					curent[0].style.left = '0px';
-					
+		setTimeout(() => {
+			for (let i = 0; i < 7; i++) {
+				if (!switchMenu) {
+					width.push(curent[i].offsetWidth);
+				} else if (switchMenu) {
+					width.push(curent[i].offsetWidth);
+				} else if (switchMenu && i === 1) {
+					width.push(0);
 				}
-		
-			}, 200);
-
+				curent[i].style.left = res + 7 + 'px';
+				res = width.reduce((prev, curr) => prev + curr, 0);
+				curent[0].style.left = '7px';
+			}
+		}, 200);
 	}, [objProduct, switchMenu]);
-	function clickTr() {
+	function clickTr(e) {
 		let newobj = [...objProduct];
-	
+		if (e.ctrlKey || e.metaKey) {
 			newobj[index].podProduct[index2].select = !newobj[index].podProduct[index2].select;
-		
+		} else {
+			if (newobj[index].podProduct[index2].select !== true) {
+				newobj[index].podProduct.map((x) => (x.select = false));
+			}
+			newobj[index].podProduct[index2].select = !newobj[index].podProduct[index2].select;
+		}
+		if (e.shiftKey) {
+			newobj[index].podProduct.slice(lastIndex, index2).map((x) => (x.select = true));
+		}
+		setLastIndex(index);
 		setObjProduct(newobj);
-		console.log(newobj);
 	}
 	return (
-		<tr onClick={clickTr} className={objProduct[index].podProduct[index2].select ? 'select': ''} ref={linkTR}>
+		<tr
+			onClick={clickTr}
+			className={objProduct[index].podProduct[index2].select ? 'select' : ''}
+			ref={linkTR}
+		>
 			<td
 				onMouseEnter={() => setSwitchMenu(true)}
 				onMouseLeave={() => setSwitchMenu(false)}
@@ -249,7 +236,6 @@ const PodProductList = ({
 						/>
 						<span className="slider round"></span>
 					</label>
-
 					<label style={{ margin: '0 15px' }} className="switch-btn-small">
 						<input
 							type="checkbox"
@@ -260,7 +246,6 @@ const PodProductList = ({
 						/>
 						<span className="slider round"></span>
 					</label>
-
 					<label className="switch-btn-small">
 						<input
 							type="checkbox"
@@ -285,8 +270,16 @@ const PodProductList = ({
 			<td
 				style={!swtichChecked ? { opacity: 0.5, textAlign: 'center' } : { textAlign: 'center' }}
 			></td>
-			<td className="name-tovara" onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} style={!swtichChecked ? { opacity: 0.5 } : {}}>
-				<span className={objProduct[index].podProduct ? 'arrowDeg' : ''}>
+			<td
+				className="name-tovara"
+				onMouseEnter={tooltipOn}
+				onMouseLeave={tooltipOff}
+				style={!swtichChecked ? { opacity: 0.5 } : {}}
+			>
+				<span
+					style={{ fontSize: '12px' }}
+					className={objProduct[index].podProduct ? 'arrowDeg' : ''}
+				>
 					{objProduct[index].podProduct[index2].name}
 				</span>
 			</td>
@@ -296,18 +289,27 @@ const PodProductList = ({
 					src={objProduct[index].podProduct[index2].images}
 					alt=""
 				/>
-				<span style={{ marginLeft: 20, whiteSpace: 'nowrap' }}>
+				<span
+					style={{
+						marginLeft: 20,
+						whiteSpace: 'nowrap',
+						overflow: 'hidden',
+						textOverflow: 'ellipsis',
+						display: 'block',
+						maxWidth: 85,
+					}}
+				>
 					{objProduct[index].podProduct[index2].attribute}
 				</span>
 			</td>
-			<td className="nal-ostatok" style={!swtichChecked ? { opacity: 0.5 } : {}}>
-				<div
-					onMouseLeave={PlusMinusClose}
-					onMouseEnter={PlusMinusOpen}
-					style={{ display: 'flex', justifyContent: 'flex-end' }}
-				>
-					<button onClick={BtnMinus}></button>
-					{/* {formatNumber2(x.ostatok)} */}
+			<td
+				onMouseLeave={PlusMinusClose}
+				onMouseEnter={PlusMinusOpen}
+				className="nal-ostatok"
+				style={!swtichChecked ? { opacity: 0.5 } : {}}
+			>
+				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+					<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnMinus}></button>
 					<input
 						type="text"
 						value={
@@ -317,8 +319,9 @@ const PodProductList = ({
 						}
 						onChange={inputChange}
 						onKeyUp={enterInput}
+						maxLength={5}
 					/>
-					<button onClick={BtnPlus}></button>
+					<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnPlus}></button>
 					<span style={{ paddingLeft: 3 }}>/</span>
 				</div>
 			</td>
@@ -332,16 +335,16 @@ const PodProductList = ({
 				<div>{formatNumber2(objProduct[index].podProduct[index2].vozvrat)}</div>
 			</td>
 			<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
-				{formatNumber(objProduct[index].zakupka)}
+				{formatNumber(objProduct[index].podProduct[index2].zakupka)}
 			</td>
 			<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
-				{formatNumber(objProduct[index].prodazha)}
+				{formatNumber(objProduct[index].podProduct[index2].prodazha)}
 			</td>
 			<td style={!swtichChecked ? { opacity: 0.5, textAlign: 'right' } : { textAlign: 'right' }}>
-				{formatNumber(objProduct[index].marzha)}
+				{formatNumber(objProduct[index].podProduct[index2].marzha)}
 			</td>
 			<td className="summa-suma1" style={!swtichChecked ? { opacity: 0.5 } : {}}>
-				<div style={{ textAlign: 'right',display: 'flex', justifyContent: 'end' }}>
+				<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
 					{formatNumber(
 						objProduct[index].podProduct[index2].ostatok *
 							objProduct[index].podProduct[index2].zakupka
