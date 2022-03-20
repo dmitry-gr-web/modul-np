@@ -458,7 +458,7 @@ const Warehouse = () => {
 								onClick={clickPodlozhka}
 							></div>
 						)}
-						<table style={{ width: '100%', height: '100%', paddingLeft: 7 }}>
+						<table style={{ width: '100%', height: '100%', paddingLeft: 7 , paddingRight: 10}}>
 							<thead className="first-tab-header">
 								<tr>
 									<th

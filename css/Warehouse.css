@@ -64,6 +64,7 @@
   height: 100%;
   position: relative;
   z-index: 9999;
+  cursor: pointer;
 }
 .warehouse-products .warehouse-dropmenu input {
   outline: none;
@@ -180,6 +181,7 @@
   font-size: 14px;
   text-align: center;
   padding-left: 7px;
+  padding-right: 10px;
   position: relative;
 }
 .warehouse-products .warehouse-products-title button {
@@ -194,7 +196,7 @@
   content: "";
   width: 401px;
   height: 1px;
-  right: 0;
+  right: 10px;
   top: 7px;
   background-color: #000000;
 }
@@ -218,7 +220,7 @@
 }
 .warehouse-products .shadow-right {
   position: absolute;
-  height: 200px;
+  height: 196px;
   top: 60px;
   right: 0;
   width: 12px;
@@ -246,6 +248,7 @@
 .warehouse-products .simplebar-track.simplebar-horizontal {
   background-color: rgba(0, 0, 0, 0.1);
   height: 5px;
+  margin-left: 54%;
   margin-bottom: 0px;
   transition: 0.2s;
   border-radius: 5px;
@@ -267,6 +270,7 @@
 }
 .warehouse-products .simplebar-content-wrapper {
   padding: 0;
+  padding-bottom: 18px;
 }
 .warehouse-products .simplebar-content {
   display: flex;
@@ -324,6 +328,9 @@
   padding-right: 15px;
   background: white;
   z-index: 2;
+}
+.warehouse-products table .first-tab-header th:nth-child(12) {
+  background: white;
 }
 .warehouse-products table .first-tab-header th:last-child {
   padding-right: 0;
@@ -464,6 +471,9 @@
 .warehouse-products table .first-tab-body tr:hover td {
   background: #cacaca;
 }
+.warehouse-products table .first-tab-body tr:hover td input {
+  background: #cacaca;
+}
 .warehouse-products table .first-tab-body tr:hover td:first-child:before {
   content: "";
   width: 7px;
@@ -475,6 +485,9 @@
   top: 0;
 }
 .warehouse-products table .first-tab-body .select td {
+  background-color: #858585;
+}
+.warehouse-products table .first-tab-body .select td input {
   background-color: #858585;
 }
 .warehouse-products table .first-tab-body .select td:first-child:before {

@@ -14,9 +14,14 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 	newarr = newarr.flat().map((x, index) => {
 		return { id: index + 1, attribute: x, select: false };
 	});
-	let arr = [{ id: 0, attribute: 'Все', select: true }];
-	let nw = arr.concat(newarr);
-	const [obj, setObj] = useState(nw);
+	// let arr = [{ id: 0, attribute: 'Все', select: true }];
+	// let nw = arr.concat(newarr);
+	// let r = [...newarr];
+	// r = [{ id: 0, attribute: 'Все', select: true }, ...r];
+	newarr = [{ id: 0, attribute: 'Все', select: true }, ...newarr];
+	// console.log(newarr)
+	// console.log(nw)
+	const [obj, setObj] = useState(newarr);
 	const [value, setValue] = useState('');
 	function clickList(index) {
 		setPodlozhka(true);

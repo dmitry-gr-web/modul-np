@@ -63,6 +63,7 @@
 		height: 100%;
 		position: relative;
 		z-index: 9999;
+		cursor:pointer;
 		input {
 			outline: none;
 			border: none;
@@ -144,6 +145,7 @@
 				padding: 0;
 			}
 			li {
+		
 				list-style: none;
 				padding-left: 15px;
 				padding-right: 10px;
@@ -187,6 +189,7 @@
 		font-size: 14px;
 		text-align: center;
 		padding-left: 7px;
+		padding-right: 10px;
 		position: relative;
 		button {
 			outline: none;
@@ -200,7 +203,7 @@
 			content: '';
 			width: 401px;
 			height: 1px;
-			right: 0;
+			right: 10px;
 			top: 7px;
 			background-color: #000000;
 		}
@@ -235,7 +238,7 @@
 	.shadow-right {
 		position: absolute;
 
-		height: 200px;
+		height: 196px;
 		top: 60px;
 		right: 0;
 		width: 12px;
@@ -280,6 +283,7 @@
 		// margin-bottom: 12px;
 		// margin-right: 1px;
 		// bottom: 0;
+		margin-left: 54%;
 		margin-bottom: 0px;
 		transition: 0.2s;
 
@@ -302,6 +306,7 @@
 	}
 	.simplebar-content-wrapper {
 		padding: 0;
+		padding-bottom: 18px;
 	}
 
 	.simplebar-content {
@@ -365,6 +370,9 @@
 				padding-right: 15px;
 				background: white;
 				z-index: 2;
+			}
+			th:nth-child(12) {
+				background:white;
 			}
 			th:last-child {
 				padding-right: 0;
@@ -522,6 +530,9 @@
 				// background: grey !important ;
 				// background: rgba(81, 81, 81, 0.3);
 				background: #cacaca;
+				input {
+					background: #cacaca;	
+				}
 			}
 			tr:hover td:first-child:before {
 				content: '';
@@ -536,6 +547,9 @@
 			.select td {
 				// background-color: rgba(81, 81, 81, 0.7);
 				background-color: #858585;
+				input {
+					background-color: #858585;
+				}
 			}
 			.select td:first-child:before {
 				content: '';
