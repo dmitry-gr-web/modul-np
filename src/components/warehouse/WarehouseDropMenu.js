@@ -5,23 +5,48 @@ import 'simplebar/dist/simplebar.min.css';
 const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type }) => {
 	const [openMenu, setOpenMenu] = useState(false);
 	let newarr = [];
-	objProduct.map((x) => {
-		newarr.push(x[type]);
-		if (x.podProduct?.length > 0) {
-			newarr.push(x.podProduct?.map((x) => x[type]));
+	if(inputOn){
+		objProduct.map((x) => {
+			newarr.push(x[type]);
+			if (x.podProduct?.length > 0) {
+				newarr.push(x.podProduct?.map((x) => x[type]));
+			}
+		});
+		newarr = newarr.flat().map((x, index) => {
+			return { id: index + 1, attribute: x, select: false };
+		});
+		newarr = [{ id: 0, attribute: 'Все', select: true }, ...newarr];
+	} else {
+		if(type === 'country') {
+			newarr = [
+				{id: 0,attribute: 'Все',select:true},
+				{id: 1,attribute: '🇷🇺',select:false},
+				{id: 2,attribute: '🇺🇦',select:false},
+
+			]
 		}
-	});
-	newarr = newarr.flat().map((x, index) => {
-		return { id: index + 1, attribute: x, select: false };
-	});
-	// let arr = [{ id: 0, attribute: 'Все', select: true }];
-	// let nw = arr.concat(newarr);
-	// let r = [...newarr];
-	// r = [{ id: 0, attribute: 'Все', select: true }, ...r];
-	newarr = [{ id: 0, attribute: 'Все', select: true }, ...newarr];
-	// console.log(newarr)
-	// console.log(nw)
+		if(type === 'currency') {
+			newarr = [
+				{id: 0,attribute: 'Все',select:true},
+				{id: 1,attribute: '$',select:false},
+				{id: 2,attribute: '€',select:false},
+				{id: 3,attribute: '₴',select:false},
+				{id: 4,attribute: '₽',select:false}
+			]
+		}
+	}
+
 	const [obj, setObj] = useState(newarr);
+	// const [country,setCountry] = useState([
+	// 	{}
+	// ])
+	// const [currency,setCurrency] = useState([
+	// 	{name: 'Все',select:true},
+	// 	{name: '$',select:false},
+	// 	{name: '€',select:false},
+	// 	{name: '₴',select:false},
+	// 	{name: '₽',select:false}
+	// ]);
 	const [value, setValue] = useState('');
 	function clickList(index) {
 		setPodlozhka(true);

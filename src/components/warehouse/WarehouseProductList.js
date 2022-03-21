@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import PodProductList from './PodProductList';
+// import PodProductList from './PodProductList';
 
 const WarehouseProductList = ({
 	objProduct,
@@ -20,6 +20,7 @@ const WarehouseProductList = ({
 	setLastIndex,
 	btnMenu,
 }) => {
+	console.log(objProduct, index)
 	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
 	useEffect(() => {
 		if (!objProduct[index].status.all) {
@@ -100,8 +101,8 @@ const WarehouseProductList = ({
 			// tooltipBlock.style.fontSize = '12px';
 			tooltipBlock.innerText = e.target.innerText;
 
-			tooltipBlock.style.left = posElement.x + 10 + 'px';
-			tooltipBlock.style.top = posElement.y + 17 + 'px';
+			tooltipBlock.style.left = posElement.x + 'px';
+			tooltipBlock.style.top = posElement.y + 23 + 'px';
 			tooltipBlock.style.animation = 'delay-header 1s forwards';
 		}
 	}
@@ -158,7 +159,7 @@ const WarehouseProductList = ({
 		}, [value]);
 		return ref.current;
 	}
-	const [memoryInput, setMemoryInput] = useState(objProduct[index].ostatok);
+	const [memoryInput, setMemoryInput] = useState(objProduct[index]?.ostatok);
 	const prev = usePrevious(memoryInput);
 	function enterInput(e) {
 		if (e.key === 'Enter') {
@@ -225,6 +226,8 @@ const WarehouseProductList = ({
 	}, [objProduct, switchMenu]);
 
 	function clickTr(e) {
+		e.preventDefault();
+		e.stopPropagation();
 		let newobj = [...objProduct];
 		if (e.ctrlKey || e.metaKey) {
 			newobj[index].select = !newobj[index].select;
@@ -238,8 +241,16 @@ const WarehouseProductList = ({
 			// if (x.podProduct?.length > 0) {
 			// 	newarr.push(x.podProduct?.map((x) => x[type]));
 			// }
-			newobj.slice(lastIndex, index).map((x) => 
-				(x.select = true));
+			newobj.slice(lastIndex, index).map((x, i) => {
+				if (x.podProduct?.length > 0) {
+					if(lastIndex === i){
+						x.select = true;
+					}
+					x.podProduct.map((x) => (x.select = true));
+				} else {
+					x.select = true;
+				}
+			});
 		}
 		setLastIndex(index);
 		setObjProduct(newobj);
@@ -248,6 +259,7 @@ const WarehouseProductList = ({
 
 	return (
 		<>
+		{objProduct[index] && 
 			<tr className={objProduct[index].select ? 'select' : ''} onClick={clickTr} ref={linkTR}>
 				<td
 					onMouseEnter={() => setSwitchMenu(true)}
@@ -332,7 +344,7 @@ const WarehouseProductList = ({
 					onMouseEnter={tooltipOn}
 					style={!swtichChecked ? { opacity: 0.4 } : {}}
 				>
-					<span className={objProduct[index].podProduct ? 'arrow' : ''}>
+					<span className={objProduct[index].podProduct === 0 ? 'arrow' : objProduct[index].podProduct === 1 ? 'arrowDeg' : ''}>
 						{objProduct[index].name}
 					</span>
 				</td>
@@ -355,8 +367,8 @@ const WarehouseProductList = ({
 						{objProduct[index].attribute}
 					</span>
 				</td>
-				<td className='while2 shadow'>
-					<div className='shadow-left'></div>
+				<td className="while2 shadow">
+					<div className="shadow-left"></div>
 				</td>
 				<td
 					onMouseLeave={PlusMinusClose}
@@ -414,8 +426,9 @@ const WarehouseProductList = ({
 					<div>{formatNumber(objProduct[index].suma4)}</div>
 				</td>
 			</tr>
+		}	
 			{/* {console.log(objProduct[index].podProduct?.length)} */}
-			{objProduct[index].podProduct?.length !== 0
+			{/* {objProduct[index].podProduct?.length !== 0
 				? objProduct[index].podProduct?.map((x, index2) => (
 						<PodProductList
 							objProduct={objProduct}
@@ -440,7 +453,7 @@ const WarehouseProductList = ({
 							setLastIndex={setLastIndex}
 						/>
 				  ))
-				: {}}
+				: {}} */}
 		</>
 	);
 };

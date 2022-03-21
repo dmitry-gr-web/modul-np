@@ -282,6 +282,7 @@
 }
 .warehouse-products table {
   border-spacing: 0px;
+  user-select: none;
 }
 .warehouse-products table .shadow {
   min-width: 12px;
@@ -804,12 +805,12 @@
   align-items: center;
   overflow: hidden;
   width: 0;
-  transition: 0.2s;
+  transition: 0.2s width;
 }
 .warehouse-products .adaptive-switch-on {
   padding: 0;
   padding-right: 10px;
-  transition: 0.2s;
+  transition: 0.2s left;
   z-index: 1;
   background: white;
 }

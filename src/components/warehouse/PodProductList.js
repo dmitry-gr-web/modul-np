@@ -211,6 +211,8 @@ const PodProductList = ({
 		});
 	}, [memoryInput, objProduct]);
 	function clickTr(e) {
+		e.preventDefault();
+		e.stopPropagation();
 		let newobj = [...objProduct];
 		if (e.ctrlKey || e.metaKey) {
 			newobj[index].podProduct[index2].select = !newobj[index].podProduct[index2].select;
@@ -221,7 +223,7 @@ const PodProductList = ({
 			newobj[index].podProduct[index2].select = !newobj[index].podProduct[index2].select;
 		}
 		if (e.shiftKey) {
-			newobj[index].podProduct.slice(lastIndex, index2).map((x) => (x.select = true));
+			newobj[index].podProduct.slice(lastIndex, index2).map((x) => {x.select = true});
 		}
 		setLastIndex(index);
 		setObjProduct(newobj);

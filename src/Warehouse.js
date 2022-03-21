@@ -29,51 +29,53 @@ const Warehouse = () => {
 			suma3: 2924.0,
 			suma4: 655.0,
 			select: false,
-			podProduct: [
-				{
-					status: { all: true, rozetka: true, prom: true, crm: true },
-					id: '5649-2',
-					country: '🇺🇦',
-					currency: '₴',
-					images: videoregistrator,
-					name: 'Nano USB 2.0 флешка для установки в компьютеры',
-					attribute: '64 Гб',
-					ostatok: 10,
-					rezerv: 1239,
-					otpr: 2924,
-					vozvrat: 655,
-					zakupka: 157.0,
-					prodazha: 349.0,
-					marzha: 25.0,
-					suma1: 1570.0,
-					suma2: 17925.0,
-					suma3: 2924.0,
-					suma4: 655.0,
-					select: false,
-				},
-				{
-					status: { all: true, rozetka: true, prom: true, crm: true },
-					id: '5649-6.8',
-					country: '🇺🇦',
-					currency: '₴',
-					images: videoregistrator,
-					name: 'Nano USB 2.0 флешка для установки в компьютеры',
-					attribute: '128 Гб, Синий',
-					ostatok: 10,
-					rezerv: 1239,
-					otpr: 2924,
-					vozvrat: 655,
-					zakupka: 157.0,
-					prodazha: 349.0,
-					marzha: 20.0,
-					suma1: 1570.0,
-					suma2: 17925.0,
-					suma3: 2924.0,
-					suma4: 655.0,
-					select: false,
-				},
-			],
+			podProduct: 0
 		},
+		{
+			status: { all: true, rozetka: true, prom: true, crm: true },
+			id: '5649-2',
+			country: '🇺🇦',
+			currency: '₴',
+			images: videoregistrator,
+			name: 'Nano USB 2.0 флешка для установки в компьютеры',
+			attribute: '64 Гб',
+			ostatok: 10,
+			rezerv: 1239,
+			otpr: 2924,
+			vozvrat: 655,
+			zakupka: 157.0,
+			prodazha: 349.0,
+			marzha: 25.0,
+			suma1: 1570.0,
+			suma2: 17925.0,
+			suma3: 2924.0,
+			suma4: 655.0,
+			select: false,
+			podProduct: 1
+		},
+		{
+			status: { all: true, rozetka: true, prom: true, crm: true },
+			id: '5649-6.8',
+			country: '🇺🇦',
+			currency: '₴',
+			images: videoregistrator,
+			name: 'Nano USB 2.0 флешка для установки в компьютеры',
+			attribute: '128 Гб, Синий',
+			ostatok: 10,
+			rezerv: 1239,
+			otpr: 2924,
+			vozvrat: 655,
+			zakupka: 157.0,
+			prodazha: 349.0,
+			marzha: 20.0,
+			suma1: 1570.0,
+			suma2: 17925.0,
+			suma3: 2924.0,
+			suma4: 655.0,
+			select: false,
+			podProduct: 1
+		},
+		
 		{
 			status: { all: true, rozetka: true, prom: true, crm: true },
 			id: '5648-0',
@@ -320,52 +322,27 @@ const Warehouse = () => {
 	}
 	//rascheti
 	let ostatok =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0)) +
-		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.ostatok, 0)));
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
 	let rezerv =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0)) +
-		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.rezerv, 0)));
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0)) ;
 	let otpr =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0)) +
-		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.otpr, 0)));
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
 	let vozvrat =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0)) +
-		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.vozvrat, 0)));
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0)) ;
 	let zakupka =
-		parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka, 0)) +
-		parseInt(
-			objProduct.map((x) => x.podProduct?.reduce((prev, curr, _, array) => prev + curr.zakupka, 0))
-		);
+		parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka, 0));
 	let prodazha =
-		(parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha, 0)) +
-			parseInt(
-				objProduct.map((x) =>
-					x.podProduct?.reduce((prev, curr, _, array) => prev + curr.prodazha, 0)
-				)
-			)) /
-		(objProduct.length + parseInt(objProduct.map((x) => x.podProduct?.length)));
+		parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0));
 	let marzha =
-		(parseInt(objProduct.reduce((prev, curr) => prev + curr.marzha, 0)) +
-			parseInt(
-				objProduct.map((x) => x.podProduct?.reduce((prev, curr, _, array) => prev + curr.marzha, 0))
-			)) /
-		(objProduct.length + parseInt(objProduct.map((x) => x.podProduct?.length)));
+		parseInt(objProduct.reduce((prev, curr,_, array) =>  prev + curr.marzha / array.length, 0));
 	let suma1 =
-		parseInt(objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)) +
-		parseInt(
-			objProduct.map((x) =>
-				x.podProduct?.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
-			)
-		);
+		parseInt(objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0));
 	let suma2 =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0)) +
-		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.suma2, 0)));
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
 	let suma3 =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0)) +
-		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.suma4, 0)));
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
 	let suma4 =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0)) +
-		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.suma4, 0)));
+		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
 	return (
 		<div
 			style={{
@@ -377,8 +354,7 @@ const Warehouse = () => {
 		>
 			<div style={{ position: 'absolute', top: 0, right: 0 }}>
 				Выбрано{' '}
-				{parseInt(objProduct.filter((x) => x.select === true).length) +
-					parseInt(objProduct.map((x) => x.podProduct?.filter((y) => y.select === true).length))}
+				{parseInt(objProduct.filter((x) => x.select === true).length)}
 			</div>
 
 			<div
@@ -418,11 +394,11 @@ const Warehouse = () => {
 						{podlozhka && (
 							<div
 								className="warehouse-podlozhka"
-								style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 3 }}
+								style={{ width: '100%', height: '100%', position: 'fixed', zIndex: 3 }}
 								onClick={clickPodlozhka}
 							></div>
 						)}
-						<table style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
+						<table  style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
 							<thead className="first-tab-header">
 								<tr>
 									<th
