@@ -226,9 +226,7 @@ const Warehouse = () => {
 		}
 	}
 	const [indexInput, setIndexInput] = useState(0);
-	// function numRound(num, precision) {
-	// 	return Math.round(num / precision) * precision;
-	// }
+
 	function clickPodlozhka() {
 		setPodlozhka(false);
 		setFocusInput(false);
@@ -252,20 +250,8 @@ const Warehouse = () => {
 			input.style.width = input.value.length * 8 + 'px';
 		}
 	}
-	// function search(e) {
-	// 	let newarr = [...objProduct];
-	// 	newarr.filter(x => x.id.includes(e.target.value))
-	// 	// console.log(newarr)
-	// 	setObjProduct(newarr)
-	// }
-	const [inputID, setInputID] = useState('');
-	// function searchText (typeData) {
-	// 	return typeData.toLowerCase().includes(inputID.toLowerCase());
-	// }
 
-	// let newobj = objProduct.filter(x=> x.id.includes('0'));
-	// console.log(newobj)
-	// console.log(!switchMenu)
+	const [inputID, setInputID] = useState('');
 
 	useEffect(() => {
 		let curent = document.querySelectorAll('.while');
@@ -294,7 +280,7 @@ const Warehouse = () => {
 		let width = [];
 		let res = 0;
 		setTimeout(() => {
-			for (let i = 0; i < 7; i++) {
+			for (let i = 0; i < 8; i++) {
 				if (!switchMenu) {
 					width.push(curent[i].offsetWidth);
 				} else if (switchMenu) {
@@ -318,8 +304,6 @@ const Warehouse = () => {
 	// 	}
 
 	// });
-	// let suma4 = objProduct.reduce((prev, curr) =>  prev + curr.suma4,0);
-	// console.log(suma4)
 
 	function formatNumber2(number) {
 		let newnum = number.toLocaleString('ru-RU', {
@@ -366,11 +350,6 @@ const Warehouse = () => {
 				objProduct.map((x) => x.podProduct?.reduce((prev, curr, _, array) => prev + curr.marzha, 0))
 			)) /
 		(objProduct.length + parseInt(objProduct.map((x) => x.podProduct?.length)));
-	// console.log(objProduct.length,parseInt(objProduct.map(x => x.podProduct?.length)))
-	// console.log(parseInt(objProduct.map(x => x.podProduct?.reduce(
-	// 	(prev, curr, _, array) => prev + curr.marzha / array.length,
-	// 	0
-	// ))))
 	let suma1 =
 		parseInt(objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)) +
 		parseInt(
@@ -378,13 +357,6 @@ const Warehouse = () => {
 				x.podProduct?.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
 			)
 		);
-	// console.log(
-	// 	parseInt(
-	// 		objProduct
-	// 			.map((x) => x.podProduct?.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0))
-
-	// 	)
-	// );
 	let suma2 =
 		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0)) +
 		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.suma2, 0)));
@@ -394,14 +366,6 @@ const Warehouse = () => {
 	let suma4 =
 		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0)) +
 		parseInt(objProduct.map((x) => x.podProduct?.reduce((prev, curr) => prev + curr.suma4, 0)));
-
-	// console.log(parseInt(objProduct.map((x) =>{ if(x.podProduct !== undefined){
-	// 	return x.podProduct?.reduce((prev, curr) => prev + curr.suma4, 0)}})))
-	// console.log(
-	// 	objProduct
-	// 		.filter((x) => x.podProduct !== undefined)
-	// 		.reduce((prev, curr) => prev + curr.suma4, 0)
-	// );
 	return (
 		<div
 			style={{
@@ -458,14 +422,14 @@ const Warehouse = () => {
 								onClick={clickPodlozhka}
 							></div>
 						)}
-						<table style={{ width: '100%', height: '100%', paddingLeft: 7 , paddingRight: 10}}>
+						<table style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
 							<thead className="first-tab-header">
 								<tr>
 									<th
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(false)}
 										style={{ textAlign: 'left', paddingLeft: 0, minWidth: 44 }}
-										className="adaptive-switch-trigger while"
+										className="adaptive-switch-trigger while statusBefore"
 									>
 										Статус
 									</th>
@@ -486,11 +450,17 @@ const Warehouse = () => {
 										</div>
 									</th>
 									<th className="while">ID</th>
-									<th className="while">Страна</th>
-									<th style={{minWidth: 51}} className="while">Валюта</th>
+									<th style={{ minWidth: 51 ,textAlign: 'left'}} className="while">Страна</th>
+									<th style={{ minWidth: 51,textAlign: 'left' }} className="while">
+										Валюта
+									</th>
 									<th className="while">Название </th>
 									<th className="while">
-										Атрибут <div className="shadow-left"></div>
+										Атрибут
+										{/* <div className="shadow-left"></div> */}
+									</th>
+									<th className="while shadow">
+										<div className="shadow-left"></div>
 									</th>
 									<th colSpan={4}>Наличие</th>
 									<th>Закупка</th>
@@ -525,7 +495,14 @@ const Warehouse = () => {
 											/>
 										</div>
 									</th>
-									<th> </th>
+									<th>
+										<WarehouseDropMenu
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											type={'country'}
+											objProduct={objProduct}
+										/>
+									</th>
 									<th style={{ textAlign: 'left' }}>
 										<WarehouseDropMenu
 											setPodlozhka={setPodlozhka}
@@ -551,6 +528,9 @@ const Warehouse = () => {
 											inputOn={true}
 											objProduct={objProduct}
 										/>
+									</th>
+									<th className="shadow">
+										<div className="shadow-left"></div>
 									</th>
 									<th className="nal-ostatok">
 										<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
@@ -586,6 +566,11 @@ const Warehouse = () => {
 										<div>{formatNumber(suma4)}</div>
 									</th>
 								</tr>
+								<tr>
+									<th colSpan='18' className='shadow-vertical'>
+										<div></div>
+									</th>
+								</tr>
 							</thead>
 							<tbody className="first-tab-body">
 								{objProduct
@@ -614,11 +599,13 @@ const Warehouse = () => {
 									))}
 								{/* {console.log(objProduct[0]['id'])} */}
 							</tbody>
-							{/* <tfoot>
+							<tfoot>
 								<tr>
-									<td colSpan={17} style={{ height: 20 }}></td>
+									<td colSpan={18} style={{ height: 12 }}>
+										<div className='shadow-vertical-2'></div>
+									</td>
 								</tr>
-							</tfoot> */}
+							</tfoot>
 						</table>
 						{/* <SimpleBar forceVisible="x" className="scroll-block" autoHide={false}>
 							<table>

@@ -116,6 +116,7 @@ const WarehouseProductList = ({
 		}
 	}, [objProduct]);
 	function BtnMinus(e) {
+		e.stopPropagation();
 		let newobj = [...objProduct];
 		if (newobj[index].ostatok !== 0) {
 			newobj[index].ostatok = newobj[index].ostatok - 1;
@@ -124,6 +125,7 @@ const WarehouseProductList = ({
 		setMemoryInput(newobj[index].ostatok);
 	}
 	function BtnPlus(e) {
+		e.stopPropagation();
 		let newobj = [...objProduct];
 		newobj[index].ostatok = newobj[index].ostatok + 1;
 		setObjProduct(newobj);
@@ -207,7 +209,7 @@ const WarehouseProductList = ({
 		let width = [];
 		let res = 0;
 		setTimeout(() => {
-			for (let i = 0; i < 7; i++) {
+			for (let i = 0; i < 8; i++) {
 				if (!switchMenu) {
 					width.push(curent[i].offsetWidth);
 				} else if (switchMenu) {
@@ -233,7 +235,11 @@ const WarehouseProductList = ({
 			newobj[index].select = !newobj[index].select;
 		}
 		if (e.shiftKey) {
-			newobj.slice(lastIndex, index).map((x) => (x.select = true));
+			// if (x.podProduct?.length > 0) {
+			// 	newarr.push(x.podProduct?.map((x) => x[type]));
+			// }
+			newobj.slice(lastIndex, index).map((x) => 
+				(x.select = true));
 		}
 		setLastIndex(index);
 		setObjProduct(newobj);
@@ -348,6 +354,9 @@ const WarehouseProductList = ({
 					>
 						{objProduct[index].attribute}
 					</span>
+				</td>
+				<td className='while2 shadow'>
+					<div className='shadow-left'></div>
 				</td>
 				<td
 					onMouseLeave={PlusMinusClose}

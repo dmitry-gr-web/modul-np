@@ -101,16 +101,20 @@ const PodProductList = ({
 		}
 	}, [objProduct]);
 	function BtnMinus(e) {
+		e.stopPropagation();
 		let newobj = [...objProduct];
 		if (newobj[index].podProduct[index2].ostatok !== 0) {
 			newobj[index].podProduct[index2].ostatok = newobj[index].podProduct[index2].ostatok - 1;
 		}
 		setObjProduct(newobj);
+		setMemoryInput(newobj[index].podProduct[index2].ostatok);
 	}
 	function BtnPlus(e) {
+		e.stopPropagation();
 		let newobj = [...objProduct];
 		newobj[index].podProduct[index2].ostatok = newobj[index].podProduct[index2].ostatok + 1;
 		setObjProduct(newobj);
+		setMemoryInput(newobj[index].podProduct[index2].ostatok);
 	}
 	function formatNumber(number) {
 		let newnum = number
@@ -138,9 +142,10 @@ const PodProductList = ({
 		setFocusInput(true);
 		setPodlozhka(true);
 		e.target.value = e.target.value.replace(/[^0-9]/g, '');
-		let newobj = [...objProduct];
-		newobj[index].podProduct[index2].ostatok = +e.target.value;
-		setObjProduct(newobj);
+		// let newobj = [...objProduct];
+		// newobj[index].podProduct[index2].ostatok = +e.target.value;
+		// setObjProduct(newobj);
+		setMemoryInput(e.target.value);
 	}
 	function enterInput(e) {
 		if (e.key === 'Enter') {
@@ -167,7 +172,7 @@ const PodProductList = ({
 		let width = [];
 		let res = 0;
 		setTimeout(() => {
-			for (let i = 0; i < 7; i++) {
+			for (let i = 0; i < 8; i++) {
 				if (!switchMenu) {
 					width.push(curent[i].offsetWidth);
 				} else if (switchMenu) {
@@ -181,6 +186,30 @@ const PodProductList = ({
 			}
 		}, 200);
 	}, [objProduct, switchMenu]);
+	const [memoryInput, setMemoryInput] = useState(objProduct[index].podProduct[index2].ostatok);
+	useEffect(() => {
+		if (!podlozhka) {
+			let newobj = [...objProduct];
+			newobj[index].podProduct[index2].ostatok = +memoryInput;
+			setObjProduct(newobj);
+		}
+	}, [podlozhka]);
+	useEffect(() => {
+		document.querySelectorAll('.nal-ostatok input').forEach((x) => {
+			// x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
+
+			if (x.value.replaceAll(' ', '').length >= 4) {
+				// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
+				x.style.width = x.value.replaceAll(' ', '').length * 8 + 4 + 'px';
+			}
+			if (x.value.replaceAll(' ', '').length >= 7) {
+				x.style.width = x.value.replaceAll(' ', '').length * 8 + 8 + 'px';
+			}
+			if (x.value.replaceAll(' ', '').length < 4) {
+				x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
+			}
+		});
+	}, [memoryInput, objProduct]);
 	function clickTr(e) {
 		let newobj = [...objProduct];
 		if (e.ctrlKey || e.metaKey) {
@@ -302,6 +331,9 @@ const PodProductList = ({
 					{objProduct[index].podProduct[index2].attribute}
 				</span>
 			</td>
+			<td className='shadow'>
+				<div className='shadow-left'></div>
+			</td>
 			<td
 				onMouseLeave={PlusMinusClose}
 				onMouseEnter={PlusMinusOpen}
@@ -313,9 +345,7 @@ const PodProductList = ({
 					<input
 						type="text"
 						value={
-							focusInput
-								? objProduct[index].podProduct[index2].ostatok
-								: formatNumber2(objProduct[index].podProduct[index2].ostatok)
+							focusInput ? memoryInput : formatNumber2(+memoryInput)
 						}
 						onChange={inputChange}
 						onKeyUp={enterInput}

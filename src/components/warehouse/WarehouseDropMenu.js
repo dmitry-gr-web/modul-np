@@ -133,7 +133,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 					) : obj.filter((x) => x.select === true)[0].attribute.includes('Все') ? (
 						''
 					) : (
-						<span style={{ paddingLeft: 10 }}>
+						<span className={type === 'country' ? 'flags' : ''} style={{ paddingLeft: 10 }}>
 							{obj.filter((x) => x.select === true)[0].attribute}
 						</span>
 					)}
@@ -160,7 +160,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 								className={x.select ? 'select-btn' : ''}
 								onClick={() => clickList(x.id)}
 							>
-								{x.attribute}
+								{type === 'country' ? <span className={index !== 0 ? 'flags' : ''}>{x.attribute}</span> : x.attribute}
 							</li>
 					  ))}
 			</SimpleBar>
