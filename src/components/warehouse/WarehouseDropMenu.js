@@ -37,16 +37,6 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 	}
 
 	const [obj, setObj] = useState(newarr);
-	// const [country,setCountry] = useState([
-	// 	{}
-	// ])
-	// const [currency,setCurrency] = useState([
-	// 	{name: 'Все',select:true},
-	// 	{name: '$',select:false},
-	// 	{name: '€',select:false},
-	// 	{name: '₴',select:false},
-	// 	{name: '₽',select:false}
-	// ]);
 	const [value, setValue] = useState('');
 	function clickList(index) {
 		setPodlozhka(true);

@@ -19,6 +19,8 @@ const WarehouseProductList = ({
 	lastIndex,
 	setLastIndex,
 	btnMenu,
+	selectAll,
+	setSelectAll
 }) => {
 	// console.log(objProduct, index)
 	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
@@ -226,10 +228,12 @@ const WarehouseProductList = ({
 	}, [objProduct, switchMenu]);
 
 	function clickTr(e) {
-		e.preventDefault();
-		e.stopPropagation();
+		// e.preventDefault();
+		// e.stopPropagation();
 		let newobj = [...objProduct];
 		if (e.ctrlKey || e.metaKey) {
+			e.preventDefault();
+			e.stopPropagation();
 			newobj[index].select = !newobj[index].select;
 		} else {
 			if (newobj[index].select !== true) {
@@ -238,195 +242,205 @@ const WarehouseProductList = ({
 			newobj[index].select = !newobj[index].select;
 		}
 		if (e.shiftKey) {
-			// if (x.podProduct?.length > 0) {
-			// 	newarr.push(x.podProduct?.map((x) => x[type]));
-			// }
+			e.preventDefault();
+			e.stopPropagation();
 			newobj.slice(lastIndex, index).map((x, i) => {
-				if (x.podProduct?.length > 0) {
-					if(lastIndex === i){
-						x.select = true;
-					}
-					x.podProduct.map((x) => (x.select = true));
-				} else {
-					x.select = true;
-				}
+				x.select = true;
 			});
 		}
 		setLastIndex(index);
 		setObjProduct(newobj);
-		console.log(lastIndex, index);
+		// console.log(lastIndex, index);
 	}
-
+	// console.log(objProduct[index].status.all);
 	return (
 		<>
-		{objProduct[index] && 
-			<tr className={objProduct[index].select ? 'select' : ''} onClick={clickTr} ref={linkTR}>
-				<td
-					onMouseEnter={() => setSwitchMenu(true)}
-					onMouseLeave={() => setSwitchMenu(false)}
-					className="adaptive-switch-trigger while2"
-				>
-					<label className="switch-btn-warehouse">
-						<input
-							type="checkbox"
-							className="status-all"
-							onChange={switchBtn}
-							defaultChecked={objProduct[index].status.all}
-							checked={objProduct[index].status.all}
-						/>
-						<span className="slider round"></span>
-					</label>
-				</td>
-				<td
-					style={!swtichChecked ? { opacity: 0.4 } : {}}
-					onMouseEnter={() => setSwitchMenu(true)}
-					onMouseLeave={() => setSwitchMenu(false)}
-					className={
-						switchMenu ? 'adaptive-switch adaptive-switch-on while2' : 'adaptive-switch while2'
-					}
-				>
-					<div>
-						<label className="switch-btn-small">
-							<input
-								type="checkbox"
-								className="status-crm"
-								onChange={switchBtn}
-								defaultChecked={objProduct[index].status.crm}
-								checked={objProduct[index].status.crm}
-							/>
-							<span className="slider round"></span>
-						</label>
-
-						<label style={{ margin: '0 15px' }} className="switch-btn-small">
-							<input
-								type="checkbox"
-								className="status-rozetka"
-								onChange={switchBtn}
-								defaultChecked={objProduct[index].status.rozetka}
-								checked={objProduct[index].status.rozetka}
-							/>
-							<span className="slider round"></span>
-						</label>
-
-						<label className="switch-btn-small">
-							<input
-								type="checkbox"
-								className="status-prom"
-								onChange={switchBtn}
-								defaultChecked={objProduct[index].status.prom}
-								checked={objProduct[index].status.prom}
-							/>
-							<span className="slider round"></span>
-						</label>
-					</div>
-				</td>
-				<td
-					className="id-tovara while2"
-					style={!swtichChecked ? { opacity: 0.4, textAlign: 'left' } : { textAlign: 'left' }}
-				>
-					{objProduct[index].id}
-				</td>
-				<td
-					className="while2"
-					style={!swtichChecked ? { opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
-				>
-					<span className="flags">{objProduct[index].country}</span>
-				</td>
-				<td
-					className="while2"
-					style={!swtichChecked ? { opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
-				>
-					{objProduct[index].currency}
-				</td>
-				<td
-					className="name-tovara while2"
-					onMouseLeave={tooltipOff}
-					onMouseEnter={tooltipOn}
-					style={!swtichChecked ? { opacity: 0.4 } : {}}
-				>
-					<span className={objProduct[index].podProduct === 0 ? 'arrow' : objProduct[index].podProduct === 1 ? 'arrowDeg' : ''}>
-						{objProduct[index].name}
-					</span>
-				</td>
-				<td className="while2" style={!swtichChecked ? { opacity: 0.4 } : {}}>
-					<img
-						style={{ width: 16, height: 16, position: 'absolute' }}
-						src={objProduct[index].images}
-						alt=""
-					/>
-					<span
-						style={{
-							marginLeft: 20,
-							whiteSpace: 'nowrap',
-							overflow: 'hidden',
-							textOverflow: 'ellipsis',
-							display: 'block',
-							maxWidth: 85,
-						}}
+			{objProduct[index] && (
+				<tr className={objProduct[index].select ? 'select' : ''} onClick={clickTr} ref={linkTR}>
+					<td
+						onMouseEnter={() => setSwitchMenu(true)}
+						onMouseLeave={() => setSwitchMenu(false)}
+						className="adaptive-switch-trigger while2"
 					>
-						{objProduct[index].attribute}
-					</span>
-				</td>
-				<td className="while2 shadow">
-					<div className="shadow-left"></div>
-				</td>
-				<td
-					onMouseLeave={PlusMinusClose}
-					onMouseEnter={PlusMinusOpen}
-					className="nal-ostatok"
-					style={!swtichChecked ? { opacity: 0.4 } : {}}
-				>
-					<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-						<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnMinus}></button>
+						<label className="switch-btn-warehouse">
+							<input
+								type="checkbox"
+								className="status-all"
+								onChange={switchBtn}
+								defaultChecked={objProduct[index].status.all}
+								checked={objProduct[index].status.all}
+							/>
+							<span className="slider round"></span>
+						</label>
+					</td>
+					<td
+						style={!swtichChecked ? { opacity: 0.4 } : {}}
+						onMouseEnter={() => setSwitchMenu(true)}
+						onMouseLeave={() => setSwitchMenu(false)}
+						className={
+							switchMenu ? 'adaptive-switch adaptive-switch-on while2' : 'adaptive-switch while2'
+						}
+					>
+						<div>
+							<label className="switch-btn-small">
+								<input
+									type="checkbox"
+									className="status-crm"
+									onChange={switchBtn}
+									defaultChecked={objProduct[index].status.crm}
+									checked={objProduct[index].status.crm}
+								/>
+								<span className="slider round"></span>
+							</label>
 
-						<input
-							type="text"
-							value={focusInput ? memoryInput : formatNumber2(+memoryInput)}
-							onChange={inputChange}
-							onKeyUp={enterInput}
-							maxLength={5}
-							onClick={() => setFocusInput(true)}
+							<label style={{ margin: '0 15px' }} className="switch-btn-small">
+								<input
+									type="checkbox"
+									className="status-rozetka"
+									onChange={switchBtn}
+									defaultChecked={objProduct[index].status.rozetka}
+									checked={objProduct[index].status.rozetka}
+								/>
+								<span className="slider round"></span>
+							</label>
+
+							<label className="switch-btn-small">
+								<input
+									type="checkbox"
+									className="status-prom"
+									onChange={switchBtn}
+									defaultChecked={objProduct[index].status.prom}
+									checked={objProduct[index].status.prom}
+								/>
+								<span className="slider round"></span>
+							</label>
+						</div>
+					</td>
+					<td
+						onMouseLeave={tooltipOff}
+						onMouseEnter={tooltipOn}
+						className="id-tovara while2"
+						style={!swtichChecked ? { opacity: 0.4, textAlign: 'left' } : { textAlign: 'left' }}
+					>
+						{objProduct[index].id}
+					</td>
+					<td
+						className="while2"
+						style={!swtichChecked ? { opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
+					>
+						<span className="flags">{objProduct[index].country}</span>
+					</td>
+					<td
+						className="while2"
+						style={!swtichChecked ? { opacity: 0.4, textAlign: 'center' } : { textAlign: 'center' }}
+					>
+						{objProduct[index].currency}
+					</td>
+					<td
+						className="name-tovara while2"
+						onMouseLeave={tooltipOff}
+						onMouseEnter={tooltipOn}
+						style={!swtichChecked ? { opacity: 0.4 } : {}}
+					>
+						<span
+							className={
+								objProduct[index].podProduct === 0
+									? 'arrow'
+									: objProduct[index].podProduct === 1
+									? 'arrowDeg'
+									: ''
+							}
+						>
+							{objProduct[index].name}
+						</span>
+					</td>
+					<td className="while2" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<img
+							style={{ width: 16, height: 16, position: 'absolute' }}
+							src={objProduct[index].images}
+							alt=""
 						/>
+						<span
+							onMouseLeave={tooltipOff}
+							onMouseEnter={tooltipOn}
+							style={{
+								marginLeft: 20,
+								whiteSpace: 'nowrap',
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+								display: 'block',
+								maxWidth: 85,
+							}}
+						>
+							{objProduct[index].attribute}
+						</span>
+					</td>
+					<td className="while2 shadow">
+						<div className="shadow-left"></div>
+					</td>
+					<td
+						onMouseLeave={PlusMinusClose}
+						onMouseEnter={PlusMinusOpen}
+						className="nal-ostatok"
+						style={!swtichChecked ? { opacity: 0.4 } : {}}
+					>
+						<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+							<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnMinus}></button>
 
-						<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnPlus}></button>
-						<span style={{ paddingLeft: 3 }}>/</span>
-					</div>
-				</td>
-				<td className="nal-rezerv" style={!swtichChecked ? { opacity: 0.4 } : {}}>
-					<div>{formatNumber2(objProduct[index].rezerv)}</div>
-				</td>
-				<td className="nal-otpr" style={!swtichChecked ? { opacity: 0.4 } : {}}>
-					<div>{formatNumber2(objProduct[index].otpr)}</div>
-				</td>
-				<td className="nal-vozvrat" style={!swtichChecked ? { opacity: 0.4 } : {}}>
-					<div>{formatNumber2(objProduct[index].vozvrat)}</div>
-				</td>
-				<td style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
-					{formatNumber(objProduct[index].zakupka)}
-				</td>
-				<td style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
-					{formatNumber(objProduct[index].prodazha)}
-				</td>
-				<td style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}>
-					{formatNumber(objProduct[index].marzha)}
-				</td>
-				<td className="summa-suma1" style={!swtichChecked ? { opacity: 0.4 } : {}}>
-					<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
-						{formatNumber(objProduct[index].ostatok * objProduct[index].zakupka)}
-						<span style={{ paddingLeft: 3 }}>/</span>
-					</div>
-				</td>
-				<td className="summa-suma2" style={!swtichChecked ? { opacity: 0.4 } : {}}>
-					<div>{formatNumber(objProduct[index].suma2)}</div>
-				</td>
-				<td className="summa-suma3" style={!swtichChecked ? { opacity: 0.4 } : {}}>
-					<div>{formatNumber(objProduct[index].suma3)}</div>
-				</td>
-				<td className="summa-suma4" style={!swtichChecked ? { opacity: 0.4 } : {}}>
-					<div>{formatNumber(objProduct[index].suma4)}</div>
-				</td>
-			</tr>
-		}	
+							<input
+								type="text"
+								value={focusInput ? memoryInput : formatNumber2(+memoryInput)}
+								onChange={inputChange}
+								onKeyUp={enterInput}
+								maxLength={5}
+								onClick={() => setFocusInput(true)}
+							/>
+
+							<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnPlus}></button>
+							<span style={{ paddingLeft: 3 }}>/</span>
+						</div>
+					</td>
+					<td className="nal-rezerv" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div>{formatNumber2(objProduct[index].rezerv)}</div>
+					</td>
+					<td className="nal-otpr" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div>{formatNumber2(objProduct[index].otpr)}</div>
+					</td>
+					<td className="nal-vozvrat" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div>{formatNumber2(objProduct[index].vozvrat)}</div>
+					</td>
+					<td
+						style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}
+					>
+						{formatNumber(objProduct[index].zakupka)}
+					</td>
+					<td
+						style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}
+					>
+						{formatNumber(objProduct[index].prodazha)}
+					</td>
+					<td
+						style={!swtichChecked ? { opacity: 0.4, textAlign: 'right' } : { textAlign: 'right' }}
+					>
+						{formatNumber(objProduct[index].marzha)}
+					</td>
+					<td className="summa-suma1" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
+							{formatNumber(objProduct[index].ostatok * objProduct[index].zakupka)}
+							<span style={{ paddingLeft: 3 }}>/</span>
+						</div>
+					</td>
+					<td className="summa-suma2" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div>{formatNumber(objProduct[index].suma2)}</div>
+					</td>
+					<td className="summa-suma3" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div>{formatNumber(objProduct[index].suma3)}</div>
+					</td>
+					<td className="summa-suma4" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div>{formatNumber(objProduct[index].suma4)}</div>
+					</td>
+				</tr>
+			)}
 			{/* {console.log(objProduct[index].podProduct?.length)} */}
 			{/* {objProduct[index].podProduct?.length !== 0
 				? objProduct[index].podProduct?.map((x, index2) => (

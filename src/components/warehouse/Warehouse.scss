@@ -1,8 +1,8 @@
 @font-face {
 	font-family: 'BabelStone Flags';
 	src: local('BabelStone Flags'), local('BabelStoneFlags'),
-		url('./fonts/BabelStoneFlags.woff2') format('woff2'),
-		url('./fonts/BabelStoneFlags.woff') format('woff');
+		url('../../fonts/BabelStoneFlags.woff2') format('woff2'),
+		url('../../fonts/BabelStoneFlags.woff') format('woff');
 }
 .flags {
 	font-family: 'BabelStone Flags';
@@ -74,7 +74,7 @@
 			width: calc(100% - 10px);
 		}
 		&:before {
-			background-image: url('img/arrow-down.svg');
+			background-image: url('../../img/arrow-down.svg');
 			content: '';
 			background-repeat: no-repeat;
 			background-size: contain;
@@ -686,7 +686,7 @@
 			.arrow {
 				margin-left: 13px;
 				&:before {
-					background-image: url('img/arrow-down.svg');
+					background-image: url('../../img/arrow-down.svg');
 					content: '';
 					background-repeat: no-repeat;
 					background-size: contain;
@@ -701,7 +701,7 @@
 			.arrowDeg {
 				margin-left: 25px;
 				&:before {
-					background-image: url('img/arrow-down.svg');
+					background-image: url('../../img/arrow-down.svg');
 					content: '';
 					background-repeat: no-repeat;
 					background-size: contain;

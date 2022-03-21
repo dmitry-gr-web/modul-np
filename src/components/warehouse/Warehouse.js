@@ -1,208 +1,15 @@
-import React, { useState, useEffect, useRef,useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './Warehouse.scss';
-import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus, videoregistrator } from './img/svg-pack';
+import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus } from '../../img/svg-pack';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
-import WarehouseProductList from './components/warehouse/WarehouseProductList';
-import WarehouseDropMenu from './components/warehouse/WarehouseDropMenu';
+import WarehouseProductList from './WarehouseProductList';
+import WarehouseDropMenu from './WarehouseDropMenu';
+import { dataWarehouse } from '../data/dataWarehouse';
 
 const Warehouse = () => {
 	const [selectLink, setSelectLink] = useState(true);
-	const [objProduct, setObjProduct] = useState([
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5649-1',
-			country: '🇺🇦',
-			currency: '₴',
-			name: 'Nano USB 2.0 флешка для установки в компьютеры',
-			attribute: '32 Гб',
-			images: videoregistrator,
-			ostatok: 10,
-			rezerv: 1239,
-			otpr: 2924,
-			vozvrat: 655,
-			zakupka: 157.0,
-			prodazha: 349.0,
-			marzha: 40.0,
-			suma1: 1570.0,
-			suma2: 17925.0,
-			suma3: 2924.0,
-			suma4: 655.0,
-			select: false,
-			podProduct: 0
-		},
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5649-2',
-			country: '🇺🇦',
-			currency: '₴',
-			images: videoregistrator,
-			name: 'Nano USB 2.0 флешка для установки в компьютеры',
-			attribute: '64 Гб',
-			ostatok: 10,
-			rezerv: 1239,
-			otpr: 2924,
-			vozvrat: 655,
-			zakupka: 157.0,
-			prodazha: 349.0,
-			marzha: 25.0,
-			suma1: 1570.0,
-			suma2: 17925.0,
-			suma3: 2924.0,
-			suma4: 655.0,
-			select: false,
-			podProduct: 1
-		},
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5649-6.8',
-			country: '🇺🇦',
-			currency: '₴',
-			images: videoregistrator,
-			name: 'Nano USB 2.0 флешка для установки в компьютеры',
-			attribute: '128 Гб, Синий',
-			ostatok: 10,
-			rezerv: 1239,
-			otpr: 2924,
-			vozvrat: 655,
-			zakupka: 157.0,
-			prodazha: 349.0,
-			marzha: 20.0,
-			suma1: 1570.0,
-			suma2: 17925.0,
-			suma3: 2924.0,
-			suma4: 655.0,
-			select: false,
-			podProduct: 1
-		},
-		
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5648-0',
-			country: '🇷🇺',
-			currency: '₽',
-			name: 'Чистящее средство VCle что то там средствто',
-			attribute: 'Основной',
-			images: videoregistrator,
-			ostatok: 0,
-			rezerv: 0,
-			otpr: 4,
-			vozvrat: 1,
-			zakupka: 860.0,
-			prodazha: 1260.0,
-			marzha: 400.0,
-			suma1: 0.0,
-			suma2: 11924.0,
-			suma3: 11924.0,
-			suma4: 11924.0,
-			select: false,
-		},
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5648-0',
-			country: '🇷🇺',
-			currency: '₽',
-			name: 'Чистящее средство VCle что то там средствто',
-			attribute: 'Основной',
-			images: videoregistrator,
-			ostatok: 1278,
-			rezerv: 0,
-			otpr: 4,
-			vozvrat: 1,
-			zakupka: 860.0,
-			prodazha: 1260.0,
-			marzha: 400.0,
-			suma1: 0.0,
-			suma2: 11924.0,
-			suma3: 11924.0,
-			suma4: 11924.0,
-			select: false,
-		},
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5648-0',
-			country: '🇷🇺',
-			currency: '₽',
-			name: 'Чистящее средство VCle что то там средствто',
-			attribute: 'Основной и дополнительный',
-			images: videoregistrator,
-			ostatok: 10000,
-			rezerv: 0,
-			otpr: 4,
-			vozvrat: 1,
-			zakupka: 860.0,
-			prodazha: 1260.0,
-			marzha: 400.0,
-			suma1: 0.0,
-			suma2: 11924.0,
-			suma3: 11924.0,
-			suma4: 11924.0,
-			select: false,
-		},
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5648-0',
-			country: '🇷🇺',
-			currency: '₽',
-			name: 'Чистящее средство VCle что то там средствто',
-			attribute: 'Основной',
-			images: videoregistrator,
-			ostatok: 0,
-			rezerv: 0,
-			otpr: 4,
-			vozvrat: 1,
-			zakupka: 860.0,
-			prodazha: 1260.0,
-			marzha: 400.0,
-			suma1: 0.0,
-			suma2: 11924.0,
-			suma3: 11924.0,
-			suma4: 11924.0,
-			select: false,
-		},
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5648-0',
-			country: '🇷🇺',
-			currency: '₽',
-			name: 'Чистящее средство VCle что то там средствто',
-			attribute: 'Основной',
-			images: videoregistrator,
-			ostatok: 0,
-			rezerv: 0,
-			otpr: 4,
-			vozvrat: 1,
-			zakupka: 860.0,
-			prodazha: 1260.0,
-			marzha: 400.0,
-			suma1: 0.0,
-			suma2: 11924.0,
-			suma3: 11924.0,
-			suma4: 11924.0,
-			select: false,
-		},
-		{
-			status: { all: true, rozetka: true, prom: true, crm: true },
-			id: '5648-0',
-			country: '🇷🇺',
-			currency: '₽',
-			name: 'Чистящее средство VCle что то там средствто',
-			attribute: 'Основной',
-			images: videoregistrator,
-			ostatok: 0,
-			rezerv: 0,
-			otpr: 4,
-			vozvrat: 1,
-			zakupka: 860.0,
-			prodazha: 1260.0,
-			marzha: 400.0,
-			suma1: 0.0,
-			suma2: 11924.0,
-			suma3: 11924.0,
-			suma4: 11924.0,
-			select: false,
-		},
-	]);
+	const [objProduct, setObjProduct] = useState(dataWarehouse);
 
 	const [checked, setChecked] = useState(true);
 
@@ -295,35 +102,41 @@ const Warehouse = () => {
 				curent[0].style.left = '7px';
 			}
 		}, 200);
-
 	}, [objProduct, switchMenu]);
-	const [selectAll,setSelectAll] = useState(false);
-	useMemo(()=> {
-		if(!selectAll){
-			document.addEventListener('keydown' , function(e){
-
-			
+	const [selectAll, setSelectAll] = useState(false);
+	useMemo(() => {
+		if (!selectAll) {
+			document.addEventListener('keydown', function (e) {
 				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
 					e.preventDefault();
 					setSelectAll(true);
 					let newobj = [...objProduct];
-					newobj.map(x => x.select = true);
+					newobj.map((x) => (x.select = true));
 					setObjProduct(newobj);
 				}
 				// console.log(e)
-		
 			});
-		} else if(selectAll)  {
-			document.addEventListener('click',function(e){
-				if(!e.target.className.includes('warehouse-table')) {
+		} else {
+			document.addEventListener('click', function (e) {
+				if (!e.target.closest('.warehouse-table')) {
 					setSelectAll(false);
 					let newobj = [...objProduct];
-					newobj.map(x => x.select = false);
+					newobj.map((x) => (x.select = false));
 					setObjProduct(newobj);
 				}
 			});
 		}
-	},[selectAll])
+	}, [selectAll]);
+	// useEffect(()=> {
+	// 	document.addEventListener('click',function(e){
+	// 		if(!e.target.className.includes('warehouse-table')) {
+	// 			setSelectAll(false);
+	// 			let newobj = [...objProduct];
+	// 			newobj.map(x => x.select = false);
+	// 			setObjProduct(newobj);
+	// 		}
+	// 	});
+	// },[selectAll])
 
 	function formatNumber2(number) {
 		let newnum = number.toLocaleString('ru-RU', {
@@ -339,28 +152,23 @@ const Warehouse = () => {
 		return newnum;
 	}
 	//rascheti
-	let ostatok =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
-	let rezerv =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0)) ;
-	let otpr =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
-	let vozvrat =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0)) ;
-	let zakupka =
-		parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka, 0));
-	let prodazha =
-		parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0));
-	let marzha =
-		parseInt(objProduct.reduce((prev, curr,_, array) =>  prev + curr.marzha / array.length, 0));
-	let suma1 =
-		parseInt(objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0));
-	let suma2 =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
-	let suma3 =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
-	let suma4 =
-		parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
+	let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
+	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
+	let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
+	let vozvrat = parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0));
+	let zakupka = parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka, 0));
+	let prodazha = parseInt(
+		objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0)
+	);
+	let marzha = parseInt(
+		objProduct.reduce((prev, curr, _, array) => prev + curr.marzha / array.length, 0)
+	);
+	let suma1 = parseInt(
+		objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
+	);
+	let suma2 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
+	let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
+	let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
 	return (
 		<div
 			style={{
@@ -371,8 +179,7 @@ const Warehouse = () => {
 			}}
 		>
 			<div style={{ position: 'absolute', top: 0, right: 0 }}>
-				Выбрано{' '}
-				{parseInt(objProduct.filter((x) => x.select === true).length)}
+				Выбрано {parseInt(objProduct.filter((x) => x.select === true).length)}
 			</div>
 
 			<div
@@ -408,7 +215,11 @@ const Warehouse = () => {
 						</button>
 					</div>
 					<div className="shadow-right"></div>
-					<SimpleBar className='warehouse-table' style={{ display: 'flex', maxHeight: 200, maxWidth: 1150 }} autoHide={false}>
+					<SimpleBar
+						className="warehouse-table"
+						style={{ display: 'flex', maxHeight: 200, maxWidth: 1150 }}
+						autoHide={false}
+					>
 						{podlozhka && (
 							<div
 								className="warehouse-podlozhka"
@@ -416,7 +227,7 @@ const Warehouse = () => {
 								onClick={clickPodlozhka}
 							></div>
 						)}
-						<table  style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
+						<table style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
 							<thead className="first-tab-header">
 								<tr>
 									<th
@@ -444,8 +255,10 @@ const Warehouse = () => {
 										</div>
 									</th>
 									<th className="while">ID</th>
-									<th style={{ minWidth: 51 ,textAlign: 'left'}} className="while">Страна</th>
-									<th style={{ minWidth: 51,textAlign: 'left' }} className="while">
+									<th style={{ minWidth: 51, textAlign: 'left' }} className="while">
+										Страна
+									</th>
+									<th style={{ minWidth: 51, textAlign: 'left' }} className="while">
 										Валюта
 									</th>
 									<th className="while">Название </th>
@@ -528,7 +341,7 @@ const Warehouse = () => {
 									</th>
 									<th className="nal-ostatok">
 										<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
-											{formatNumber(ostatok)}
+											{formatNumber2(ostatok)}
 											<span style={{ paddingLeft: 3 }}>/</span>
 										</div>
 									</th>
@@ -561,7 +374,7 @@ const Warehouse = () => {
 									</th>
 								</tr>
 								<tr>
-									<th colSpan='18' className='shadow-vertical'>
+									<th colSpan="18" className="shadow-vertical">
 										<div></div>
 									</th>
 								</tr>
@@ -589,6 +402,8 @@ const Warehouse = () => {
 											lastIndex={lastIndex}
 											btnMenu={btnMenu}
 											setBtnMenu={setBtnMenu}
+											selectAll={selectAll}
+											setSelectAll={setSelectAll}
 										/>
 									))}
 								{/* {console.log(objProduct[0]['id'])} */}
@@ -596,7 +411,7 @@ const Warehouse = () => {
 							<tfoot>
 								<tr>
 									<td colSpan={18} style={{ height: 12 }}>
-										<div className='shadow-vertical-2'></div>
+										<div className="shadow-vertical-2"></div>
 									</td>
 								</tr>
 							</tfoot>
