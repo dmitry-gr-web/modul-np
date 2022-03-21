@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef,useMemo } from 'react';
 import './Warehouse.scss';
 import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus, videoregistrator } from './img/svg-pack';
 import SimpleBar from 'simplebar-react';
@@ -295,17 +295,35 @@ const Warehouse = () => {
 				curent[0].style.left = '7px';
 			}
 		}, 200);
+
 	}, [objProduct, switchMenu]);
-	// document.addEventListener('keydown' , function(e){
+	const [selectAll,setSelectAll] = useState(false);
+	useMemo(()=> {
+		if(!selectAll){
+			document.addEventListener('keydown' , function(e){
 
-	// 	e.preventDefault();
-	// 	if (e.ctrlKey || e.metaKey && e.code.KeyA) {
-	// 		let newobj = [...objProduct];
-	// 		newobj.map(x => x.select = true);
-	// 		setObjProduct(newobj);
-	// 	}
-
-	// });
+			
+				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+					e.preventDefault();
+					setSelectAll(true);
+					let newobj = [...objProduct];
+					newobj.map(x => x.select = true);
+					setObjProduct(newobj);
+				}
+				// console.log(e)
+		
+			});
+		} else if(selectAll)  {
+			document.addEventListener('click',function(e){
+				if(!e.target.className.includes('warehouse-table')) {
+					setSelectAll(false);
+					let newobj = [...objProduct];
+					newobj.map(x => x.select = false);
+					setObjProduct(newobj);
+				}
+			});
+		}
+	},[selectAll])
 
 	function formatNumber2(number) {
 		let newnum = number.toLocaleString('ru-RU', {
@@ -390,7 +408,7 @@ const Warehouse = () => {
 						</button>
 					</div>
 					<div className="shadow-right"></div>
-					<SimpleBar style={{ display: 'flex', maxHeight: 200, maxWidth: 1150 }} autoHide={false}>
+					<SimpleBar className='warehouse-table' style={{ display: 'flex', maxHeight: 200, maxWidth: 1150 }} autoHide={false}>
 						{podlozhka && (
 							<div
 								className="warehouse-podlozhka"

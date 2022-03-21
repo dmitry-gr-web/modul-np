@@ -20,7 +20,7 @@ const WarehouseProductList = ({
 	setLastIndex,
 	btnMenu,
 }) => {
-	console.log(objProduct, index)
+	// console.log(objProduct, index)
 	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
 	useEffect(() => {
 		if (!objProduct[index].status.all) {
@@ -96,7 +96,7 @@ const WarehouseProductList = ({
 		let posElement = e.currentTarget.getBoundingClientRect();
 		// tooltipBlock.innerHTML = html;
 		tooltipBlock.style.fontSize = '14px';
-		console.log(e);
+		// console.log(e);
 		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
 			// tooltipBlock.style.fontSize = '12px';
 			tooltipBlock.innerText = e.target.innerText;
