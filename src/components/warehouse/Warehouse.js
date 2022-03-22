@@ -40,9 +40,9 @@ const Warehouse = () => {
 	function clickPodlozhka() {
 		setPodlozhka(false);
 		setFocusInput(false);
-		document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
-			x.style.width = '0%';
-		});
+		// document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
+		// 	x.style.width = '0%';
+		// });
 		document.querySelectorAll('.nal-ostatok button').forEach((x) => {
 			x.style.width = '0px';
 		});
@@ -156,7 +156,7 @@ const Warehouse = () => {
 	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
 	let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
 	let vozvrat = parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0));
-	let zakupka = parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka, 0));
+	let zakupka = parseInt(objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka / array.length, 0));
 	let prodazha = parseInt(
 		objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0)
 	);

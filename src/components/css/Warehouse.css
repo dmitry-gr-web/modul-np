@@ -73,7 +73,7 @@
 }
 .warehouse-products .warehouse-input .underline {
   transition: 0.2s;
-  width: 0%;
+  width: 100%;
   background-color: #9c9b9e;
   height: 1px;
   bottom: -1px;
@@ -136,7 +136,7 @@
 }
 .warehouse-products .warehouse-dropmenu .underline {
   transition: 0.2s;
-  width: 0%;
+  width: 100%;
   background-color: #9c9b9e;
   height: 1px;
   bottom: 2px;

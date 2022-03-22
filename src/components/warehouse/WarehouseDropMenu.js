@@ -97,10 +97,10 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 	function menuOn(e) {
 		setValue('');
 		setOpenMenu(true);
-		e.currentTarget.querySelector('.underline').style.width = '100%';
+		// e.currentTarget.querySelector('.underline').style.width = '100%';
 		if (inputOn) {
 			ref.current.focus();
-			e.currentTarget.querySelector('.underline').style.width = '100%';
+			// e.currentTarget.querySelector('.underline').style.width = '100%';
 		}
 		if(adaptive){
 			e.currentTarget.style.minWidth = '50px';
@@ -132,13 +132,13 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 			}
 			setOpenMenu(false);
 			if (inputOn) {
-				e.currentTarget.querySelector('.underline').style.width = '0%';
+				// e.currentTarget.querySelector('.underline').style.width = '0%';
 				ref.current.blur();
 			}
 			if(adaptive){
 				e.currentTarget.style.minWidth = '28px';
 			}
-			e.currentTarget.querySelector('.underline').style.width = '0%';
+			// e.currentTarget.querySelector('.underline').style.width = '0%';
 
 	
 		}

@@ -4,11 +4,11 @@ const WarehouseInput = () => {
     const [inputID, setInputID] = useState('');
     function warehouseInputOn(e) {
 		e.currentTarget.querySelector('input').focus();
-		e.currentTarget.querySelector('.underline').style.width = '100%';
+		// e.currentTarget.querySelector('.underline').style.width = '100%';
 	}
 	function warehouseInputOff(e) {
 		e.currentTarget.querySelector('input').blur();
-		e.currentTarget.querySelector('.underline').style.width = '0%';
+		// e.currentTarget.querySelector('.underline').style.width = '0%';
 	}
   return (
     <div
