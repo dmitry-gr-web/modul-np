@@ -914,6 +914,7 @@
 			bottom: 0;
 			background-color: #ccc;
 			transition: 0.2s;
+			box-shadow: 0 0 1px black;
 		}
 		&:hover .slider {
 			background: rgb(149, 149, 149);
@@ -1005,6 +1006,7 @@
 			bottom: 0;
 			background-color: #ccc;
 			transition: 0.2s;
+			box-shadow: 0 0 1px black;
 		}
 		&:hover .slider {
 			background: rgb(149, 149, 149);

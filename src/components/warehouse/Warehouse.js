@@ -366,13 +366,13 @@ const Warehouse = () => {
 										</div>
 									</th>
 									<th className="nal-rezerv">
-										<div>{formatNumber(rezerv)}</div>
+										<div>{formatNumber2(rezerv)}</div>
 									</th>
 									<th className="nal-otpr">
-										<div>{formatNumber(otpr)}</div>
+										<div>{formatNumber2(otpr)}</div>
 									</th>
 									<th className="nal-vozvrat">
-										<div>{formatNumber(vozvrat)}</div>
+										<div>{formatNumber2(vozvrat)}</div>
 									</th>
 									<th style={{ textAlign: 'right' }}>{formatNumber(zakupka)}</th>
 									<th style={{ textAlign: 'right' }}>{formatNumber(prodazha)}</th>

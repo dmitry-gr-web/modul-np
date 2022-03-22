@@ -97,6 +97,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 	function menuOn(e) {
 		setValue('');
 		setOpenMenu(true);
+		e.currentTarget.querySelector('.underline').style.width = '100%';
 		if (inputOn) {
 			ref.current.focus();
 			e.currentTarget.querySelector('.underline').style.width = '100%';
@@ -137,6 +138,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 			if(adaptive){
 				e.currentTarget.style.minWidth = '28px';
 			}
+			e.currentTarget.querySelector('.underline').style.width = '0%';
 
 	
 		}
@@ -198,7 +200,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 							}
 						}}
 					/>
-					<span className="underline"></span>
+					{/* <span className="underline"></span> */}
 				</>
 			) : type === 'status' ? (
 			<div className='status-result'>
@@ -216,6 +218,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 					)}
 				</div>
 			)}
+			<span className="underline"></span>
 			<SimpleBar autoHide={false} className={openMenu ? 'dropmenu toggle' : 'dropmenu'}>
 				{inputOn
 					? obj
