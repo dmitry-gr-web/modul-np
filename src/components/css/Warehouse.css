@@ -59,6 +59,34 @@
   width: 1036px;
   position: relative;
 }
+.warehouse-products .warehouse-input {
+  width: 100%;
+  position: relative;
+}
+.warehouse-products .warehouse-input input {
+  width: 100%;
+  border: none;
+  padding: 0;
+  outline: none;
+  font-weight: 300;
+  text-overflow: ellipsis;
+}
+.warehouse-products .warehouse-input .underline {
+  transition: 0.2s;
+  width: 0%;
+  background-color: #9c9b9e;
+  height: 1px;
+  bottom: -1px;
+  left: 0;
+  z-index: 4;
+  position: absolute;
+}
+.warehouse-products .block-3-btn {
+  display: flex;
+  width: 0px;
+  transition: 0.2s width;
+  visibility: hidden;
+}
 .warehouse-products .warehouse-dropmenu {
   width: 100%;
   height: 100%;
@@ -85,6 +113,18 @@
   position: absolute;
   right: 0;
   top: 6px;
+}
+.warehouse-products .warehouse-dropmenu .text-result, .warehouse-products .warehouse-dropmenu .status-result {
+  text-align: center;
+  height: 20px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(100% - 10px);
+}
+.warehouse-products .warehouse-dropmenu .text-result label, .warehouse-products .warehouse-dropmenu .status-result label {
+  float: left;
+  top: 5px;
 }
 .warehouse-products .warehouse-dropmenu .text-result {
   text-align: center;
@@ -162,6 +202,9 @@
 .warehouse-products .warehouse-dropmenu .dropmenu li:hover {
   color: rgba(0, 0, 0, 0.5);
 }
+.warehouse-products .warehouse-dropmenu .dropmenu li:hover .status {
+  opacity: 0.5;
+}
 .warehouse-products .warehouse-dropmenu .dropmenu li:hover .flags {
   opacity: 0.5;
 }
@@ -196,6 +239,10 @@
   border: none;
   position: absolute;
   right: -32px;
+  cursor: pointer;
+}
+.warehouse-products .warehouse-products-title button:hover {
+  opacity: 0.5;
 }
 .warehouse-products .warehouse-products-title:after {
   position: absolute;
@@ -798,7 +845,7 @@
   position: sticky;
   background: white;
 }
-.warehouse-products .adaptive-switch div {
+.warehouse-products .adaptive-switch div:first-child {
   display: flex;
   visibility: hidden;
   justify-content: space-between;
@@ -814,7 +861,7 @@
   z-index: 1;
   background: white;
 }
-.warehouse-products .adaptive-switch-on div {
+.warehouse-products .adaptive-switch-on div:first-child {
   visibility: visible;
   width: 85px;
   transition: 0.2s width;

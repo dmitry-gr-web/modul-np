@@ -6,6 +6,7 @@ import 'simplebar/dist/simplebar.min.css';
 import WarehouseProductList from './WarehouseProductList';
 import WarehouseDropMenu from './WarehouseDropMenu';
 import { dataWarehouse } from '../data/dataWarehouse';
+import WarehouseInput from './WarehouseInput';
 
 const Warehouse = () => {
 	const [selectLink, setSelectLink] = useState(true);
@@ -59,8 +60,6 @@ const Warehouse = () => {
 			input.style.width = input.value.length * 8 + 'px';
 		}
 	}
-
-	const [inputID, setInputID] = useState('');
 
 	useEffect(() => {
 		let curent = document.querySelectorAll('.while');
@@ -151,6 +150,7 @@ const Warehouse = () => {
 			.replace(',', '.');
 		return newnum;
 	}
+
 	//rascheti
 	let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
 	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
@@ -233,7 +233,7 @@ const Warehouse = () => {
 									<th
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(false)}
-										style={{ textAlign: 'left', paddingLeft: 0, minWidth: 44 }}
+										style={{ textAlign: 'left', paddingLeft: 0, minWidth: 51 }}
 										className="adaptive-switch-trigger while statusBefore"
 									>
 										Статус
@@ -281,26 +281,46 @@ const Warehouse = () => {
 										onMouseLeave={() => setSwitchMenu(false)}
 										className="adaptive-switch-trigger"
 									>
-										Поиск
+										<WarehouseDropMenu
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											type={'status'}
+											objProduct={objProduct}
+										/>
 									</th>
 									<th
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(false)}
-										className={
-											switchMenu ? 'adaptive-switch adaptive-switch-on' : 'adaptive-switch'
-										}
+										// className={
+										// 	switchMenu ? 'adaptive-switch adaptive-switch-on' : 'adaptive-switch'
+										// }
 									>
-										<div></div>
-									</th>
-									<th>
-										<div style={{ width: '100%' }}>
-											<input
-												onChange={(e) => setInputID(e.target.value)}
-												value={inputID}
-												style={{ width: '100%', border: 'none', padding: 0, outline: 'none' }}
-												type="text"
+										<div style={switchMenu ? {width: '85px', visibility: 'visible'}: {width: '0px'}} className="block-3-btn">
+											<WarehouseDropMenu
+												adaptive={true}
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'status'}
+												objProduct={objProduct}
+											/>
+											<WarehouseDropMenu
+												adaptive={true}
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'status'}
+												objProduct={objProduct}
+											/>
+											<WarehouseDropMenu
+												adaptive={true}
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'status'}
+												objProduct={objProduct}
 											/>
 										</div>
+									</th>
+									<th>
+										<WarehouseInput />
 									</th>
 									<th>
 										<WarehouseDropMenu
@@ -380,32 +400,31 @@ const Warehouse = () => {
 								</tr>
 							</thead>
 							<tbody className="first-tab-body">
-								{objProduct
-									.filter((x) => x.id.toLowerCase().includes(inputID.toLowerCase()))
-									.map((x, index) => (
-										<WarehouseProductList
-											index={index}
-											setChecked={setChecked}
-											checked={checked}
-											objProduct={objProduct}
-											switchMenu={switchMenu}
-											setObjProduct={setObjProduct}
-											setSwitchMenu={setSwitchMenu}
-											PlusMinusOpen={PlusMinusOpen}
-											PlusMinusClose={PlusMinusClose}
-											podlozhka={podlozhka}
-											setPodlozhka={setPodlozhka}
-											focusInput={focusInput}
-											setFocusInput={setFocusInput}
-											setIndexInput={setIndexInput}
-											setLastIndex={setLastIndex}
-											lastIndex={lastIndex}
-											btnMenu={btnMenu}
-											setBtnMenu={setBtnMenu}
-											selectAll={selectAll}
-											setSelectAll={setSelectAll}
-										/>
-									))}
+								{/* .filter((x) => x.id.toLowerCase().includes(inputID.toLowerCase())) */}
+								{objProduct.map((x, index) => (
+									<WarehouseProductList
+										index={index}
+										setChecked={setChecked}
+										checked={checked}
+										objProduct={objProduct}
+										switchMenu={switchMenu}
+										setObjProduct={setObjProduct}
+										setSwitchMenu={setSwitchMenu}
+										PlusMinusOpen={PlusMinusOpen}
+										PlusMinusClose={PlusMinusClose}
+										podlozhka={podlozhka}
+										setPodlozhka={setPodlozhka}
+										focusInput={focusInput}
+										setFocusInput={setFocusInput}
+										setIndexInput={setIndexInput}
+										setLastIndex={setLastIndex}
+										lastIndex={lastIndex}
+										btnMenu={btnMenu}
+										setBtnMenu={setBtnMenu}
+										selectAll={selectAll}
+										setSelectAll={setSelectAll}
+									/>
+								))}
 								{/* {console.log(objProduct[0]['id'])} */}
 							</tbody>
 							<tfoot>

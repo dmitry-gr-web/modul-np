@@ -2,10 +2,36 @@ import React, { useState, useRef, useEffect } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
-const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type }) => {
+const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,adaptive }) => {
 	const [openMenu, setOpenMenu] = useState(false);
 	let newarr = [];
-	if(inputOn){
+	const LabelOn = () => {
+		return (
+			<label style={{pointerEvents: 'none'}} className="switch-btn-small">
+				<input
+				style={{pointerEvents: 'none'}}
+					type="checkbox"
+					className="status-rozetka"
+					checked={true}
+				/>
+				<span className="slider round"></span>
+			</label>
+		);
+	};
+	const LabelOff = () => {
+		return (
+			<label style={{pointerEvents: 'none'}} className="switch-btn-small">
+				<input
+				style={{pointerEvents: 'none'}}
+					type="checkbox"
+					className="status-rozetka"
+					checked={false}
+				/>
+				<span className="slider round"></span>
+			</label>
+		);
+	};
+	if (inputOn) {
 		objProduct.map((x) => {
 			newarr.push(x[type]);
 			if (x.podProduct?.length > 0) {
@@ -17,22 +43,28 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 		});
 		newarr = [{ id: 0, attribute: 'Все', select: true }, ...newarr];
 	} else {
-		if(type === 'country') {
+		if (type === 'country') {
 			newarr = [
-				{id: 0,attribute: 'Все',select:true},
-				{id: 1,attribute: '🇷🇺',select:false},
-				{id: 2,attribute: '🇺🇦',select:false},
-
-			]
+				{ id: 0, attribute: 'Все', select: true },
+				{ id: 1, attribute: '🇷🇺', select: false },
+				{ id: 2, attribute: '🇺🇦', select: false },
+			];
 		}
-		if(type === 'currency') {
+		if (type === 'currency') {
 			newarr = [
-				{id: 0,attribute: 'Все',select:true},
-				{id: 1,attribute: '$',select:false},
-				{id: 2,attribute: '€',select:false},
-				{id: 3,attribute: '₴',select:false},
-				{id: 4,attribute: '₽',select:false}
-			]
+				{ id: 0, attribute: 'Все', select: true },
+				{ id: 1, attribute: '$', select: false },
+				{ id: 2, attribute: '€', select: false },
+				{ id: 3, attribute: '₴', select: false },
+				{ id: 4, attribute: '₽', select: false },
+			];
+		}
+		if (type === 'status') {
+			newarr = [
+				{ id: 0, attribute: 'Все', select: true },
+				{ id: 1, attribute: <LabelOn/>, select: false },
+				{ id: 2, attribute: <LabelOff/>, select: false }
+			];
 		}
 	}
 
@@ -69,7 +101,9 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 			ref.current.focus();
 			e.currentTarget.querySelector('.underline').style.width = '100%';
 		}
-
+		if(adaptive){
+			e.currentTarget.style.minWidth = '50px';
+		}
 		e.currentTarget.querySelector('.simplebar-content-wrapper').scrollTo({
 			top: 0,
 		});
@@ -78,19 +112,33 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 		if (podlozhka) {
 			setOpenMenu(true);
 		} else {
+			if(type !== 'status'){
+				setValue(
+					obj.filter((x) => x.select === true).length > 1
+						? 'Фильтр'
+						: obj.filter((x) => x.select === true)[0].attribute.includes('Все')
+						? ''
+						: obj.filter((x) => x.select === true)[0].attribute
+				);
+			} else {
+				setValue(
+					obj.filter((x) => x.select === true).length > 1
+						? 'Фильтр'
+						: obj.filter((x) => x.select === true)[0].attribute ==='Все'
+						? ''
+						: obj.filter((x) => x.select === true)[0].attribute
+				);
+			}
 			setOpenMenu(false);
 			if (inputOn) {
 				e.currentTarget.querySelector('.underline').style.width = '0%';
 				ref.current.blur();
 			}
+			if(adaptive){
+				e.currentTarget.style.minWidth = '28px';
+			}
 
-			setValue(
-				obj.filter((x) => x.select === true).length > 1
-					? 'Фильтр'
-					: obj.filter((x) => x.select === true)[0].attribute.includes('Все')
-					? ''
-					: obj.filter((x) => x.select === true)[0].attribute
-			);
+	
 		}
 	}
 	useEffect(() => {
@@ -98,13 +146,24 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 			// setOpenMenu(true);
 			// setValue('');
 		} else {
-			setValue(
-				obj.filter((x) => x.select === true).length > 1
-					? 'Фильтр'
-					: obj.filter((x) => x.select === true)[0].attribute.includes('Все')
-					? ''
-					: obj.filter((x) => x.select === true)[0].attribute
-			);
+			if(type !== 'status'){
+				setValue(
+					obj.filter((x) => x.select === true).length > 1
+						? 'Фильтр'
+						: obj.filter((x) => x.select === true)[0].attribute.includes('Все')
+						? ''
+						: obj.filter((x) => x.select === true)[0].attribute
+				);
+			} else {
+				setValue(
+					obj.filter((x) => x.select === true).length > 1
+						? 'Фильтр'
+						: obj.filter((x) => x.select === true)[0].attribute ==='Все'
+						? ''
+						: obj.filter((x) => x.select === true)[0].attribute
+				);
+			}
+	
 			setOpenMenu(false);
 		}
 	}, [podlozhka]);
@@ -124,7 +183,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	return (
-		<div onMouseEnter={menuOn} onMouseLeave={menuOff} className="warehouse-dropmenu">
+		<div style={adaptive ? {minWidth: 28, transition: '0.3s'}: {}} onMouseEnter={menuOn} onMouseLeave={menuOff} className="warehouse-dropmenu">
 			{inputOn ? (
 				<>
 					<input
@@ -141,7 +200,10 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 					/>
 					<span className="underline"></span>
 				</>
-			) : (
+			) : type === 'status' ? (
+			<div className='status-result'>
+				{obj.filter((x) => x.select === true).length > 1 ? 'Фильтр' : obj.filter((x) => x.select === true)[0].attribute ==='Все' ? '' : obj.filter((x) => x.select === true)[0].attribute}
+			</div>) : (
 				<div className="text-result">
 					{obj.filter((x) => x.select === true).length > 1 ? (
 						'Фильтр'
@@ -175,7 +237,11 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type 
 								className={x.select ? 'select-btn' : ''}
 								onClick={() => clickList(x.id)}
 							>
-								{type === 'country' ? <span className={index !== 0 ? 'flags' : ''}>{x.attribute}</span> : x.attribute}
+								{type === 'country' ? (
+									<span className={index !== 0 ? 'flags' : ''}>{x.attribute}</span>
+								) : (
+									type === 'status' ? <span className={index !== 0 ? 'status' : ''}>{x.attribute}</span> : x.attribute
+								)}
 							</li>
 					  ))}
 			</SimpleBar>
