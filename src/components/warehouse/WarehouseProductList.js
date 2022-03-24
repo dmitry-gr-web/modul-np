@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef,useMemo } from 'react';
 // import PodProductList from './PodProductList';
-
+let plusminus;
 const WarehouseProductList = ({
 	objProduct,
 	setSwitchMenu,
@@ -9,8 +9,7 @@ const WarehouseProductList = ({
 	setChecked,
 	setObjProduct,
 	checked,
-	PlusMinusOpen,
-	PlusMinusClose,
+	setBtnMenu,
 	podlozhka,
 	setPodlozhka,
 	focusInput,
@@ -252,6 +251,38 @@ const WarehouseProductList = ({
 		setObjProduct(newobj);
 		// console.log(lastIndex, index);
 	}
+
+	const inputRef = useRef();
+	function PlusMinusOpen(e) {
+		setBtnMenu(true);
+		// e.querySelectorAll('button').forEach((x) => {
+		// 	x.style.width = '16px';
+		// });
+		plusminus = setTimeout(() => {
+		
+			inputRef.current.select();
+			inputRef.current.focus();
+				// console.log(e.target.querySelector('input'))
+			
+		
+		}, 100);
+		
+	
+	}
+	function PlusMinusClose(e) {
+		if (!podlozhka) {
+			setBtnMenu(false);
+			// e.querySelectorAll('button').forEach((x) => {
+			// 	x.style.width = '0px';
+			// });
+			inputRef.current.blur();
+		}
+		clearTimeout(plusminus)
+	}
+	// useMemo(()=> {
+	// 	PlusMinusClose()
+	// 	PlusMinusOpen()
+	// }, [])
 	// console.log(objProduct[index].status.all);
 	return (
 		<>
@@ -381,6 +412,7 @@ const WarehouseProductList = ({
 					</td>
 					<td className="while2 shadow">
 						<div className="shadow-left"></div>
+						<div className="shadow-back"></div>
 					</td>
 					<td onMouseLeave={PlusMinusClose} onMouseEnter={PlusMinusOpen} className="nal-ostatok">
 						<div
@@ -393,12 +425,13 @@ const WarehouseProductList = ({
 							<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnMinus}></button>
 
 							<input
+								ref={inputRef}
 								type="text"
 								value={focusInput ? memoryInput : formatNumber2(+memoryInput)}
 								onChange={inputChange}
 								onKeyUp={enterInput}
 								maxLength={5}
-								onClick={() => setFocusInput(true)}
+								onClick={() => {setFocusInput(true);setPodlozhka(true)}}
 							/>
 
 							<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnPlus}></button>

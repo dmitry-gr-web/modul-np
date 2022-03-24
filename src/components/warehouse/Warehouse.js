@@ -17,32 +17,18 @@ const Warehouse = () => {
 	const [podlozhka, setPodlozhka] = useState(false);
 	const [switchMenu, setSwitchMenu] = useState(false);
 	const [focusInput, setFocusInput] = useState(false);
-	const [btnMenu, setBtnMenu] = useState(false);
-	function PlusMinusOpen(e) {
-		setBtnMenu(true);
-		// e.querySelectorAll('button').forEach((x) => {
-		// 	x.style.width = '16px';
-		// });
-		e.currentTarget.querySelector('input').select();
-		e.currentTarget.querySelector('input').focus();
-	}
-	function PlusMinusClose(e) {
-		if (!podlozhka) {
-			setBtnMenu(false);
-			// e.querySelectorAll('button').forEach((x) => {
-			// 	x.style.width = '0px';
-			// });
-			e.currentTarget.querySelector('input').blur();
-		}
-	}
-	const [indexInput, setIndexInput] = useState(0);
 
+	const [indexInput, setIndexInput] = useState(0);
+	const [btnMenu, setBtnMenu] = useState(false);
 	function clickPodlozhka() {
 		setPodlozhka(false);
 		setFocusInput(false);
 		// document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
 		// 	x.style.width = '0%';
 		// });
+		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach(x=> {
+			x.style.visibility = 'visible';
+		});
 		document.querySelectorAll('.nal-ostatok button').forEach((x) => {
 			x.style.width = '0px';
 		});
@@ -217,7 +203,7 @@ const Warehouse = () => {
 					<div className="shadow-right"></div>
 					<SimpleBar
 						className="warehouse-table"
-						style={{ display: 'flex', maxHeight: 200, maxWidth: 1150 }}
+						style={{ display: 'flex', maxHeight: 'calc(100vh - 149px)', marginBottom: '10px',maxWidth: 1150 }}
 						autoHide={false}
 					>
 						{podlozhka && (
@@ -291,17 +277,23 @@ const Warehouse = () => {
 									<th
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(false)}
-										// className={
-										// 	switchMenu ? 'adaptive-switch adaptive-switch-on' : 'adaptive-switch'
-										// }
+										className={
+											switchMenu ? 'adaptive-switch2 adaptive-switch-on2' : 'adaptive-switch2'
+										}
+										
 									>
-										<div style={switchMenu ? {width: '85px', visibility: 'visible'}: {width: '0px'}} className="block-3-btn">
+										
+
+									
+										<div style={switchMenu ? { overflow: ''}: {overflow: 'hidden'}} className="block-3-btn">
 											<WarehouseDropMenu
 												adaptive={true}
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
 												type={'status'}
 												objProduct={objProduct}
+												setSwitchMenu={setSwitchMenu}
+												switchMenu={switchMenu}
 											/>
 											<WarehouseDropMenu
 												adaptive={true}
@@ -309,6 +301,8 @@ const Warehouse = () => {
 												podlozhka={podlozhka}
 												type={'status'}
 												objProduct={objProduct}
+												setSwitchMenu={setSwitchMenu}
+												switchMenu={switchMenu}
 											/>
 											<WarehouseDropMenu
 												adaptive={true}
@@ -316,11 +310,14 @@ const Warehouse = () => {
 												podlozhka={podlozhka}
 												type={'status'}
 												objProduct={objProduct}
+												setSwitchMenu={setSwitchMenu}
+												switchMenu={switchMenu}
 											/>
 										</div>
+									
 									</th>
 									<th>
-										<WarehouseInput />
+										<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
 									</th>
 									<th>
 										<WarehouseDropMenu
@@ -328,6 +325,8 @@ const Warehouse = () => {
 											podlozhka={podlozhka}
 											type={'country'}
 											objProduct={objProduct}
+											setSwitchMenu={setSwitchMenu}
+											switchMenu={switchMenu}
 										/>
 									</th>
 									<th style={{ textAlign: 'left' }}>
@@ -336,6 +335,8 @@ const Warehouse = () => {
 											podlozhka={podlozhka}
 											type={'currency'}
 											objProduct={objProduct}
+											setSwitchMenu={setSwitchMenu}
+											switchMenu={switchMenu}
 										/>
 									</th>
 									<th style={{ textAlign: 'left' }}>
@@ -345,6 +346,8 @@ const Warehouse = () => {
 											type={'name'}
 											inputOn={true}
 											objProduct={objProduct}
+											setSwitchMenu={setSwitchMenu}
+											switchMenu={switchMenu}
 										/>
 									</th>
 									<th style={{ textAlign: 'left' }}>
@@ -354,6 +357,8 @@ const Warehouse = () => {
 											type={'attribute'}
 											inputOn={true}
 											objProduct={objProduct}
+											setSwitchMenu={setSwitchMenu}
+											switchMenu={switchMenu}
 										/>
 									</th>
 									<th className="shadow">
@@ -394,7 +399,15 @@ const Warehouse = () => {
 									</th>
 								</tr>
 								<tr>
-									<th colSpan="18" className="shadow-vertical">
+									<th onMouseEnter={() => setSwitchMenu(true)}
+										onMouseLeave={() => setSwitchMenu(false)} className="shadow-vertical">
+										<div></div>
+									</th>
+									<th onMouseEnter={() => setSwitchMenu(true)}
+										onMouseLeave={() => setSwitchMenu(false)} className="shadow-vertical">
+										<div></div>
+									</th>
+									<th colSpan="16" className="shadow-vertical">
 										<div></div>
 									</th>
 								</tr>
@@ -410,8 +423,7 @@ const Warehouse = () => {
 										switchMenu={switchMenu}
 										setObjProduct={setObjProduct}
 										setSwitchMenu={setSwitchMenu}
-										PlusMinusOpen={PlusMinusOpen}
-										PlusMinusClose={PlusMinusClose}
+							
 										podlozhka={podlozhka}
 										setPodlozhka={setPodlozhka}
 										focusInput={focusInput}
@@ -419,8 +431,8 @@ const Warehouse = () => {
 										setIndexInput={setIndexInput}
 										setLastIndex={setLastIndex}
 										lastIndex={lastIndex}
-										btnMenu={btnMenu}
 										setBtnMenu={setBtnMenu}
+										btnMenu={btnMenu}
 										selectAll={selectAll}
 										setSelectAll={setSelectAll}
 									/>

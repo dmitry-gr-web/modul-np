@@ -3,6 +3,7 @@ import crmLogo from './crm.svg';
 import promLogo from './Prom.svg';
 import rozetkaLogo from './Rozetka.svg';
 import videoregistrator from './videoregistrator.jpg';
+import kalyan from './image19.png';
 const SvgDeleteBtn = () => {
 	return (
 		<svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,4 +34,4 @@ const SvGBtnPlus = () => {
 	);
 };
 
-export { SvGBtnPlus, SvgLogoNV , SvgDeleteBtn,crmLogo,rozetkaLogo,promLogo,videoregistrator};
+export { SvGBtnPlus, SvgLogoNV , SvgDeleteBtn,crmLogo,rozetkaLogo,promLogo,videoregistrator,kalyan};

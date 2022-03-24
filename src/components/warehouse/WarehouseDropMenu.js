@@ -2,14 +2,23 @@ import React, { useState, useRef, useEffect } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
-const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,adaptive }) => {
+const WarehouseDropMenu = ({
+	objProduct,
+	inputOn,
+	setPodlozhka,
+	podlozhka,
+	type,
+	adaptive,
+	setSwitchMenu,
+	switchMenu,
+}) => {
 	const [openMenu, setOpenMenu] = useState(false);
 	let newarr = [];
 	const LabelOn = () => {
 		return (
-			<label style={{pointerEvents: 'none'}} className="switch-btn-small">
+			<label style={{ pointerEvents: 'none' }} className="switch-btn-small">
 				<input
-				style={{pointerEvents: 'none'}}
+					style={{ pointerEvents: 'none' }}
 					type="checkbox"
 					className="status-rozetka"
 					checked={true}
@@ -20,9 +29,9 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 	};
 	const LabelOff = () => {
 		return (
-			<label style={{pointerEvents: 'none'}} className="switch-btn-small">
+			<label style={{ pointerEvents: 'none' }} className="switch-btn-small">
 				<input
-				style={{pointerEvents: 'none'}}
+					style={{ pointerEvents: 'none' }}
 					type="checkbox"
 					className="status-rozetka"
 					checked={false}
@@ -48,6 +57,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 				{ id: 0, attribute: 'Все', select: true },
 				{ id: 1, attribute: '🇷🇺', select: false },
 				{ id: 2, attribute: '🇺🇦', select: false },
+				{ id: 2, attribute: '🇹🇷', select: false },
 			];
 		}
 		if (type === 'currency') {
@@ -62,24 +72,35 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 		if (type === 'status') {
 			newarr = [
 				{ id: 0, attribute: 'Все', select: true },
-				{ id: 1, attribute: <LabelOn/>, select: false },
-				{ id: 2, attribute: <LabelOff/>, select: false }
+				{ id: 1, attribute: <LabelOn />, select: false },
+				{ id: 2, attribute: <LabelOff />, select: false },
 			];
 		}
 	}
 
 	const [obj, setObj] = useState(newarr);
 	const [value, setValue] = useState('');
-	function clickList(index) {
+	function clickList(index, e) {
 		setPodlozhka(true);
 		let newobj = obj.map((x, i) => {
 			if (i === index) {
+				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+					x.style.visibility = 'hidden';
+				});
+				e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
 				return { ...x, select: !x.select };
 			} else if (index === 0 && i === 0) {
+				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+					x.style.visibility = 'visible';
+				});
 				return { ...x, select: true };
 			} else if (index === 0 && i !== 0) {
+				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+					x.style.visibility = 'visible';
+				});
 				setOpenMenu(false);
 				setPodlozhka(false);
+
 				return { ...x, select: false };
 			} else if (index !== 0 && i === 0) {
 				return { ...x, select: false };
@@ -88,11 +109,32 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 			}
 		});
 		if (newobj.filter((x) => x.select === true).length === 0) {
+			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+				x.style.visibility = 'visible';
+			});
 			setOpenMenu(false);
 			setPodlozhka(false);
 			newobj[0].select = true;
 		}
+		// if(adaptive){
+		// 	setSwitchMenu(true);
+		// }
+
+		// e.target?.closest('.warehouse-input').style.display = 'block';
 		setObj(newobj);
+	}
+	const ref = useRef();
+	function changeInput (e) {
+		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+			x.style.visibility = 'hidden';
+		});
+		e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
+		setValue(e.target.value);
+		if (ref.current.value.length === 1) {
+			ref.current.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
+			setValue(e.target.value);
+		}
+		setPodlozhka(true);
 	}
 	function menuOn(e) {
 		setValue('');
@@ -102,8 +144,8 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 			ref.current.focus();
 			// e.currentTarget.querySelector('.underline').style.width = '100%';
 		}
-		if(adaptive){
-			e.currentTarget.style.minWidth = '50px';
+		if (adaptive) {
+			e.currentTarget.style.width = '100px';
 		}
 		e.currentTarget.querySelector('.simplebar-content-wrapper').scrollTo({
 			top: 0,
@@ -113,7 +155,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 		if (podlozhka) {
 			setOpenMenu(true);
 		} else {
-			if(type !== 'status'){
+			if (type !== 'status') {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
@@ -125,7 +167,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
-						: obj.filter((x) => x.select === true)[0].attribute ==='Все'
+						: obj.filter((x) => x.select === true)[0].attribute === 'Все'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
 				);
@@ -135,12 +177,10 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 				// e.currentTarget.querySelector('.underline').style.width = '0%';
 				ref.current.blur();
 			}
-			if(adaptive){
-				e.currentTarget.style.minWidth = '28px';
+			if (adaptive) {
+				e.currentTarget.style.width = '21px';
 			}
 			// e.currentTarget.querySelector('.underline').style.width = '0%';
-
-	
 		}
 	}
 	useEffect(() => {
@@ -148,7 +188,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 			// setOpenMenu(true);
 			// setValue('');
 		} else {
-			if(type !== 'status'){
+			if (type !== 'status') {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
@@ -160,16 +200,16 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
-						: obj.filter((x) => x.select === true)[0].attribute ==='Все'
+						: obj.filter((x) => x.select === true)[0].attribute === 'Все'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
 				);
 			}
-	
+
 			setOpenMenu(false);
 		}
 	}, [podlozhka]);
-	const ref = useRef();
+
 	function tooltipOn(e) {
 		const tooltipBlock = document.getElementById('tooltipBtn');
 		let posElement = e.currentTarget.getBoundingClientRect();
@@ -184,28 +224,47 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
+
+	useEffect(() => {
+		console.log();
+		document.querySelectorAll('.status-result').forEach((x, i) => {
+			if (i !== 0 && x.innerHTML !== '') {
+				// setHide(true);
+				x.closest('.warehouse-dropmenu').classList.add('hide-arrow');
+			} else {
+				x.closest('.warehouse-dropmenu').classList.remove('hide-arrow');
+			}
+		});
+		// if(document.querySelector('.status-result').innerHTML !== ''){
+
+		// }
+	}, [podlozhka, openMenu]);
 	return (
-		<div style={adaptive ? {minWidth: 28, transition: '0.3s'}: {}} onMouseEnter={menuOn} onMouseLeave={menuOff} className="warehouse-dropmenu">
+		<div
+			style={adaptive ? { width: 21, transition: '0.3s' } : {}}
+			onMouseEnter={menuOn}
+			onMouseLeave={menuOff}
+			className={'warehouse-dropmenu'}
+		>
 			{inputOn ? (
 				<>
 					<input
 						ref={ref}
 						type="text"
 						value={value}
-						onChange={(e) => {
-							setValue(e.target.value);
-							if (ref.current.value.length === 1) {
-								ref.current.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
-								setValue(e.target.value);
-							}
-						}}
+						onChange={changeInput}
 					/>
 					{/* <span className="underline"></span> */}
 				</>
 			) : type === 'status' ? (
-			<div className='status-result'>
-				{obj.filter((x) => x.select === true).length > 1 ? 'Фильтр' : obj.filter((x) => x.select === true)[0].attribute ==='Все' ? '' : obj.filter((x) => x.select === true)[0].attribute}
-			</div>) : (
+				<div className="status-result">
+					{obj.filter((x) => x.select === true).length > 1
+						? 'Фильтр'
+						: obj.filter((x) => x.select === true)[0].attribute === 'Все'
+						? ''
+						: obj.filter((x) => x.select === true)[0].attribute}
+				</div>
+			) : (
 				<div className="text-result">
 					{obj.filter((x) => x.select === true).length > 1 ? (
 						'Фильтр'
@@ -219,7 +278,11 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 				</div>
 			)}
 			<span className="underline"></span>
-			<SimpleBar autoHide={false} className={openMenu ? 'dropmenu toggle' : 'dropmenu'}>
+			<SimpleBar
+				style={adaptive ? { transitionDelay: '0.1s' } : {}}
+				autoHide={false}
+				className={openMenu ? 'dropmenu toggle' : 'dropmenu'}
+			>
 				{inputOn
 					? obj
 							.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
@@ -228,7 +291,7 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 									onMouseEnter={tooltipOn}
 									onMouseLeave={tooltipOff}
 									className={x.select ? 'select-btn' : ''}
-									onClick={() => clickList(x.id)}
+									onClick={(e) => clickList(x.id, e)}
 								>
 									{x.attribute}
 								</li>
@@ -238,12 +301,14 @@ const WarehouseDropMenu = ({ objProduct, inputOn, setPodlozhka, podlozhka, type,
 								onMouseEnter={tooltipOn}
 								onMouseLeave={tooltipOff}
 								className={x.select ? 'select-btn' : ''}
-								onClick={() => clickList(x.id)}
+								onClick={(e) => clickList(x.id, e)}
 							>
 								{type === 'country' ? (
 									<span className={index !== 0 ? 'flags' : ''}>{x.attribute}</span>
+								) : type === 'status' ? (
+									<span className={index !== 0 ? 'status' : ''}>{x.attribute}</span>
 								) : (
-									type === 'status' ? <span className={index !== 0 ? 'status' : ''}>{x.attribute}</span> : x.attribute
+									x.attribute
 								)}
 							</li>
 					  ))}
