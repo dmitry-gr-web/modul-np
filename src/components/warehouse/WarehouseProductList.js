@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef,useMemo } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 // import PodProductList from './PodProductList';
 let plusminus;
 const WarehouseProductList = ({
@@ -20,7 +20,7 @@ const WarehouseProductList = ({
 	btnMenu,
 	selectAll,
 	setSelectAll,
-	flagSwitchMenu
+	flagSwitchMenu,
 }) => {
 	// console.log(objProduct, index)
 	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
@@ -207,26 +207,25 @@ const WarehouseProductList = ({
 	}, [memoryInput, objProduct]);
 
 	const linkTR = useRef();
-	useEffect(() => {
-		let curent = linkTR.current.querySelectorAll('td');
-		let width = [];
-		let res = 0;
-		setTimeout(() => {
-			for (let i = 0; i < 8; i++) {
-				if (!switchMenu) {
-					width.push(curent[i].offsetWidth);
-				} else if (switchMenu) {
-					width.push(curent[i].offsetWidth);
-				} else if (switchMenu && i === 1) {
-					width.push(0);
-				}
-				curent[i].style.left = res + 7 + 'px';
-				res = width.reduce((prev, curr) => prev + curr, 0);
-				curent[0].style.left = '7px';
-			}
-		}, 200);
-	}, [objProduct, switchMenu]);
-
+	// useEffect(() => {
+	// 	let curent = linkTR.current.querySelectorAll('td');
+	// 	let width = [];
+	// 	let res = 0;
+	// 	setTimeout(() => {
+	// 		for (let i = 0; i < 8; i++) {
+	// 			if (!switchMenu) {
+	// 				width.push(curent[i].offsetWidth);
+	// 			} else if (switchMenu) {
+	// 				width.push(curent[i].offsetWidth);
+	// 			} else if (switchMenu && i === 1) {
+	// 				width.push(0);
+	// 			}
+	// 			curent[i].style.left = res + 7 + 'px';
+	// 			res = width.reduce((prev, curr) => prev + curr, 0);
+	// 			curent[0].style.left = '7px';
+	// 		}
+	// 	}, 200);
+	// }, [objProduct, switchMenu]);
 
 	function clickTr(e) {
 		// e.preventDefault();
@@ -261,15 +260,10 @@ const WarehouseProductList = ({
 		// 	x.style.width = '16px';
 		// });
 		plusminus = setTimeout(() => {
-		
 			inputRef.current.select();
 			inputRef.current.focus();
-				// console.log(e.target.querySelector('input'))
-			
-		
+			// console.log(e.target.querySelector('input'))
 		}, 100);
-		
-	
 	}
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
@@ -279,8 +273,16 @@ const WarehouseProductList = ({
 			// });
 			inputRef.current.blur();
 		}
-		clearTimeout(plusminus)
+		clearTimeout(plusminus);
 	}
+	// const [leftShadow,setLeftShadow] = useState(0);
+	// useEffect(() => {
+	// 	let width = document.querySelector('.sticky-body')?.offsetWidth;
+	// 	// setLeftShadow(width);
+	// 	document.querySelectorAll('.shadow').forEach((x) => {
+	// 		x.style.left = width + 7 + 'px';
+	// 	});
+	// }, [objProduct, switchMenu]);
 	// useMemo(()=> {
 	// 	PlusMinusClose()
 	// 	PlusMinusOpen()
@@ -289,69 +291,162 @@ const WarehouseProductList = ({
 	return (
 		<>
 			{objProduct[index] && (
-				<tr style={{position:'relative'}} className={objProduct[index].select ? 'select' : ''} onClick={clickTr} ref={linkTR}>
-					{/* <td className=''>	<div className='hover'></div></td> */}
-					<td
-						onMouseEnter={() => setSwitchMenu(true)}
-						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-						className="adaptive-switch-trigger while2"
-		
-					>
-						<label className="switch-btn-warehouse">
-							<input
-								type="checkbox"
-								className="status-all"
-								onChange={switchBtn}
-								defaultChecked={objProduct[index].status.all}
-								checked={objProduct[index].status.all}
-							/>
-							<span className="slider round"></span>
-						</label>
+				<tr
+					style={{ position: 'relative' }}
+					className={objProduct[index].select ? 'select' : ''}
+					onClick={clickTr}
+					ref={linkTR}
+				>
+					<td className="sticky-body">
+						<div className="sticky-block">
+							<div className="hover"></div>
+							<div
+								onMouseEnter={() => setSwitchMenu(true)}
+								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+								className="sticky-block-children"
+							>
+								<div style={{ minWidth: '51px', paddingRight: '10px' }}>
+									<label className="switch-btn-warehouse">
+										<input
+											type="checkbox"
+											className="status-all"
+											onChange={switchBtn}
+											defaultChecked={objProduct[index].status.all}
+											checked={objProduct[index].status.all}
+										/>
+										<span className="slider round"></span>
+									</label>
+								</div>
+								<div
+									style={
+										switchMenu
+											? { transition: '0.2s', paddingRight: '10px', width: '85px' }
+											: {
+													transition: '0.2s',
+													overflow: 'hidden',
+													width: '0px',
+													paddingRight: '0px',
+											  }
+									}
+								>
+									<label className="switch-btn-small">
+										<input
+											type="checkbox"
+											className="status-crm"
+											onChange={switchBtn}
+											defaultChecked={objProduct[index].status.crm}
+											checked={objProduct[index].status.crm}
+										/>
+										<span className="slider round"></span>
+									</label>
+
+									<label style={{ margin: '0 15px' }} className="switch-btn-small">
+										<input
+											type="checkbox"
+											className="status-rozetka"
+											onChange={switchBtn}
+											defaultChecked={objProduct[index].status.rozetka}
+											checked={objProduct[index].status.rozetka}
+										/>
+										<span className="slider round"></span>
+									</label>
+
+									<label className="switch-btn-small">
+										<input
+											type="checkbox"
+											className="status-prom"
+											onChange={switchBtn}
+											defaultChecked={objProduct[index].status.prom}
+											checked={objProduct[index].status.prom}
+										/>
+										<span className="slider round"></span>
+									</label>
+								</div>
+							</div>
+							<div
+								className="id-width"
+								onMouseLeave={tooltipOff}
+								onMouseEnter={tooltipOn}
+								style={
+									!swtichChecked
+										? { color: 'rgba(0,0,0,0.4)', textAlign: 'left', paddingRight: '10px' }
+										: { textAlign: 'left', paddingRight: '10px' }
+								}
+							>
+								{objProduct[index].id}
+							</div>
+							<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
+								<span
+									style={
+										!swtichChecked
+											? { opacity: 0.4, color: 'rgba(0,0,0,1)' }
+											: { color: 'rgba(0,0,0,1)' }
+									}
+									className="flags"
+								>
+									{objProduct[index].country}
+								</span>
+							</div>
+							<div
+								style={
+									!swtichChecked
+										? {
+												color: 'rgba(0,0,0,0.4)',
+												textAlign: 'center',
+												minWidth: 51,
+												paddingRight: '10px',
+										  }
+										: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
+								}
+							>
+								{objProduct[index].currency}
+							</div>
+							<div
+								className="name-width"
+								onMouseLeave={tooltipOff}
+								onMouseEnter={tooltipOn}
+								style={{ overflow: 'hidden', paddingRight: '15px' }}
+							>
+								<span
+									style={!swtichChecked ? { opacity: 0.4 } : {}}
+									className={
+										objProduct[index].podProduct === 0
+											? 'arrow'
+											: objProduct[index].podProduct === 1
+											? 'arrowDeg'
+											: ''
+									}
+								>
+									{objProduct[index].name}
+								</span>
+							</div>
+							<div className="attribute-width" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+								<img
+									style={{ width: 16, height: 16, position: 'absolute' }}
+									src={objProduct[index].images}
+									alt=""
+								/>
+								<span
+									onMouseLeave={tooltipOff}
+									onMouseEnter={tooltipOn}
+									style={{
+										marginLeft: 20,
+										whiteSpace: 'nowrap',
+										overflow: 'hidden',
+										textOverflow: 'ellipsis',
+										display: 'block',
+										maxWidth: 85,
+									}}
+								>
+									{objProduct[index].attribute}
+								</span>
+							</div>
+							<div className="shadow-left"></div>
+						</div>
 						{/* <div className='hover'></div> */}
 					</td>
-					<td
-						onMouseEnter={() => setSwitchMenu(true)}
-						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-						className={
-							switchMenu ? 'adaptive-switch adaptive-switch-on while2' : 'adaptive-switch while2'
-						}
-					>
-						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
-							<label className="switch-btn-small">
-								<input
-									type="checkbox"
-									className="status-crm"
-									onChange={switchBtn}
-									defaultChecked={objProduct[index].status.crm}
-									checked={objProduct[index].status.crm}
-								/>
-								<span className="slider round"></span>
-							</label>
 
-							<label style={{ margin: '0 15px' }} className="switch-btn-small">
-								<input
-									type="checkbox"
-									className="status-rozetka"
-									onChange={switchBtn}
-									defaultChecked={objProduct[index].status.rozetka}
-									checked={objProduct[index].status.rozetka}
-								/>
-								<span className="slider round"></span>
-							</label>
-
-							<label className="switch-btn-small">
-								<input
-									type="checkbox"
-									className="status-prom"
-									onChange={switchBtn}
-									defaultChecked={objProduct[index].status.prom}
-									checked={objProduct[index].status.prom}
-								/>
-								<span className="slider round"></span>
-							</label>
-						</div>
-					</td>
-					<td
+					{/* <td
 						onMouseLeave={tooltipOff}
 						onMouseEnter={tooltipOn}
 						className="id-tovara while2"
@@ -362,13 +457,13 @@ const WarehouseProductList = ({
 						}
 					>
 						{objProduct[index].id}
-					</td>
-					<td className="while2" style={{ textAlign: 'center' }}>
+					</td> */}
+					{/* <td className="while2" style={{ textAlign: 'center' }}>
 						<span style={!swtichChecked ? { opacity: 0.4 } : {}} className="flags">
 							{objProduct[index].country}
 						</span>
-					</td>
-					<td
+					</td> */}
+					{/* <td
 						className="while2"
 						style={
 							!swtichChecked
@@ -377,8 +472,8 @@ const WarehouseProductList = ({
 						}
 					>
 						{objProduct[index].currency}
-					</td>
-					<td className="name-tovara while2" onMouseLeave={tooltipOff} onMouseEnter={tooltipOn}>
+					</td> */}
+					{/* <td className="name-tovara while2" onMouseLeave={tooltipOff} onMouseEnter={tooltipOn}>
 						<span
 							style={!swtichChecked ? { opacity: 0.4 } : {}}
 							className={
@@ -391,8 +486,8 @@ const WarehouseProductList = ({
 						>
 							{objProduct[index].name}
 						</span>
-					</td>
-					<td className="while2">
+					</td> */}
+					{/* <td className="while2">
 						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
 							<img
 								style={{ width: 16, height: 16, position: 'absolute' }}
@@ -414,17 +509,18 @@ const WarehouseProductList = ({
 								{objProduct[index].attribute}
 							</span>
 						</div>
-					</td>
-					<td className="while2 shadow">
+					</td> */}
+
+					{/* <td className="shadow">
 						<div className="shadow-left"></div>
-						<div className="shadow-back"></div>
-					</td>
-					<td onMouseLeave={PlusMinusClose} onMouseEnter={PlusMinusOpen} className="nal-ostatok">
+					
+					</td> */}
+					<td style={{paddingLeft: '12px'}} onMouseLeave={PlusMinusClose} onMouseEnter={PlusMinusOpen} className="nal-ostatok">
 						<div
 							style={
 								!swtichChecked
-									? { opacity: 0.4, display: 'flex', justifyContent: 'flex-end' }
-									: { display: 'flex', justifyContent: 'flex-end' }
+									? { opacity: 0.4, display: 'flex', justifyContent: 'flex-end',paddingRight:'3px' }
+									: { display: 'flex', justifyContent: 'flex-end', paddingRight:'3px'}
 							}
 						>
 							<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnMinus}></button>
@@ -436,33 +532,37 @@ const WarehouseProductList = ({
 								onChange={inputChange}
 								onKeyUp={enterInput}
 								maxLength={5}
-								onClick={() => {setFocusInput(true);setPodlozhka(true)}}
+								onClick={() => {
+									setFocusInput(true);
+									setPodlozhka(true);
+								}}
+								style={{color:'rgba(0,0,0,0.7)'}}
 							/>
 
 							<button style={btnMenu ? { width: 16 } : { width: 0 }} onClick={BtnPlus}></button>
-							<span style={{ paddingLeft: 3 }}>/</span>
+							<span style={{ paddingLeft: 3 , color:'rgba(0,0,0,0.5)'}}>/</span>
 						</div>
 					</td>
 					<td className="nal-rezerv">
-						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div style={!swtichChecked ? { opacity: 0.4 ,color:'rgba(0,0,0,0.5)',paddingRight: '4px'} : {color:'rgba(0,0,0,0.5)',paddingRight: '4px'}}>
 							{formatNumber2(objProduct[index].rezerv)}
 						</div>
 					</td>
 					<td className="nal-otpr">
-						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div style={!swtichChecked ? { opacity: 0.4,color:'rgba(0,0,0,0.5)',paddingRight: '4px' } : {color:'rgba(0,0,0,0.5)',paddingRight: '4px'}}>
 							{formatNumber2(objProduct[index].otpr)}
 						</div>
 					</td>
 					<td className="nal-vozvrat">
-						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div style={!swtichChecked ? { opacity: 0.4,color:'rgba(0,0,0,0.5)',paddingRight: '15px' } : {color:'rgba(0,0,0,0.5)',paddingRight: '15px'}}>
 							{formatNumber2(objProduct[index].vozvrat)}
 						</div>
 					</td>
 					<td
 						style={
 							!swtichChecked
-								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right' }
-								: { textAlign: 'right' }
+								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right',paddingRight: '15px' }
+								: { textAlign: 'right',paddingRight: '15px' }
 						}
 					>
 						{formatNumber(objProduct[index].zakupka)}
@@ -470,8 +570,8 @@ const WarehouseProductList = ({
 					<td
 						style={
 							!swtichChecked
-								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right' }
-								: { textAlign: 'right' }
+								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right',paddingRight: '15px' }
+								: { textAlign: 'right',paddingRight: '15px' }
 						}
 					>
 						{formatNumber(objProduct[index].prodazha)}
@@ -479,8 +579,8 @@ const WarehouseProductList = ({
 					<td
 						style={
 							!swtichChecked
-								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right' }
-								: { textAlign: 'right' }
+								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right' ,paddingRight: '15px'}
+								: { textAlign: 'right',paddingRight: '15px' }
 						}
 					>
 						{formatNumber(objProduct[index].marzha)}
@@ -489,21 +589,21 @@ const WarehouseProductList = ({
 						<div
 							style={
 								!swtichChecked
-									? { opacity: 0.4, textAlign: 'right', display: 'flex', justifyContent: 'end' }
-									: { textAlign: 'right', display: 'flex', justifyContent: 'end' }
+									? { opacity: 0.4, textAlign: 'right', display: 'flex', justifyContent: 'end',paddingRight:'3px' }
+									: { textAlign: 'right', display: 'flex', justifyContent: 'end',paddingRight:'3px' }
 							}
 						>
 							{formatNumber(objProduct[index].ostatok * objProduct[index].zakupka)}
-							<span style={{ paddingLeft: 3 }}>/</span>
+							<span style={{ paddingLeft: 3 ,color:'rgba(0,0,0,0.5)'}}>/</span>
 						</div>
 					</td>
 					<td className="summa-suma2">
-						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div style={!swtichChecked ? { opacity: 0.4 ,paddingRight: '4px'} : {paddingRight: '4px'}}>
 							{formatNumber(objProduct[index].suma2)}
 						</div>
 					</td>
 					<td className="summa-suma3">
-						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div style={!swtichChecked ? { opacity: 0.4 ,paddingRight: '4px'} : {paddingRight: '4px'}}>
 							{formatNumber(objProduct[index].suma3)}
 						</div>
 					</td>

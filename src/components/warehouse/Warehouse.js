@@ -21,7 +21,7 @@ const Warehouse = () => {
 	const [indexInput, setIndexInput] = useState(0);
 	const [btnMenu, setBtnMenu] = useState(false);
 	const [flagSwitchMenu, setFlagSwitchMenu] = useState(false);
-	console.log(flagSwitchMenu)
+	// console.log(flagSwitchMenu);
 	function clickPodlozhka() {
 		setPodlozhka(false);
 		setFocusInput(false);
@@ -60,47 +60,47 @@ const Warehouse = () => {
 		}
 	}
 
-	useEffect(() => {
-		let curent = document.querySelectorAll('.while');
-		let width = [];
-		let res = 0;
-		setTimeout(() => {
-			for (let i = 0; i < curent.length; i++) {
-				if (!switchMenu) {
-					width.push(curent[i].offsetWidth);
-				} else if (switchMenu) {
-					width.push(curent[i].offsetWidth);
-				} else if (switchMenu && i === 1) {
-					width.push(0);
-				}
-				curent[i].style.left = res + 7 + 'px';
-				res = width.reduce((prev, curr) => prev + curr, 0);
-				curent[0].style.left = '7px';
-			}
-		}, 200);
-		console.log(width);
-	}, [objProduct, switchMenu]);
+	// useEffect(() => {
+	// 	let curent = document.querySelectorAll('.while');
+	// 	let width = [];
+	// 	let res = 0;
+	// 	setTimeout(() => {
+	// 		for (let i = 0; i < curent.length; i++) {
+	// 			if (!switchMenu) {
+	// 				width.push(curent[i].offsetWidth);
+	// 			} else if (switchMenu) {
+	// 				width.push(curent[i].offsetWidth);
+	// 			} else if (switchMenu && i === 1) {
+	// 				width.push(0);
+	// 			}
+	// 			curent[i].style.left = res + 7 + 'px';
+	// 			res = width.reduce((prev, curr) => prev + curr, 0);
+	// 			curent[0].style.left = '7px';
+	// 		}
+	// 	}, 200);
+	// 	console.log(width);
+	// }, [objProduct, switchMenu]);
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
-	useEffect(() => {
-		let curent = linkTR.current.querySelectorAll('th');
-		let width = [];
-		let res = 0;
-		setTimeout(() => {
-			for (let i = 0; i < 8; i++) {
-				if (!switchMenu) {
-					width.push(curent[i].offsetWidth);
-				} else if (switchMenu) {
-					width.push(curent[i].offsetWidth);
-				} else if (switchMenu && i === 1) {
-					width.push(0);
-				}
-				curent[i].style.left = res + 7 + 'px';
-				res = width.reduce((prev, curr) => prev + curr, 0);
-				curent[0].style.left = '7px';
-			}
-		}, 200);
-	}, [objProduct, switchMenu]);
+	// useEffect(() => {
+	// 	let curent = linkTR.current.querySelectorAll('th');
+	// 	let width = [];
+	// 	let res = 0;
+	// 	setTimeout(() => {
+	// 		for (let i = 0; i < 8; i++) {
+	// 			if (!switchMenu) {
+	// 				width.push(curent[i].offsetWidth);
+	// 			} else if (switchMenu) {
+	// 				width.push(curent[i].offsetWidth);
+	// 			} else if (switchMenu && i === 1) {
+	// 				width.push(0);
+	// 			}
+	// 			curent[i].style.left = res + 7 + 'px';
+	// 			res = width.reduce((prev, curr) => prev + curr, 0);
+	// 			curent[0].style.left = '7px';
+	// 		}
+	// 	}, 200);
+	// }, [objProduct, switchMenu]);
 	const [selectAll, setSelectAll] = useState(false);
 	useMemo(() => {
 		if (!selectAll) {
@@ -111,8 +111,8 @@ const Warehouse = () => {
 					let newobj = [...objProduct];
 					newobj.map((x) => (x.select = true));
 					setObjProduct(newobj);
+					console.log('asdasdasd');
 				}
-				// console.log(e)
 			});
 		} else {
 			document.addEventListener('click', function (e) {
@@ -135,6 +135,37 @@ const Warehouse = () => {
 	// 		}
 	// 	});
 	// },[selectAll])
+	function width() {
+		let arr = [];
+		document.querySelectorAll('.id-width').forEach((x) => {
+			arr.push(x.offsetWidth);
+		});
+		let maxwidth = Math.max(...arr);
+		document.querySelectorAll('.id-width').forEach((x) => {
+			x.style.width = maxwidth + 'px';
+		});
+
+		let arr2 = [];
+		document.querySelectorAll('.name-width').forEach((x) => {
+			arr2.push(x.offsetWidth);
+		});
+		let maxwidth2 = Math.max(...arr2);
+		document.querySelectorAll('.name-width').forEach((x) => {
+			x.style.width = maxwidth2 + 'px';
+		});
+
+		let arr3 = [];
+		document.querySelectorAll('.attribute-width').forEach((x) => {
+			arr3.push(x.offsetWidth);
+		});
+		let maxwidth3 = Math.max(...arr3);
+		document.querySelectorAll('.attribute-width').forEach((x) => {
+			x.style.width = maxwidth3 + 'px';
+		});
+	}
+	useEffect(() => {
+		width();
+	}, []);
 
 	function formatNumber2(number) {
 		let newnum = number.toLocaleString('ru-RU', {
@@ -236,185 +267,252 @@ const Warehouse = () => {
 						<table style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
 							<thead className="first-tab-header">
 								<tr>
-									<th
-										onMouseEnter={() => setSwitchMenu(true)}
-										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-										style={{ textAlign: 'left', paddingLeft: 0, minWidth: 51 }}
-										className="adaptive-switch-trigger while statusBefore"
-									>
-										Статус
-									</th>
-									<th
-										onMouseEnter={() => setSwitchMenu(true)}
-										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-										className={
-											switchMenu
-												? 'adaptive-switch adaptive-switch-on while'
-												: 'adaptive-switch while'
-										}
-										style={switchMenu ? { paddingRight: 10 } : {}}
-									>
-										<div>
-											<img className="logo-mail" src={crmLogo} alt="" />
-											<img className="logo-mail" src={rozetkaLogo} alt="" />
-											<img className="logo-mail" src={promLogo} alt="" />
+									{/* <th style={{position:'sticky',left:'7px'}}>
+					<div className='hover'></div>
+					</th> */}
+									<th className="statusBefore sticky-head">
+										<div className="sticky-block">
+											<div
+												onMouseEnter={() => setSwitchMenu(true)}
+												onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+												// style={{ display: 'flex' }}
+												className="sticky-block-children"
+											>
+												<div
+													style={{
+														textAlign: 'left',
+														paddingLeft: 0,
+														minWidth: 51,
+														paddingRight: '10px',
+													}}
+												>
+													Статус
+												</div>
+												<div
+													style={
+														switchMenu
+															? {
+																	transition: '0.2s',
+																	paddingRight: '10px',
+																	width: '85px',
+																	display: 'flex',
+																	justifyContent: 'space-between',
+																	overflow: '',
+															  }
+															: {
+																	transition: '0.2s',
+																	overflow: 'hidden',
+																	width: '0px',
+																	paddingRight: '0px',
+																	justifyContent: 'space-between',
+																	display: 'flex',
+															  }
+													}
+												>
+													<img className="logo-mail" src={crmLogo} alt="" />
+													<img className="logo-mail" src={rozetkaLogo} alt="" />
+													<img className="logo-mail" src={promLogo} alt="" />
+												</div>
+											</div>
+
+											<div className="id-width" style={{ paddingRight: '10px' }}>
+												ID
+											</div>
+											<div style={{ paddingRight: '10px', minWidth: 51 }}>Страна</div>
+											<div style={{ paddingRight: '10px', minWidth: 51 }}>Валюта</div>
+											<div className="name-width" style={{ paddingRight: '15px' }}>
+												Название
+											</div>
+											<div className="attribute-width" style={{ paddingRight: '3px' }}>
+												Атрибут
+											</div>
+											<div className="shadow-left"></div>
 										</div>
 									</th>
-									<th className="while">ID</th>
-									<th style={{ minWidth: 51, textAlign: 'left' }} className="while">
-										Страна
-									</th>
-									<th style={{ minWidth: 51, textAlign: 'left' }} className="while">
-										Валюта
-									</th>
-									<th className="while">Название </th>
-									<th className="while">
-										Атрибут
-										{/* <div className="shadow-left"></div> */}
-									</th>
-									<th className="while shadow">
+									{/* <th className="while shadow">
 										<div className="shadow-left"></div>
-									</th>
-									<th colSpan={4}>Наличие</th>
-									<th>Закупка</th>
-									<th>Продажа</th>
-									<th>Маржа</th>
+									</th> */}
+									<th style={{paddingLeft: '12px',paddingRight: '15px'}} colSpan={4}>Наличие</th>
+									<th style={{paddingRight:'15px'}}>Закупка</th>
+									<th style={{paddingRight:'15px'}}>Продажа</th>
+									<th style={{paddingRight:'15px'}}>Маржа</th>
 									<th colSpan={4}>Сумма</th>
 								</tr>
 								<tr ref={linkTR}>
-									<th
-										onMouseEnter={() => setSwitchMenu(true)}
-										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-										className="adaptive-switch-trigger"
-									>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'status'}
-											objProduct={objProduct}
-										/>
-									</th>
-									<th
-										onMouseEnter={() => setSwitchMenu(true)}
-										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-										className={
-											switchMenu ? 'adaptive-switch2 adaptive-switch-on2' : 'adaptive-switch2'
-										}
-										style={switchMenu ? { paddingRight: 10 } : {}}
-									>
-										<div
-											style={switchMenu ? { overflow: '' } : { overflow: 'hidden' }}
-											className="block-3-btn"
-										>
-											<WarehouseDropMenu
-												adaptive={true}
-												setPodlozhka={setPodlozhka}
-												podlozhka={podlozhka}
-												type={'status'}
-												objProduct={objProduct}
-												setSwitchMenu={setSwitchMenu}
-												switchMenu={switchMenu}
-												setFlagSwitchMenu={setFlagSwitchMenu}
-											/>
-											<WarehouseDropMenu
-												adaptive={true}
-												setPodlozhka={setPodlozhka}
-												podlozhka={podlozhka}
-												type={'status'}
-												objProduct={objProduct}
-												setSwitchMenu={setSwitchMenu}
-												switchMenu={switchMenu}
-												setFlagSwitchMenu={setFlagSwitchMenu}
-											/>
-											<WarehouseDropMenu
-												adaptive={true}
-												setPodlozhka={setPodlozhka}
-												podlozhka={podlozhka}
-												type={'status'}
-												objProduct={objProduct}
-												setSwitchMenu={setSwitchMenu}
-												switchMenu={switchMenu}
-												setFlagSwitchMenu={setFlagSwitchMenu}
-											/>
+									{/* <th style={{position:'sticky',left:'7px'}}>
+					<div className='hover'></div>
+					</th> */}
+									<th className="sticky-head">
+										<div className="sticky-block">
+											<div
+												onMouseEnter={() => setSwitchMenu(true)}
+												onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+												className="sticky-block-children"
+												style={{maxWidth: '156px'}}
+											>
+												<div style={{ width: '51px', paddingRight: '10px' }}>
+													<WarehouseDropMenu
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														type={'status'}
+														objProduct={objProduct}
+													/>
+												</div>
+												<div
+													// style={
+													//  {
+													// 				transition: '0.2s',
+													// 				paddingRight: '10px',
+													// 				// width: '85px',
+													// 				maxWidth: '125px',
+													// 				// minWidth:'85px',
+													// 				display: 'flex',
+													// 				justifyContent: 'space-between',
+													// 				overflow: '',
+													// 		  }
+													
+													// }
+													style={
+														switchMenu
+															? {
+																	transition: '0.2s',
+																	paddingRight: '10px',
+																	// width: '85px',
+																	maxWidth: '125px',
+																	display: 'flex',
+																	justifyContent: 'space-between',
+																	overflow: '',
+															  }
+															: {
+																	transition: '0.2s',
+																	overflow: 'hidden',
+																	maxWidth: '0px',
+																	paddingRight: '0px',
+																	justifyContent: 'space-between',
+																	display: 'flex',
+															  }
+													}
+													className="block-3-btn"
+												>
+										
+													<WarehouseDropMenu
+														adaptive={true}
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														type={'status'}
+														objProduct={objProduct}
+														setSwitchMenu={setSwitchMenu}
+														switchMenu={switchMenu}
+														setFlagSwitchMenu={setFlagSwitchMenu}
+													/>
+												
+										
+													<div style={{margin: '0 11px'}}>
+													<WarehouseDropMenu
+														adaptive={true}
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														type={'status'}
+														objProduct={objProduct}
+														setSwitchMenu={setSwitchMenu}
+														switchMenu={switchMenu}
+														setFlagSwitchMenu={setFlagSwitchMenu}
+													/>
+													</div>
+											
+													<WarehouseDropMenu
+														adaptive={true}
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														type={'status'}
+														objProduct={objProduct}
+														setSwitchMenu={setSwitchMenu}
+														switchMenu={switchMenu}
+														setFlagSwitchMenu={setFlagSwitchMenu}
+													/>
+												</div>
+											</div>
+
+											<div className="id-width" style={{ paddingRight: '10px' }}>
+												<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
+											</div>
+											<div style={{ paddingRight: '10px', minWidth: 51 }}>
+												<WarehouseDropMenu
+													setPodlozhka={setPodlozhka}
+													podlozhka={podlozhka}
+													type={'country'}
+													objProduct={objProduct}
+													setSwitchMenu={setSwitchMenu}
+													switchMenu={switchMenu}
+												/>
+											</div>
+											<div style={{ paddingRight: '10px', minWidth: 51 }}>
+												<WarehouseDropMenu
+													setPodlozhka={setPodlozhka}
+													podlozhka={podlozhka}
+													type={'currency'}
+													objProduct={objProduct}
+													setSwitchMenu={setSwitchMenu}
+													switchMenu={switchMenu}
+												/>
+											</div>
+											<div className="name-width" style={{ paddingRight: '15px' }}>
+												<WarehouseDropMenu
+													setPodlozhka={setPodlozhka}
+													podlozhka={podlozhka}
+													type={'name'}
+													inputOn={true}
+													objProduct={objProduct}
+													setSwitchMenu={setSwitchMenu}
+													switchMenu={switchMenu}
+												/>
+											</div>
+											<div className="attribute-width" style={{ paddingRight: '3px' }}>
+												<WarehouseDropMenu
+													setPodlozhka={setPodlozhka}
+													podlozhka={podlozhka}
+													type={'attribute'}
+													inputOn={true}
+													objProduct={objProduct}
+													setSwitchMenu={setSwitchMenu}
+													switchMenu={switchMenu}
+												/>
+											</div>
+											<div className="shadow-left"></div>
 										</div>
 									</th>
-									<th>
-										<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
-									</th>
-									<th>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'country'}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-										/>
-									</th>
-									<th style={{ textAlign: 'left' }}>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'currency'}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-										/>
-									</th>
-									<th style={{ textAlign: 'left' }}>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'name'}
-											inputOn={true}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-										/>
-									</th>
-									<th style={{ textAlign: 'left' }}>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'attribute'}
-											inputOn={true}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-										/>
-									</th>
-									<th className="shadow">
+									{/* <th className="shadow">
 										<div className="shadow-left"></div>
-									</th>
-									<th className="nal-ostatok">
+									</th> */}
+									<th style={{paddingLeft: '12px',paddingRight: '3px'}} className="nal-ostatok">
 										<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
 											{formatNumber2(ostatok)}
 											<span style={{ paddingLeft: 3 }}>/</span>
 										</div>
 									</th>
-									<th className="nal-rezerv">
+									<th className="nal-rezerv" style={{paddingRight: '4px'}}>
 										<div>{formatNumber2(rezerv)}</div>
 									</th>
-									<th className="nal-otpr">
+									<th className="nal-otpr" style={{paddingRight: '4px'}}>
 										<div>{formatNumber2(otpr)}</div>
 									</th>
-									<th className="nal-vozvrat">
+									<th className="nal-vozvrat" style={{paddingRight: '15px'}}>
 										<div>{formatNumber2(vozvrat)}</div>
 									</th>
-									<th style={{ textAlign: 'right' }}>{formatNumber(zakupka)}</th>
-									<th style={{ textAlign: 'right' }}>{formatNumber(prodazha)}</th>
-									<th style={{ textAlign: 'right' }}>{formatNumber(marzha)}</th>
+									<th style={{ textAlign: 'right',paddingRight: '15px' }}>{formatNumber(zakupka)}</th>
+									<th style={{ textAlign: 'right',paddingRight: '15px' }}>{formatNumber(prodazha)}</th>
+									<th style={{ textAlign: 'right',paddingRight: '15px' }}>{formatNumber(marzha)}</th>
 									<th className="summa-suma1">
-										<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
+										<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end',paddingRight:'3px' }}>
 											{formatNumber(suma1)}
 											<span style={{ paddingLeft: 3 }}>/</span>
 										</div>
 									</th>
 									<th className="summa-suma2">
-										<div>{formatNumber(suma2)}</div>
+										<div style={{paddingRight: '4px'}}>{formatNumber(suma2)}</div>
 									</th>
 									<th className="summa-suma3">
-										<div>{formatNumber(suma3)}</div>
+										<div style={{paddingRight: '4px'}}>{formatNumber(suma3)}</div>
 									</th>
 									<th className="summa-suma4">
 										<div>{formatNumber(suma4)}</div>
@@ -428,14 +526,14 @@ const Warehouse = () => {
 									>
 										<div></div>
 									</th>
-									<th
+									{/* <th
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 										className="shadow-vertical"
 									>
 										<div></div>
-									</th>
-									<th colSpan="16" className="shadow-vertical">
+									</th> */}
+									<th colSpan="17" className="shadow-vertical">
 										<div></div>
 									</th>
 								</tr>

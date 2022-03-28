@@ -153,7 +153,7 @@ const WarehouseDropMenu = ({
 			// e.currentTarget.querySelector('.underline').style.width = '100%';
 		}
 		if (adaptive) {
-			e.currentTarget.style.width = '100px';
+			e.currentTarget.style.width = '51px';
 		}
 		e.currentTarget.querySelector('.simplebar-content-wrapper').scrollTo({
 			top: 0,
@@ -280,7 +280,7 @@ const WarehouseDropMenu = ({
 					)}
 				</div>
 			)}
-			<span className="underline"></span>
+			<span className="underline" style={inputOn ? {bottom: '1px'}: {}}></span>
 			<SimpleBar
 				style={adaptive ? { transitionDelay: '0.1s' } : {}}
 				autoHide={false}
