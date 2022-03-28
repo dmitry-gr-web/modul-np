@@ -11,6 +11,7 @@ const WarehouseDropMenu = ({
 	adaptive,
 	setSwitchMenu,
 	switchMenu,
+	setFlagSwitchMenu,
 }) => {
 	const [openMenu, setOpenMenu] = useState(false);
 	let newarr = [];
@@ -107,7 +108,11 @@ const WarehouseDropMenu = ({
 			} else {
 				return { ...x };
 			}
+		
 		});
+		if (adaptive) {
+			setFlagSwitchMenu(true);
+		}
 		if (newobj.filter((x) => x.select === true).length === 0) {
 			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 				x.style.visibility = 'visible';
@@ -115,16 +120,19 @@ const WarehouseDropMenu = ({
 			setOpenMenu(false);
 			setPodlozhka(false);
 			newobj[0].select = true;
+			if (adaptive) {
+				setFlagSwitchMenu(false);
+			}
 		}
 		// if(adaptive){
 		// 	setSwitchMenu(true);
 		// }
-
+	
 		// e.target?.closest('.warehouse-input').style.display = 'block';
 		setObj(newobj);
 	}
 	const ref = useRef();
-	function changeInput (e) {
+	function changeInput(e) {
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 			x.style.visibility = 'hidden';
 		});
@@ -248,12 +256,7 @@ const WarehouseDropMenu = ({
 		>
 			{inputOn ? (
 				<>
-					<input
-						ref={ref}
-						type="text"
-						value={value}
-						onChange={changeInput}
-					/>
+					<input ref={ref} type="text" value={value} onChange={changeInput} />
 					{/* <span className="underline"></span> */}
 				</>
 			) : type === 'status' ? (

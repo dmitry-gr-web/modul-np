@@ -20,6 +20,7 @@ const WarehouseProductList = ({
 	btnMenu,
 	selectAll,
 	setSelectAll,
+	flagSwitchMenu
 }) => {
 	// console.log(objProduct, index)
 	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
@@ -226,6 +227,7 @@ const WarehouseProductList = ({
 		}, 200);
 	}, [objProduct, switchMenu]);
 
+
 	function clickTr(e) {
 		// e.preventDefault();
 		// e.stopPropagation();
@@ -287,11 +289,13 @@ const WarehouseProductList = ({
 	return (
 		<>
 			{objProduct[index] && (
-				<tr className={objProduct[index].select ? 'select' : ''} onClick={clickTr} ref={linkTR}>
+				<tr style={{position:'relative'}} className={objProduct[index].select ? 'select' : ''} onClick={clickTr} ref={linkTR}>
+					{/* <td className=''>	<div className='hover'></div></td> */}
 					<td
 						onMouseEnter={() => setSwitchMenu(true)}
-						onMouseLeave={() => setSwitchMenu(false)}
+						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 						className="adaptive-switch-trigger while2"
+		
 					>
 						<label className="switch-btn-warehouse">
 							<input
@@ -303,10 +307,11 @@ const WarehouseProductList = ({
 							/>
 							<span className="slider round"></span>
 						</label>
+						{/* <div className='hover'></div> */}
 					</td>
 					<td
 						onMouseEnter={() => setSwitchMenu(true)}
-						onMouseLeave={() => setSwitchMenu(false)}
+						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 						className={
 							switchMenu ? 'adaptive-switch adaptive-switch-on while2' : 'adaptive-switch while2'
 						}

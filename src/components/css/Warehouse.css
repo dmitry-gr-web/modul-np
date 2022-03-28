@@ -632,14 +632,16 @@
 .warehouse-products table .first-tab-body tr:hover td:not(.shadow) .shadow-left {
   background: #cacaca;
 }
-.warehouse-products table .first-tab-body tr:hover td:not(.shadow) input {
-  background: #cacaca;
+.warehouse-products table .first-tab-body tr:hover td:not(.shadow) label span {
+  background: #adaaaa;
 }
 .warehouse-products table .first-tab-body tr:hover .shadow-left {
   background: linear-gradient(90deg, #cacaca 0%, rgba(202, 202, 202, 0.95) 20%, rgba(202, 202, 202, 0.7) 45%, rgba(202, 202, 202, 0.5) 65%, rgba(202, 202, 202, 0) 100%) !important;
 }
 .warehouse-products table .first-tab-body tr:hover td:first-child:before {
   content: "";
+}
+.warehouse-products table .first-tab-body td:first-child:before {
   width: 7px;
   height: 20px;
   position: absolute;
@@ -720,6 +722,7 @@
   outline: none;
   border: none;
   padding: 0;
+  background-color: transparent;
   font-weight: 300;
 }
 .warehouse-products table .nal-ostatok input::selection {
