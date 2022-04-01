@@ -531,22 +531,17 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		function onScroll(e) {
 			// rootRef.current.el
 			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
+			// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
+			// 	x.style.animation = 'trAnimtaion 0.2s forwards';
+			// });
 			setTimeout(() => {
-			
 				setStart(
 					Math.min(objProduct.length - visibleRows - 1, Math.floor(e.target.scrollTop / rowHeight))
-					);
-					rootRef.current.recalculate();
+				);
+				// rootRef.current.recalculate();
 			}, 30);
-	
-	
-				document.querySelectorAll('.first-tab-body tr').forEach(x => {
-					x.style.animation = 'trAnimtaion 0.2s forwards';
-				})
-			
-			
 		}
-	
+
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
 			.addEventListener('scroll', onScroll);
@@ -634,15 +629,22 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					{Row}
 				</StickyList> */}
 
-				{podlozhka && (
-					<div
-						className="warehouse-podlozhka"
-						style={{ width: '100%', height: '100%', position: 'fixed', zIndex: 3 }}
-						onClick={clickPodlozhka}
-					></div>
-				)}
 				{/* <div style={{ height: getTopHeight() }} /> */}
 				<table style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
+					{podlozhka && (
+						<tr
+							className="warehouse-podlozhka"
+							style={{
+								width: '100%',
+								height: '100%',
+								position: 'sticky',
+								left: 0,
+								top: 0,
+								zIndex: 3,
+							}}
+							onClick={clickPodlozhka}
+						></tr>
+					)}
 					<thead className="first-tab-header">
 						<tr>
 							<th className="statusBefore sticky-head">
@@ -703,7 +705,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 										style={{
 											paddingRight: '15px',
 											justifyContent: 'center',
-											width: widthColum.name + 'px',
+											width: widthColum.name - 15 + 'px',
 										}}
 									>
 										Название
@@ -831,7 +833,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 									</div>
 									<div
 										className="name-width"
-										style={{ paddingRight: '15px', width: widthColum.name + 'px' }}
+										style={{ paddingRight: '15px', width: widthColum.name - 15 + 'px' }}
 									>
 										<WarehouseDropMenu
 											setPodlozhka={setPodlozhka}
@@ -919,6 +921,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
+
 						{objProduct.slice(start, start + visibleRows + 1).map((x, index) => (
 							<WarehouseProductList
 								index={index + start}

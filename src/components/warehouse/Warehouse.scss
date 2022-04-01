@@ -383,9 +383,12 @@
 
 		border-radius: 5px;
 	}
-	.simplebar-scrollbar.simplebar-visible {
+	.simplebar-track.simplebar-vertical div {
 		transition: 0.2s;
 	}
+	// .simplebar-scrollbar.simplebar-visible {
+	// 	transition: 0.2s;
+	// }
 	.simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
 		background: rgba(0, 0, 0, 0.3);
 		width: 5px;
