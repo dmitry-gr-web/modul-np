@@ -546,7 +546,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			
 			
 		}
-		// console.log(rootRef.current.el.querySelector('.simplebar-content-wrapper'));
 	
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
