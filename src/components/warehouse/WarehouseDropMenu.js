@@ -22,7 +22,7 @@ const WarehouseDropMenu = ({
 					style={{ pointerEvents: 'none' }}
 					type="checkbox"
 					className="status-rozetka"
-					checked={true}
+					defaultChecked={true}
 				/>
 				<span className="slider round"></span>
 			</label>
@@ -35,7 +35,7 @@ const WarehouseDropMenu = ({
 					style={{ pointerEvents: 'none' }}
 					type="checkbox"
 					className="status-rozetka"
-					checked={false}
+					defaultChecked={false}
 				/>
 				<span className="slider round"></span>
 			</label>
@@ -247,6 +247,7 @@ const WarehouseDropMenu = ({
 
 		// }
 	}, [podlozhka, openMenu]);
+	
 	return (
 		<div
 			style={adaptive ? { width: 21, transition: '0.3s' } : {}}
@@ -280,7 +281,7 @@ const WarehouseDropMenu = ({
 					)}
 				</div>
 			)}
-			<span className="underline" style={inputOn ? {bottom: '1px'}: {}}></span>
+			<span className="underline" ></span>
 			<SimpleBar
 				style={adaptive ? { transitionDelay: '0.1s' } : {}}
 				autoHide={false}

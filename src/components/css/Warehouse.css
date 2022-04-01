@@ -37,6 +37,7 @@
   padding-left: 12px;
   margin-left: 2px;
   width: 127px;
+  cursor: pointer;
 }
 .warehouse-nav .select-link {
   background: rgba(81, 81, 81, 0.7);
@@ -127,7 +128,7 @@
   font-weight: 300;
   padding: 0;
   text-overflow: ellipsis;
-  height: 18px;
+  height: 20px;
   width: 100%;
   box-sizing: border-box;
   padding-right: 10px;
@@ -334,6 +335,9 @@
   transition: 0.2s;
   border-radius: 5px;
 }
+.warehouse-products .simplebar-scrollbar.simplebar-visible {
+  transition: 0.2s;
+}
 .warehouse-products .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
   background: rgba(0, 0, 0, 0.3);
   width: 5px;
@@ -369,6 +373,7 @@
 }
 .warehouse-products .simplebar-content-wrapper {
   padding: 0;
+  will-change: transform;
 }
 .warehouse-products .simplebar-content {
   display: flex;
@@ -414,8 +419,7 @@
   text-overflow: ellipsis;
 }
 .warehouse-products table .name-width {
-  max-width: 172px;
-  text-overflow: ellipsis;
+  display: flex;
 }
 .warehouse-products table .name-width .arrow {
   margin-left: 13px;
@@ -856,4 +860,15 @@
 }
 .warehouse-products .switch-btn-small input {
   display: none;
+}
+
+@keyframes trAnimtaion {
+  0% {
+    transition: 0.2s;
+    opacity: 0;
+  }
+  100% {
+    transition: 0.2s;
+    opacity: 1;
+  }
 }
