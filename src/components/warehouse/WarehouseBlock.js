@@ -549,12 +549,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 								<div
 									onMouseEnter={() => setSwitchMenu(true)}
 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-									style={switchMenu ? { width: '156px' } : { width: '51px' }}
+									style={switchMenu ? { width: '171px' } : { width: '51px' }}
 								></div>
 								<div></div>
 							</th>
 
-							<th colSpan="1" className="shadow-vertical">
+							<th colSpan="17" className="shadow-vertical-3">
 								<div></div>
 							</th>
 						</tr>

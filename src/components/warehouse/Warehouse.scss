@@ -752,6 +752,7 @@ html {
 				background: none !important;
 				z-index: 1 !important;
 				position: sticky;
+				display: flex;
 				div:first-child {
 					height: 12px;
 					width: 100%;
@@ -767,6 +768,42 @@ html {
 						rgba(255, 255, 255, 0) 100%
 					);
 				}
+				div:nth-child(2) {
+					height: 12px;
+					width: 100%;
+					position: relative;
+			
+				
+					background: linear-gradient(
+						180deg,
+						white 0%,
+						rgba(255, 255, 255, 0.95) 20%,
+						rgba(255, 255, 255, 0.7) 45%,
+						rgba(255, 255, 255, 0.5) 65%,
+						rgba(255, 255, 255, 0) 100%
+					);
+				}
+			}
+			.shadow-vertical-3 {
+				height: 12px;
+				background: none !important;
+				z-index: 1 !important;
+				div {
+					height: 12px;
+					width: 100%;
+					position: relative;
+
+				
+					background: linear-gradient(
+						180deg,
+						white 0%,
+						rgba(255, 255, 255, 0.95) 20%,
+						rgba(255, 255, 255, 0.7) 45%,
+						rgba(255, 255, 255, 0.5) 65%,
+						rgba(255, 255, 255, 0) 100%
+					);
+				}
+				
 			}
 		}
 

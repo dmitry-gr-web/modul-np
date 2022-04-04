@@ -527,12 +527,30 @@ html {
   background: none !important;
   z-index: 1 !important;
   position: sticky;
+  display: flex;
 }
 .warehouse-products table .first-tab-header .shadow-vertical div:first-child {
   height: 12px;
   width: 100%;
   position: sticky;
   left: 13px;
+  background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
+}
+.warehouse-products table .first-tab-header .shadow-vertical div:nth-child(2) {
+  height: 12px;
+  width: 100%;
+  position: relative;
+  background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
+}
+.warehouse-products table .first-tab-header .shadow-vertical-3 {
+  height: 12px;
+  background: none !important;
+  z-index: 1 !important;
+}
+.warehouse-products table .first-tab-header .shadow-vertical-3 div {
+  height: 12px;
+  width: 100%;
+  position: relative;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table thead {
