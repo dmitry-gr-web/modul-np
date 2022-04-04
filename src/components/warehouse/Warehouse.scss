@@ -871,7 +871,13 @@ html {
 					background-color:rgb(226, 224, 222)!important;
 				}
 				// user-select: none;
-				pointer-events: none;
+				// pointer-events: none;npm 
+				label,input {
+					pointer-events: none;
+				}
+				// .nal-ostatok {
+				// 	pointer-events: none;
+				// }
 				.shadow-left {
 					// display: none;
 					background: linear-gradient(
@@ -1271,7 +1277,9 @@ html {
 			width: 100%;
 		}
 	}
-
+	.hoverOff {
+		pointer-events: none;
+	}
 	.switch-btn-warehouse {
 		position: relative;
 		display: inline-block;

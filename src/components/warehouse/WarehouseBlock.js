@@ -18,7 +18,7 @@ import WarehouseDropMenu from './WarehouseDropMenu';
 import WarehouseInput from './WarehouseInput';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
-
+let timer;
 const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
@@ -168,12 +168,14 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	// useEffect(()=> {
 	// 	rootRef.current.recalculate();
 	// },[start])
+
 	useEffect(() => {
 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 		function onScroll(e) {
-			document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-			setTimeout(() => {
-				document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
+			clearTimeout(timer);
+			document.querySelector('.warehouse-products table').classList.add('hoverOff');
+			timer = setTimeout(() => {
+				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
 			}, 300);
 			// rootRef.current.el
 			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
