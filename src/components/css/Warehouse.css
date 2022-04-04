@@ -598,7 +598,7 @@ html {
 }
 .warehouse-products table .first-tab-body .lockOrder td, .warehouse-products table .first-tab-body .lockOrder div, .warehouse-products table .first-tab-body .lockOrder input {
   color: rgba(0, 0, 0, 0.2) !important;
-  background-color: #e2e0de !important;
+  background-color: #e3e0df !important;
 }
 .warehouse-products table .first-tab-body .lockOrder label, .warehouse-products table .first-tab-body .lockOrder input {
   pointer-events: none;
