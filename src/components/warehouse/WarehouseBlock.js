@@ -163,7 +163,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		return rowHeight * start;
 	}
 	function getBottomHeight() {
-		return rowHeight * (objProduct.length - (start + visibleRows + 1));
+		return rowHeight * (objProduct.length - (start + visibleRows + 100));
 	}
 	// useEffect(()=> {
 	// 	rootRef.current.recalculate();
@@ -183,12 +183,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			// 	x.style.animation = 'trAnimtaion 0.2s forwards';
 			// });
 			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-			setTimeout(() => {
+			// setTimeout(() => {
 				setStart(
 					Math.min(objProduct.length - visibleRows - 1, Math.floor(e.target.scrollTop / rowHeight))
 				);
 				// rootRef.current.recalculate();
-			}, 0);
+			// }, 0);
 		}
 
 		rootRef.current.el

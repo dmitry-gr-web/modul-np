@@ -4,7 +4,7 @@
 		url('../../fonts/BabelStoneFlags.woff2') format('woff2'),
 		url('../../fonts/BabelStoneFlags.woff') format('woff');
 }
-@media (min-width: 1400px){
+@media (min-width: 1400px) {
 	.id-width {
 		max-width: 100px !important;
 	}
@@ -67,6 +67,11 @@ html {
 			border-radius: 2px 0 0 2px;
 		}
 	}
+}
+.warehouse-table {
+	// transform: translateZ(0);
+	// transform: translate3d(0, 0, 0);
+	// will-change: transform;
 }
 .warehouse-products {
 	margin-left: 60px;
@@ -268,7 +273,7 @@ html {
 			.findUnderline {
 				position: relative;
 				&:before {
-					content: "";
+					content: '';
 					height: 2px;
 					border-radius: 2px;
 					width: 100%;
@@ -461,6 +466,9 @@ html {
 	.simplebar-content-wrapper {
 		padding: 0;
 		// scroll-behavior: smooth;
+		// user-select: none;
+		transform: translateZ(0);
+		transform: translate3d(0, 0, 0);
 		will-change: transform;
 		// padding-bottom: 18px;
 	}
@@ -471,14 +479,20 @@ html {
 	table {
 		border-spacing: 0px;
 		user-select: none;
+		transform: translateZ(0);
+		transform: translate3d(0, 0, 0);
+		will-change: transform;
+		tr {
+			transform: translateZ(0);
+			transform: translate3d(0, 0, 0);
+			will-change: transform;
+		}
 		// outline: none;
 		// outline-width: 0;
 		// box-shadow:none;
 		// border:none;
 		&:focus {
 			outline: none;
-		
-
 		}
 		// .shadow {
 		// 	min-width: 12px;
@@ -758,7 +772,7 @@ html {
 					width: 100%;
 					position: sticky;
 					left: 13px;
-				
+
 					background: linear-gradient(
 						180deg,
 						white 0%,
@@ -772,8 +786,7 @@ html {
 					height: 12px;
 					width: 100%;
 					position: relative;
-			
-				
+
 					background: linear-gradient(
 						180deg,
 						white 0%,
@@ -793,7 +806,6 @@ html {
 					width: 100%;
 					position: relative;
 
-				
 					background: linear-gradient(
 						180deg,
 						white 0%,
@@ -803,7 +815,6 @@ html {
 						rgba(255, 255, 255, 0) 100%
 					);
 				}
-				
 			}
 		}
 
@@ -856,24 +867,27 @@ html {
 			.lockOrder .sticky-body:after {
 				content: '';
 				background-image: url('../../img/lockOrder.svg');
-				background-size:100%;
-				background-repeat:no-repeat;
+				background-size: 100%;
+				background-repeat: no-repeat;
 				position: absolute;
 				width: 12px;
 				height: 12px;
-				left:-13px;
-				top:3px;
-		
+				left: -13px;
+				top: 3px;
 			}
 			.lockOrder {
-				td,div,input {
+				td,
+				div,
+				input {
 					color: rgba(0, 0, 0, 0.2) !important;
 					// background-color:rgb(226, 224, 222)!important;
-					background-color:#e3e0df!important
+					// background-color:#D6D3D2!important
+					background-color: rgb(214, 211, 210) !important;
 				}
 				// user-select: none;
-				// pointer-events: none;npm 
-				label,input {
+				// pointer-events: none;npm
+				label,
+				input {
 					pointer-events: none;
 				}
 				// .nal-ostatok {
@@ -883,11 +897,11 @@ html {
 					// display: none;
 					background: linear-gradient(
 						90deg,
-						rgba(226, 224, 222, 1) 0%,
-						rgba(226, 224, 222, 0.95) 20%,
-						rgba(226, 224, 222, 0.7) 45%,
-						rgba(226, 224, 222, 0.5) 65%,
-						rgba(226, 224, 222, 0) 100%
+						rgba(214, 211, 210, 1) 0%,
+						rgba(214, 211, 210, 0.95) 20%,
+						rgba(214, 211, 210, 0.7) 45%,
+						rgba(214, 211, 210, 0.5) 65%,
+						rgba(214, 211, 210, 0) 100%
 					) !important;
 					// 	// background:transparent;
 				}

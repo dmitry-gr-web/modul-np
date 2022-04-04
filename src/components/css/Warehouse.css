@@ -402,6 +402,8 @@ html {
 }
 .warehouse-products .simplebar-content-wrapper {
   padding: 0;
+  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
   will-change: transform;
 }
 .warehouse-products .simplebar-content {
@@ -410,6 +412,14 @@ html {
 .warehouse-products table {
   border-spacing: 0px;
   user-select: none;
+  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+.warehouse-products table tr {
+  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 .warehouse-products table:focus {
   outline: none;
@@ -596,15 +606,18 @@ html {
   left: -13px;
   top: 3px;
 }
-.warehouse-products table .first-tab-body .lockOrder td, .warehouse-products table .first-tab-body .lockOrder div, .warehouse-products table .first-tab-body .lockOrder input {
+.warehouse-products table .first-tab-body .lockOrder td,
+.warehouse-products table .first-tab-body .lockOrder div,
+.warehouse-products table .first-tab-body .lockOrder input {
   color: rgba(0, 0, 0, 0.2) !important;
-  background-color: #e3e0df !important;
+  background-color: #d6d3d2 !important;
 }
-.warehouse-products table .first-tab-body .lockOrder label, .warehouse-products table .first-tab-body .lockOrder input {
+.warehouse-products table .first-tab-body .lockOrder label,
+.warehouse-products table .first-tab-body .lockOrder input {
   pointer-events: none;
 }
 .warehouse-products table .first-tab-body .lockOrder .shadow-left {
-  background: linear-gradient(90deg, #e2e0de 0%, rgba(226, 224, 222, 0.95) 20%, rgba(226, 224, 222, 0.7) 45%, rgba(226, 224, 222, 0.5) 65%, rgba(226, 224, 222, 0) 100%) !important;
+  background: linear-gradient(90deg, #d6d3d2 0%, rgba(214, 211, 210, 0.95) 20%, rgba(214, 211, 210, 0.7) 45%, rgba(214, 211, 210, 0.5) 65%, rgba(214, 211, 210, 0) 100%) !important;
 }
 .warehouse-products table .first-tab-body tr:not(.lockOrder):hover {
   background: #cacaca;
