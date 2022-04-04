@@ -153,38 +153,38 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
 	let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
 
-	const rootRef = React.useRef();
-	const [start, setStart] = React.useState(0);
-
-	let rowHeight = 20;
-	let visibleRows = Math.round((document.body.clientHeight - 140) / 20);
-
-	function getTopHeight() {
-		return rowHeight * start;
-	}
-	function getBottomHeight() {
-		return rowHeight * (objProduct.length - (start + visibleRows + 10));
-	}
-	// useEffect(()=> {
-	// 	rootRef.current.recalculate();
-	// },[start])start
+	const rootRef = useRef();
+	const [start, setStart] = useState(0);
 	function getStart() {
 
 		let temp = start - 10 * rowHeight;
 
 		return Math.min(
-			objProduct.length - visibleRows - 10,
+			objProduct.length - visibleRows - 1,
 			Math.floor(temp < 0 ? 0 : temp / rowHeight)
 		);
 	}
-	console.log(getStart())
+	let rowHeight = 20;
+	let visibleRows = Math.round((document.body.clientHeight * 1.3 - 140) / 20);
+
+	function getTopHeight() {
+		return rowHeight * getStart();
+	}
+	function getBottomHeight() {
+		return rowHeight * (objProduct.length - (getStart() + visibleRows + 1));
+	}
+	// useEffect(()=> {
+	// 	rootRef.current.recalculate();
+	// },[start])start
+
+	// console.log(getStart())
 	useEffect(() => {
 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 
 		function onScroll(e) {
 			clearTimeout(timer);
 			setStart(e.target.scrollTop);
-			console.log(start)
+			// console.log(start)
 			document.querySelector('.warehouse-products table').classList.add('hoverOff');
 			timer = setTimeout(() => {
 				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
@@ -196,14 +196,18 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			// });
 			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
 			// setTimeout(() => {
-			let temp = start - 10 * rowHeight;
-			setStart(
-				// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
-				Math.min(
-					objProduct.length - visibleRows - 10,
-					Math.floor(temp < 0 ? 0 : temp / rowHeight)
-				)
-			);
+				
+			// setStart(
+			// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
+			// 	Math.min(
+			// 		objProduct.length - visibleRows - 10,
+			// 		Math.floor(
+			// 			e.target.scrollTop - 10 * rowHeight < 0
+			// 				? 0
+			// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
+			// 		)
+			// 	)
+			// );
 			// rootRef.current.recalculate();
 			// }, 0);
 			// getStart();
@@ -217,6 +221,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			rootRef.current.removeEventListener('scroll', onScroll);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
+	
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
 	function width() {
@@ -276,7 +281,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					width: '100%',
 					overflow: 'auto',
 					// height: '800px',
-					height: rowHeight * visibleRows + 1,
+					height: document.body.clientHeight -180 + 'px',
 				}}
 				autoHide={false}
 				ref={rootRef}
@@ -597,14 +602,14 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
 
-						{objProduct.slice(start, start + visibleRows + 10).map((x, index) => (
+						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
 							<WarehouseProductList
-								index={index + start}
+								index={index + getStart()}
 								// rowHeight={rowHeight}
 								// style={{ height: rowHeight }}
 								widthColum={widthColum}
-								key={index + start}
-								start={start}
+								key={index + getStart()}
+								start={getStart()}
 								setChecked={setChecked}
 								checked={checked}
 								objProduct={objProduct}

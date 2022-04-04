@@ -30,7 +30,7 @@ const WarehouseProductList = ({
 	// setWidthColum
 }) => {
 	// console.log(objProduct, index)
-	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
+	const [swtichChecked, setSwitchChecked] = useState(true);
 	useEffect(() => {
 		if (!objProduct[index].status.all) {
 			setSwitchChecked(false);
