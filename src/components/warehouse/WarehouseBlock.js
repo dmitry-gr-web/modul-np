@@ -157,7 +157,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	const [start, setStart] = useState(0);
 	function getStart() {
 
-		let temp = start - 10 * rowHeight;
+		let temp = start - 20 * rowHeight;
 
 		return Math.min(
 			objProduct.length - visibleRows - 1,
@@ -165,7 +165,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		);
 	}
 	let rowHeight = 20;
-	let visibleRows = Math.round((document.body.clientHeight * 1.3 - 140) / 20);
+	let visibleRows = Math.round((document.body.clientHeight * 1.5 - 140) / 20);
 
 	function getTopHeight() {
 		return rowHeight * getStart();
@@ -178,49 +178,80 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	// },[start])start
 
 	// console.log(getStart())
-	useEffect(() => {
-		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
+	function onScroll(e) {
+		clearTimeout(timer);
+		setStart(e.target.scrollTop);
+		// console.log(start)
+		document.querySelector('.warehouse-products table').classList.add('hoverOff');
+		timer = setTimeout(() => {
+			document.querySelector('.warehouse-products table').classList.remove('hoverOff');
+		}, 300);
+		// rootRef.current.el
+		// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
+		// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
+		// 	x.style.animation = 'trAnimtaion 0.2s forwards';
+		// });
+		// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
+		// setTimeout(() => {
+			
+		// setStart(
+		// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
+		// 	Math.min(
+		// 		objProduct.length - visibleRows - 10,
+		// 		Math.floor(
+		// 			e.target.scrollTop - 10 * rowHeight < 0
+		// 				? 0
+		// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
+		// 		)
+		// 	)
+		// );
+		// rootRef.current.recalculate();
+		// }, 0);
+		// getStart();
+	}
+	// useEffect(() => {
+	// 	// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 
-		function onScroll(e) {
-			clearTimeout(timer);
-			setStart(e.target.scrollTop);
-			// console.log(start)
-			document.querySelector('.warehouse-products table').classList.add('hoverOff');
-			timer = setTimeout(() => {
-				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-			}, 300);
-			// rootRef.current.el
-			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
-			// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
-			// 	x.style.animation = 'trAnimtaion 0.2s forwards';
-			// });
-			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-			// setTimeout(() => {
+	// 	function onScroll(e) {
+	// 		clearTimeout(timer);
+	// 		setStart(e.target.scrollTop);
+	// 		// console.log(start)
+	// 		document.querySelector('.warehouse-products table').classList.add('hoverOff');
+	// 		timer = setTimeout(() => {
+	// 			document.querySelector('.warehouse-products table').classList.remove('hoverOff');
+	// 		}, 300);
+	// 		// rootRef.current.el
+	// 		// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
+	// 		// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
+	// 		// 	x.style.animation = 'trAnimtaion 0.2s forwards';
+	// 		// });
+	// 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
+	// 		// setTimeout(() => {
 				
-			// setStart(
-			// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
-			// 	Math.min(
-			// 		objProduct.length - visibleRows - 10,
-			// 		Math.floor(
-			// 			e.target.scrollTop - 10 * rowHeight < 0
-			// 				? 0
-			// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
-			// 		)
-			// 	)
-			// );
-			// rootRef.current.recalculate();
-			// }, 0);
-			// getStart();
-		}
+	// 		// setStart(
+	// 		// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
+	// 		// 	Math.min(
+	// 		// 		objProduct.length - visibleRows - 10,
+	// 		// 		Math.floor(
+	// 		// 			e.target.scrollTop - 10 * rowHeight < 0
+	// 		// 				? 0
+	// 		// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
+	// 		// 		)
+	// 		// 	)
+	// 		// );
+	// 		// rootRef.current.recalculate();
+	// 		// }, 0);
+	// 		// getStart();
+	// 	}
 
-		rootRef.current.addEventListener('scroll', onScroll);
-		//   console.log(objProduct.length)
-		// console.log(document.querySelectorAll('tr').length);
+	// 	rootRef.current.addEventListener('scroll', onScroll);
+	// 	//   console.log(objProduct.length)
+	// 	// console.log(document.querySelectorAll('tr').length);
 
-		return () => {
-			rootRef.current.removeEventListener('scroll', onScroll);
-		};
-	}, [objProduct.length, visibleRows, rowHeight]);
+	// 	return () => {
+	// 		rootRef.current.removeEventListener('scroll', onScroll);
+	// 	};
+	// }, [objProduct.length, visibleRows, rowHeight]);
 	
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
@@ -283,6 +314,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					// height: '800px',
 					height: document.body.clientHeight -180 + 'px',
 				}}
+				onScroll={onScroll}
 				autoHide={false}
 				ref={rootRef}
 			>
