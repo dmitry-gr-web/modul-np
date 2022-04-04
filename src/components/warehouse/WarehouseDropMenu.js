@@ -103,7 +103,7 @@ const WarehouseDropMenu = ({
 				});
 				setOpenMenu(false);
 				setPodlozhka(false);
-				document.querySelector('.warehouse-table').style.overflow = '';
+				document.querySelector('.warehouse-table').style.overflow = 'auto';
 
 				return { ...x, select: false };
 			} else if (index !== 0 && i === 0) {
@@ -122,7 +122,7 @@ const WarehouseDropMenu = ({
 			});
 			setOpenMenu(false);
 			setPodlozhka(false);
-			document.querySelector('.warehouse-table').style.overflow = '';
+			document.querySelector('.warehouse-table').style.overflow = 'auto';
 			newobj[0].select = true;
 			if (adaptive) {
 				setFlagSwitchMenu(false);

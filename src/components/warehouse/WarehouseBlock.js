@@ -43,7 +43,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		// document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
 		// 	x.style.width = '0%';
 		// });
-		document.querySelector('.warehouse-table').style.overflow = '';
+		document.querySelector('.warehouse-table').style.overflow = 'auto';
+
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 			x.style.visibility = 'visible';
 		});
@@ -100,9 +101,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					let newobj = [...objProduct];
 					newobj.map((x) => {
 						if (x.lock) {
-							x.select = false;
+						return	x.select = false;
 						} else {
-							x.select = true;
+						return	x.select = true;
 						}
 					});
 					setObjProduct(newobj);
@@ -156,7 +157,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
 	function getStart() {
-
 		let temp = start - 20 * rowHeight;
 
 		return Math.min(
@@ -178,81 +178,51 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	// },[start])start
 
 	// console.log(getStart())
-	function onScroll(e) {
-		clearTimeout(timer);
-		setStart(e.target.scrollTop);
-		// console.log(start)
-		document.querySelector('.warehouse-products table').classList.add('hoverOff');
-		timer = setTimeout(() => {
-			document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-		}, 300);
+
+	useEffect(() => {
+		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
+
+		function onScroll(e) {
+			clearTimeout(timer);
+			setStart(e.target.scrollTop);
+			// console.log(start)
+			document.querySelector('.warehouse-products table').classList.add('hoverOff');
+			timer = setTimeout(() => {
+				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
+			}, 300);
+			// rootRef.current.el
+			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
+			// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
+			// 	x.style.animation = 'trAnimtaion 0.2s forwards';
+			// });
+			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
+			// setTimeout(() => {
+
+			// setStart(
+			// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
+			// 	Math.min(
+			// 		objProduct.length - visibleRows - 10,
+			// 		Math.floor(
+			// 			e.target.scrollTop - 10 * rowHeight < 0
+			// 				? 0
+			// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
+			// 		)
+			// 	)
+			// );
+			// rootRef.current.recalculate();
+			// }, 0);
+			// getStart();
+		}
+
+		rootRef.current.addEventListener('scroll', onScroll);
 		// rootRef.current.el
-		// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
-		// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
-		// 	x.style.animation = 'trAnimtaion 0.2s forwards';
-		// });
-		// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-		// setTimeout(() => {
-			
-		// setStart(
-		// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
-		// 	Math.min(
-		// 		objProduct.length - visibleRows - 10,
-		// 		Math.floor(
-		// 			e.target.scrollTop - 10 * rowHeight < 0
-		// 				? 0
-		// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
-		// 		)
-		// 	)
-		// );
-		// rootRef.current.recalculate();
-		// }, 0);
-		// getStart();
-	}
-	// useEffect(() => {
-	// 	// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('scroll', onScroll);
+		return () => {
+			rootRef.current.removeEventListener('scroll', onScroll);
+		};
+	}, [objProduct.length, visibleRows, rowHeight]);
 
-	// 	function onScroll(e) {
-	// 		clearTimeout(timer);
-	// 		setStart(e.target.scrollTop);
-	// 		// console.log(start)
-	// 		document.querySelector('.warehouse-products table').classList.add('hoverOff');
-	// 		timer = setTimeout(() => {
-	// 			document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-	// 		}, 300);
-	// 		// rootRef.current.el
-	// 		// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
-	// 		// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
-	// 		// 	x.style.animation = 'trAnimtaion 0.2s forwards';
-	// 		// });
-	// 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-	// 		// setTimeout(() => {
-				
-	// 		// setStart(
-	// 		// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
-	// 		// 	Math.min(
-	// 		// 		objProduct.length - visibleRows - 10,
-	// 		// 		Math.floor(
-	// 		// 			e.target.scrollTop - 10 * rowHeight < 0
-	// 		// 				? 0
-	// 		// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
-	// 		// 		)
-	// 		// 	)
-	// 		// );
-	// 		// rootRef.current.recalculate();
-	// 		// }, 0);
-	// 		// getStart();
-	// 	}
-
-	// 	rootRef.current.addEventListener('scroll', onScroll);
-	// 	//   console.log(objProduct.length)
-	// 	// console.log(document.querySelectorAll('tr').length);
-
-	// 	return () => {
-	// 		rootRef.current.removeEventListener('scroll', onScroll);
-	// 	};
-	// }, [objProduct.length, visibleRows, rowHeight]);
-	
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
 	function width() {
@@ -312,31 +282,36 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					width: '100%',
 					overflow: 'auto',
 					// height: '800px',
-					height: document.body.clientHeight -180 + 'px',
+					height: document.body.clientHeight - 180 + 'px',
 				}}
-				onScroll={onScroll}
 				autoHide={false}
 				ref={rootRef}
 			>
-				{/* <StickyList
-					innerElementType={innerElementType}
-					// className="first-tab-body"
-					// itemData={objProduct}
-					height={800}
-					width={1150}
-					itemCount={objProduct.length}
-					itemSize={20}
-			
-				>
-					{Row}
-				</StickyList> */}
 
-				{/* <div style={{ height: getTopHeight() }} /> */}
 				<table
 					tabIndex={-1}
 					style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 				>
 					<thead className="first-tab-header">
+						<tr>
+							{podlozhka && (
+								<td style={{ padding: '0px' }}>
+									<div
+										className="warehouse-podlozhka"
+										style={{
+											width: '100%',
+											height: document.body.clientHeight + 'px',
+											position: 'absolute',
+											left: 0,
+											top: 0,
+											zIndex: 3,
+										}}
+										onClick={clickPodlozhka}
+									></div>
+								</td>
+							)}
+						</tr>
+
 						<tr>
 							<th className="statusBefore sticky-head">
 								<div className="sticky-block">
@@ -597,6 +572,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 								<div>{formatNumber(suma4)}</div>
 							</th>
 						</tr>
+
 						<tr>
 							<th className="shadow-vertical" colSpan={1}>
 								<div
@@ -610,24 +586,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 							<th colSpan="17" className="shadow-vertical-3">
 								<div></div>
 							</th>
-						</tr>
-						<tr>
-							{podlozhka && (
-								<td style={{ padding: '0px' }}>
-									<div
-										className="warehouse-podlozhka"
-										style={{
-											width: '100%',
-											height: document.body.clientHeight + 'px',
-											position: 'absolute',
-											left: 0,
-											top: 0,
-											zIndex: 3,
-										}}
-										onClick={clickPodlozhka}
-									></div>
-								</td>
-							)}
 						</tr>
 					</thead>
 

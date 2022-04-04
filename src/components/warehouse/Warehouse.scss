@@ -69,9 +69,9 @@ html {
 	}
 }
 .warehouse-table {
+	// transform: translate3d(0, 0, 0);
 	transform: translateZ(0);
-	transform: translate3d(0, 0, 0);
-	will-change: transform;
+	will-change: transform,scroll-position;
 }
 .warehouse-products {
 	margin-left: 30px;
@@ -339,7 +339,7 @@ html {
 		margin-top: 24px;
 		font-size: 14px;
 		text-align: center;
-		padding-left: 7px;
+		padding-left: 13px;
 		padding-right: 10px;
 		position: relative;
 		button {
@@ -367,7 +367,7 @@ html {
 			content: '';
 			width: 401px;
 			height: 1px;
-			left: 7px;
+			left: 13px;
 			top: 7px;
 			background-color: #000000;
 		}
@@ -419,6 +419,7 @@ html {
 		transition: 0.2s;
 
 		border-radius: 5px;
+		// display: none;
 	}
 	.simplebar-track.simplebar-vertical div {
 		transition: 0.2s;
@@ -484,14 +485,10 @@ html {
 	table {
 		border-spacing: 0px;
 		user-select: none;
-		transform: translateZ(0);
+		// transform: translateZ(0);
+		// will-change: transform ,scroll-position;
 		// transform: translate3d(0, 0, 0);
-		will-change: transform ,scroll-position;
-		tr {
-			transform: translateZ(0);
-			// transform: translate3d(0, 0, 0);
-			will-change: transform ,scroll-position;
-		}
+		
 		// outline: none;
 		// outline-width: 0;
 		// box-shadow:none;
@@ -632,17 +629,17 @@ html {
 			// tr:nth-child(2) th {
 			// 	padding-bottom: 12px;
 			// }
-			tr:nth-child(2) th {
+			tr:nth-child(3) th {
 				font-size: 12px;
 				font-weight: 300;
 			}
 			th {
 				padding: 0;
 			}
-			tr:first-child th {
+			tr:nth-child(2) th {
 				background: white;
 			}
-			tr:nth-child(2) th {
+			tr:nth-child(3) th {
 				background: white;
 			}
 			// th:nth-child(3) {
@@ -790,7 +787,7 @@ html {
 				div:nth-child(2) {
 					height: 12px;
 					width: 100%;
-					position: absolute;
+					position: relative;
 
 					background: linear-gradient(
 						180deg,
@@ -855,6 +852,11 @@ html {
 			}
 		}
 		.first-tab-body {
+			// tr {
+			// 	transform: translateZ(0);
+			// 	// transform: translate3d(0, 0, 0);
+			// 	will-change: transform ,scroll-position;
+			// }
 			td {
 				padding: 0;
 				font-size: 14px;

@@ -30,14 +30,14 @@ const WarehouseProductList = ({
 	// setWidthColum
 }) => {
 	// console.log(objProduct, index)
-	const [swtichChecked, setSwitchChecked] = useState(true);
-	useEffect(() => {
-		if (!objProduct[index].status.all) {
-			setSwitchChecked(false);
-		} else {
-			setSwitchChecked(true);
-		}
-	}, [objProduct]);
+	// const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
+	// useEffect(() => {
+	// 	if (!objProduct[index].status.all) {
+	// 		setSwitchChecked(false);
+	// 	} else {
+	// 		setSwitchChecked(true);
+	// 	}
+	// }, [objProduct]);
 	function switchBtn(e) {
 		if (e.target.className === 'status-all') {
 			let newobj = [...objProduct];
@@ -228,7 +228,7 @@ const WarehouseProductList = ({
 	const linkTR = useRef();
 	// useEffect(() => {
 	// 	let curent = linkTR.current.querySelectorAll('td');
-	// 	let width = [];
+	// 	let width = [];тзь ыефк
 	// 	let res = 0;
 	// 	setTimeout(() => {
 	// 		for (let i = 0; i < 8; i++) {
@@ -363,7 +363,7 @@ const WarehouseProductList = ({
 											  }
 									}
 								>
-									<label 	style={!swtichChecked ? { opacity: 0.4 } : {}} className="switch-btn-small">
+									<label 	style={!objProduct[index].status.all ? { opacity: 0.4 } : {}} className="switch-btn-small">
 										<input
 											type="checkbox"
 											className="status-crm"
@@ -374,7 +374,7 @@ const WarehouseProductList = ({
 										<span className="slider round"></span>
 									</label>
 
-									<label 	 style={!swtichChecked ? { opacity: 0.4 ,margin: '0 15px' } : { margin: '0 15px' }} className="switch-btn-small">
+									<label 	 style={!objProduct[index].status.all ? { opacity: 0.4 ,margin: '0 15px' } : { margin: '0 15px' }} className="switch-btn-small">
 										<input
 											type="checkbox"
 											className="status-rozetka"
@@ -386,7 +386,7 @@ const WarehouseProductList = ({
 									</label>
 
 									<label
-										style={!swtichChecked ? { opacity: 0.4 } : {}}
+										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
 										className="switch-btn-small"
 									>
 										<input
@@ -405,7 +405,7 @@ const WarehouseProductList = ({
 								onMouseLeave={tooltipOff}
 								onMouseEnter={tooltipOn}
 								style={
-									!swtichChecked
+									!objProduct[index].status.all
 										? {
 												color: 'rgba(0,0,0,0.4)',
 												textAlign: 'left',
@@ -420,7 +420,7 @@ const WarehouseProductList = ({
 							<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
 								<span
 									style={
-										!swtichChecked
+										!objProduct[index].status.all
 											? { opacity: 0.4, color: 'rgba(0,0,0,1)' }
 											: { color: 'rgba(0,0,0,1)' }
 									}
@@ -431,7 +431,7 @@ const WarehouseProductList = ({
 							</div>
 							<div
 								style={
-									!swtichChecked
+									!objProduct[index].status.all
 										? {
 												color: 'rgba(0,0,0,0.4)',
 												textAlign: 'center',
@@ -465,7 +465,7 @@ const WarehouseProductList = ({
 									onMouseLeave={tooltipOff}
 									onMouseEnter={tooltipOn}
 									style={
-										!swtichChecked
+										!objProduct[index].status.all
 											? {
 													opacity: 0.4,
 													whiteSpace: 'nowrap',
@@ -484,7 +484,7 @@ const WarehouseProductList = ({
 									{objProduct[index].name}
 								</span>
 							</div>
-							<div className="attribute-width" style={!swtichChecked ? { opacity: 0.4 } : {}}>
+							<div className="attribute-width" style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}>
 								<img
 									style={{ width: 16, height: 16, position: 'absolute' }}
 									src={objProduct[index].images}
@@ -588,7 +588,7 @@ const WarehouseProductList = ({
 					>
 						<div
 							style={
-								!swtichChecked
+								!objProduct[index].status.all
 									? {
 											opacity: 0.4,
 											display: 'flex',
@@ -624,7 +624,7 @@ const WarehouseProductList = ({
 					<td className="nal-rezerv">
 						<div
 							style={
-								!swtichChecked
+								!objProduct[index].status.all
 									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
 									: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
 							}
@@ -635,7 +635,7 @@ const WarehouseProductList = ({
 					<td className="nal-otpr">
 						<div
 							style={
-								!swtichChecked
+								!objProduct[index].status.all
 									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
 									: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
 							}
@@ -646,7 +646,7 @@ const WarehouseProductList = ({
 					<td className="nal-vozvrat">
 						<div
 							style={
-								!swtichChecked
+								!objProduct[index].status.all
 									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
 									: { color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
 							}
@@ -656,7 +656,7 @@ const WarehouseProductList = ({
 					</td>
 					<td
 						style={
-							!swtichChecked
+							!objProduct[index].status.all
 								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right', paddingRight: '15px' }
 								: { textAlign: 'right', paddingRight: '15px' }
 						}
@@ -665,7 +665,7 @@ const WarehouseProductList = ({
 					</td>
 					<td
 						style={
-							!swtichChecked
+							!objProduct[index].status.all
 								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right', paddingRight: '15px' }
 								: { textAlign: 'right', paddingRight: '15px' }
 						}
@@ -674,7 +674,7 @@ const WarehouseProductList = ({
 					</td>
 					<td
 						style={
-							!swtichChecked
+							!objProduct[index].status.all
 								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right', paddingRight: '15px' }
 								: { textAlign: 'right', paddingRight: '15px' }
 						}
@@ -684,7 +684,7 @@ const WarehouseProductList = ({
 					<td className="summa-suma1">
 						<div
 							style={
-								!swtichChecked
+								!objProduct[index].status.all
 									? {
 											opacity: 0.4,
 											textAlign: 'right',
@@ -707,7 +707,7 @@ const WarehouseProductList = ({
 					<td className="summa-suma2">
 						<div
 							style={
-								!swtichChecked ? { opacity: 0.4, paddingRight: '4px' } : { paddingRight: '4px' }
+								!objProduct[index].status.all ? { opacity: 0.4, paddingRight: '4px' } : { paddingRight: '4px' }
 							}
 						>
 							{formatNumber(objProduct[index].suma2)}
@@ -716,14 +716,14 @@ const WarehouseProductList = ({
 					<td className="summa-suma3">
 						<div
 							style={
-								!swtichChecked ? { opacity: 0.4, paddingRight: '4px' } : { paddingRight: '4px' }
+								!objProduct[index].status.all ? { opacity: 0.4, paddingRight: '4px' } : { paddingRight: '4px' }
 							}
 						>
 							{formatNumber(objProduct[index].suma3)}
 						</div>
 					</td>
 					<td className="summa-suma4">
-						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
+						<div style={!objProduct[index].status.all? { opacity: 0.4 } : {}}>
 							{formatNumber(objProduct[index].suma4)}
 						</div>
 					</td>

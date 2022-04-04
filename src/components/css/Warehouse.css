@@ -74,8 +74,7 @@ html {
 
 .warehouse-table {
   transform: translateZ(0);
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
+  will-change: transform, scroll-position;
 }
 
 .warehouse-products {
@@ -311,7 +310,7 @@ html {
   margin-top: 24px;
   font-size: 14px;
   text-align: center;
-  padding-left: 7px;
+  padding-left: 13px;
   padding-right: 10px;
   position: relative;
 }
@@ -340,7 +339,7 @@ html {
   content: "";
   width: 401px;
   height: 1px;
-  left: 7px;
+  left: 13px;
   top: 7px;
   background-color: #000000;
 }
@@ -418,12 +417,6 @@ html {
 .warehouse-products table {
   border-spacing: 0px;
   user-select: none;
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
-}
-.warehouse-products table tr {
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
 }
 .warehouse-products table:focus {
   outline: none;
@@ -512,17 +505,17 @@ html {
   color: rgba(0, 0, 0, 0.65);
   padding-bottom: 17px;
 }
-.warehouse-products table .first-tab-header tr:nth-child(2) th {
+.warehouse-products table .first-tab-header tr:nth-child(3) th {
   font-size: 12px;
   font-weight: 300;
 }
 .warehouse-products table .first-tab-header th {
   padding: 0;
 }
-.warehouse-products table .first-tab-header tr:first-child th {
+.warehouse-products table .first-tab-header tr:nth-child(2) th {
   background: white;
 }
-.warehouse-products table .first-tab-header tr:nth-child(2) th {
+.warehouse-products table .first-tab-header tr:nth-child(3) th {
   background: white;
 }
 .warehouse-products table .first-tab-header .statusBefore:before {
@@ -552,7 +545,7 @@ html {
 .warehouse-products table .first-tab-header .shadow-vertical div:nth-child(2) {
   height: 12px;
   width: 100%;
-  position: absolute;
+  position: relative;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table .first-tab-header .shadow-vertical-3 {
