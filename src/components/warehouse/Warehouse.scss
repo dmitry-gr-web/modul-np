@@ -74,10 +74,12 @@ html {
 	will-change: transform;
 }
 .warehouse-products {
-	margin-left: 60px;
+	margin-left: 30px;
 	// width: 970px;
 	// width: 1150px;
 	width: 100%;
+	width: calc(100vw - 350px);
+	// width: 1035px;
 	position: relative;
 	.warehouse-input {
 		// max-width: 60px;
