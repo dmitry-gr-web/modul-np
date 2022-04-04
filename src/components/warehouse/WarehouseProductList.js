@@ -30,7 +30,7 @@ const WarehouseProductList = ({
 	// setWidthColum
 }) => {
 	// console.log(objProduct, index)
-	const [swtichChecked, setSwitchChecked] = useState(objProduct[index]?.status.all);
+	const [swtichChecked, setSwitchChecked] = useState(objProduct[index].status.all);
 	useEffect(() => {
 		if (!objProduct[index].status.all) {
 			setSwitchChecked(false);
@@ -52,6 +52,7 @@ const WarehouseProductList = ({
 				newobj[index].status.crm = true;
 			}
 			setObjProduct(newobj);
+			console.log(objProduct)
 		}
 		if (e.target.className === 'status-rozetka') {
 			let newobj = [...objProduct];
@@ -118,13 +119,13 @@ const WarehouseProductList = ({
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-	useEffect(() => {
-		if (!objProduct[index].status.all) {
-			setSwitchChecked(false);
-		} else {
-			setSwitchChecked(true);
-		}
-	}, [objProduct]);
+	// useEffect(() => {
+	// 	if (!objProduct[index].status.all) {
+	// 		setSwitchChecked(false);
+	// 	} else {
+	// 		setSwitchChecked(true);
+	// 	}
+	// }, [objProduct]);
 	function BtnMinus(e) {
 		e.stopPropagation();
 		let newobj = [...objProduct];
@@ -215,7 +216,7 @@ const WarehouseProductList = ({
 	function inputLength(input) {
 		if (input.replaceAll(' ', '').length >= 4) {
 			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-			 return input.replaceAll(' ', '').length * 8 + 4 + 'px';
+			return input.replaceAll(' ', '').length * 8 + 4 + 'px';
 		}
 		if (input.replaceAll(' ', '').length >= 7) {
 			return input.replaceAll(' ', '').length * 8 + 8 + 'px';
@@ -263,7 +264,11 @@ const WarehouseProductList = ({
 			e.preventDefault();
 			e.stopPropagation();
 			newobj.slice(lastIndex, index).map((x, i) => {
-				x.select = true;
+				if(x.lock) {
+					x.select = false;
+				} else {
+					x.select = true;
+				}
 			});
 		}
 		setLastIndex(index);
@@ -272,8 +277,7 @@ const WarehouseProductList = ({
 	}
 
 	const inputRef = useRef();
-	const btnRef = useRef();
-	const btnRef2 = useRef();
+
 	// console.log(inputRef.current.value)
 
 	// inputRef.current.style.width = inputRef.current.value.length * 8 + 4 + 'px';
@@ -314,13 +318,12 @@ const WarehouseProductList = ({
 	// }, [])
 	// console.log(objProduct[index].status.all);
 
-
 	return (
 		<>
 			{objProduct[index] && (
 				<tr
 					// style={height}
-					className={objProduct[index].select ? 'select' : ''}
+					className={objProduct[index].select && !objProduct[index].lock ? 'select' : objProduct[index].lock ? 'lockOrder' : ''}
 					onClick={clickTr}
 					ref={linkTR}
 					// key={index}
@@ -342,7 +345,8 @@ const WarehouseProductList = ({
 											type="checkbox"
 											className="status-all"
 											onChange={switchBtn}
-											defaultChecked={objProduct[index].status.all}
+											// defaultChecked={objProduct[index].status.all}
+											checked={objProduct[index].status.all}
 										/>
 										<span className="slider round"></span>
 									</label>
@@ -359,32 +363,38 @@ const WarehouseProductList = ({
 											  }
 									}
 								>
-									<label className="switch-btn-small">
+									<label 	style={!swtichChecked ? { opacity: 0.4 } : {}} className="switch-btn-small">
 										<input
 											type="checkbox"
 											className="status-crm"
 											onChange={switchBtn}
-											defaultChecked={objProduct[index].status.crm}
+											// defaultChecked={objProduct[index].status.crm}
+											checked={objProduct[index].status.crm}
 										/>
 										<span className="slider round"></span>
 									</label>
 
-									<label style={{ margin: '0 15px' }} className="switch-btn-small">
+									<label 	 style={!swtichChecked ? { opacity: 0.4 ,margin: '0 15px' } : { margin: '0 15px' }} className="switch-btn-small">
 										<input
 											type="checkbox"
 											className="status-rozetka"
 											onChange={switchBtn}
-											defaultChecked={objProduct[index].status.rozetka}
+											// defaultChecked={objProduct[index].status.rozetka}
+											checked={objProduct[index].status.rozetka}
 										/>
 										<span className="slider round"></span>
 									</label>
 
-									<label className="switch-btn-small">
+									<label
+										style={!swtichChecked ? { opacity: 0.4 } : {}}
+										className="switch-btn-small"
+									>
 										<input
 											type="checkbox"
 											className="status-prom"
 											onChange={switchBtn}
-											defaultChecked={objProduct[index].status.prom}
+											// defaultChecked={objProduct[index].status.prom}
+											checked={objProduct[index].status.prom}
 										/>
 										<span className="slider round"></span>
 									</label>

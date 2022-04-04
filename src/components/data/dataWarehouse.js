@@ -1,4 +1,4 @@
-import { videoregistrator,kalyan } from '../../img/svg-pack';
+import { videoregistrator, kalyan } from '../../img/svg-pack';
 
 export let dataWarehouse = [
 	{
@@ -21,6 +21,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -43,6 +44,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -65,6 +67,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -88,6 +91,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -109,6 +113,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -130,6 +135,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: true,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -151,6 +157,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -172,6 +179,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -193,6 +201,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -214,6 +223,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: true,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -235,7 +245,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: true,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -257,7 +268,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: true,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -279,7 +291,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: true,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -301,7 +314,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -323,7 +337,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -345,7 +360,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -367,7 +383,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -389,7 +406,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -411,7 +429,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -433,7 +452,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -455,7 +475,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -477,7 +498,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -499,6 +521,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -520,6 +543,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -541,6 +565,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -562,6 +587,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -583,6 +609,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -604,6 +631,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -625,6 +653,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -646,7 +675,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -666,6 +697,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -688,6 +720,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -710,6 +743,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -732,6 +766,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -754,6 +789,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -776,6 +812,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -798,6 +835,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -820,6 +858,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -842,71 +881,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
-		podProduct: 1,
-	},{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-1',
-		country: '🇺🇦',
-		currency: '₴',
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '32 Гб',
-		images: videoregistrator,
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 40.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 0,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-2',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '64 Гб',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 25.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 1,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-6.8',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '128 Гб, Синий',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 20.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -929,6 +904,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -951,6 +927,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -973,6 +950,76 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-1',
+		country: '🇺🇦',
+		currency: '₴',
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '32 Гб',
+		images: videoregistrator,
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 40.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 0,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-2',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '64 Гб',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 25.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-6.8',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '128 Гб, Синий',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 20.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -996,6 +1043,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1017,6 +1065,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1038,6 +1087,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1059,6 +1109,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1080,6 +1131,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1101,6 +1153,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1122,6 +1175,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1143,7 +1197,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1165,7 +1220,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1187,7 +1243,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1209,7 +1266,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1231,7 +1289,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1253,7 +1312,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1275,7 +1335,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1297,7 +1358,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1319,7 +1381,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1341,7 +1404,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1363,7 +1427,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1385,7 +1450,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1407,6 +1473,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1428,6 +1495,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1449,6 +1517,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1470,6 +1539,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1491,6 +1561,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1512,6 +1583,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1533,6 +1605,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1554,7 +1627,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -1574,6 +1649,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -1596,6 +1672,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -1618,6 +1695,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -1640,6 +1718,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -1662,6 +1741,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -1684,6 +1764,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -1706,6 +1787,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -1728,6 +1810,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -1750,71 +1833,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
-		podProduct: 1,
-	},{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-1',
-		country: '🇺🇦',
-		currency: '₴',
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '32 Гб',
-		images: videoregistrator,
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 40.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 0,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-2',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '64 Гб',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 25.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 1,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-6.8',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '128 Гб, Синий',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 20.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -1837,6 +1856,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -1859,6 +1879,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -1881,6 +1902,76 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-1',
+		country: '🇺🇦',
+		currency: '₴',
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '32 Гб',
+		images: videoregistrator,
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 40.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 0,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-2',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '64 Гб',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 25.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-6.8',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '128 Гб, Синий',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 20.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -1904,6 +1995,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1925,6 +2017,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1946,6 +2039,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1967,6 +2061,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -1988,6 +2083,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2009,6 +2105,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2030,6 +2127,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2051,7 +2149,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2073,7 +2172,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2095,7 +2195,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2117,7 +2218,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2139,7 +2241,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2161,7 +2264,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2183,7 +2287,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2205,7 +2310,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2227,7 +2333,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2249,7 +2356,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2271,7 +2379,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2293,7 +2402,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2315,6 +2425,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2336,6 +2447,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2357,6 +2469,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2378,6 +2491,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2399,6 +2513,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2420,6 +2535,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2441,6 +2557,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2462,7 +2579,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -2482,6 +2601,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -2504,6 +2624,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -2526,6 +2647,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -2548,6 +2670,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -2570,6 +2693,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -2592,6 +2716,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -2614,6 +2739,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -2636,6 +2762,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -2658,71 +2785,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
-		podProduct: 1,
-	},{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-1',
-		country: '🇺🇦',
-		currency: '₴',
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '32 Гб',
-		images: videoregistrator,
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 40.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 0,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-2',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '64 Гб',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 25.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 1,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-6.8',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '128 Гб, Синий',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 20.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -2745,6 +2808,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -2767,6 +2831,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -2789,6 +2854,76 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-1',
+		country: '🇺🇦',
+		currency: '₴',
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '32 Гб',
+		images: videoregistrator,
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 40.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 0,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-2',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '64 Гб',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 25.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-6.8',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '128 Гб, Синий',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 20.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -2812,6 +2947,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2833,6 +2969,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2854,6 +2991,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2875,6 +3013,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2896,6 +3035,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2917,6 +3057,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2938,6 +3079,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2959,7 +3101,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -2981,7 +3124,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3003,7 +3147,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3025,7 +3170,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3047,7 +3193,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3069,7 +3216,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3091,7 +3239,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3113,7 +3262,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3135,7 +3285,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3157,7 +3308,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3179,7 +3331,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3201,7 +3354,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3223,6 +3377,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3244,6 +3399,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3265,6 +3421,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3286,6 +3443,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3307,6 +3465,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3328,6 +3487,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3349,6 +3509,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3370,7 +3531,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -3390,6 +3553,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -3412,6 +3576,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -3434,6 +3599,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -3456,6 +3622,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -3478,6 +3645,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -3500,6 +3668,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -3522,6 +3691,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -3544,6 +3714,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -3566,71 +3737,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
-		podProduct: 1,
-	},{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-1',
-		country: '🇺🇦',
-		currency: '₴',
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '32 Гб',
-		images: videoregistrator,
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 40.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 0,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-2',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '64 Гб',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 25.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 1,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-6.8',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '128 Гб, Синий',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 20.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -3653,6 +3760,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -3675,6 +3783,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -3697,6 +3806,76 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-1',
+		country: '🇺🇦',
+		currency: '₴',
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '32 Гб',
+		images: videoregistrator,
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 40.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 0,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-2',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '64 Гб',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 25.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-6.8',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '128 Гб, Синий',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 20.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -3720,6 +3899,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3741,6 +3921,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3762,6 +3943,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3783,6 +3965,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3804,6 +3987,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3825,6 +4009,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3846,6 +4031,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3867,7 +4053,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3889,7 +4076,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3911,7 +4099,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3933,7 +4122,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3955,7 +4145,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3977,7 +4168,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -3999,7 +4191,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4021,7 +4214,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4043,7 +4237,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4065,7 +4260,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4087,7 +4283,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4109,7 +4306,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4131,6 +4329,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4152,6 +4351,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4173,6 +4373,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4194,6 +4395,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4215,6 +4417,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4236,6 +4439,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4257,6 +4461,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4278,7 +4483,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -4298,6 +4505,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -4320,6 +4528,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -4342,6 +4551,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -4364,6 +4574,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -4386,6 +4597,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -4408,6 +4620,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -4430,6 +4643,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -4452,6 +4666,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -4474,71 +4689,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
-		podProduct: 1,
-	},{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-1',
-		country: '🇺🇦',
-		currency: '₴',
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '32 Гб',
-		images: videoregistrator,
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 40.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 0,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-2',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '64 Гб',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 25.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 1,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-6.8',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '128 Гб, Синий',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 20.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -4561,6 +4712,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -4583,6 +4735,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -4605,6 +4758,76 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-1',
+		country: '🇺🇦',
+		currency: '₴',
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '32 Гб',
+		images: videoregistrator,
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 40.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 0,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-2',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '64 Гб',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 25.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-6.8',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '128 Гб, Синий',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 20.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -4628,6 +4851,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4649,6 +4873,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4670,6 +4895,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4691,6 +4917,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4712,6 +4939,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4733,6 +4961,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4754,6 +4983,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4775,7 +5005,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4797,7 +5028,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4819,7 +5051,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4841,7 +5074,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4863,7 +5097,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4885,7 +5120,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4907,7 +5143,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4929,7 +5166,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4951,7 +5189,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4973,7 +5212,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -4995,7 +5235,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5017,7 +5258,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5039,6 +5281,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5060,6 +5303,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5081,6 +5325,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5102,6 +5347,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5123,6 +5369,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5144,6 +5391,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5165,6 +5413,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5186,7 +5435,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -5206,6 +5457,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -5228,6 +5480,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -5250,6 +5503,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -5272,6 +5526,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -5294,6 +5549,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -5316,6 +5572,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -5338,6 +5595,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -5360,6 +5618,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -5382,71 +5641,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
-		podProduct: 1,
-	},{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-1',
-		country: '🇺🇦',
-		currency: '₴',
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '32 Гб',
-		images: videoregistrator,
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 40.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 0,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-2',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '64 Гб',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 25.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 1,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-6.8',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '128 Гб, Синий',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 20.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -5469,6 +5664,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -5491,6 +5687,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -5513,6 +5710,76 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-1',
+		country: '🇺🇦',
+		currency: '₴',
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '32 Гб',
+		images: videoregistrator,
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 40.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 0,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-2',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '64 Гб',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 25.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-6.8',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '128 Гб, Синий',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 20.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -5536,6 +5803,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5557,6 +5825,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5578,6 +5847,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5599,6 +5869,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5620,6 +5891,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5641,6 +5913,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5662,6 +5935,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5683,7 +5957,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5705,7 +5980,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5727,7 +6003,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5749,7 +6026,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5771,7 +6049,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5793,7 +6072,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5815,7 +6095,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5837,7 +6118,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5859,7 +6141,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5881,7 +6164,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5903,7 +6187,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5925,7 +6210,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5947,6 +6233,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5968,6 +6255,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -5989,6 +6277,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6010,6 +6299,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6031,6 +6321,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6052,6 +6343,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6073,6 +6365,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6094,7 +6387,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -6114,6 +6409,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -6136,6 +6432,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -6158,6 +6455,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -6180,6 +6478,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -6202,6 +6501,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -6224,6 +6524,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -6246,6 +6547,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -6268,6 +6570,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -6290,71 +6593,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
-		podProduct: 1,
-	},{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-1',
-		country: '🇺🇦',
-		currency: '₴',
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '32 Гб',
-		images: videoregistrator,
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 40.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 0,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-2',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '64 Гб',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 25.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 1,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-6.8',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '128 Гб, Синий',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 20.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -6377,6 +6616,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -6399,6 +6639,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -6421,6 +6662,76 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-1',
+		country: '🇺🇦',
+		currency: '₴',
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '32 Гб',
+		images: videoregistrator,
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 40.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 0,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-2',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '64 Гб',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 25.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-6.8',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '128 Гб, Синий',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 20.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -6444,6 +6755,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6465,6 +6777,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6486,6 +6799,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6507,6 +6821,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6528,6 +6843,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6549,6 +6865,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6570,6 +6887,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6591,7 +6909,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6613,7 +6932,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6635,7 +6955,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6657,7 +6978,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6679,7 +7001,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6701,7 +7024,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6723,7 +7047,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6745,7 +7070,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6767,7 +7093,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6789,7 +7116,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6811,7 +7139,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6833,7 +7162,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6855,6 +7185,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6876,6 +7207,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6897,6 +7229,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6918,6 +7251,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6939,6 +7273,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6960,6 +7295,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -6981,6 +7317,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7002,7 +7339,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -7022,6 +7361,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -7044,6 +7384,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7066,6 +7407,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7088,6 +7430,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -7110,6 +7453,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7132,6 +7476,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7154,6 +7499,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -7176,6 +7522,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7198,71 +7545,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
-		podProduct: 1,
-	},{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-1',
-		country: '🇺🇦',
-		currency: '₴',
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '32 Гб',
-		images: videoregistrator,
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 40.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 0,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-2',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '64 Гб',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 25.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
-		podProduct: 1,
-	},
-	{
-		status: { all: true, rozetka: true, prom: true, crm: true },
-		id: '5649-6.8',
-		country: '🇺🇦',
-		currency: '₴',
-		images: videoregistrator,
-		name: 'Nano USB 2.0 флешка для установки в компьютеры',
-		attribute: '128 Гб, Синий',
-		ostatok: 10,
-		rezerv: 1239,
-		otpr: 2924,
-		vozvrat: 655,
-		zakupka: 157.0,
-		prodazha: 349.0,
-		marzha: 20.0,
-		suma1: 1570.0,
-		suma2: 17925.0,
-		suma3: 2924.0,
-		suma4: 655.0,
-		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7285,6 +7568,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -7307,6 +7591,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7329,6 +7614,76 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-1',
+		country: '🇺🇦',
+		currency: '₴',
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '32 Гб',
+		images: videoregistrator,
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 40.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 0,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-2',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '64 Гб',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 25.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
+		podProduct: 1,
+	},
+	{
+		status: { all: true, rozetka: true, prom: true, crm: true },
+		id: '5649-6.8',
+		country: '🇺🇦',
+		currency: '₴',
+		images: videoregistrator,
+		name: 'Nano USB 2.0 флешка для установки в компьютеры',
+		attribute: '128 Гб, Синий',
+		ostatok: 10,
+		rezerv: 1239,
+		otpr: 2924,
+		vozvrat: 655,
+		zakupka: 157.0,
+		prodazha: 349.0,
+		marzha: 20.0,
+		suma1: 1570.0,
+		suma2: 17925.0,
+		suma3: 2924.0,
+		suma4: 655.0,
+		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 
@@ -7352,6 +7707,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7373,6 +7729,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7394,6 +7751,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7415,6 +7773,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7436,6 +7795,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7457,6 +7817,7 @@ export let dataWarehouse = [
 		suma3: 0,
 		suma4: 0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7478,6 +7839,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7499,7 +7861,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7521,7 +7884,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7543,7 +7907,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7565,7 +7930,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7587,7 +7953,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7609,7 +7976,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7631,7 +7999,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7653,7 +8022,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7675,7 +8045,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7697,7 +8068,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 0
+		lock: false,
+		podProduct: 0,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7719,7 +8091,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7741,7 +8114,8 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-		podProduct: 1
+		lock: false,
+		podProduct: 1,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7763,6 +8137,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7784,6 +8159,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7805,6 +8181,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7826,6 +8203,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7847,6 +8225,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7868,6 +8247,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7889,6 +8269,7 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
+		lock: false,
 	},
 	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
@@ -7910,7 +8291,9 @@ export let dataWarehouse = [
 		suma3: 11924.0,
 		suma4: 11924.0,
 		select: false,
-	},{
+		lock: false,
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -7930,6 +8313,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -7952,6 +8336,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7974,6 +8359,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -7996,6 +8382,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -8018,6 +8405,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -8040,6 +8428,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -8062,6 +8451,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -8084,6 +8474,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -8106,8 +8497,10 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
-	},{
+	},
+	{
 		status: { all: true, rozetka: true, prom: true, crm: true },
 		id: '5649-1',
 		country: '🇺🇦',
@@ -8127,6 +8520,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 0,
 	},
 	{
@@ -8149,6 +8543,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 	{
@@ -8171,6 +8566,7 @@ export let dataWarehouse = [
 		suma3: 2924.0,
 		suma4: 655.0,
 		select: false,
+		lock: false,
 		podProduct: 1,
 	},
 ];

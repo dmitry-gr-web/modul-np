@@ -4,6 +4,7 @@ import promLogo from './Prom.svg';
 import rozetkaLogo from './Rozetka.svg';
 import videoregistrator from './videoregistrator.jpg';
 import kalyan from './image19.png';
+// import lock from './lockOrder.svg';
 const SvgDeleteBtn = () => {
 	return (
 		<svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">

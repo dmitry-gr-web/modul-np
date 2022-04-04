@@ -4,6 +4,21 @@
 		url('../../fonts/BabelStoneFlags.woff2') format('woff2'),
 		url('../../fonts/BabelStoneFlags.woff') format('woff');
 }
+@media (min-width: 1400px){
+	.id-width {
+		max-width: 100px !important;
+	}
+	.name-width {
+		max-width: 300px !important;
+	}
+	.attribute-width span {
+		max-width: 250px !important;
+	}
+}
+html {
+	overscroll-behavior-x: none;
+	overscroll-behavior-y: none;
+}
 .flags {
 	font-family: 'BabelStone Flags';
 	font-size: 14px;
@@ -56,8 +71,8 @@
 .warehouse-products {
 	margin-left: 60px;
 	// width: 970px;
-	width: 1150px;
-	width: 1036px;
+	// width: 1150px;
+	width: 100%;
 	position: relative;
 	.warehouse-input {
 		// max-width: 60px;
@@ -250,6 +265,21 @@
 				display: block;
 				text-overflow: ellipsis;
 			}
+			.findUnderline {
+				position: relative;
+				&:before {
+					content: "";
+					height: 2px;
+					border-radius: 2px;
+					width: 100%;
+					position: absolute;
+					bottom: 0px;
+					background-color: grey;
+				}
+			}
+			// li:first-child {
+			// 	overflow: visible;
+			// }
 			.flags {
 				color: rgba(0, 0, 0, 1) !important;
 			}
@@ -397,7 +427,6 @@
 		right: 0;
 		bottom: 0;
 		top: 0;
-	
 	}
 	.simplebar-track.simplebar-horizontal {
 		background-color: rgba(0, 0, 0, 0.1);
@@ -442,6 +471,15 @@
 	table {
 		border-spacing: 0px;
 		user-select: none;
+		// outline: none;
+		// outline-width: 0;
+		// box-shadow:none;
+		// border:none;
+		&:focus {
+			outline: none;
+		
+
+		}
 		// .shadow {
 		// 	min-width: 12px;
 		// 	max-width: 12px;
@@ -490,6 +528,7 @@
 			white-space: nowrap;
 			align-items: center;
 			height: 20px;
+			z-index: 4;
 			.sticky-block-children {
 				display: flex;
 				align-items: center;
@@ -499,14 +538,14 @@
 		.sticky-head {
 			background: white;
 			position: sticky;
-			z-index: 2;
-			left: 7px;
+			z-index: 4;
+			left: 13px;
 		}
 		.sticky-body {
 			background: white;
 			position: sticky;
 			z-index: 1;
-			left: 7px;
+			left: 13px;
 		}
 		.id-width {
 			overflow: hidden;
@@ -554,10 +593,6 @@
 			}
 		}
 		.attribute-width {
-			// overflow: hidden;
-
-			max-width: 105px;
-			text-overflow: ellipsis;
 		}
 		.first-tab-header {
 			// height: 37px;
@@ -702,8 +737,8 @@
 			// }
 			.statusBefore:before {
 				content: '';
-				left: -7px;
-				width: 7px;
+				left: -13px;
+				width: 13px;
 				height: 40px;
 				background: white;
 				position: absolute;
@@ -713,13 +748,16 @@
 			.shadow-vertical {
 				height: 12px;
 				width: calc(100% + 7px);
-				left: -7px;
+				left: -13px;
 				background: none !important;
 				z-index: 1 !important;
-				div {
+				position: sticky;
+				div:first-child {
 					height: 12px;
 					width: 100%;
-					position: relative;
+					position: sticky;
+					left: 13px;
+				
 					background: linear-gradient(
 						180deg,
 						white 0%,
@@ -764,7 +802,6 @@
 			}
 		}
 		.first-tab-body {
-	
 			td {
 				padding: 0;
 				font-size: 14px;
@@ -778,6 +815,38 @@
 			td {
 				padding: 0;
 				color: rgba(0, 0, 0, 0.7);
+			}
+			.lockOrder .sticky-body:after {
+				content: '';
+				background-image: url('../../img/lockOrder.svg');
+				background-size:100%;
+				background-repeat:no-repeat;
+				position: absolute;
+				width: 12px;
+				height: 12px;
+				left:-13px;
+				top:3px;
+		
+			}
+			.lockOrder {
+				td,div,input {
+					color: rgba(0, 0, 0, 0.2) !important;
+					background-color:rgb(226, 224, 222)!important;
+				}
+				// user-select: none;
+				pointer-events: none;
+				.shadow-left {
+					// display: none;
+					background: linear-gradient(
+						90deg,
+						rgba(226, 224, 222, 1) 0%,
+						rgba(226, 224, 222, 0.95) 20%,
+						rgba(226, 224, 222, 0.7) 45%,
+						rgba(226, 224, 222, 0.5) 65%,
+						rgba(226, 224, 222, 0) 100%
+					) !important;
+					// 	// background:transparent;
+				}
 			}
 			// td:nth-child(4) {
 			// 	color: rgba(0, 0, 0, 1);
@@ -865,7 +934,7 @@
 			// 		background: #adaaaa;
 			// 	}
 			// }
-			tr:hover {
+			tr:not(.lockOrder):hover {
 				background: #cacaca;
 				.sticky-body {
 					background: #cacaca;
@@ -874,7 +943,7 @@
 					background: #adaaaa;
 				}
 			}
-			tr:hover .shadow-left {
+			tr:not(.lockOrder):hover .shadow-left {
 				// display: none;
 				background: linear-gradient(
 					90deg,
@@ -913,7 +982,7 @@
 			// tr:hover .shadow {
 			// 	z-index: -1;
 			// }
-			tr:hover td:first-child:before {
+			tr:not(.lockOrder):hover td:first-child:before {
 				content: '';
 			}
 			td:first-child:before {
@@ -974,15 +1043,15 @@
 				border-radius: 3px 0 0 3px;
 				top: 0;
 			}
-			tr:hover {
-				background: #cacaca;
-				.sticky-body {
-					background: #cacaca;
-				}
-				label span {
-					background: #adaaaa;
-				}
-			}
+			// tr:hover {
+			// 	background: #cacaca;
+			// 	.sticky-body {
+			// 		background: #cacaca;
+			// 	}
+			// 	label span {
+			// 		background: #adaaaa;
+			// 	}
+			// }
 		}
 
 		// .id-tovara {

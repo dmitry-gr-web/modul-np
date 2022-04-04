@@ -134,10 +134,11 @@ const Warehouse = () => {
 					marginLeft: 74,
 					paddingTop: 28,
 					height: '100vh',
-					width: '100%',
+					width: 'calc(100vw - 200px)',
 					background: 'white',
 					display: 'flex',
 					cursor: 'default',
+					justifyContent: 'space-between'
 				}}
 			>
 				<aside>

@@ -43,6 +43,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		// document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
 		// 	x.style.width = '0%';
 		// });
+		document.querySelector('.warehouse-table').style.overflow = '';
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 			x.style.visibility = 'visible';
 		});
@@ -72,67 +73,51 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			input.style.width = input.value.length * 8 + 'px';
 		}
 	}
+	function searchLine(text, value) {
+		if (value !== '') {
+			let re = new RegExp(value, 'gui');
+			let text_pr = text.replace(re, (x) => '<span class="findUnderline">' + x + '</span>');
+
+			return text_pr;
+		} else {
+			return text;
+		}
+	}
 	useEffect(() => {
+		function clickDocument(e) {
+			if (!e.target.closest('.warehouse-table')) {
+				setSelectAll(false);
+				let newobj = [...objProduct];
+				newobj.map((x) => (x.select = false));
+				setObjProduct(newobj);
+			}
+		}
 		if (!selectAll) {
 			document.addEventListener('keydown', function (e) {
 				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
 					e.preventDefault();
 					setSelectAll(true);
 					let newobj = [...objProduct];
-					newobj.map((x) => (x.select = true));
+					newobj.map((x) => {
+						if (x.lock) {
+							x.select = false;
+						} else {
+							x.select = true;
+						}
+					});
 					setObjProduct(newobj);
 					console.log('asdasdasd');
 				}
 			});
-		} else {
-			document.addEventListener('click', function (e) {
-				if (!e.target.closest('.warehouse-table')) {
-					setSelectAll(false);
-					let newobj = [...objProduct];
-					newobj.map((x) => (x.select = false));
-					setObjProduct(newobj);
-				}
-			});
 		}
+		document.addEventListener('click', clickDocument);
+
+		return () => {
+			document.removeEventListener('click', clickDocument);
+		};
 	}, [selectAll]);
+	console.log(objProduct.length)
 
-	// const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
-	// function width() {
-	// 	let arr = [];
-	// 	document.querySelectorAll('.id-width').forEach((x) => {
-	// 		arr.push(x.offsetWidth);
-	// 	});
-	// 	let maxwidth = Math.max(...arr);
-	// 	document.querySelectorAll('.id-width').forEach((x) => {
-	// 		x.style.width = maxwidth + 'px';
-	// 	});
-
-	// 	let arr2 = [];
-	// 	document.querySelectorAll('.name-width').forEach((x) => {
-	// 		arr2.push(x.offsetWidth);
-	// 	});
-	// 	let maxwidth2 = Math.max(...arr2);
-	// 	document.querySelectorAll('.name-width').forEach((x) => {
-	// 		x.style.width = maxwidth2 + 'px';
-	// 	});
-
-	// 	let arr3 = [];
-	// 	document.querySelectorAll('.attribute-width').forEach((x) => {
-	// 		arr3.push(x.offsetWidth);
-	// 	});
-	// 	let maxwidth3 = Math.max(...arr3);
-	// 	document.querySelectorAll('.attribute-width').forEach((x) => {
-	// 		x.style.width = maxwidth3 + 'px';
-	// 	});
-	// 	widthColum.id = maxwidth;
-	// 	widthColum.name = maxwidth2;
-	// 	widthColum.attribute = maxwidth3;
-	// 	setWidthColum(widthColum);
-	// 	// console.log(widthColum)
-	// }
-	// useLayoutEffect(() => {
-	// 	width();
-	// }, []);
 	function formatNumber2(number) {
 		let newnum = number.toLocaleString('ru-RU', {
 			minimumFractionDigits: 0,
@@ -168,350 +153,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
 	let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
 
-	// const StickyListContext = createContext();
-	// StickyListContext.displayName = 'StickyListContext';
-
-	// const ItemWrapper = ({ data, index, style }) => {
-
-	// 	const { ItemRenderer } = data;
-	// 	// if (objProduct && objProduct.includes(index)) {
-	// 	// 	return null;
-	// 	// }
-	// 	return <ItemRenderer index={index} style={style} />;
-	// };
-
-	// const StickyRow = ({ index, style }) => (
-	// 	<tr className="sticky" style={style}>
-	// 		<th>Sticky Row {index}</th>
-	// 	</tr>
-	// );
-
-	// const innerElementType = forwardRef(({ children, ...rest }, ref) => (
-	// 	<StickyListContext.Consumer>
-	// 		{({}) => (
-	// 			<table ref={ref} {...rest}>
-	// 				<thead className="first-tab-header">
-	// 					<tr>
-	// 						<th className="statusBefore sticky-head">
-	// 							<div className="sticky-block">
-	// 								<div
-	// 									onMouseEnter={() => setSwitchMenu(true)}
-	// 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-	// 									// style={{ display: 'flex' }}
-	// 									className="sticky-block-children"
-	// 								>
-	// 									<div
-	// 										style={{
-	// 											textAlign: 'left',
-	// 											paddingLeft: 0,
-	// 											minWidth: 51,
-	// 											paddingRight: '10px',
-	// 										}}
-	// 									>
-	// 										Статус
-	// 									</div>
-	// 									<div
-	// 										style={
-	// 											switchMenu
-	// 												? {
-	// 														transition: '0.2s',
-	// 														paddingRight: '10px',
-	// 														width: '85px',
-	// 														display: 'flex',
-	// 														justifyContent: 'space-between',
-	// 														overflow: '',
-	// 												  }
-	// 												: {
-	// 														transition: '0.2s',
-	// 														overflow: 'hidden',
-	// 														width: '0px',
-	// 														paddingRight: '0px',
-	// 														justifyContent: 'space-between',
-	// 														display: 'flex',
-	// 												  }
-	// 										}
-	// 									>
-	// 										<img className="logo-mail" src={crmLogo} alt="" />
-	// 										<img className="logo-mail" src={rozetkaLogo} alt="" />
-	// 										<img className="logo-mail" src={promLogo} alt="" />
-	// 									</div>
-	// 								</div>
-
-	// 								<div className="id-width" style={{ paddingRight: '10px' }}>
-	// 									ID
-	// 								</div>
-	// 								<div style={{ paddingRight: '10px', minWidth: 51 }}>Страна</div>
-	// 								<div style={{ paddingRight: '10px', minWidth: 51 }}>Валюта</div>
-	// 								<div className="name-width" style={{ paddingRight: '15px' }}>
-	// 									Название
-	// 								</div>
-	// 								<div className="attribute-width" style={{ paddingRight: '3px' }}>
-	// 									Атрибут
-	// 								</div>
-	// 								<div className="shadow-left"></div>
-	// 							</div>
-	// 						</th>
-
-	// 						<th style={{ paddingLeft: '12px', paddingRight: '15px' }} colSpan={4}>
-	// 							Наличие
-	// 						</th>
-	// 						<th style={{ paddingRight: '15px' }}>Закупка</th>
-	// 						<th style={{ paddingRight: '15px' }}>Продажа</th>
-	// 						<th style={{ paddingRight: '15px' }}>Маржа</th>
-	// 						<th colSpan={4}>Сумма</th>
-	// 					</tr>
-	// 					<tr ref={linkTR}>
-	// 						<th className="sticky-head">
-	// 							<div className="sticky-block">
-	// 								<div
-	// 									onMouseEnter={() => setSwitchMenu(true)}
-	// 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-	// 									className="sticky-block-children"
-	// 									style={{ maxWidth: '156px' }}
-	// 								>
-	// 									<div style={{ width: '51px', paddingRight: '10px' }}>
-	// 										<WarehouseDropMenu
-	// 											setPodlozhka={setPodlozhka}
-	// 											podlozhka={podlozhka}
-	// 											type={'status'}
-	// 											objProduct={objProduct}
-	// 										/>
-	// 									</div>
-	// 									<div
-	// 										style={
-	// 											switchMenu
-	// 												? {
-	// 														transition: '0.2s',
-	// 														paddingRight: '10px',
-	// 														// width: '85px',
-	// 														maxWidth: '125px',
-	// 														display: 'flex',
-	// 														justifyContent: 'space-between',
-	// 														overflow: '',
-	// 												  }
-	// 												: {
-	// 														transition: '0.2s',
-	// 														overflow: 'hidden',
-	// 														maxWidth: '0px',
-	// 														paddingRight: '0px',
-	// 														justifyContent: 'space-between',
-	// 														display: 'flex',
-	// 												  }
-	// 										}
-	// 										className="block-3-btn"
-	// 									>
-	// 										<WarehouseDropMenu
-	// 											adaptive={true}
-	// 											setPodlozhka={setPodlozhka}
-	// 											podlozhka={podlozhka}
-	// 											type={'status'}
-	// 											objProduct={objProduct}
-	// 											setSwitchMenu={setSwitchMenu}
-	// 											switchMenu={switchMenu}
-	// 											setFlagSwitchMenu={setFlagSwitchMenu}
-	// 										/>
-
-	// 										<div style={{ margin: '0 11px' }}>
-	// 											<WarehouseDropMenu
-	// 												adaptive={true}
-	// 												setPodlozhka={setPodlozhka}
-	// 												podlozhka={podlozhka}
-	// 												type={'status'}
-	// 												objProduct={objProduct}
-	// 												setSwitchMenu={setSwitchMenu}
-	// 												switchMenu={switchMenu}
-	// 												setFlagSwitchMenu={setFlagSwitchMenu}
-	// 											/>
-	// 										</div>
-
-	// 										<WarehouseDropMenu
-	// 											adaptive={true}
-	// 											setPodlozhka={setPodlozhka}
-	// 											podlozhka={podlozhka}
-	// 											type={'status'}
-	// 											objProduct={objProduct}
-	// 											setSwitchMenu={setSwitchMenu}
-	// 											switchMenu={switchMenu}
-	// 											setFlagSwitchMenu={setFlagSwitchMenu}
-	// 										/>
-	// 									</div>
-	// 								</div>
-
-	// 								<div className="id-width" style={{ paddingRight: '10px' }}>
-	// 									<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
-	// 								</div>
-	// 								<div style={{ paddingRight: '10px', minWidth: 51 }}>
-	// 									<WarehouseDropMenu
-	// 										setPodlozhka={setPodlozhka}
-	// 										podlozhka={podlozhka}
-	// 										type={'country'}
-	// 										objProduct={objProduct}
-	// 										setSwitchMenu={setSwitchMenu}
-	// 										switchMenu={switchMenu}
-	// 									/>
-	// 								</div>
-	// 								<div style={{ paddingRight: '10px', minWidth: 51 }}>
-	// 									<WarehouseDropMenu
-	// 										setPodlozhka={setPodlozhka}
-	// 										podlozhka={podlozhka}
-	// 										type={'currency'}
-	// 										objProduct={objProduct}
-	// 										setSwitchMenu={setSwitchMenu}
-	// 										switchMenu={switchMenu}
-	// 									/>
-	// 								</div>
-	// 								<div className="name-width" style={{ paddingRight: '15px' }}>
-	// 									<WarehouseDropMenu
-	// 										setPodlozhka={setPodlozhka}
-	// 										podlozhka={podlozhka}
-	// 										type={'name'}
-	// 										inputOn={true}
-	// 										objProduct={objProduct}
-	// 										setSwitchMenu={setSwitchMenu}
-	// 										switchMenu={switchMenu}
-	// 									/>
-	// 								</div>
-	// 								<div className="attribute-width" style={{ paddingRight: '3px' }}>
-	// 									<WarehouseDropMenu
-	// 										setPodlozhka={setPodlozhka}
-	// 										podlozhka={podlozhka}
-	// 										type={'attribute'}
-	// 										inputOn={true}
-	// 										objProduct={objProduct}
-	// 										setSwitchMenu={setSwitchMenu}
-	// 										switchMenu={switchMenu}
-	// 									/>
-	// 								</div>
-	// 								<div className="shadow-left"></div>
-	// 							</div>
-	// 						</th>
-
-	// 						<th style={{ paddingLeft: '12px', paddingRight: '3px' }} className="nal-ostatok">
-	// 							<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
-	// 								{formatNumber2(ostatok)}
-	// 								<span style={{ paddingLeft: 3 }}>/</span>
-	// 							</div>
-	// 						</th>
-	// 						<th className="nal-rezerv" style={{ paddingRight: '4px' }}>
-	// 							<div>{formatNumber2(rezerv)}</div>
-	// 						</th>
-	// 						<th className="nal-otpr" style={{ paddingRight: '4px' }}>
-	// 							<div>{formatNumber2(otpr)}</div>
-	// 						</th>
-	// 						<th className="nal-vozvrat" style={{ paddingRight: '15px' }}>
-	// 							<div>{formatNumber2(vozvrat)}</div>
-	// 						</th>
-	// 						<th style={{ textAlign: 'right', paddingRight: '15px' }}>{formatNumber(zakupka)}</th>
-	// 						<th style={{ textAlign: 'right', paddingRight: '15px' }}>{formatNumber(prodazha)}</th>
-	// 						<th style={{ textAlign: 'right', paddingRight: '15px' }}>{formatNumber(marzha)}</th>
-	// 						<th className="summa-suma1">
-	// 							<div
-	// 								style={{
-	// 									textAlign: 'right',
-	// 									display: 'flex',
-	// 									justifyContent: 'end',
-	// 									paddingRight: '3px',
-	// 								}}
-	// 							>
-	// 								{formatNumber(suma1)}
-	// 								<span style={{ paddingLeft: 3 }}>/</span>
-	// 							</div>
-	// 						</th>
-	// 						<th className="summa-suma2">
-	// 							<div style={{ paddingRight: '4px' }}>{formatNumber(suma2)}</div>
-	// 						</th>
-	// 						<th className="summa-suma3">
-	// 							<div style={{ paddingRight: '4px' }}>{formatNumber(suma3)}</div>
-	// 						</th>
-	// 						<th className="summa-suma4">
-	// 							<div>{formatNumber(suma4)}</div>
-	// 						</th>
-	// 					</tr>
-	// 					<tr>
-	// 						<th className="shadow-vertical" colSpan={1}>
-	// 							<div
-	// 								onMouseEnter={() => setSwitchMenu(true)}
-	// 								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-	// 								style={{ width: '90px' }}
-	// 							></div>
-	// 						</th>
-
-	// 						<th colSpan="17" className="shadow-vertical">
-	// 							<div></div>
-	// 						</th>
-	// 					</tr>
-	// 				</thead>
-	// 				{/* {objProduct.map((index) => (
-	// 					<StickyRow
-	// 						index={index}
-	// 						key={index}
-	// 						style={{ top: index * 35, left: 0, width: '100%', height: 20 }}
-	// 					/>
-	// 				))} */}
-
-	// 				<tbody className="first-tab-body">{children}</tbody>
-	// 			</table>
-	// 		)}
-	// 	</StickyListContext.Consumer>
-	// ));
-
-	// const StickyList = ({ children, ...rest }) => (
-	// 	<StickyListContext.Provider value={{ ItemRenderer: children }}>
-	// 		<List itemData={{ ItemRenderer: children }} {...rest}>
-	// 			{ItemWrapper}
-	// 		</List>
-	// 	</StickyListContext.Provider>
-	// );
-	// const Row = ({ index, style }) => {
-	// 	return (
-	// 		<WarehouseProductList
-	// 			index={index}
-	// 			setChecked={setChecked}
-	// 			checked={checked}
-	// 			objProduct={objProduct}
-	// 			switchMenu={switchMenu}
-	// 			setObjProduct={setObjProduct}
-	// 			setSwitchMenu={setSwitchMenu}
-	// 			podlozhka={podlozhka}
-	// 			setPodlozhka={setPodlozhka}
-	// 			focusInput={focusInput}
-	// 			setFocusInput={setFocusInput}
-	// 			setIndexInput={setIndexInput}
-	// 			setLastIndex={setLastIndex}
-	// 			lastIndex={lastIndex}
-	// 			setBtnMenu={setBtnMenu}
-	// 			btnMenu={btnMenu}
-	// 			selectAll={selectAll}
-	// 			setSelectAll={setSelectAll}
-	// 			flagSwitchMenu={flagSwitchMenu}
-	// 		/>
-	// 	);
-	// };
-	// const Row = ({ index, style }) => (
-	// 	<WarehouseProductList
-	// 		height={style}
-	// 		index={index}
-	// 		// widthColum={widthColum}
-	// 		setChecked={setChecked}
-	// 		checked={checked}
-	// 		objProduct={objProduct}
-	// 		switchMenu={switchMenu}
-	// 		setObjProduct={setObjProduct}
-	// 		setSwitchMenu={setSwitchMenu}
-	// 		podlozhka={podlozhka}
-	// 		setPodlozhka={setPodlozhka}
-	// 		focusInput={focusInput}
-	// 		setFocusInput={setFocusInput}
-	// 		setIndexInput={setIndexInput}
-	// 		setLastIndex={setLastIndex}
-	// 		lastIndex={lastIndex}
-	// 		setBtnMenu={setBtnMenu}
-	// 		btnMenu={btnMenu}
-	// 		selectAll={selectAll}
-	// 		setSelectAll={setSelectAll}
-	// 		flagSwitchMenu={flagSwitchMenu}
-	// 	/>
-	// );
 	const rootRef = React.useRef();
 	const [start, setStart] = React.useState(0);
 
@@ -528,18 +169,24 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	// 	rootRef.current.recalculate();
 	// },[start])
 	useEffect(() => {
+		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 		function onScroll(e) {
+			document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
+			setTimeout(() => {
+				document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
+			}, 300);
 			// rootRef.current.el
 			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
 			// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
 			// 	x.style.animation = 'trAnimtaion 0.2s forwards';
 			// });
+			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
 			setTimeout(() => {
 				setStart(
 					Math.min(objProduct.length - visibleRows - 1, Math.floor(e.target.scrollTop / rowHeight))
 				);
 				// rootRef.current.recalculate();
-			}, 30);
+			}, 0);
 		}
 
 		rootRef.current.el
@@ -547,6 +194,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			.addEventListener('scroll', onScroll);
 		//   console.log(objProduct.length)
 		// console.log(document.querySelectorAll('tr').length);
+
 		return () => {
 			rootRef.current.el
 				.querySelector('.simplebar-content-wrapper')
@@ -608,7 +256,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					display: 'flex',
 					maxHeight: 'calc(100vh - 149px)',
 					marginBottom: '10px',
-					maxWidth: 1150,
+					// maxWidth: 1150,
+					width: '100%',
 					// overflow: 'auto',
 					// height: '800px',
 					height: rowHeight * visibleRows + 1,
@@ -630,21 +279,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 				</StickyList> */}
 
 				{/* <div style={{ height: getTopHeight() }} /> */}
-				<table style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
-					{podlozhka && (
-						<tr
-							className="warehouse-podlozhka"
-							style={{
-								width: '100%',
-								height: '100%',
-								position: 'sticky',
-								left: 0,
-								top: 0,
-								zIndex: 3,
-							}}
-							onClick={clickPodlozhka}
-						></tr>
-					)}
+				<table
+					tabIndex={-1}
+					style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
+				>
 					<thead className="first-tab-header">
 						<tr>
 							<th className="statusBefore sticky-head">
@@ -840,6 +478,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 											podlozhka={podlozhka}
 											type={'name'}
 											inputOn={true}
+											searchLine={searchLine}
 											objProduct={objProduct}
 											setSwitchMenu={setSwitchMenu}
 											switchMenu={switchMenu}
@@ -853,6 +492,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 											setPodlozhka={setPodlozhka}
 											podlozhka={podlozhka}
 											type={'attribute'}
+											searchLine={searchLine}
 											inputOn={true}
 											objProduct={objProduct}
 											setSwitchMenu={setSwitchMenu}
@@ -909,13 +549,32 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 								<div
 									onMouseEnter={() => setSwitchMenu(true)}
 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-									style={{ width: '90px' }}
+									style={switchMenu ? { width: '156px' } : { width: '51px' }}
 								></div>
-							</th>
-
-							<th colSpan="17" className="shadow-vertical">
 								<div></div>
 							</th>
+
+							<th colSpan="1" className="shadow-vertical">
+								<div></div>
+							</th>
+						</tr>
+						<tr>
+							{podlozhka && (
+								<td style={{padding: '0px'}}>
+									<div
+										className="warehouse-podlozhka"
+										style={{
+											width: '100%',
+											height: document.body.clientHeight + 'px',
+											position: 'absolute',
+											left: 0,
+											top: 0,
+											zIndex: 3,
+										}}
+										onClick={clickPodlozhka}
+									></div>
+								</td>
+							)}
 						</tr>
 					</thead>
 

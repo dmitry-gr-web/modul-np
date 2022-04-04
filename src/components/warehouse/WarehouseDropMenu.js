@@ -12,6 +12,7 @@ const WarehouseDropMenu = ({
 	setSwitchMenu,
 	switchMenu,
 	setFlagSwitchMenu,
+	searchLine
 }) => {
 	const [openMenu, setOpenMenu] = useState(false);
 	let newarr = [];
@@ -83,6 +84,7 @@ const WarehouseDropMenu = ({
 	const [value, setValue] = useState('');
 	function clickList(index, e) {
 		setPodlozhka(true);
+		document.querySelector('.warehouse-table').style.overflow = 'hidden';
 		let newobj = obj.map((x, i) => {
 			if (i === index) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
@@ -101,6 +103,7 @@ const WarehouseDropMenu = ({
 				});
 				setOpenMenu(false);
 				setPodlozhka(false);
+				document.querySelector('.warehouse-table').style.overflow = '';
 
 				return { ...x, select: false };
 			} else if (index !== 0 && i === 0) {
@@ -119,6 +122,7 @@ const WarehouseDropMenu = ({
 			});
 			setOpenMenu(false);
 			setPodlozhka(false);
+			document.querySelector('.warehouse-table').style.overflow = '';
 			newobj[0].select = true;
 			if (adaptive) {
 				setFlagSwitchMenu(false);
@@ -223,7 +227,8 @@ const WarehouseDropMenu = ({
 		let posElement = e.currentTarget.getBoundingClientRect();
 		tooltipBlock.style.fontSize = '12px';
 		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
-			tooltipBlock.innerText = e.target.innerText;
+			// tooltipBlock.innerText = e.target.innerText;
+			tooltipBlock.innerHTML = searchLine(e.target.innerText, value);
 			tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 			tooltipBlock.style.top = posElement.y + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
@@ -297,7 +302,9 @@ const WarehouseDropMenu = ({
 									className={x.select ? 'select-btn' : ''}
 									onClick={(e) => clickList(x.id, e)}
 								>
-									{x.attribute}
+									<span dangerouslySetInnerHTML={{
+										__html: searchLine(x.attribute, value),
+									}}></span>
 								</li>
 							))
 					: obj.map((x, index) => (
@@ -306,11 +313,12 @@ const WarehouseDropMenu = ({
 								onMouseLeave={tooltipOff}
 								className={x.select ? 'select-btn' : ''}
 								onClick={(e) => clickList(x.id, e)}
+								style={type === 'status' ? {overflow: 'visible'} : {}}
 							>
 								{type === 'country' ? (
 									<span className={index !== 0 ? 'flags' : ''}>{x.attribute}</span>
 								) : type === 'status' ? (
-									<span className={index !== 0 ? 'status' : ''}>{x.attribute}</span>
+									<span className={index !== 0 ? 'status' : ''} >{x.attribute}</span>
 								) : (
 									x.attribute
 								)}

@@ -2,6 +2,24 @@
   font-family: "BabelStone Flags";
   src: local("BabelStone Flags"), local("BabelStoneFlags"), url("../../fonts/BabelStoneFlags.woff2") format("woff2"), url("../../fonts/BabelStoneFlags.woff") format("woff");
 }
+@media (min-width: 1400px) {
+  .id-width {
+    max-width: 100px !important;
+  }
+
+  .name-width {
+    max-width: 300px !important;
+  }
+
+  .attribute-width span {
+    max-width: 250px !important;
+  }
+}
+html {
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+}
+
 .flags {
   font-family: "BabelStone Flags";
   font-size: 14px;
@@ -56,8 +74,7 @@
 
 .warehouse-products {
   margin-left: 60px;
-  width: 1150px;
-  width: 1036px;
+  width: 100%;
   position: relative;
 }
 .warehouse-products .warehouse-input {
@@ -228,6 +245,18 @@
   display: block;
   text-overflow: ellipsis;
 }
+.warehouse-products .warehouse-dropmenu .dropmenu .findUnderline {
+  position: relative;
+}
+.warehouse-products .warehouse-dropmenu .dropmenu .findUnderline:before {
+  content: "";
+  height: 2px;
+  border-radius: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background-color: grey;
+}
 .warehouse-products .warehouse-dropmenu .dropmenu .flags {
   color: black !important;
 }
@@ -382,6 +411,9 @@
   border-spacing: 0px;
   user-select: none;
 }
+.warehouse-products table:focus {
+  outline: none;
+}
 .warehouse-products table .shadow-left {
   position: absolute;
   height: 20px;
@@ -395,6 +427,7 @@
   white-space: nowrap;
   align-items: center;
   height: 20px;
+  z-index: 4;
 }
 .warehouse-products table .sticky-block .sticky-block-children {
   display: flex;
@@ -404,14 +437,14 @@
 .warehouse-products table .sticky-head {
   background: white;
   position: sticky;
-  z-index: 2;
-  left: 7px;
+  z-index: 4;
+  left: 13px;
 }
 .warehouse-products table .sticky-body {
   background: white;
   position: sticky;
   z-index: 1;
-  left: 7px;
+  left: 13px;
 }
 .warehouse-products table .id-width {
   overflow: hidden;
@@ -452,10 +485,6 @@
   transform: rotate(-90deg);
   top: 4px;
 }
-.warehouse-products table .attribute-width {
-  max-width: 105px;
-  text-overflow: ellipsis;
-}
 .warehouse-products table .first-tab-header .flags {
   color: black !important;
 }
@@ -484,8 +513,8 @@
 }
 .warehouse-products table .first-tab-header .statusBefore:before {
   content: "";
-  left: -7px;
-  width: 7px;
+  left: -13px;
+  width: 13px;
   height: 40px;
   background: white;
   position: absolute;
@@ -494,14 +523,16 @@
 .warehouse-products table .first-tab-header .shadow-vertical {
   height: 12px;
   width: calc(100% + 7px);
-  left: -7px;
+  left: -13px;
   background: none !important;
   z-index: 1 !important;
+  position: sticky;
 }
-.warehouse-products table .first-tab-header .shadow-vertical div {
+.warehouse-products table .first-tab-header .shadow-vertical div:first-child {
   height: 12px;
   width: 100%;
-  position: relative;
+  position: sticky;
+  left: 13px;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table thead {
@@ -536,19 +567,40 @@
   padding: 0;
   color: rgba(0, 0, 0, 0.7);
 }
-.warehouse-products table .first-tab-body tr:hover {
+.warehouse-products table .first-tab-body .lockOrder .sticky-body:after {
+  content: "";
+  background-image: url("../../img/lockOrder.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: -13px;
+  top: 3px;
+}
+.warehouse-products table .first-tab-body .lockOrder {
+  pointer-events: none;
+}
+.warehouse-products table .first-tab-body .lockOrder td, .warehouse-products table .first-tab-body .lockOrder div, .warehouse-products table .first-tab-body .lockOrder input {
+  color: rgba(0, 0, 0, 0.2) !important;
+  background-color: #e2e0de !important;
+}
+.warehouse-products table .first-tab-body .lockOrder .shadow-left {
+  background: linear-gradient(90deg, #e2e0de 0%, rgba(226, 224, 222, 0.95) 20%, rgba(226, 224, 222, 0.7) 45%, rgba(226, 224, 222, 0.5) 65%, rgba(226, 224, 222, 0) 100%) !important;
+}
+.warehouse-products table .first-tab-body tr:not(.lockOrder):hover {
   background: #cacaca;
 }
-.warehouse-products table .first-tab-body tr:hover .sticky-body {
+.warehouse-products table .first-tab-body tr:not(.lockOrder):hover .sticky-body {
   background: #cacaca;
 }
-.warehouse-products table .first-tab-body tr:hover label span {
+.warehouse-products table .first-tab-body tr:not(.lockOrder):hover label span {
   background: #adaaaa;
 }
-.warehouse-products table .first-tab-body tr:hover .shadow-left {
+.warehouse-products table .first-tab-body tr:not(.lockOrder):hover .shadow-left {
   background: linear-gradient(90deg, #cacaca 0%, rgba(202, 202, 202, 0.95) 20%, rgba(202, 202, 202, 0.7) 45%, rgba(202, 202, 202, 0.5) 65%, rgba(202, 202, 202, 0) 100%) !important;
 }
-.warehouse-products table .first-tab-body tr:hover td:first-child:before {
+.warehouse-products table .first-tab-body tr:not(.lockOrder):hover td:first-child:before {
   content: "";
 }
 .warehouse-products table .first-tab-body td:first-child:before {
@@ -581,15 +633,6 @@
   left: -7px;
   border-radius: 3px 0 0 3px;
   top: 0;
-}
-.warehouse-products table .first-tab-body tr:hover {
-  background: #cacaca;
-}
-.warehouse-products table .first-tab-body tr:hover .sticky-body {
-  background: #cacaca;
-}
-.warehouse-products table .first-tab-body tr:hover label span {
-  background: #adaaaa;
 }
 .warehouse-products table .nal-ostatok {
   padding: 0 2px;
