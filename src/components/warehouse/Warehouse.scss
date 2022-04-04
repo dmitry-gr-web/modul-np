@@ -69,9 +69,9 @@ html {
 	}
 }
 .warehouse-table {
-	// transform: translateZ(0);
-	// transform: translate3d(0, 0, 0);
-	// will-change: transform;
+	transform: translateZ(0);
+	transform: translate3d(0, 0, 0);
+	will-change: transform;
 }
 .warehouse-products {
 	margin-left: 60px;
@@ -882,7 +882,8 @@ html {
 					color: rgba(0, 0, 0, 0.2) !important;
 					// background-color:rgb(226, 224, 222)!important;
 					// background-color:#D6D3D2!important
-					background-color: rgb(214, 211, 210) !important;
+					// background-color: rgb(214, 211, 210) !important;
+					background-color: rgb(225, 222, 221) !important;
 				}
 				// user-select: none;
 				// pointer-events: none;npm
@@ -897,11 +898,11 @@ html {
 					// display: none;
 					background: linear-gradient(
 						90deg,
-						rgba(214, 211, 210, 1) 0%,
-						rgba(214, 211, 210, 0.95) 20%,
-						rgba(214, 211, 210, 0.7) 45%,
-						rgba(214, 211, 210, 0.5) 65%,
-						rgba(214, 211, 210, 0) 100%
+						rgba(225, 222, 221, 1) 0%,
+						rgba(225, 222, 221, 0.95) 20%,
+						rgba(225, 222, 221, 0.7) 45%,
+						rgba(225, 222, 221, 0.5) 65%,
+						rgba(225, 222, 221, 0) 100%
 					) !important;
 					// 	// background:transparent;
 				}

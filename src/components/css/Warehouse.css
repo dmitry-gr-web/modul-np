@@ -72,6 +72,12 @@ html {
   border-radius: 2px 0 0 2px;
 }
 
+.warehouse-table {
+  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
 .warehouse-products {
   margin-left: 60px;
   width: 100%;
@@ -610,14 +616,14 @@ html {
 .warehouse-products table .first-tab-body .lockOrder div,
 .warehouse-products table .first-tab-body .lockOrder input {
   color: rgba(0, 0, 0, 0.2) !important;
-  background-color: #d6d3d2 !important;
+  background-color: #e1dedd !important;
 }
 .warehouse-products table .first-tab-body .lockOrder label,
 .warehouse-products table .first-tab-body .lockOrder input {
   pointer-events: none;
 }
 .warehouse-products table .first-tab-body .lockOrder .shadow-left {
-  background: linear-gradient(90deg, #d6d3d2 0%, rgba(214, 211, 210, 0.95) 20%, rgba(214, 211, 210, 0.7) 45%, rgba(214, 211, 210, 0.5) 65%, rgba(214, 211, 210, 0) 100%) !important;
+  background: linear-gradient(90deg, #e1dedd 0%, rgba(225, 222, 221, 0.95) 20%, rgba(225, 222, 221, 0.7) 45%, rgba(225, 222, 221, 0.5) 65%, rgba(225, 222, 221, 0) 100%) !important;
 }
 .warehouse-products table .first-tab-body tr:not(.lockOrder):hover {
   background: #cacaca;

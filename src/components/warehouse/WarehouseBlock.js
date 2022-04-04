@@ -116,7 +116,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			document.removeEventListener('click', clickDocument);
 		};
 	}, [selectAll]);
-	console.log(objProduct.length)
+	console.log(objProduct.length);
 
 	function formatNumber2(number) {
 		let newnum = number.toLocaleString('ru-RU', {
@@ -163,16 +163,28 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		return rowHeight * start;
 	}
 	function getBottomHeight() {
-		return rowHeight * (objProduct.length - (start + visibleRows + 100));
+		return rowHeight * (objProduct.length - (start + visibleRows + 10));
 	}
 	// useEffect(()=> {
 	// 	rootRef.current.recalculate();
-	// },[start])
+	// },[start])start
+	function getStart() {
 
+		let temp = start - 10 * rowHeight;
+
+		return Math.min(
+			objProduct.length - visibleRows - 10,
+			Math.floor(temp < 0 ? 0 : temp / rowHeight)
+		);
+	}
+	console.log(getStart())
 	useEffect(() => {
 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
+
 		function onScroll(e) {
 			clearTimeout(timer);
+			setStart(e.target.scrollTop);
+			console.log(start)
 			document.querySelector('.warehouse-products table').classList.add('hoverOff');
 			timer = setTimeout(() => {
 				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
@@ -184,23 +196,25 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			// });
 			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
 			// setTimeout(() => {
-				setStart(
-					Math.min(objProduct.length - visibleRows - 1, Math.floor(e.target.scrollTop / rowHeight))
-				);
-				// rootRef.current.recalculate();
+			let temp = start - 10 * rowHeight;
+			setStart(
+				// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
+				Math.min(
+					objProduct.length - visibleRows - 10,
+					Math.floor(temp < 0 ? 0 : temp / rowHeight)
+				)
+			);
+			// rootRef.current.recalculate();
 			// }, 0);
+			// getStart();
 		}
 
-		rootRef.current.el
-			.querySelector('.simplebar-content-wrapper')
-			.addEventListener('scroll', onScroll);
+		rootRef.current.addEventListener('scroll', onScroll);
 		//   console.log(objProduct.length)
 		// console.log(document.querySelectorAll('tr').length);
 
 		return () => {
-			rootRef.current.el
-				.querySelector('.simplebar-content-wrapper')
-				.removeEventListener('scroll', onScroll);
+			rootRef.current.removeEventListener('scroll', onScroll);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
@@ -252,7 +266,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 				</button>
 			</div>
 			<div className="shadow-right"></div>
-			<SimpleBar
+			<div
 				className="warehouse-table"
 				style={{
 					display: 'flex',
@@ -260,7 +274,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					marginBottom: '10px',
 					// maxWidth: 1150,
 					width: '100%',
-					// overflow: 'auto',
+					overflow: 'auto',
 					// height: '800px',
 					height: rowHeight * visibleRows + 1,
 				}}
@@ -562,7 +576,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 						</tr>
 						<tr>
 							{podlozhka && (
-								<td style={{padding: '0px'}}>
+								<td style={{ padding: '0px' }}>
 									<div
 										className="warehouse-podlozhka"
 										style={{
@@ -583,7 +597,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
 
-						{objProduct.slice(start, start + visibleRows + 1).map((x, index) => (
+						{objProduct.slice(start, start + visibleRows + 10).map((x, index) => (
 							<WarehouseProductList
 								index={index + start}
 								// rowHeight={rowHeight}
@@ -623,7 +637,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					</tfoot>
 				</table>
 				{/* <div style={{ height: getBottomHeight() }} />   */}
-			</SimpleBar>
+			</div>
 		</div>
 	);
 };
