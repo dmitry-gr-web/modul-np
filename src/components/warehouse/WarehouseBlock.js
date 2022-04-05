@@ -43,7 +43,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		// document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
 		// 	x.style.width = '0%';
 		// });
-		document.querySelector('.warehouse-table').style.overflow = 'auto';
+		document.querySelector('.warehouse-table').style.overflow = '';
 
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 			x.style.visibility = 'visible';
@@ -101,9 +101,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					let newobj = [...objProduct];
 					newobj.map((x) => {
 						if (x.lock) {
-						return	x.select = false;
+							return (x.select = false);
 						} else {
-						return	x.select = true;
+							return (x.select = true);
 						}
 					});
 					setObjProduct(newobj);
@@ -157,15 +157,16 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
 	function getStart() {
-		let temp = start - 20 * rowHeight;
+		let temp = start - 40 * rowHeight;
 
 		return Math.min(
 			objProduct.length - visibleRows - 1,
 			Math.floor(temp < 0 ? 0 : temp / rowHeight)
 		);
 	}
+
 	let rowHeight = 20;
-	let visibleRows = Math.round((document.body.clientHeight * 1.5 - 140) / 20);
+	let visibleRows = Math.round((document.body.clientHeight * 1.8 - 140) / 20);
 
 	function getTopHeight() {
 		return rowHeight * getStart();
@@ -176,9 +177,35 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 	// useEffect(()=> {
 	// 	rootRef.current.recalculate();
 	// },[start])start
-
+	console.log(getStart());
 	// console.log(getStart())
+	function throttle(func, ms) {
+		let isThrottled = false,
+			savedArgs,
+			savedThis;
 
+		function wrapper() {
+			if (isThrottled) {
+				savedArgs = arguments;
+				savedThis = this;
+				return;
+			}
+
+			func.apply(this, arguments);
+
+			isThrottled = true;
+
+			setTimeout(function () {
+				isThrottled = false;
+				if (savedArgs) {
+					wrapper.apply(savedThis, savedArgs);
+					savedArgs = savedThis = null;
+				}
+			}, ms);
+		}
+
+		return wrapper;
+	}
 	useEffect(() => {
 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 
@@ -190,6 +217,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			timer = setTimeout(() => {
 				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
 			}, 300);
+			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
 			// rootRef.current.el
 			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
 			// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
@@ -197,6 +225,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			// });
 			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
 			// setTimeout(() => {
+			// const simpleBar = new SimpleBar(document.getElementById('myElement'));
 
 			// setStart(
 			// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
@@ -214,15 +243,22 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			// getStart();
 		}
 
-		rootRef.current.addEventListener('scroll', onScroll);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('scroll', onScroll);
+		// rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
 		// rootRef.current.el
 		// 	.querySelector('.simplebar-content-wrapper')
 		// 	.addEventListener('scroll', onScroll);
 		return () => {
-			rootRef.current.removeEventListener('scroll', onScroll);
+			rootRef.current.el
+				.querySelector('.simplebar-content-wrapper')
+				.removeEventListener('scroll', onScroll);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
-
+	useEffect(() => {
+		rootRef.current.getContentElement();
+	}, [start]);
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
 	function width() {
@@ -260,7 +296,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		// console.log(widthColum)
 	}
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		width();
 	}, []);
 	return (
@@ -272,7 +308,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 				</button>
 			</div>
 			<div className="shadow-right"></div>
-			<div
+			<SimpleBar
 				className="warehouse-table"
 				style={{
 					display: 'flex',
@@ -280,14 +316,13 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					marginBottom: '10px',
 					// maxWidth: 1150,
 					width: '100%',
-					overflow: 'auto',
+					// overflow: 'auto',
 					// height: '800px',
 					height: document.body.clientHeight - 180 + 'px',
 				}}
 				autoHide={false}
 				ref={rootRef}
 			>
-
 				<table
 					tabIndex={-1}
 					style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
@@ -335,7 +370,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 											style={
 												switchMenu
 													? {
-															transition: '0.2s',
 															paddingRight: '10px',
 															width: '85px',
 															display: 'flex',
@@ -343,7 +377,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 															overflow: '',
 													  }
 													: {
-															transition: '0.2s',
 															overflow: 'hidden',
 															width: '0px',
 															paddingRight: '0px',
@@ -415,7 +448,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 											style={
 												switchMenu
 													? {
-															transition: '0.2s',
+															// transition: '0.2s',
 															paddingRight: '10px',
 															// width: '85px',
 															maxWidth: '125px',
@@ -424,7 +457,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 															overflow: '',
 													  }
 													: {
-															transition: '0.2s',
+															// transition: '0.2s',
 															overflow: 'hidden',
 															maxWidth: '0px',
 															paddingRight: '0px',
@@ -592,7 +625,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
 
-						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
+						{objProduct.slice(getStart(), getStart() + visibleRows + 40).map((x, index) => (
 							<WarehouseProductList
 								index={index + getStart()}
 								// rowHeight={rowHeight}
@@ -632,7 +665,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					</tfoot>
 				</table>
 				{/* <div style={{ height: getBottomHeight() }} />   */}
-			</div>
+			</SimpleBar>
 		</div>
 	);
 };

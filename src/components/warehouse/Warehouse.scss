@@ -68,11 +68,26 @@ html {
 		}
 	}
 }
-.warehouse-table {
-	// transform: translate3d(0, 0, 0);
-	transform: translateZ(0);
-	will-change: transform,scroll-position;
+.suda {
+	width: 0px;
+	// transition: 0.2s;
+	overflow: hidden;
+	padding-right: 0;
 }
+// .etot:hover .suda {
+// 	width: 85px;
+// }
+@keyframes suka {
+ 0% {width: 0px;
+	padding-right: 0px;}
+ 100%{width: 85px;
+	padding-right: 10px}
+}
+// .warehouse-table {
+// 	// transform: translate3d(0, 0, 0);
+// 	transform: translateZ(0);
+// 	will-change: transform,scroll-position;
+// }
 .warehouse-products {
 	margin-left: 30px;
 	// width: 970px;
@@ -423,6 +438,7 @@ html {
 	}
 	.simplebar-track.simplebar-vertical div {
 		transition: 0.2s;
+		// display: none !important;
 	}
 	// .simplebar-scrollbar.simplebar-visible {
 	// 	transition: 0.2s;
@@ -474,10 +490,14 @@ html {
 		// transform: translate3d(0, 0, 0);
 		// will-change: transform;
 		// padding-bottom: 18px;
-		transform: translateZ(0);
 		// transform: translate3d(0, 0, 0);
+		transform: translateZ(0);
 		will-change: transform ,scroll-position;
 	}
+	// .simplebar-content {
+	// 	transform: translateZ(0);
+	// 	will-change: transform ,scroll-position;
+	// }
 
 	.simplebar-content {
 		display: flex;

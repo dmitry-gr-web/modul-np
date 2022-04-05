@@ -339,7 +339,7 @@ const WarehouseProductList = ({
 								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 								className="sticky-block-children"
 							>
-								<div style={{ minWidth: '51px', paddingRight: '10px' }}>
+								<div class="etot" style={{ minWidth: '51px', paddingRight: '10px' }}>
 									<label className="switch-btn-warehouse">
 										<input
 											type="checkbox"
@@ -351,17 +351,24 @@ const WarehouseProductList = ({
 										<span className="slider round"></span>
 									</label>
 								</div>
-								<div
+								<div className='suda'
 									style={
 										switchMenu
-											? { transition: '0.2s', paddingRight: '10px', width: '85px' }
+											? {  paddingRight: '10px', width: '85px' }
 											: {
-													transition: '0.2s',
+													// transition: '0.2s',
 													overflow: 'hidden',
 													width: '0px',
 													paddingRight: '0px',
 											  }
 									}
+									// style={
+									// 	switchMenu
+									// 		? { animation: 'suka 0.2s forwards' }
+									// 		: {
+									// 				animation: ''
+									// 		  }
+									// }
 								>
 									<label 	style={!objProduct[index].status.all ? { opacity: 0.4 } : {}} className="switch-btn-small">
 										<input

@@ -72,11 +72,22 @@ html {
   border-radius: 2px 0 0 2px;
 }
 
-.warehouse-table {
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
+.suda {
+  width: 0px;
+  overflow: hidden;
+  padding-right: 0;
 }
 
+@keyframes suka {
+  0% {
+    width: 0px;
+    padding-right: 0px;
+  }
+  100% {
+    width: 85px;
+    padding-right: 10px;
+  }
+}
 .warehouse-products {
   margin-left: 30px;
   width: 100%;
