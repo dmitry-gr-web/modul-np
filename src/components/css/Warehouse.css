@@ -433,6 +433,10 @@ html {
 .warehouse-products table:focus {
   outline: none;
 }
+.warehouse-products table td {
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
+}
 .warehouse-products table .shadow-left {
   position: absolute;
   height: 20px;
