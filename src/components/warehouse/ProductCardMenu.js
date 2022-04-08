@@ -16,8 +16,8 @@ const ProductCardMenu = () => {
 				<input onChange={(e) => searchInput(e)} ref={props.inputRef2} type="text" />
 				<div
 					className="count"
-					onMouseEnter={(e) => props.toolTipOn(e, e.target.innerText)}
-					onMouseLeave={props.toolTipOff}
+					// onMouseEnter={(e) => props.toolTipOn(e, e.target.innerText)}
+					// onMouseLeave={props.toolTipOff}
 				>
 					(
 					{props.data.length > 0 &&

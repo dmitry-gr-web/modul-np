@@ -295,9 +295,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 		// console.log(widthColum)
 	}
 
-	useLayoutEffect(() => {
-		width();
-	}, []);
+	// useLayoutEffect(() => {
+	// 	width();
+	// }, []);
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
