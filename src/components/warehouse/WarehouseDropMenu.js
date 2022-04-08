@@ -103,7 +103,8 @@ const WarehouseDropMenu = ({
 				});
 				setOpenMenu(false);
 				setPodlozhka(false);
-				document.querySelector('.warehouse-table').style.overflow = '';
+				// document.querySelector('.warehouse-table').style.overflow = '';
+				document.querySelector('.warehouse-table').style.overflow = 'auto';
 
 				return { ...x, select: false };
 			} else if (index !== 0 && i === 0) {
@@ -122,7 +123,8 @@ const WarehouseDropMenu = ({
 			});
 			setOpenMenu(false);
 			setPodlozhka(false);
-			document.querySelector('.warehouse-table').style.overflow = '';
+			document.querySelector('.warehouse-table').style.overflow = 'auto';
+			// document.querySelector('.warehouse-table').style.overflow = '';
 			newobj[0].select = true;
 			if (adaptive) {
 				setFlagSwitchMenu(false);
@@ -228,10 +230,15 @@ const WarehouseDropMenu = ({
 		tooltipBlock.style.fontSize = '12px';
 		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
 			// tooltipBlock.innerText = e.target.innerText;
-			tooltipBlock.innerHTML = searchLine(e.target.innerText, value);
-			tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-			tooltipBlock.style.top = posElement.y + 'px';
-			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+			if(type === 'country' || type === 'status') {
+				// tooltipBlock.innerText = e.target.innerText;
+			} else {
+				tooltipBlock.innerHTML = searchLine(e.target.innerText, value);
+				tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+				tooltipBlock.style.top = posElement.y + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+			}
+
 		}
 	}
 	function tooltipOff() {

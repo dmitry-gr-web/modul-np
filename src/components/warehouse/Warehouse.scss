@@ -68,12 +68,15 @@ html {
 		}
 	}
 }
-.suda {
-	width: 0px;
-	// transition: 0.2s;
-	overflow: hidden;
-	padding-right: 0;
-}
+// .suda {
+// 	width: 0px;
+// 	// transition: 0.2s;
+// 	transform: translateZ(0);
+// 	transform: translate3d(0, 0, 0);
+// 	will-change: transform,scroll-position;
+// 	overflow: hidden;
+// 	padding-right: 0;
+// }
 // .etot:hover .suda {
 // 	width: 85px;
 // }
@@ -83,11 +86,11 @@ html {
  100%{width: 85px;
 	padding-right: 10px}
 }
-// .warehouse-table {
-// 	// transform: translate3d(0, 0, 0);
-// 	transform: translateZ(0);
-// 	will-change: transform,scroll-position;
-// }
+.warehouse-table {
+	transform: translateZ(0);
+	transform: translate3d(0, 0, 0);
+	will-change: transform,scroll-position;
+}
 .warehouse-products {
 	margin-left: 30px;
 	// width: 970px;
@@ -490,8 +493,8 @@ html {
 		// transform: translate3d(0, 0, 0);
 		// will-change: transform;
 		// padding-bottom: 18px;
-		// transform: translate3d(0, 0, 0);
 		transform: translateZ(0);
+		transform: translate3d(0, 0, 0);
 		will-change: transform ,scroll-position;
 	}
 	// .simplebar-content {
@@ -505,10 +508,13 @@ html {
 	table {
 		border-spacing: 0px;
 		user-select: none;
+		transform: translateZ(0);
+		transform: translate3d(0, 0, 0);
+		will-change: transform ,scroll-position;
 		// transform: translateZ(0);
 		// will-change: transform ,scroll-position;
 		// transform: translate3d(0, 0, 0);
-		
+	
 		// outline: none;
 		// outline-width: 0;
 		// box-shadow:none;
@@ -877,6 +883,11 @@ html {
 			// 	// transform: translate3d(0, 0, 0);
 			// 	will-change: transform ,scroll-position;
 			// }
+			tr{
+				transform: translateZ(0);
+				transform: translate3d(0, 0, 0);
+				will-change: transform ,scroll-position;
+			}
 			td {
 				padding: 0;
 				font-size: 14px;
@@ -1020,7 +1031,7 @@ html {
 			// 		background: #adaaaa;
 			// 	}
 			// }
-			tr:not(.lockOrder):hover {
+			tr:not(.lockOrder):hover  {
 				background: #cacaca;
 				.sticky-body {
 					background: #cacaca;
@@ -1028,7 +1039,24 @@ html {
 				label span {
 					background: #adaaaa;
 				}
+			
+				// .hover{	background: #cacaca;
+				// 	width: 100vw;
+				// 	height: 20px;
+				// 	display: block;
+				// 	position: absolute;
+				// 	left:0;
+				// 	top:0;
+				// 	z-index: -123232;}
+				
+				// td {
+				// 	background: #cacaca;
+				// }
 			}
+			// td:not(td:first-child) {
+			// 	z-index: 2;
+			// 	position: relative;
+			// }
 			tr:not(.lockOrder):hover .shadow-left {
 				// display: none;
 				background: linear-gradient(

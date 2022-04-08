@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useRef, useMemo,useContext } from 'react';
+// import ProductCard from '../warehouse/Warehouse';
 // import PodProductList from './PodProductList';
 let plusminus;
 const WarehouseProductList = ({
@@ -26,6 +27,9 @@ const WarehouseProductList = ({
 	start,
 	widthColum,
 	height,
+	setToggleCard,
+	setGetIndex,
+	indexParent
 	// widthColum,
 	// setWidthColum
 }) => {
@@ -38,7 +42,10 @@ const WarehouseProductList = ({
 	// 		setSwitchChecked(true);
 	// 	}
 	// }, [objProduct]);
+	// const toggleCard  = useContext(ProductCard);
+	
 	function switchBtn(e) {
+		e.stopPropagation();
 		if (e.target.className === 'status-all') {
 			let newobj = [...objProduct];
 			newobj[index].status.all = !newobj[index].status.all;
@@ -102,19 +109,26 @@ const WarehouseProductList = ({
 	}
 	function tooltipOn(e) {
 		// e.stopPropagation();
+		clearTimeout(plusminus);
 		const tooltipBlock = document.getElementById('tooltipBtn');
 		let posElement = e.currentTarget.getBoundingClientRect();
 		// tooltipBlock.innerHTML = html;
 		tooltipBlock.style.fontSize = '14px';
 		// console.log(e);
-		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
-			// tooltipBlock.style.fontSize = '12px';
-			tooltipBlock.innerText = e.target.innerText;
 
-			tooltipBlock.style.left = posElement.x + 'px';
-			tooltipBlock.style.top = posElement.y + 23 + 'px';
-			tooltipBlock.style.animation = 'delay-header 1s forwards';
-		}
+			if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
+				// tooltipBlock.style.fontSize = '12px';
+				plusminus = setTimeout(() => {
+				tooltipBlock.innerText = e.target.innerText;
+	
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+			}
+			// console.log(e.target.querySelector('input'))
+
+	
 	}
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
@@ -291,7 +305,7 @@ const WarehouseProductList = ({
 			inputRef?.current?.select();
 			inputRef?.current?.focus();
 			// console.log(e.target.querySelector('input'))
-		}, 100);
+		}, 150);
 	}
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
@@ -317,18 +331,29 @@ const WarehouseProductList = ({
 	// 	PlusMinusOpen()
 	// }, [])
 	// console.log(objProduct[index].status.all);
+	function dblClick (e) {
+		// console.log(e)
+		if(e.target.localName ==='button' || e.target.offsetParent ==='label' || e.target.className === '.slider.round') {
+		} else {
+		
+			setToggleCard(true);
+			setGetIndex(index);
+		}
 
+		
+	}
 	return (
 		<>
 			{objProduct[index] && (
 				<tr
+				
 					// style={height}
 					className={objProduct[index].select && !objProduct[index].lock ? 'select' : objProduct[index].lock ? 'lockOrder' : ''}
 					onClick={clickTr}
 					ref={linkTR}
 					// key={index}
 					// style={{transition: '0.2s',opacity: 0}}
-
+					onDoubleClickCapture={dblClick}
 					key={index}
 				>
 					<td className="sticky-body">
@@ -351,12 +376,12 @@ const WarehouseProductList = ({
 										<span className="slider round"></span>
 									</label>
 								</div>
-								<div className='suda'
+								<div 
 									style={
 										switchMenu
-											? {  paddingRight: '10px', width: '85px' }
+											? {	transition: '0.2s',  paddingRight: '10px', width: '85px' }
 											: {
-													// transition: '0.2s',
+													transition: '0.2s',
 													overflow: 'hidden',
 													width: '0px',
 													paddingRight: '0px',

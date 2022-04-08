@@ -19,7 +19,7 @@ import WarehouseInput from './WarehouseInput';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
-const WarehouseBlock = ({ objProduct, setObjProduct }) => {
+const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex}) => {
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
@@ -43,7 +43,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 		// document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
 		// 	x.style.width = '0%';
 		// });
-		document.querySelector('.warehouse-table').style.overflow = '';
+		// document.querySelector('.warehouse-table').style.overflow = '';
+		document.querySelector('.warehouse-table').style.overflow = 'auto';
 
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 			x.style.visibility = 'visible';
@@ -216,7 +217,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			document.querySelector('.warehouse-products table').classList.add('hoverOff');
 			timer = setTimeout(() => {
 				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-			}, 300);
+			}, 10);
 			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
 			// rootRef.current.el
 			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
@@ -243,22 +244,20 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 			// getStart();
 		}
 
-		rootRef.current.el
-			.querySelector('.simplebar-content-wrapper')
+		rootRef.current
 			.addEventListener('scroll', onScroll);
 		// rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
 		// rootRef.current.el
 		// 	.querySelector('.simplebar-content-wrapper')
 		// 	.addEventListener('scroll', onScroll);
 		return () => {
-			rootRef.current.el
-				.querySelector('.simplebar-content-wrapper')
+			rootRef.current
 				.removeEventListener('scroll', onScroll);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
-	useEffect(() => {
-		rootRef.current.getContentElement();
-	}, [start]);
+	// useEffect(() => {
+	// 	rootRef.current.getContentElement();
+	// }, [start]);
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
 	function width() {
@@ -308,7 +307,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 				</button>
 			</div>
 			<div className="shadow-right"></div>
-			<SimpleBar
+			<div
 				className="warehouse-table"
 				style={{
 					display: 'flex',
@@ -316,7 +315,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					marginBottom: '10px',
 					// maxWidth: 1150,
 					width: '100%',
-					// overflow: 'auto',
+					overflow: 'auto',
 					// height: '800px',
 					height: document.body.clientHeight - 180 + 'px',
 				}}
@@ -366,10 +365,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 										>
 											Статус
 										</div>
-										<div
+										<div 
 											style={
 												switchMenu
-													? {
+													? {	
+															transition:'0.2s',
 															paddingRight: '10px',
 															width: '85px',
 															display: 'flex',
@@ -377,6 +377,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 															overflow: '',
 													  }
 													: {
+															transition:'0.2s',
 															overflow: 'hidden',
 															width: '0px',
 															paddingRight: '0px',
@@ -444,11 +445,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 												objProduct={objProduct}
 											/>
 										</div>
-										<div
+										<div 
 											style={
 												switchMenu
 													? {
-															// transition: '0.2s',
+															transition: '0.2s',
 															paddingRight: '10px',
 															// width: '85px',
 															maxWidth: '125px',
@@ -457,7 +458,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 															overflow: '',
 													  }
 													: {
-															// transition: '0.2s',
+															transition: '0.2s',
 															overflow: 'hidden',
 															maxWidth: '0px',
 															paddingRight: '0px',
@@ -630,11 +631,13 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 								index={index + getStart()}
 								// rowHeight={rowHeight}
 								// style={{ height: rowHeight }}
+								indexParent={index}
 								widthColum={widthColum}
 								key={index + getStart()}
 								start={getStart()}
 								setChecked={setChecked}
 								checked={checked}
+								setGetIndex={setGetIndex}
 								objProduct={objProduct}
 								switchMenu={switchMenu}
 								setObjProduct={setObjProduct}
@@ -648,6 +651,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 								lastIndex={lastIndex}
 								setBtnMenu={setBtnMenu}
 								btnMenu={btnMenu}
+								setToggleCard={setToggleCard}
 								selectAll={selectAll}
 								setSelectAll={setSelectAll}
 								flagSwitchMenu={flagSwitchMenu}
@@ -665,7 +669,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct }) => {
 					</tfoot>
 				</table>
 				{/* <div style={{ height: getBottomHeight() }} />   */}
-			</SimpleBar>
+			</div>
 		</div>
 	);
 };

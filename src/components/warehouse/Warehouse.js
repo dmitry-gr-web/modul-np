@@ -5,10 +5,15 @@ import { dataWarehouse } from '../data/dataWarehouse';
 import WarehouseBlock from './WarehouseBlock';
 import Suppliers from './Suppliers';
 import AttributeBlock from './AttributeBlock';
+import ProductCard from './ProductCard';
 
 const Warehouse = () => {
 	// let newarr = [...dataWarehouse, ...dataWarehouse];
+	// const ProductCard = React.createContext();
+	const [toggleCard, setToggleCard] = useState(false);
 	const [objProduct, setObjProduct] = useState(dataWarehouse);
+	const [getIndex,setGetIndex] = useState(0);
+
 	// useEffect(() => {
 	// 	let curent = document.querySelectorAll('.while');
 	// 	let width = [];
@@ -49,8 +54,7 @@ const Warehouse = () => {
 	// 		}
 	// 	}, 200);
 	// }, [objProduct, switchMenu]);
-	
-	
+
 	// useEffect(()=> {
 	// 	document.addEventListener('click',function(e){
 	// 		if(!e.target.className.includes('warehouse-table')) {
@@ -61,8 +65,6 @@ const Warehouse = () => {
 	// 		}
 	// 	});
 	// },[selectAll])
-
-
 
 	// const rootRef = useRef();
 	// const [start, setStart] = useState(0);
@@ -111,11 +113,12 @@ const Warehouse = () => {
 			if (index === i) {
 				return { ...x, select: true };
 			} else {
-				return {...x, select: false};
+				return { ...x, select: false };
 			}
 		});
 		setUl(obj);
 	}
+
 	return (
 		<div
 			style={{
@@ -138,26 +141,29 @@ const Warehouse = () => {
 					background: 'white',
 					display: 'flex',
 					cursor: 'default',
-					justifyContent: 'space-between'
+					justifyContent: 'space-between',
 				}}
 			>
-				<aside>
-					<div className="warehouse-title">Склад</div>
-					<nav className="warehouse-nav">
-						<ul>
-							{ul.map((x, i) => (
-								<li onClick={() => clickNav(x.id)} className={x.select ? 'select-link' : ''}>
-									{x.name}
-								</li>
-							))}
-						</ul>
-					</nav>
-				</aside>
-				{ul[0].select && <WarehouseBlock setObjProduct={setObjProduct} objProduct={objProduct}/>}
-				{ul[1].select && <AttributeBlock/>}
-				{ul[2].select && <Suppliers/>}
-				{ul[3].select && <div/>}
-								
+
+					<aside>
+						<div className="warehouse-title">Склад</div>
+						<nav className="warehouse-nav">
+							<ul>
+								{ul.map((x, i) => (
+									<li onClick={() => clickNav(x.id)} className={x.select ? 'select-link' : ''}>
+										{x.name}
+									</li>
+								))}
+							</ul>
+						</nav>
+					</aside>
+					{ul[0].select && <WarehouseBlock setToggleCard={setToggleCard} setGetIndex={setGetIndex} setObjProduct={setObjProduct} objProduct={objProduct} />}
+					{ul[1].select && <AttributeBlock />}
+					{ul[2].select && <Suppliers />}
+					{ul[3].select && <div />}
+				
+					{toggleCard && <ProductCard getIndex={getIndex} toggleCard={toggleCard} setToggleCard={setToggleCard} setObjProduct={setObjProduct} objProduct={objProduct}/>}
+
 			</div>
 		</div>
 	);
