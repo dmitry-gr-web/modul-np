@@ -83,8 +83,7 @@ html {
   }
 }
 .warehouse-table {
-  transform: translateZ(0);
-  transform: translate3d(0, 0, 0);
+  transform: scale(1);
   will-change: transform, scroll-position;
 }
 
@@ -420,7 +419,6 @@ html {
 .warehouse-products .simplebar-content-wrapper {
   padding: 0;
   transform: translateZ(0);
-  transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
 }
 .warehouse-products .simplebar-content {
@@ -430,7 +428,6 @@ html {
   border-spacing: 0px;
   user-select: none;
   transform: translateZ(0);
-  transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
 }
 .warehouse-products table:focus {
@@ -597,7 +594,6 @@ html {
 }
 .warehouse-products table .first-tab-body tr {
   transform: translateZ(0);
-  transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
 }
 .warehouse-products table .first-tab-body td {

@@ -207,54 +207,87 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 
 		return wrapper;
 	}
-	useEffect(() => {
-		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
-
-		function onScroll(e) {
-			clearTimeout(timer);
-			setStart(e.target.scrollTop);
-			// console.log(start)
-			document.querySelector('.warehouse-products table').classList.add('hoverOff');
-			timer = setTimeout(() => {
-				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-			}, 10);
-			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
-			// rootRef.current.el
-			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
-			// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
-			// 	x.style.animation = 'trAnimtaion 0.2s forwards';
-			// });
-			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-			// setTimeout(() => {
-			// const simpleBar = new SimpleBar(document.getElementById('myElement'));
-
-			// setStart(
-			// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
-			// 	Math.min(
-			// 		objProduct.length - visibleRows - 10,
-			// 		Math.floor(
-			// 			e.target.scrollTop - 10 * rowHeight < 0
-			// 				? 0
-			// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
-			// 		)
-			// 	)
-			// );
-			// rootRef.current.recalculate();
-			// }, 0);
-			// getStart();
-		}
-
-		rootRef.current
-			.addEventListener('scroll', onScroll);
-		// rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
+	function onScroll(e) {
+		clearTimeout(timer);
+		setStart(e.target.scrollTop);
+		// console.log(start)
+		document.querySelector('.warehouse-products table').classList.add('hoverOff');
+		timer = setTimeout(() => {
+			document.querySelector('.warehouse-products table').classList.remove('hoverOff');
+		}, 10);
+		// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
 		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('scroll', onScroll);
-		return () => {
-			rootRef.current
-				.removeEventListener('scroll', onScroll);
-		};
-	}, [objProduct.length, visibleRows, rowHeight]);
+		// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
+		// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
+		// 	x.style.animation = 'trAnimtaion 0.2s forwards';
+		// });
+		// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
+		// setTimeout(() => {
+		// const simpleBar = new SimpleBar(document.getElementById('myElement'));
+
+		// setStart(
+		// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
+		// 	Math.min(
+		// 		objProduct.length - visibleRows - 10,
+		// 		Math.floor(
+		// 			e.target.scrollTop - 10 * rowHeight < 0
+		// 				? 0
+		// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
+		// 		)
+		// 	)
+		// );
+		// rootRef.current.recalculate();
+		// }, 0);
+		// getStart();
+	}
+	// useEffect(() => {
+	// 	// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
+
+	// 	function onScroll(e) {
+	// 		clearTimeout(timer);
+	// 		setStart(e.target.scrollTop);
+	// 		// console.log(start)
+	// 		document.querySelector('.warehouse-products table').classList.add('hoverOff');
+	// 		timer = setTimeout(() => {
+	// 			document.querySelector('.warehouse-products table').classList.remove('hoverOff');
+	// 		}, 10);
+	// 		// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
+	// 		// rootRef.current.el
+	// 		// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
+	// 		// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
+	// 		// 	x.style.animation = 'trAnimtaion 0.2s forwards';
+	// 		// });
+	// 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
+	// 		// setTimeout(() => {
+	// 		// const simpleBar = new SimpleBar(document.getElementById('myElement'));
+
+	// 		// setStart(
+	// 		// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
+	// 		// 	Math.min(
+	// 		// 		objProduct.length - visibleRows - 10,
+	// 		// 		Math.floor(
+	// 		// 			e.target.scrollTop - 10 * rowHeight < 0
+	// 		// 				? 0
+	// 		// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
+	// 		// 		)
+	// 		// 	)
+	// 		// );
+	// 		// rootRef.current.recalculate();
+	// 		// }, 0);
+	// 		// getStart();
+	// 	}
+
+	// 	rootRef.current
+	// 		.addEventListener('scroll', onScroll);
+	// 	// rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
+	// 	// rootRef.current.el
+	// 	// 	.querySelector('.simplebar-content-wrapper')
+	// 	// 	.addEventListener('scroll', onScroll);
+	// 	return () => {
+	// 		rootRef.current
+	// 			.removeEventListener('scroll', onScroll);
+	// 	};
+	// }, [objProduct.length, visibleRows, rowHeight]);
 	// useEffect(() => {
 	// 	rootRef.current.getContentElement();
 	// }, [start]);
@@ -295,9 +328,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 		// console.log(widthColum)
 	}
 
-	// useLayoutEffect(() => {
-	// 	width();
-	// }, []);
+	useLayoutEffect(() => {
+		width();
+	}, []);
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
@@ -321,6 +354,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 				}}
 				autoHide={false}
 				ref={rootRef}
+				onScroll={onScroll}
 			>
 				<table
 					tabIndex={-1}
