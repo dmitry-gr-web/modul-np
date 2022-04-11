@@ -4,7 +4,7 @@
 		url('../../fonts/BabelStoneFlags.woff2') format('woff2'),
 		url('../../fonts/BabelStoneFlags.woff') format('woff');
 }
-@media (min-width: 1350px) {
+@media (min-width: 1335px) {
 	.id-width {
 		width: 100px !important;
 	}
@@ -15,6 +15,20 @@
 		max-width: 250px !important;
 	}
 }
+@media (-webkit-min-device-pixel-ratio: 2) {
+	.id-width {
+		width: 60px !important;
+	}
+	.name-width {
+		max-width: 172px !important;
+	}
+	.attribute-width span {
+		max-width: 100px !important;
+	}
+}
+// @media (-webkit-min-device-pixel-ratio: 1) {
+
+// }
 html {
 	overscroll-behavior-x: none;
 	overscroll-behavior-y: none;
