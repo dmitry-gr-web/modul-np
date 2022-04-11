@@ -4,7 +4,7 @@
 		url('../../fonts/BabelStoneFlags.woff2') format('woff2'),
 		url('../../fonts/BabelStoneFlags.woff') format('woff');
 }
-@media (min-width: 1335px) {
+@media (min-width: 1400px) {
 	.id-width {
 		width: 100px !important;
 	}
@@ -161,6 +161,16 @@ html {
 				margin: 0 5px;
 			}
 		}
+	}
+	.block-3-btn {
+	position: absolute;
+	left:54px;
+	display: flex;
+	justify-content: space-between;
+	padding-right: 0;
+	max-width: 0px;
+	// overflow: hidden;
+	transition: 0.3s;
 	}
 	.adaptive-switch-on2 {
 		padding-right: 10px;
@@ -607,6 +617,9 @@ html {
 			height: 20px;
 			background-color:white;
 			z-index: 2;
+			label {
+				top:2px;
+			}
 		}
 		.sticky-body {
 			background: white;
@@ -1174,6 +1187,9 @@ html {
 			}
 			tr:hover .sticky-block  {
 				background: #cacaca;
+				.animationFrame {
+					background: #cacaca;
+				}
 				label span {
 							background: #adaaaa;
 						}
@@ -1250,6 +1266,9 @@ html {
 			.select {
 				// background-color: rgba(81, 81, 81, 0.7);
 				background-color: #858585;
+				.animationFrame {
+					background-color: #858585;
+				}
 				.shadow-left {
 					// display: none;
 					background: linear-gradient(

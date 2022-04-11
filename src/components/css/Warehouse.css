@@ -2,7 +2,7 @@
   font-family: "BabelStone Flags";
   src: local("BabelStone Flags"), local("BabelStoneFlags"), url("../../fonts/BabelStoneFlags.woff2") format("woff2"), url("../../fonts/BabelStoneFlags.woff") format("woff");
 }
-@media (min-width: 1335px) {
+@media (min-width: 1400px) {
   .id-width {
     width: 100px !important;
   }
@@ -136,6 +136,15 @@ html {
 }
 .warehouse-products .adaptive-switch2 .block-3-btn .warehouse-dropmenu:nth-child(2) {
   margin: 0 5px;
+}
+.warehouse-products .block-3-btn {
+  position: absolute;
+  left: 54px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 0;
+  max-width: 0px;
+  transition: 0.3s;
 }
 .warehouse-products .adaptive-switch-on2 {
   padding-right: 10px;
@@ -472,6 +481,9 @@ html {
   background-color: white;
   z-index: 2;
 }
+.warehouse-products table .animationFrame label {
+  top: 2px;
+}
 .warehouse-products table .sticky-body {
   background: white;
   position: sticky;
@@ -710,6 +722,9 @@ html {
 .warehouse-products table .first-tab-body tr:hover .sticky-block {
   background: #cacaca;
 }
+.warehouse-products table .first-tab-body tr:hover .sticky-block .animationFrame {
+  background: #cacaca;
+}
 .warehouse-products table .first-tab-body tr:hover .sticky-block label span {
   background: #adaaaa;
 }
@@ -729,6 +744,9 @@ html {
   top: 0;
 }
 .warehouse-products table .first-tab-body .select {
+  background-color: #858585;
+}
+.warehouse-products table .first-tab-body .select .animationFrame {
   background-color: #858585;
 }
 .warehouse-products table .first-tab-body .select .shadow-left {

@@ -250,7 +250,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 			document.querySelector('.warehouse-products table').classList.add('hoverOff');
 			timer = setTimeout(() => {
 				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-			}, 50);
+			}, 100);
 			document.querySelector('#tooltipBtn').style.animation = '';
 			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
 			// rootRef.current.el
@@ -344,10 +344,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 					x.style.width = '90px';
 					x.style.paddingRight = '10px';
 				});
-				document.querySelectorAll('.block-3-btn').forEach(x => {
+				document.querySelectorAll('.block-3-btn').forEach((x) => {
 					x.style.maxWidth = '125px';
 					x.style.paddingRight = '10px';
-				})
+				});
 			});
 		} else {
 			requestAnimationFrame(() => {
@@ -355,10 +355,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 					x.style.width = '0px';
 					x.style.paddingRight = '0px';
 				});
-				document.querySelectorAll('.block-3-btn').forEach(x => {
+				document.querySelectorAll('.block-3-btn').forEach((x) => {
 					x.style.maxWidth = '0px';
 					x.style.paddingRight = '0px';
-				})
+				});
 			});
 		}
 	}, [switchMenu]);
@@ -467,6 +467,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 												paddingRight: '0px',
 												justifyContent: 'space-between',
 												display: 'flex',
+												height: '16px',
 											}}
 										>
 											<img className="logo-mail" src={crmLogo} alt="" />
@@ -594,30 +595,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 												objProduct={objProduct}
 											/>
 										</div>
-										<div
-											style={
-												switchMenu
-													? {
-															overflow: '',
-												
-															
-															justifyContent: 'space-between',
-															display: 'flex',
-													
-													  }
-													:
-													 {
-															transition: '0.3s',
-															overflow: 'hidden',
-															// width: '0px',
-															maxWidth: '0px',
-															paddingRight: '0px',
-															justifyContent: 'space-between',
-															display: 'flex',
-													  }
-											}
-											className="block-3-btn"
-										>
+										<div style={switchMenu ? { overflow: '' } : {overflow:'hidden'}} className="block-3-btn">
 											<WarehouseDropMenu
 												adaptive={true}
 												setPodlozhka={setPodlozhka}

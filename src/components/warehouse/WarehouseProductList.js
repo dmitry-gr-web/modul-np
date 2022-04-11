@@ -293,14 +293,19 @@ const WarehouseProductList = ({
 	// console.log(inputRef.current.value)
 
 	// inputRef.current.style.width = inputRef.current.value.length * 8 + 4 + 'px';
+	const btnRef = useRef();
 	function PlusMinusOpen(e) {
 		// setBtnMenu(true);
-		requestAnimationFrame(()=> {
-			document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-				x.style.width = '16px';
-			});
+		// requestAnimationFrame(()=> {
+		// 	document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+		// 		x.style.width = '16px';
+		// 	});
+		// })
+		btnRef.current.querySelectorAll('button').forEach(x => {
+			x.style.width = '16px';
 		})
-
+		// console.log(btnRef.current.firstChild.style.width = '16px')
+		// console.log(btnRef.current.lastChild.style.width = '16px')
 		// console.log(inputRef.current.offsetParent.children[0].children[0].style.width = '16px')
 		plusminus = setTimeout(() => {
 			inputRef?.current?.select();
@@ -311,12 +316,14 @@ const WarehouseProductList = ({
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
 			// setBtnMenu(false);
-			requestAnimationFrame(()=> {
-				document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-					x.style.width = '0px';
-				});
+			// requestAnimationFrame(()=> {
+			// 	document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+			// 		x.style.width = '0px';
+			// 	});
+			// })
+			btnRef.current.querySelectorAll('button').forEach(x => {
+				x.style.width = '0px';
 			})
-		
 
 			inputRef.current.blur();
 		}
@@ -700,7 +707,7 @@ const WarehouseProductList = ({
 						onMouseEnter={PlusMinusOpen}
 						className="nal-ostatok"
 					>
-						<div
+						<div ref={btnRef}
 							style={
 								!objProduct[index].status.all
 									? {
