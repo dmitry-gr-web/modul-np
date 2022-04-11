@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo,useContext } from 'react';
+import React, { useEffect, useState, useRef, useMemo, useContext } from 'react';
 // import ProductCard from '../warehouse/Warehouse';
 // import PodProductList from './PodProductList';
 let plusminus;
@@ -29,7 +29,7 @@ const WarehouseProductList = ({
 	height,
 	setToggleCard,
 	setGetIndex,
-	indexParent
+	indexParent,
 	// widthColum,
 	// setWidthColum
 }) => {
@@ -43,7 +43,7 @@ const WarehouseProductList = ({
 	// 	}
 	// }, [objProduct]);
 	// const toggleCard  = useContext(ProductCard);
-	
+
 	function switchBtn(e) {
 		e.stopPropagation();
 		if (e.target.className === 'status-all') {
@@ -59,7 +59,7 @@ const WarehouseProductList = ({
 				newobj[index].status.crm = true;
 			}
 			setObjProduct(newobj);
-			console.log(objProduct)
+			console.log(objProduct);
 		}
 		if (e.target.className === 'status-rozetka') {
 			let newobj = [...objProduct];
@@ -116,19 +116,17 @@ const WarehouseProductList = ({
 		tooltipBlock.style.fontSize = '14px';
 		// console.log(e);
 
-			if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
-				// tooltipBlock.style.fontSize = '12px';
-				plusminus = setTimeout(() => {
+		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
+			// tooltipBlock.style.fontSize = '12px';
+			plusminus = setTimeout(() => {
 				tooltipBlock.innerText = e.target.innerText;
-	
+
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-header 1s forwards';
 			}, 150);
-			}
-			// console.log(e.target.querySelector('input'))
-
-	
+		}
+		// console.log(e.target.querySelector('input'))
 	}
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
@@ -278,7 +276,7 @@ const WarehouseProductList = ({
 			e.preventDefault();
 			e.stopPropagation();
 			newobj.slice(lastIndex, index).map((x, i) => {
-				if(x.lock) {
+				if (x.lock) {
 					x.select = false;
 				} else {
 					x.select = true;
@@ -297,9 +295,12 @@ const WarehouseProductList = ({
 	// inputRef.current.style.width = inputRef.current.value.length * 8 + 4 + 'px';
 	function PlusMinusOpen(e) {
 		// setBtnMenu(true);
-		document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-			x.style.width = '16px';
-		});
+		requestAnimationFrame(()=> {
+			document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+				x.style.width = '16px';
+			});
+		})
+
 		// console.log(inputRef.current.offsetParent.children[0].children[0].style.width = '16px')
 		plusminus = setTimeout(() => {
 			inputRef?.current?.select();
@@ -310,9 +311,12 @@ const WarehouseProductList = ({
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
 			// setBtnMenu(false);
-			document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-				x.style.width = '0px';
-			});
+			requestAnimationFrame(()=> {
+				document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+					x.style.width = '0px';
+				});
+			})
+		
 
 			inputRef.current.blur();
 		}
@@ -331,24 +335,31 @@ const WarehouseProductList = ({
 	// 	PlusMinusOpen()
 	// }, [])
 	// console.log(objProduct[index].status.all);
-	function dblClick (e) {
+	function dblClick(e) {
 		// console.log(e)
-		if(e.target.localName ==='button' || e.target.offsetParent ==='label' || e.target.className === '.slider.round') {
+		if (
+			e.target.localName === 'button' ||
+			e.target.offsetParent === 'label' ||
+			e.target.className === '.slider.round'
+		) {
 		} else {
-		
 			setToggleCard(true);
 			setGetIndex(index);
 		}
-
-		
 	}
+
 	return (
 		<>
 			{objProduct[index] && (
 				<tr
-				
 					// style={height}
-					className={objProduct[index].select && !objProduct[index].lock ? 'select' : objProduct[index].lock ? 'lockOrder' : ''}
+					className={
+						objProduct[index].select && !objProduct[index].lock
+							? 'select'
+							: objProduct[index].lock
+							? 'lockOrder'
+							: ''
+					}
 					onClick={clickTr}
 					ref={linkTR}
 					// key={index}
@@ -356,15 +367,86 @@ const WarehouseProductList = ({
 					onDoubleClickCapture={dblClick}
 					key={index}
 				>
+					<td className="hoverr">
+						<div></div>
+					</td>
+					{/* <td
+						className="sticky-body-row1"
+						onMouseEnter={() => setSwitchMenu(true)}
+						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+					>
+						<label className="switch-btn-warehouse">
+							<input
+								type="checkbox"
+								className="status-all"
+								onChange={switchBtn}
+								// defaultChecked={objProduct[index].status.all}
+								checked={objProduct[index].status.all}
+							/>
+							<span className="slider round"></span>
+						</label>
+					</td> */}
+					{/* <td
+						className="sticky-body-row2"
+						onMouseEnter={() => setSwitchMenu(true)}
+						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+					>
+						<div style={{ whiteSpace: 'nowrap' }}>
+							<label
+								style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
+								className="switch-btn-small"
+							>
+								<input
+									type="checkbox"
+									className="status-crm"
+									onChange={switchBtn}
+									// defaultChecked={objProduct[index].status.crm}
+									checked={objProduct[index].status.crm}
+								/>
+								<span className="slider round"></span>
+							</label>
+
+							<label
+								style={
+									!objProduct[index].status.all
+										? { opacity: 0.4, margin: '0 15px' }
+										: { margin: '0 15px' }
+								}
+								className="switch-btn-small"
+							>
+								<input
+									type="checkbox"
+									className="status-rozetka"
+									onChange={switchBtn}
+									// defaultChecked={objProduct[index].status.rozetka}
+									checked={objProduct[index].status.rozetka}
+								/>
+								<span className="slider round"></span>
+							</label>
+
+							<label
+								style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
+								className="switch-btn-small"
+							>
+								<input
+									type="checkbox"
+									className="status-prom"
+									onChange={switchBtn}
+									// defaultChecked={objProduct[index].status.prom}
+									checked={objProduct[index].status.prom}
+								/>
+								<span className="slider round"></span>
+							</label>
+						</div>
+					</td> */}
 					<td className="sticky-body">
 						<div className="sticky-block">
-							<div className="hover"></div>
 							<div
 								onMouseEnter={() => setSwitchMenu(true)}
 								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-								className="sticky-block-children"
+								style={{display: 'flex', height:'20px',alignItems:'center'}}
 							>
-								<div class="etot" style={{ minWidth: '51px', paddingRight: '10px' }}>
+								<div style={{ minWidth: '51px', paddingRight: '10px' }}>
 									<label className="switch-btn-warehouse">
 										<input
 											type="checkbox"
@@ -376,26 +458,15 @@ const WarehouseProductList = ({
 										<span className="slider round"></span>
 									</label>
 								</div>
-								<div 
-									style={
-										switchMenu
-											? {	transition: '0.2s',  paddingRight: '10px', width: '85px' }
-											: {
-													transition: '0.2s',
-													overflow: 'hidden',
-													width: '0px',
-													paddingRight: '0px',
-											  }
-									}
-									// style={
-									// 	switchMenu
-									// 		? { animation: 'suka 0.2s forwards' }
-									// 		: {
-									// 				animation: ''
-									// 		  }
-									// }
+
+								<div
+									className="animationFrame"
+									style={{ whiteSpace: 'nowrap', width: '0px', overflow: 'hidden' }}
 								>
-									<label 	style={!objProduct[index].status.all ? { opacity: 0.4 } : {}} className="switch-btn-small">
+									<label
+										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
+										className="switch-btn-small"
+									>
 										<input
 											type="checkbox"
 											className="status-crm"
@@ -406,7 +477,14 @@ const WarehouseProductList = ({
 										<span className="slider round"></span>
 									</label>
 
-									<label 	 style={!objProduct[index].status.all ? { opacity: 0.4 ,margin: '0 15px' } : { margin: '0 15px' }} className="switch-btn-small">
+									<label
+										style={
+											!objProduct[index].status.all
+												? { opacity: 0.4, margin: '0 15px' }
+												: { margin: '0 15px' }
+										}
+										className="switch-btn-small"
+									>
 										<input
 											type="checkbox"
 											className="status-rozetka"
@@ -432,6 +510,7 @@ const WarehouseProductList = ({
 									</label>
 								</div>
 							</div>
+
 							<div
 								className="id-width"
 								onMouseLeave={tooltipOff}
@@ -516,7 +595,10 @@ const WarehouseProductList = ({
 									{objProduct[index].name}
 								</span>
 							</div>
-							<div className="attribute-width" style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}>
+							<div
+								className="attribute-width"
+								style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
+							>
 								<img
 									style={{ width: 16, height: 16, position: 'absolute' }}
 									src={objProduct[index].images}
@@ -689,8 +771,13 @@ const WarehouseProductList = ({
 					<td
 						style={
 							!objProduct[index].status.all
-								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right', paddingRight: '15px' }
-								: { textAlign: 'right', paddingRight: '15px' }
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
 						}
 					>
 						{formatNumber(objProduct[index].zakupka)}
@@ -698,8 +785,13 @@ const WarehouseProductList = ({
 					<td
 						style={
 							!objProduct[index].status.all
-								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right', paddingRight: '15px' }
-								: { textAlign: 'right', paddingRight: '15px' }
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
 						}
 					>
 						{formatNumber(objProduct[index].prodazha)}
@@ -707,8 +799,13 @@ const WarehouseProductList = ({
 					<td
 						style={
 							!objProduct[index].status.all
-								? { color: 'rgba(0,0,0,0.4)', textAlign: 'right', paddingRight: '15px' }
-								: { textAlign: 'right', paddingRight: '15px' }
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
 						}
 					>
 						{formatNumber(objProduct[index].marzha)}
@@ -739,7 +836,9 @@ const WarehouseProductList = ({
 					<td className="summa-suma2">
 						<div
 							style={
-								!objProduct[index].status.all ? { opacity: 0.4, paddingRight: '4px' } : { paddingRight: '4px' }
+								!objProduct[index].status.all
+									? { opacity: 0.4, paddingRight: '4px' }
+									: { paddingRight: '4px' }
 							}
 						>
 							{formatNumber(objProduct[index].suma2)}
@@ -748,14 +847,16 @@ const WarehouseProductList = ({
 					<td className="summa-suma3">
 						<div
 							style={
-								!objProduct[index].status.all ? { opacity: 0.4, paddingRight: '4px' } : { paddingRight: '4px' }
+								!objProduct[index].status.all
+									? { opacity: 0.4, paddingRight: '4px' }
+									: { paddingRight: '4px' }
 							}
 						>
 							{formatNumber(objProduct[index].suma3)}
 						</div>
 					</td>
 					<td className="summa-suma4">
-						<div style={!objProduct[index].status.all? { opacity: 0.4 } : {}}>
+						<div style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}>
 							{formatNumber(objProduct[index].suma4)}
 						</div>
 					</td>

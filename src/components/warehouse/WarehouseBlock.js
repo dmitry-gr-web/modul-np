@@ -19,7 +19,7 @@ import WarehouseInput from './WarehouseInput';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
-const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex}) => {
+const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex }) => {
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
@@ -43,8 +43,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 		// document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
 		// 	x.style.width = '0%';
 		// });
-		// document.querySelector('.warehouse-table').style.overflow = '';
-		document.querySelector('.warehouse-table').style.overflow = 'auto';
+		document.querySelector('.warehouse-table').style.overflow = '';
+		// document.querySelector('.warehouse-table').style.overflow = 'auto';
 
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 			x.style.visibility = 'visible';
@@ -178,7 +178,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 	// useEffect(()=> {
 	// 	rootRef.current.recalculate();
 	// },[start])start
-	console.log(getStart());
+	// console.log(getStart());
 	// console.log(getStart())
 	function throttle(func, ms) {
 		let isThrottled = false,
@@ -207,39 +207,39 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 
 		return wrapper;
 	}
-	function onScroll(e) {
-		clearTimeout(timer);
-		setStart(e.target.scrollTop);
-		// console.log(start)
-		document.querySelector('.warehouse-products table').classList.add('hoverOff');
-		timer = setTimeout(() => {
-			document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-		}, 10);
-		// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
-		// rootRef.current.el
-		// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
-		// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
-		// 	x.style.animation = 'trAnimtaion 0.2s forwards';
-		// });
-		// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-		// setTimeout(() => {
-		// const simpleBar = new SimpleBar(document.getElementById('myElement'));
+	// function onScroll(e) {
+	// 	clearTimeout(timer);
+	// 	setStart(e.target.scrollTop);
+	// 	// console.log(start)
+	// 	document.querySelector('.warehouse-products table').classList.add('hoverOff');
+	// 	timer = setTimeout(() => {
+	// 		document.querySelector('.warehouse-products table').classList.remove('hoverOff');
+	// 	}, 10);
+	// 	// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
+	// 	// rootRef.current.el
+	// 	// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
+	// 	// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
+	// 	// 	x.style.animation = 'trAnimtaion 0.2s forwards';
+	// 	// });
+	// 	// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
+	// 	// setTimeout(() => {
+	// 	// const simpleBar = new SimpleBar(document.getElementById('myElement'));
 
-		// setStart(
-		// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
-		// 	Math.min(
-		// 		objProduct.length - visibleRows - 10,
-		// 		Math.floor(
-		// 			e.target.scrollTop - 10 * rowHeight < 0
-		// 				? 0
-		// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
-		// 		)
-		// 	)
-		// );
-		// rootRef.current.recalculate();
-		// }, 0);
-		// getStart();
-	}
+	// 	// setStart(
+	// 	// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
+	// 	// 	Math.min(
+	// 	// 		objProduct.length - visibleRows - 10,
+	// 	// 		Math.floor(
+	// 	// 			e.target.scrollTop - 10 * rowHeight < 0
+	// 	// 				? 0
+	// 	// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
+	// 	// 		)
+	// 	// 	)
+	// 	// );
+	// 	// rootRef.current.recalculate();
+	// 	// }, 0);
+	// 	// getStart();
+	// }
 	useEffect(() => {
 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 
@@ -250,7 +250,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 			document.querySelector('.warehouse-products table').classList.add('hoverOff');
 			timer = setTimeout(() => {
 				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-			}, 10);
+			}, 50);
+			document.querySelector('#tooltipBtn').style.animation = '';
 			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
 			// rootRef.current.el
 			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
@@ -286,13 +287,15 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 		return () => {
 			// rootRef.current
 			// 	.removeEventListener('scroll', onScroll);
-				rootRef.current.el
+			rootRef.current.el
 				.querySelector('.simplebar-content-wrapper')
 				.removeEventListener('scroll', onScroll);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
 	// useEffect(() => {
-	// 	rootRef.current.getContentElement();
+	// 	rootRef.current.recalculate();
+	// 	// rootRef.current.el.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${getStart()}px,0px)`;
+
 	// }, [start]);
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
@@ -334,6 +337,31 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 	useLayoutEffect(() => {
 		width();
 	}, []);
+	useEffect(() => {
+		if (switchMenu) {
+			requestAnimationFrame(() => {
+				document.querySelectorAll('.animationFrame').forEach((x) => {
+					x.style.width = '90px';
+					x.style.paddingRight = '10px';
+				});
+				document.querySelectorAll('.block-3-btn').forEach(x => {
+					x.style.maxWidth = '125px';
+					x.style.paddingRight = '10px';
+				})
+			});
+		} else {
+			requestAnimationFrame(() => {
+				document.querySelectorAll('.animationFrame').forEach((x) => {
+					x.style.width = '0px';
+					x.style.paddingRight = '0px';
+				});
+				document.querySelectorAll('.block-3-btn').forEach(x => {
+					x.style.maxWidth = '0px';
+					x.style.paddingRight = '0px';
+				})
+			});
+		}
+	});
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
@@ -357,7 +385,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 				}}
 				autoHide={false}
 				ref={rootRef}
-				onScroll={onScroll}
+				// onScroll={onScroll}
 			>
 				<table
 					tabIndex={-1}
@@ -384,6 +412,34 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 						</tr>
 
 						<tr>
+							{/* <th style={{width: '0px',position:'absolute'}}>
+						<div></div>
+						</th> */}
+							<th className="hoverr">
+								<div></div>
+							</th>
+							{/* <th
+								className="sticky-head-row1"
+								onMouseEnter={() => setSwitchMenu(true)}
+								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+							>
+								Статус
+							</th>
+							<th
+								className="sticky-head-row2"
+								onMouseEnter={() => setSwitchMenu(true)}
+								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+							
+							
+							>
+								<div 	style={switchMenu ? { width:'100px' } : {}}>
+									<img className="logo-mail" src={crmLogo} alt="" />
+									<img className="logo-mail" src={rozetkaLogo} alt="" />
+									<img className="logo-mail" src={promLogo} alt="" />
+								</div>
+
+								
+							</th> */}
 							<th className="statusBefore sticky-head">
 								<div className="sticky-block">
 									<div
@@ -402,26 +458,16 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 										>
 											Статус
 										</div>
-										<div 
-											style={
-												switchMenu
-													? {	
-															transition:'0.2s',
-															paddingRight: '10px',
-															width: '85px',
-															display: 'flex',
-															justifyContent: 'space-between',
-															overflow: '',
-													  }
-													: {
-															transition:'0.2s',
-															overflow: 'hidden',
-															width: '0px',
-															paddingRight: '0px',
-															justifyContent: 'space-between',
-															display: 'flex',
-													  }
-											}
+										<div
+											className="animationFrame"
+											style={{
+												// transition:'0.2s',
+												overflow: 'hidden',
+												width: '0px',
+												paddingRight: '0px',
+												justifyContent: 'space-between',
+												display: 'flex',
+											}}
 										>
 											<img className="logo-mail" src={crmLogo} alt="" />
 											<img className="logo-mail" src={rozetkaLogo} alt="" />
@@ -466,6 +512,72 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 							<th colSpan={4}>Сумма</th>
 						</tr>
 						<tr ref={linkTR}>
+							{/* <th style={{width: '0px',position:'absolute'}}>
+						<div></div>
+						</th> */}
+							<th className="hoverr">
+								<div></div>
+							</th>
+							{/* <th
+								className="sticky-head-row1"
+								onMouseEnter={() => setSwitchMenu(true)}
+								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+							>
+								<div style={{ width: '51px', paddingRight: '10px' }}>
+									<WarehouseDropMenu
+										setPodlozhka={setPodlozhka}
+										podlozhka={podlozhka}
+										type={'status'}
+										objProduct={objProduct}
+									/>
+								</div>
+							</th> */}
+							{/* <th
+								className="sticky-head-row2"
+								onMouseEnter={() => setSwitchMenu(true)}
+								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+							>
+								<div
+								
+									// style={switchMenu ? { width:'85px' } : {}}
+									className="block-3-btn"
+								>
+									<WarehouseDropMenu
+										adaptive={true}
+										setPodlozhka={setPodlozhka}
+										podlozhka={podlozhka}
+										type={'status'}
+										objProduct={objProduct}
+										setSwitchMenu={setSwitchMenu}
+										switchMenu={switchMenu}
+										setFlagSwitchMenu={setFlagSwitchMenu}
+									/>
+
+									<div style={{ margin: '0 11px' }}>
+										<WarehouseDropMenu
+											adaptive={true}
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											type={'status'}
+											objProduct={objProduct}
+											setSwitchMenu={setSwitchMenu}
+											switchMenu={switchMenu}
+											setFlagSwitchMenu={setFlagSwitchMenu}
+										/>
+									</div>
+
+									<WarehouseDropMenu
+										adaptive={true}
+										setPodlozhka={setPodlozhka}
+										podlozhka={podlozhka}
+										type={'status'}
+										objProduct={objProduct}
+										setSwitchMenu={setSwitchMenu}
+										switchMenu={switchMenu}
+										setFlagSwitchMenu={setFlagSwitchMenu}
+									/>
+								</div>
+							</th> */}
 							<th className="sticky-head">
 								<div className="sticky-block">
 									<div
@@ -482,21 +594,22 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 												objProduct={objProduct}
 											/>
 										</div>
-										<div 
+										<div
 											style={
-												switchMenu
-													? {
-															transition: '0.2s',
-															paddingRight: '10px',
-															// width: '85px',
-															maxWidth: '125px',
-															display: 'flex',
-															justifyContent: 'space-between',
-															overflow: '',
-													  }
-													: {
-															transition: '0.2s',
+												// switchMenu
+												// 	? {
+												// 			overflow: '',
+												// 			transition: '0.3s',
+												// 			maxWidth: '125px',
+												// 			justifyContent: 'space-between',
+												// 			display: 'flex',
+												// 			paddingRight: '10px'
+												// 	  }
+												// 	:
+													 {
+															transition: '0.3s',
 															overflow: 'hidden',
+															// width: '0px',
 															maxWidth: '0px',
 															paddingRight: '0px',
 															justifyContent: 'space-between',
@@ -644,20 +757,22 @@ const WarehouseBlock = ({ objProduct, setObjProduct ,setToggleCard,setGetIndex})
 							</th>
 						</tr>
 
-						<tr>
-							<th className="shadow-vertical" colSpan={1}>
+						{/* <tr>
+				
+						<th className="hoverr" style={{height:'12px'}}>
+							<div></div>
+						</th>
+							<th className="shadow-vertical" colSpan={17}>
 								<div
 									onMouseEnter={() => setSwitchMenu(true)}
 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-									style={switchMenu ? { width: '171px' } : { width: '51px' }}
+									style={switchMenu ? { width: '171px' } : { width: '64px' }}
 								></div>
-								<div></div>
+								<div  		style={switchMenu ? { left: '158px' } : {left:'51px' }}></div>
 							</th>
 
-							<th colSpan="17" className="shadow-vertical-3">
-								<div></div>
-							</th>
-						</tr>
+						
+						</tr> */}
 					</thead>
 
 					<tbody className="first-tab-body">

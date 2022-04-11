@@ -80,17 +80,12 @@ html {
 // .etot:hover .suda {
 // 	width: 85px;
 // }
-@keyframes suka {
- 0% {width: 0px;
-	padding-right: 0px;}
- 100%{width: 85px;
-	padding-right: 10px}
-}
+
 .warehouse-table {
 	transform: scale(1);
 	// transform: translateZ(0);
 	// transform: translate3d(0, 0, 0);
-	will-change: transform,scroll-position;
+	will-change: transform, scroll-position;
 }
 .warehouse-products {
 	margin-left: 30px;
@@ -375,7 +370,7 @@ html {
 		&:after {
 			position: absolute;
 			content: '';
-			width: 401px;
+			width: 40%;
 			height: 1px;
 			right: 10px;
 			top: 7px;
@@ -384,7 +379,7 @@ html {
 		&:before {
 			position: absolute;
 			content: '';
-			width: 401px;
+			width: 40%;
 			height: 1px;
 			left: 13px;
 			top: 7px;
@@ -496,7 +491,7 @@ html {
 		// padding-bottom: 18px;
 		transform: translateZ(0);
 		// transform: translate3d(0, 0, 0);
-		will-change: transform ,scroll-position;
+		will-change: transform, scroll-position;
 	}
 	// .simplebar-content {
 	// 	transform: translateZ(0);
@@ -511,11 +506,11 @@ html {
 		user-select: none;
 		transform: translateZ(0);
 		// transform: translate3d(0, 0, 0);
-		will-change: transform ,scroll-position;
+		will-change: transform, scroll-position;
 		// transform: translateZ(0);
 		// will-change: transform ,scroll-position;
 		// transform: translate3d(0, 0, 0);
-	
+
 		// outline: none;
 		// outline-width: 0;
 		// box-shadow:none;
@@ -548,9 +543,7 @@ html {
 		// 		);
 		// 	}
 		// }
-		td{ 	transform: translateZ(0);
-			// transform: translate3d(0, 0, 0);
-			will-change: transform ,scroll-position;}
+
 		.shadow-left {
 			position: absolute;
 
@@ -585,14 +578,91 @@ html {
 			background: white;
 			position: sticky;
 			z-index: 4;
-			left: 13px;
+			// left: 74px;
+			// transition: 0.5s;
+			// left:200px;
+			left:13px;
+		}
+		.animationFrame {
+			transition: 0.3s;
+			transform: translateZ(0);
+			transform: translate3d(0, 0, 0);
+			will-change: transform, scroll-position;
 		}
 		.sticky-body {
 			background: white;
 			position: sticky;
 			z-index: 1;
 			left: 13px;
+			// left: 74px;
+			// left:200px;
+			// transition: 0.5s;
+			// transform: translateZ(0);
+			// transform: translate3d(0, 0, 0);
+			// will-change: transform, scroll-position;
 		}
+		.id-width {
+			transform: translateZ(0);
+			// transform: translate3d(0, 0, 0);
+			will-change: transform, scroll-position;
+		}
+		.sticky-head-row2 {
+			background: white;
+			position: sticky;
+			z-index: 5;
+			left: 64px;
+			max-width: 0px;
+			width: 0px;
+			// display: flex;
+			// transition: 0.3s;
+			padding-right: 0;
+			// overflow: hidden;
+			div {
+				// transform: translate3d(0, 0, 0);
+				// will-change: transform;
+				width: 0px;
+				transition: 0.3s;
+				overflow: hidden;
+				display: flex;
+
+			}
+		}
+		.sticky-head-row1 {
+			background: white;
+			position: sticky;
+			z-index: 4;
+			left:13px;
+			text-align: left;
+		}
+		.sticky-body-row2 {
+		
+			background: white;
+			position: sticky;
+			z-index: 2;
+			left: 64px;
+			max-width: 0px;
+			width: 0px;
+			// overflow: hidden;
+			div {
+				// transform: translate3d(0, 0, 0);
+				// will-change: transform;
+				width: 0px;
+				// opacity: 0;
+				transition: 0.3s;
+				overflow: hidden;
+				display: flex;
+
+			}
+		}
+		.sticky-body-row1 {
+			background: white;
+			position: sticky;
+			z-index: 1;
+			left:13px;
+			min-width: 51px;
+			padding-right: 10px;
+		}
+		
 		.id-width {
 			overflow: hidden;
 			max-width: 60px;
@@ -801,9 +871,9 @@ html {
 				display: flex;
 				div:first-child {
 					height: 12px;
-					width: 100%;
-					position: sticky;
-					left: 13px;
+					width: calc(100% + 13px);
+					position: absolute;
+					left: -13px;
 
 					background: linear-gradient(
 						180deg,
@@ -816,8 +886,8 @@ html {
 				}
 				div:nth-child(2) {
 					height: 12px;
-					width: 100%;
-					position: relative;
+					width: 100vw;
+					position: absolute;
 
 					background: linear-gradient(
 						180deg,
@@ -833,11 +903,12 @@ html {
 				height: 12px;
 				background: none !important;
 				// z-index: 1 !important;
+				position: relative;
 				div {
 					height: 12px;
 					width: 100%;
-					position: relative;
-
+					position: absolute;
+					top:0;
 					background: linear-gradient(
 						180deg,
 						white 0%,
@@ -883,14 +954,19 @@ html {
 		}
 		.first-tab-body {
 			// tr {
+				// td:nth-child(2) {
+				// 	transform: translateZ(0);
+				// 	// transform: translate3d(0, 0, 0);
+				// 	will-change: transform, scroll-position;
+				// }
 			// 	transform: translateZ(0);
 			// 	// transform: translate3d(0, 0, 0);
 			// 	will-change: transform ,scroll-position;
 			// }
-			tr{
+			tr {
 				transform: translateZ(0);
 				// transform: translate3d(0, 0, 0);
-				will-change: transform ,scroll-position;
+				will-change: transform, scroll-position;
 			}
 			td {
 				padding: 0;
@@ -1038,27 +1114,53 @@ html {
 			// 		background: #adaaaa;
 			// 	}
 			// }
-			tr:not(.lockOrder):hover  {
-				background: #cacaca;
-				.sticky-body {
+			// tr:not(.lockOrder):hover {
+			// 	background: #cacaca;
+			// 	.sticky-body {
+			// 		background: #cacaca;
+			// 	}
+			// 	label span {
+			// 		background: #adaaaa;
+			// 	}
+
+			// 	// .hover{	background: #cacaca;
+			// 	// 	width: 100vw;
+			// 	// 	height: 20px;
+			// 	// 	display: block;
+			// 	// 	position: absolute;
+			// 	// 	left:0;
+			// 	// 	top:0;
+			// 	// 	z-index: -123232;}
+
+			// 	// td {
+			// 	// 	background: #cacaca;
+			// 	// }
+			// }
+			.hoverr {
+				position: sticky;
+				left:13px;
+				width: 0px;
+		
+				div {
+					position: absolute;
+					z-index: -1;
+					height: 20px;
+					top:0;
+					left:0;
+					width: 100vw;
+					display: none;
 					background: #cacaca;
 				}
-				label span {
-					background: #adaaaa;
-				}
 			
-				// .hover{	background: #cacaca;
-				// 	width: 100vw;
-				// 	height: 20px;
-				// 	display: block;
-				// 	position: absolute;
-				// 	left:0;
-				// 	top:0;
-				// 	z-index: -123232;}
-				
-				// td {
-				// 	background: #cacaca;
-				// }
+			}
+			tr:hover .hoverr div {
+				display: block;
+			}
+			tr:hover .sticky-block  {
+				background: #cacaca;
+				label span {
+							background: #adaaaa;
+						}
 			}
 			// td:not(td:first-child) {
 			// 	z-index: 2;
@@ -1227,6 +1329,7 @@ html {
 		.nal-ostatok {
 			padding: 0 2px;
 			position: relative;
+			
 			input {
 				outline: none;
 				border: none;
@@ -1239,6 +1342,9 @@ html {
 				background-color: #afafb3;
 			}
 			button {
+				transform: translateZ(0);
+				// transform: translate3d(0, 0, 0);
+				will-change: transform;
 				position: relative;
 				width: 0px;
 				height: 16px;
@@ -1247,11 +1353,13 @@ html {
 				background-color: transparent;
 				border: none;
 				overflow: hidden;
+				
 				// visibility: hidden;
 				transition: 0.2s;
 				cursor: pointer;
 			}
 			button:first-child {
+				
 				// position: relative;
 				&:before {
 					content: '';
@@ -1519,5 +1627,21 @@ html {
 	100% {
 		transition: 0.2s;
 		opacity: 1;
+	}
+}
+@keyframes suka {
+	0% {
+		// max-width: 0px !important;
+		padding-right: 0px;
+		width: 0px !important;
+		// transform: translateZ(0);
+		// will-change: transform,scroll-position;
+	}
+	100% {
+		// max-width: 85px !important;
+		width:85px !important;
+		// transform: translate3d(0, 0, 0);
+		// will-change: transform,scroll-position;
+		padding-right: 10px;
 	}
 }

@@ -72,16 +72,6 @@ html {
   border-radius: 2px 0 0 2px;
 }
 
-@keyframes suka {
-  0% {
-    width: 0px;
-    padding-right: 0px;
-  }
-  100% {
-    width: 85px;
-    padding-right: 10px;
-  }
-}
 .warehouse-table {
   transform: scale(1);
   will-change: transform, scroll-position;
@@ -338,7 +328,7 @@ html {
 .warehouse-products .warehouse-products-title:after {
   position: absolute;
   content: "";
-  width: 401px;
+  width: 40%;
   height: 1px;
   right: 10px;
   top: 7px;
@@ -347,7 +337,7 @@ html {
 .warehouse-products .warehouse-products-title:before {
   position: absolute;
   content: "";
-  width: 401px;
+  width: 40%;
   height: 1px;
   left: 13px;
   top: 7px;
@@ -433,10 +423,6 @@ html {
 .warehouse-products table:focus {
   outline: none;
 }
-.warehouse-products table td {
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
-}
 .warehouse-products table .shadow-left {
   position: absolute;
   height: 20px;
@@ -463,11 +449,65 @@ html {
   z-index: 4;
   left: 13px;
 }
+.warehouse-products table .animationFrame {
+  transition: 0.3s;
+  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
+  will-change: transform, scroll-position;
+}
 .warehouse-products table .sticky-body {
   background: white;
   position: sticky;
   z-index: 1;
   left: 13px;
+}
+.warehouse-products table .id-width {
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
+}
+.warehouse-products table .sticky-head-row2 {
+  background: white;
+  position: sticky;
+  z-index: 5;
+  left: 64px;
+  max-width: 0px;
+  width: 0px;
+  padding-right: 0;
+}
+.warehouse-products table .sticky-head-row2 div {
+  width: 0px;
+  transition: 0.3s;
+  overflow: hidden;
+  display: flex;
+}
+.warehouse-products table .sticky-head-row1 {
+  background: white;
+  position: sticky;
+  z-index: 4;
+  left: 13px;
+  text-align: left;
+}
+.warehouse-products table .sticky-body-row2 {
+  background: white;
+  position: sticky;
+  z-index: 2;
+  left: 64px;
+  max-width: 0px;
+  width: 0px;
+}
+.warehouse-products table .sticky-body-row2 div {
+  width: 0px;
+  transition: 0.3s;
+  overflow: hidden;
+  display: flex;
+}
+.warehouse-products table .sticky-body-row1 {
+  background: white;
+  position: sticky;
+  z-index: 1;
+  left: 13px;
+  min-width: 51px;
+  padding-right: 10px;
 }
 .warehouse-products table .id-width {
   overflow: hidden;
@@ -553,25 +593,27 @@ html {
 }
 .warehouse-products table .first-tab-header .shadow-vertical div:first-child {
   height: 12px;
-  width: 100%;
-  position: sticky;
-  left: 13px;
+  width: calc(100% + 13px);
+  position: absolute;
+  left: -13px;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table .first-tab-header .shadow-vertical div:nth-child(2) {
   height: 12px;
-  width: 100%;
-  position: relative;
+  width: 100vw;
+  position: absolute;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table .first-tab-header .shadow-vertical-3 {
   height: 12px;
   background: none !important;
+  position: relative;
 }
 .warehouse-products table .first-tab-header .shadow-vertical-3 div {
   height: 12px;
   width: 100%;
-  position: relative;
+  position: absolute;
+  top: 0;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table thead {
@@ -634,13 +676,28 @@ html {
 .warehouse-products table .first-tab-body .lockOrder .shadow-left {
   background: linear-gradient(90deg, #e1dedd 0%, rgba(225, 222, 221, 0.95) 20%, rgba(225, 222, 221, 0.7) 45%, rgba(225, 222, 221, 0.5) 65%, rgba(225, 222, 221, 0) 100%) !important;
 }
-.warehouse-products table .first-tab-body tr:not(.lockOrder):hover {
+.warehouse-products table .first-tab-body .hoverr {
+  position: sticky;
+  left: 13px;
+  width: 0px;
+}
+.warehouse-products table .first-tab-body .hoverr div {
+  position: absolute;
+  z-index: -1;
+  height: 20px;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: none;
   background: #cacaca;
 }
-.warehouse-products table .first-tab-body tr:not(.lockOrder):hover .sticky-body {
+.warehouse-products table .first-tab-body tr:hover .hoverr div {
+  display: block;
+}
+.warehouse-products table .first-tab-body tr:hover .sticky-block {
   background: #cacaca;
 }
-.warehouse-products table .first-tab-body tr:not(.lockOrder):hover label span {
+.warehouse-products table .first-tab-body tr:hover .sticky-block label span {
   background: #adaaaa;
 }
 .warehouse-products table .first-tab-body tr:not(.lockOrder):hover .shadow-left {
@@ -695,6 +752,8 @@ html {
   background-color: #afafb3;
 }
 .warehouse-products table .nal-ostatok button {
+  transform: translateZ(0);
+  will-change: transform;
   position: relative;
   width: 0px;
   height: 16px;
@@ -962,5 +1021,15 @@ html {
   100% {
     transition: 0.2s;
     opacity: 1;
+  }
+}
+@keyframes suka {
+  0% {
+    padding-right: 0px;
+    width: 0px !important;
+  }
+  100% {
+    width: 85px !important;
+    padding-right: 10px;
   }
 }
