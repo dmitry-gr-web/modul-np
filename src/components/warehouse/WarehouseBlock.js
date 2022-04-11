@@ -639,7 +639,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 									>
 										<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
 									</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>
+									<div style={{ paddingRight: '10px', minWidth: 51 ,zIndex: 2}}>
 										<WarehouseDropMenu
 											setPodlozhka={setPodlozhka}
 											podlozhka={podlozhka}

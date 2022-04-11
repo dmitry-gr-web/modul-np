@@ -139,11 +139,13 @@ html {
 }
 .warehouse-products .block-3-btn {
   position: absolute;
-  left: 54px;
+  left: 62px;
   display: flex;
   justify-content: space-between;
   padding-right: 0;
   max-width: 0px;
+  z-index: 5;
+  background-color: white;
   transition: 0.3s;
 }
 .warehouse-products .adaptive-switch-on2 {
@@ -476,7 +478,7 @@ html {
   transform: translateZ(0);
   will-change: width;
   position: absolute;
-  left: 54px;
+  left: 62px;
   height: 20px;
   background-color: white;
   z-index: 2;
