@@ -4,7 +4,7 @@
 		url('../../fonts/BabelStoneFlags.woff2') format('woff2'),
 		url('../../fonts/BabelStoneFlags.woff') format('woff');
 }
-@media (min-width: 1335px) {
+@media (min-width: 1450px) {
 	.id-width {
 		max-width: 100px !important;
 	}
@@ -954,11 +954,11 @@ html {
 		}
 		.first-tab-body {
 			// tr {
-				// td:nth-child(2) {
-				// 	transform: translateZ(0);
-				// 	// transform: translate3d(0, 0, 0);
-				// 	will-change: transform, scroll-position;
-				// }
+				.id-width,.name-width,.attribute-width {
+					transform: translateZ(0);
+					// transform: translate3d(0, 0, 0);
+					will-change: transform, scroll-position;
+				}
 			// 	transform: translateZ(0);
 			// 	// transform: translate3d(0, 0, 0);
 			// 	will-change: transform ,scroll-position;
@@ -1342,9 +1342,8 @@ html {
 				background-color: #afafb3;
 			}
 			button {
-				transform: translateZ(0);
-				// transform: translate3d(0, 0, 0);
-				will-change: transform;
+				// transform: translateZ(0);
+				// will-change: transform;
 				position: relative;
 				width: 0px;
 				height: 16px;
