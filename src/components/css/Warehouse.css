@@ -4,7 +4,7 @@
 }
 @media (min-width: 1450px) {
   .id-width {
-    max-width: 100px !important;
+    width: 100px !important;
   }
 
   .name-width {
@@ -450,20 +450,20 @@ html {
   left: 13px;
 }
 .warehouse-products table .animationFrame {
-  transition: 0.3s;
+  transition: width 0.3s;
   transform: translateZ(0);
-  transform: translate3d(0, 0, 0);
-  will-change: transform, scroll-position;
+  will-change: width;
+  position: absolute;
+  left: 54px;
+  height: 20px;
+  background-color: white;
+  z-index: 2;
 }
 .warehouse-products table .sticky-body {
   background: white;
   position: sticky;
   z-index: 1;
   left: 13px;
-}
-.warehouse-products table .id-width {
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
 }
 .warehouse-products table .sticky-head-row2 {
   background: white;
@@ -511,7 +511,7 @@ html {
 }
 .warehouse-products table .id-width {
   overflow: hidden;
-  max-width: 60px;
+  width: 60px;
   text-overflow: ellipsis;
 }
 .warehouse-products table .name-width {
@@ -642,10 +642,6 @@ html {
   transform: translateZ(0);
   will-change: transform, scroll-position;
 }
-.warehouse-products table .first-tab-body tr {
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
-}
 .warehouse-products table .first-tab-body td {
   padding: 0;
   font-size: 14px;
@@ -764,7 +760,7 @@ html {
   background-color: transparent;
   border: none;
   overflow: hidden;
-  transition: 0.2s;
+  transition: width 0.2s;
   cursor: pointer;
 }
 .warehouse-products table .nal-ostatok button:first-child:before {

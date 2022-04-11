@@ -6,7 +6,7 @@
 }
 @media (min-width: 1450px) {
 	.id-width {
-		max-width: 100px !important;
+		width: 100px !important;
 	}
 	.name-width {
 		max-width: 300px !important;
@@ -584,10 +584,15 @@ html {
 			left:13px;
 		}
 		.animationFrame {
-			transition: 0.3s;
+			transition: width 0.3s;
 			transform: translateZ(0);
-			transform: translate3d(0, 0, 0);
-			will-change: transform, scroll-position;
+			// transform: translate3d(0, 0, 0);
+			will-change: width;
+			position: absolute;
+			left: 54px;
+			height: 20px;
+			background-color:white;
+			z-index: 2;
 		}
 		.sticky-body {
 			background: white;
@@ -601,11 +606,7 @@ html {
 			// transform: translate3d(0, 0, 0);
 			// will-change: transform, scroll-position;
 		}
-		.id-width {
-			transform: translateZ(0);
-			// transform: translate3d(0, 0, 0);
-			will-change: transform, scroll-position;
-		}
+	
 		.sticky-head-row2 {
 			background: white;
 			position: sticky;
@@ -665,8 +666,9 @@ html {
 		
 		.id-width {
 			overflow: hidden;
-			max-width: 60px;
+			width: 60px;
 			text-overflow: ellipsis;
+
 		}
 		.name-width {
 			// overflow: hidden;
@@ -963,11 +965,11 @@ html {
 			// 	// transform: translate3d(0, 0, 0);
 			// 	will-change: transform ,scroll-position;
 			// }
-			tr {
-				transform: translateZ(0);
-				// transform: translate3d(0, 0, 0);
-				will-change: transform, scroll-position;
-			}
+			// tr {
+			// 	transform: translateZ(0);
+			// 	// transform: translate3d(0, 0, 0);
+			// 	will-change: transform, scroll-position;
+			// }
 			td {
 				padding: 0;
 				font-size: 14px;
@@ -1354,9 +1356,12 @@ html {
 				overflow: hidden;
 				
 				// visibility: hidden;
-				transition: 0.2s;
+				transition: width 0.2s;
 				cursor: pointer;
 			}
+			// &:hover button {
+			// 	width: 16px !important;
+			// }
 			button:first-child {
 				
 				// position: relative;

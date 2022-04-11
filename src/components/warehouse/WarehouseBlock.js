@@ -300,11 +300,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
 	function width() {
-		let arr = [];
-		document.querySelectorAll('.id-width').forEach((x) => {
-			arr.push(x.offsetWidth);
-		});
-		let maxwidth = Math.max(...arr);
+		// let arr = [];
+		// document.querySelectorAll('.id-width').forEach((x) => {
+		// 	arr.push(x.offsetWidth);
+		// });
+		// let maxwidth = Math.max(...arr);
 		// document.querySelectorAll('.id-width').forEach((x) => {
 		// 	x.style.width = maxwidth + 'px';
 		// });
@@ -323,11 +323,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 			arr3.push(x.offsetWidth);
 		});
 		let maxwidth3 = Math.max(...arr3);
-		console.log(arr, maxwidth);
+		// console.log(arr, maxwidth);
 		// document.querySelectorAll('.attribute-width').forEach((x) => {
 		// 	x.style.width = maxwidth3 + 'px';
 		// });
-		widthColum.id = maxwidth;
+		// widthColum.id = maxwidth;
 		widthColum.name = maxwidth2;
 		widthColum.attribute = maxwidth3;
 		setWidthColum(widthColum);
@@ -361,7 +361,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 				})
 			});
 		}
-	});
+	}, [switchMenu]);
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
@@ -596,16 +596,16 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 										</div>
 										<div
 											style={
-												// switchMenu
-												// 	? {
-												// 			overflow: '',
-												// 			transition: '0.3s',
-												// 			maxWidth: '125px',
-												// 			justifyContent: 'space-between',
-												// 			display: 'flex',
-												// 			paddingRight: '10px'
-												// 	  }
-												// 	:
+												switchMenu
+													? {
+															overflow: '',
+												
+															
+															justifyContent: 'space-between',
+															display: 'flex',
+													
+													  }
+													:
 													 {
 															transition: '0.3s',
 															overflow: 'hidden',
