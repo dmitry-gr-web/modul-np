@@ -168,10 +168,12 @@ const WarehouseProductList = ({
 		return newnum;
 	}
 	const [memoryInput, setMemoryInput] = useState(objProduct[index]?.ostatok);
+	const [inputFormat, setInputFormat] = useState(false);
 	function inputChange(e) {
 		setIndexInput(index - start);
 		setFocusInput(true);
 		setPodlozhka(true);
+		setInputFormat(true);
 		e.target.value = e.target.value.replace(/[^0-9]/g, '');
 		setMemoryInput(e.target.value);
 	}
@@ -204,6 +206,7 @@ const WarehouseProductList = ({
 	}
 	useEffect(() => {
 		if (!podlozhka) {
+			setInputFormat(false);
 			let newobj = [...objProduct];
 			newobj[index].ostatok = +memoryInput;
 			setObjProduct(newobj);
@@ -307,7 +310,7 @@ const WarehouseProductList = ({
 				x.style.opacity = '1';
 			});
 			document.querySelectorAll('.gus').forEach((x) => {
-				x.style.right = '8px';
+				x.style.right = '7px';
 			});
 		});
 		// btnRef.current.querySelectorAll('button').forEach(x => {
@@ -764,15 +767,17 @@ const WarehouseProductList = ({
 								<input
 									ref={inputRef}
 									type="text"
-									value={focusInput ? memoryInput : formatNumber2(+memoryInput)}
 									onChange={inputChange}
 									onKeyUp={enterInput}
 									maxLength={5}
 									onClick={(e) => {
 										setFocusInput(true);
 										setPodlozhka(true);
+										setInputFormat(true);
 										e.stopPropagation();
+										
 									}}
+									value={focusInput && inputFormat ? memoryInput : formatNumber2(+memoryInput)}
 									onDoubleClick={e => e.stopPropagation()}
 									style={{
 										color: 'rgba(0,0,0,0.7)',
