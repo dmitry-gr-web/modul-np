@@ -58,8 +58,14 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 		document.querySelectorAll('.adaptive-switch2').forEach((x) => {
 			x.classList.remove('adaptive-switch-on2');
 		});
+		// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+		// 	x.style.width = '0px';
+		// });
 		document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-			x.style.width = '0px';
+			x.style.opacity = '0';
+		});
+		document.querySelectorAll('.gus').forEach((x) => {
+			x.style.right = '-5px';
 		});
 
 		let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
@@ -341,24 +347,35 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 		if (switchMenu) {
 			requestAnimationFrame(() => {
 				document.querySelectorAll('.animationFrame').forEach((x) => {
-					x.style.width = '90px';
-					x.style.paddingRight = '10px';
+					// x.style.width = '90px';
+					// x.style.paddingRight = '10px';
+					x.classList.add('show');
+					x.style.overflow = '';
 				});
-				document.querySelectorAll('.block-3-btn').forEach((x) => {
-					x.style.maxWidth = '125px';
-					x.style.paddingRight = '10px';
-				});
+				// document.querySelectorAll('.block-3-btn').forEach((x) => {
+				// 	// x.style.maxWidth = '125px';
+				// 	// x.style.width = '90px'
+				// 	// x.style.paddingRight = '10px';
+				// 	x.classList.add('show');
+				// });
+				// setTimeout(() => {
+				// 	document.querySelector('.shadow-block').style.height = '100vh';
+				// }, 300);
 			});
 		} else {
 			requestAnimationFrame(() => {
 				document.querySelectorAll('.animationFrame').forEach((x) => {
-					x.style.width = '0px';
-					x.style.paddingRight = '0px';
+					// x.style.width = '0px';
+					// x.style.paddingRight = '0px';
+					x.classList.remove('show');
+					x.style.overflow = 'hidden';
 				});
-				document.querySelectorAll('.block-3-btn').forEach((x) => {
-					x.style.maxWidth = '0px';
-					x.style.paddingRight = '0px';
-				});
+				// document.querySelectorAll('.block-3-btn').forEach((x) => {
+				// 	// x.style.maxWidth = '0px';
+				// 	// x.style.width = '0px'
+				// 	// x.style.paddingRight = '0px';
+				// 	x.classList.remove('show');
+				// });
 			});
 		}
 	}, [switchMenu]);
@@ -462,17 +479,18 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 											className="animationFrame"
 											style={{
 												// transition:'0.2s',
-												overflow: 'hidden',
-												width: '0px',
-												paddingRight: '0px',
+												// overflow: 'hidden',
+												// width: '0px',
+												// paddingRight: '0px',
 												justifyContent: 'space-between',
 												display: 'flex',
-												height: '16px',
+												// height: '16px',
 											}}
 										>
 											<img className="logo-mail" src={crmLogo} alt="" />
 											<img className="logo-mail" src={rozetkaLogo} alt="" />
 											<img className="logo-mail" src={promLogo} alt="" />
+											<div className='shadow-block'></div>
 										</div>
 									</div>
 
@@ -675,8 +693,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 										/>
 									</div>
 									<div
-										className="attribute-width"
-										style={{ paddingRight: '3px', width: widthColum.attribute + 'px' }}
+										className="attribute-width btn"
+										style={{ paddingRight: '3px', width: widthColum.attribute + 'px', maxWidth: '105px' }}
 									>
 										<WarehouseDropMenu
 											setPodlozhka={setPodlozhka}
@@ -735,7 +753,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 							</th>
 						</tr>
 
-						{/* <tr>
+						<tr>
 				
 						<th className="hoverr" style={{height:'12px'}}>
 							<div></div>
@@ -750,7 +768,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 							</th>
 
 						
-						</tr> */}
+						</tr>
 					</thead>
 
 					<tbody className="first-tab-body">

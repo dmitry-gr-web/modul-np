@@ -296,14 +296,18 @@ const WarehouseProductList = ({
 	const btnRef = useRef();
 	function PlusMinusOpen(e) {
 		// setBtnMenu(true);
-		// requestAnimationFrame(()=> {
-		// 	document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-		// 		x.style.width = '16px';
-		// 	});
+		requestAnimationFrame(() => {
+			document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+				x.style.opacity = '1';
+			});
+			document.querySelectorAll('.gus').forEach(x=> {
+				x.style.right = '10px';
+			});
+	
+		});
+		// btnRef.current.querySelectorAll('button').forEach(x => {
+		// 	x.style.opacity = '1';
 		// })
-		btnRef.current.querySelectorAll('button').forEach(x => {
-			x.style.width = '16px';
-		})
 		// console.log(btnRef.current.firstChild.style.width = '16px')
 		// console.log(btnRef.current.lastChild.style.width = '16px')
 		// console.log(inputRef.current.offsetParent.children[0].children[0].style.width = '16px')
@@ -316,14 +320,17 @@ const WarehouseProductList = ({
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
 			// setBtnMenu(false);
-			// requestAnimationFrame(()=> {
-			// 	document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-			// 		x.style.width = '0px';
-			// 	});
+			requestAnimationFrame(() => {
+				document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+					x.style.opacity = '0';
+				});
+				document.querySelectorAll('.gus').forEach(x=> {
+					x.style.right = '-5px';
+				});
+			});
+			// btnRef.current.querySelectorAll('button').forEach(x => {
+			// 	x.style.opacity = '0';
 			// })
-			btnRef.current.querySelectorAll('button').forEach(x => {
-				x.style.width = '0px';
-			})
 
 			inputRef.current.blur();
 		}
@@ -451,7 +458,7 @@ const WarehouseProductList = ({
 							<div
 								onMouseEnter={() => setSwitchMenu(true)}
 								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-								style={{display: 'flex', height:'20px',alignItems:'center'}}
+								style={{ display: 'flex', height: '20px', alignItems: 'center' }}
 							>
 								<div style={{ minWidth: '51px', paddingRight: '10px' }}>
 									<label className="switch-btn-warehouse">
@@ -468,7 +475,7 @@ const WarehouseProductList = ({
 
 								<div
 									className="animationFrame"
-									style={{ whiteSpace: 'nowrap', width: '0px', overflow: 'hidden' }}
+									style={{ whiteSpace: 'nowrap',overflow:'hidden'}}
 								>
 									<label
 										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
@@ -515,6 +522,7 @@ const WarehouseProductList = ({
 										/>
 										<span className="slider round"></span>
 									</label>
+									<div className='gradi'></div>
 								</div>
 							</div>
 
@@ -707,7 +715,8 @@ const WarehouseProductList = ({
 						onMouseEnter={PlusMinusOpen}
 						className="nal-ostatok"
 					>
-						<div ref={btnRef}
+						<div
+							ref={btnRef}
 							style={
 								!objProduct[index].status.all
 									? {
@@ -719,26 +728,29 @@ const WarehouseProductList = ({
 									: { display: 'flex', justifyContent: 'flex-end', paddingRight: '3px' }
 							}
 						>
-							<button style={btnMenu ? { width: '16px' } : {}} onClick={BtnMinus}></button>
+							<div className='gus' style={{display:'flex',position: 'absolute',right:'-5px',transition:'0.2s'}}>
+								<button style={btnMenu ? { width: '16px' } : {}} onClick={BtnMinus}></button>
 
-							<input
-								ref={inputRef}
-								type="text"
-								value={focusInput ? memoryInput : formatNumber2(+memoryInput)}
-								onChange={inputChange}
-								onKeyUp={enterInput}
-								maxLength={5}
-								onClick={() => {
-									setFocusInput(true);
-									setPodlozhka(true);
-								}}
-								style={{
-									color: 'rgba(0,0,0,0.7)',
-									width: inputLength(memoryInput.toString()),
-								}}
-							/>
+								<input
+									ref={inputRef}
+									type="text"
+									value={focusInput ? memoryInput : formatNumber2(+memoryInput)}
+									onChange={inputChange}
+									onKeyUp={enterInput}
+									maxLength={5}
+									onClick={() => {
+										setFocusInput(true);
+										setPodlozhka(true);
+									}}
+									style={{
+										color: 'rgba(0,0,0,0.7)',
+										width: inputLength(memoryInput.toString()),
+									}}
+								/>
 
-							<button style={btnMenu ? { width: '16px' } : {}} onClick={BtnPlus}></button>
+								<button style={btnMenu ? { width: '16px' } : {}} onClick={BtnPlus}></button>
+							</div>
+
 							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
 						</div>
 					</td>
