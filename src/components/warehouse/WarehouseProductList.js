@@ -147,7 +147,7 @@ const WarehouseProductList = ({
 		setObjProduct(newobj);
 		setMemoryInput(newobj[index].ostatok);
 	}
-	function BtnPlus(e) {
+		function BtnPlus(e) {
 		e.stopPropagation();
 		let newobj = [...objProduct];
 		newobj[index].ostatok = newobj[index].ostatok + 1;
