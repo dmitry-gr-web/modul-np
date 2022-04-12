@@ -310,7 +310,7 @@ const WarehouseProductList = ({
 				x.style.opacity = '1';
 			});
 			document.querySelectorAll('.gus').forEach((x) => {
-				x.style.right = '7px';
+				x.style.right = '6px';
 			});
 		});
 		// btnRef.current.querySelectorAll('button').forEach(x => {

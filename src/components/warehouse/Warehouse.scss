@@ -690,7 +690,7 @@ html {
 		.sticky-body {
 			background: white;
 			position: sticky;
-			z-index: 1;
+			z-index: 2;
 			left: 13px;
 			// left: 60px;
 			// left:200px;
@@ -1442,7 +1442,7 @@ html {
 		.nal-ostatok {
 			padding: 0 2px;
 			position: relative;
-			min-width: 77px;
+			min-width: 76px;
 
 			input {
 				outline: none;
@@ -1450,6 +1450,7 @@ html {
 				padding: 0;
 				background-color: transparent;
 				font-weight: 300;
+				text-align: right;
 				// position: absolute;
 			}
 			input::selection {
@@ -1474,6 +1475,9 @@ html {
 				// visibility: hidden;
 				// transition: width 0.2s;
 				cursor: pointer;
+			}
+			span {
+				z-index: 1;
 			}
 			// &:hover button {
 			// 	width: 16px !important;

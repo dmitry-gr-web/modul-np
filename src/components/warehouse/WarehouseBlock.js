@@ -758,14 +758,14 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 						<th className="hoverr" style={{height:'12px'}}>
 							<div></div>
 						</th>
-							<th className="shadow-vertical" colSpan={17}>
+							{/* <th className="shadow-vertical" colSpan={17}>
 								<div
 									onMouseEnter={() => setSwitchMenu(true)}
 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 									style={switchMenu ? { width: '171px' } : { width: '64px' }}
 								></div>
 								<div  		style={switchMenu ? { left: '158px' } : {left:'51px' }}></div>
-							</th>
+							</th> */}
 
 						
 						</tr>
