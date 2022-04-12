@@ -147,7 +147,7 @@ const WarehouseProductList = ({
 		setObjProduct(newobj);
 		setMemoryInput(newobj[index].ostatok);
 	}
-		function BtnPlus(e) {
+	function BtnPlus(e) {
 		e.stopPropagation();
 		let newobj = [...objProduct];
 		newobj[index].ostatok = newobj[index].ostatok + 1;
@@ -261,30 +261,36 @@ const WarehouseProductList = ({
 	function clickTr(e) {
 		// e.preventDefault();
 		// e.stopPropagation();
-		let newobj = [...objProduct];
-		if (e.ctrlKey || e.metaKey) {
-			e.preventDefault();
-			e.stopPropagation();
-			newobj[index].select = !newobj[index].select;
-		} else {
-			if (newobj[index].select !== true) {
-				newobj.map((x) => (x.select = false));
-			}
-			newobj[index].select = !newobj[index].select;
-		}
-		if (e.shiftKey) {
-			e.preventDefault();
-			e.stopPropagation();
-			newobj.slice(lastIndex, index).map((x, i) => {
-				if (x.lock) {
-					x.select = false;
-				} else {
-					x.select = true;
+		console.log(e.currentTarget)
+		if (e.currentTarget){
+			let newobj = [...objProduct];
+			if (e.ctrlKey || e.metaKey) {
+				e.preventDefault();
+				e.stopPropagation();
+				newobj[index].select = !newobj[index].select;
+			} else {
+				// e.preventDefault();
+				e.stopPropagation();
+				if (newobj[index].select !== true) {
+					newobj.map((x) => (x.select = false));
 				}
-			});
+				newobj[index].select = !newobj[index].select;
+			}
+			if (e.shiftKey) {
+				e.preventDefault();
+				e.stopPropagation();
+				newobj.slice(lastIndex, index).map((x, i) => {
+					if (x.lock) {
+						x.select = false;
+					} else {
+						x.select = true;
+					}
+				});
+			}
+			setLastIndex(index);
+			setObjProduct(newobj);
 		}
-		setLastIndex(index);
-		setObjProduct(newobj);
+		
 		// console.log(lastIndex, index);
 	}
 
@@ -300,10 +306,9 @@ const WarehouseProductList = ({
 			document.querySelectorAll('.nal-ostatok button').forEach((x) => {
 				x.style.opacity = '1';
 			});
-			document.querySelectorAll('.gus').forEach(x=> {
-				x.style.right = '10px';
+			document.querySelectorAll('.gus').forEach((x) => {
+				x.style.right = '8px';
 			});
-	
 		});
 		// btnRef.current.querySelectorAll('button').forEach(x => {
 		// 	x.style.opacity = '1';
@@ -324,7 +329,7 @@ const WarehouseProductList = ({
 				document.querySelectorAll('.nal-ostatok button').forEach((x) => {
 					x.style.opacity = '0';
 				});
-				document.querySelectorAll('.gus').forEach(x=> {
+				document.querySelectorAll('.gus').forEach((x) => {
 					x.style.right = '-5px';
 				});
 			});
@@ -351,15 +356,19 @@ const WarehouseProductList = ({
 	// console.log(objProduct[index].status.all);
 	function dblClick(e) {
 		// console.log(e)
-		if (
-			e.target.localName === 'button' ||
-			e.target.offsetParent === 'label' ||
-			e.target.className === '.slider.round'
-		) {
-		} else {
-			setToggleCard(true);
-			setGetIndex(index);
-		}
+		console.log(e)
+	
+			if (
+				e.target.localName === 'button' ||
+				e.target.offsetParent === 'label' ||
+				e.target.className === '.slider.round'
+			) {
+			} else {
+				setToggleCard(true);
+				setGetIndex(index);
+			}
+		
+	
 	}
 
 	return (
@@ -378,7 +387,7 @@ const WarehouseProductList = ({
 					ref={linkTR}
 					// key={index}
 					// style={{transition: '0.2s',opacity: 0}}
-					onDoubleClickCapture={dblClick}
+					onDoubleClick={dblClick}
 					key={index}
 				>
 					<td className="hoverr">
@@ -475,7 +484,7 @@ const WarehouseProductList = ({
 
 								<div
 									className="animationFrame"
-									style={{ whiteSpace: 'nowrap',overflow:'hidden'}}
+									style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
 								>
 									<label
 										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
@@ -522,7 +531,7 @@ const WarehouseProductList = ({
 										/>
 										<span className="slider round"></span>
 									</label>
-									<div className='gradi'></div>
+									<div className="gradi"></div>
 								</div>
 							</div>
 
@@ -728,8 +737,29 @@ const WarehouseProductList = ({
 									: { display: 'flex', justifyContent: 'flex-end', paddingRight: '3px' }
 							}
 						>
-							<div className='gus' style={{display:'flex',position: 'absolute',right:'-5px',transition:'0.2s'}}>
-								<button style={btnMenu ? { width: '16px' } : {}} onClick={BtnMinus}></button>
+							<div
+								className="gus"
+								style={{ display: 'flex', position: 'absolute', right: '-5px', transition: '0.2s' }}
+							>
+								<button style={btnMenu ? { width: '16px' } : {}} onDoubleClick={(e) => e.stopPropagation()} onClick={BtnMinus}>
+									<svg
+										width="9"
+										height="7"
+										viewBox="0 0 9 7"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+										
+									>
+										<path
+											d="M1.26782 3.44748L8.08752 3.44747"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+									</svg>
+								</button>
 
 								<input
 									ref={inputRef}
@@ -738,17 +768,77 @@ const WarehouseProductList = ({
 									onChange={inputChange}
 									onKeyUp={enterInput}
 									maxLength={5}
-									onClick={() => {
+									onClick={(e) => {
 										setFocusInput(true);
 										setPodlozhka(true);
+										e.stopPropagation();
 									}}
+									onDoubleClick={e => e.stopPropagation()}
 									style={{
 										color: 'rgba(0,0,0,0.7)',
 										width: inputLength(memoryInput.toString()),
 									}}
 								/>
 
-								<button style={btnMenu ? { width: '16px' } : {}} onClick={BtnPlus}></button>
+								<button style={btnMenu ? { width: '16px' } : {}} onDoubleClick={(e) => e.stopPropagation()}  onClick={BtnPlus}>
+									<svg
+										width="15"
+										height="15"
+										viewBox="3 2 15 15"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+										style={{transform: 'rotate(45deg)', marginTop: '1px'}}
+									>
+										<path
+											d="M7.26655 8.03662L12.0888 12.8589"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 12.8589L12.0888 8.03659"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 8.03662L12.0888 12.8589"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 12.8589L12.0888 8.03659"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 8.03662L12.0888 12.8589"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 12.8589L12.0888 8.03659"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+									</svg>
+								</button>
 							</div>
 
 							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>

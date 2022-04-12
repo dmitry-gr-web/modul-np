@@ -819,7 +819,7 @@ html {
 .warehouse-products table .nal-ostatok {
   padding: 0 2px;
   position: relative;
-  min-width: 80px;
+  min-width: 77px;
 }
 .warehouse-products table .nal-ostatok input {
   outline: none;
@@ -844,39 +844,11 @@ html {
   overflow: hidden;
   cursor: pointer;
 }
-.warehouse-products table .nal-ostatok button:first-child:before {
-  content: "";
-  position: absolute;
-  width: 8px;
-  height: 0px;
-  top: 6px;
-  left: 3px;
-  border: 0.5px solid #636363;
-  border-radius: 2px;
+.warehouse-products table .nal-ostatok button:nth-child(3) svg {
+  opacity: 0.7;
 }
-.warehouse-products table .nal-ostatok button:nth-child(3):before {
-  content: "";
-  position: absolute;
-  width: 8px;
-  height: 0px;
-  top: 6px;
-  left: 3px;
-  border: 0.5px solid #636363;
-  border-radius: 2px;
-}
-.warehouse-products table .nal-ostatok button:nth-child(3):after {
-  content: "";
-  position: absolute;
-  width: 0px;
-  height: 8px;
-  top: 2px;
-  left: 7px;
-  border: 0.5px solid #636363;
-  border-radius: 2px;
-}
-.warehouse-products table .nal-ostatok button:hover:before,
-.warehouse-products table .nal-ostatok button:hover:after {
-  border: 0.5px solid #929292;
+.warehouse-products table .nal-ostatok button:hover {
+  opacity: 0.5 !important;
 }
 .warehouse-products table .nal-rezerv,
 .warehouse-products table .nal-otpr,
