@@ -1,8 +1,101 @@
-import React from 'react';
+import React, { useState, useRef,useEffect } from 'react';
 import DropMenu from '../dropMenu/dropMenu';
 import './ProductCard.scss';
+import ProductCardMenu from './ProductCardMenu';
 
 const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, getIndex }) => {
+	const [openCardMenu, setOpenCardMenu] = useState(false);
+	const [podlozhka, setPodlozhka] = useState(false);
+	const inputRef = useRef();
+	function searchLine(text, value) {
+		if (value !== '') {
+			let re = new RegExp(value, 'gui');
+			let text_pr = text.replace(re, (x) => '<span class="findUnderline">' + x + '</span>');
+
+			return text_pr;
+		} else {
+			return text;
+		}
+	}
+	function onClick(type, targetBlock) {
+		let posEl = targetBlock?.getBoundingClientRect();
+		let adapEl = document.querySelector('.productMenu');
+		let block = document.querySelector('.product-card').getBoundingClientRect();
+		adapEl.style.top = posEl?.y - block.y + 'px';
+		adapEl.style.left = '117px';
+		adapEl.style.width = '202px';
+		setOpenCardMenu(true);
+		setPodlozhka(true);
+		// console.log(posEl.y - block.y);
+
+		// if (types === 'day') {
+		// 	setType('day');
+		// 	adapEl.style.top = posEl?.y - block.y + 'px';
+		// 	adapEl.style.left = '0px';
+		// 	adapEl.style.width = '202px';
+		// }
+		// if (types === 'status') {
+		// 	setType('status');
+		// 	adapEl.style.top = posEl?.y - block.y + 'px';
+		// 	adapEl.style.left = '210px';
+		// 	adapEl.style.width = '503px';
+		// }
+		// if (types === 'statusNV') {
+		// 	setType('statusNV');
+		// 	adapEl.style.top = posEl?.y - block.y + 'px';
+		// 	adapEl.style.left = '0px';
+		// 	adapEl.style.width = '202px';
+		// }
+		// if (types === 'statusCrm') {
+		// 	setType('statusCrm');
+		// 	adapEl.style.top = posEl?.y - block.y + 'px';
+		// 	adapEl.style.left = '212px';
+		// 	adapEl.style.width = '202px';
+		// }
+		// if (types === 'statusAccept') {
+		// 	setType('statusAccept');
+		// 	adapEl.style.top = posEl?.y - block.y + 'px';
+		// 	adapEl.style.left = '424px';
+		// 	adapEl.style.width = '288px';
+		// }
+		// document.querySelectorAll('.block-menu .simplebar-content-wrapper').forEach((x) =>
+		// 	x.scrollTo({
+		// 		top: 0,
+		// 	})
+		// );
+		// setValueAdaptiveMenu('');
+		// setOpenMenu(!openMenu);
+		// setPodlozhka(true);
+		// setTimeout(() => {
+		// 	inputRef.current.value = '';
+		// 	inputRef.current.focus();
+		// }, 100);
+	}
+	const [countryArr, setCountryArr] = useState([
+		// { id: 0, name: 'Все', select: true },
+		{ id: 0, name: '🇷🇺', nameCountry : 'Россия',select: false },
+		{ id: 1, name: '🇺🇦', nameCountry : 'Украина',select: false },
+		{ id: 2, name: '🇹🇷', nameCountry : 'Турция',select: false },
+	]);
+	useEffect(()=> {
+		setCountryArr([...countryArr.map(x => {
+			if(x.name === objProduct[getIndex].country){
+				return {...x, select : true};
+			} else {
+				return {...x};
+			}
+		})])
+	},[])
+	// 	useEffect(() => {
+	// 	let newarr = [...countryArr];
+	// 	newarr.filter((x) => {
+	// 		if (x.name === document.getElementById('strana').innerText) {
+	// 			x.select = true;
+	// 		}
+	// 	});
+	// 	setCountryArr(newarr);
+	// }, []);
+	// console.log(objProduct[getIndex].country , countryArr.filter(x => x.name === '🇷🇺'))
 	return (
 		<>
 			<div class="bg"></div>
@@ -15,6 +108,15 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 						boxSizing: 'border-box',
 					}}
 				>
+					{podlozhka && (
+						<div
+							className="product-card-podlozhka"
+							onClick={() => {
+								setOpenCardMenu(false);
+								setPodlozhka(false);
+							}}
+						></div>
+					)}
 					<div>
 						<button className="np-close" onClick={() => setToggleCard(false)}></button>
 					</div>
@@ -45,10 +147,12 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 										<td>Розничный магазин</td>
 									</tr>
 									<tr>
-										<td>Старана:</td>
+										<td>Страна:</td>
 										<td>
-											<div>
-												<span className="flags">{objProduct[getIndex].country}</span>
+											<div id="strana" className='btn-product-menu' onClick={(e) => onClick('', e.target)}>
+												<span className="flags" style={{ fontSize: '16px' }}>
+													{countryArr.filter(x => x.select === true)[0]?.name}
+												</span>
 											</div>
 										</td>
 									</tr>
@@ -111,6 +215,15 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 									</tr>
 								</table>
 							</div>
+							<ProductCardMenu
+								openCardMenu={openCardMenu}
+								searchLine={searchLine}
+								inputRef={inputRef}
+								countryArr={countryArr}
+								setCountryArr={setCountryArr}
+								setPodlozhka={setPodlozhka}
+								setOpenCardMenu={setOpenCardMenu}
+							/>
 						</div>
 
 						<div class="attr-block">

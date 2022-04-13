@@ -110,15 +110,19 @@ const WarehouseProductList = ({
 	function tooltipOn(e) {
 		// e.stopPropagation();
 		clearTimeout(plusminus);
-		const tooltipBlock = document.getElementById('tooltipBtn');
-		let posElement = e.currentTarget.getBoundingClientRect();
-		// tooltipBlock.innerHTML = html;
-		tooltipBlock.style.fontSize = '14px';
+		// const tooltipBlock = document.getElementById('tooltipBtn');
+		// let posElement = e.currentTarget.getBoundingClientRect();
+		// // tooltipBlock.innerHTML = html;
+		// tooltipBlock.style.fontSize = '14px';
 		// console.log(e);
-
+		let posElement = e.currentTarget.getBoundingClientRect();
 		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
 			// tooltipBlock.style.fontSize = '12px';
 			plusminus = setTimeout(() => {
+				const tooltipBlock = document.getElementById('tooltipBtn');
+			
+				// tooltipBlock.innerHTML = html;
+				tooltipBlock.style.fontSize = '14px';
 				tooltipBlock.innerText = e.target.innerText;
 
 				tooltipBlock.style.left = posElement.x + 'px';

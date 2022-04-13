@@ -19,7 +19,7 @@ import WarehouseInput from './WarehouseInput';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
-const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex }) => {
+const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,load }) => {
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
@@ -256,8 +256,17 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 			document.querySelector('.warehouse-products table').classList.add('hoverOff');
 			timer = setTimeout(() => {
 				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
+				// requestAnimationFrame(() => {
+				// 	document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+				// 		x.style.opacity = '0';
+				// 	});
+				// 	document.querySelectorAll('.gus').forEach((x) => {
+				// 		x.style.right = '-5px';
+				// 	});
+				// });
 			}, 100);
 			document.querySelector('#tooltipBtn').style.animation = '';
+	
 			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
 			// rootRef.current.el
 			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
@@ -352,12 +361,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 					x.classList.add('show');
 					x.style.overflow = '';
 				});
-				// document.querySelectorAll('.block-3-btn').forEach((x) => {
-				// 	// x.style.maxWidth = '125px';
-				// 	// x.style.width = '90px'
-				// 	// x.style.paddingRight = '10px';
-				// 	x.classList.add('show');
-				// });
+				document.querySelectorAll('.block-3-btn').forEach((x) => {
+					// x.style.maxWidth = '125px';
+					// x.style.width = '90px'
+					// x.style.paddingRight = '10px';
+					x.classList.add('show');
+				});
 				// setTimeout(() => {
 				// 	document.querySelector('.shadow-block').style.height = '100vh';
 				// }, 300);
@@ -370,16 +379,17 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 					x.classList.remove('show');
 					x.style.overflow = 'hidden';
 				});
-				// document.querySelectorAll('.block-3-btn').forEach((x) => {
-				// 	// x.style.maxWidth = '0px';
-				// 	// x.style.width = '0px'
-				// 	// x.style.paddingRight = '0px';
-				// 	x.classList.remove('show');
-				// });
+				document.querySelectorAll('.block-3-btn').forEach((x) => {
+					// x.style.maxWidth = '0px';
+					// x.style.width = '0px'
+					// x.style.paddingRight = '0px';
+					x.classList.remove('show');
+				});
 			});
 		}
 	}, [switchMenu]);
 	return (
+		
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
 				Товары
@@ -490,7 +500,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 											<img className="logo-mail" src={crmLogo} alt="" />
 											<img className="logo-mail" src={rozetkaLogo} alt="" />
 											<img className="logo-mail" src={promLogo} alt="" />
-											<div className='shadow-block'></div>
+											{/* <div className='shadow-block'></div> */}
 										</div>
 									</div>
 
@@ -603,9 +613,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 										className="sticky-block-children"
-										style={{ maxWidth: '156px' }}
+										style={{ maxWidth: '156px' , position:'absolute', left:0}}
 									>
-										<div style={{ width: '51px', paddingRight: '10px' }}>
+										<div style={{ width: '51px' }}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
@@ -613,7 +623,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 												objProduct={objProduct}
 											/>
 										</div>
-										<div style={switchMenu ? { overflow: '' } : {overflow:'hidden'}} className="block-3-btn">
+										<div style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}} className="block-3-btn">
 											<WarehouseDropMenu
 												adaptive={true}
 												setPodlozhka={setPodlozhka}
@@ -648,9 +658,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 												switchMenu={switchMenu}
 												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
+												{/* <div className='shadow-block'></div> */}
 										</div>
 									</div>
-
+									<div style={{position:'relative',left:60, display:'flex'}}>
 									<div
 										className="id-width"
 										style={{ paddingRight: '10px', width: widthColum.id + 'px' }}
@@ -708,6 +719,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 										/>
 									</div>
 									<div className="shadow-left"></div>
+									</div>
+									
 								</div>
 							</th>
 
@@ -753,22 +766,22 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex 
 							</th>
 						</tr>
 
-						<tr>
+						{/* <tr>
 				
 						<th className="hoverr" style={{height:'12px'}}>
 							<div></div>
 						</th>
-							{/* <th className="shadow-vertical" colSpan={17}>
+							<th className="shadow-vertical" colSpan={17}>
 								<div
 									onMouseEnter={() => setSwitchMenu(true)}
 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 									style={switchMenu ? { width: '171px' } : { width: '64px' }}
 								></div>
 								<div  		style={switchMenu ? { left: '158px' } : {left:'51px' }}></div>
-							</th> */}
+							</th>
 
 						
-						</tr>
+						</tr> */}
 					</thead>
 
 					<tbody className="first-tab-body">

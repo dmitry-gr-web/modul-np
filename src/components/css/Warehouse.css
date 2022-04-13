@@ -478,6 +478,17 @@ html {
   width: 0;
   background-color: white;
 }
+.warehouse-products table .block-3-btn:after {
+  content: "";
+  box-shadow: 3px 0px 3px 0px grey;
+  position: absolute;
+  width: 2px;
+  top: -19px;
+  right: 0;
+  height: 100vh;
+  transition: 0.2s;
+  z-index: -1;
+}
 .warehouse-products table .shadow-block {
   box-shadow: 3px 0px 3px 0px grey;
   position: absolute;

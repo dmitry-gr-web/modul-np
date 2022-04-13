@@ -163,6 +163,7 @@ html {
 			.warehouse-dropmenu:nth-child(2) {
 				margin: 0 5px;
 			}
+		
 		}
 	}
 	
@@ -614,6 +615,17 @@ html {
 			top: 0;
 			width: 0;
 			background-color: white;
+			&:after {
+				content: '';
+				box-shadow: 3px 0px 3px 0px grey;
+				position: absolute;
+				width: 2px;
+				top: -19px;
+				right: 0;
+				height: 100vh;
+				transition: 0.2s;
+				z-index: -1;
+			}
 			// overflow: hidden;
 			// box-shadow:2px 0px 3px 0px grey;
 			// .block-3-btn {
