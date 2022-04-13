@@ -219,7 +219,7 @@
 .productMenu .block-menu-toggle {
   visibility: visible;
   opacity: 1;
-  top: 20px;
+  top: 27px;
   transition: 0.3s;
 }
 .productMenu .block-menu-another-toggle {
@@ -240,11 +240,15 @@
 .productMenu .menu-list:hover {
   color: rgba(0, 0, 0, 0.5);
 }
+.productMenu .menu-list .icons {
+  position: relative;
+  font-size: 16px;
+}
 .productMenu .menu-list .flags {
   font-size: 16px;
   color: black !important;
 }
-.productMenu .menu-list:hover .flags {
+.productMenu .menu-list:hover .flags, .productMenu .menu-list:hover .icons {
   opacity: 0.5;
 }
 .productMenu .menu-list:first-child {
@@ -253,7 +257,7 @@
 .productMenu .menu-list:last-child {
   margin-bottom: 5px;
 }
-.productMenu .menu-list span {
+.productMenu .menu-list span:not(.icons) {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

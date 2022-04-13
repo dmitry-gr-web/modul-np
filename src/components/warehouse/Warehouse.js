@@ -150,7 +150,7 @@ const Warehouse = () => {
 						<nav className="warehouse-nav">
 							<ul>
 								{ul.map((x, i) => (
-									<li onClick={() => clickNav(x.id)} className={x.select ? 'select-link' : ''}>
+									<li key={i} onClick={() => clickNav(x.id)} className={x.select ? 'select-link' : ''}>
 										{x.name}
 									</li>
 								))}

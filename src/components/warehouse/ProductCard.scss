@@ -109,7 +109,7 @@
 			font-size: 14px;
 			display: flex;
 			align-items: flex-end;
-			min-width: 68px;
+			min-width: 71px;
 			padding-right: 27px;
 		}
 		td:last-child {
@@ -140,8 +140,18 @@
         position: relative;
         width: max-content;
         padding-right: 16px;
+        height: 24px;
+        display: flex;
+        align-items:flex-end;
         cursor:pointer;
-        &:hover .flags {
+        .icons {
+            position: relative;
+            font-size: 16px;
+        }
+        // &:hover .flags {
+        //     opacity: 0.5;
+        // }
+        &:hover {
             opacity: 0.5;
         }
 		&:after {
@@ -151,7 +161,7 @@
 			height: 5px;
 			position: absolute;
 			right: 1px;
-			top: 6px;
+			top: 13px;
 			opacity: 0.8;
 		}
 	}

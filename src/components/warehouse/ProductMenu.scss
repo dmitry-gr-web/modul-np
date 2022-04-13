@@ -225,7 +225,7 @@
 	.block-menu-toggle {
 		visibility: visible;
 		opacity: 1;
-		top: 20px;
+		top: 27px;
 		transition: 0.3s;
 	}
 	.block-menu-another-toggle {
@@ -257,11 +257,15 @@
 		&:hover {
 			color: rgba(0, 0, 0, 0.5);
 		}
+        .icons {
+            position: relative;
+            font-size: 16px;
+        }
         .flags{
             font-size: 16px;
             color: rgba(0, 0, 0, 1) !important;
         }
-        &:hover .flags {
+        &:hover .flags, &:hover .icons {
             opacity: 0.5;
         }
 		&:first-child {
@@ -270,7 +274,7 @@
 		&:last-child {
 			margin-bottom: 5px;
 		}
-		span {
+		span:not(.icons) {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;

@@ -1,9 +1,20 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import './ProductMenu.scss';
 
-const ProductCardMenu = ({ openCardMenu,setOpenCardMenu, inputRef, searchLine, inputOn,setCountryArr, countryArr , setPodlozhka}) => {
+const ProductCardMenu = ({
+	openCardMenu,
+	typeData,
+	setOpenCardMenu,
+	inputRef,
+	dataCurrent,
+	searchLine,
+	inputOn,
+	data,
+	setData,
+	setPodlozhka,
+}) => {
 	const [value, setValue] = useState('');
 	// if (type === 'country') {
 
@@ -24,11 +35,13 @@ const ProductCardMenu = ({ openCardMenu,setOpenCardMenu, inputRef, searchLine, i
 		// 	if (x.id === id) return { ...x, select: true };
 		// 	else return { ...x, select: false };
 		// });
-		let newarr = countryArr.map((x) => {
+		// if(type === '')
+		let newarr = data.map((x) => {
 			if (x.id === id) return { ...x, select: true };
 			else return { ...x, select: false };
 		});
-		setCountryArr(newarr);
+		// setData(newarr);
+		setData({ ...dataCurrent, [typeData]: [...newarr] });
 		setOpenCardMenu(false);
 		setPodlozhka(false);
 	}
@@ -40,7 +53,7 @@ const ProductCardMenu = ({ openCardMenu,setOpenCardMenu, inputRef, searchLine, i
 			<div className={inputOn && openCardMenu ? 'btn-menu-input toggle' : 'btn-menu-input'}>
 				<input
 					value={value}
-					// onChange={(e) => searchInput(e)}
+					onChange={(e) => setValue(e.target.value)}
 					ref={inputRef}
 					type="text"
 				/>
@@ -63,8 +76,8 @@ const ProductCardMenu = ({ openCardMenu,setOpenCardMenu, inputRef, searchLine, i
 				autoHide={false}
 			>
 				{/* {console.log(props.data)} */}
-				{countryArr
-					.filter((x) => x.name.toLowerCase().includes(value.toLowerCase()))
+				{data
+					?.filter((x) => x.name.toLowerCase().includes(value.toLowerCase()))
 					.map((x, index) => (
 						<li
 							key={x.id}
@@ -73,12 +86,20 @@ const ProductCardMenu = ({ openCardMenu,setOpenCardMenu, inputRef, searchLine, i
 							onClick={(e) => selectFunc(x.id)}
 							className={x.select ? 'menu-list menu-select-filter' : 'menu-list'}
 						>
-							<span
-								className="flags"
-								dangerouslySetInnerHTML={{
-									__html: searchLine(x.name, value),
-								}}
-							></span><div style={{marginLeft: '5px'}}>{x.nameCountry}</div>
+							{typeData === 'vidPlatformi' ? (
+								<img src={x.name} />
+							) : typeData === 'delivery' ? (
+								<span className={x.name}></span>
+							) : (
+								<span
+									className={typeData === 'flags' ? 'flags' : ''}
+									dangerouslySetInnerHTML={{
+										__html: searchLine(x.name, value),
+									}}
+								></span>
+							)}
+							{/* {typeData === 'delivery' ? <span className={x.name}></span> : ''} */}
+							<div style={{ marginLeft: '5px' }}>{x.nameCountry}</div>
 						</li>
 					))}
 			</SimpleBar>

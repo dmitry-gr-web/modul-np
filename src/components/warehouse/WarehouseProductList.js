@@ -268,7 +268,7 @@ const WarehouseProductList = ({
 	function clickTr(e) {
 		// e.preventDefault();
 		// e.stopPropagation();
-		console.log(e.currentTarget)
+		// console.log(e.currentTarget)
 		if (e.currentTarget){
 			let newobj = [...objProduct];
 			if (e.ctrlKey || e.metaKey) {
@@ -363,7 +363,7 @@ const WarehouseProductList = ({
 	// console.log(objProduct[index].status.all);
 	function dblClick(e) {
 		// console.log(e)
-		console.log(e)
+		// console.log(e)
 	
 			if (
 				e.target.localName === 'button' ||

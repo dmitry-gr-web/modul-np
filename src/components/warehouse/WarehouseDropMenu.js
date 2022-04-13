@@ -305,6 +305,7 @@ const WarehouseDropMenu = ({
 							.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
 							.map((x, index) => (
 								<li
+								key={index}
 									onMouseEnter={tooltipOn}
 									onMouseLeave={tooltipOff}
 									className={x.select ? 'select-btn' : ''}
@@ -317,6 +318,7 @@ const WarehouseDropMenu = ({
 							))
 					: obj.map((x, index) => (
 							<li
+								key={index}
 								onMouseEnter={tooltipOn}
 								onMouseLeave={tooltipOff}
 								className={x.select ? 'select-btn' : ''}

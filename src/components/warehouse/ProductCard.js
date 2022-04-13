@@ -1,11 +1,13 @@
-import React, { useState, useRef,useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import DropMenu from '../dropMenu/dropMenu';
 import './ProductCard.scss';
 import ProductCardMenu from './ProductCardMenu';
+import { rozetkaLogo, promLogo, crmLogo, SvgCalendar } from '../../img/svg-pack';
 
 const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, getIndex }) => {
 	const [openCardMenu, setOpenCardMenu] = useState(false);
 	const [podlozhka, setPodlozhka] = useState(false);
+	const [typeData, setTypeData] = useState('');
 	const inputRef = useRef();
 	function searchLine(text, value) {
 		if (value !== '') {
@@ -17,6 +19,123 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 			return text;
 		}
 	}
+
+	// const [countryArr, setCountryArr] = useState([
+	// 	// { id: 0, name: 'Все', select: true },
+	// 	{ id: 0, name: '🇷🇺', nameCountry: 'Россия', select: false },
+	// 	{ id: 1, name: '🇺🇦', nameCountry: 'Украина', select: false },
+	// 	{ id: 2, name: '🇹🇷', nameCountry: 'Турция', select: false },
+	// ]);
+	const [data, setData] = useState({
+		flags: [
+			{ id: 0, name: '🇷🇺', nameCountry: 'Россия', select: false },
+			{ id: 1, name: '🇺🇦', nameCountry: 'Украина', select: false },
+			{ id: 2, name: '🇹🇷', nameCountry: 'Турция', select: false },
+		],
+		currency: [
+			{ id: 0, name: '$', select: false },
+			{ id: 1, name: '€', select: false },
+			{ id: 2, name: '₴', select: false },
+			{ id: 3, name: '₽', select: false },
+		],
+		otdel: [
+			{ id: 0, name: 'Розничный магазин', select: true },
+			{ id: 1, name: 'Отдел номер 2', select: false },
+			{ id: 2, name: 'Отдел гусей', select: false },
+			{ id: 3, name: 'Отдел когото', select: false },
+			{ id: 4, name: 'Магазин', select: false },
+			{ id: 5, name: 'Склад', select: false },
+		],
+		category: [
+			{ id: 0, name: 'Товар для дома', select: true },
+			{ id: 1, name: 'Инструменты', select: false },
+			{ id: 2, name: 'Сад и город', select: false },
+			{ id: 3, name: 'Электротехника', select: false },
+		],
+		tip: [
+			{ id: 0, name: 'Опт и розница', select: true },
+			{ id: 1, name: 'Розница и опт', select: false },
+		],
+		vidPlatformi: [
+			{ id: 0, name: rozetkaLogo, select: true },
+			{ id: 1, name: promLogo, select: false },
+			{ id: 3, name: crmLogo, select: false },
+		],
+		description: [
+			{ id: 0, name: 'Флешкарта', select: true },
+			{ id: 1, name: 'Флешкарта-1', select: false },
+			{ id: 3, name: 'Флешкарта-2', select: false },
+		],
+		delivery: [
+			{ id: 1, name: 'icon-Union-3 icons', select: true },
+			{ id: 2, name: 'icon-Vector-2 icons', select: false },
+			{ id: 3, name: 'icon-ukrposhta icons', select: false },
+			{ id: 4, name: 'icon-Union-4 icons', select: false },
+		],
+		// { id: 0, name: 'Все', select: true },
+	});
+	// console.log(data['flags'])
+	// const [currency, setCurrency] = useState([
+	// 	// { id: 0, attribute: 'Все', select: true },
+	// 	{ id: 0, name: '$', select: false },
+	// 	{ id: 1, name: '€', select: false },
+	// 	{ id: 2, name: '₴', select: false },
+	// 	{ id: 3, name: '₽', select: false },
+	// ]);
+	useEffect(() => {
+		let obj = { ...data };
+		let obj1 = {};
+		Object.keys(obj).map(
+			(x) =>
+				(obj1[x] = obj[x].map((x) => {
+					if (x.name === objProduct[getIndex].country) {
+						return { ...x, select: true };
+					} else if (x.name === objProduct[getIndex].currency) {
+						return { ...x, select: true };
+					} else {
+						return { ...x };
+					}
+				}))
+		);
+		// let obj = [...data.flags];
+
+		// obj = obj.map((x) => {
+		// 	if (x.name === objProduct[getIndex].country) {
+		// 		return  {...x, select: true };
+		// 	} else {
+		// 		return { ...x };
+		// 	}
+		// })
+		setData({ ...obj1 });
+	}, []);
+	// setData({
+	// 	...data.currency.map((x) => {
+	// 		if (x.name === objProduct[getIndex].country) {
+	// 			return { ...x, select: true };
+	// 		} else {
+	// 			return { ...x };
+	// 		}
+	// 	})
+	// });
+	// setCountryArr([
+	// 	...countryArr.map((x) => {
+	// 		if (x.name === objProduct[getIndex].country) {
+	// 			return { ...x, select: true };
+	// 		} else {
+	// 			return { ...x };
+	// 		}
+	// 	}),
+	// ]);
+	// setCurrency([
+	// 	...currency.map((x) => {
+	// 		if (x.name === objProduct[getIndex].currency) {
+	// 			return { ...x, select: true };
+	// 		} else {
+	// 			return { ...x };
+	// 		}
+	// 	}),
+	// ]);
+	// }, []);
 	function onClick(type, targetBlock) {
 		let posEl = targetBlock?.getBoundingClientRect();
 		let adapEl = document.querySelector('.productMenu');
@@ -26,32 +145,33 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 		adapEl.style.width = '202px';
 		setOpenCardMenu(true);
 		setPodlozhka(true);
+		console.log(type);
+		if (type === 'flags') {
+			setTypeData('flags');
+		}
+		if (type === 'currency') {
+			setTypeData('currency');
+		}
+		if (type === 'otdel') {
+			setTypeData('otdel');
+		}
+		if (type === 'category') {
+			setTypeData('category');
+		}
+		if (type === 'tip') {
+			setTypeData('tip');
+		}
+		if (type === 'vidPlatformi') {
+			setTypeData('vidPlatformi');
+		}
+		if (type === 'description') {
+			setTypeData('description');
+		}
+		if (type === 'delivery') {
+			setTypeData('delivery');
+		}
 		// console.log(posEl.y - block.y);
 
-		// if (types === 'day') {
-		// 	setType('day');
-		// 	adapEl.style.top = posEl?.y - block.y + 'px';
-		// 	adapEl.style.left = '0px';
-		// 	adapEl.style.width = '202px';
-		// }
-		// if (types === 'status') {
-		// 	setType('status');
-		// 	adapEl.style.top = posEl?.y - block.y + 'px';
-		// 	adapEl.style.left = '210px';
-		// 	adapEl.style.width = '503px';
-		// }
-		// if (types === 'statusNV') {
-		// 	setType('statusNV');
-		// 	adapEl.style.top = posEl?.y - block.y + 'px';
-		// 	adapEl.style.left = '0px';
-		// 	adapEl.style.width = '202px';
-		// }
-		// if (types === 'statusCrm') {
-		// 	setType('statusCrm');
-		// 	adapEl.style.top = posEl?.y - block.y + 'px';
-		// 	adapEl.style.left = '212px';
-		// 	adapEl.style.width = '202px';
-		// }
 		// if (types === 'statusAccept') {
 		// 	setType('statusAccept');
 		// 	adapEl.style.top = posEl?.y - block.y + 'px';
@@ -71,21 +191,48 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 		// 	inputRef.current.focus();
 		// }, 100);
 	}
-	const [countryArr, setCountryArr] = useState([
-		// { id: 0, name: 'Все', select: true },
-		{ id: 0, name: '🇷🇺', nameCountry : 'Россия',select: false },
-		{ id: 1, name: '🇺🇦', nameCountry : 'Украина',select: false },
-		{ id: 2, name: '🇹🇷', nameCountry : 'Турция',select: false },
-	]);
-	useEffect(()=> {
-		setCountryArr([...countryArr.map(x => {
-			if(x.name === objProduct[getIndex].country){
-				return {...x, select : true};
-			} else {
-				return {...x};
-			}
-		})])
-	},[])
+	// function loadImg(e) {
+	// 	if (this.files[0]) {
+	// 		var fr = new FileReader();
+
+	// 		fr.addEventListener(
+	// 			'load',
+	// 			function () {
+	// 				document.querySelector('label').style.backgroundImage = 'url(' + fr.result + ')';
+	// 			},
+	// 			false
+	// 		);
+
+	// 		fr.readAsDataURL(this.files[0]);
+	// 	}
+	// }
+	function loadImg (e) {
+		if (e.target.files[0]) {
+			var fr = new FileReader();
+		
+			fr.addEventListener("load", function () {
+			  // document.getElementById("labelImg").style.backgroundImage = "url(" + fr.result + ")";
+			  document.getElementById("imgID").src = fr.result;
+			}, false);
+		
+			fr.readAsDataURL(e.target.files[0]);
+		  }
+	}
+	// useEffect(()=> {
+	// 	document.getElementById("pct").addEventListener("change", function () {
+	// 		if (this.files[0]) {
+	// 		  var fr = new FileReader();
+		  
+	// 		  fr.addEventListener("load", function () {
+	// 			// document.getElementById("labelImg").style.backgroundImage = "url(" + fr.result + ")";
+	// 			document.getElementById("imgID").src = fr.result;
+	// 		  }, false);
+		  
+	// 		  fr.readAsDataURL(this.files[0]);
+	// 		}
+	// 	});
+	// })
+
 	// 	useEffect(() => {
 	// 	let newarr = [...countryArr];
 	// 	newarr.filter((x) => {
@@ -98,7 +245,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 	// console.log(objProduct[getIndex].country , countryArr.filter(x => x.name === '🇷🇺'))
 	return (
 		<>
-			<div class="bg"></div>
+			<div className="bg"></div>
 			<div className="product-card">
 				<div
 					style={{
@@ -123,111 +270,184 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 					<div style={{ display: 'flex', marginTop: '15px' }}>
 						<div>
 							<div>
-								<div class="header-text">Товар</div>
+								<div className="header-text">Товар</div>
 								<table>
-									<tr>
-										<td>
-											<div>Название:</div>
-										</td>
-										<td>
-											<div
-												style={{
-													width: '200px',
-													overflow: 'hidden',
-													textOverflow: 'ellipsis',
-													whiteSpace: 'nowrap',
-												}}
-											>
-												{objProduct[getIndex].name}
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>Отдел:</td>
-										<td>Розничный магазин</td>
-									</tr>
-									<tr>
-										<td>Страна:</td>
-										<td>
-											<div id="strana" className='btn-product-menu' onClick={(e) => onClick('', e.target)}>
-												<span className="flags" style={{ fontSize: '16px' }}>
-													{countryArr.filter(x => x.select === true)[0]?.name}
-												</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>Валюта:</td>
-										<td>{objProduct[getIndex].currency}</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>
+												<div>Название:</div>
+											</td>
+											<td>
+												<div
+													style={{
+														width: '200px',
+														overflow: 'hidden',
+														textOverflow: 'ellipsis',
+														whiteSpace: 'nowrap',
+													}}
+												>
+													{objProduct[getIndex].name}
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Отдел:</td>
+											<td>
+												<div
+													onClick={(e) => onClick('otdel', e.currentTarget)}
+													className="btn-product-menu"
+												>
+													{data.otdel?.filter((x) => x.select === true)[0]?.name}
+													{/* {data['currency']?.filter((x) => x.select === true)[0]?.name} */}
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Страна:</td>
+											<td>
+												<div
+													className="btn-product-menu"
+													onClick={(e) => onClick('flags', e.currentTarget)}
+												>
+													<span className="flags" style={{ fontSize: '16px' }}>
+														{data.flags?.filter((x) => x.select === true)[0]?.name}
+													</span>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Валюта:</td>
+											<td>
+												<div
+													onClick={(e) => onClick('currency', e.currentTarget)}
+													className="btn-product-menu"
+												>
+													{data.currency?.filter((x) => x.select === true)[0]?.name}
+													{/* {data['currency']?.filter((x) => x.select === true)[0]?.name} */}
+												</div>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</div>
 							<div style={{ marginTop: '30px' }}>
-								<div class="header-text">Платформа</div>
+								<div className="header-text">Платформа</div>
 								<table>
-									<tr>
-										<td>Вид:</td>
-										<td>Nano USB 2.0 флешка Intel ilicon p...</td>
-									</tr>
-									<tr>
-										<td>Фото:</td>
-										<td>
-											<img
-												style={{ width: '16px', height: '16px' }}
-												src={objProduct[getIndex].images}
-												alt=""
-											/>
-										</td>
-									</tr>
-									<tr>
-										<td>Тип:</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td>Категория:</td>
-										<td></td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>Вид:</td>
+											<td>
+												<div
+													onClick={(e) => onClick('vidPlatformi', e.currentTarget)}
+													className="btn-product-menu"
+												>
+													<img src={data.vidPlatformi?.filter((x) => x.select === true)[0]?.name} />
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Фото:</td>
+											<td>
+												<img
+													style={{ width: '16px', height: '16px' }}
+													src={objProduct[getIndex].images}
+													alt=""
+												/>
+												<img id='imgID' src=""/>
+												<label for="pct" id="labelImg" />
+												<input onChange={loadImg} type="file" id="pct" />
+											</td>
+										</tr>
+										<tr>
+											<td>Тип:</td>
+											<td>
+												<div
+													onClick={(e) => onClick('tip', e.currentTarget)}
+													className="btn-product-menu"
+												>
+													{data.tip?.filter((x) => x.select === true)[0]?.name}
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Категория:</td>
+											<td>
+												<div
+													onClick={(e) => onClick('category', e.currentTarget)}
+													className="btn-product-menu"
+												>
+													{data.category?.filter((x) => x.select === true)[0]?.name}
+												</div>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</div>
 							<div style={{ marginTop: '30px' }}>
-								<div class="header-text">Доставка</div>
+								<div className="header-text">Доставка</div>
 								<table>
-									<tr>
-										<td>Вид:</td>
-										<td>Nano USB 2.0 флешка Intel ilicon p...</td>
-									</tr>
-									<tr>
-										<td>Описание:</td>
-										<td>Розничный магазин, Оптовый м...</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>Вид:</td>
+											<td>
+												<div
+													onClick={(e) => onClick('delivery', e.currentTarget)}
+													className="btn-product-menu"
+												>
+													<span
+														className={data.delivery?.filter((x) => x.select === true)[0]?.name}
+													/>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Описание:</td>
+											<td>
+												<div
+													onClick={(e) => onClick('description', e.currentTarget)}
+													className="btn-product-menu"
+												>
+													{data.description?.filter((x) => x.select === true)[0]?.name}
+												</div>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</div>
 							<div style={{ marginTop: '30px' }}>
-								<div class="header-text">Информация</div>
+								<div className="header-text">Информация</div>
 								<table>
-									<tr>
-										<td>Создал:</td>
-										<td>Nano USB 2.0 флешка Intel ilicon p...</td>
-									</tr>
-									<tr>
-										<td>Изменил:</td>
-										<td>Розничный магазин, Оптовый м...</td>
-									</tr>
+									<tbody>
+										<tr>
+											<td>Создал:</td>
+											<td>
+												<SvgCalendar /> Завхоз склада Михаил Пронск...
+											</td>
+										</tr>
+										<tr>
+											<td>Изменил:</td>
+											<td>
+												<SvgCalendar /> 14.01.2021 19:54:12
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							</div>
 							<ProductCardMenu
 								openCardMenu={openCardMenu}
 								searchLine={searchLine}
 								inputRef={inputRef}
-								countryArr={countryArr}
-								setCountryArr={setCountryArr}
+								data={data[typeData]}
+								dataCurrent={data}
+								typeData={typeData}
+								setData={setData}
 								setPodlozhka={setPodlozhka}
 								setOpenCardMenu={setOpenCardMenu}
 							/>
 						</div>
 
-						<div class="attr-block">
-							<div class="header-text">Атрибут</div>
+						<div className="attr-block">
+							<div className="header-text">Атрибут</div>
 							<div>
 								<table>
 									<thead>

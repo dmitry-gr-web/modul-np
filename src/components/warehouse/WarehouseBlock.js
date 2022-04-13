@@ -124,7 +124,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			document.removeEventListener('click', clickDocument);
 		};
 	}, [selectAll]);
-	console.log(objProduct.length);
+	// console.log(objProduct.length);
 
 	function formatNumber2(number) {
 		let newnum = number.toLocaleString('ru-RU', {
@@ -352,6 +352,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	useLayoutEffect(() => {
 		width();
 	}, []);
+	useEffect(()=> {
+		return () => {
+			console.log('unmount')
+		}
+	},[])
 	useEffect(() => {
 		if (switchMenu) {
 			requestAnimationFrame(() => {
