@@ -298,9 +298,9 @@ const WarehouseDropMenu = ({
 			)}
 			<span className="underline" ></span>
 			<SimpleBar
-				style={adaptive ? { transitionDelay: '0.1s' } : {}}
+				// style={adaptive ? { transitionDelay: '0.1s' } : {}}
 				autoHide={false}
-				className={openMenu ? 'dropmenu toggle' : 'dropmenu'}
+				className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
 			>
 				{inputOn
 					? obj
