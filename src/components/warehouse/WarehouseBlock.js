@@ -359,11 +359,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	},[])
 	useEffect(() => {
 		if (switchMenu) {
-			requestAnimationFrame(() => {
+			// requestAnimationFrame(() => {
 				document.querySelectorAll('.animationFrame').forEach((x) => {
 					// x.style.width = '90px';
 					// x.style.paddingRight = '10px';
 					x.classList.add('show');
+					// x.style.animation = 'transform 0.3s forwards'
 					x.style.overflow = '';
 				});
 				document.querySelectorAll('.block-3-btn').forEach((x) => {
@@ -375,13 +376,14 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 				// setTimeout(() => {
 				// 	document.querySelector('.shadow-block').style.height = '100vh';
 				// }, 300);
-			});
+			// });
 		} else {
-			requestAnimationFrame(() => {
+			// requestAnimationFrame(() => {
 				document.querySelectorAll('.animationFrame').forEach((x) => {
 					// x.style.width = '0px';
 					// x.style.paddingRight = '0px';
 					x.classList.remove('show');
+					// x.style.animation = ''
 					x.style.overflow = 'hidden';
 				});
 				document.querySelectorAll('.block-3-btn').forEach((x) => {
@@ -390,7 +392,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					// x.style.paddingRight = '0px';
 					x.classList.remove('show');
 				});
-			});
+			// });
 		}
 	}, [switchMenu]);
 	return (
@@ -620,7 +622,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										className="sticky-block-children"
 										style={{ maxWidth: '156px' , position:'absolute', left:0}}
 									>
-										<div style={{ width: '51px' }}>
+										<div style={{ width: '51px',paddingRight:'10px' }}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
@@ -628,7 +630,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												objProduct={objProduct}
 											/>
 										</div>
-										<div style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}} className="block-3-btn">
+										<div 
+										// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
+										 className="block-3-btn">
 											<WarehouseDropMenu
 												adaptive={true}
 												setPodlozhka={setPodlozhka}
@@ -663,7 +667,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												switchMenu={switchMenu}
 												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
-												{/* <div className='shadow-block'></div> */}
+											
 										</div>
 									</div>
 									<div style={{position:'relative',left:60, display:'flex'}}>

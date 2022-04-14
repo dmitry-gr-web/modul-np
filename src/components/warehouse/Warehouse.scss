@@ -616,6 +616,15 @@ html {
 			top: 0;
 			width: 0;
 			background-color: white;
+			
+			transition: transform 0.3s, opacity 0.3s;
+			width: 90px;
+			left:0;
+			width: max-content;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateX(0px);
+			// padding-right: 10px;
 			&:after {
 				content: '';
 				box-shadow: 3px 0px 3px 0px grey;
@@ -668,10 +677,14 @@ html {
 			//   red,
 			//   rgba(0, 0, 0, 0)
 			// ) 1 100%;
-		
-			// opacity: 0;
-			// width: 90px;
-			// left:0;
+			transition: transform   0.3s, opacity  0.3s;
+			opacity: 0;
+			visibility: hidden;
+			width: 90px;
+			left:0;
+			// transition: 0.3s;
+			transform: translateX(0px);
+
 			img {
 				height: 16px;
 			}
@@ -680,16 +693,42 @@ html {
 				top: 2px;
 			}
 		}
+		@keyframes transform {
+			0% {
+			
+				opacity: 0;
+				visibility: hidden;
+				transform: translateX(0px);
+			}
+			100%{
+				// transition: 0s;
+				visibility: visible;
+				transform: translateX(60px);
+				opacity: 1;
+				padding-right: 10px;
+			}
+		}
 		.animationFrame.show {
 			// transition: opacity 0.3s;
 			// opacity: 1;
 			// left:60px;
-			width: 90px;
+			// width: 90px;
+			// transition: transform 0.3s;
+			// transition: transform   0.3s, opacity  0.3s;
+			// transition: opacity  0.3s;
+			opacity: 1;
+			visibility: visible;
+			transform: translateX(60px);
 			padding-right: 10px;
 		
 		}
 		.block-3-btn.show {
-			width: 90px;
+			// width: 90px;
+			// padding-right: 10px;
+
+			opacity: 1;
+			visibility: visible;
+			transform: translateX(60px);
 			padding-right: 10px;
 		}
 		// .gradi {
@@ -1456,7 +1495,10 @@ html {
 			padding: 0 2px;
 			position: relative;
 			min-width: 76px;
-
+			.wrap-nal-ostatok {
+				transition: transform 0.3s;
+				transform: translateX(8px);
+			}
 			input {
 				outline: none;
 				border: none;
@@ -1484,6 +1526,7 @@ html {
 				background-color: transparent;
 				border: none;
 				overflow: hidden;
+				transition: opacity 0.3s;
 
 				// visibility: hidden;
 				// transition: width 0.2s;
@@ -1537,6 +1580,14 @@ html {
 			}
 			button:hover {
 				opacity: 0.5 !important;
+			}
+		}
+		.nal-ostatok.showBtn {
+			button {
+				opacity: 1;
+			}
+			.wrap-nal-ostatok {
+				transform: translateX(-3px);
 			}
 		}
 		.nal-rezerv,

@@ -310,12 +310,20 @@ const WarehouseProductList = ({
 	function PlusMinusOpen(e) {
 		// setBtnMenu(true);
 		requestAnimationFrame(() => {
-			document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-				x.style.opacity = '1';
+			document.querySelectorAll('.nal-ostatok').forEach((x) => {
+				// x.style.opacity = '1';
+				x.classList.add('showBtn');
 			});
-			document.querySelectorAll('.gus').forEach((x) => {
-				x.style.right = '6px';
-			});
+			// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
+			// 	x.style.right = '6px';
+			// });
+			// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+			// 	x.style.opacity = '1';
+			// 	x.classList.add('showBtn');
+			// });
+			// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
+			// 	x.style.right = '6px';
+			// });
 		});
 		// btnRef.current.querySelectorAll('button').forEach(x => {
 		// 	x.style.opacity = '1';
@@ -333,12 +341,16 @@ const WarehouseProductList = ({
 		if (!podlozhka) {
 			// setBtnMenu(false);
 			requestAnimationFrame(() => {
-				document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-					x.style.opacity = '0';
+				document.querySelectorAll('.nal-ostatok').forEach((x) => {
+					// x.style.opacity = '1';
+					x.classList.remove('showBtn');
 				});
-				document.querySelectorAll('.gus').forEach((x) => {
-					x.style.right = '-5px';
-				});
+				// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+				// 	x.style.opacity = '0';
+				// });
+				// document.querySelectorAll('.wrap-nal.ostatok').forEach((x) => {
+				// 	x.style.right = '-5px';
+				// });
 			});
 			// btnRef.current.querySelectorAll('button').forEach(x => {
 			// 	x.style.opacity = '0';
@@ -745,8 +757,8 @@ const WarehouseProductList = ({
 							}
 						>
 							<div
-								className="gus"
-								style={{ display: 'flex', position: 'absolute', right: '-5px', transition: '0.2s' }}
+								className="wrap-nal-ostatok"
+								style={{ display: 'flex', position: 'absolute' }}
 							>
 								<button style={btnMenu ? { width: '16px' } : {}} onDoubleClick={(e) => e.stopPropagation()} onClick={BtnMinus}>
 									<svg
