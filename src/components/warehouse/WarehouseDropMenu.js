@@ -59,7 +59,7 @@ const WarehouseDropMenu = ({
 				{ id: 0, attribute: 'Все', select: true },
 				{ id: 1, attribute: '🇷🇺', select: false },
 				{ id: 2, attribute: '🇺🇦', select: false },
-				{ id: 2, attribute: '🇹🇷', select: false },
+				{ id: 3, attribute: '🇹🇷', select: false },
 			];
 		}
 		if (type === 'currency') {

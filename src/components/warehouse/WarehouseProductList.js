@@ -116,15 +116,40 @@ const WarehouseProductList = ({
 		// tooltipBlock.style.fontSize = '14px';
 		// console.log(e);
 		let posElement = e.currentTarget.getBoundingClientRect();
+		const tooltipBlock = document.getElementById('tooltipBtn');
 		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
 			// tooltipBlock.style.fontSize = '12px';
 			plusminus = setTimeout(() => {
-				const tooltipBlock = document.getElementById('tooltipBtn');
-			
 				// tooltipBlock.innerHTML = html;
 				tooltipBlock.style.fontSize = '14px';
 				tooltipBlock.innerText = e.target.innerText;
-
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+		}
+		if (e.currentTarget.innerText === '🇺🇦') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.style.fontSize = '14px';
+				tooltipBlock.innerText = 'Украина';
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+		}
+		if (e.currentTarget.innerText === '🇷🇺') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.style.fontSize = '14px';
+				tooltipBlock.innerText = 'Россия';
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+		}
+		if (e.currentTarget.innerText === '🇹🇷') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.style.fontSize = '14px';
+				tooltipBlock.innerText = 'Турция';
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-header 1s forwards';
@@ -132,6 +157,7 @@ const WarehouseProductList = ({
 		}
 		// console.log(e.target.querySelector('input'))
 	}
+	
 	function tooltipOff() {
 		clearTimeout(plusminus);
 		document.getElementById('tooltipBtn').style.animation = '';
@@ -270,7 +296,7 @@ const WarehouseProductList = ({
 		// e.preventDefault();
 		// e.stopPropagation();
 		// console.log(e.currentTarget)
-		if (e.currentTarget){
+		if (e.currentTarget) {
 			let newobj = [...objProduct];
 			if (e.ctrlKey || e.metaKey) {
 				e.preventDefault();
@@ -298,7 +324,7 @@ const WarehouseProductList = ({
 			setLastIndex(index);
 			setObjProduct(newobj);
 		}
-		
+
 		// console.log(lastIndex, index);
 	}
 
@@ -310,22 +336,22 @@ const WarehouseProductList = ({
 	const btnRef = useRef();
 	function PlusMinusOpen(e) {
 		// setBtnMenu(true);
-	
-			document.querySelectorAll('.nal-ostatok').forEach((x) => {
-				// x.style.opacity = '1';
-				x.classList.add('showBtn');
-			});
-			// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
-			// 	x.style.right = '6px';
-			// });
-			// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-			// 	x.style.opacity = '1';
-			// 	x.classList.add('showBtn');
-			// });
-			// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
-			// 	x.style.right = '6px';
-			// });
-	
+
+		document.querySelectorAll('.nal-ostatok').forEach((x) => {
+			// x.style.opacity = '1';
+			x.classList.add('showBtn');
+		});
+		// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
+		// 	x.style.right = '6px';
+		// });
+		// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+		// 	x.style.opacity = '1';
+		// 	x.classList.add('showBtn');
+		// });
+		// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
+		// 	x.style.right = '6px';
+		// });
+
 		// btnRef.current.querySelectorAll('button').forEach(x => {
 		// 	x.style.opacity = '1';
 		// })
@@ -341,18 +367,18 @@ const WarehouseProductList = ({
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
 			// setBtnMenu(false);
-		
-				document.querySelectorAll('.nal-ostatok').forEach((x) => {
-					// x.style.opacity = '1';
-					x.classList.remove('showBtn');
-				});
-				// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-				// 	x.style.opacity = '0';
-				// });
-				// document.querySelectorAll('.wrap-nal.ostatok').forEach((x) => {
-				// 	x.style.right = '-5px';
-				// });
-			
+
+			document.querySelectorAll('.nal-ostatok').forEach((x) => {
+				// x.style.opacity = '1';
+				x.classList.remove('showBtn');
+			});
+			// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+			// 	x.style.opacity = '0';
+			// });
+			// document.querySelectorAll('.wrap-nal.ostatok').forEach((x) => {
+			// 	x.style.right = '-5px';
+			// });
+
 			// btnRef.current.querySelectorAll('button').forEach(x => {
 			// 	x.style.opacity = '0';
 			// })
@@ -377,18 +403,16 @@ const WarehouseProductList = ({
 	function dblClick(e) {
 		// console.log(e)
 		// console.log(e)
-	
-			if (
-				e.target.localName === 'button' ||
-				e.target.offsetParent === 'label' ||
-				e.target.className === '.slider.round'
-			) {
-			} else {
-				setToggleCard(true);
-				setGetIndex(index);
-			}
-		
-	
+
+		if (
+			e.target.localName === 'button' ||
+			e.target.offsetParent === 'label' ||
+			e.target.className === '.slider.round'
+		) {
+		} else {
+			setToggleCard(true);
+			setGetIndex(index);
+		}
 	}
 
 	return (
@@ -580,8 +604,10 @@ const WarehouseProductList = ({
 											: { color: 'rgba(0,0,0,1)' }
 									}
 									className="flags"
+									onMouseLeave={tooltipOff}
+									onMouseEnter={tooltipOn}
 								>
-									{objProduct[index].podProduct === 1 ? '' : objProduct[index].country}
+									{objProduct[index].country}
 								</span>
 							</div>
 							<div
@@ -596,7 +622,7 @@ const WarehouseProductList = ({
 										: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
 								}
 							>
-								{objProduct[index].podProduct === 1 ? '' : objProduct[index].currency}
+								{objProduct[index].currency}
 							</div>
 							<div
 								className="name-width"
@@ -615,7 +641,7 @@ const WarehouseProductList = ({
 											? 'arrowDeg'
 											: ''
 									}
-									style={objProduct[index].podProduct === 1 ? {opacity: 0.4} : {}}
+									style={objProduct[index].podProduct === 1 ? { opacity: 0.4 } : {}}
 								></span>
 								<span
 									onMouseLeave={tooltipOff}
@@ -634,7 +660,7 @@ const WarehouseProductList = ({
 													overflow: 'hidden',
 													textOverflow: 'ellipsis',
 													display: 'block',
-													opacity: `${objProduct[index].podProduct === 1 ? 0.4 : ''}`
+													opacity: `${objProduct[index].podProduct === 1 ? 0.4 : ''}`,
 											  }
 									}
 								>
@@ -759,18 +785,18 @@ const WarehouseProductList = ({
 									: { display: 'flex', justifyContent: 'flex-end', paddingRight: '3px' }
 							}
 						>
-							<div
-								className="wrap-nal-ostatok"
-								style={{ display: 'flex', position: 'absolute' }}
-							>
-								<button style={btnMenu ? { width: '16px' } : {}} onDoubleClick={(e) => e.stopPropagation()} onClick={BtnMinus}>
+							<div className="wrap-nal-ostatok" style={{ display: 'flex', position: 'absolute' }}>
+								<button
+									style={btnMenu ? { width: '16px' } : {}}
+									onDoubleClick={(e) => e.stopPropagation()}
+									onClick={BtnMinus}
+								>
 									<svg
 										width="9"
 										height="7"
 										viewBox="0 0 9 7"
 										fill="none"
 										xmlns="http://www.w3.org/2000/svg"
-										
 									>
 										<path
 											d="M1.26782 3.44748L8.08752 3.44747"
@@ -794,24 +820,27 @@ const WarehouseProductList = ({
 										setPodlozhka(true);
 										setInputFormat(true);
 										e.stopPropagation();
-										
 									}}
 									value={focusInput && inputFormat ? memoryInput : formatNumber2(+memoryInput)}
-									onDoubleClick={e => e.stopPropagation()}
+									onDoubleClick={(e) => e.stopPropagation()}
 									style={{
 										color: 'rgba(0,0,0,0.7)',
 										width: inputLength(memoryInput.toString()),
 									}}
 								/>
 
-								<button style={btnMenu ? { width: '16px' } : {}} onDoubleClick={(e) => e.stopPropagation()}  onClick={BtnPlus}>
+								<button
+									style={btnMenu ? { width: '16px' } : {}}
+									onDoubleClick={(e) => e.stopPropagation()}
+									onClick={BtnPlus}
+								>
 									<svg
 										width="15"
 										height="15"
 										viewBox="3 2 15 15"
 										fill="none"
 										xmlns="http://www.w3.org/2000/svg"
-										style={{transform: 'rotate(45deg)', marginTop: '1px'}}
+										style={{ transform: 'rotate(45deg)', marginTop: '1px' }}
 									>
 										<path
 											d="M7.26655 8.03662L12.0888 12.8589"

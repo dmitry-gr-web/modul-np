@@ -20,7 +20,7 @@ import WarehouseInput from './WarehouseInput';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
 let hover;
-const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,load }) => {
+const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex, load }) => {
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
@@ -187,6 +187,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	function getBottomHeight() {
 		return rowHeight * (objProduct.length - (getStart() + visibleRows + 1));
 	}
+
 	// useEffect(()=> {
 	// 	rootRef.current.recalculate();
 	// },[start])start
@@ -218,6 +219,33 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		}
 
 		return wrapper;
+	}
+	let isDown = false;
+	let startX;
+	let scrollLeft;
+	function onMouseDown(e) {
+		if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
+			isDown = true;
+			startX = e.pageX - rootRef.current.el.querySelector('.simplebar-content-wrapper').offsetLeft;
+			scrollLeft = rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollLeft;
+		} else {
+			isDown = false;
+		}
+	}
+
+	function onMouseLeave(e) {
+		isDown = false;
+	}
+
+	function onMouseMove(e) {
+		if (!isDown) return;
+
+		e.preventDefault();
+		throttle(() => {
+			const x = e.pageX - rootRef.current.el.querySelector('.simplebar-content-wrapper').offsetLeft;
+			const walk = (x - startX) * 2; //scroll-fast
+			rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollLeft = scrollLeft - walk;
+		}, 100)();
 	}
 	// function onScroll(e) {
 	// 	clearTimeout(timer);
@@ -253,23 +281,22 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	// 	// getStart();
 	// }
 	async function updateHover(e) {
-	
 		clearTimeout(hover);
 		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
-		  document.querySelector('.first-tab-body').classList.add('hoverOff')
+			document.querySelector('.first-tab-body').classList.add('hoverOff');
 		}
 		// document.getElementById("tooltipBtn").style.animation = '';
 		// document.getElementById("tooltipBtn").style.fontSize = '12px';
 		// timers = setTimeout(function () {
-	
+
 		//   document.querySelector('.disableHover').classList.remove('disable-hover')
 		// }, 400);
 		hover = setTimeout(() => {
 			document.querySelector('.first-tab-body').classList.remove('hoverOff');
 		}, 400);
-		document.getElementById("tooltipBtn").style.animation = '';
+		document.getElementById('tooltipBtn').style.animation = '';
 	}
-	useEffect(() => {
+	useEffect(async () => {
 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 
 		async function onScroll(e) {
@@ -282,7 +309,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			// 	document.querySelector('.warehouse-products table').classList.remove('hoverOff');
 			// }, 100);
 			// document.querySelector('#tooltipBtn').style.animation = '';
-	
+
 			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
 			// rootRef.current.el
 			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
@@ -315,6 +342,16 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
 			.addEventListener('scroll', onScroll);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('mousedown', onMouseDown);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('mouseleave', onMouseLeave);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('mousemove', onMouseMove);
+
 		return () => {
 			// rootRef.current
 			// 	.removeEventListener('scroll', onScroll);
@@ -376,43 +413,42 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	useEffect(() => {
 		if (switchMenu) {
 			// requestAnimationFrame(() => {
-				document.querySelectorAll('.animationFrame').forEach((x) => {
-					// x.style.width = '90px';
-					// x.style.paddingRight = '10px';
-					x.classList.add('show');
-					// x.style.animation = 'transform 0.3s forwards'
-					x.style.overflow = '';
-				});
-				document.querySelectorAll('.block-3-btn').forEach((x) => {
-					// x.style.maxWidth = '125px';
-					// x.style.width = '90px'
-					// x.style.paddingRight = '10px';
-					x.classList.add('show');
-				});
-				// setTimeout(() => {
-				// 	document.querySelector('.shadow-block').style.height = '100vh';
-				// }, 300);
+			document.querySelectorAll('.animationFrame').forEach((x) => {
+				// x.style.width = '90px';
+				// x.style.paddingRight = '10px';
+				x.classList.add('show');
+				// x.style.animation = 'transform 0.3s forwards'
+				x.style.overflow = '';
+			});
+			document.querySelectorAll('.block-3-btn').forEach((x) => {
+				// x.style.maxWidth = '125px';
+				// x.style.width = '90px'
+				// x.style.paddingRight = '10px';
+				x.classList.add('show');
+			});
+			// setTimeout(() => {
+			// 	document.querySelector('.shadow-block').style.height = '100vh';
+			// }, 300);
 			// });
 		} else {
 			// requestAnimationFrame(() => {
-				document.querySelectorAll('.animationFrame').forEach((x) => {
-					// x.style.width = '0px';
-					// x.style.paddingRight = '0px';
-					x.classList.remove('show');
-					// x.style.animation = ''
-					x.style.overflow = 'hidden';
-				});
-				document.querySelectorAll('.block-3-btn').forEach((x) => {
-					// x.style.maxWidth = '0px';
-					// x.style.width = '0px'
-					// x.style.paddingRight = '0px';
-					x.classList.remove('show');
-				});
+			document.querySelectorAll('.animationFrame').forEach((x) => {
+				// x.style.width = '0px';
+				// x.style.paddingRight = '0px';
+				x.classList.remove('show');
+				// x.style.animation = ''
+				x.style.overflow = 'hidden';
+			});
+			document.querySelectorAll('.block-3-btn').forEach((x) => {
+				// x.style.maxWidth = '0px';
+				// x.style.width = '0px'
+				// x.style.paddingRight = '0px';
+				x.classList.remove('show');
+			});
 			// });
 		}
 	}, [switchMenu]);
 	return (
-		
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
 				Товары
@@ -636,9 +672,17 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 										className="sticky-block-children"
-										style={{ width: '156px' , position:'absolute', left:0}}
+										style={{ width: '156px', position: 'absolute', left: 0 }}
 									>
-										<div className='width21px' style={{transition:'0.3s', maxWidth: '51px',paddingRight:'10px' ,width:'100%'}}>
+										<div
+											className="width21px"
+											style={{
+												transition: '0.3s',
+												maxWidth: '51px',
+												paddingRight: '10px',
+												width: '100%',
+											}}
+										>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
@@ -646,9 +690,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												objProduct={objProduct}
 											/>
 										</div>
-										<div 
-										// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
-										 className="block-3-btn">
+										<div
+											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
+											className="block-3-btn"
+										>
 											<WarehouseDropMenu
 												adaptive={true}
 												setPodlozhka={setPodlozhka}
@@ -683,69 +728,71 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												switchMenu={switchMenu}
 												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
-											
 										</div>
 									</div>
-									<div style={{position:'relative',left:60, display:'flex'}}>
-									<div
-										className="id-width"
-										style={{ paddingRight: '10px', width: widthColum.id + 'px' }}
-									>
-										<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
+									<div style={{ position: 'relative', left: 60, display: 'flex' }}>
+										<div
+											className="id-width"
+											style={{ paddingRight: '10px', width: widthColum.id + 'px' }}
+										>
+											<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
+										</div>
+										<div style={{ paddingRight: '10px', minWidth: 51, zIndex: 2 }}>
+											<WarehouseDropMenu
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'country'}
+												objProduct={objProduct}
+												setSwitchMenu={setSwitchMenu}
+												switchMenu={switchMenu}
+											/>
+										</div>
+										<div style={{ paddingRight: '10px', minWidth: 51 }}>
+											<WarehouseDropMenu
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'currency'}
+												objProduct={objProduct}
+												setSwitchMenu={setSwitchMenu}
+												switchMenu={switchMenu}
+											/>
+										</div>
+										<div
+											className="name-width"
+											style={{ paddingRight: '15px', width: widthColum.name - 15 + 'px' }}
+										>
+											<WarehouseDropMenu
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'name'}
+												inputOn={true}
+												searchLine={searchLine}
+												objProduct={objProduct}
+												setSwitchMenu={setSwitchMenu}
+												switchMenu={switchMenu}
+											/>
+										</div>
+										<div
+											className="attribute-width btn"
+											style={{
+												paddingRight: '3px',
+												width: widthColum.attribute + 'px',
+												maxWidth: '105px',
+											}}
+										>
+											<WarehouseDropMenu
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'attribute'}
+												searchLine={searchLine}
+												inputOn={true}
+												objProduct={objProduct}
+												setSwitchMenu={setSwitchMenu}
+												switchMenu={switchMenu}
+											/>
+										</div>
+										<div className="shadow-left"></div>
 									</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 ,zIndex: 2}}>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'country'}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-										/>
-									</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'currency'}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-										/>
-									</div>
-									<div
-										className="name-width"
-										style={{ paddingRight: '15px', width: widthColum.name - 15 + 'px' }}
-									>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'name'}
-											inputOn={true}
-											searchLine={searchLine}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-										/>
-									</div>
-									<div
-										className="attribute-width btn"
-										style={{ paddingRight: '3px', width: widthColum.attribute + 'px', maxWidth: '105px' }}
-									>
-										<WarehouseDropMenu
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'attribute'}
-											searchLine={searchLine}
-											inputOn={true}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-										/>
-									</div>
-									<div className="shadow-left"></div>
-									</div>
-									
 								</div>
 							</th>
 
