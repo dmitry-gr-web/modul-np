@@ -258,9 +258,7 @@ const WarehouseDropMenu = ({
 				x.closest('.warehouse-dropmenu').classList.remove('hide-arrow');
 			}
 		});
-		// if(document.querySelector('.status-result').innerHTML !== ''){
 
-		// }
 	}, [podlozhka, openMenu]);
 	
 	return (
