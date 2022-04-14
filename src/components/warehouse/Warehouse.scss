@@ -488,6 +488,9 @@ html {
 		transition: 0.2s;
 
 		border-radius: 5px;
+
+	
+		
 	}
 	.simplebar-track.simplebar-horizontal .simplebar-scrollbar {
 		top: 0px;
@@ -500,6 +503,8 @@ html {
 		right: 0;
 		bottom: 0;
 		top: 0;
+		cursor: pointer;
+		pointer-events: auto;
 	}
 	.simplebar-scrollbar.simplebar-visible:before {
 		opacity: 1;
@@ -1325,7 +1330,7 @@ html {
 					height: 20px;
 					top: 0;
 					left: 0;
-					width: 100vw;
+					width: calc(100vw - 394px);
 					// display: none;
 					transform: translateZ(0);
 					will-change: transform,scroll-position;

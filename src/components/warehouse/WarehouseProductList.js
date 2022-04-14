@@ -581,7 +581,7 @@ const WarehouseProductList = ({
 									}
 									className="flags"
 								>
-									{objProduct[index].country}
+									{objProduct[index].podProduct === 1 ? '' : objProduct[index].country}
 								</span>
 							</div>
 							<div
@@ -596,7 +596,7 @@ const WarehouseProductList = ({
 										: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
 								}
 							>
-								{objProduct[index].currency}
+								{objProduct[index].podProduct === 1 ? '' : objProduct[index].currency}
 							</div>
 							<div
 								className="name-width"
@@ -615,6 +615,7 @@ const WarehouseProductList = ({
 											? 'arrowDeg'
 											: ''
 									}
+									style={objProduct[index].podProduct === 1 ? {opacity: 0.4} : {}}
 								></span>
 								<span
 									onMouseLeave={tooltipOff}
@@ -633,6 +634,7 @@ const WarehouseProductList = ({
 													overflow: 'hidden',
 													textOverflow: 'ellipsis',
 													display: 'block',
+													opacity: `${objProduct[index].podProduct === 1 ? 0.4 : ''}`
 											  }
 									}
 								>
