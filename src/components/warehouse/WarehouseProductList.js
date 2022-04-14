@@ -133,6 +133,7 @@ const WarehouseProductList = ({
 		// console.log(e.target.querySelector('input'))
 	}
 	function tooltipOff() {
+		clearTimeout(plusminus);
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	// useEffect(() => {

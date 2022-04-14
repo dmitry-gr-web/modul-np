@@ -802,11 +802,13 @@ html {
   top: 0;
   left: 0;
   width: 100vw;
-  display: none;
+  transform: translateZ(0px);
+  visibility: hidden;
   background: #cacaca;
 }
 .warehouse-products table .first-tab-body tr:hover .hoverr div {
-  display: block;
+  transform: translateZ(0px);
+  visibility: visible;
 }
 .warehouse-products table .first-tab-body tr:hover .sticky-block {
   background: #cacaca;

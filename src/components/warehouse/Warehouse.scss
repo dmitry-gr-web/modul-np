@@ -1308,12 +1308,16 @@ html {
 					top: 0;
 					left: 0;
 					width: 100vw;
-					display: none;
+					// display: none;
+					transform: translateZ(0px);
+					visibility: hidden;
 					background: #cacaca;
 				}
 			}
 			tr:hover .hoverr div {
-				display: block;
+				// display: block;
+				transform: translateZ(0px);
+				visibility: visible;
 			}
 			tr:hover .sticky-block {
 				background: #cacaca;
