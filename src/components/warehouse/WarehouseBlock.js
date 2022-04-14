@@ -19,6 +19,7 @@ import WarehouseInput from './WarehouseInput';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
+let hover;
 const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,load }) => {
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
@@ -52,21 +53,26 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
 			x.style.width = '21px';
 		});
-		document.querySelectorAll('.adaptive-switch').forEach((x) => {
-			x.classList.remove('adaptive-switch-on');
+		document.querySelectorAll('.nal-ostatok').forEach((x) => {
+			// x.style.opacity = '1';
+			x.classList.remove('showBtn');
 		});
-		document.querySelectorAll('.adaptive-switch2').forEach((x) => {
-			x.classList.remove('adaptive-switch-on2');
-		});
+		document.querySelector('.width21px').style.maxWidth = '51px';
+		// document.querySelectorAll('.adaptive-switch').forEach((x) => {
+		// 	x.classList.remove('adaptive-switch-on');
+		// });
+		// document.querySelectorAll('.adaptive-switch2').forEach((x) => {
+		// 	x.classList.remove('adaptive-switch-on2');
+		// });
 		// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
 		// 	x.style.width = '0px';
 		// });
-		document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-			x.style.opacity = '0';
-		});
-		document.querySelectorAll('.gus').forEach((x) => {
-			x.style.right = '-5px';
-		});
+		// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
+		// 	x.style.opacity = '0';
+		// });
+		// document.querySelectorAll('.gus').forEach((x) => {
+		// 	x.style.right = '-5px';
+		// });
 
 		let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
 
@@ -246,26 +252,36 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	// 	// }, 0);
 	// 	// getStart();
 	// }
+	async function updateHover(e) {
+	
+		clearTimeout(hover);
+		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
+		  document.querySelector('.first-tab-body').classList.add('hoverOff')
+		}
+		// document.getElementById("tooltipBtn").style.animation = '';
+		// document.getElementById("tooltipBtn").style.fontSize = '12px';
+		// timers = setTimeout(function () {
+	
+		//   document.querySelector('.disableHover').classList.remove('disable-hover')
+		// }, 400);
+		hover = setTimeout(() => {
+			document.querySelector('.first-tab-body').classList.remove('hoverOff');
+		}, 400);
+		document.getElementById("tooltipBtn").style.animation = '';
+	}
 	useEffect(() => {
 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 
-		function onScroll(e) {
-			clearTimeout(timer);
+		async function onScroll(e) {
+			// clearTimeout(timer);
 			setStart(e.target.scrollTop);
+			updateHover();
 			// console.log(start)
-			document.querySelector('.warehouse-products table').classList.add('hoverOff');
-			timer = setTimeout(() => {
-				document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-				// requestAnimationFrame(() => {
-				// 	document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-				// 		x.style.opacity = '0';
-				// 	});
-				// 	document.querySelectorAll('.gus').forEach((x) => {
-				// 		x.style.right = '-5px';
-				// 	});
-				// });
-			}, 100);
-			document.querySelector('#tooltipBtn').style.animation = '';
+			// document.querySelector('.warehouse-products table').classList.add('hoverOff');
+			// timer = setTimeout(() => {
+			// 	document.querySelector('.warehouse-products table').classList.remove('hoverOff');
+			// }, 100);
+			// document.querySelector('#tooltipBtn').style.animation = '';
 	
 			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
 			// rootRef.current.el
@@ -352,11 +368,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	useLayoutEffect(() => {
 		width();
 	}, []);
-	useEffect(()=> {
-		return () => {
-			console.log('unmount')
-		}
-	},[])
+	// useEffect(()=> {
+	// 	return () => {
+	// 		console.log('unmount')
+	// 	}
+	// },[])
 	useEffect(() => {
 		if (switchMenu) {
 			// requestAnimationFrame(() => {
@@ -620,9 +636,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 										className="sticky-block-children"
-										style={{ maxWidth: '156px' , position:'absolute', left:0}}
+										style={{ width: '156px' , position:'absolute', left:0}}
 									>
-										<div style={{ width: '51px',paddingRight:'10px' }}>
+										<div className='width21px' style={{transition:'0.3s', maxWidth: '51px',paddingRight:'10px' ,width:'100%'}}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}

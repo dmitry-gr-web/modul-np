@@ -468,22 +468,31 @@ html {
 }
 .warehouse-products table .block-3-btn {
   position: absolute;
-  left: 60px;
   display: flex;
   justify-content: space-between;
   padding-right: 0;
+  padding-left: 5px;
   z-index: 5;
   transition: width 0.3s;
   top: 0;
   width: 0;
   background-color: white;
   transition: transform 0.3s, opacity 0.3s;
-  width: 90px;
-  left: 0;
+  right: 0;
   width: max-content;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(0px);
+  transform: translateX(-60px);
+}
+.warehouse-products table .block-3-btn:before {
+  content: "";
+  position: absolute;
+  background: white;
+  width: 5px;
+  top: 0;
+  right: -5px;
+  height: 20px;
+  z-index: -2;
 }
 .warehouse-products table .block-3-btn:after {
   content: "";
@@ -491,7 +500,7 @@ html {
   position: absolute;
   width: 2px;
   top: -19px;
-  right: -5px;
+  right: -4px;
   height: 100vh;
   transition: 0.2s;
   z-index: -1;
@@ -553,7 +562,7 @@ html {
 .warehouse-products table .block-3-btn.show {
   opacity: 1;
   visibility: visible;
-  transform: translateX(60px);
+  transform: translateX(0px);
   padding-right: 10px;
 }
 .warehouse-products table .sticky-body {
@@ -756,6 +765,10 @@ html {
   transform: translateZ(0);
   will-change: transform, scroll-position;
 }
+.warehouse-products table .first-tab-body tr {
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
+}
 .warehouse-products table .first-tab-body td {
   padding: 0;
   font-size: 14px;
@@ -794,6 +807,8 @@ html {
   position: sticky;
   left: 13px;
   width: 0px;
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
 }
 .warehouse-products table .first-tab-body .hoverr div {
   position: absolute;
@@ -802,7 +817,8 @@ html {
   top: 0;
   left: 0;
   width: 100vw;
-  transform: translateZ(0px);
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
   visibility: hidden;
   background: #cacaca;
 }
@@ -977,7 +993,7 @@ html {
   width: 100%;
 }
 .warehouse-products .hoverOff {
-  pointer-events: none;
+  pointer-events: none !important;
 }
 .warehouse-products .switch-btn-warehouse {
   position: relative;

@@ -161,6 +161,7 @@ const WarehouseDropMenu = ({
 		}
 		if (adaptive) {
 			e.currentTarget.style.width = '51px';
+			document.querySelector('.width21px').style.maxWidth = '21px';
 		}
 		e.currentTarget.querySelector('.simplebar-content-wrapper').scrollTo({
 			top: 0,
@@ -194,6 +195,7 @@ const WarehouseDropMenu = ({
 			}
 			if (adaptive) {
 				e.currentTarget.style.width = '21px';
+				document.querySelector('.width21px').style.maxWidth = '51px';
 			}
 			// e.currentTarget.querySelector('.underline').style.width = '0%';
 		}

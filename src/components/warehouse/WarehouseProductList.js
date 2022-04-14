@@ -310,7 +310,7 @@ const WarehouseProductList = ({
 	const btnRef = useRef();
 	function PlusMinusOpen(e) {
 		// setBtnMenu(true);
-		requestAnimationFrame(() => {
+	
 			document.querySelectorAll('.nal-ostatok').forEach((x) => {
 				// x.style.opacity = '1';
 				x.classList.add('showBtn');
@@ -325,7 +325,7 @@ const WarehouseProductList = ({
 			// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
 			// 	x.style.right = '6px';
 			// });
-		});
+	
 		// btnRef.current.querySelectorAll('button').forEach(x => {
 		// 	x.style.opacity = '1';
 		// })
@@ -341,7 +341,7 @@ const WarehouseProductList = ({
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
 			// setBtnMenu(false);
-			requestAnimationFrame(() => {
+		
 				document.querySelectorAll('.nal-ostatok').forEach((x) => {
 					// x.style.opacity = '1';
 					x.classList.remove('showBtn');
@@ -352,7 +352,7 @@ const WarehouseProductList = ({
 				// document.querySelectorAll('.wrap-nal.ostatok').forEach((x) => {
 				// 	x.style.right = '-5px';
 				// });
-			});
+			
 			// btnRef.current.querySelectorAll('button').forEach(x => {
 			// 	x.style.opacity = '0';
 			// })
