@@ -24,5 +24,11 @@
 		"russia":"Россия",
 		"kazakhstan":"Казахстан",
 		"turkey":"Турция"
+	},
+	"tooltipCurrency": {
+		"uah":"Гривна",
+		"dollar":"Доллар",
+		"eur":"Евро",
+		"rub":"Рубль"
 	}
 }

@@ -747,6 +747,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												objProduct={objProduct}
 												setSwitchMenu={setSwitchMenu}
 												switchMenu={switchMenu}
+												translator={translator}
 											/>
 										</div>
 										<div style={{ paddingRight: '10px', minWidth: 51 }}>
@@ -754,6 +755,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
 												type={'currency'}
+												translator={translator}
 												objProduct={objProduct}
 												setSwitchMenu={setSwitchMenu}
 												switchMenu={switchMenu}

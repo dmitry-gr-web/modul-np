@@ -1,5 +1,7 @@
-const UA = require('./ua.json');
-const RU = require('./ru.json');
+// const UA = require('./ua.json');
+// const RU = require('./ru.json');
+import UA from './ua.json';
+import RU from './ru.json';
 let translator = {
 	lang: 'RU',
 	dic: { UA: UA, RU: RU },

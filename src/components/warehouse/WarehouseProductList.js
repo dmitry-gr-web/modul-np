@@ -156,6 +156,44 @@ const WarehouseProductList = ({
 				tooltipBlock.style.animation = 'delay-header 1s forwards';
 			}, 150);
 		}
+
+		if (e.currentTarget.innerText === '€') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.style.fontSize = '14px';
+				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'eur');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+		}
+		if (e.currentTarget.innerText === '₽') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.style.fontSize = '14px';
+				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'rub');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+		}
+		if (e.currentTarget.innerText === '₴') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.style.fontSize = '14px';
+				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'uah');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+		}
+		if (e.currentTarget.innerText === '$') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.style.fontSize = '14px';
+				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'dollar');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+		}
+
 		// console.log(e.target.querySelector('input'))
 	}
 	
@@ -612,6 +650,8 @@ const WarehouseProductList = ({
 								</span>
 							</div>
 							<div
+								onMouseLeave={tooltipOff}
+								onMouseEnter={tooltipOn}
 								style={
 									!objProduct[index].status.all
 										? {

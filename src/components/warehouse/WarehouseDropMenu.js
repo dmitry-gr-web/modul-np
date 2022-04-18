@@ -12,7 +12,8 @@ const WarehouseDropMenu = ({
 	setSwitchMenu,
 	switchMenu,
 	setFlagSwitchMenu,
-	searchLine
+	searchLine,
+	translator,
 }) => {
 	const [openMenu, setOpenMenu] = useState(false);
 	let newarr = [];
@@ -113,7 +114,6 @@ const WarehouseDropMenu = ({
 			} else {
 				return { ...x };
 			}
-		
 		});
 		if (adaptive) {
 			setFlagSwitchMenu(true);
@@ -134,7 +134,7 @@ const WarehouseDropMenu = ({
 		// if(adaptive){
 		// 	setSwitchMenu(true);
 		// }
-	
+
 		// e.target?.closest('.warehouse-input').style.display = 'block';
 		setObj(newobj);
 	}
@@ -233,15 +233,74 @@ const WarehouseDropMenu = ({
 		tooltipBlock.style.fontSize = '12px';
 		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
 			// tooltipBlock.innerText = e.target.innerText;
-			if(type === 'country' || type === 'status') {
+			if (type === 'country' || type === 'status') {
 				// tooltipBlock.innerText = e.target.innerText;
 			} else {
 				tooltipBlock.innerHTML = searchLine(e.target.innerText, value);
 				tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 				tooltipBlock.style.top = posElement.y + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+		
 			}
-
+		} else {
+			if(type === 'country'){
+				if (e.currentTarget.innerText === '🇺🇦') {
+					tooltipBlock.style.fontSize = '12px';
+					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'ukraine');
+					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 'px';
+					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				}
+				if (e.currentTarget.innerText === '🇷🇺') {
+					tooltipBlock.style.fontSize = '12px';
+					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'russia');
+					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 'px';
+					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				}
+				if (e.currentTarget.innerText === '🇹🇷') {
+					tooltipBlock.style.fontSize = '12px';
+					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'turkey');
+					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 'px';
+					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				}
+			} else if (type === 'currency'){
+				console.log(e)
+				// { id: 1, attribute: '$', select: false },
+				// { id: 2, attribute: '€', select: false },
+				// { id: 3, attribute: '₴', select: false },
+				// { id: 4, attribute: '₽', select: false },
+				if (e.currentTarget.innerText === '$') {
+					tooltipBlock.style.fontSize = '12px';
+					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'dollar');
+					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 'px';
+					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				}
+				if (e.currentTarget.innerText === '€') {
+					tooltipBlock.style.fontSize = '12px';
+					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'eur');
+					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 'px';
+					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				}
+				if (e.currentTarget.innerText === '₴') {
+					tooltipBlock.style.fontSize = '12px';
+					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'uah');
+					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 'px';
+					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				}
+				if (e.currentTarget.innerText === '₽') {
+					tooltipBlock.style.fontSize = '12px';
+					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'rub');
+					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 'px';
+					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				}
+			}
+			
 		}
 	}
 	function tooltipOff() {
@@ -258,9 +317,8 @@ const WarehouseDropMenu = ({
 				x.closest('.warehouse-dropmenu').classList.remove('hide-arrow');
 			}
 		});
-
 	}, [podlozhka, openMenu]);
-	
+
 	return (
 		<div
 			style={adaptive ? { width: 21, transition: '0.3s' } : {}}
@@ -294,7 +352,7 @@ const WarehouseDropMenu = ({
 					)}
 				</div>
 			)}
-			<span className="underline" ></span>
+			<span className="underline"></span>
 			<SimpleBar
 				// style={adaptive ? { transitionDelay: '0.1s' } : {}}
 				autoHide={false}
@@ -305,15 +363,17 @@ const WarehouseDropMenu = ({
 							.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
 							.map((x, index) => (
 								<li
-								key={index}
+									key={index}
 									onMouseEnter={tooltipOn}
 									onMouseLeave={tooltipOff}
 									className={x.select ? 'select-btn' : ''}
 									onClick={(e) => clickList(x.id, e)}
 								>
-									<span dangerouslySetInnerHTML={{
-										__html: searchLine(x.attribute, value),
-									}}></span>
+									<span
+										dangerouslySetInnerHTML={{
+											__html: searchLine(x.attribute, value),
+										}}
+									></span>
 								</li>
 							))
 					: obj.map((x, index) => (
@@ -323,14 +383,14 @@ const WarehouseDropMenu = ({
 								onMouseLeave={tooltipOff}
 								className={x.select ? 'select-btn' : ''}
 								onClick={(e) => clickList(x.id, e)}
-								style={type === 'status' ? {overflow: 'visible'} : {}}
+								style={type === 'status' ? { overflow: 'visible' } : {}}
 							>
 								{type === 'country' ? (
 									<span className={index !== 0 ? 'flags' : ''}>{x.attribute}</span>
 								) : type === 'status' ? (
-									<span className={index !== 0 ? 'status' : ''} >{x.attribute}</span>
+									<span className={index !== 0 ? 'status' : ''}>{x.attribute}</span>
 								) : (
-									x.attribute
+									<span>{x.attribute}</span>
 								)}
 							</li>
 					  ))}

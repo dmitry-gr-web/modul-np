@@ -176,7 +176,7 @@ const Warehouse = () => {
 						objProduct={objProduct}
 						translator={translator}
 						/>
-					// </Suspense>
+					// {/* </Suspense> */}
 				)}
 				{ul[1].select && <AttributeBlock />}
 				{ul[2].select && <Suppliers />}
