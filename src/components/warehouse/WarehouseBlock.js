@@ -20,7 +20,7 @@ import WarehouseInput from './WarehouseInput';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
 let hover;
-const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex, load }) => {
+const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex, load , translator}) => {
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
@@ -147,6 +147,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	}
 
 	//rascheti
+	
 	let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
 	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
 	let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
@@ -451,7 +452,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
-				Товары
+				{translator.getTranslation('warehouse', 'goods')}
 				<button>
 					<SvGBtnPlus />
 				</button>
@@ -542,7 +543,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												paddingRight: '10px',
 											}}
 										>
-											Статус
+										
+											{translator.getTranslation('warehouse','status')}
 										</div>
 										<div
 											className="animationFrame"
@@ -569,8 +571,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 									>
 										ID
 									</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>Страна</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>Валюта</div>
+									<div style={{ paddingRight: '10px', minWidth: 51 }}>{translator.getTranslation('warehouse','country')}</div>
+									<div style={{ paddingRight: '10px', minWidth: 51 }}>{translator.getTranslation('warehouse','currency')}</div>
 									<div
 										className="name-width"
 										style={{
@@ -579,25 +581,25 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											width: widthColum.name - 15 + 'px',
 										}}
 									>
-										Название
+										{translator.getTranslation('warehouse','name')}
 									</div>
 									<div
 										className="attribute-width"
 										style={{ paddingRight: '3px', width: widthColum.attribute + 'px' }}
 									>
-										Атрибут
+										{translator.getTranslation('warehouse','attribute')}
 									</div>
 									<div className="shadow-left"></div>
 								</div>
 							</th>
 
 							<th style={{ paddingLeft: '12px', paddingRight: '15px' }} colSpan={4}>
-								Наличие
+							{translator.getTranslation('warehouse','available')}
 							</th>
-							<th style={{ paddingRight: '15px' }}>Закупка</th>
-							<th style={{ paddingRight: '15px' }}>Продажа</th>
-							<th style={{ paddingRight: '15px' }}>Маржа</th>
-							<th colSpan={4}>Сумма</th>
+							<th style={{ paddingRight: '15px' }}>{translator.getTranslation('warehouse','purchase')}</th>
+							<th style={{ paddingRight: '15px' }}>{translator.getTranslation('warehouse','sales')}</th>
+							<th style={{ paddingRight: '15px' }}>{translator.getTranslation('warehouse','margin')}</th>
+							<th colSpan={4}>{translator.getTranslation('warehouse','total')}</th>
 						</tr>
 						<tr ref={linkTR}>
 							{/* <th style={{width: '0px',position:'absolute'}}>
@@ -886,6 +888,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 								btnMenu={btnMenu}
 								setToggleCard={setToggleCard}
 								selectAll={selectAll}
+								translator={translator}
 								setSelectAll={setSelectAll}
 								flagSwitchMenu={flagSwitchMenu}
 							/>

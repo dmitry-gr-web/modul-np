@@ -1,0 +1,28 @@
+{
+	"card": {
+		"order": "Заказ"
+	},
+	"warehouse": {
+		"goods":"Товары",
+		"attributes":"Атрибуты",
+		"attribute":"Атрибут",
+		"suppliers":"Поставщики",
+		"movementOfGoods": "Движение товара",
+		"warehouse":"Склад",
+		"status": "Статус",
+		"country": "Страна",
+		"name": "Название",
+		"currency":"Валюта",
+		"available":"Наличие",
+		"purchase":"Закупка",
+		"sales":"Продажа",
+		"margin": "Маржа",
+		"total": "Сумма"
+	},
+	"tooltipCountries": {
+		"ukraine":"Украина",
+		"russia":"Россия",
+		"kazakhstan":"Казахстан",
+		"turkey":"Турция"
+	}
+}

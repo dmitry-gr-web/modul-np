@@ -1,0 +1,28 @@
+{
+	"card": {
+		"order": "Замовлення"
+	},
+	"warehouse": {
+		"goods":"Товари",
+		"attributes":"Атрибути",
+		"attribute":"Атрибут",
+		"suppliers": "Постачальники",
+		"movementOfGoods": "Рух товарів",
+		"warehouse":"Склад",
+		"status": "Статус",
+		"country": "Країна",
+		"name": "Назва",
+		"currency":"Валюта",
+		"available":"Наявність",
+		"purchase":"Закупівля",
+		"sales":"Продаж",
+		"margin": "Маржа",
+		"total": "Сума"
+	},
+	"tooltipCountries": {
+		"ukraine":"Україна",
+		"russia":"Росія",
+		"kazakhstan":"Казахстан",
+		"turkey":"Туреччина"
+	}
+}

@@ -24,6 +24,7 @@ const WarehouseProductList = ({
 	flagSwitchMenu,
 	// rowHeight,
 	// key,
+	translator,
 	start,
 	widthColum,
 	height,
@@ -131,7 +132,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.innerText === '🇺🇦') {
 			plusminus = setTimeout(() => {
 				tooltipBlock.style.fontSize = '14px';
-				tooltipBlock.innerText = 'Украина';
+				tooltipBlock.innerText = translator.getTranslation('tooltipCountries','ukraine');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-header 1s forwards';
@@ -140,7 +141,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.innerText === '🇷🇺') {
 			plusminus = setTimeout(() => {
 				tooltipBlock.style.fontSize = '14px';
-				tooltipBlock.innerText = 'Россия';
+				tooltipBlock.innerText = translator.getTranslation('tooltipCountries','russia');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-header 1s forwards';
@@ -149,7 +150,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.innerText === '🇹🇷') {
 			plusminus = setTimeout(() => {
 				tooltipBlock.style.fontSize = '14px';
-				tooltipBlock.innerText = 'Турция';
+				tooltipBlock.innerText = translator.getTranslation('tooltipCountries','turkey');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-header 1s forwards';

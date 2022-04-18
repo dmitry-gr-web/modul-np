@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect,lazy, Suspense } from 'react';
 import './Warehouse.scss';
 import 'simplebar/dist/simplebar.min.css';
 import { dataWarehouse } from '../data/dataWarehouse';
@@ -6,13 +6,15 @@ import WarehouseBlock from './WarehouseBlock';
 import Suppliers from './Suppliers';
 import AttributeBlock from './AttributeBlock';
 import ProductCard from './ProductCard';
-
+import translator from '../data/translator';
+// const WarehouseBlock = lazy(() => import('./WarehouseBlock'));
 const Warehouse = () => {
 	// let newarr = [...dataWarehouse, ...dataWarehouse];
 	// const ProductCard = React.createContext();
+
 	const [toggleCard, setToggleCard] = useState(false);
 	const [objProduct, setObjProduct] = useState(dataWarehouse);
-	const [getIndex,setGetIndex] = useState(0);
+	const [getIndex, setGetIndex] = useState(0);
 
 	// useEffect(() => {
 	// 	let curent = document.querySelectorAll('.while');
@@ -103,11 +105,12 @@ const Warehouse = () => {
 	// 	};
 	// }, [objProduct.length, visibleRows, rowHeight]);
 	const [ul, setUl] = useState([
-		{ id: 0, name: 'Товары', select: true },
-		{ id: 1, name: 'Атрибуты', select: false },
-		{ id: 2, name: 'Поставщики', select: false },
-		{ id: 3, name: 'Движение товара', select: false },
+		{ id: 0, name: "goods", select: true },
+		{ id: 1, name: "attributes", select: false },
+		{ id: 2, name: "suppliers", select: false },
+		{ id: 3, name: "movementOfGoods", select: false },
 	]);
+	// .map(x => ({...x,['name']:translator.getTranslation('card',x.name)}))
 	function clickNav(i) {
 		let obj = ul.map((x, index) => {
 			if (index === i) {
@@ -118,7 +121,28 @@ const Warehouse = () => {
 		});
 		setUl(obj);
 	}
+	function ruBtn() {
+		// translator.setLang('UA');
+		// console.log(translator.getTranslation('order'));
+		translator.setLang('RU');
+		console.log(this)
 
+		// let obj = ul.map(x => ({...x,['name']:translator.getTranslation('warehouse',x.name)}));
+		// setUl(obj);
+
+	}
+	
+	function uaBtn () {
+		translator.setLang('UA');
+
+		// let obj = ul.map(x => ({...x,['name']:translator.getTranslation('warehouse',x.name)}));
+		// setUl(obj);
+	}
+
+
+	// useEffect(()=> {
+	// },[translator])
+	// console.log(ul)
 	return (
 		<div
 			style={{
@@ -128,6 +152,10 @@ const Warehouse = () => {
 				background: 'white',
 			}}
 		>
+			<div style={{ position: 'absolute', top: 0, left: '200px' }}>
+				<button onClick={ruBtn}>RU</button>
+				<button onClick={uaBtn}>UA</button>
+			</div>
 			<div style={{ position: 'absolute', top: 0, right: 0 }}>
 				Выбрано {parseInt(objProduct.filter((x) => x.select === true).length)}
 			</div>
@@ -144,26 +172,46 @@ const Warehouse = () => {
 					justifyContent: 'space-between',
 				}}
 			>
+				<aside>
+					<div className="warehouse-title">{translator.getTranslation('warehouse', 'warehouse')}</div>
+					<nav className="warehouse-nav">
+						<ul>
+							{ul.map((x, i) => (
+								<li
+									key={i}
+									onClick={() => clickNav(x.id)}
+									className={x.select ? 'select-link' : ''}
+								>
+									{translator.getTranslation('warehouse', x.name)}
+								</li>
+							))}
+						</ul>
+					</nav>
+				</aside>
+				{ul[0].select && (
+					// <Suspense fallback={<div>Loading</div>}>
+						<WarehouseBlock
+						setToggleCard={setToggleCard}
+						setGetIndex={setGetIndex}
+						setObjProduct={setObjProduct}
+						objProduct={objProduct}
+						translator={translator}
+						/>
+					// </Suspense>
+				)}
+				{ul[1].select && <AttributeBlock />}
+				{ul[2].select && <Suppliers />}
+				{ul[3].select && <div />}
 
-					<aside>
-						<div className="warehouse-title">Склад</div>
-						<nav className="warehouse-nav">
-							<ul>
-								{ul.map((x, i) => (
-									<li key={i} onClick={() => clickNav(x.id)} className={x.select ? 'select-link' : ''}>
-										{x.name}
-									</li>
-								))}
-							</ul>
-						</nav>
-					</aside>
-					{ul[0].select && <WarehouseBlock setToggleCard={setToggleCard} setGetIndex={setGetIndex} setObjProduct={setObjProduct} objProduct={objProduct} />}
-					{ul[1].select && <AttributeBlock />}
-					{ul[2].select && <Suppliers />}
-					{ul[3].select && <div />}
-				
-					{toggleCard && <ProductCard getIndex={getIndex} toggleCard={toggleCard} setToggleCard={setToggleCard} setObjProduct={setObjProduct} objProduct={objProduct}/>}
-
+				{toggleCard && (
+					<ProductCard
+						getIndex={getIndex}
+						toggleCard={toggleCard}
+						setToggleCard={setToggleCard}
+						setObjProduct={setObjProduct}
+						objProduct={objProduct}
+					/>
+				)}
 			</div>
 		</div>
 	);
