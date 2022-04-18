@@ -17,27 +17,6 @@ const Warehouse = () => {
 	const [getIndex, setGetIndex] = useState(0);
 
 	// useEffect(() => {
-	// 	let curent = document.querySelectorAll('.while');
-	// 	let width = [];
-	// 	let res = 0;
-	// 	setTimeout(() => {
-	// 		for (let i = 0; i < curent.length; i++) {
-	// 			if (!switchMenu) {
-	// 				width.push(curent[i].offsetWidth);
-	// 			} else if (switchMenu) {
-	// 				width.push(curent[i].offsetWidth);
-	// 			} else if (switchMenu && i === 1) {
-	// 				width.push(0);
-	// 			}
-	// 			curent[i].style.left = res + 7 + 'px';
-	// 			res = width.reduce((prev, curr) => prev + curr, 0);
-	// 			curent[0].style.left = '7px';
-	// 		}
-	// 	}, 200);
-	// 	console.log(width);
-	// }, [objProduct, switchMenu]);
-
-	// useEffect(() => {
 	// 	let curent = linkTR.current.querySelectorAll('th');
 	// 	let width = [];
 	// 	let res = 0;
