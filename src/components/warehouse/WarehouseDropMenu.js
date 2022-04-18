@@ -16,7 +16,7 @@ const WarehouseDropMenu = ({
 	translator,
 }) => {
 	const [openMenu, setOpenMenu] = useState(false);
-	let newarr = [];
+
 	const LabelOn = () => {
 		return (
 			<label style={{ pointerEvents: 'none' }} className="switch-btn-small">
@@ -43,6 +43,8 @@ const WarehouseDropMenu = ({
 			</label>
 		);
 	};
+	// console.log(translator?.getTranslation('btnAll','all') ?? 'Все')
+	let newarr = [];
 	if (inputOn) {
 		objProduct.map((x) => {
 			newarr.push(x[type]);
@@ -53,11 +55,14 @@ const WarehouseDropMenu = ({
 		newarr = newarr.flat().map((x, index) => {
 			return { id: index + 1, attribute: x, select: false };
 		});
-		newarr = [{ id: 0, attribute: 'Все', select: true }, ...newarr];
+		newarr = [{ id: 0, attribute: 'all', select: true }, ...newarr];
+		// newarr.map(x => x.attribute)[0]translator.getTranslation('btnAll', 'all')
+		// newarr[0].attribute = translator.getTranslation('btnAll', 'all')
+		//  console.log(newarr[0].attribute = 'дщі')
 	} else {
 		if (type === 'country') {
 			newarr = [
-				{ id: 0, attribute: 'Все', select: true },
+				{ id: 0, attribute: 'all', select: true },
 				{ id: 1, attribute: '🇷🇺', select: false },
 				{ id: 2, attribute: '🇺🇦', select: false },
 				{ id: 3, attribute: '🇹🇷', select: false },
@@ -65,7 +70,7 @@ const WarehouseDropMenu = ({
 		}
 		if (type === 'currency') {
 			newarr = [
-				{ id: 0, attribute: 'Все', select: true },
+				{ id: 0, attribute: 'all', select: true },
 				{ id: 1, attribute: '$', select: false },
 				{ id: 2, attribute: '€', select: false },
 				{ id: 3, attribute: '₴', select: false },
@@ -74,14 +79,21 @@ const WarehouseDropMenu = ({
 		}
 		if (type === 'status') {
 			newarr = [
-				{ id: 0, attribute: 'Все', select: true },
+				{ id: 0, attribute: 'all', select: true },
 				{ id: 1, attribute: <LabelOn />, select: false },
 				{ id: 2, attribute: <LabelOff />, select: false },
 			];
 		}
 	}
 
+	// useEffect(()=> {
+	// 	newarr = [{ id: 0, attribute: translator?.getTranslation('btnAll','all') ?? 'Все', select: true }, ...newarr];
+	// },[])
 	const [obj, setObj] = useState(newarr);
+	// obj[0].attribute = translator.getTranslation('btnAll', 'all');
+	// setObj(obj)
+	// newarr = newarr[0].attribute = translator.getTranslation('btnAll', 'all');
+
 	const [value, setValue] = useState('');
 	function clickList(index, e) {
 		setPodlozhka(true);
@@ -133,7 +145,7 @@ const WarehouseDropMenu = ({
 		}
 		// if(adaptive){
 		// 	setSwitchMenu(true);
-		// }
+		// }git
 
 		// e.target?.closest('.warehouse-input').style.display = 'block';
 		setObj(newobj);
@@ -175,7 +187,7 @@ const WarehouseDropMenu = ({
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
-						: obj.filter((x) => x.select === true)[0].attribute.includes('Все')
+						: obj.filter((x) => x.select === true)[0].attribute.includes('all')
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
 				);
@@ -183,7 +195,7 @@ const WarehouseDropMenu = ({
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
-						: obj.filter((x) => x.select === true)[0].attribute === 'Все'
+						: obj.filter((x) => x.select === true)[0].attribute === 'all'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
 				);
@@ -209,7 +221,7 @@ const WarehouseDropMenu = ({
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
-						: obj.filter((x) => x.select === true)[0].attribute.includes('Все')
+						: obj.filter((x) => x.select === true)[0].attribute.includes('all')
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
 				);
@@ -217,7 +229,7 @@ const WarehouseDropMenu = ({
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
-						: obj.filter((x) => x.select === true)[0].attribute === 'Все'
+						: obj.filter((x) => x.select === true)[0].attribute === 'all'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
 				);
@@ -240,10 +252,9 @@ const WarehouseDropMenu = ({
 				tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 				tooltipBlock.style.top = posElement.y + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
-		
 			}
 		} else {
-			if(type === 'country'){
+			if (type === 'country') {
 				if (e.currentTarget.innerText === '🇺🇦') {
 					tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'ukraine');
@@ -265,8 +276,8 @@ const WarehouseDropMenu = ({
 					tooltipBlock.style.top = posElement.y + 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
-			} else if (type === 'currency'){
-				console.log(e)
+			} else if (type === 'currency') {
+				console.log(e);
 				// { id: 1, attribute: '$', select: false },
 				// { id: 2, attribute: '€', select: false },
 				// { id: 3, attribute: '₴', select: false },
@@ -300,7 +311,6 @@ const WarehouseDropMenu = ({
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 			}
-			
 		}
 	}
 	function tooltipOff() {
@@ -311,7 +321,6 @@ const WarehouseDropMenu = ({
 		console.log();
 		document.querySelectorAll('.status-result').forEach((x, i) => {
 			if (i !== 0 && x.innerHTML !== '') {
-				// setHide(true);
 				x.closest('.warehouse-dropmenu').classList.add('hide-arrow');
 			} else {
 				x.closest('.warehouse-dropmenu').classList.remove('hide-arrow');
@@ -335,7 +344,7 @@ const WarehouseDropMenu = ({
 				<div className="status-result">
 					{obj.filter((x) => x.select === true).length > 1
 						? 'Фильтр'
-						: obj.filter((x) => x.select === true)[0].attribute === 'Все'
+						: obj.filter((x) => x.select === true)[0].attribute === 'all'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute}
 				</div>
@@ -343,7 +352,7 @@ const WarehouseDropMenu = ({
 				<div className="text-result">
 					{obj.filter((x) => x.select === true).length > 1 ? (
 						'Фильтр'
-					) : obj.filter((x) => x.select === true)[0].attribute.includes('Все') ? (
+					) : obj.filter((x) => x.select === true)[0].attribute.includes('all')  ? (
 						''
 					) : (
 						<span className={type === 'country' ? 'flags' : ''} style={{ paddingLeft: 10 }}>
@@ -371,7 +380,7 @@ const WarehouseDropMenu = ({
 								>
 									<span
 										dangerouslySetInnerHTML={{
-											__html: searchLine(x.attribute, value),
+											__html: searchLine(translator.getTranslation('btnAll', x.attribute) ??  x.attribute, value),
 										}}
 									></span>
 								</li>
@@ -385,13 +394,16 @@ const WarehouseDropMenu = ({
 								onClick={(e) => clickList(x.id, e)}
 								style={type === 'status' ? { overflow: 'visible' } : {}}
 							>
-								{type === 'country' ? (
-									<span className={index !== 0 ? 'flags' : ''}>{x.attribute}</span>
-								) : type === 'status' ? (
-									<span className={index !== 0 ? 'status' : ''}>{x.attribute}</span>
-								) : (
-									<span>{x.attribute}</span>
-								)}
+								<span
+									className={
+										index !== 0
+											? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : ''}`
+											: ''
+									}
+								>
+									{/* {console.log(translator.getTranslation('btnAll', x.attribute), x.attribute)} */}
+									{translator.getTranslation('btnAll', x.attribute) ??  x.attribute}
+								</span>
 							</li>
 					  ))}
 			</SimpleBar>
