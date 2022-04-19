@@ -710,8 +710,8 @@ html {
 }
 .warehouse-products table .first-tab-header .shadow-vertical {
   height: 12px;
-  width: calc(100% + 7px);
-  left: -13px;
+  width: 100%;
+  left: 13px;
   background: none !important;
   position: sticky;
   display: flex;
@@ -725,20 +725,24 @@ html {
 }
 .warehouse-products table .first-tab-header .shadow-vertical div:nth-child(2) {
   height: 12px;
-  width: 100vw;
+  width: 100%;
   position: absolute;
+  right: 0;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table .first-tab-header .shadow-vertical-3 {
   height: 12px;
   background: none !important;
-  position: relative;
+  position: sticky;
+  right: 10px;
+  z-index: -1;
 }
 .warehouse-products table .first-tab-header .shadow-vertical-3 div {
   height: 12px;
   width: 100%;
   position: absolute;
   top: 0;
+  right: -10px;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table thead {
@@ -820,13 +824,27 @@ html {
   height: 20px;
   top: 0;
   left: 0;
+  width: calc(100vw - 386px);
   width: calc(100vw - 394px);
   transform: translateZ(0);
   will-change: transform, scroll-position;
   visibility: hidden;
   background: #cacaca;
 }
-.warehouse-products table .first-tab-body tr:hover .hoverr div {
+.warehouse-products table .first-tab-body .hoverr .div {
+  position: absolute;
+  z-index: -2;
+  height: 20px;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 386px);
+  width: calc(100vw - 394px);
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
+  visibility: hidden;
+  background: #858585;
+}
+.warehouse-products table .first-tab-body tr:hover .hoverr div:first-child {
   transform: translateZ(0px);
   visibility: visible;
 }
@@ -854,8 +872,8 @@ html {
   border-radius: 3px 0 0 3px;
   top: 0;
 }
-.warehouse-products table .first-tab-body .select {
-  background-color: #858585;
+.warehouse-products table .first-tab-body .select .hoverr .div {
+  visibility: visible;
 }
 .warehouse-products table .first-tab-body .select .animationFrame {
   background-color: #858585;

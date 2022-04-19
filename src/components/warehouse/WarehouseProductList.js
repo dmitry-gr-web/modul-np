@@ -475,6 +475,7 @@ const WarehouseProductList = ({
 				>
 					<td className="hoverr">
 						<div></div>
+						<div className='div'></div>
 					</td>
 					{/* <td
 						className="sticky-body-row1"

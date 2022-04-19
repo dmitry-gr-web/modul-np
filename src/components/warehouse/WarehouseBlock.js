@@ -225,13 +225,13 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	let startX;
 	let scrollLeft;
 	function onMouseDown(e) {
-		if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
+		// if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
 			isDown = true;
 			startX = e.pageX - rootRef.current.el.querySelector('.simplebar-content-wrapper').offsetLeft;
 			scrollLeft = rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollLeft;
-		} else {
-			isDown = false;
-		}
+		// } else {
+		// 	isDown = false;
+		// }
 	}
 
 	function onMouseLeave(e) {
@@ -297,13 +297,16 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		}, 400);
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
+	// const scrollableNodeRef = React.createRef();
 	useEffect(async () => {
 		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 
 		async function onScroll(e) {
 			// clearTimeout(timer);
+			// rootRef.current.recalculate();
 			setStart(e.target.scrollTop);
 			updateHover();
+		
 			// console.log(start)
 			// document.querySelector('.warehouse-products table').classList.add('hoverOff');
 			// timer = setTimeout(() => {
@@ -337,12 +340,23 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			// getStart();
 		}
 
-		// rootRef.current
-		// 	.addEventListener('scroll', onScroll);
-		// rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
+
+		// rootRef.current.addEventListener('scroll', onScroll);
+		// rootRef.current.addEventListener('mousedown', onMouseDown);
+		// rootRef.current.addEventListener('mouseleave', onMouseLeave);
+		// rootRef.current.addEventListener('mouseup', onMouseLeave);
+		// rootRef.current.addEventListener('mousemove', onMouseMove);
+		// rootRef.current.recalculate();
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
 			.addEventListener('scroll', onScroll);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('scroll', onScroll);
+		// const simpleBar = new SimpleBar(document.querySelector('.warehouse-table .simplebar-content-wrapper'));
+		// simpleBar.addEventListener('scroll', onScroll);
+		// simpleBar.getScrollElement();
+
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
 			.addEventListener('mousedown', onMouseDown);
@@ -351,11 +365,15 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			.addEventListener('mouseleave', onMouseLeave);
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('mouseup', onMouseLeave);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
 			.addEventListener('mousemove', onMouseMove);
-
+		
 		return () => {
 			// rootRef.current
 			// 	.removeEventListener('scroll', onScroll);
+			// rootRef.current.recalculate();
 			rootRef.current.el
 				.querySelector('.simplebar-content-wrapper')
 				.removeEventListener('scroll', onScroll);
@@ -364,7 +382,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	// useEffect(() => {
 	// 	rootRef.current.recalculate();
 	// 	// rootRef.current.el.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${getStart()}px,0px)`;
-
+	// console.log(scrollableNodeRef)
 	// }, [start]);
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
@@ -459,6 +477,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			</div>
 			<div className="shadow-right"></div>
 			<SimpleBar
+				// scrollableNodeProps={{ref: scrollableNodeRef}}
 				className="warehouse-table"
 				style={{
 					display: 'flex',
@@ -466,12 +485,13 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					marginBottom: '10px',
 					// maxWidth: 1150,
 					width: '100%',
-					// overflow: 'auto',
+					// overflow: 'scroll',
 					// height: '800px',
 					height: document.body.clientHeight - 180 + 'px',
 				}}
 				autoHide={false}
 				ref={rootRef}
+				// direction='rtl'
 				// onScroll={onScroll}
 			>
 				<table
@@ -602,9 +622,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 							<th colSpan={4}>{translator.getTranslation('warehouse','total')}</th>
 						</tr>
 						<tr ref={linkTR}>
-							{/* <th style={{width: '0px',position:'absolute'}}>
-						<div></div>
-						</th> */}
+
 							<th className="hoverr">
 								<div></div>
 							</th>
@@ -848,22 +866,24 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 							</th>
 						</tr>
 
-						{/* <tr>
+						<tr>
 				
 						<th className="hoverr" style={{height:'12px'}}>
 							<div></div>
 						</th>
-							<th className="shadow-vertical" colSpan={17}>
+							<th className="shadow-vertical" colSpan={1}>
 								<div
 									onMouseEnter={() => setSwitchMenu(true)}
 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-									style={switchMenu ? { width: '171px' } : { width: '64px' }}
+									style={switchMenu ? { width: '171px' } : { width: '74px' }}
 								></div>
-								<div  		style={switchMenu ? { left: '158px' } : {left:'51px' }}></div>
+								<div style={switchMenu ? { width: 'calc(100% - 158px)' } : {width:'calc(100% - 61px)' }}></div>
 							</th>
 
-						
-						</tr> */}
+							<th colSpan={17} className="shadow-vertical-3">
+								<div style={{width:  document.querySelector('.warehouse-table')?.offsetWidth - document.querySelector('.sticky-body')?.offsetWidth - 13 + 'px'}}></div>
+							</th>
+						</tr>
 					</thead>
 
 					<tbody className="first-tab-body">
