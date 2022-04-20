@@ -201,7 +201,7 @@ html {
 .warehouse-products .warehouse-dropmenu .text-result {
   text-align: center;
   height: 20px;
-  line-height: 18px;
+  line-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   width: calc(100% - 10px);
@@ -238,6 +238,9 @@ html {
   margin-bottom: 5px;
   margin-right: 5px;
   border-radius: 5px;
+}
+.warehouse-products .warehouse-dropmenu .dropmenu .simplebar-track.simplebar-vertical div {
+  transition: transform 0s !important;
 }
 .warehouse-products .warehouse-dropmenu .dropmenu .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
   background: rgba(0, 0, 0, 0.3);
@@ -322,6 +325,9 @@ html {
 .warehouse-products .warehouse-dropmenu .status-result {
   width: 100%;
   text-align: left;
+}
+.warehouse-products .warehouse-dropmenu.hide-menu, .warehouse-products .warehouse-input.hide-menu {
+  visibility: hidden !important;
 }
 .warehouse-products .warehouse-products-title {
   margin-bottom: 21px;

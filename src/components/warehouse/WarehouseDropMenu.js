@@ -102,18 +102,25 @@ const WarehouseDropMenu = ({
 		let newobj = obj.map((x, i) => {
 			if (i === index) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					x.style.visibility = 'hidden';
+					// x.style.visibility = 'hidden';
+					x.classList.add('hide-menu');
+
 				});
-				e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
+				e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+				// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
 				return { ...x, select: !x.select };
 			} else if (index === 0 && i === 0) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					x.style.visibility = 'visible';
+					// x.style.visibility = 'visible';
+					x.classList.remove('hide-menu');
+
 				});
 				return { ...x, select: true };
 			} else if (index === 0 && i !== 0) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					x.style.visibility = 'visible';
+					// x.style.visibility = 'visible';
+					x.classList.remove('hide-menu');
+
 				});
 				setOpenMenu(false);
 				setPodlozhka(false);
@@ -132,7 +139,9 @@ const WarehouseDropMenu = ({
 		}
 		if (newobj.filter((x) => x.select === true).length === 0) {
 			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-				x.style.visibility = 'visible';
+				// x.style.visibility = 'visible';
+				x.classList.remove('hide-menu');
+
 			});
 			setOpenMenu(false);
 			setPodlozhka(false);
@@ -153,9 +162,11 @@ const WarehouseDropMenu = ({
 	const ref = useRef();
 	function changeInput(e) {
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.style.visibility = 'hidden';
+			// x.style.visibility = 'hidden';
+			x.classList.add('hide-menu');
 		});
-		e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
+		// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
+		e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		setValue(e.target.value);
 		if (ref.current.value.length === 1) {
 			ref.current.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
@@ -186,7 +197,7 @@ const WarehouseDropMenu = ({
 			if (type !== 'status') {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
-						? 'Фильтр'
+						? translator.getTranslation('btnFiltr', 'filtr')
 						: obj.filter((x) => x.select === true)[0].attribute.includes('all')
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
@@ -194,7 +205,7 @@ const WarehouseDropMenu = ({
 			} else {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
-						? 'Фильтр'
+						? translator.getTranslation('btnFiltr', 'filtr')
 						: obj.filter((x) => x.select === true)[0].attribute === 'all'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
@@ -220,7 +231,7 @@ const WarehouseDropMenu = ({
 			if (type !== 'status') {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
-						? 'Фильтр'
+						? translator.getTranslation('btnFiltr', 'filtr')
 						: obj.filter((x) => x.select === true)[0].attribute.includes('all')
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
@@ -228,7 +239,7 @@ const WarehouseDropMenu = ({
 			} else {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
-						? 'Фильтр'
+						?  translator.getTranslation('btnFiltr', 'filtr')
 						: obj.filter((x) => x.select === true)[0].attribute === 'all'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
@@ -330,29 +341,29 @@ const WarehouseDropMenu = ({
 
 	return (
 		<div
-			style={adaptive ? { width: 21, transition: '0.3s' } : {}}
+			style={adaptive ? { width: 21, transition: 'width 0.3s' } : {}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
 			className={'warehouse-dropmenu'}
 		>
 			{inputOn ? (
 				<>
-					<input ref={ref} type="text" value={value} onChange={changeInput} />
+					<input ref={ref} type="text" style={{color: 'rgba(0, 0, 0, 0.65)'}} value={value} onChange={changeInput} />
 					{/* <span className="underline"></span> */}
 				</>
 			) : type === 'status' ? (
 				<div className="status-result">
 					{obj.filter((x) => x.select === true).length > 1
-						? 'Фильтр'
+						? translator.getTranslation('btnFiltr', 'filtr')
 						: obj.filter((x) => x.select === true)[0].attribute === 'all'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute}
 				</div>
 			) : (
 				<div className="text-result">
-					{obj.filter((x) => x.select === true).length > 1 ? (
-						'Фильтр'
-					) : obj.filter((x) => x.select === true)[0].attribute.includes('all')  ? (
+					{obj.filter((x) => x.select === true).length > 1 ? 
+						translator.getTranslation('btnFiltr', 'filtr')
+					 : obj.filter((x) => x.select === true)[0].attribute.includes('all')  ? (
 						''
 					) : (
 						<span className={type === 'country' ? 'flags' : ''} style={{ paddingLeft: 10 }}>
@@ -400,6 +411,7 @@ const WarehouseDropMenu = ({
 											? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : ''}`
 											: ''
 									}
+							
 								>
 									{/* {console.log(translator.getTranslation('btnAll', x.attribute), x.attribute)} */}
 									{translator.getTranslation('btnAll', x.attribute) ??  x.attribute}

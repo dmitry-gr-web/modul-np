@@ -48,7 +48,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		// document.querySelector('.warehouse-table').style.overflow = 'auto';
 
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.style.visibility = 'visible';
+			// x.style.visibility = 'visible';
+			x.classList.remove('hide-menu');
 		});
 		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
 			x.style.width = '21px';
@@ -304,9 +305,26 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		async function onScroll(e) {
 			// clearTimeout(timer);
 			// rootRef.current.recalculate();
+			// setInterval(() => {
 			setStart(e.target.scrollTop);
 			updateHover();
-		
+			setSwitchMenu(false);
+			document.querySelectorAll('.nal-ostatok').forEach((x) => {
+				// x.style.opacity = '1';
+				x.classList.remove('showBtn');
+			});
+			// rootRef.current.recalculate();
+			// document.querySelector('.warehouse-table .simplebar-track.simplebar-vertical div').style.transform = `translate3d(0px, ${getStart()}px, 0px)`;
+			// }, 0);
+			
+
+			// console.log(			rootRef.current.unMount())
+			// rootRef.current.getScrollElement();
+			// setInterval(() => {
+				
+			// 	// await let root = rootRef.current.recalculate();
+			
+			// }, 20);
 			// console.log(start)
 			// document.querySelector('.warehouse-products table').classList.add('hoverOff');
 			// timer = setTimeout(() => {
@@ -374,11 +392,15 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			// rootRef.current
 			// 	.removeEventListener('scroll', onScroll);
 			// rootRef.current.recalculate();
-			rootRef.current.el
-				.querySelector('.simplebar-content-wrapper')
-				.removeEventListener('scroll', onScroll);
+			// rootRef.current.el
+			// 	.querySelector('.simplebar-content-wrapper')
+			// 	.removeEventListener('scroll', onScroll);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
+	// function root () {
+	// 	return rootRef.current.recalculate();
+	// }
+
 	// useEffect(() => {
 	// 	rootRef.current.recalculate();
 	// 	// rootRef.current.el.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${getStart()}px,0px)`;
@@ -487,9 +509,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					width: '100%',
 					// overflow: 'scroll',
 					// height: '800px',
+					// willChange:'transform, scroll-position',
 					height: document.body.clientHeight - 180 + 'px',
 				}}
 				autoHide={false}
+				// direction={'rtl'}
 				ref={rootRef}
 				// direction='rtl'
 				// onScroll={onScroll}
@@ -714,7 +738,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										<div
 											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 											className="block-3-btn"
-										>
+										>	
+											<div >
 											<WarehouseDropMenu
 												adaptive={true}
 												setPodlozhka={setPodlozhka}
@@ -726,6 +751,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												switchMenu={switchMenu}
 												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
+											</div>
+										
 
 											<div style={{ margin: '0 11px' }}>
 												<WarehouseDropMenu
@@ -740,7 +767,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setFlagSwitchMenu={setFlagSwitchMenu}
 												/>
 											</div>
-
+											<div>
 											<WarehouseDropMenu
 												adaptive={true}
 												setPodlozhka={setPodlozhka}
@@ -752,6 +779,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												switchMenu={switchMenu}
 												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
+											</div>
+											
 										</div>
 									</div>
 									<div style={{ position: 'relative', left: 60, display: 'flex' }}>
@@ -888,7 +917,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
-
+	
 						{objProduct.slice(getStart(), getStart() + visibleRows + 40).map((x, index) => (
 							<WarehouseProductList
 								index={index + getStart()}
@@ -920,7 +949,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 								setSelectAll={setSelectAll}
 								flagSwitchMenu={flagSwitchMenu}
 							/>
+							
 						))}
+						
 						<tr style={{ height: getBottomHeight() }}></tr>
 					</tbody>
 

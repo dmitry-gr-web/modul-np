@@ -246,7 +246,7 @@ html {
 		.text-result {
 			text-align: center;
 			height: 20px;
-			line-height: 18px;
+			line-height: 20px;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			width: calc(100% - 10px);
@@ -284,6 +284,9 @@ html {
 				margin-right: 5px;
 				// bottom: 0;
 				border-radius: 5px;
+				div {
+					transition: transform 0s !important;
+				}
 			}
 			.simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
 				background: rgba(0, 0, 0, 0.3);
@@ -303,6 +306,7 @@ html {
 			.simplebar-content-wrapper {
 				padding: 0;
 			}
+	
 			li {
 				list-style: none;
 				padding-left: 15px;
@@ -380,6 +384,10 @@ html {
 	.warehouse-dropmenu .status-result {
 		width: 100%;
 		text-align: left;
+	}
+	.warehouse-dropmenu.hide-menu,.warehouse-input.hide-menu {
+		visibility: hidden !important;
+		// display: none;
 	}
 	.warehouse-products-title {
 		margin-bottom: 21px;
@@ -470,6 +478,7 @@ html {
 	}
 	.simplebar-track.simplebar-vertical div {
 		transition: 0.2s;
+
 		// display: none !important;
 	}
 	// .simplebar-scrollbar.simplebar-visible {
