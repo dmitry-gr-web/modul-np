@@ -2,7 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import DropMenu from '../dropMenu/dropMenu';
 import './ProductCard.scss';
 import ProductCardMenu from './ProductCardMenu';
-import { rozetkaLogo, promLogo, crmLogo, SvgCalendar } from '../../img/svg-pack';
+import {
+	rozetkaLogo,
+	promLogo,
+	crmLogo,
+	SvgCalendar,
+	CirclePlus,
+	addImg,
+} from '../../img/svg-pack';
 
 const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, getIndex }) => {
 	const [openCardMenu, setOpenCardMenu] = useState(false);
@@ -206,28 +213,50 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 	// 		fr.readAsDataURL(this.files[0]);
 	// 	}
 	// }
-	function loadImg (e) {
-		if (e.target.files[0]) {
-			var fr = new FileReader();
-		
-			fr.addEventListener("load", function () {
-			  // document.getElementById("labelImg").style.backgroundImage = "url(" + fr.result + ")";
-			  document.getElementById("imgID").src = fr.result;
-			}, false);
-		
-			fr.readAsDataURL(e.target.files[0]);
-		  }
+	function zoomImg(e) {
+		if(e.target.className === 'clear'){
+
+		}else {
+
+			e.target.style.transform = 'scale(3)';
+		}
+	}
+	function zoomOutImg(e) {
+		e.target.style.transform = 'scale(1)';
+	}
+
+	function loadImg(e) {
+		const fileSize = e.target.files[0].size; // in MiB
+		// const MB = 500000;
+		if (fileSize > 500000) {
+			alert('Файл больше 500кб');
+			// $(file).val(''); //for clearing with Jquery
+		} else {
+			// Proceed further
+			if (e.target.files[0]) {
+				var fr = new FileReader();
+				fr.addEventListener(
+					'load',
+					function () {
+						e.target.previousSibling.src = fr.result;
+						e.target.previousSibling.classList.remove('clear');
+					},
+					false
+				);
+				fr.readAsDataURL(e.target.files[0]);
+			}
+		}
 	}
 	// useEffect(()=> {
 	// 	document.getElementById("pct").addEventListener("change", function () {
 	// 		if (this.files[0]) {
 	// 		  var fr = new FileReader();
-		  
+
 	// 		  fr.addEventListener("load", function () {
 	// 			// document.getElementById("labelImg").style.backgroundImage = "url(" + fr.result + ")";
 	// 			document.getElementById("imgID").src = fr.result;
 	// 		  }, false);
-		  
+
 	// 		  fr.readAsDataURL(this.files[0]);
 	// 		}
 	// 	});
@@ -348,14 +377,31 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 										<tr>
 											<td>Фото:</td>
 											<td>
-												<img
+												{/* <img
 													style={{ width: '16px', height: '16px' }}
 													src={objProduct[getIndex].images}
 													alt=""
-												/>
-												<img id='imgID' src=""/>
-												<label for="pct" id="labelImg" />
-												<input onChange={loadImg} type="file" id="pct" />
+												/> */}
+												<label className="addImg">
+													<img
+														onMouseEnter={zoomImg}
+														onMouseLeave={zoomOutImg}
+														src={objProduct[getIndex].images}
+													/>
+													<input onChange={loadImg} type="file" accept="image/*" />
+												</label>
+												<label className="addImg">
+													<img className='clear' onMouseEnter={zoomImg} onMouseLeave={zoomOutImg} src={addImg} />
+													<input onChange={loadImg} type="file" accept="image/*" />
+												</label>
+												<label className="addImg">
+													<img className='clear' onMouseEnter={zoomImg} onMouseLeave={zoomOutImg} src={addImg} />
+													<input onChange={loadImg} type="file" accept="image/*" />
+												</label>
+												<label className="addImg">
+													<img className='clear' onMouseEnter={zoomImg} onMouseLeave={zoomOutImg} src={addImg} />
+													<input onChange={loadImg} type="file" accept="image/*" />
+												</label>
 											</td>
 										</tr>
 										<tr>
