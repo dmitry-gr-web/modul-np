@@ -1084,6 +1084,15 @@ html {
 				position: absolute;
 				top: 0;
 			}
+			.summa-suma4:after {
+				content: '';
+				right: -10px;
+				width: 10px;
+				height: 40px;
+				background: white;
+				position: absolute;
+				top: -20px;
+			}
 
 			.shadow-vertical {
 				height: 12px;
@@ -1381,7 +1390,7 @@ html {
 					top: 0;
 					left: 0;
 					width: calc(100vw - 386px);
-					width: calc(100vw - 394px);
+					// width: calc(100vw - 394px);
 					// display: none;
 					transform: translateZ(0);
 					will-change: transform, scroll-position;
@@ -1395,7 +1404,7 @@ html {
 					top: 0;
 					left: 0;
 					width: calc(100vw - 386px);
-					width: calc(100vw - 394px);
+					// width: calc(100vw - 394px);
 					// display: none;
 					transform: translateZ(0);
 					will-change: transform, scroll-position;

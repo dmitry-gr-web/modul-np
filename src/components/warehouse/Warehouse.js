@@ -189,6 +189,7 @@ const Warehouse = () => {
 						setToggleCard={setToggleCard}
 						setObjProduct={setObjProduct}
 						objProduct={objProduct}
+						translator={translator}
 					/>
 				)}
 			</div>

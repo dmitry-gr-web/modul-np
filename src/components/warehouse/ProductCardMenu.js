@@ -14,6 +14,7 @@ const ProductCardMenu = ({
 	data,
 	setData,
 	setPodlozhka,
+	translator
 }) => {
 	const [value, setValue] = useState('');
 	// if (type === 'country') {
@@ -99,7 +100,10 @@ const ProductCardMenu = ({
 								></span>
 							)}
 							{/* {typeData === 'delivery' ? <span className={x.name}></span> : ''} */}
-							<div style={{ marginLeft: '5px' }}>{x.nameCountry}</div>
+							{typeData === 'flags' ? <div style={{ marginLeft: '5px' }}>{translator?.getTranslation(`tooltipCountries`,x.secondName)}</div> : ''}
+							{typeData === 'currency' ? <div style={{ marginLeft: '5px' }}>{translator?.getTranslation(`tooltipCurrency`,x.secondName)}</div> : ''}
+							{typeData === 'vidPlatformi' ? <div style={{ marginLeft: '5px' }}>{translator?.getTranslation(`tooltipPlatform`,x.secondName)}</div> : ''}
+							{typeData === 'delivery' ? <div style={{ marginLeft: '5px' }}>{translator?.getTranslation(`tooltipDelivery`,x.secondName)}</div> : ''}
 						</li>
 					))}
 			</SimpleBar>

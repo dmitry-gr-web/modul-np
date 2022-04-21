@@ -715,6 +715,15 @@ html {
   position: absolute;
   top: 0;
 }
+.warehouse-products table .first-tab-header .summa-suma4:after {
+  content: "";
+  right: -10px;
+  width: 10px;
+  height: 40px;
+  background: white;
+  position: absolute;
+  top: -20px;
+}
 .warehouse-products table .first-tab-header .shadow-vertical {
   height: 12px;
   width: 100%;
@@ -832,7 +841,6 @@ html {
   top: 0;
   left: 0;
   width: calc(100vw - 386px);
-  width: calc(100vw - 394px);
   transform: translateZ(0);
   will-change: transform, scroll-position;
   visibility: hidden;
@@ -845,7 +853,6 @@ html {
   top: 0;
   left: 0;
   width: calc(100vw - 386px);
-  width: calc(100vw - 394px);
   transform: translateZ(0);
   will-change: transform, scroll-position;
   visibility: hidden;

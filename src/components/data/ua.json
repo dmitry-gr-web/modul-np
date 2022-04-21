@@ -31,6 +31,17 @@
 		"eur":"Євро",
 		"rub":"Рубль"
 	},
+	"tooltipPlatform": {
+		"rozetka":"Rozetka",
+		"lpcrm":"Lp-crm",
+		"prom":"Prom"
+	},
+	"tooltipDelivery": {
+		"novapochta":"Нова пошта",
+		"ukrpochta":"Укрпошта",
+		"justin":"Justin",
+		"samovivoz":"Самовивіз"
+	},
 	"btnAll": {
 		"all":"Всі"
 	},

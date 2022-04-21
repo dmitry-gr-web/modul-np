@@ -12,7 +12,7 @@
 		content: '';
 		width: 4px;
 		height: 4px;
-		top: 7px;
+		top: 8px;
 		left: 6px;
 		border-radius: 100%;
 		position: absolute;
@@ -254,6 +254,7 @@
 		//     position: absolute;
 		//     background-color: rgb(120, 120, 133);
 		// }
+		
 		&:hover {
 			color: rgba(0, 0, 0, 0.5);
 		}
@@ -278,8 +279,14 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-			height: 15px;
+			// height: 15px;
+			height: 22px;
+			line-height: 22px;
 			max-width: 600px;
+		}
+		div {
+			height: 22px;
+			line-height: 22px;
 		}
 	}
 	// .ostalosDney-np,

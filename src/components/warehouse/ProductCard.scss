@@ -96,10 +96,10 @@
 		padding: 0;
 	}
 	table {
-		tr {
-			display: flex;
-			// align-items:flex-end;
-		}
+		// tr {
+		// 	display: flex;
+		// 	// align-items:flex-end;
+		// }
 		td {
 			height: 24px;
 		}
@@ -107,16 +107,18 @@
 			font-weight: 400;
 			color: rgb(0, 0, 0, 0.8);
 			font-size: 14px;
-			display: flex;
-			align-items: flex-end;
-			min-width: 71px;
+			line-height: 24px;
+			// display: flex;
+			// align-items: flex-end;
+			min-width: 79px;
 			padding-right: 27px;
 		}
 		td:last-child {
 			font-weight: 300;
 			font-size: 12px;
-			display: flex;
-			align-items: flex-end;
+			line-height: 24px;
+			// display: flex;
+			// align-items: flex-end;
 		}
 	}
 	.header-text {
@@ -124,7 +126,8 @@
 		color: rgba(0, 0, 0, 0.5);
 		position: relative;
 		user-select: none;
-		margin-bottom: 12px;
+		height: 24px;
+		margin-bottom: 7px;
 		&:before {
 			content: '';
 			width: 147px;
@@ -137,23 +140,32 @@
 		}
 	}
 	.btn-product-menu {
-        position: relative;
-        width: max-content;
-        padding-right: 16px;
-        height: 24px;
-        display: flex;
-        align-items:flex-end;
-        cursor:pointer;
-        .icons {
-            position: relative;
-            font-size: 16px;
-        }
-        // &:hover .flags {
-        //     opacity: 0.5;
-        // }
-        &:hover {
-            opacity: 0.5;
-        }
+		position: relative;
+		width: max-content;
+		padding-right: 16px;
+		height: 24px;
+		// display: flex;
+		// align-items: flex-end;
+		line-height: 24px;
+		cursor: pointer;
+		.icons {
+			position: relative;
+			font-size: 16px;
+		}
+		// &:hover .flags {
+		//     opacity: 0.5;
+		// }
+		img {
+			position: relative;
+			top:3px;
+		}
+		.icons {
+			position: relative;
+			top:3px;
+		}
+		&:hover {
+			opacity: 0.5;
+		}
 		&:after {
 			background-image: url('../../img/arrow-down.svg');
 			content: '';
@@ -161,7 +173,7 @@
 			height: 5px;
 			position: absolute;
 			right: 1px;
-			top: 13px;
+			top: 9px;
 			opacity: 0.8;
 		}
 	}
@@ -180,6 +192,50 @@
 	}
 	.addImg:first-child {
 		margin-left: 0;
+	}
+	.platform-block {
+		.header-text {
+			position: sticky;
+			top: 0;
+			background: white;
+			z-index: 2;
+		}
+		.simplebar-track.simplebar-vertical {
+			background-color: rgba(0, 0, 0, 0.1);
+			width: 5px;
+			margin-top: 41px;
+			margin-bottom: -2px;
+			margin-right: 0px;
+			// bottom: 0;
+			transition: 0.2s;
+
+			border-radius: 5px;
+		}
+		.simplebar-track.simplebar-vertical.show-scroll {
+			opacity: 1;
+		}
+		.simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
+			background: rgba(0, 0, 0, 0.3);
+			width: 5px;
+			border-radius: 5px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+		}
+		.simplebar-scrollbar.simplebar-visible:before {
+			opacity: 1;
+		}
+		.simplebar-content-wrapper {
+			padding: 0;
+		}
+	}
+	.info-warehouse-card {
+		svg {
+			position: relative;
+			top:3px;
+			margin-right: 4px;
+		}
 	}
 }
 .bg {

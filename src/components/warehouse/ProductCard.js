@@ -2,16 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import DropMenu from '../dropMenu/dropMenu';
 import './ProductCard.scss';
 import ProductCardMenu from './ProductCardMenu';
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 import {
 	rozetkaLogo,
 	promLogo,
 	crmLogo,
 	SvgCalendar,
 	CirclePlus,
-	addImg,
+	addImg
 } from '../../img/svg-pack';
 
-const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, getIndex }) => {
+const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, getIndex,translator }) => {
 	const [openCardMenu, setOpenCardMenu] = useState(false);
 	const [podlozhka, setPodlozhka] = useState(false);
 	const [typeData, setTypeData] = useState('');
@@ -35,15 +37,15 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 	// ]);
 	const [data, setData] = useState({
 		flags: [
-			{ id: 0, name: '🇷🇺', nameCountry: 'Россия', select: false },
-			{ id: 1, name: '🇺🇦', nameCountry: 'Украина', select: false },
-			{ id: 2, name: '🇹🇷', nameCountry: 'Турция', select: false },
+			{ id: 0, name: '🇷🇺', secondName: 'russia', select: false },
+			{ id: 1, name: '🇺🇦', secondName: 'ukraine', select: false },
+			{ id: 2, name: '🇹🇷', secondName: 'turkey', select: false },
 		],
 		currency: [
-			{ id: 0, name: '$', select: false },
-			{ id: 1, name: '€', select: false },
-			{ id: 2, name: '₴', select: false },
-			{ id: 3, name: '₽', select: false },
+			{ id: 0, name: '$',secondName: 'dollar', select: false },
+			{ id: 1, name: '€',secondName:'eur', select: false },
+			{ id: 2, name: '₴',secondName:'uah', select: false },
+			{ id: 3, name: '₽',secondName:'rub', select: false },
 		],
 		otdel: [
 			{ id: 0, name: 'Розничный магазин', select: true },
@@ -64,9 +66,9 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 			{ id: 1, name: 'Розница и опт', select: false },
 		],
 		vidPlatformi: [
-			{ id: 0, name: rozetkaLogo, select: true },
-			{ id: 1, name: promLogo, select: false },
-			{ id: 3, name: crmLogo, select: false },
+			{ id: 0, name: rozetkaLogo,secondName:'rozetka', select: true },
+			{ id: 1, name: promLogo, secondName:'prom',select: false },
+			{ id: 3, name: crmLogo, secondName:'lpcrm',select: false },
 		],
 		description: [
 			{ id: 0, name: 'Флешкарта', select: true },
@@ -74,10 +76,10 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 			{ id: 3, name: 'Флешкарта-2', select: false },
 		],
 		delivery: [
-			{ id: 1, name: 'icon-Union-3 icons', select: true },
-			{ id: 2, name: 'icon-Vector-2 icons', select: false },
-			{ id: 3, name: 'icon-ukrposhta icons', select: false },
-			{ id: 4, name: 'icon-Union-4 icons', select: false },
+			{ id: 1, name: 'icon-Union-3 icons',secondName:'novapochta', select: true },
+			{ id: 2, name: 'icon-Vector-2 icons', secondName:'justin',select: false },
+			{ id: 3, name: 'icon-ukrposhta icons',secondName:'ukrpochta', select: false },
+			{ id: 4, name: 'icon-Union-4 icons',secondName:'samovivoz', select: false },
 		],
 		// { id: 0, name: 'Все', select: true },
 	});
@@ -148,7 +150,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 		let adapEl = document.querySelector('.productMenu');
 		let block = document.querySelector('.product-card').getBoundingClientRect();
 		adapEl.style.top = posEl?.y - block.y + 'px';
-		adapEl.style.left = '117px';
+		adapEl.style.left = '129px';
 		adapEl.style.width = '202px';
 		setOpenCardMenu(true);
 		setPodlozhka(true);
@@ -214,10 +216,8 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 	// 	}
 	// }
 	function zoomImg(e) {
-		if(e.target.className === 'clear'){
-
-		}else {
-
+		if (e.target.className === 'clear') {
+		} else {
 			e.target.style.transform = 'scale(3)';
 		}
 	}
@@ -359,7 +359,11 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 									</tbody>
 								</table>
 							</div>
-							<div style={{ marginTop: '30px' }}>
+							<SimpleBar
+								className="platform-block"
+								style={{ marginTop: '26px', maxHeight: '138px' }}
+								autoHide={false}
+							>
 								<div className="header-text">Платформа</div>
 								<table>
 									<tbody>
@@ -382,26 +386,43 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 													src={objProduct[getIndex].images}
 													alt=""
 												/> */}
-												<label className="addImg">
-													<img
-														onMouseEnter={zoomImg}
-														onMouseLeave={zoomOutImg}
-														src={objProduct[getIndex].images}
-													/>
-													<input onChange={loadImg} type="file" accept="image/*" />
-												</label>
-												<label className="addImg">
-													<img className='clear' onMouseEnter={zoomImg} onMouseLeave={zoomOutImg} src={addImg} />
-													<input onChange={loadImg} type="file" accept="image/*" />
-												</label>
-												<label className="addImg">
-													<img className='clear' onMouseEnter={zoomImg} onMouseLeave={zoomOutImg} src={addImg} />
-													<input onChange={loadImg} type="file" accept="image/*" />
-												</label>
-												<label className="addImg">
-													<img className='clear' onMouseEnter={zoomImg} onMouseLeave={zoomOutImg} src={addImg} />
-													<input onChange={loadImg} type="file" accept="image/*" />
-												</label>
+												<div style={{ display: 'flex', alignItems: 'center', height: '24px' }}>
+													<label className="addImg">
+														<img
+															onMouseEnter={zoomImg}
+															onMouseLeave={zoomOutImg}
+															src={objProduct[getIndex].images}
+														/>
+														<input onChange={loadImg} type="file" accept="image/*" />
+													</label>
+													<label className="addImg">
+														<img
+															className="clear"
+															onMouseEnter={zoomImg}
+															onMouseLeave={zoomOutImg}
+															src={addImg}
+														/>
+														<input onChange={loadImg} type="file" accept="image/*" />
+													</label>
+													<label className="addImg">
+														<img
+															className="clear"
+															onMouseEnter={zoomImg}
+															onMouseLeave={zoomOutImg}
+															src={addImg}
+														/>
+														<input onChange={loadImg} type="file" accept="image/*" />
+													</label>
+													<label className="addImg">
+														<img
+															className="clear"
+															onMouseEnter={zoomImg}
+															onMouseLeave={zoomOutImg}
+															src={addImg}
+														/>
+														<input onChange={loadImg} type="file" accept="image/*" />
+													</label>
+												</div>
 											</td>
 										</tr>
 										<tr>
@@ -426,10 +447,34 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 												</div>
 											</td>
 										</tr>
+										<tr>
+											<td>Кол-во:</td>
+											<td>
+												<div></div>
+											</td>
+										</tr>
+										<tr>
+											<td>Слова:</td>
+											<td>
+												<div>Флешкарта, usb</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Произ-тель:</td>
+											<td>
+												<div>Китай</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Гарантия:</td>
+											<td>
+												<div></div>
+											</td>
+										</tr>
 									</tbody>
 								</table>
-							</div>
-							<div style={{ marginTop: '30px' }}>
+							</SimpleBar>
+							<div style={{ marginTop: '26px' }}>
 								<div className="header-text">Доставка</div>
 								<table>
 									<tbody>
@@ -460,20 +505,25 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 									</tbody>
 								</table>
 							</div>
-							<div style={{ marginTop: '30px' }}>
+							<div style={{ marginTop: '26px' }}>
 								<div className="header-text">Информация</div>
 								<table>
 									<tbody>
 										<tr>
 											<td>Создал:</td>
 											<td>
-												<SvgCalendar /> Завхоз склада Михаил Пронск...
+												<div className="info-warehouse-card">
+													<SvgCalendar /> Завхоз склада Михаил Пронск...
+												</div>
 											</td>
 										</tr>
 										<tr>
 											<td>Изменил:</td>
 											<td>
-												<SvgCalendar /> 14.01.2021 19:54:12
+												<div className="info-warehouse-card">
+													<SvgCalendar /> 14.01.2021 19:54:12
+												</div>
+											
 											</td>
 										</tr>
 									</tbody>
@@ -489,6 +539,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 								setData={setData}
 								setPodlozhka={setPodlozhka}
 								setOpenCardMenu={setOpenCardMenu}
+								translator={translator}
 							/>
 						</div>
 
