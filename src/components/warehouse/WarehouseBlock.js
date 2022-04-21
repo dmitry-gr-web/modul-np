@@ -20,7 +20,14 @@ import WarehouseInput from './WarehouseInput';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
 let hover;
-const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex, load , translator}) => {
+const WarehouseBlock = ({
+	objProduct,
+	setObjProduct,
+	setToggleCard,
+	setGetIndex,
+	load,
+	translator,
+}) => {
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
@@ -148,7 +155,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	}
 
 	//rascheti
-	
+
 	let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
 	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
 	let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
@@ -227,9 +234,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	let scrollLeft;
 	function onMouseDown(e) {
 		// if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
-			isDown = true;
-			startX = e.pageX - rootRef.current.el.querySelector('.simplebar-content-wrapper').offsetLeft;
-			scrollLeft = rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollLeft;
+		isDown = true;
+		startX = e.pageX - rootRef.current.el.querySelector('.simplebar-content-wrapper').offsetLeft;
+		scrollLeft = rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollLeft;
 		// } else {
 		// 	isDown = false;
 		// }
@@ -245,7 +252,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		e.preventDefault();
 		throttle(() => {
 			const x = e.pageX - rootRef.current.el.querySelector('.simplebar-content-wrapper').offsetLeft;
-			const walk = (x - startX) * 2; //scroll-fast
+			const walk = (x - startX) * 1.2; //scroll-fast
 			rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollLeft = scrollLeft - walk;
 		}, 100)();
 	}
@@ -316,14 +323,13 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			// rootRef.current.recalculate();
 			// document.querySelector('.warehouse-table .simplebar-track.simplebar-vertical div').style.transform = `translate3d(0px, ${getStart()}px, 0px)`;
 			// }, 0);
-			
 
 			// console.log(			rootRef.current.unMount())
 			// rootRef.current.getScrollElement();
 			// setInterval(() => {
-				
+
 			// 	// await let root = rootRef.current.recalculate();
-			
+
 			// }, 20);
 			// console.log(start)
 			// document.querySelector('.warehouse-products table').classList.add('hoverOff');
@@ -358,7 +364,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			// getStart();
 		}
 
-
 		// rootRef.current.addEventListener('scroll', onScroll);
 		// rootRef.current.addEventListener('mousedown', onMouseDown);
 		// rootRef.current.addEventListener('mouseleave', onMouseLeave);
@@ -387,14 +392,14 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
 			.addEventListener('mousemove', onMouseMove);
-		
+
 		return () => {
 			// rootRef.current
 			// 	.removeEventListener('scroll', onScroll);
 			// rootRef.current.recalculate();
-			// rootRef.current.el
-			// 	.querySelector('.simplebar-content-wrapper')
-			// 	.removeEventListener('scroll', onScroll);
+			rootRef.current.el
+				.querySelector('.simplebar-content-wrapper')
+				.removeEventListener('scroll', onScroll);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
 	// function root () {
@@ -587,8 +592,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												paddingRight: '10px',
 											}}
 										>
-										
-											{translator.getTranslation('warehouse','status')}
+											{translator.getTranslation('warehouse', 'status')}
 										</div>
 										<div
 											className="animationFrame"
@@ -615,8 +619,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 									>
 										ID
 									</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>{translator.getTranslation('warehouse','country')}</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>{translator.getTranslation('warehouse','currency')}</div>
+									<div style={{ paddingRight: '10px', minWidth: 51 }}>
+										{translator.getTranslation('warehouse', 'country')}
+									</div>
+									<div style={{ paddingRight: '10px', minWidth: 51 }}>
+										{translator.getTranslation('warehouse', 'currency')}
+									</div>
 									<div
 										className="name-width"
 										style={{
@@ -625,28 +633,33 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											width: widthColum.name - 15 + 'px',
 										}}
 									>
-										{translator.getTranslation('warehouse','name')}
+										{translator.getTranslation('warehouse', 'name')}
 									</div>
 									<div
 										className="attribute-width"
 										style={{ paddingRight: '3px', width: widthColum.attribute + 'px' }}
 									>
-										{translator.getTranslation('warehouse','attribute')}
+										{translator.getTranslation('warehouse', 'attribute')}
 									</div>
 									<div className="shadow-left"></div>
 								</div>
 							</th>
 
 							<th style={{ paddingLeft: '12px', paddingRight: '15px' }} colSpan={4}>
-							{translator.getTranslation('warehouse','available')}
+								{translator.getTranslation('warehouse', 'available')}
 							</th>
-							<th style={{ paddingRight: '15px' }}>{translator.getTranslation('warehouse','purchase')}</th>
-							<th style={{ paddingRight: '15px' }}>{translator.getTranslation('warehouse','sales')}</th>
-							<th style={{ paddingRight: '15px' }}>{translator.getTranslation('warehouse','margin')}</th>
-							<th colSpan={4}>{translator.getTranslation('warehouse','total')}</th>
+							<th style={{ paddingRight: '15px' }}>
+								{translator.getTranslation('warehouse', 'purchase')}
+							</th>
+							<th style={{ paddingRight: '15px' }}>
+								{translator.getTranslation('warehouse', 'sales')}
+							</th>
+							<th style={{ paddingRight: '15px' }}>
+								{translator.getTranslation('warehouse', 'margin')}
+							</th>
+							<th colSpan={4}>{translator.getTranslation('warehouse', 'total')}</th>
 						</tr>
 						<tr ref={linkTR}>
-
 							<th className="hoverr">
 								<div></div>
 							</th>
@@ -738,21 +751,20 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										<div
 											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 											className="block-3-btn"
-										>	
-											<div >
-											<WarehouseDropMenu
-												adaptive={true}
-												setPodlozhka={setPodlozhka}
-												podlozhka={podlozhka}
-												type={'status'}
-												objProduct={objProduct}
-												translator={translator}
-												setSwitchMenu={setSwitchMenu}
-												switchMenu={switchMenu}
-												setFlagSwitchMenu={setFlagSwitchMenu}
-											/>
+										>
+											<div>
+												<WarehouseDropMenu
+													adaptive={true}
+													setPodlozhka={setPodlozhka}
+													podlozhka={podlozhka}
+													type={'status'}
+													objProduct={objProduct}
+													translator={translator}
+													setSwitchMenu={setSwitchMenu}
+													switchMenu={switchMenu}
+													setFlagSwitchMenu={setFlagSwitchMenu}
+												/>
 											</div>
-										
 
 											<div style={{ margin: '0 11px' }}>
 												<WarehouseDropMenu
@@ -768,19 +780,18 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												/>
 											</div>
 											<div>
-											<WarehouseDropMenu
-												adaptive={true}
-												setPodlozhka={setPodlozhka}
-												podlozhka={podlozhka}
-												type={'status'}
-												translator={translator}
-												objProduct={objProduct}
-												setSwitchMenu={setSwitchMenu}
-												switchMenu={switchMenu}
-												setFlagSwitchMenu={setFlagSwitchMenu}
-											/>
+												<WarehouseDropMenu
+													adaptive={true}
+													setPodlozhka={setPodlozhka}
+													podlozhka={podlozhka}
+													type={'status'}
+													translator={translator}
+													objProduct={objProduct}
+													setSwitchMenu={setSwitchMenu}
+													switchMenu={switchMenu}
+													setFlagSwitchMenu={setFlagSwitchMenu}
+												/>
 											</div>
-											
 										</div>
 									</div>
 									<div style={{ position: 'relative', left: 60, display: 'flex' }}>
@@ -896,28 +907,39 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 						</tr>
 
 						<tr>
-				
-						<th className="hoverr" style={{height:'12px'}}>
-							<div></div>
-						</th>
+							<th className="hoverr" style={{ height: '12px' }}>
+								<div></div>
+							</th>
 							<th className="shadow-vertical" colSpan={1}>
 								<div
 									onMouseEnter={() => setSwitchMenu(true)}
 									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 									style={switchMenu ? { width: '171px' } : { width: '74px' }}
 								></div>
-								<div style={switchMenu ? { width: 'calc(100% - 158px)' } : {width:'calc(100% - 61px)' }}></div>
+								<div
+									style={
+										switchMenu ? { width: 'calc(100% - 158px)' } : { width: 'calc(100% - 61px)' }
+									}
+								></div>
 							</th>
 
 							<th colSpan={17} className="shadow-vertical-3">
-								<div style={{width:  document.querySelector('.warehouse-table')?.offsetWidth - document.querySelector('.sticky-body')?.offsetWidth - 13 + 'px'}}></div>
+								<div
+									style={{
+										width:
+											document.querySelector('.warehouse-table')?.offsetWidth -
+											document.querySelector('.sticky-body')?.offsetWidth -
+											13 +
+											'px',
+									}}
+								></div>
 							</th>
 						</tr>
 					</thead>
 
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
-	
+
 						{objProduct.slice(getStart(), getStart() + visibleRows + 40).map((x, index) => (
 							<WarehouseProductList
 								index={index + getStart()}
@@ -949,9 +971,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 								setSelectAll={setSelectAll}
 								flagSwitchMenu={flagSwitchMenu}
 							/>
-							
 						))}
-						
+
 						<tr style={{ height: getBottomHeight() }}></tr>
 					</tbody>
 

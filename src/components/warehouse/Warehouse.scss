@@ -639,7 +639,7 @@ html {
 			z-index: 5;
 			transition: width 0.3s;
 			top: 0;
-			width: 0;
+			// width: 0;
 			background-color: white;
 
 			transition: transform 0.3s, opacity 0.3s;
@@ -677,9 +677,9 @@ html {
 					rgba(202, 202, 202, 0) 100%
 				) !important;
 				top: -19px;
-				right: -4px;
+				// right: -4px;
 				right: -15px;
-				height: 52px;
+				// height: 52px;
 				height: 100vh;
 				transition: 0.2s;
 				z-index: -1;
@@ -700,13 +700,13 @@ html {
 			z-index: -1;
 		}
 		.animationFrame {
-			transition: width 0.3s;
-			transform: translateZ(0);
+			// transition: width 0.3s;
+			// transform: translateZ(0);
 			// transform: translate3d(0, 0, 0);
-			will-change: width;
+			// will-change: width;
 			position: absolute;
-			left: 60px;
-			width: 0px;
+			// left: 60px;
+			// width: 0px;
 			height: 20px;
 			background-color: white;
 			z-index: 2;
