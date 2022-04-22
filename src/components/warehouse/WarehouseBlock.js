@@ -448,9 +448,9 @@ const WarehouseBlock = ({
 		// console.log(widthColum)
 	}
 
-	useLayoutEffect(() => {
-		width();
-	}, []);
+	// useLayoutEffect(() => {
+	// 	width();
+	// }, []);
 	// useEffect(()=> {
 	// 	return () => {
 	// 		console.log('unmount')
