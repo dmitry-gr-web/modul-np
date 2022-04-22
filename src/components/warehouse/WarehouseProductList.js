@@ -274,14 +274,14 @@ const WarehouseProductList = ({
 			setPodlozhka(false);
 		}
 	}
-	// useEffect(() => {
-	// 	if (!podlozhka) {
-	// 		setInputFormat(false);
-	// 		let newobj = [...objProduct];
-	// 		newobj[index].ostatok = +memoryInput;
-	// 		setObjProduct(newobj);
-	// 	}
-	// }, [podlozhka]);
+	useEffect(() => {
+		if (!podlozhka) {
+			setInputFormat(false);
+			let newobj = [...objProduct];
+			newobj[index].ostatok = +memoryInput;
+			setObjProduct(newobj);
+		}
+	}, [podlozhka]);
 	// useEffect(() => {
 	// 	document.querySelectorAll('.nal-ostatok input').forEach((x) => {
 	// 		// x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';

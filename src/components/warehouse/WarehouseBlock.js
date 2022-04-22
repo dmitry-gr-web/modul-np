@@ -176,6 +176,8 @@ const WarehouseBlock = ({
 
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
+	let rowHeight = 20;
+	let visibleRows = Math.round((document.body.clientHeight * 1.5- 140) / 20);
 	function getStart() {
 		let temp = start - 50 * rowHeight;
 
@@ -185,8 +187,7 @@ const WarehouseBlock = ({
 		);
 	}
 
-	let rowHeight = 20;
-	let visibleRows = Math.round((document.body.clientHeight * 1.8- 140) / 20);
+	
 
 	function getTopHeight() {
 		return rowHeight * getStart();
@@ -267,59 +268,60 @@ const WarehouseBlock = ({
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	// const scrollableNodeRef = React.createRef();
-	useEffect(async () => {
-
-		async function onScroll(e) {
-			// clearTimeout(timer);
-			// rootRef.current.recalculate();
-			// setInterval(() => {
-			setStart(e.target.scrollTop);
-			updateHover();
-			// setSwitchMenu(false);
-			// document.querySelectorAll('.nal-ostatok').forEach((x) => {
-			// 	// x.style.opacity = '1';
-			// 	x.classList.remove('showBtn');
-			// });
-			
-		}
-
-		rootRef.current.addEventListener('scroll', onScroll);
-		// rootRef.current.addEventListener('mousedown', onMouseDown);
-		// rootRef.current.addEventListener('mouseleave', onMouseLeave);
-		// rootRef.current.addEventListener('mouseup', onMouseLeave);
-		// rootRef.current.addEventListener('mousemove', onMouseMove);
+	async function onScroll(e) {
+		// clearTimeout(timer);
 		// rootRef.current.recalculate();
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('scroll', onScroll);
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('scroll', onScroll);
-		// const simpleBar = new SimpleBar(document.querySelector('.warehouse-table .simplebar-content-wrapper'));
-		// simpleBar.addEventListener('scroll', onScroll);
-		// simpleBar.getScrollElement();
+		// setInterval(() => {
+		setStart(e.target.scrollTop);
+		updateHover();
+		// setSwitchMenu(false);
+		// document.querySelectorAll('.nal-ostatok').forEach((x) => {
+		// 	// x.style.opacity = '1';
+		// 	x.classList.remove('showBtn');
+		// });
+		
+	}
+	// useEffect(async () => {
 
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('mousedown', onMouseDown);
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('mouseleave', onMouseLeave);
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('mouseup', onMouseLeave);
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('mousemove', onMouseMove);
 
-		return () => {
-			rootRef.current.removeEventListener('scroll', onScroll);
-			// rootRef.current.recalculate();
-			// rootRef.current.el
-			// 	.querySelector('.simplebar-content-wrapper')
-			// 	.removeEventListener('scroll', onScroll);
-		};
-	}, [objProduct.length, visibleRows, rowHeight]);
+
+	// 	rootRef.current.addEventListener('scroll', onScroll);
+	// 	// rootRef.current.addEventListener('mousedown', onMouseDown);
+	// 	// rootRef.current.addEventListener('mouseleave', onMouseLeave);
+	// 	// rootRef.current.addEventListener('mouseup', onMouseLeave);
+	// 	// rootRef.current.addEventListener('mousemove', onMouseMove);
+	// 	// rootRef.current.recalculate();
+	// 	// rootRef.current.el
+	// 	// 	.querySelector('.simplebar-content-wrapper')
+	// 	// 	.addEventListener('scroll', onScroll);
+	// 	// rootRef.current.el
+	// 	// 	.querySelector('.simplebar-content-wrapper')
+	// 	// 	.addEventListener('scroll', onScroll);
+	// 	// const simpleBar = new SimpleBar(document.querySelector('.warehouse-table .simplebar-content-wrapper'));
+	// 	// simpleBar.addEventListener('scroll', onScroll);
+	// 	// simpleBar.getScrollElement();
+
+	// 	// rootRef.current.el
+	// 	// 	.querySelector('.simplebar-content-wrapper')
+	// 	// 	.addEventListener('mousedown', onMouseDown);
+	// 	// rootRef.current.el
+	// 	// 	.querySelector('.simplebar-content-wrapper')
+	// 	// 	.addEventListener('mouseleave', onMouseLeave);
+	// 	// rootRef.current.el
+	// 	// 	.querySelector('.simplebar-content-wrapper')
+	// 	// 	.addEventListener('mouseup', onMouseLeave);
+	// 	// rootRef.current.el
+	// 	// 	.querySelector('.simplebar-content-wrapper')
+	// 	// 	.addEventListener('mousemove', onMouseMove);
+
+	// 	return () => {
+	// 		rootRef.current.removeEventListener('scroll', onScroll);
+	// 		// rootRef.current.recalculate();
+	// 		// rootRef.current.el
+	// 		// 	.querySelector('.simplebar-content-wrapper')
+	// 		// 	.removeEventListener('scroll', onScroll);
+	// 	};
+	// }, [objProduct.length, visibleRows, rowHeight]);
 	// function root () {
 	// 	return rootRef.current.recalculate();
 	// }
@@ -374,44 +376,44 @@ const WarehouseBlock = ({
 	// 		console.log('unmount')
 	// 	}
 	// },[])
-	// useEffect(() => {
-	// 	if (switchMenu) {
-	// 		// requestAnimationFrame(() => {
-	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
-	// 			// x.style.width = '90px';
-	// 			// x.style.paddingRight = '10px';
-	// 			x.classList.add('show');
-	// 			// x.style.animation = 'transform 0.3s forwards'
-	// 			x.style.overflow = '';
-	// 		});
-	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
-	// 			// x.style.maxWidth = '125px';
-	// 			// x.style.width = '90px'
-	// 			// x.style.paddingRight = '10px';
-	// 			x.classList.add('show');
-	// 		});
-	// 		// setTimeout(() => {
-	// 		// 	document.querySelector('.shadow-block').style.height = '100vh';
-	// 		// }, 300);
-	// 		// });
-	// 	} else {
-	// 		// requestAnimationFrame(() => {
-	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
-	// 			// x.style.width = '0px';
-	// 			// x.style.paddingRight = '0px';
-	// 			x.classList.remove('show');
-	// 			// x.style.animation = ''
-	// 			x.style.overflow = 'hidden';
-	// 		});
-	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
-	// 			// x.style.maxWidth = '0px';
-	// 			// x.style.width = '0px'
-	// 			// x.style.paddingRight = '0px';
-	// 			x.classList.remove('show');
-	// 		});
-	// 		// });
-	// 	}
-	// }, [switchMenu]);
+	useEffect(() => {
+		if (switchMenu) {
+			// requestAnimationFrame(() => {
+			document.querySelectorAll('.animationFrame').forEach((x) => {
+				// x.style.width = '90px';
+				// x.style.paddingRight = '10px';
+				x.classList.add('show');
+				// x.style.animation = 'transform 0.3s forwards'
+				x.style.overflow = '';
+			});
+			document.querySelectorAll('.block-3-btn').forEach((x) => {
+				// x.style.maxWidth = '125px';
+				// x.style.width = '90px'
+				// x.style.paddingRight = '10px';
+				x.classList.add('show');
+			});
+			// setTimeout(() => {
+			// 	document.querySelector('.shadow-block').style.height = '100vh';
+			// }, 300);
+			// });
+		} else {
+			// requestAnimationFrame(() => {
+			document.querySelectorAll('.animationFrame').forEach((x) => {
+				// x.style.width = '0px';
+				// x.style.paddingRight = '0px';
+				x.classList.remove('show');
+				// x.style.animation = ''
+				x.style.overflow = 'hidden';
+			});
+			document.querySelectorAll('.block-3-btn').forEach((x) => {
+				// x.style.maxWidth = '0px';
+				// x.style.width = '0px'
+				// x.style.paddingRight = '0px';
+				x.classList.remove('show');
+			});
+			// });
+		}
+	}, [switchMenu]);
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
@@ -439,7 +441,7 @@ const WarehouseBlock = ({
 				// direction={'rtl'}
 				ref={rootRef}
 				// direction='rtl'
-				// onScroll={onScroll}
+				onScroll={e => throttle(onScroll(e),40)}
 			>
 				<table
 					tabIndex={-1}
