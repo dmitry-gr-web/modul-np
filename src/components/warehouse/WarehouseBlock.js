@@ -364,15 +364,15 @@ const WarehouseBlock = ({
 			// getStart();
 		}
 
-		// rootRef.current.addEventListener('scroll', onScroll);
+		rootRef.current.addEventListener('scroll', onScroll);
 		// rootRef.current.addEventListener('mousedown', onMouseDown);
 		// rootRef.current.addEventListener('mouseleave', onMouseLeave);
 		// rootRef.current.addEventListener('mouseup', onMouseLeave);
 		// rootRef.current.addEventListener('mousemove', onMouseMove);
 		// rootRef.current.recalculate();
-		rootRef.current.el
-			.querySelector('.simplebar-content-wrapper')
-			.addEventListener('scroll', onScroll);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('scroll', onScroll);
 		// rootRef.current.el
 		// 	.querySelector('.simplebar-content-wrapper')
 		// 	.addEventListener('scroll', onScroll);
@@ -380,18 +380,18 @@ const WarehouseBlock = ({
 		// simpleBar.addEventListener('scroll', onScroll);
 		// simpleBar.getScrollElement();
 
-		rootRef.current.el
-			.querySelector('.simplebar-content-wrapper')
-			.addEventListener('mousedown', onMouseDown);
-		rootRef.current.el
-			.querySelector('.simplebar-content-wrapper')
-			.addEventListener('mouseleave', onMouseLeave);
-		rootRef.current.el
-			.querySelector('.simplebar-content-wrapper')
-			.addEventListener('mouseup', onMouseLeave);
-		rootRef.current.el
-			.querySelector('.simplebar-content-wrapper')
-			.addEventListener('mousemove', onMouseMove);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('mousedown', onMouseDown);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('mouseleave', onMouseLeave);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('mouseup', onMouseLeave);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('mousemove', onMouseMove);
 
 		return () => {
 			// rootRef.current
@@ -503,7 +503,7 @@ const WarehouseBlock = ({
 				</button>
 			</div>
 			<div className="shadow-right"></div>
-			<SimpleBar
+			<div
 				// scrollableNodeProps={{ref: scrollableNodeRef}}
 				className="warehouse-table"
 				style={{
@@ -512,7 +512,7 @@ const WarehouseBlock = ({
 					marginBottom: '10px',
 					// maxWidth: 1150,
 					width: '100%',
-					// overflow: 'scroll',
+					overflow: 'scroll',
 					// height: '800px',
 					// willChange:'transform, scroll-position',
 					height: document.body.clientHeight - 180 + 'px',
@@ -985,7 +985,7 @@ const WarehouseBlock = ({
 					</tfoot>
 				</table>
 				{/* <div style={{ height: getBottomHeight() }} />   */}
-			</SimpleBar>
+			</div>
 		</div>
 	);
 };
