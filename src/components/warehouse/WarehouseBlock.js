@@ -155,26 +155,26 @@ const WarehouseBlock = ({
 	}
 
 	//rascheti
-
-	let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
-	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
-	let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
-	let vozvrat = parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0));
-	let zakupka = parseInt(
-		objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka / array.length, 0)
-	);
-	let prodazha = parseInt(
-		objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0)
-	);
-	let marzha = parseInt(
-		objProduct.reduce((prev, curr, _, array) => prev + curr.marzha / array.length, 0)
-	);
-	let suma1 = parseInt(
-		objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
-	);
-	let suma2 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
-	let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
-	let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
+	
+	// let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
+	// let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
+	// let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
+	// let vozvrat = parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0));
+	// let zakupka = parseInt(
+	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka / array.length, 0)
+	// );
+	// let prodazha = parseInt(
+	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0)
+	// );
+	// let marzha = parseInt(
+	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.marzha / array.length, 0)
+	// );
+	// let suma1 = parseInt(
+	// 	objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
+	// );
+	// let suma2 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
+	// let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
+	// let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
 
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
@@ -617,70 +617,11 @@ const WarehouseBlock = ({
 							</th>
 							<th colSpan={4}>{translator.getTranslation('warehouse', 'total')}</th>
 						</tr>
-						<tr ref={linkTR}>
+						{/* <tr ref={linkTR}>
 							<th className="hoverr">
 								<div></div>
 							</th>
-							{/* <th
-								className="sticky-head-row1"
-								onMouseEnter={() => setSwitchMenu(true)}
-								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-							>
-								<div style={{ width: '51px', paddingRight: '10px' }}>
-									<WarehouseDropMenu
-										setPodlozhka={setPodlozhka}
-										podlozhka={podlozhka}
-										type={'status'}
-										objProduct={objProduct}
-									/>
-								</div>
-							</th> */}
-							{/* <th
-								className="sticky-head-row2"
-								onMouseEnter={() => setSwitchMenu(true)}
-								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-							>
-								<div
-								
-									// style={switchMenu ? { width:'85px' } : {}}
-									className="block-3-btn"
-								>
-									<WarehouseDropMenu
-										adaptive={true}
-										setPodlozhka={setPodlozhka}
-										podlozhka={podlozhka}
-										type={'status'}
-										objProduct={objProduct}
-										setSwitchMenu={setSwitchMenu}
-										switchMenu={switchMenu}
-										setFlagSwitchMenu={setFlagSwitchMenu}
-									/>
-
-									<div style={{ margin: '0 11px' }}>
-										<WarehouseDropMenu
-											adaptive={true}
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											type={'status'}
-											objProduct={objProduct}
-											setSwitchMenu={setSwitchMenu}
-											switchMenu={switchMenu}
-											setFlagSwitchMenu={setFlagSwitchMenu}
-										/>
-									</div>
-
-									<WarehouseDropMenu
-										adaptive={true}
-										setPodlozhka={setPodlozhka}
-										podlozhka={podlozhka}
-										type={'status'}
-										objProduct={objProduct}
-										setSwitchMenu={setSwitchMenu}
-										switchMenu={switchMenu}
-										setFlagSwitchMenu={setFlagSwitchMenu}
-									/>
-								</div>
-							</th> */}
+							
 							<th className="sticky-head">
 								<div className="sticky-block">
 									<div
@@ -707,7 +648,6 @@ const WarehouseBlock = ({
 											/>
 										</div>
 										<div
-											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 											className="block-3-btn"
 										>
 											<div>
@@ -862,7 +802,7 @@ const WarehouseBlock = ({
 							<th className="summa-suma4">
 								<div>{formatNumber(suma4)}</div>
 							</th>
-						</tr>
+						</tr> */}
 
 						<tr>
 							<th className="hoverr" style={{ height: '12px' }}>
