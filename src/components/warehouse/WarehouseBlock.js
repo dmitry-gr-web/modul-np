@@ -40,9 +40,7 @@ const WarehouseBlock = ({
 	const [indexInput, setIndexInput] = useState(0);
 	const [btnMenu, setBtnMenu] = useState(false);
 	const [flagSwitchMenu, setFlagSwitchMenu] = useState(false);
-	// const [selectLink, setSelectLink] = useState(true);
-	// let newarr = [...dataWarehouse, ...dataWarehouse];
-	// const [objProduct, setObjProduct] = useState(dataWarehouse);
+
 	function clickPodlozhka() {
 		setPodlozhka(false);
 		setFocusInput(false);
@@ -156,30 +154,30 @@ const WarehouseBlock = ({
 
 	//rascheti
 	
-	// let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
-	// let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
-	// let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
-	// let vozvrat = parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0));
-	// let zakupka = parseInt(
-	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka / array.length, 0)
-	// );
-	// let prodazha = parseInt(
-	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0)
-	// );
-	// let marzha = parseInt(
-	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.marzha / array.length, 0)
-	// );
-	// let suma1 = parseInt(
-	// 	objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
-	// );
-	// let suma2 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
-	// let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
-	// let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
+	let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
+	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
+	let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
+	let vozvrat = parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0));
+	let zakupka = parseInt(
+		objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka / array.length, 0)
+	);
+	let prodazha = parseInt(
+		objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0)
+	);
+	let marzha = parseInt(
+		objProduct.reduce((prev, curr, _, array) => prev + curr.marzha / array.length, 0)
+	);
+	let suma1 = parseInt(
+		objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
+	);
+	let suma2 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
+	let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
+	let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
 
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
 	function getStart() {
-		let temp = start - 40 * rowHeight;
+		let temp = start - 50 * rowHeight;
 
 		return Math.min(
 			objProduct.length - visibleRows - 1,
@@ -188,7 +186,7 @@ const WarehouseBlock = ({
 	}
 
 	let rowHeight = 20;
-	let visibleRows = Math.round((document.body.clientHeight * 1.8 - 140) / 20);
+	let visibleRows = Math.round((document.body.clientHeight * 1.8- 140) / 20);
 
 	function getTopHeight() {
 		return rowHeight * getStart();
@@ -197,11 +195,6 @@ const WarehouseBlock = ({
 		return rowHeight * (objProduct.length - (getStart() + visibleRows + 1));
 	}
 
-	// useEffect(()=> {
-	// 	rootRef.current.recalculate();
-	// },[start])start
-	// console.log(getStart());
-	// console.log(getStart())
 	function throttle(func, ms) {
 		let isThrottled = false,
 			savedArgs,
@@ -256,39 +249,7 @@ const WarehouseBlock = ({
 			rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollLeft = scrollLeft - walk;
 		}, 100)();
 	}
-	// function onScroll(e) {
-	// 	clearTimeout(timer);
-	// 	setStart(e.target.scrollTop);
-	// 	// console.log(start)
-	// 	document.querySelector('.warehouse-products table').classList.add('hoverOff');
-	// 	timer = setTimeout(() => {
-	// 		document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-	// 	}, 10);
-	// 	// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
-	// 	// rootRef.current.el
-	// 	// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
-	// 	// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
-	// 	// 	x.style.animation = 'trAnimtaion 0.2s forwards';
-	// 	// });
-	// 	// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-	// 	// setTimeout(() => {
-	// 	// const simpleBar = new SimpleBar(document.getElementById('myElement'));
 
-	// 	// setStart(
-	// 	// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
-	// 	// 	Math.min(
-	// 	// 		objProduct.length - visibleRows - 10,
-	// 	// 		Math.floor(
-	// 	// 			e.target.scrollTop - 10 * rowHeight < 0
-	// 	// 				? 0
-	// 	// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
-	// 	// 		)
-	// 	// 	)
-	// 	// );
-	// 	// rootRef.current.recalculate();
-	// 	// }, 0);
-	// 	// getStart();
-	// }
 	async function updateHover(e) {
 		clearTimeout(hover);
 		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
@@ -352,8 +313,7 @@ const WarehouseBlock = ({
 		// 	.addEventListener('mousemove', onMouseMove);
 
 		return () => {
-			rootRef.current
-				.removeEventListener('scroll', onScroll);
+			rootRef.current.removeEventListener('scroll', onScroll);
 			// rootRef.current.recalculate();
 			// rootRef.current.el
 			// 	.querySelector('.simplebar-content-wrapper')
@@ -617,7 +577,7 @@ const WarehouseBlock = ({
 							</th>
 							<th colSpan={4}>{translator.getTranslation('warehouse', 'total')}</th>
 						</tr>
-						{/* <tr ref={linkTR}>
+						<tr ref={linkTR}>
 							<th className="hoverr">
 								<div></div>
 							</th>
@@ -648,6 +608,7 @@ const WarehouseBlock = ({
 											/>
 										</div>
 										<div
+											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 											className="block-3-btn"
 										>
 											<div>
@@ -802,9 +763,9 @@ const WarehouseBlock = ({
 							<th className="summa-suma4">
 								<div>{formatNumber(suma4)}</div>
 							</th>
-						</tr> */}
+						</tr>
 
-						{/* <tr>
+						<tr>
 							<th className="hoverr" style={{ height: '12px' }}>
 								<div></div>
 							</th>
@@ -832,13 +793,13 @@ const WarehouseBlock = ({
 									}}
 								></div>
 							</th>
-						</tr> */}
+						</tr>
 					</thead>
 
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
 
-						{objProduct.slice(getStart(), getStart() + visibleRows + 40).map((x, index) => (
+						{objProduct.slice(getStart(), getStart() + visibleRows + 50).map((x, index) => (
 							<WarehouseProductList
 								index={index + getStart()}
 								// rowHeight={rowHeight}
