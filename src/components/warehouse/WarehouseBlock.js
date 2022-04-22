@@ -418,44 +418,44 @@ const WarehouseBlock = ({
 	// 		console.log('unmount')
 	// 	}
 	// },[])
-	useEffect(() => {
-		if (switchMenu) {
-			// requestAnimationFrame(() => {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				// x.style.width = '90px';
-				// x.style.paddingRight = '10px';
-				x.classList.add('show');
-				// x.style.animation = 'transform 0.3s forwards'
-				x.style.overflow = '';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				// x.style.maxWidth = '125px';
-				// x.style.width = '90px'
-				// x.style.paddingRight = '10px';
-				x.classList.add('show');
-			});
-			// setTimeout(() => {
-			// 	document.querySelector('.shadow-block').style.height = '100vh';
-			// }, 300);
-			// });
-		} else {
-			// requestAnimationFrame(() => {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				// x.style.width = '0px';
-				// x.style.paddingRight = '0px';
-				x.classList.remove('show');
-				// x.style.animation = ''
-				x.style.overflow = 'hidden';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				// x.style.maxWidth = '0px';
-				// x.style.width = '0px'
-				// x.style.paddingRight = '0px';
-				x.classList.remove('show');
-			});
-			// });
-		}
-	}, [switchMenu]);
+	// useEffect(() => {
+	// 	if (switchMenu) {
+	// 		// requestAnimationFrame(() => {
+	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			// x.style.width = '90px';
+	// 			// x.style.paddingRight = '10px';
+	// 			x.classList.add('show');
+	// 			// x.style.animation = 'transform 0.3s forwards'
+	// 			x.style.overflow = '';
+	// 		});
+	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			// x.style.maxWidth = '125px';
+	// 			// x.style.width = '90px'
+	// 			// x.style.paddingRight = '10px';
+	// 			x.classList.add('show');
+	// 		});
+	// 		// setTimeout(() => {
+	// 		// 	document.querySelector('.shadow-block').style.height = '100vh';
+	// 		// }, 300);
+	// 		// });
+	// 	} else {
+	// 		// requestAnimationFrame(() => {
+	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			// x.style.width = '0px';
+	// 			// x.style.paddingRight = '0px';
+	// 			x.classList.remove('show');
+	// 			// x.style.animation = ''
+	// 			x.style.overflow = 'hidden';
+	// 		});
+	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			// x.style.maxWidth = '0px';
+	// 			// x.style.width = '0px'
+	// 			// x.style.paddingRight = '0px';
+	// 			x.classList.remove('show');
+	// 		});
+	// 		// });
+	// 	}
+	// }, [switchMenu]);
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
