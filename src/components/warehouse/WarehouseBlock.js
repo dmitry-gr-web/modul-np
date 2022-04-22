@@ -804,7 +804,7 @@ const WarehouseBlock = ({
 							</th>
 						</tr> */}
 
-						<tr>
+						{/* <tr>
 							<th className="hoverr" style={{ height: '12px' }}>
 								<div></div>
 							</th>
@@ -832,7 +832,7 @@ const WarehouseBlock = ({
 									}}
 								></div>
 							</th>
-						</tr>
+						</tr> */}
 					</thead>
 
 					<tbody className="first-tab-body">

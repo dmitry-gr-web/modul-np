@@ -647,7 +647,7 @@ const WarehouseProductList = ({
 									onMouseLeave={tooltipOff}
 									onMouseEnter={tooltipOn}
 								>
-									{objProduct[index].country}
+									{/* {objProduct[index].country} */}
 								</span>
 							</div>
 							<div
@@ -713,11 +713,11 @@ const WarehouseProductList = ({
 								className="attribute-width"
 								style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
 							>
-								<img
+								{/* <img
 									style={{ width: 16, height: 16, position: 'absolute' }}
 									src={objProduct[index].images}
 									alt=""
-								/>
+								/> */}
 								<span
 									onMouseLeave={tooltipOff}
 									onMouseEnter={tooltipOn}

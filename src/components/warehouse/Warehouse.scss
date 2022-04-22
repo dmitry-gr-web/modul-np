@@ -100,10 +100,11 @@ html {
 // }
 
 .warehouse-table {
-	// transform: scale(1);
+	transform: scale(1);
 	transform: translateZ(0);
 	// transform: translate3d(0, 0, 0);
 	will-change: transform, scroll-position;
+	transform-origin: 0 0;
 }
 // .warehouse-table::-webkit-scrollbar-thumb {
 // 	background-color: grey; /* color of the scroll thumb */
@@ -548,7 +549,7 @@ html {
 	table {
 		border-spacing: 0px;
 		user-select: none;
-		transform: translateZ(0);
+		// transform: translateZ(0);
 		// transform: translate3d(0, 0, 0);
 		// will-change: transform, scroll-position;
 		// transform: translateZ(0);
