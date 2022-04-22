@@ -1108,9 +1108,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     );
   }
 
-
-
-
   function getStart() {
     let temp = top - document.body.clientHeight * 0.5;
 

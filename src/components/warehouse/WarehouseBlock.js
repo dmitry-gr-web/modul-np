@@ -177,25 +177,67 @@ const WarehouseBlock = ({
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
 	let rowHeight = 20;
-	let visibleRows = Math.round((document.body.clientHeight * 1.5- 140) / 20);
+	const visibleRows = Math.floor((document.body.clientHeight * 2)/ rowHeight);
+	// const [visibleRows, setVisible] = useState(Math.round((document.body.clientHeight * 1.5- 140) / 20));
+	// Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))
 	function getStart() {
-		let temp = start - 50 * rowHeight;
+		let temp = start - document.body.clientHeight * 0.5;
+		// let temp = start - 50 * rowHeight;
+	
 
 		return Math.min(
 			objProduct.length - visibleRows - 1,
 			Math.floor(temp < 0 ? 0 : temp / rowHeight)
 		);
+
 	}
 
 	
 
 	function getTopHeight() {
-		return rowHeight * getStart();
+		// let temp = start - 50 * rowHeight;
+		let temp = start - document.body.clientHeight * 0.5;
+		// return rowHeight * getStart();
+		return rowHeight * Math.min(
+				  (objProduct.length - visibleRows - 1),
+				  Math.floor(temp < 0 ? 0 : temp / rowHeight)
+		);
 	}
 	function getBottomHeight() {
-		return rowHeight * (objProduct.length - (getStart() + visibleRows + 1));
+		// let temp = start - 50 * rowHeight;
+		let temp = start - document.body.clientHeight * 0.5;
+		// return rowHeight * (objProduct.length - (getStart() + visibleRows + 1));
+		return rowHeight * (objProduct.length - (Math.min(
+				  (objProduct.length - visibleRows - 1),
+				  Math.floor(temp < 0 ? 0 : temp / rowHeight)
+				) + visibleRows + 1));
 	}
+	// function getTopHeight() {
 
+
+	// 	let temp = top - document.body.clientHeight * 0.5;
+	
+	// 	return rowHeight * Math.min(
+	// 	  (data.length - visible - 1),
+	// 	  Math.floor(temp < 0 ? 0 : temp / rowHeight)
+	// 	);
+	//   }
+	
+	//   function getStart() {
+	// 	let temp = top - document.body.clientHeight * 0.5;
+	
+	// 	return Math.min(
+	// 	  (data.length - visible - 1),
+	// 	  Math.floor(temp < 0 ? 0 : temp / rowHeight)
+	// 	);
+	//   }
+	//   function getBottomHeight() {
+	// 	let temp = top - document.body.clientHeight * 0.5;
+	// 	return rowHeight * (data.length - (Math.min(
+	// 	  (data.length - visible - 1),
+	// 	  Math.floor(temp < 0 ? 0 : temp / rowHeight)
+	// 	) + visible + 1));
+	//   }
 	function throttle(func, ms) {
 		let isThrottled = false,
 			savedArgs,
@@ -801,7 +843,7 @@ const WarehouseBlock = ({
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
 
-						{objProduct.slice(getStart(), getStart() + visibleRows + 50).map((x, index) => (
+						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
 							<WarehouseProductList
 								index={index + getStart()}
 								// rowHeight={rowHeight}
