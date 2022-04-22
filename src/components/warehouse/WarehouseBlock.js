@@ -307,7 +307,6 @@ const WarehouseBlock = ({
 	}
 	// const scrollableNodeRef = React.createRef();
 	useEffect(async () => {
-		// document.querySelector('.warehouse-products table').style.pointerEvents = 'all';
 
 		async function onScroll(e) {
 			// clearTimeout(timer);
@@ -315,53 +314,12 @@ const WarehouseBlock = ({
 			// setInterval(() => {
 			setStart(e.target.scrollTop);
 			updateHover();
-			setSwitchMenu(false);
+			// setSwitchMenu(false);
 			// document.querySelectorAll('.nal-ostatok').forEach((x) => {
 			// 	// x.style.opacity = '1';
 			// 	x.classList.remove('showBtn');
 			// });
-			// rootRef.current.recalculate();
-			// document.querySelector('.warehouse-table .simplebar-track.simplebar-vertical div').style.transform = `translate3d(0px, ${getStart()}px, 0px)`;
-			// }, 0);
-
-			// console.log(			rootRef.current.unMount())
-			// rootRef.current.getScrollElement();
-			// setInterval(() => {
-
-			// 	// await let root = rootRef.current.recalculate();
-
-			// }, 20);
-			// console.log(start)
-			// document.querySelector('.warehouse-products table').classList.add('hoverOff');
-			// timer = setTimeout(() => {
-			// 	document.querySelector('.warehouse-products table').classList.remove('hoverOff');
-			// }, 100);
-			// document.querySelector('#tooltipBtn').style.animation = '';
-
-			// document.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${start}px,0px)`;
-			// rootRef.current.el
-			// .querySelector('.simplebar-scrollbar.simplebar-visible').style.transition = '0.2s';
-			// document.querySelectorAll('.first-tab-body tr').forEach((x) => {
-			// 	x.style.animation = 'trAnimtaion 0.2s forwards';
-			// });
-			// document.querySelector('.warehouse-products table').style.pointerEvents = 'none';
-			// setTimeout(() => {
-			// const simpleBar = new SimpleBar(document.getElementById('myElement'));
-
-			// setStart(
-			// 	// Math.min(objProduct.length - visibleRows - 10, Math.floor(e.target.scrollTop / rowHeight))
-			// 	Math.min(
-			// 		objProduct.length - visibleRows - 10,
-			// 		Math.floor(
-			// 			e.target.scrollTop - 10 * rowHeight < 0
-			// 				? 0
-			// 				: e.target.scrollTop - 10 * rowHeight/ rowHeight
-			// 		)
-			// 	)
-			// );
-			// rootRef.current.recalculate();
-			// }, 0);
-			// getStart();
+			
 		}
 
 		rootRef.current.addEventListener('scroll', onScroll);
@@ -394,12 +352,12 @@ const WarehouseBlock = ({
 		// 	.addEventListener('mousemove', onMouseMove);
 
 		return () => {
-			// rootRef.current
-			// 	.removeEventListener('scroll', onScroll);
-			// rootRef.current.recalculate();
-			rootRef.current.el
-				.querySelector('.simplebar-content-wrapper')
+			rootRef.current
 				.removeEventListener('scroll', onScroll);
+			// rootRef.current.recalculate();
+			// rootRef.current.el
+			// 	.querySelector('.simplebar-content-wrapper')
+			// 	.removeEventListener('scroll', onScroll);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
 	// function root () {
@@ -448,52 +406,52 @@ const WarehouseBlock = ({
 		// console.log(widthColum)
 	}
 
-	useLayoutEffect(() => {
-		width();
-	}, []);
+	// useLayoutEffect(() => {
+	// 	width();
+	// }, []);
 	// useEffect(()=> {
 	// 	return () => {
 	// 		console.log('unmount')
 	// 	}
 	// },[])
-	useEffect(() => {
-		if (switchMenu) {
-			// requestAnimationFrame(() => {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				// x.style.width = '90px';
-				// x.style.paddingRight = '10px';
-				x.classList.add('show');
-				// x.style.animation = 'transform 0.3s forwards'
-				x.style.overflow = '';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				// x.style.maxWidth = '125px';
-				// x.style.width = '90px'
-				// x.style.paddingRight = '10px';
-				x.classList.add('show');
-			});
-			// setTimeout(() => {
-			// 	document.querySelector('.shadow-block').style.height = '100vh';
-			// }, 300);
-			// });
-		} else {
-			// requestAnimationFrame(() => {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				// x.style.width = '0px';
-				// x.style.paddingRight = '0px';
-				x.classList.remove('show');
-				// x.style.animation = ''
-				x.style.overflow = 'hidden';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				// x.style.maxWidth = '0px';
-				// x.style.width = '0px'
-				// x.style.paddingRight = '0px';
-				x.classList.remove('show');
-			});
-			// });
-		}
-	}, [switchMenu]);
+	// useEffect(() => {
+	// 	if (switchMenu) {
+	// 		// requestAnimationFrame(() => {
+	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			// x.style.width = '90px';
+	// 			// x.style.paddingRight = '10px';
+	// 			x.classList.add('show');
+	// 			// x.style.animation = 'transform 0.3s forwards'
+	// 			x.style.overflow = '';
+	// 		});
+	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			// x.style.maxWidth = '125px';
+	// 			// x.style.width = '90px'
+	// 			// x.style.paddingRight = '10px';
+	// 			x.classList.add('show');
+	// 		});
+	// 		// setTimeout(() => {
+	// 		// 	document.querySelector('.shadow-block').style.height = '100vh';
+	// 		// }, 300);
+	// 		// });
+	// 	} else {
+	// 		// requestAnimationFrame(() => {
+	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			// x.style.width = '0px';
+	// 			// x.style.paddingRight = '0px';
+	// 			x.classList.remove('show');
+	// 			// x.style.animation = ''
+	// 			x.style.overflow = 'hidden';
+	// 		});
+	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			// x.style.maxWidth = '0px';
+	// 			// x.style.width = '0px'
+	// 			// x.style.paddingRight = '0px';
+	// 			x.classList.remove('show');
+	// 		});
+	// 		// });
+	// 	}
+	// }, [switchMenu]);
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
