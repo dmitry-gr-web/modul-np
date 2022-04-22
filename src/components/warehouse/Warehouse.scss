@@ -100,8 +100,8 @@ html {
 // }
 
 .warehouse-table {
-	transform: scale(1);
-	// transform: translateZ(0);
+	// transform: scale(1);
+	transform: translateZ(0);
 	// transform: translate3d(0, 0, 0);
 	will-change: transform, scroll-position;
 }
@@ -550,7 +550,7 @@ html {
 		user-select: none;
 		transform: translateZ(0);
 		// transform: translate3d(0, 0, 0);
-		will-change: transform, scroll-position;
+		// will-change: transform, scroll-position;
 		// transform: translateZ(0);
 		// will-change: transform ,scroll-position;
 		// transform: translate3d(0, 0, 0);
@@ -703,7 +703,7 @@ html {
 			// transition: width 0.3s;
 			// transform: translateZ(0);
 			// transform: translate3d(0, 0, 0);
-			// will-change: width;
+			// will-change:transform, scroll-position;
 			position: absolute;
 			// left: 60px;
 			// width: 0px;
@@ -1199,6 +1199,11 @@ html {
 				// transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
 			}
+			// td:first-child {
+			// 	transform: translateZ(0);
+			// 	// transform: translate3d(0, 0, 0);
+			// 	will-change: transform, scroll-position;
+			// }
 			// 	transform: translateZ(0);
 			// 	// transform: translate3d(0, 0, 0);
 			// 	will-change: transform ,scroll-position;
@@ -1215,7 +1220,7 @@ html {
 				height: 20px;
 				// display: flex;
 				// transform: translateZ(0);
-				// transform: translate3d(0, 0, 0);
+				// // transform: translate3d(0, 0, 0);
 				// will-change: transform ,scroll-position;
 			}
 			// tr:first-child td {

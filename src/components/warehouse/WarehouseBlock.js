@@ -316,10 +316,10 @@ const WarehouseBlock = ({
 			setStart(e.target.scrollTop);
 			updateHover();
 			setSwitchMenu(false);
-			document.querySelectorAll('.nal-ostatok').forEach((x) => {
-				// x.style.opacity = '1';
-				x.classList.remove('showBtn');
-			});
+			// document.querySelectorAll('.nal-ostatok').forEach((x) => {
+			// 	// x.style.opacity = '1';
+			// 	x.classList.remove('showBtn');
+			// });
 			// rootRef.current.recalculate();
 			// document.querySelector('.warehouse-table .simplebar-track.simplebar-vertical div').style.transform = `translate3d(0px, ${getStart()}px, 0px)`;
 			// }, 0);
@@ -448,9 +448,9 @@ const WarehouseBlock = ({
 		// console.log(widthColum)
 	}
 
-	// useLayoutEffect(() => {
-	// 	width();
-	// }, []);
+	useLayoutEffect(() => {
+		width();
+	}, []);
 	// useEffect(()=> {
 	// 	return () => {
 	// 		console.log('unmount')
