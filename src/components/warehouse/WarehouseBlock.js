@@ -1341,7 +1341,7 @@ const WarehouseBlock = ({
 										style={{
 											overflow: 'hidden',
 											paddingRight: '15px',
-											width: widthColum.name - 15 + 'px',
+											// width: widthColum.name - 15 + 'px',
 											maxWidth: '172px',
 										}}
 									>
@@ -1397,7 +1397,7 @@ const WarehouseBlock = ({
 												overflow: 'hidden',
 												textOverflow: 'ellipsis',
 												display: 'block',
-												width: widthColum.attribute + 'px',
+												// width: widthColum.attribute + 'px',
 												maxWidth: 85,
 											}}
 										>
