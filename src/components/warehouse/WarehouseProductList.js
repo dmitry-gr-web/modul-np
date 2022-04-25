@@ -433,75 +433,7 @@ const WarehouseProductList = ({
 						<div></div>
 						<div className='div'></div>
 					</td>
-					{/* <td
-						className="sticky-body-row1"
-						onMouseEnter={() => setSwitchMenu(true)}
-						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-					>
-						<label className="switch-btn-warehouse">
-							<input
-								type="checkbox"
-								className="status-all"
-								onChange={switchBtn}
-								// defaultChecked={objProduct[index].status.all}
-								checked={objProduct[index].status.all}
-							/>
-							<span className="slider round"></span>
-						</label>
-					</td> */}
-					{/* <td
-						className="sticky-body-row2"
-						onMouseEnter={() => setSwitchMenu(true)}
-						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-					>
-						<div style={{ whiteSpace: 'nowrap' }}>
-							<label
-								style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
-								className="switch-btn-small"
-							>
-								<input
-									type="checkbox"
-									className="status-crm"
-									onChange={switchBtn}
-									// defaultChecked={objProduct[index].status.crm}
-									checked={objProduct[index].status.crm}
-								/>
-								<span className="slider round"></span>
-							</label>
-
-							<label
-								style={
-									!objProduct[index].status.all
-										? { opacity: 0.4, margin: '0 15px' }
-										: { margin: '0 15px' }
-								}
-								className="switch-btn-small"
-							>
-								<input
-									type="checkbox"
-									className="status-rozetka"
-									onChange={switchBtn}
-									// defaultChecked={objProduct[index].status.rozetka}
-									checked={objProduct[index].status.rozetka}
-								/>
-								<span className="slider round"></span>
-							</label>
-
-							<label
-								style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
-								className="switch-btn-small"
-							>
-								<input
-									type="checkbox"
-									className="status-prom"
-									onChange={switchBtn}
-									// defaultChecked={objProduct[index].status.prom}
-									checked={objProduct[index].status.prom}
-								/>
-								<span className="slider round"></span>
-							</label>
-						</div>
-					</td> */}
+				
 					<td className="sticky-body">
 						<div className="sticky-block">
 							<div
