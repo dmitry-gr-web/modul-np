@@ -32,6 +32,14 @@
     max-width: 100px !important;
   }
 }
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+
 html {
   overscroll-behavior-x: none;
   overscroll-behavior-y: none;
@@ -570,7 +578,7 @@ html {
 }
 .warehouse-products table .sticky-body {
   background: white;
-  position: sticky;
+  position: sticky !important;
   z-index: 2;
   left: 13px;
 }
@@ -775,7 +783,9 @@ html {
   position: relative;
   background: linear-gradient(360deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
-.warehouse-products table .first-tab-body td:first-child {
+.warehouse-products table .first-tab-body .id-width,
+.warehouse-products table .first-tab-body .name-width,
+.warehouse-products table .first-tab-body .attribute-width {
   transform: translateZ(0px);
   will-change: transform, scroll-position;
 }
@@ -819,7 +829,7 @@ html {
   background: linear-gradient(90deg, #e1dedd 0%, rgba(225, 222, 221, 0.95) 20%, rgba(225, 222, 221, 0.7) 45%, rgba(225, 222, 221, 0.5) 65%, rgba(225, 222, 221, 0) 100%) !important;
 }
 .warehouse-products table .first-tab-body .hoverr {
-  position: sticky;
+  position: sticky !important;
   left: 13px;
   width: 0px;
 }
