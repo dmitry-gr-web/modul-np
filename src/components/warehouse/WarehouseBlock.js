@@ -76,7 +76,9 @@ const WarehouseBlock = ({
 		// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
 		// 	x.style.opacity = '0';
 		// });
-	
+		// document.querySelectorAll('.gus').forEach((x) => {
+		// 	x.style.right = '-5px';
+		// });
 
 		let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
 
