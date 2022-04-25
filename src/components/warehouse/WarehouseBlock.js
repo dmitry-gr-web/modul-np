@@ -104,39 +104,39 @@ const WarehouseBlock = ({
 			return text;
 		}
 	}
-	useEffect(() => {
-		function clickDocument(e) {
-			if (!e.target.closest('.warehouse-table')) {
-				setSelectAll(false);
-				let newobj = [...objProduct];
-				newobj.map((x) => (x.select = false));
-				setObjProduct(newobj);
-			}
-		}
-		if (!selectAll) {
-			document.addEventListener('keydown', function (e) {
-				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
-					e.preventDefault();
-					setSelectAll(true);
-					let newobj = [...objProduct];
-					newobj.map((x) => {
-						if (x.lock) {
-							return (x.select = false);
-						} else {
-							return (x.select = true);
-						}
-					});
-					setObjProduct(newobj);
-					console.log('asdasdasd');
-				}
-			});
-		}
-		document.addEventListener('click', clickDocument);
+	// useEffect(() => {
+	// 	function clickDocument(e) {
+	// 		if (!e.target.closest('.warehouse-table')) {
+	// 			setSelectAll(false);
+	// 			let newobj = [...objProduct];
+	// 			newobj.map((x) => (x.select = false));
+	// 			setObjProduct(newobj);
+	// 		}
+	// 	}
+	// 	if (!selectAll) {
+	// 		document.addEventListener('keydown', function (e) {
+	// 			if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+	// 				e.preventDefault();
+	// 				setSelectAll(true);
+	// 				let newobj = [...objProduct];
+	// 				newobj.map((x) => {
+	// 					if (x.lock) {
+	// 						return (x.select = false);
+	// 					} else {
+	// 						return (x.select = true);
+	// 					}
+	// 				});
+	// 				setObjProduct(newobj);
+	// 				console.log('asdasdasd');
+	// 			}
+	// 		});
+	// 	}
+	// 	document.addEventListener('click', clickDocument);
 
-		return () => {
-			document.removeEventListener('click', clickDocument);
-		};
-	}, [selectAll]);
+	// 	return () => {
+	// 		document.removeEventListener('click', clickDocument);
+	// 	};
+	// }, [selectAll]);
 	// console.log(objProduct.length);
 
 	function formatNumber2(number) {
@@ -411,33 +411,33 @@ const WarehouseBlock = ({
 		// console.log(widthColum)
 	}
 
-	useLayoutEffect(() => {
-		width();
-	}, []);
-	useEffect(() => {
-		if (switchMenu) {
-			// requestAnimationFrame(() => {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				x.classList.add('show');
-				x.style.overflow = '';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				x.classList.add('show');
-			});
-			// setTimeout(() => {
-			// 	document.querySelector('.shadow-block').style.height = '100vh';
-			// }, 300);
-			// });
-		} else {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				x.classList.remove('show');
-				x.style.overflow = 'hidden';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				x.classList.remove('show');
-			});
-		}
-	}, [switchMenu]);
+	// useLayoutEffect(() => {
+	// 	width();
+	// }, []);
+	// useEffect(() => {
+	// 	if (switchMenu) {
+	// 		// requestAnimationFrame(() => {
+	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			x.classList.add('show');
+	// 			x.style.overflow = '';
+	// 		});
+	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			x.classList.add('show');
+	// 		});
+	// 		// setTimeout(() => {
+	// 		// 	document.querySelector('.shadow-block').style.height = '100vh';
+	// 		// }, 300);
+	// 		// });
+	// 	} else {
+	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			x.classList.remove('show');
+	// 			x.style.overflow = 'hidden';
+	// 		});
+	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			x.classList.remove('show');
+	// 		});
+	// 	}
+	// }, [switchMenu]);
 	
 	// function switchBtn(e) {
 	// 	e.stopPropagation();
