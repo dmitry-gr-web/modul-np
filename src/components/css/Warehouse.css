@@ -90,8 +90,7 @@ html {
 }
 
 .warehouse-table {
-  transform: translateZ(0);
-  transform: scale(1);
+  transform: translateZ(0px);
   will-change: transform, scroll-position;
 }
 
@@ -442,7 +441,7 @@ html {
 .warehouse-products table {
   border-spacing: 0px;
   user-select: none;
-  transform: translateZ(0);
+  transform: translateZ(0px);
   will-change: transform, scroll-position;
 }
 .warehouse-products table:focus {
@@ -775,11 +774,11 @@ html {
   background: linear-gradient(360deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
 .warehouse-products table .first-tab-body td:first-child {
-  transform: translateZ(0);
+  transform: translateZ(0px);
   will-change: transform, scroll-position;
 }
 .warehouse-products table .first-tab-body tr {
-  transform: translateZ(0);
+  transform: translateZ(0px);
   will-change: transform, scroll-position;
 }
 .warehouse-products table .first-tab-body td {
@@ -820,8 +819,6 @@ html {
   position: sticky;
   left: 13px;
   width: 0px;
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
 }
 .warehouse-products table .first-tab-body .hoverr div {
   position: absolute;
@@ -830,8 +827,6 @@ html {
   top: 0;
   left: 0;
   width: calc(100vw - 386px);
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
   visibility: hidden;
   background: #cacaca;
 }
@@ -842,13 +837,10 @@ html {
   top: 0;
   left: 0;
   width: calc(100vw - 386px);
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
   visibility: hidden;
   background: #858585;
 }
 .warehouse-products table .first-tab-body tr:hover .hoverr div:first-child {
-  transform: translateZ(0px);
   visibility: visible;
 }
 .warehouse-products table .first-tab-body tr:hover .sticky-block {
@@ -963,6 +955,7 @@ html {
 .warehouse-products table .nal-rezerv div:before,
 .warehouse-products table .nal-otpr div:before,
 .warehouse-products table .nal-vozvrat div:before {
+  content: "";
   position: absolute;
   width: calc(100% - 4px);
   left: 0;
@@ -998,6 +991,7 @@ html {
 .warehouse-products table .summa-suma2 div:before,
 .warehouse-products table .summa-suma3 div:before,
 .warehouse-products table .summa-suma4 div:before {
+  content: "";
   position: absolute;
   width: calc(100% - 4px);
   left: 0px;

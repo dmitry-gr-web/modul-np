@@ -100,8 +100,8 @@ html {
 // }
 
 .warehouse-table {
-	transform: translateZ(0);
-	transform: scale(1);
+	transform: translateZ(0px);
+	// transform: scale(1);
 	// transform: translate3d(0, 0, 0);
 	will-change: transform, scroll-position;
 	// transform-origin: 0 0;
@@ -551,7 +551,7 @@ html {
 		user-select: none;
 		// transform: translateZ(0);
 		// transform: translate3d(0, 0, 0);
-		transform: translateZ(0);
+		transform: translateZ(0px);
 		will-change: transform, scroll-position;
 		// will-change: transform ,scroll-position;
 		// transform: transnpm late3d(0, 0, 0);
@@ -1201,7 +1201,7 @@ html {
 			// 	will-change: transform, scroll-position;
 			// }
 			td:first-child {
-				transform: translateZ(0);
+				transform: translateZ(0px);
 				// transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
 			}
@@ -1210,7 +1210,7 @@ html {
 			// 	will-change: transform ,scroll-position;
 			// }
 			tr {
-				transform: translateZ(0);
+				transform: translateZ(0px);
 				// transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
 			}
@@ -1386,8 +1386,8 @@ html {
 				position: sticky;
 				left: 13px;
 				width: 0px;
-				transform: translateZ(0);
-				will-change: transform, scroll-position;
+				// transform: translateZ(0);
+				// will-change: transform, scroll-position;
 
 				div {
 					position: absolute;
@@ -1398,8 +1398,8 @@ html {
 					width: calc(100vw - 386px);
 					// width: calc(100vw - 394px);
 					// display: none;
-					transform: translateZ(0);
-					will-change: transform, scroll-position;
+					// transform: translateZ(0);
+					// will-change: transform, scroll-position;
 					visibility: hidden;
 					background: #cacaca;
 				}
@@ -1412,15 +1412,15 @@ html {
 					width: calc(100vw - 386px);
 					// width: calc(100vw - 394px);
 					// display: none;
-					transform: translateZ(0);
-					will-change: transform, scroll-position;
+					// transform: translateZ(0);
+					// will-change: transform, scroll-position;
 					visibility: hidden;
 					background: #858585;
 				}
 			}
 			tr:hover .hoverr div:first-child {
 				// display: block;
-				transform: translateZ(0px);
+				// transform: translateZ(0px);
 				visibility: visible;
 			}
 			tr:hover .sticky-block {
@@ -1709,7 +1709,7 @@ html {
 			div {
 				text-align: right;
 				&:before {
-					// content: '';
+					content: '';
 					position: absolute;
 					width: calc(100% - 4px);
 					left: 0;
@@ -1742,7 +1742,7 @@ html {
 			div {
 				text-align: right;
 				&:before {
-					// content: '';
+					content: '';
 					position: absolute;
 					width: calc(100% - 4px);
 					left: 0px;
