@@ -1193,13 +1193,13 @@ html {
 		}
 		.first-tab-body {
 			// tr {
-			.id-width,
-			.name-width,
-			.attribute-width {
-				transform: translateZ(0);
-				// transform: translate3d(0, 0, 0);
-				will-change: transform, scroll-position;
-			}
+			// .id-width,
+			// .name-width,
+			// .attribute-width {
+			// 	transform: translateZ(0);
+			// 	// transform: translate3d(0, 0, 0);
+			// 	will-change: transform, scroll-position;
+			// }
 			// td:first-child {
 			// 	transform: translateZ(0);
 			// 	// transform: translate3d(0, 0, 0);
@@ -1209,8 +1209,13 @@ html {
 			// 	// transform: translate3d(0, 0, 0);
 			// 	will-change: transform ,scroll-position;
 			// }
-			tr {
-				transform: translateZ(0);
+			// tr {
+			// 	transform: translateZ(0);
+			// 	// transform: translate3d(0, 0, 0);
+			// 	will-change: transform, scroll-position;
+			// }
+			td {
+								transform: translateZ(0);
 				// transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
 			}

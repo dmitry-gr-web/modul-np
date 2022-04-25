@@ -1197,13 +1197,13 @@ const WarehouseBlock = ({
 						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
 							<tr
 							// style={height}
-							className={
-								objProduct[index + getStart()].select && !objProduct[index + getStart()].lock
-									? 'select'
-									: objProduct[index + getStart()].lock
-									? 'lockOrder'
-									: ''
-							}
+							// className={
+							// 	objProduct[index + getStart()].select && !objProduct[index + getStart()].lock
+							// 		? 'select'
+							// 		: objProduct[index + getStart()].lock
+							// 		? 'lockOrder'
+							// 		: ''
+							// }
 							// onClick={clickTr}
 							ref={linkTR}
 							// key={index}
@@ -1230,7 +1230,7 @@ const WarehouseBlock = ({
 													className="status-all"
 													// onChange={switchBtn}
 													// defaultChecked={objProduct[index].status.all}
-													checked={objProduct[index + getStart()].status.all}
+													// checked={objProduct[index + getStart()].status.all}
 												/>
 												<span className="slider round"></span>
 											</label>
@@ -1249,7 +1249,7 @@ const WarehouseBlock = ({
 													className="status-crm"
 													// onChange={switchBtn}
 													// defaultChecked={objProduct[index].status.crm}
-													checked={objProduct[index + getStart()].status.crm}
+													// checked={objProduct[index + getStart()].status.crm}
 												/>
 												<span className="slider round"></span>
 											</label>
@@ -1267,7 +1267,7 @@ const WarehouseBlock = ({
 													className="status-rozetka"
 													// onChange={switchBtn}
 													// defaultChecked={objProduct[index].status.rozetka}
-													checked={objProduct[index + getStart()].status.rozetka}
+													// checked={objProduct[index + getStart()].status.rozetka}
 												/>
 												<span className="slider round"></span>
 											</label>
@@ -1281,7 +1281,7 @@ const WarehouseBlock = ({
 													className="status-prom"
 													// onChange={switchBtn}
 													// defaultChecked={objProduct[index].status.prom}
-													checked={objProduct[index + getStart()].status.prom}
+													// checked={objProduct[index + getStart()].status.prom}
 												/>
 												<span className="slider round"></span>
 											</label>
@@ -1299,9 +1299,9 @@ const WarehouseBlock = ({
 														color: 'rgba(0,0,0,0.4)',
 														textAlign: 'left',
 														paddingRight: '10px',
-														width: widthColum.id + 'px',
+														// width: widthColum.id + 'px',
 												  }
-												: { textAlign: 'left', paddingRight: '10px', width: widthColum.id + 'px' }
+												: { textAlign: 'left', paddingRight: '10px', }
 										}
 									>
 										{objProduct[index + getStart()].id}
@@ -1533,7 +1533,7 @@ const WarehouseBlock = ({
 												setInputFormat(true);
 												e.stopPropagation();
 											}}
-											value={focusInput && inputFormat ? memoryInput : formatNumber2(+memoryInput)}
+											// value={focusInput && inputFormat ? memoryInput : formatNumber2(+memoryInput)}
 											onDoubleClick={(e) => e.stopPropagation()}
 											style={{
 												color: 'rgba(0,0,0,0.7)',
