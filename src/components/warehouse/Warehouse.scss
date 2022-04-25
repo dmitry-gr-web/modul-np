@@ -100,8 +100,8 @@ html {
 // }
 
 .warehouse-table {
-	// transform: scale(1);
 	transform: translateZ(0);
+	transform: scale(1);
 	// transform: translate3d(0, 0, 0);
 	will-change: transform, scroll-position;
 	// transform-origin: 0 0;
@@ -551,10 +551,10 @@ html {
 		user-select: none;
 		// transform: translateZ(0);
 		// transform: translate3d(0, 0, 0);
-		// will-change: transform, scroll-position;
-		// transform: translateZ(0);
+		transform: translateZ(0);
+		will-change: transform, scroll-position;
 		// will-change: transform ,scroll-position;
-		// transform: translate3d(0, 0, 0);
+		// transform: transnpm late3d(0, 0, 0);
 
 		// outline: none;
 		// outline-width: 0;

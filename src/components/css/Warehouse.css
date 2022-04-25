@@ -91,6 +91,7 @@ html {
 
 .warehouse-table {
   transform: translateZ(0);
+  transform: scale(1);
   will-change: transform, scroll-position;
 }
 
@@ -441,6 +442,8 @@ html {
 .warehouse-products table {
   border-spacing: 0px;
   user-select: none;
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
 }
 .warehouse-products table:focus {
   outline: none;
