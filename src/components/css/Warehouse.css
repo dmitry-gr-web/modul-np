@@ -32,14 +32,6 @@
     max-width: 100px !important;
   }
 }
-::-webkit-scrollbar {
-  width: 0px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: none;
-}
-
 html {
   overscroll-behavior-x: none;
   overscroll-behavior-y: none;
