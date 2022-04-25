@@ -416,14 +416,25 @@ const WarehouseBlock = ({
 	// useLayoutEffect(() => {
 	// 	width();
 	// }, []);
+	// useEffect(()=> {
+	// 	return () => {
+	// 		console.log('unmount')
+	// 	}
+	// },[])
 	// useEffect(() => {
 	// 	if (switchMenu) {
 	// 		// requestAnimationFrame(() => {
 	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			// x.style.width = '90px';
+	// 			// x.style.paddingRight = '10px';
 	// 			x.classList.add('show');
+	// 			// x.style.animation = 'transform 0.3s forwards'
 	// 			x.style.overflow = '';
 	// 		});
 	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			// x.style.maxWidth = '125px';
+	// 			// x.style.width = '90px'
+	// 			// x.style.paddingRight = '10px';
 	// 			x.classList.add('show');
 	// 		});
 	// 		// setTimeout(() => {
@@ -431,382 +442,23 @@ const WarehouseBlock = ({
 	// 		// }, 300);
 	// 		// });
 	// 	} else {
+	// 		// requestAnimationFrame(() => {
 	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			// x.style.width = '0px';
+	// 			// x.style.paddingRight = '0px';
 	// 			x.classList.remove('show');
+	// 			// x.style.animation = ''
 	// 			x.style.overflow = 'hidden';
 	// 		});
 	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			// x.style.maxWidth = '0px';
+	// 			// x.style.width = '0px'
+	// 			// x.style.paddingRight = '0px';
 	// 			x.classList.remove('show');
 	// 		});
+	// 		// });
 	// 	}
 	// }, [switchMenu]);
-	
-	// function switchBtn(e) {
-	// 	e.stopPropagation();
-	// 	if (e.target.className === 'status-all') {
-	// 		let newobj = [...objProduct];
-	// 		newobj[index].status.all = !newobj[index].status.all;
-	// 		if (newobj[index].status.all === false) {
-	// 			newobj[index].status.rozetka = false;
-	// 			newobj[index].status.prom = false;
-	// 			newobj[index].status.crm = false;
-	// 		} else {
-	// 			newobj[index].status.rozetka = true;
-	// 			newobj[index].status.prom = true;
-	// 			newobj[index].status.crm = true;
-	// 		}
-	// 		setObjProduct(newobj);
-	// 		console.log(objProduct);
-	// 	}
-	// 	if (e.target.className === 'status-rozetka') {
-	// 		let newobj = [...objProduct];
-	// 		newobj[index].status.rozetka = !newobj[index].status.rozetka;
-	// 		if (newobj[index].status.rozetka === true) {
-	// 			newobj[index].status.all = true;
-	// 		}
-	// 		if (
-	// 			newobj[index].status.rozetka === false &&
-	// 			newobj[index].status.prom === false &&
-	// 			newobj[index].status.crm === false
-	// 		) {
-	// 			newobj[index].status.all = false;
-	// 		}
-	// 		setObjProduct(newobj);
-	// 	}
-	// 	if (e.target.className === 'status-prom') {
-	// 		let newobj = [...objProduct];
-	// 		newobj[index].status.prom = !newobj[index].status.prom;
-	// 		if (newobj[index].status.prom === true) {
-	// 			newobj[index].status.all = true;
-	// 		}
-	// 		if (
-	// 			newobj[index].status.rozetka === false &&
-	// 			newobj[index].status.prom === false &&
-	// 			newobj[index].status.crm === false
-	// 		) {
-	// 			newobj[index].status.all = false;
-	// 		}
-	// 		setObjProduct(newobj);
-	// 	}
-	// 	if (e.target.className === 'status-crm') {
-	// 		let newobj = [...objProduct];
-	// 		newobj[index].status.crm = !newobj[index].status.crm;
-	// 		if (newobj[index].status.crm === true) {
-	// 			newobj[index].status.all = true;
-	// 		}
-	// 		if (
-	// 			newobj[index].status.rozetka === false &&
-	// 			newobj[index].status.prom === false &&
-	// 			newobj[index].status.crm === false
-	// 		) {
-	// 			newobj[index].status.all = false;
-	// 		}
-	// 		setObjProduct(newobj);
-	// 	}
-	// }
-	// function tooltipOn(e) {
-	// 	// e.stopPropagation();
-	// 	clearTimeout(plusminus);
-	// 	// const tooltipBlock = document.getElementById('tooltipBtn');
-	// 	// let posElement = e.currentTarget.getBoundingClientRect();
-	// 	// // tooltipBlock.innerHTML = html;
-	// 	// tooltipBlock.style.fontSize = '14px';
-	// 	// console.log(e);
-	// 	let posElement = e.currentTarget.getBoundingClientRect();
-	// 	const tooltipBlock = document.getElementById('tooltipBtn');
-	// 	if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
-	// 		// tooltipBlock.style.fontSize = '12px';
-	// 		plusminus = setTimeout(() => {
-	// 			// tooltipBlock.innerHTML = html;
-	// 			tooltipBlock.style.fontSize = '14px';
-	// 			tooltipBlock.innerText = e.target.innerText;
-	// 			tooltipBlock.style.left = posElement.x + 'px';
-	// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
-	// 			tooltipBlock.style.animation = 'delay-header 1s forwards';
-	// 		}, 150);
-	// 	}
-	// 	if (e.currentTarget.innerText === '🇺🇦') {
-	// 		plusminus = setTimeout(() => {
-	// 			tooltipBlock.style.fontSize = '14px';
-	// 			tooltipBlock.innerText = translator.getTranslation('tooltipCountries','ukraine');
-	// 			tooltipBlock.style.left = posElement.x + 'px';
-	// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
-	// 			tooltipBlock.style.animation = 'delay-header 1s forwards';
-	// 		}, 150);
-	// 	}
-	// 	if (e.currentTarget.innerText === '🇷🇺') {
-	// 		plusminus = setTimeout(() => {
-	// 			tooltipBlock.style.fontSize = '14px';
-	// 			tooltipBlock.innerText = translator.getTranslation('tooltipCountries','russia');
-	// 			tooltipBlock.style.left = posElement.x + 'px';
-	// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
-	// 			tooltipBlock.style.animation = 'delay-header 1s forwards';
-	// 		}, 150);
-	// 	}
-	// 	if (e.currentTarget.innerText === '🇹🇷') {
-	// 		plusminus = setTimeout(() => {
-	// 			tooltipBlock.style.fontSize = '14px';
-	// 			tooltipBlock.innerText = translator.getTranslation('tooltipCountries','turkey');
-	// 			tooltipBlock.style.left = posElement.x + 'px';
-	// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
-	// 			tooltipBlock.style.animation = 'delay-header 1s forwards';
-	// 		}, 150);
-	// 	}
-
-	// 	if (e.currentTarget.innerText === '€') {
-	// 		plusminus = setTimeout(() => {
-	// 			tooltipBlock.style.fontSize = '14px';
-	// 			tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'eur');
-	// 			tooltipBlock.style.left = posElement.x + 'px';
-	// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
-	// 			tooltipBlock.style.animation = 'delay-header 1s forwards';
-	// 		}, 150);
-	// 	}
-	// 	if (e.currentTarget.innerText === '₽') {
-	// 		plusminus = setTimeout(() => {
-	// 			tooltipBlock.style.fontSize = '14px';
-	// 			tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'rub');
-	// 			tooltipBlock.style.left = posElement.x + 'px';
-	// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
-	// 			tooltipBlock.style.animation = 'delay-header 1s forwards';
-	// 		}, 150);
-	// 	}
-	// 	if (e.currentTarget.innerText === '₴') {
-	// 		plusminus = setTimeout(() => {
-	// 			tooltipBlock.style.fontSize = '14px';
-	// 			tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'uah');
-	// 			tooltipBlock.style.left = posElement.x + 'px';
-	// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
-	// 			tooltipBlock.style.animation = 'delay-header 1s forwards';
-	// 		}, 150);
-	// 	}
-	// 	if (e.currentTarget.innerText === '$') {
-	// 		plusminus = setTimeout(() => {
-	// 			tooltipBlock.style.fontSize = '14px';
-	// 			tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'dollar');
-	// 			tooltipBlock.style.left = posElement.x + 'px';
-	// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
-	// 			tooltipBlock.style.animation = 'delay-header 1s forwards';
-	// 		}, 150);
-	// 	}
-
-	// 	// console.log(e.target.querySelector('input'))
-	// }
-	
-	// function tooltipOff() {
-	// 	clearTimeout(plusminus);
-	// 	document.getElementById('tooltipBtn').style.animation = '';
-	// }
-	// useEffect(() => {
-	// 	if (!objProduct[index].status.all) {
-	// 		setSwitchChecked(false);
-	// 	} else {
-	// 		setSwitchChecked(true);
-	// 	}
-	// }, [objProduct]);
-	// function BtnMinus(e) {
-	// 	e.stopPropagation();
-	// 	let newobj = [...objProduct];
-	// 	if (newobj[index].ostatok !== 0) {
-	// 		newobj[index].ostatok = newobj[index].ostatok - 1;
-	// 	}
-	// 	setObjProduct(newobj);
-	// 	setMemoryInput(newobj[index].ostatok);
-	// }
-	// function BtnPlus(e) {
-	// 	e.stopPropagation();
-	// 	let newobj = [...objProduct];
-	// 	newobj[index].ostatok = newobj[index].ostatok + 1;
-	// 	setObjProduct(newobj);
-	// 	setMemoryInput(newobj[index].ostatok);
-	// }
-	function formatNumber(number) {
-		let newnum = number
-			.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-			.replace(',', '.');
-		return newnum;
-	}
-	function formatNumber2(number) {
-		let newnum = number.toLocaleString('ru-RU', {
-			minimumFractionDigits: 0,
-			maximumFractionDigits: 0,
-		});
-		return newnum;
-	}
-	const [memoryInput, setMemoryInput] = useState(
-		// objProduct[index]?.ostatok
-		);
-	const [inputFormat, setInputFormat] = useState(false);
-	function inputChange(e) {
-		// setIndexInput(index - start);
-		setFocusInput(true);
-		setPodlozhka(true);
-		setInputFormat(true);
-		e.target.value = e.target.value.replace(/[^0-9]/g, '');
-		setMemoryInput(e.target.value);
-	}
-	function usePrevious(value) {
-		const ref = useRef();
-		useEffect(() => {
-			ref.current = value;
-		}, [value]);
-		return ref.current;
-	}
-	const prev = usePrevious(memoryInput);
-	function enterInput(e) {
-		if (e.key === 'Enter') {
-			if (podlozhka && prev !== memoryInput) {
-				if (e.target.value.length >= 4) {
-					e.target.style.width = e.target.value.length * 8 + 4 + 'px';
-				}
-				if (e.target.value.length >= 7) {
-					e.target.style.width = e.target.value.length * 8 + 8 + 'px';
-				}
-				if (e.target.value.length < 4) {
-					e.target.style.width = e.target.value.length * 8 + 'px';
-				}
-				e.target.blur();
-				console.log('enter');
-				setFocusInput(false);
-			}
-			setPodlozhka(false);
-		}
-	}
-	// useEffect(() => {
-	// 	if (!podlozhka) {
-	// 		setInputFormat(false);
-	// 		let newobj = [...objProduct];
-	// 		newobj[index].ostatok = +memoryInput;
-	// 		setObjProduct(newobj);
-	// 	}
-	// }, [podlozhka]);
-	// useEffect(() => {
-	// 	document.querySelectorAll('.nal-ostatok input').forEach((x) => {
-	// 		// x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
-
-	// 		if (x.value.replaceAll(' ', '').length >= 4) {
-	// 			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-	// 			x.style.width = x.value.replaceAll(' ', '').length * 8 + 4 + 'px';
-	// 		}
-	// 		if (x.value.replaceAll(' ', '').length >= 7) {
-	// 			x.style.width = x.value.replaceAll(' ', '').length * 8 + 8 + 'px';
-	// 		}
-	// 		if (x.value.replaceAll(' ', '').length < 4) {
-	// 			x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
-	// 		}
-	// 	});
-	// }, [memoryInput, objProduct]);
-	function inputLength(input) {
-		if (input.replaceAll(' ', '').length >= 4) {
-			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-			return input.replaceAll(' ', '').length * 8 + 4 + 'px';
-		}
-		if (input.replaceAll(' ', '').length >= 7) {
-			return input.replaceAll(' ', '').length * 8 + 8 + 'px';
-		}
-		if (input.replaceAll(' ', '').length < 4) {
-			return input.replaceAll(' ', '').length * 8 + 'px';
-		}
-	}
-	// const linkTR = useRef();
-	// useEffect(() => {
-	// 	let curent = linkTR.current.querySelectorAll('td');
-	// 	let width = [];тзь ыефк
-	// 	let res = 0;
-	// 	setTimeout(() => {
-	// 		for (let i = 0; i < 8; i++) {
-	// 			if (!switchMenu) {
-	// 				width.push(curent[i].offsetWidth);
-	// 			} else if (switchMenu) {
-	// 				width.push(curent[i].offsetWidth);
-	// 			} else if (switchMenu && i === 1) {
-	// 				width.push(0);
-	// 			}
-	// 			curent[i].style.left = res + 7 + 'px';
-	// 			res = width.reduce((prev, curr) => prev + curr, 0);
-	// 			curent[0].style.left = '7px';
-	// 		}
-	// 	}, 200);
-	// }, [objProduct, switchMenu]);
-
-	// function clickTr(e) {
-	// 	// e.preventDefault();
-	// 	// e.stopPropagation();
-	// 	// console.log(e.currentTarget)
-	// 	if (e.currentTarget) {
-	// 		let newobj = [...objProduct];
-	// 		if (e.ctrlKey || e.metaKey) {
-	// 			e.preventDefault();
-	// 			e.stopPropagation();
-	// 			newobj[index].select = !newobj[index].select;
-	// 		} else {
-	// 			// e.preventDefault();
-	// 			e.stopPropagation();
-	// 			if (newobj[index].select !== true) {
-	// 				newobj.map((x) => (x.select = false));
-	// 			}
-	// 			newobj[index].select = !newobj[index].select;
-	// 		}
-	// 		if (e.shiftKey) {
-	// 			e.preventDefault();
-	// 			e.stopPropagation();
-	// 			newobj.slice(lastIndex, index).map((x, i) => {
-	// 				if (x.lock) {
-	// 					x.select = false;
-	// 				} else {
-	// 					x.select = true;
-	// 				}
-	// 			});
-	// 		}
-	// 		setLastIndex(index);
-	// 		setObjProduct(newobj);
-	// 	}
-	// }
-
-	const inputRef = useRef();
-	const btnRef = useRef();
-	function PlusMinusOpen(e) {
-		document.querySelectorAll('.nal-ostatok').forEach((x) => {
-			x.classList.add('showBtn');
-		});
-		plusminus = setTimeout(() => {
-			inputRef?.current?.select();
-			inputRef?.current?.focus();
-		}, 150);
-	}
-	function PlusMinusClose(e) {
-		if (!podlozhka) {
-			document.querySelectorAll('.nal-ostatok').forEach((x) => {
-				x.classList.remove('showBtn');
-			});
-			inputRef.current.blur();
-		}
-		clearTimeout(plusminus);
-	}
-	// const [leftShadow,setLeftShadow] = useState(0);
-	// useEffect(() => {
-	// 	let width = document.querySelector('.sticky-body')?.offsetWidth;
-	// 	// setLeftShadow(width);
-	// 	document.querySelectorAll('.shadow').forEach((x) => {
-	// 		x.style.left = width + 7 + 'px';
-	// 	});
-	// }, [objProduct, switchMenu]);
-	// useMemo(()=> {
-	// 	PlusMinusClose()
-	// 	PlusMinusOpen()
-	// }, [])
-	// console.log(objProduct[index].status.all);
-	function dblClick(e) {
-		if (
-			e.target.localName === 'button' ||
-			e.target.offsetParent === 'label' ||
-			e.target.className === '.slider.round'
-		) {
-		} else {
-			setToggleCard(true);
-			// setGetIndex(index);
-		}
-	}
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
