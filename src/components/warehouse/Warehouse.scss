@@ -1709,7 +1709,7 @@ html {
 			div {
 				text-align: right;
 				&:before {
-					content: '';
+					// content: '';
 					position: absolute;
 					width: calc(100% - 4px);
 					left: 0;
@@ -1742,7 +1742,7 @@ html {
 			div {
 				text-align: right;
 				&:before {
-					content: '';
+					// content: '';
 					position: absolute;
 					width: calc(100% - 4px);
 					left: 0px;

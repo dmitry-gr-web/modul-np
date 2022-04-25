@@ -963,7 +963,6 @@ html {
 .warehouse-products table .nal-rezerv div:before,
 .warehouse-products table .nal-otpr div:before,
 .warehouse-products table .nal-vozvrat div:before {
-  content: "";
   position: absolute;
   width: calc(100% - 4px);
   left: 0;
@@ -999,7 +998,6 @@ html {
 .warehouse-products table .summa-suma2 div:before,
 .warehouse-products table .summa-suma3 div:before,
 .warehouse-products table .summa-suma4 div:before {
-  content: "";
   position: absolute;
   width: calc(100% - 4px);
   left: 0px;
