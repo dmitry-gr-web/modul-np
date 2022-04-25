@@ -451,11 +451,11 @@ const WarehouseBlock = ({
 				className="warehouse-table"
 				style={{
 					display: 'flex',
-					maxHeight: 'calc(100vh - 149px)',
+					// maxHeight: 'calc(100vh - 149px)',
 					marginBottom: '10px',
 					// maxWidth: 1150,
 					width: '100%',
-					overflow: 'scroll',
+					overflow: 'auto',
 					// height: '800px',
 					// willChange:'transform, scroll-position',
 					height: document.body.clientHeight - 180 + 'px',
@@ -468,7 +468,7 @@ const WarehouseBlock = ({
 			>
 				<table
 					tabIndex={-1}
-					style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
+					// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 				>
 					<thead className="first-tab-header">
 						<tr>

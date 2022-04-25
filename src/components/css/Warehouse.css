@@ -90,7 +90,7 @@ html {
 }
 
 .warehouse-table {
-  transform: translateZ(0px);
+  transform: scale(1);
   will-change: transform, scroll-position;
 }
 
@@ -441,6 +441,8 @@ html {
 .warehouse-products table {
   border-spacing: 0px;
   user-select: none;
+  width: 0px;
+  border-collapse: collapse;
   transform: translateZ(0px);
   will-change: transform, scroll-position;
 }
@@ -786,6 +788,7 @@ html {
   font-size: 14px;
   font-weight: 300;
   height: 20px;
+  position: relative;
 }
 .warehouse-products table .first-tab-body td {
   padding: 0;
