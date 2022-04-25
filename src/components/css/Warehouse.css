@@ -90,10 +90,8 @@ html {
 }
 
 .warehouse-table {
-  transform: scale(1);
   transform: translateZ(0);
   will-change: transform, scroll-position;
-  transform-origin: 0 0;
 }
 
 .warehouse-products {
@@ -436,8 +434,6 @@ html {
 }
 .warehouse-products .simplebar-content-wrapper {
   padding: 0;
-  transform: translateZ(0);
-  will-change: transform, scroll-position;
 }
 .warehouse-products .simplebar-content {
   display: flex;
@@ -775,9 +771,7 @@ html {
   position: relative;
   background: linear-gradient(360deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
-.warehouse-products table .first-tab-body .id-width,
-.warehouse-products table .first-tab-body .name-width,
-.warehouse-products table .first-tab-body .attribute-width {
+.warehouse-products table .first-tab-body td:first-child {
   transform: translateZ(0);
   will-change: transform, scroll-position;
 }
