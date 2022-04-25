@@ -274,14 +274,14 @@ const WarehouseProductList = ({
 			setPodlozhka(false);
 		}
 	}
-	// useEffect(() => {
-	// 	if (!podlozhka) {
-	// 		setInputFormat(false);
-	// 		let newobj = [...objProduct];
-	// 		newobj[index].ostatok = +memoryInput;
-	// 		setObjProduct(newobj);
-	// 	}
-	// }, [podlozhka]);
+	useEffect(() => {
+		if (!podlozhka) {
+			setInputFormat(false);
+			let newobj = [...objProduct];
+			newobj[index].ostatok = +memoryInput;
+			setObjProduct(newobj);
+		}
+	}, [podlozhka]);
 	// useEffect(() => {
 	// 	document.querySelectorAll('.nal-ostatok input').forEach((x) => {
 	// 		// x.style.width = x.value.replaceAll(' ', '').length * 8 + 'px';
@@ -363,65 +363,24 @@ const WarehouseProductList = ({
 			setLastIndex(index);
 			setObjProduct(newobj);
 		}
-
-		// console.log(lastIndex, index);
 	}
 
 	const inputRef = useRef();
-
-	// console.log(inputRef.current.value)
-
-	// inputRef.current.style.width = inputRef.current.value.length * 8 + 4 + 'px';
 	const btnRef = useRef();
 	function PlusMinusOpen(e) {
-		// setBtnMenu(true);
-
 		document.querySelectorAll('.nal-ostatok').forEach((x) => {
-			// x.style.opacity = '1';
 			x.classList.add('showBtn');
 		});
-		// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
-		// 	x.style.right = '6px';
-		// });
-		// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-		// 	x.style.opacity = '1';
-		// 	x.classList.add('showBtn');
-		// });
-		// document.querySelectorAll('.wrap-nal-ostatok').forEach((x) => {
-		// 	x.style.right = '6px';
-		// });
-
-		// btnRef.current.querySelectorAll('button').forEach(x => {
-		// 	x.style.opacity = '1';
-		// })
-		// console.log(btnRef.current.firstChild.style.width = '16px')
-		// console.log(btnRef.current.lastChild.style.width = '16px')
-		// console.log(inputRef.current.offsetParent.children[0].children[0].style.width = '16px')
 		plusminus = setTimeout(() => {
 			inputRef?.current?.select();
 			inputRef?.current?.focus();
-			// console.log(e.target.querySelector('input'))
 		}, 150);
 	}
 	function PlusMinusClose(e) {
 		if (!podlozhka) {
-			// setBtnMenu(false);
-
 			document.querySelectorAll('.nal-ostatok').forEach((x) => {
-				// x.style.opacity = '1';
 				x.classList.remove('showBtn');
 			});
-			// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-			// 	x.style.opacity = '0';
-			// });
-			// document.querySelectorAll('.wrap-nal.ostatok').forEach((x) => {
-			// 	x.style.right = '-5px';
-			// });
-
-			// btnRef.current.querySelectorAll('button').forEach(x => {
-			// 	x.style.opacity = '0';
-			// })
-
 			inputRef.current.blur();
 		}
 		clearTimeout(plusminus);
@@ -440,9 +399,6 @@ const WarehouseProductList = ({
 	// }, [])
 	// console.log(objProduct[index].status.all);
 	function dblClick(e) {
-		// console.log(e)
-		// console.log(e)
-
 		if (
 			e.target.localName === 'button' ||
 			e.target.offsetParent === 'label' ||
