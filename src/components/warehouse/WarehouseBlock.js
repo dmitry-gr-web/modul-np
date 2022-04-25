@@ -16,19 +16,21 @@ import WarehouseProductList from './WarehouseProductList';
 import WarehouseDropMenu from './WarehouseDropMenu';
 // import { dataWarehouse } from '../data/dataWarehouse';
 import WarehouseInput from './WarehouseInput';
+import { dataWarehouse } from '../data/dataWarehouse';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
 let hover;
 let plusminus;
 const WarehouseBlock = ({
-	objProduct,
-	setObjProduct,
+
+
 	setToggleCard,
 	setGetIndex,
 	load,
 	translator,
 }) => {
+	const [objProduct, setObjProduct] = useState(dataWarehouse);
 	const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
