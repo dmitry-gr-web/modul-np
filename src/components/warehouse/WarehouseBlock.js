@@ -816,11 +816,11 @@ const WarehouseBlock = ({
 							</th>
 						</tr>
 					</thead>
-
+					{objProduct.length > 0 && 
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
 
-						{objProduct?.length !== 0  && objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
+						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
 							// <WarehouseProductList
 							// 	index={index + getStart()}
 							// 	// rowHeight={rowHeight}
@@ -1464,7 +1464,7 @@ const WarehouseBlock = ({
 						))}
 
 						<tr style={{ height: getBottomHeight() }}></tr>
-					</tbody>
+					</tbody>}
 
 					<tfoot>
 						<tr>

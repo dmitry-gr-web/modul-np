@@ -36,12 +36,12 @@
 // ::-webkit-scrollbar-thumb {
 // 	background: none;
 //   }
-body {
-	left: 0;
-    position: fixed;
-    top: 0;
-	width: 100%;
-}
+// body {
+// 	left: 0;
+//     position: fixed;
+//     top: 0;
+// 	width: 100%;
+// }
 html {
 	overscroll-behavior-x: none;
 	overscroll-behavior-y: none;
@@ -1246,7 +1246,7 @@ html {
 				transform: translate3d(0, 0, 0);
 				// -webkit-backface-visibility: hidden;
 				// -webkit-perspective: 1000;
-				height: 20px;
+				// height: 20px;
 				will-change: transform, scroll-position;
 			}
 			.sticky-body {
@@ -1255,9 +1255,9 @@ html {
 				transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
 			}
-			tr {
-				height: 20px;
-			}
+			// tr {
+			// 	height: 20px;
+			// }
 			// td:not(.hoverr, .sticky-body) {
 			// 	position: relative;
 			// }
@@ -1265,7 +1265,7 @@ html {
 				padding: 0;
 				font-size: 14px;
 				font-weight: 300;
-				height: 20px;
+				// height: 20px;
 				position: relative;
 				// display: flex;
 				// transform: translateZ(0);

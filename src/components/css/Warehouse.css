@@ -32,13 +32,6 @@
     max-width: 100px !important;
   }
 }
-body {
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
 html {
   overscroll-behavior-x: none;
   overscroll-behavior-y: none;
@@ -792,21 +785,16 @@ html {
 }
 .warehouse-products table .first-tab-body td {
   transform: translate3d(0, 0, 0);
-  height: 20px;
   will-change: transform, scroll-position;
 }
 .warehouse-products table .first-tab-body .sticky-body {
   transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
 }
-.warehouse-products table .first-tab-body tr {
-  height: 20px;
-}
 .warehouse-products table .first-tab-body td {
   padding: 0;
   font-size: 14px;
   font-weight: 300;
-  height: 20px;
   position: relative;
 }
 .warehouse-products table .first-tab-body td {
