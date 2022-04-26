@@ -825,15 +825,12 @@ html {
 		// 	background:linear-gradient(90deg, grey, white) !important;
 		// }
 		.sticky-body {
-			background: white;
-			position: sticky !important;
-			z-index: 2;
-			left: 13px;
-			// left: 60px;
-			// left:200px;
-			// transition: 0.5s;
-			transform: translate3d(0, 0, 0);
-			will-change: transform, scroll-position;
+			// background: white;
+			// position: sticky !important;
+			// z-index: 2;
+			// left: 13px;
+			// transform: translate3d(0, 0, 0);
+			// will-change: transform, scroll-position;
 			
 		}
 		.sticky-row-0 {

@@ -816,9 +816,9 @@ const WarehouseBlock = ({
 							</th>
 						</tr>
 					</thead>
-					{objProduct.length > 0 && 
+					
 					<tbody className="first-tab-body">
-						<tr style={{ height: getTopHeight() }}></tr>
+						<tr style={{ height: 1+ getTopHeight() }}></tr>
 
 						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
 							// <WarehouseProductList
@@ -861,6 +861,7 @@ const WarehouseBlock = ({
 							// : 
 							'speed'
 					}
+					style={{height: rowHeight}}
 					// onClick={clickTr}
 					ref={linkTR}
 					// key={index}
@@ -942,7 +943,7 @@ const WarehouseBlock = ({
 							</label>
 						</div>
 					</td> */}
-					<td className="sticky-body">
+					<td className="sticky-body" style={{position:'sticky !important',zIndex:2,left:13,background:'white', transform:'translate3d(0,0,0)',willChange:'transform,scroll-position'}}>
 						<div className="sticky-block">
 							<div
 								onMouseEnter={() => setSwitchMenu(true)}
@@ -1464,7 +1465,7 @@ const WarehouseBlock = ({
 						))}
 
 						<tr style={{ height: getBottomHeight() }}></tr>
-					</tbody>}
+					</tbody>
 
 					<tfoot>
 						<tr>

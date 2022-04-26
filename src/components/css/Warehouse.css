@@ -570,14 +570,6 @@ html {
   transform: translateX(0px);
   padding-right: 10px;
 }
-.warehouse-products table .sticky-body {
-  background: white;
-  position: sticky !important;
-  z-index: 2;
-  left: 13px;
-  transform: translate3d(0, 0, 0);
-  will-change: transform, scroll-position;
-}
 .warehouse-products table .sticky-row-0 {
   position: sticky;
   left: 13px;
