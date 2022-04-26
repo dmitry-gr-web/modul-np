@@ -854,11 +854,12 @@ const WarehouseBlock = ({
 							<tr
 					// style={height}
 					className={
-						objProduct[index + getStart()].select && !objProduct[index  + getStart()].lock
-							? 'select speed'
-							: objProduct[index  + getStart()].lock
-							? 'lockOrder speed'
-							: 'speed'
+						// objProduct[index + getStart()].select && !objProduct[index  + getStart()].lock
+						// 	? 'select speed'
+						// 	: objProduct[index  + getStart()].lock
+						// 	? 'lockOrder speed'
+							// : 
+							'speed'
 					}
 					// onClick={clickTr}
 					ref={linkTR}
@@ -868,7 +869,8 @@ const WarehouseBlock = ({
 					key={index  + getStart()}
 				>
 					<td className="hoverr">
-						<div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div>
+						<div></div>
+						{/* <div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div> */}
 						<div className='div'></div>
 					</td>
 					{/* <td
@@ -954,7 +956,7 @@ const WarehouseBlock = ({
 											className="status-all"
 											// onChange={switchBtn}
 											// defaultChecked={objProduct[index].status.all}
-											checked={objProduct[index  + getStart()].status.all}
+											// checked={objProduct[index  + getStart()].status.all}
 										/>
 										<span className="slider round"></span>
 									</label>
@@ -965,7 +967,7 @@ const WarehouseBlock = ({
 									style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
 								>
 									<label
-										style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+										// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
 										className="switch-btn-small"
 									>
 										<input
@@ -973,17 +975,17 @@ const WarehouseBlock = ({
 											className="status-crm"
 											// onChange={switchBtn}
 											// defaultChecked={objProduct[index].status.crm}
-											checked={objProduct[index  + getStart()].status.crm}
+											// checked={objProduct[index  + getStart()].status.crm}
 										/>
 										<span className="slider round"></span>
 									</label>
 
 									<label
-										style={
-											!objProduct[index  + getStart()].status.all
-												? { opacity: 0.4, margin: '0 15px' }
-												: { margin: '0 15px' }
-										}
+										// style={
+										// 	!objProduct[index  + getStart()].status.all
+										// 		? { opacity: 0.4, margin: '0 15px' }
+										// 		: { margin: '0 15px' }
+										// }
 										className="switch-btn-small"
 									>
 										<input
@@ -991,13 +993,13 @@ const WarehouseBlock = ({
 											className="status-rozetka"
 											// onChange={switchBtn}
 											// defaultChecked={objProduct[index].status.rozetka}
-											checked={objProduct[index  + getStart()].status.rozetka}
+											// checked={objProduct[index  + getStart()].status.rozetka}
 										/>
 										<span className="slider round"></span>
 									</label>
 
 									<label
-										style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+										// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
 										className="switch-btn-small"
 									>
 										<input
@@ -1005,7 +1007,7 @@ const WarehouseBlock = ({
 											className="status-prom"
 											// onChange={switchBtn}
 											// defaultChecked={objProduct[index].status.prom}
-											checked={objProduct[index  + getStart()].status.prom}
+											// checked={objProduct[index  + getStart()].status.prom}
 										/>
 										<span className="slider round"></span>
 									</label>
@@ -1017,26 +1019,26 @@ const WarehouseBlock = ({
 								className="id-width"
 								// onMouseLeave={tooltipOff}
 								// onMouseEnter={tooltipOn}
-								style={
-									!objProduct[index  + getStart()].status.all
-										? {
-												color: 'rgba(0,0,0,0.4)',
-												textAlign: 'left',
-												paddingRight: '10px',
-												width: widthColum.id + 'px',
-										  }
-										: { textAlign: 'left', paddingRight: '10px', width: widthColum.id + 'px' }
-								}
+								// style={
+								// 	!objProduct[index  + getStart()].status.all
+								// 		? {
+								// 				color: 'rgba(0,0,0,0.4)',
+								// 				textAlign: 'left',
+								// 				paddingRight: '10px',
+								// 				width: widthColum.id + 'px',
+								// 		  }
+								// 		: { textAlign: 'left', paddingRight: '10px', width: widthColum.id + 'px' }
+								// }
 							>
 								{objProduct[index  + getStart()].id}
 							</div>
 							<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
 								<span
-									style={
-										!objProduct[index  + getStart()].status.all
-											? { opacity: 0.4, color: 'rgba(0,0,0,1)' }
-											: { color: 'rgba(0,0,0,1)' }
-									}
+									// style={
+									// 	!objProduct[index  + getStart()].status.all
+									// 		? { opacity: 0.4, color: 'rgba(0,0,0,1)' }
+									// 		: { color: 'rgba(0,0,0,1)' }
+									// }
 									className="flags"
 									// onMouseLeave={tooltipOff}
 									// onMouseEnter={tooltipOn}
@@ -1047,16 +1049,16 @@ const WarehouseBlock = ({
 							<div
 								// onMouseLeave={tooltipOff}
 								// onMouseEnter={tooltipOn}
-								style={
-									!objProduct[index  + getStart()].status.all
-										? {
-												color: 'rgba(0,0,0,0.4)',
-												textAlign: 'center',
-												minWidth: 51,
-												paddingRight: '10px',
-										  }
-										: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
-								}
+								// style={
+								// 	!objProduct[index  + getStart()].status.all
+								// 		? {
+								// 				color: 'rgba(0,0,0,0.4)',
+								// 				textAlign: 'center',
+								// 				minWidth: 51,
+								// 				paddingRight: '10px',
+								// 		  }
+								// 		: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
+								// }
 							>
 								{objProduct[index  + getStart()].currency}
 							</div>
@@ -1065,25 +1067,25 @@ const WarehouseBlock = ({
 								style={{
 									overflow: 'hidden',
 									paddingRight: '15px',
-									width: widthColum.name - 15 + 'px',
+									// width: widthColum.name - 15 + 'px',
 									maxWidth: '172px',
 								}}
 							>
 								<span
-									className={
-										objProduct[index  + getStart()].podProduct === 0
-											? 'arrow'
-											: objProduct[index  + getStart()].podProduct === 1
-											? 'arrowDeg'
-											: ''
-									}
-									style={objProduct[index  + getStart()].podProduct === 1 ? { opacity: 0.4 } : {}}
+									// className={
+									// 	objProduct[index  + getStart()].podProduct === 0
+									// 		? 'arrow'
+									// 		: objProduct[index  + getStart()].podProduct === 1
+									// 		? 'arrowDeg'
+									// 		: ''
+									// }
+									// style={objProduct[index  + getStart()].podProduct === 1 ? { opacity: 0.4 } : {}}
 								></span>
 								<span
 									// onMouseLeave={tooltipOff}
 									// onMouseEnter={tooltipOn}
 									style={
-										!objProduct[index  + getStart()].status.all
+										!objProduct[index + getStart()].status.all
 											? {
 													opacity: 0.4,
 													whiteSpace: 'nowrap',
@@ -1096,7 +1098,7 @@ const WarehouseBlock = ({
 													overflow: 'hidden',
 													textOverflow: 'ellipsis',
 													display: 'block',
-													opacity: `${objProduct[index].podProduct === 1 ? 0.4 : ''}`,
+													opacity: `${objProduct[index + getStart()].podProduct === 1 ? 0.4 : ''}`,
 											  }
 									}
 								>
@@ -1105,11 +1107,11 @@ const WarehouseBlock = ({
 							</div>
 							<div
 								className="attribute-width"
-								style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+								// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
 							>
 								<img
 									style={{ width: 16, height: 16, position: 'absolute' }}
-									src={objProduct[index  + getStart()].images}
+									src={objProduct[index + getStart()].images}
 									alt=""
 								/>
 								<span
@@ -1121,7 +1123,7 @@ const WarehouseBlock = ({
 										overflow: 'hidden',
 										textOverflow: 'ellipsis',
 										display: 'block',
-										width: widthColum.attribute + 'px',
+										// width: widthColum.attribute + 'px',
 										maxWidth: 85,
 									}}
 								>
@@ -1211,7 +1213,7 @@ const WarehouseBlock = ({
 						<div
 							// ref={btnRef}
 							style={
-								!objProduct[index  + getStart()].status.all
+								!objProduct[index].status.all
 									? {
 											opacity: 0.4,
 											display: 'flex',
@@ -1335,22 +1337,22 @@ const WarehouseBlock = ({
 					</td>
 					<td className="nal-rezerv">
 						<div
-							style={
-								!objProduct[index  + getStart()].status.all
-									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
-									: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
-							}
+							// style={
+							// 	!objProduct[index  + getStart()].status.all
+							// 		? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+							// 		: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+							// }
 						>
 							{formatNumber2(objProduct[index  + getStart()].rezerv)}
 						</div>
 					</td>
 					<td className="nal-otpr">
 						<div
-							style={
-								!objProduct[index  + getStart()].status.all
-									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
-									: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
-							}
+							// style={
+							// 	!objProduct[index  + getStart()].status.all
+							// 		? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+							// 		: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+							// }
 						>
 							{formatNumber2(objProduct[index  + getStart()].otpr)}
 						</div>
@@ -1358,7 +1360,7 @@ const WarehouseBlock = ({
 					<td className="nal-vozvrat">
 						<div
 							style={
-								!objProduct[index  + getStart()].status.all
+								!objProduct[index].status.all
 									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
 									: { color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
 							}
@@ -1368,7 +1370,7 @@ const WarehouseBlock = ({
 					</td>
 					<td
 						style={
-							!objProduct[index  + getStart()].status.all
+							!objProduct[index].status.all
 								? {
 										color: 'rgba(0,0,0,0.4)',
 										textAlign: 'right',
@@ -1382,7 +1384,7 @@ const WarehouseBlock = ({
 					</td>
 					<td
 						style={
-							!objProduct[index  + getStart()].status.all
+							!objProduct[index].status.all
 								? {
 										color: 'rgba(0,0,0,0.4)',
 										textAlign: 'right',
@@ -1396,7 +1398,7 @@ const WarehouseBlock = ({
 					</td>
 					<td
 						style={
-							!objProduct[index + getStart()].status.all
+							!objProduct[index].status.all
 								? {
 										color: 'rgba(0,0,0,0.4)',
 										textAlign: 'right',
@@ -1411,7 +1413,7 @@ const WarehouseBlock = ({
 					<td className="summa-suma1">
 						<div
 							style={
-								!objProduct[index  + getStart()].status.all
+								!objProduct[index].status.all
 									? {
 											opacity: 0.4,
 											textAlign: 'right',
@@ -1434,7 +1436,7 @@ const WarehouseBlock = ({
 					<td className="summa-suma2">
 						<div
 							style={
-								!objProduct[index  + getStart()].status.all
+								!objProduct[index].status.all
 									? { opacity: 0.4, paddingRight: '4px' }
 									: { paddingRight: '4px' }
 							}
@@ -1445,7 +1447,7 @@ const WarehouseBlock = ({
 					<td className="summa-suma3">
 						<div
 							style={
-								!objProduct[index  + getStart()].status.all
+								!objProduct[index].status.all
 									? { opacity: 0.4, paddingRight: '4px' }
 									: { paddingRight: '4px' }
 							}
@@ -1454,7 +1456,7 @@ const WarehouseBlock = ({
 						</div>
 					</td>
 					<td className="summa-suma4">
-						<div style={!objProduct[index + getStart()].status.all ? { opacity: 0.4 } : {}}>
+						<div style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}>
 							{formatNumber(objProduct[index  + getStart()].suma4)}
 						</div>
 					</td>
