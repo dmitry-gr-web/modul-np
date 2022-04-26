@@ -104,12 +104,11 @@ html {
 
 .warehouse-table {
 	// transform: translateZ(0px);
-	transform: scale(1);
-	// transform: translate3d(0, 0, 0);
+	// transform: scale(1);
+	transform: translate3d(0, 0, 0);
 	will-change: transform, scroll-position;
 	transform-origin: 0 0;
-	-webkit-backface-visibility: hidden;
-	-webkit-perspective: 1000;
+	
 }
 // .warehouse-table::-webkit-scrollbar-thumb {
 // 	background-color: grey; /* color of the scroll thumb */
@@ -559,10 +558,9 @@ html {
 		border-collapse: collapse;
 		// transform: translateZ(0);
 		// transform: translate3d(0, 0, 0);
-		transform: translateZ(0px);
+		transform: translate3d(0,0,0);
 		will-change: transform, scroll-position;
-		-webkit-backface-visibility: hidden;
-		-webkit-perspective: 1000;
+		
 		// will-change: transform ,scroll-position;
 		// transform: transnpm late3d(0, 0, 0);
 
@@ -824,11 +822,9 @@ html {
 			// left: 60px;
 			// left:200px;
 			// transition: 0.5s;
-			transform: translateZ(0);
 			transform: translate3d(0, 0, 0);
 			will-change: transform, scroll-position;
-			-webkit-backface-visibility: hidden;
-			-webkit-perspective: 1000;
+			
 		}
 		.sticky-row-0 {
 			position: sticky;
@@ -1222,8 +1218,7 @@ html {
 
 			// }
 			.speed {
-				transform: translateZ(0px);
-				// transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
 			}
 			// td {
@@ -1236,7 +1231,7 @@ html {
 			// 	}
 			// }
 			.sticky-body {
-				transform: translateX(0);
+				transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
 			}
 			// td:not(.hoverr, .sticky-body) {
@@ -1415,10 +1410,9 @@ html {
 				position: sticky !important;
 				left: 13px;
 				width: 0px;
-				transform: translateZ(0);
+				transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
-				-webkit-backface-visibility: hidden;
-				-webkit-perspective: 1000;
+				
 				div {
 					position: absolute;
 					z-index: -1;
@@ -1796,10 +1790,9 @@ html {
 	}
 	.hoverOff {
 		pointer-events: none !important;
-		transform: translateZ(0);
+		transform: translate3d(0, 0, 0);
 		will-change: transform, scroll-position;
-		-webkit-backface-visibility: hidden;
-		-webkit-perspective: 1000;
+		
 	}
 	.switch-btn-warehouse {
 		position: relative;
