@@ -93,6 +93,8 @@ html {
   transform: scale(1);
   will-change: transform, scroll-position;
   transform-origin: 0 0;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 
 .warehouse-products {
@@ -327,7 +329,8 @@ html {
   width: 100%;
   text-align: left;
 }
-.warehouse-products .warehouse-dropmenu.hide-menu, .warehouse-products .warehouse-input.hide-menu {
+.warehouse-products .warehouse-dropmenu.hide-menu,
+.warehouse-products .warehouse-input.hide-menu {
   visibility: hidden !important;
 }
 .warehouse-products .warehouse-products-title {
@@ -446,6 +449,8 @@ html {
   border-collapse: collapse;
   transform: translateZ(0px);
   will-change: transform, scroll-position;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 .warehouse-products table:focus {
   outline: none;
@@ -574,6 +579,11 @@ html {
   position: sticky !important;
   z-index: 2;
   left: 13px;
+  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
+  will-change: transform, scroll-position;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 .warehouse-products table .sticky-row-0 {
   position: sticky;
@@ -823,6 +833,10 @@ html {
   position: sticky !important;
   left: 13px;
   width: 0px;
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 .warehouse-products table .first-tab-body .hoverr div {
   position: absolute;
@@ -1017,6 +1031,8 @@ html {
   pointer-events: none !important;
   transform: translateZ(0);
   will-change: transform, scroll-position;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 .warehouse-products .switch-btn-warehouse {
   position: relative;

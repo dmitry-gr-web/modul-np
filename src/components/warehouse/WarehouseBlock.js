@@ -295,7 +295,6 @@ const WarehouseBlock = ({
 
 	async function updateHover(e) {
 		clearTimeout(hover);
-		requestAnimationFrame(()=> {
 			if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
 				document.querySelector('.first-tab-body').classList.add('hoverOff');
 			}
@@ -304,7 +303,6 @@ const WarehouseBlock = ({
 				document.querySelector('.first-tab-body').classList.remove('hoverOff');
 			}, 400);
 			document.getElementById('tooltipBtn').style.animation = '';
-		})
 
 	}
 	// const scrollableNodeRef = React.createRef();
