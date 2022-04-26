@@ -92,6 +92,7 @@ html {
 .warehouse-table {
   transform: scale(1);
   will-change: transform, scroll-position;
+  transform-origin: 0 0;
 }
 
 .warehouse-products {

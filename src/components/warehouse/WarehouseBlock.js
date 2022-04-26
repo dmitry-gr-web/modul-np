@@ -375,7 +375,7 @@ const WarehouseBlock = ({
 	// }, [start]);
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
-	function width() {
+	async function width() {
 		// let arr = [];
 		// document.querySelectorAll('.id-width').forEach((x) => {
 		// 	arr.push(x.offsetWidth);

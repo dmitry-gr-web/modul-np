@@ -107,7 +107,7 @@ html {
 	transform: scale(1);
 	// transform: translate3d(0, 0, 0);
 	will-change: transform, scroll-position;
-	// transform-origin: 0 0;
+	transform-origin: 0 0;
 }
 // .warehouse-table::-webkit-scrollbar-thumb {
 // 	background-color: grey; /* color of the scroll thumb */
