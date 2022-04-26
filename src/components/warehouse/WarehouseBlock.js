@@ -406,33 +406,33 @@ const WarehouseBlock = ({
 		// console.log(widthColum)
 	}
 
-	useEffect(() => {
-		width();
-	}, []);
-	useEffect(() => {
-		if (switchMenu) {
-			// requestAnimationFrame(() => {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				x.classList.add('show');
-				x.style.overflow = '';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				x.classList.add('show');
-			});
-			// setTimeout(() => {
-			// 	document.querySelector('.shadow-block').style.height = '100vh';
-			// }, 300);
-			// });
-		} else {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				x.classList.remove('show');
-				x.style.overflow = 'hidden';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				x.classList.remove('show');
-			});
-		}
-	}, [switchMenu]);
+	// useEffect(() => {
+	// 	width();
+	// }, []);
+	// useEffect(() => {
+	// 	if (switchMenu) {
+	// 		// requestAnimationFrame(() => {
+	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			x.classList.add('show');
+	// 			x.style.overflow = '';
+	// 		});
+	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			x.classList.add('show');
+	// 		});
+	// 		// setTimeout(() => {
+	// 		// 	document.querySelector('.shadow-block').style.height = '100vh';
+	// 		// }, 300);
+	// 		// });
+	// 	} else {
+	// 		document.querySelectorAll('.animationFrame').forEach((x) => {
+	// 			x.classList.remove('show');
+	// 			x.style.overflow = 'hidden';
+	// 		});
+	// 		document.querySelectorAll('.block-3-btn').forEach((x) => {
+	// 			x.classList.remove('show');
+	// 		});
+	// 	}
+	// }, [switchMenu]);
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
