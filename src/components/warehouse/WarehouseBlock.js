@@ -406,9 +406,9 @@ const WarehouseBlock = ({
 		// console.log(widthColum)
 	}
 
-	// useEffect(() => {
-	// 	width();
-	// }, []);
+	useEffect(() => {
+		width();
+	}, []);
 	// useEffect(() => {
 	// 	if (switchMenu) {
 	// 		// requestAnimationFrame(() => {
@@ -820,37 +820,645 @@ const WarehouseBlock = ({
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
 
-						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
-							<WarehouseProductList
-								index={index + getStart()}
-								// rowHeight={rowHeight}
-								// style={{ height: rowHeight }}
-								indexParent={index}
-								widthColum={widthColum}
-								key={index + getStart()}
-								start={getStart()}
-								setChecked={setChecked}
-								checked={checked}
-								setGetIndex={setGetIndex}
-								objProduct={objProduct}
-								switchMenu={switchMenu}
-								setObjProduct={setObjProduct}
-								setSwitchMenu={setSwitchMenu}
-								podlozhka={podlozhka}
-								setPodlozhka={setPodlozhka}
-								focusInput={focusInput}
-								setFocusInput={setFocusInput}
-								setIndexInput={setIndexInput}
-								setLastIndex={setLastIndex}
-								lastIndex={lastIndex}
-								setBtnMenu={setBtnMenu}
-								btnMenu={btnMenu}
-								setToggleCard={setToggleCard}
-								selectAll={selectAll}
-								translator={translator}
-								setSelectAll={setSelectAll}
-								flagSwitchMenu={flagSwitchMenu}
+						{objProduct?.length !== 0  && objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
+							// <WarehouseProductList
+							// 	index={index + getStart()}
+							// 	// rowHeight={rowHeight}
+							// 	// style={{ height: rowHeight }}
+							// 	indexParent={index}
+							// 	widthColum={widthColum}
+							// 	key={index + getStart()}
+							// 	start={getStart()}
+							// 	setChecked={setChecked}
+							// 	checked={checked}
+							// 	setGetIndex={setGetIndex}
+							// 	objProduct={objProduct}
+							// 	switchMenu={switchMenu}
+							// 	setObjProduct={setObjProduct}
+							// 	setSwitchMenu={setSwitchMenu}
+							// 	podlozhka={podlozhka}
+							// 	setPodlozhka={setPodlozhka}
+							// 	focusInput={focusInput}
+							// 	setFocusInput={setFocusInput}
+							// 	setIndexInput={setIndexInput}
+							// 	setLastIndex={setLastIndex}
+							// 	lastIndex={lastIndex}
+							// 	setBtnMenu={setBtnMenu}
+							// 	btnMenu={btnMenu}
+							// 	setToggleCard={setToggleCard}
+							// 	selectAll={selectAll}
+							// 	translator={translator}
+							// 	setSelectAll={setSelectAll}
+							// 	flagSwitchMenu={flagSwitchMenu}
+							// />
+							<tr
+					// style={height}
+					className={
+						objProduct[index + getStart()].select && !objProduct[index  + getStart()].lock
+							? 'select speed'
+							: objProduct[index  + getStart()].lock
+							? 'lockOrder speed'
+							: 'speed'
+					}
+					// onClick={clickTr}
+					ref={linkTR}
+					// key={index}
+					// style={{transition: '0.2s',opacity: 0}}
+					// onDoubleClick={dblClick}
+					key={index  + getStart()}
+				>
+					<td className="hoverr">
+						<div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div>
+						<div className='div'></div>
+					</td>
+					{/* <td
+						className="sticky-body-row1"
+						onMouseEnter={() => setSwitchMenu(true)}
+						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+					>
+						<label className="switch-btn-warehouse">
+							<input
+								type="checkbox"
+								className="status-all"
+								onChange={switchBtn}
+								// defaultChecked={objProduct[index].status.all}
+								checked={objProduct[index].status.all}
 							/>
+							<span className="slider round"></span>
+						</label>
+					</td> */}
+					{/* <td
+						className="sticky-body-row2"
+						onMouseEnter={() => setSwitchMenu(true)}
+						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+					>
+						<div style={{ whiteSpace: 'nowrap' }}>
+							<label
+								style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
+								className="switch-btn-small"
+							>
+								<input
+									type="checkbox"
+									className="status-crm"
+									onChange={switchBtn}
+									// defaultChecked={objProduct[index].status.crm}
+									checked={objProduct[index].status.crm}
+								/>
+								<span className="slider round"></span>
+							</label>
+
+							<label
+								style={
+									!objProduct[index].status.all
+										? { opacity: 0.4, margin: '0 15px' }
+										: { margin: '0 15px' }
+								}
+								className="switch-btn-small"
+							>
+								<input
+									type="checkbox"
+									className="status-rozetka"
+									onChange={switchBtn}
+									// defaultChecked={objProduct[index].status.rozetka}
+									checked={objProduct[index].status.rozetka}
+								/>
+								<span className="slider round"></span>
+							</label>
+
+							<label
+								style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
+								className="switch-btn-small"
+							>
+								<input
+									type="checkbox"
+									className="status-prom"
+									onChange={switchBtn}
+									// defaultChecked={objProduct[index].status.prom}
+									checked={objProduct[index].status.prom}
+								/>
+								<span className="slider round"></span>
+							</label>
+						</div>
+					</td> */}
+					<td className="sticky-body">
+						<div className="sticky-block">
+							<div
+								onMouseEnter={() => setSwitchMenu(true)}
+								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+								style={{ display: 'flex', height: '20px', alignItems: 'center' }}
+							>
+								<div style={{ minWidth: '51px', paddingRight: '10px' }}>
+									<label className="switch-btn-warehouse">
+										<input
+											type="checkbox"
+											className="status-all"
+											// onChange={switchBtn}
+											// defaultChecked={objProduct[index].status.all}
+											checked={objProduct[index  + getStart()].status.all}
+										/>
+										<span className="slider round"></span>
+									</label>
+								</div>
+
+								<div
+									className="animationFrame"
+									style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
+								>
+									<label
+										style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+										className="switch-btn-small"
+									>
+										<input
+											type="checkbox"
+											className="status-crm"
+											// onChange={switchBtn}
+											// defaultChecked={objProduct[index].status.crm}
+											checked={objProduct[index  + getStart()].status.crm}
+										/>
+										<span className="slider round"></span>
+									</label>
+
+									<label
+										style={
+											!objProduct[index  + getStart()].status.all
+												? { opacity: 0.4, margin: '0 15px' }
+												: { margin: '0 15px' }
+										}
+										className="switch-btn-small"
+									>
+										<input
+											type="checkbox"
+											className="status-rozetka"
+											// onChange={switchBtn}
+											// defaultChecked={objProduct[index].status.rozetka}
+											checked={objProduct[index  + getStart()].status.rozetka}
+										/>
+										<span className="slider round"></span>
+									</label>
+
+									<label
+										style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+										className="switch-btn-small"
+									>
+										<input
+											type="checkbox"
+											className="status-prom"
+											// onChange={switchBtn}
+											// defaultChecked={objProduct[index].status.prom}
+											checked={objProduct[index  + getStart()].status.prom}
+										/>
+										<span className="slider round"></span>
+									</label>
+									<div className="gradi"></div>
+								</div>
+							</div>
+
+							<div
+								className="id-width"
+								// onMouseLeave={tooltipOff}
+								// onMouseEnter={tooltipOn}
+								style={
+									!objProduct[index  + getStart()].status.all
+										? {
+												color: 'rgba(0,0,0,0.4)',
+												textAlign: 'left',
+												paddingRight: '10px',
+												width: widthColum.id + 'px',
+										  }
+										: { textAlign: 'left', paddingRight: '10px', width: widthColum.id + 'px' }
+								}
+							>
+								{objProduct[index  + getStart()].id}
+							</div>
+							<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
+								<span
+									style={
+										!objProduct[index  + getStart()].status.all
+											? { opacity: 0.4, color: 'rgba(0,0,0,1)' }
+											: { color: 'rgba(0,0,0,1)' }
+									}
+									className="flags"
+									// onMouseLeave={tooltipOff}
+									// onMouseEnter={tooltipOn}
+								>
+									{objProduct[index  + getStart()].country}
+								</span>
+							</div>
+							<div
+								// onMouseLeave={tooltipOff}
+								// onMouseEnter={tooltipOn}
+								style={
+									!objProduct[index  + getStart()].status.all
+										? {
+												color: 'rgba(0,0,0,0.4)',
+												textAlign: 'center',
+												minWidth: 51,
+												paddingRight: '10px',
+										  }
+										: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
+								}
+							>
+								{objProduct[index  + getStart()].currency}
+							</div>
+							<div
+								className="name-width"
+								style={{
+									overflow: 'hidden',
+									paddingRight: '15px',
+									width: widthColum.name - 15 + 'px',
+									maxWidth: '172px',
+								}}
+							>
+								<span
+									className={
+										objProduct[index  + getStart()].podProduct === 0
+											? 'arrow'
+											: objProduct[index  + getStart()].podProduct === 1
+											? 'arrowDeg'
+											: ''
+									}
+									style={objProduct[index  + getStart()].podProduct === 1 ? { opacity: 0.4 } : {}}
+								></span>
+								<span
+									// onMouseLeave={tooltipOff}
+									// onMouseEnter={tooltipOn}
+									style={
+										!objProduct[index  + getStart()].status.all
+											? {
+													opacity: 0.4,
+													whiteSpace: 'nowrap',
+													overflow: 'hidden',
+													textOverflow: 'ellipsis',
+													display: 'block',
+											  }
+											: {
+													whiteSpace: 'nowrap',
+													overflow: 'hidden',
+													textOverflow: 'ellipsis',
+													display: 'block',
+													opacity: `${objProduct[index].podProduct === 1 ? 0.4 : ''}`,
+											  }
+									}
+								>
+									{objProduct[index  + getStart()].name}
+								</span>
+							</div>
+							<div
+								className="attribute-width"
+								style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+							>
+								<img
+									style={{ width: 16, height: 16, position: 'absolute' }}
+									src={objProduct[index  + getStart()].images}
+									alt=""
+								/>
+								<span
+									// onMouseLeave={tooltipOff}
+									// onMouseEnter={tooltipOn}
+									style={{
+										marginLeft: 20,
+										whiteSpace: 'nowrap',
+										overflow: 'hidden',
+										textOverflow: 'ellipsis',
+										display: 'block',
+										width: widthColum.attribute + 'px',
+										maxWidth: 85,
+									}}
+								>
+									{objProduct[index  + getStart()].attribute}
+								</span>
+							</div>
+							<div className="shadow-left"></div>
+						</div>
+						{/* <div className='hover'></div> */}
+					</td>
+
+					{/* <td
+						onMouseLeave={tooltipOff}
+						onMouseEnter={tooltipOn}
+						className="id-tovara while2"
+						style={
+							!swtichChecked
+								? { color: 'rgba(0,0,0,0.4)', textAlign: 'left' }
+								: { textAlign: 'left' }
+						}
+					>
+						{objProduct[index].id}
+					</td> */}
+					{/* <td className="while2" style={{ textAlign: 'center' }}>
+						<span style={!swtichChecked ? { opacity: 0.4 } : {}} className="flags">
+							{objProduct[index].country}
+						</span>
+					</td> */}
+					{/* <td
+						className="while2"
+						style={
+							!swtichChecked
+								? { color: 'rgba(0,0,0,0.4)', textAlign: 'center' }
+								: { textAlign: 'center' }
+						}
+					>
+						{objProduct[index].currency}
+					</td> */}
+					{/* <td className="name-tovara while2" onMouseLeave={tooltipOff} onMouseEnter={tooltipOn}>
+						<span
+							style={!swtichChecked ? { opacity: 0.4 } : {}}
+							className={
+								objProduct[index].podProduct === 0
+									? 'arrow'
+									: objProduct[index].podProduct === 1
+									? 'arrowDeg'
+									: ''
+							}
+						>
+							{objProduct[index].name}
+						</span>
+					</td> */}
+					{/* <td className="while2">
+						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
+							<img
+								style={{ width: 16, height: 16, position: 'absolute' }}
+								src={objProduct[index].images}
+								alt=""
+							/>
+							<span
+								onMouseLeave={tooltipOff}
+								onMouseEnter={tooltipOn}
+								style={{
+									marginLeft: 20,
+									whiteSpace: 'nowrap',
+									overflow: 'hidden',
+									textOverflow: 'ellipsis',
+									display: 'block',
+									maxWidth: 85,
+								}}
+							>
+								{objProduct[index].attribute}
+							</span>
+						</div>
+					</td> */}
+
+					{/* <td className="shadow">
+						<div className="shadow-left"></div>
+					
+					</td> */}
+					<td
+						style={{ paddingLeft: '12px' }}
+						// onMouseLeave={PlusMinusClose}
+						// onMouseEnter={PlusMinusOpen}
+						className="nal-ostatok"
+					>
+						<div
+							// ref={btnRef}
+							style={
+								!objProduct[index  + getStart()].status.all
+									? {
+											opacity: 0.4,
+											display: 'flex',
+											justifyContent: 'flex-end',
+											paddingRight: '3px',
+									  }
+									: { display: 'flex', justifyContent: 'flex-end', paddingRight: '3px' }
+							}
+						>
+							<div className="wrap-nal-ostatok" style={{ display: 'flex', position: 'absolute' }}>
+								<button
+									style={btnMenu ? { width: '16px' } : {}}
+									onDoubleClick={(e) => e.stopPropagation()}
+									// onClick={BtnMinus}
+								>
+									<svg
+										width="9"
+										height="7"
+										viewBox="0 0 9 7"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M1.26782 3.44748L8.08752 3.44747"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+									</svg>
+								</button>
+
+								<input
+									// ref={inputRef}
+									type="text"
+									// onChange={inputChange}
+									// onKeyUp={enterInput}
+									maxLength={5}
+									onClick={(e) => {
+										setFocusInput(true);
+										setPodlozhka(true);
+										// setInputFormat(true);
+										e.stopPropagation();
+									}}
+									// value={focusInput && inputFormat ? memoryInput : formatNumber2(+memoryInput)}
+									onDoubleClick={(e) => e.stopPropagation()}
+									style={{
+										color: 'rgba(0,0,0,0.7)',
+										// width: inputLength(memoryInput.toString()),
+									}}
+								/>
+
+								<button
+									style={btnMenu ? { width: '16px' } : {}}
+									onDoubleClick={(e) => e.stopPropagation()}
+									// onClick={BtnPlus}
+								>
+									<svg
+										width="15"
+										height="15"
+										viewBox="3 2 15 15"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+										style={{ transform: 'rotate(45deg)', marginTop: '1px' }}
+									>
+										<path
+											d="M7.26655 8.03662L12.0888 12.8589"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 12.8589L12.0888 8.03659"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 8.03662L12.0888 12.8589"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 12.8589L12.0888 8.03659"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 8.03662L12.0888 12.8589"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+										<path
+											d="M7.26655 12.8589L12.0888 8.03659"
+											stroke="black"
+											strokeOpacity="0.7"
+											strokeWidth="1.09116"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+									</svg>
+								</button>
+							</div>
+
+							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
+						</div>
+					</td>
+					<td className="nal-rezerv">
+						<div
+							style={
+								!objProduct[index  + getStart()].status.all
+									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+									: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+							}
+						>
+							{formatNumber2(objProduct[index  + getStart()].rezerv)}
+						</div>
+					</td>
+					<td className="nal-otpr">
+						<div
+							style={
+								!objProduct[index  + getStart()].status.all
+									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+									: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+							}
+						>
+							{formatNumber2(objProduct[index  + getStart()].otpr)}
+						</div>
+					</td>
+					<td className="nal-vozvrat">
+						<div
+							style={
+								!objProduct[index  + getStart()].status.all
+									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
+									: { color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
+							}
+						>
+							{formatNumber2(objProduct[index  + getStart()].vozvrat)}
+						</div>
+					</td>
+					<td
+						style={
+							!objProduct[index  + getStart()].status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{formatNumber(objProduct[index + getStart()].zakupka)}
+					</td>
+					<td
+						style={
+							!objProduct[index  + getStart()].status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{formatNumber(objProduct[index  + getStart()].prodazha)}
+					</td>
+					<td
+						style={
+							!objProduct[index + getStart()].status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{formatNumber(objProduct[index  + getStart()].marzha)}
+					</td>
+					<td className="summa-suma1">
+						<div
+							style={
+								!objProduct[index  + getStart()].status.all
+									? {
+											opacity: 0.4,
+											textAlign: 'right',
+											display: 'flex',
+											justifyContent: 'end',
+											paddingRight: '3px',
+									  }
+									: {
+											textAlign: 'right',
+											display: 'flex',
+											justifyContent: 'end',
+											paddingRight: '3px',
+									  }
+							}
+						>
+							{formatNumber(objProduct[index  + getStart()].ostatok * objProduct[index  + getStart()].zakupka)}
+							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
+						</div>
+					</td>
+					<td className="summa-suma2">
+						<div
+							style={
+								!objProduct[index  + getStart()].status.all
+									? { opacity: 0.4, paddingRight: '4px' }
+									: { paddingRight: '4px' }
+							}
+						>
+							{formatNumber(objProduct[index  + getStart()].suma2)}
+						</div>
+					</td>
+					<td className="summa-suma3">
+						<div
+							style={
+								!objProduct[index  + getStart()].status.all
+									? { opacity: 0.4, paddingRight: '4px' }
+									: { paddingRight: '4px' }
+							}
+						>
+							{formatNumber(objProduct[index  + getStart()].suma3)}
+						</div>
+					</td>
+					<td className="summa-suma4">
+						<div style={!objProduct[index + getStart()].status.all ? { opacity: 0.4 } : {}}>
+							{formatNumber(objProduct[index  + getStart()].suma4)}
+						</div>
+					</td>
+				</tr>
 						))}
 
 						<tr style={{ height: getBottomHeight() }}></tr>
