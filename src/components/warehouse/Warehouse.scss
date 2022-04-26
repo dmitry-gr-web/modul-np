@@ -1214,12 +1214,12 @@ html {
 			// 	will-change: transform, scroll-position;
 		
 			// }
-			// .speed {
-			// 	transform: translateZ(0px);
-			// 	// transform: translate3d(0, 0, 0);
-			// 	will-change: transform, scroll-position;
+			.speed {
+				transform: translateZ(0px);
+				// transform: translate3d(0, 0, 0);
+				will-change: transform, scroll-position;
 		
-			// }
+			}
 			// td {
 			// 	.id-width,
 			// 	.name-width,
@@ -1418,7 +1418,7 @@ html {
 					height: 20px;
 					top: 0;
 					left: 0;
-					width: calc(100vw - 386px);
+					width: 100%;
 					// width: calc(100vw - 394px);
 					// display: none;
 					// transform: translateZ(0);
@@ -1789,6 +1789,8 @@ html {
 	}
 	.hoverOff {
 		pointer-events: none !important;
+		transform: translateZ(0);
+		will-change: transform,scroll-position;
 	}
 	.switch-btn-warehouse {
 		position: relative;

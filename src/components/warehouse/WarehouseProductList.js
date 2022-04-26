@@ -430,7 +430,7 @@ const WarehouseProductList = ({
 					key={index}
 				>
 					<td className="hoverr">
-						<div></div>
+						<div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div>
 						<div className='div'></div>
 					</td>
 					{/* <td

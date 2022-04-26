@@ -460,7 +460,7 @@ const WarehouseBlock = ({
 					// willChange:'transform, scroll-position',
 					height: document.body.clientHeight - 180 + 'px',
 				}}
-				autoHide={false}
+				// autoHide={false}
 				// direction={'rtl'}
 				ref={rootRef}
 				// direction='rtl'
@@ -584,7 +584,7 @@ const WarehouseBlock = ({
 									>
 										{translator.getTranslation('warehouse', 'attribute')}
 									</div>
-									<div className="shadow-left"></div>
+									<div className="shadow-left" style={{right: '-30px'}}></div>
 								</div>
 							</th>
 

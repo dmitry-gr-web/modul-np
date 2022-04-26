@@ -775,6 +775,10 @@ html {
   position: relative;
   background: linear-gradient(360deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }
+.warehouse-products table .first-tab-body .speed {
+  transform: translateZ(0px);
+  will-change: transform, scroll-position;
+}
 .warehouse-products table .first-tab-body .sticky-body {
   transform: translateX(0);
   will-change: transform, scroll-position;
@@ -825,7 +829,7 @@ html {
   height: 20px;
   top: 0;
   left: 0;
-  width: calc(100vw - 386px);
+  width: 100%;
   visibility: hidden;
   background: #cacaca;
 }
@@ -1010,6 +1014,8 @@ html {
 }
 .warehouse-products .hoverOff {
   pointer-events: none !important;
+  transform: translateZ(0);
+  will-change: transform, scroll-position;
 }
 .warehouse-products .switch-btn-warehouse {
   position: relative;
