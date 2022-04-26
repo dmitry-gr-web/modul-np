@@ -1237,10 +1237,10 @@ html {
 			// 	}
 			// }
 			td {
-				// transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
 				// -webkit-backface-visibility: hidden;
 				// -webkit-perspective: 1000;
-				// will-change: transform, scroll-position;
+				will-change: transform, scroll-position;
 			}
 			.sticky-body {
 				// -webkit-backface-visibility: hidden;

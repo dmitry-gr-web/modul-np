@@ -406,9 +406,9 @@ const WarehouseBlock = ({
 		// console.log(widthColum)
 	}
 
-	useEffect(() => {
-		width();
-	}, []);
+	// useEffect(() => {
+	// 	width();
+	// }, []);
 	// useEffect(() => {
 	// 	if (switchMenu) {
 	// 		// requestAnimationFrame(() => {
@@ -820,7 +820,7 @@ const WarehouseBlock = ({
 					<tbody className="first-tab-body">
 						<tr style={{ height: getTopHeight() }}></tr>
 
-						{objProduct?.length !== 0  && objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
+						{objProduct?.length !== 0  && objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
 							// <WarehouseProductList
 							// 	index={index + getStart()}
 							// 	// rowHeight={rowHeight}
@@ -1030,7 +1030,7 @@ const WarehouseBlock = ({
 								// 		: { textAlign: 'left', paddingRight: '10px', width: widthColum.id + 'px' }
 								// }
 							>
-								{objProduct[index  + getStart()].id}
+								{objProduct[index + getStart()]?.id}
 							</div>
 							<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
 								<span
@@ -1043,7 +1043,7 @@ const WarehouseBlock = ({
 									// onMouseLeave={tooltipOff}
 									// onMouseEnter={tooltipOn}
 								>
-									{objProduct[index  + getStart()].country}
+									{objProduct[index  + getStart()]?.country}
 								</span>
 							</div>
 							<div
@@ -1060,7 +1060,7 @@ const WarehouseBlock = ({
 								// 		: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
 								// }
 							>
-								{objProduct[index  + getStart()].currency}
+								{objProduct[index  + getStart()]?.currency}
 							</div>
 							<div
 								className="name-width"
@@ -1085,7 +1085,7 @@ const WarehouseBlock = ({
 									// onMouseLeave={tooltipOff}
 									// onMouseEnter={tooltipOn}
 									style={
-										!objProduct[index + getStart()].status.all
+										!objProduct[index + getStart()]?.status.all
 											? {
 													opacity: 0.4,
 													whiteSpace: 'nowrap',
@@ -1098,11 +1098,11 @@ const WarehouseBlock = ({
 													overflow: 'hidden',
 													textOverflow: 'ellipsis',
 													display: 'block',
-													opacity: `${objProduct[index + getStart()].podProduct === 1 ? 0.4 : ''}`,
+													opacity: `${objProduct[index + getStart()]?.podProduct === 1 ? 0.4 : ''}`,
 											  }
 									}
 								>
-									{objProduct[index  + getStart()].name}
+									{objProduct[index  + getStart()]?.name}
 								</span>
 							</div>
 							<div
@@ -1111,7 +1111,7 @@ const WarehouseBlock = ({
 							>
 								<img
 									style={{ width: 16, height: 16, position: 'absolute' }}
-									src={objProduct[index + getStart()].images}
+									src={objProduct[index + getStart()]?.images}
 									alt=""
 								/>
 								<span
@@ -1127,7 +1127,7 @@ const WarehouseBlock = ({
 										maxWidth: 85,
 									}}
 								>
-									{objProduct[index  + getStart()].attribute}
+									{objProduct[index  + getStart()]?.attribute}
 								</span>
 							</div>
 							<div className="shadow-left"></div>
@@ -1213,7 +1213,7 @@ const WarehouseBlock = ({
 						<div
 							// ref={btnRef}
 							style={
-								!objProduct[index].status.all
+								!objProduct[index]?.status.all
 									? {
 											opacity: 0.4,
 											display: 'flex',
@@ -1343,7 +1343,7 @@ const WarehouseBlock = ({
 							// 		: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
 							// }
 						>
-							{formatNumber2(objProduct[index  + getStart()].rezerv)}
+							{objProduct[index  + getStart()]?.rezerv}
 						</div>
 					</td>
 					<td className="nal-otpr">
@@ -1354,23 +1354,23 @@ const WarehouseBlock = ({
 							// 		: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
 							// }
 						>
-							{formatNumber2(objProduct[index  + getStart()].otpr)}
+							{objProduct[index  + getStart()]?.otpr}
 						</div>
 					</td>
 					<td className="nal-vozvrat">
 						<div
 							style={
-								!objProduct[index].status.all
+								!objProduct[index]?.status.all
 									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
 									: { color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
 							}
 						>
-							{formatNumber2(objProduct[index  + getStart()].vozvrat)}
+							{objProduct[index  + getStart()]?.vozvrat}
 						</div>
 					</td>
 					<td
 						style={
-							!objProduct[index].status.all
+							!objProduct[index]?.status.all
 								? {
 										color: 'rgba(0,0,0,0.4)',
 										textAlign: 'right',
@@ -1380,11 +1380,11 @@ const WarehouseBlock = ({
 								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
 						}
 					>
-						{formatNumber(objProduct[index + getStart()].zakupka)}
+						{objProduct[index + getStart()]?.zakupka}
 					</td>
 					<td
 						style={
-							!objProduct[index].status.all
+							!objProduct[index]?.status.all
 								? {
 										color: 'rgba(0,0,0,0.4)',
 										textAlign: 'right',
@@ -1394,11 +1394,11 @@ const WarehouseBlock = ({
 								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
 						}
 					>
-						{formatNumber(objProduct[index  + getStart()].prodazha)}
+						{objProduct[index  + getStart()]?.prodazha}
 					</td>
 					<td
 						style={
-							!objProduct[index].status.all
+							!objProduct[index]?.status.all
 								? {
 										color: 'rgba(0,0,0,0.4)',
 										textAlign: 'right',
@@ -1408,7 +1408,7 @@ const WarehouseBlock = ({
 								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
 						}
 					>
-						{formatNumber(objProduct[index  + getStart()].marzha)}
+						{objProduct[index  + getStart()]?.marzha}
 					</td>
 					<td className="summa-suma1">
 						<div
@@ -1429,19 +1429,19 @@ const WarehouseBlock = ({
 									  }
 							}
 						>
-							{formatNumber(objProduct[index  + getStart()].ostatok * objProduct[index  + getStart()].zakupka)}
+							{objProduct[index  + getStart()]?.ostatok * objProduct[index  + getStart()]?.zakupka}
 							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
 						</div>
 					</td>
 					<td className="summa-suma2">
 						<div
 							style={
-								!objProduct[index].status.all
+								!objProduct[index]?.status.all
 									? { opacity: 0.4, paddingRight: '4px' }
 									: { paddingRight: '4px' }
 							}
 						>
-							{formatNumber(objProduct[index  + getStart()].suma2)}
+							{objProduct[index  + getStart()]?.suma2}
 						</div>
 					</td>
 					<td className="summa-suma3">
@@ -1452,12 +1452,12 @@ const WarehouseBlock = ({
 									: { paddingRight: '4px' }
 							}
 						>
-							{formatNumber(objProduct[index  + getStart()].suma3)}
+							{objProduct[index  + getStart()]?.suma3}
 						</div>
 					</td>
 					<td className="summa-suma4">
 						<div style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}>
-							{formatNumber(objProduct[index  + getStart()].suma4)}
+							{objProduct[index  + getStart()]?.suma4}
 						</div>
 					</td>
 				</tr>
