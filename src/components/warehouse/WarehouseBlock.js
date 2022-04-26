@@ -410,7 +410,7 @@ const WarehouseBlock = ({
 		// console.log(widthColum)
 	}
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		width();
 	}, []);
 	useEffect(() => {

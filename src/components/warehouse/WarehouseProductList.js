@@ -417,10 +417,10 @@ const WarehouseProductList = ({
 					// style={height}
 					className={
 						objProduct[index].select && !objProduct[index].lock
-							? 'select'
+							? 'select speed'
 							: objProduct[index].lock
-							? 'lockOrder'
-							: ''
+							? 'lockOrder speed'
+							: 'speed'
 					}
 					onClick={clickTr}
 					ref={linkTR}
