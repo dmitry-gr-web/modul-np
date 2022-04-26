@@ -1212,9 +1212,12 @@ html {
 				transform: translateZ(0px);
 				// transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
+		
+			}
+			td {
 				.id-width,
 				.name-width,
-			.attribute-width {
+				.attribute-width {
 					transform: translateZ(0px);
 					// transform: translate3d(0, 0, 0);
 					will-change: transform, scroll-position;

@@ -779,9 +779,9 @@ html {
   transform: translateZ(0px);
   will-change: transform, scroll-position;
 }
-.warehouse-products table .first-tab-body tr .id-width,
-.warehouse-products table .first-tab-body tr .name-width,
-.warehouse-products table .first-tab-body tr .attribute-width {
+.warehouse-products table .first-tab-body td .id-width,
+.warehouse-products table .first-tab-body td .name-width,
+.warehouse-products table .first-tab-body td .attribute-width {
   transform: translateZ(0px);
   will-change: transform, scroll-position;
 }
