@@ -295,19 +295,17 @@ const WarehouseBlock = ({
 
 	async function updateHover(e) {
 		clearTimeout(hover);
-		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
-			document.querySelector('.first-tab-body').classList.add('hoverOff');
-		}
-		// document.getElementById("tooltipBtn").style.animation = '';
-		// document.getElementById("tooltipBtn").style.fontSize = '12px';
-		// timers = setTimeout(function () {
+		requestAnimationFrame(()=> {
+			if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
+				document.querySelector('.first-tab-body').classList.add('hoverOff');
+			}
+	
+			hover = setTimeout(() => {
+				document.querySelector('.first-tab-body').classList.remove('hoverOff');
+			}, 400);
+			document.getElementById('tooltipBtn').style.animation = '';
+		})
 
-		//   document.querySelector('.disableHover').classList.remove('disable-hover')
-		// }, 400);
-		hover = setTimeout(() => {
-			document.querySelector('.first-tab-body').classList.remove('hoverOff');
-		}, 400);
-		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	// const scrollableNodeRef = React.createRef();
 	async function onScroll(e) {
