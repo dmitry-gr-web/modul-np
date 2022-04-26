@@ -90,6 +90,8 @@ html {
 }
 
 .warehouse-table {
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
   transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
   transform-origin: 0 0;
@@ -445,6 +447,8 @@ html {
   user-select: none;
   width: 0px;
   border-collapse: collapse;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
   transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
 }
@@ -784,6 +788,8 @@ html {
   will-change: transform, scroll-position;
 }
 .warehouse-products table .first-tab-body .sticky-body {
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
   transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
 }
@@ -1020,8 +1026,6 @@ html {
 }
 .warehouse-products .hoverOff {
   pointer-events: none !important;
-  transform: translate3d(0, 0, 0);
-  will-change: transform, scroll-position;
 }
 .warehouse-products .switch-btn-warehouse {
   position: relative;
