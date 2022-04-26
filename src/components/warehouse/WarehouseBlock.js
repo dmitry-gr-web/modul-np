@@ -154,25 +154,25 @@ const WarehouseBlock = ({
 
 	//rascheti
 	
-	// let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
-	// let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
-	// let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
-	// let vozvrat = parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0));
-	// let zakupka = parseInt(
-	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka / array.length, 0)
-	// );
-	// let prodazha = parseInt(
-	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0)
-	// );
-	// let marzha = parseInt(
-	// 	objProduct.reduce((prev, curr, _, array) => prev + curr.marzha / array.length, 0)
-	// );
-	// let suma1 = parseInt(
-	// 	objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
-	// );
-	// let suma2 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
-	// let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
-	// let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
+	let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
+	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
+	let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
+	let vozvrat = parseInt(objProduct.reduce((prev, curr) => prev + curr.vozvrat, 0));
+	let zakupka = parseInt(
+		objProduct.reduce((prev, curr, _, array) => prev + curr.zakupka / array.length, 0)
+	);
+	let prodazha = parseInt(
+		objProduct.reduce((prev, curr, _, array) => prev + curr.prodazha / array.length, 0)
+	);
+	let marzha = parseInt(
+		objProduct.reduce((prev, curr, _, array) => prev + curr.marzha / array.length, 0)
+	);
+	let suma1 = parseInt(
+		objProduct.map((x) => x.ostatok * x.zakupka).reduce((prev, curr) => prev + curr, 0)
+	);
+	let suma2 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
+	let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
+	let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
 
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
@@ -746,28 +746,22 @@ const WarehouseBlock = ({
 
 							<th style={{ paddingLeft: '12px', paddingRight: '3px' }} className="nal-ostatok">
 								<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
-									{/* {formatNumber2(ostatok)} */}
+									{formatNumber2(ostatok)}
 									<span style={{ paddingLeft: 3 }}>/</span>
 								</div>
 							</th>
 							<th className="nal-rezerv" style={{ paddingRight: '4px' }}>
-								{/* <div>{formatNumber2(rezerv)}</div> */}
+								<div>{formatNumber2(rezerv)}</div>
 							</th>
 							<th className="nal-otpr" style={{ paddingRight: '4px' }}>
-								{/* <div>{formatNumber2(otpr)}</div> */}
+								<div>{formatNumber2(otpr)}</div>
 							</th>
 							<th className="nal-vozvrat" style={{ paddingRight: '15px' }}>
-								{/* <div>{formatNumber2(vozvrat)}</div> */}
+								<div>{formatNumber2(vozvrat)}</div>
 							</th>
-							<th style={{ textAlign: 'right', paddingRight: '15px' }}>
-								{/* {formatNumber(zakupka)} */}
-								</th>
-							<th style={{ textAlign: 'right', paddingRight: '15px' }}>
-								{/* {formatNumber(prodazha)} */}
-								</th>
-							<th style={{ textAlign: 'right', paddingRight: '15px' }}>
-								{/* {formatNumber(marzha)} */}
-								</th>
+							<th style={{ textAlign: 'right', paddingRight: '15px' }}>{formatNumber(zakupka)}</th>
+							<th style={{ textAlign: 'right', paddingRight: '15px' }}>{formatNumber(prodazha)}</th>
+							<th style={{ textAlign: 'right', paddingRight: '15px' }}>{formatNumber(marzha)}</th>
 							<th className="summa-suma1">
 								<div
 									style={{
@@ -777,24 +771,18 @@ const WarehouseBlock = ({
 										paddingRight: '3px',
 									}}
 								>
-									{/* {formatNumber(suma1)} */}
+									{formatNumber(suma1)}
 									<span style={{ paddingLeft: 3 }}>/</span>
 								</div>
 							</th>
 							<th className="summa-suma2">
-								<div style={{ paddingRight: '4px' }}>
-									{/* {formatNumber(suma2)} */}
-									</div>
+								<div style={{ paddingRight: '4px' }}>{formatNumber(suma2)}</div>
 							</th>
 							<th className="summa-suma3">
-								<div style={{ paddingRight: '4px' }}>
-									{/* {formatNumber(suma3)} */}
-									</div>
+								<div style={{ paddingRight: '4px' }}>{formatNumber(suma3)}</div>
 							</th>
 							<th className="summa-suma4">
-								<div>
-									{/* {formatNumber(suma4)} */}
-									</div>
+								<div>{formatNumber(suma4)}</div>
 							</th>
 						</tr>
 

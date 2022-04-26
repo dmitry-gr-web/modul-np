@@ -1804,8 +1804,8 @@ html {
 	}
 	.hoverOff {
 		pointer-events: none !important;
-		// transform: translate3d(0, 0, 0);
-		// will-change: transform, scroll-position;
+		transform: translate3d(0, 0, 0);
+		will-change: transform, scroll-position;
 		
 	}
 	.switch-btn-warehouse {
