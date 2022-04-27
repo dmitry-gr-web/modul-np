@@ -292,7 +292,6 @@ const WarehouseBlock = ({
 			rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollLeft = scrollLeft - walk;
 		}, 100)();
 	}
-
 	async function updateHover(e) {
 		clearTimeout(hover);
 			if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
@@ -301,6 +300,7 @@ const WarehouseBlock = ({
 	
 			hover = setTimeout(() => {
 				document.querySelector('.first-tab-body').classList.remove('hoverOff');
+			
 			}, 400);
 			document.getElementById('tooltipBtn').style.animation = '';
 
@@ -866,7 +866,7 @@ const WarehouseBlock = ({
 							// : 
 							'speed'
 					}
-					style={{height: rowHeight}}
+					style={{height: rowHeight, position: 'relative'}}
 					// onClick={clickTr}
 					// ref={linkTR}
 					// key={index}
@@ -874,7 +874,7 @@ const WarehouseBlock = ({
 					// onDoubleClick={dblClick}
 					key={index  + getStart()}
 				>	
-					{objProduct.length > 0  && 		<td className="hoverr">
+					{objProduct.length > 0 && <td className="hoverr">
 						<div></div>
 						{/* <div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div> */}
 						<div className='div'></div>
