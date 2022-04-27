@@ -1401,6 +1401,356 @@ const WarehouseBlock = ({
 								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
 						}
 					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td>
+					<td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
 						{objProduct[index  + getStart()]?.prodazha}
 					</td>
 					<td
@@ -1463,7 +1813,9 @@ const WarehouseBlock = ({
 						</div>
 					</td>
 					<td className="summa-suma4">
-						<div style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}>
+						<div 
+						// style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
+						>
 							{objProduct[index  + getStart()]?.suma4}
 						</div>
 					</td>
