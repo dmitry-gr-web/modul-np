@@ -300,57 +300,49 @@ const WarehouseBlock = ({
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	// const scrollableNodeRef = React.createRef();
-	async function onScroll(e) {
-		// clearTimeout(timer);
+
+	useEffect(async () => {
+		async function onScroll(e) {
+			setStart(e.target.scrollTop);
+			updateHover();
+		}
+		// rootRef.current.addEventListener('scroll', onScroll);
+		// rootRef.current.addEventListener('mousedown', onMouseDown);
+		// rootRef.current.addEventListener('mouseleave', onMouseLeave);
+		// rootRef.current.addEventListener('mouseup', onMouseLeave);
+		// rootRef.current.addEventListener('mousemove', onMouseMove);
 		// rootRef.current.recalculate();
-		// setInterval(() => {
-		setStart(e.target.scrollTop);
-		updateHover();
-		// setSwitchMenu(false);
-		// document.querySelectorAll('.nal-ostatok').forEach((x) => {
-		// 	// x.style.opacity = '1';
-		// 	x.classList.remove('showBtn');
-		// });
-	}
-	// useEffect(async () => {
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('scroll', onScroll);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('scroll', onScroll);
+		// const simpleBar = new SimpleBar(document.querySelector('.warehouse-table .simplebar-content-wrapper'));
+		// simpleBar.addEventListener('scroll', onScroll);
+		// simpleBar.getScrollElement();
 
-	// 	rootRef.current.addEventListener('scroll', onScroll);
-	// 	// rootRef.current.addEventListener('mousedown', onMouseDown);
-	// 	// rootRef.current.addEventListener('mouseleave', onMouseLeave);
-	// 	// rootRef.current.addEventListener('mouseup', onMouseLeave);
-	// 	// rootRef.current.addEventListener('mousemove', onMouseMove);
-	// 	// rootRef.current.recalculate();
-	// 	// rootRef.current.el
-	// 	// 	.querySelector('.simplebar-content-wrapper')
-	// 	// 	.addEventListener('scroll', onScroll);
-	// 	// rootRef.current.el
-	// 	// 	.querySelector('.simplebar-content-wrapper')
-	// 	// 	.addEventListener('scroll', onScroll);
-	// 	// const simpleBar = new SimpleBar(document.querySelector('.warehouse-table .simplebar-content-wrapper'));
-	// 	// simpleBar.addEventListener('scroll', onScroll);
-	// 	// simpleBar.getScrollElement();
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('mousedown', onMouseDown);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('mouseleave', onMouseLeave);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('mouseup', onMouseLeave);
+		// rootRef.current.el
+		// 	.querySelector('.simplebar-content-wrapper')
+		// 	.addEventListener('mousemove', onMouseMove);
 
-	// 	// rootRef.current.el
-	// 	// 	.querySelector('.simplebar-content-wrapper')
-	// 	// 	.addEventListener('mousedown', onMouseDown);
-	// 	// rootRef.current.el
-	// 	// 	.querySelector('.simplebar-content-wrapper')
-	// 	// 	.addEventListener('mouseleave', onMouseLeave);
-	// 	// rootRef.current.el
-	// 	// 	.querySelector('.simplebar-content-wrapper')
-	// 	// 	.addEventListener('mouseup', onMouseLeave);
-	// 	// rootRef.current.el
-	// 	// 	.querySelector('.simplebar-content-wrapper')
-	// 	// 	.addEventListener('mousemove', onMouseMove);
-
-	// 	return () => {
-	// 		rootRef.current.removeEventListener('scroll', onScroll);
-	// 		// rootRef.current.recalculate();
-	// 		// rootRef.current.el
-	// 		// 	.querySelector('.simplebar-content-wrapper')
-	// 		// 	.removeEventListener('scroll', onScroll);
-	// 	};
-	// }, [objProduct.length, visibleRows, rowHeight]);
+		return () => {
+			// rootRef.current.removeEventListener('scroll', onScroll);
+			// rootRef.current.recalculate();
+			rootRef.current.el
+				.querySelector('.simplebar-content-wrapper')
+				.removeEventListener('scroll', onScroll);
+		};
+	}, [objProduct.length, visibleRows, rowHeight]);
 	// function root () {
 	// 	return rootRef.current.recalculate();
 	// }
@@ -438,7 +430,7 @@ const WarehouseBlock = ({
 				</button>
 			</div>
 			<div className="shadow-right"></div>
-			<div
+			<SimpleBar
 				// scrollableNodeProps={{ref: scrollableNodeRef}}
 				className="warehouse-table"
 				style={{
@@ -453,11 +445,11 @@ const WarehouseBlock = ({
 					// willChange:'transform, scroll-position',
 					height: document.body.clientHeight - 180 + 'px',
 				}}
-				// autoHide={false}
+				autoHide={false}
 				// direction={'rtl'}
 				ref={rootRef}
 				// direction='rtl'
-				onScroll={(e) => throttle(onScroll(e), 40)}
+				// onScroll={(e) => throttle(onScroll(e), 40)}
 			>
 				<table
 					tabIndex={-1}
@@ -864,7 +856,7 @@ const WarehouseBlock = ({
 					</tfoot>
 				</table>
 				{/* <div style={{ height: getBottomHeight() }} />   */}
-			</div>
+			</SimpleBar>
 			{/* <div
 				style={{
 					display: 'flex',

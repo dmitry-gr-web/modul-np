@@ -550,8 +550,8 @@ body {
 		// will-change: transform;
 		// padding-bottom: 18px;
 		// transform: translateZ(0);
-		// transform: translate3d(0, 0, 0);
-		// will-change: transform, scroll-position;
+		transform: translate3d(0, 0, 0);
+		will-change: transform, scroll-position;
 	}
 	// .simplebar-content {
 	// 	transform: translateZ(0);
