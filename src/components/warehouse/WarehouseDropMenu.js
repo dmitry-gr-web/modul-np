@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
+import { FixedSizeList as List } from 'react-window';
 
 const WarehouseDropMenu = ({
 	objProduct,
@@ -104,7 +105,6 @@ const WarehouseDropMenu = ({
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 					// x.style.visibility = 'hidden';
 					x.classList.add('hide-menu');
-
 				});
 				e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 				// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
@@ -113,14 +113,12 @@ const WarehouseDropMenu = ({
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 					// x.style.visibility = 'visible';
 					x.classList.remove('hide-menu');
-
 				});
 				return { ...x, select: true };
 			} else if (index === 0 && i !== 0) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 					// x.style.visibility = 'visible';
 					x.classList.remove('hide-menu');
-
 				});
 				setOpenMenu(false);
 				setPodlozhka(false);
@@ -141,7 +139,6 @@ const WarehouseDropMenu = ({
 			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 				// x.style.visibility = 'visible';
 				x.classList.remove('hide-menu');
-
 			});
 			setOpenMenu(false);
 			setPodlozhka(false);
@@ -186,7 +183,7 @@ const WarehouseDropMenu = ({
 			e.currentTarget.style.width = '51px';
 			document.querySelector('.width21px').style.maxWidth = '21px';
 		}
-		e.currentTarget.querySelector('.simplebar-content-wrapper').scrollTo({
+		e.currentTarget?.querySelector('.simplebar-content-wrapper')?.scrollTo({
 			top: 0,
 		});
 	}
@@ -239,7 +236,7 @@ const WarehouseDropMenu = ({
 			} else {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
-						?  translator.getTranslation('btnFiltr', 'filtr')
+						? translator.getTranslation('btnFiltr', 'filtr')
 						: obj.filter((x) => x.select === true)[0].attribute === 'all'
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute
@@ -348,7 +345,13 @@ const WarehouseDropMenu = ({
 		>
 			{inputOn ? (
 				<>
-					<input ref={ref} type="text" style={{color: 'rgba(0, 0, 0, 0.65)'}} value={value} onChange={changeInput} />
+					<input
+						ref={ref}
+						type="text"
+						style={{ color: 'rgba(0, 0, 0, 0.65)' }}
+						value={value}
+						onChange={changeInput}
+					/>
 					{/* <span className="underline"></span> */}
 				</>
 			) : type === 'status' ? (
@@ -361,9 +364,9 @@ const WarehouseDropMenu = ({
 				</div>
 			) : (
 				<div className="text-result">
-					{obj.filter((x) => x.select === true).length > 1 ? 
+					{obj.filter((x) => x.select === true).length > 1 ? (
 						translator.getTranslation('btnFiltr', 'filtr')
-					 : obj.filter((x) => x.select === true)[0].attribute.includes('all')  ? (
+					) : obj.filter((x) => x.select === true)[0].attribute.includes('all') ? (
 						''
 					) : (
 						<span className={type === 'country' ? 'flags' : ''} style={{ paddingLeft: 10 }}>
@@ -373,52 +376,92 @@ const WarehouseDropMenu = ({
 				</div>
 			)}
 			<span className="underline"></span>
-			<SimpleBar
-				// style={adaptive ? { transitionDelay: '0.1s' } : {}}
-				autoHide={false}
-				className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
-			>
-				{inputOn
-					? obj
-							.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
-							.map((x, index) => (
+			{type === 'name' ? (
+				<SimpleBar
+				className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'} autoHide={false}>
+					{({ scrollableNodeRef, contentNodeRef }) => {
+						return (
+							<List
+								height={83}
+								itemCount={obj.length}
+								itemSize={20}
+							
+								className='scrollOff'
+								// ref={listRef}
+								innerRef={contentNodeRef}
+								outerRef={scrollableNodeRef}
+							>
+								{({ index, style }) => (
+									<li 
+									onMouseEnter={tooltipOn}
+									onMouseLeave={tooltipOff}
+							
+									className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
+									onClick={(e) => clickList(obj[index].id, e)} key={index} style={style}
+									
+									dangerouslySetInnerHTML={{
+										__html: searchLine(
+											translator.getTranslation('btnAll', obj[index].attribute) ?? obj[index].attribute,
+											value
+										),
+									}}>
+										{/* {obj[index].attribute} */}
+									</li>
+								)}
+							</List>
+						);
+					}}
+				</SimpleBar>
+			) : (
+				<SimpleBar
+					// style={adaptive ? { transitionDelay: '0.1s' } : {}}
+					autoHide={false}
+					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+				>
+					{inputOn
+						? obj
+								.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
+								.map((x, index) => (
+									<li
+										key={index}
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
+										className={x.select ? 'select-btn' : ''}
+										onClick={(e) => clickList(x.id, e)}
+									>
+										<span
+											dangerouslySetInnerHTML={{
+												__html: searchLine(
+													translator.getTranslation('btnAll', x.attribute) ?? x.attribute,
+													value
+												),
+											}}
+										></span>
+									</li>
+								))
+						: obj.map((x, index) => (
 								<li
 									key={index}
 									onMouseEnter={tooltipOn}
 									onMouseLeave={tooltipOff}
 									className={x.select ? 'select-btn' : ''}
 									onClick={(e) => clickList(x.id, e)}
+									style={type === 'status' ? { overflow: 'visible' } : {}}
 								>
 									<span
-										dangerouslySetInnerHTML={{
-											__html: searchLine(translator.getTranslation('btnAll', x.attribute) ??  x.attribute, value),
-										}}
-									></span>
+										className={
+											index !== 0
+												? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : ''}`
+												: ''
+										}
+									>
+										{/* {console.log(translator.getTranslation('btnAll', x.attribute), x.attribute)} */}
+										{translator.getTranslation('btnAll', x.attribute) ?? x.attribute}
+									</span>
 								</li>
-							))
-					: obj.map((x, index) => (
-							<li
-								key={index}
-								onMouseEnter={tooltipOn}
-								onMouseLeave={tooltipOff}
-								className={x.select ? 'select-btn' : ''}
-								onClick={(e) => clickList(x.id, e)}
-								style={type === 'status' ? { overflow: 'visible' } : {}}
-							>
-								<span
-									className={
-										index !== 0
-											? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : ''}`
-											: ''
-									}
-							
-								>
-									{/* {console.log(translator.getTranslation('btnAll', x.attribute), x.attribute)} */}
-									{translator.getTranslation('btnAll', x.attribute) ??  x.attribute}
-								</span>
-							</li>
-					  ))}
-			</SimpleBar>
+						  ))}
+				</SimpleBar>
+			)}
 		</div>
 	);
 };

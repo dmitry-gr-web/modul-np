@@ -16,6 +16,7 @@ import WarehouseProductList from './WarehouseProductList';
 import WarehouseDropMenu from './WarehouseDropMenu';
 // import { dataWarehouse } from '../data/dataWarehouse';
 import WarehouseInput from './WarehouseInput';
+
 import todo from '../data/todo.json';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
@@ -440,7 +441,7 @@ const WarehouseBlock = ({
 					// maxWidth: 1150,
 					// display: 'none',
 					width: '100%',
-					overflow: 'auto',
+					// overflow: 'auto',
 					// height: '800px',
 					// willChange:'transform, scroll-position',
 					height: document.body.clientHeight - 180 + 'px',
@@ -844,7 +845,7 @@ const WarehouseBlock = ({
 							
 						))}
 
-						<tr style={{ height: getBottomHeight() }}></tr>
+						<tr colSpan={18} style={{ height: getBottomHeight() }}><td style={{paddingBottom: 16}}></td></tr>
 					</tbody>
 
 					<tfoot>

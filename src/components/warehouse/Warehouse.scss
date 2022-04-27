@@ -118,7 +118,6 @@ body {
 	transform: translate3d(0, 0, 0);
 	will-change: transform, scroll-position;
 	transform-origin: 0 0;
-	
 }
 // .warehouse-table::-webkit-scrollbar-thumb {
 // 	background-color: grey; /* color of the scroll thumb */
@@ -220,6 +219,7 @@ body {
 		height: 100%;
 		position: relative;
 		z-index: 9999;
+
 		cursor: pointer;
 		input {
 			outline: none;
@@ -291,6 +291,20 @@ body {
 			top: 0;
 			transform: translateY(0px);
 			overflow-x: hidden;
+			.scrollOff {
+				&::-webkit-scrollbar {
+					width: 0;
+				}
+				&::-webkit-scrollbar-track {
+					background: transparent;
+					box-shadow: none;
+				}
+				&::-webkit-scrollbar-thumb {
+					background-color: transparent;
+					box-shadow: none;
+				}
+			}
+	
 			.simplebar-track.simplebar-vertical {
 				background-color: rgba(0, 0, 0, 0.1);
 				width: 3px;
@@ -335,6 +349,9 @@ body {
 				overflow: hidden;
 				display: block;
 				text-overflow: ellipsis;
+			}
+			.infinity-list {
+				width: calc(100% - 25px) !important;
 			}
 			.findUnderline {
 				position: relative;
@@ -485,8 +502,8 @@ body {
 		width: 5px;
 		margin-top: 37px;
 		margin-bottom: 12px;
-		margin-right: -10px;
-		margin-right: 8px;
+		margin-right: -20px;
+		// margin-right: 8px;
 		// bottom: 0;
 		transition: 0.2s;
 
@@ -571,9 +588,9 @@ body {
 		// transform: translate3d(0, 0, 0);
 		// -webkit-backface-visibility: hidden;
 		// -webkit-perspective: 1000;
-		transform: translate3d(0,0,0);
+		transform: translate3d(0, 0, 0);
 		will-change: transform, scroll-position;
-		
+
 		// will-change: transform ,scroll-position;
 		// transform: transnpm late3d(0, 0, 0);
 
@@ -834,7 +851,6 @@ body {
 			left: 13px;
 			transform: translate3d(0, 0, 0);
 			will-change: transform, scroll-position;
-			
 		}
 		.sticky-row-0 {
 			position: sticky;
@@ -1242,7 +1258,7 @@ body {
 			// 		will-change: transform, scroll-position;
 			// 	}
 			// }
-			td {
+			tr td {
 				// transform: translate3d(0, 0, 0);
 				// -webkit-backface-visibility: hidden;
 				// -webkit-perspective: 1000;
@@ -1436,7 +1452,7 @@ body {
 				width: 0px;
 				transform: translate3d(0, 0, 0);
 				will-change: transform, scroll-position;
-				
+
 				div {
 					position: absolute;
 					z-index: -1;
@@ -1819,7 +1835,6 @@ body {
 		pointer-events: none !important;
 		// transform: translate3d(0, 0, 0);
 		// will-change: transform, scroll-position;
-		
 	}
 	.switch-btn-warehouse {
 		position: relative;

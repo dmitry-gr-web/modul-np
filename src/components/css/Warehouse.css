@@ -232,6 +232,17 @@ body {
   transform: translateY(0px);
   overflow-x: hidden;
 }
+.warehouse-products .warehouse-dropmenu .dropmenu .scrollOff::-webkit-scrollbar {
+  width: 0;
+}
+.warehouse-products .warehouse-dropmenu .dropmenu .scrollOff::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: none;
+}
+.warehouse-products .warehouse-dropmenu .dropmenu .scrollOff::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  box-shadow: none;
+}
 .warehouse-products .warehouse-dropmenu .dropmenu .simplebar-track.simplebar-vertical {
   background-color: rgba(0, 0, 0, 0.1);
   width: 3px;
@@ -272,6 +283,9 @@ body {
   overflow: hidden;
   display: block;
   text-overflow: ellipsis;
+}
+.warehouse-products .warehouse-dropmenu .dropmenu .infinity-list {
+  width: calc(100% - 25px) !important;
 }
 .warehouse-products .warehouse-dropmenu .dropmenu .findUnderline {
   position: relative;
@@ -392,8 +406,7 @@ body {
   width: 5px;
   margin-top: 37px;
   margin-bottom: 12px;
-  margin-right: -10px;
-  margin-right: 8px;
+  margin-right: -20px;
   transition: 0.2s;
   border-radius: 5px;
 }

@@ -11,10 +11,15 @@ const WarehouseInput = ({setPodlozhka}) => {
 		// e.currentTarget.querySelector('.underline').style.width = '0%';
 	}
     function changeInput (e) {
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.style.visibility = 'hidden';
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.style.visibility = 'hidden';
+		// });
+        document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+			// x.style.visibility = 'visible';
+			x.classList.add('hide-menu');
 		});
-		e.target.closest('.warehouse-input').style.visibility = 'visible';
+        e.target.closest('.warehouse-input').classList.remove('hide-menu');
+		// e.target.closest('.warehouse-input').style.visibility = 'visible';
         setInputID(e.target.value);
         if (e.target.value.length === 1) {
             e.target.value =
