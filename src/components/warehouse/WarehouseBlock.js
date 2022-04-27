@@ -1521,45 +1521,51 @@ const WarehouseBlock = ({
 				}}
 				onScroll={(e) => throttle(onScroll(e), 40)}
 			>
-				<table>
-					<tbody>
-						<tr style={{ height: 1 + getTopHeight() }}></tr>
-						{todo.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
-							<tr
-								key={index + getStart()}
-								style={{
-									height: rowHeight,
-									transform: 'translate3d(0,0,0)',
-									willChange: 'transform, scroll-position',
-								}}
-							>
-								<td
+				<table
+					style={{ transform: 'translate3d(0,0,0)', willChange: 'transform, scroll-position' }}
+				>
+					{todo.length > 0 && (
+						<tbody
+							style={{ transform: 'translate3d(0,0,0)', willChange: 'transform, scroll-position' }}
+						>
+							<tr style={{ height: 1 + getTopHeight() }}></tr>
+							{todo.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
+								<tr
+									key={index + getStart()}
 									style={{
-										whiteSpace: 'nowrap',
-										height: rowHeight,
-										transform: 'translate3d(0,0,0)',
-										willChange: 'transform, scroll-position',
-										maxWidth: '400px',
-										overflow: 'hidden',
-										textOverflow: 'ellipsis',
-									}}
-								>
-									{x.title}
-								</td>
-								<td
-									style={{
-										whiteSpace: 'nowrap',
 										height: rowHeight,
 										transform: 'translate3d(0,0,0)',
 										willChange: 'transform, scroll-position',
 									}}
 								>
-									{x.id}
-								</td>
-							</tr>
-						))}
-						<tr style={{ height: 1 + getBottomHeight() }}></tr>
-					</tbody>
+									<td
+										style={{
+											whiteSpace: 'nowrap',
+											height: rowHeight,
+											transform: 'translate3d(0,0,0)',
+											willChange: 'transform, scroll-position',
+											maxWidth: '400px',
+											overflow: 'hidden',
+											textOverflow: 'ellipsis',
+										}}
+									>
+										{x.title}
+									</td>
+									<td
+										style={{
+											whiteSpace: 'nowrap',
+											height: rowHeight,
+											transform: 'translate3d(0,0,0)',
+											willChange: 'transform, scroll-position',
+										}}
+									>
+										{x.id}
+									</td>
+								</tr>
+							))}
+							<tr style={{ height: 1 + getBottomHeight() }}></tr>
+						</tbody>
+					)}
 				</table>
 			</div>
 		</div>
