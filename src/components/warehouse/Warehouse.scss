@@ -827,12 +827,12 @@ body {
 		// 	background:linear-gradient(90deg, grey, white) !important;
 		// }
 		.sticky-body {
-			// background: white;
-			// position: sticky !important;
-			// z-index: 2;
-			// left: 13px;
-			// transform: translate3d(0, 0, 0);
-			// will-change: transform, scroll-position;
+			background: white;
+			position: sticky !important;
+			z-index: 2;
+			left: 13px;
+			transform: translate3d(0, 0, 0);
+			will-change: transform, scroll-position;
 			
 		}
 		.sticky-row-0 {
@@ -1242,11 +1242,11 @@ body {
 			// 	}
 			// }
 			td {
-				transform: translate3d(0, 0, 0);
+				// transform: translate3d(0, 0, 0);
 				// -webkit-backface-visibility: hidden;
 				// -webkit-perspective: 1000;
 				// height: 20px;
-				will-change: transform, scroll-position;
+				// will-change: transform, scroll-position;
 			}
 			.sticky-body {
 				// -webkit-backface-visibility: hidden;
@@ -1265,7 +1265,7 @@ body {
 				font-size: 14px;
 				font-weight: 300;
 				// height: 20px;
-				position: relative;
+				// position: relative;
 				// display: flex;
 				// transform: translateZ(0);
 				// // transform: translate3d(0, 0, 0);

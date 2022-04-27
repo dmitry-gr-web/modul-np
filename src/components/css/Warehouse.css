@@ -570,6 +570,14 @@ body {
   transform: translateX(0px);
   padding-right: 10px;
 }
+.warehouse-products table .sticky-body {
+  background: white;
+  position: sticky !important;
+  z-index: 2;
+  left: 13px;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, scroll-position;
+}
 .warehouse-products table .sticky-row-0 {
   position: sticky;
   left: 13px;
@@ -776,14 +784,9 @@ body {
   will-change: transform, scroll-position;
 }
 .warehouse-products table .first-tab-body td {
-  transform: translate3d(0, 0, 0);
-  will-change: transform, scroll-position;
-}
-.warehouse-products table .first-tab-body td {
   padding: 0;
   font-size: 14px;
   font-weight: 300;
-  position: relative;
 }
 .warehouse-products table .first-tab-body td {
   padding: 0;
