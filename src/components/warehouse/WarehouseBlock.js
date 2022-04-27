@@ -16,6 +16,7 @@ import WarehouseProductList from './WarehouseProductList';
 import WarehouseDropMenu from './WarehouseDropMenu';
 // import { dataWarehouse } from '../data/dataWarehouse';
 import WarehouseInput from './WarehouseInput';
+import todo from '../data/todo.json';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
 let timer;
@@ -153,7 +154,7 @@ const WarehouseBlock = ({
 	}
 
 	//rascheti
-	
+
 	let ostatok = parseInt(objProduct.reduce((prev, curr) => prev + curr.ostatok, 0));
 	let rezerv = parseInt(objProduct.reduce((prev, curr) => prev + curr.rezerv, 0));
 	let otpr = parseInt(objProduct.reduce((prev, curr) => prev + curr.otpr, 0));
@@ -177,55 +178,50 @@ const WarehouseBlock = ({
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
 	let rowHeight = 20;
-	const visibleRows = Math.floor((document.body.clientHeight * 2)/ rowHeight);
+	const visibleRows = Math.floor((document.body.clientHeight * 2) / rowHeight);
 	// const [visibleRows, setVisible] = useState(Math.round((document.body.clientHeight * 1.5- 140) / 20));
 	// Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))
 	function getStart() {
 		let temp = start - document.body.clientHeight * 0.5;
 		// let temp = start - 50 * rowHeight;
-	
 
-		return Math.min(
-			objProduct.length - visibleRows - 1,
-			Math.floor(temp < 0 ? 0 : temp / rowHeight)
-		);
-
+		return Math.min(todo.length - visibleRows - 1, Math.floor(temp < 0 ? 0 : temp / rowHeight));
 	}
-
-	
 
 	function getTopHeight() {
 		// let temp = start - 50 * rowHeight;
 		let temp = start - document.body.clientHeight * 0.5;
 		// return rowHeight * getStart();
-		return rowHeight * Math.min(
-				  (objProduct.length - visibleRows - 1),
-				  Math.floor(temp < 0 ? 0 : temp / rowHeight)
+		return (
+			rowHeight *
+			Math.min(todo.length - visibleRows - 1, Math.floor(temp < 0 ? 0 : temp / rowHeight))
 		);
 	}
 	function getBottomHeight() {
 		// let temp = start - 50 * rowHeight;
 		let temp = start - document.body.clientHeight * 0.5;
 		// return rowHeight * (objProduct.length - (getStart() + visibleRows + 1));
-		return rowHeight * (objProduct.length - (Math.min(
-				  (objProduct.length - visibleRows - 1),
-				  Math.floor(temp < 0 ? 0 : temp / rowHeight)
-				) + visibleRows + 1));
+		return (
+			rowHeight *
+			(todo.length -
+				(Math.min(todo.length - visibleRows - 1, Math.floor(temp < 0 ? 0 : temp / rowHeight)) +
+					visibleRows +
+					1))
+		);
 	}
 	// function getTopHeight() {
 
-
 	// 	let temp = top - document.body.clientHeight * 0.5;
-	
+
 	// 	return rowHeight * Math.min(
 	// 	  (data.length - visible - 1),
 	// 	  Math.floor(temp < 0 ? 0 : temp / rowHeight)
 	// 	);
 	//   }
-	
+
 	//   function getStart() {
 	// 	let temp = top - document.body.clientHeight * 0.5;
-	
+
 	// 	return Math.min(
 	// 	  (data.length - visible - 1),
 	// 	  Math.floor(temp < 0 ? 0 : temp / rowHeight)
@@ -294,16 +290,14 @@ const WarehouseBlock = ({
 	}
 	async function updateHover(e) {
 		clearTimeout(hover);
-			if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
-				document.querySelector('.first-tab-body').classList.add('hoverOff');
-			}
-	
-			hover = setTimeout(() => {
-				document.querySelector('.first-tab-body').classList.remove('hoverOff');
-			
-			}, 400);
-			document.getElementById('tooltipBtn').style.animation = '';
+		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
+			document.querySelector('.first-tab-body').classList.add('hoverOff');
+		}
 
+		hover = setTimeout(() => {
+			document.querySelector('.first-tab-body').classList.remove('hoverOff');
+		}, 400);
+		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	// const scrollableNodeRef = React.createRef();
 	async function onScroll(e) {
@@ -317,11 +311,8 @@ const WarehouseBlock = ({
 		// 	// x.style.opacity = '1';
 		// 	x.classList.remove('showBtn');
 		// });
-		
 	}
 	// useEffect(async () => {
-
-
 
 	// 	rootRef.current.addEventListener('scroll', onScroll);
 	// 	// rootRef.current.addEventListener('mousedown', onMouseDown);
@@ -455,6 +446,7 @@ const WarehouseBlock = ({
 					maxHeight: 'calc(100vh - 149px)',
 					marginBottom: '10px',
 					// maxWidth: 1150,
+					display: 'none',
 					width: '100%',
 					overflow: 'auto',
 					// height: '800px',
@@ -465,10 +457,11 @@ const WarehouseBlock = ({
 				// direction={'rtl'}
 				ref={rootRef}
 				// direction='rtl'
-				onScroll={e => throttle(onScroll(e),40)}
+				onScroll={(e) => throttle(onScroll(e), 40)}
 			>
 				<table
 					tabIndex={-1}
+
 					// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 				>
 					<thead className="first-tab-header">
@@ -585,7 +578,7 @@ const WarehouseBlock = ({
 									>
 										{translator.getTranslation('warehouse', 'attribute')}
 									</div>
-									<div className="shadow-left" style={{right: '-30px'}}></div>
+									<div className="shadow-left" style={{ right: '-30px' }}></div>
 								</div>
 							</th>
 
@@ -607,7 +600,7 @@ const WarehouseBlock = ({
 							<th className="hoverr">
 								<div></div>
 							</th>
-							
+
 							<th className="sticky-head">
 								<div className="sticky-block">
 									<div
@@ -821,9 +814,9 @@ const WarehouseBlock = ({
 							</th>
 						</tr>
 					</thead>
-					
+
 					<tbody className="first-tab-body">
-						<tr style={{ height: 1+ getTopHeight() }}></tr>
+						<tr style={{ height: 1 + getTopHeight() }}></tr>
 
 						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
 							// <WarehouseProductList
@@ -857,30 +850,32 @@ const WarehouseBlock = ({
 							// 	flagSwitchMenu={flagSwitchMenu}
 							// />
 							<tr
-					// style={height}
-					className={
-						// objProduct[index + getStart()].select && !objProduct[index  + getStart()].lock
-						// 	? 'select speed'
-						// 	: objProduct[index  + getStart()].lock
-						// 	? 'lockOrder speed'
-							// : 
-							'speed'
-					}
-					style={{height: rowHeight, position: 'relative'}}
-					// onClick={clickTr}
-					// ref={linkTR}
-					// key={index}
-					// style={{transition: '0.2s',opacity: 0}}
-					// onDoubleClick={dblClick}
-					key={index  + getStart()}
-				>	
-					{objProduct.length > 0 && <td className="hoverr">
-						<div></div>
-						{/* <div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div> */}
-						<div className='div'></div>
-					</td>}
-			
-					{/* <td
+								// style={height}
+								className={
+									// objProduct[index + getStart()].select && !objProduct[index  + getStart()].lock
+									// 	? 'select speed'
+									// 	: objProduct[index  + getStart()].lock
+									// 	? 'lockOrder speed'
+									// :
+									'speed'
+								}
+								style={{ height: rowHeight, position: 'relative' }}
+								// onClick={clickTr}
+								// ref={linkTR}
+								// key={index}
+								// style={{transition: '0.2s',opacity: 0}}
+								// onDoubleClick={dblClick}
+								key={index + getStart()}
+							>
+								{objProduct.length > 0 && (
+									<td className="hoverr">
+										<div></div>
+										{/* <div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div> */}
+										<div className="div"></div>
+									</td>
+								)}
+
+								{/* <td
 						className="sticky-body-row1"
 						onMouseEnter={() => setSwitchMenu(true)}
 						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
@@ -896,7 +891,7 @@ const WarehouseBlock = ({
 							<span className="slider round"></span>
 						</label>
 					</td> */}
-					{/* <td
+								{/* <td
 						className="sticky-body-row2"
 						onMouseEnter={() => setSwitchMenu(true)}
 						onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
@@ -949,200 +944,212 @@ const WarehouseBlock = ({
 							</label>
 						</div>
 					</td> */}
-					<td className="sticky-body" style={{position:'sticky',zIndex:2,left:13,background:'white', transform:'translate3d(0,0,0)',willChange:'transform,scroll-position'}}>
-						<div className="sticky-block">
-							<div
-								onMouseEnter={() => setSwitchMenu(true)}
-								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-								style={{ display: 'flex', height: '20px', alignItems: 'center' }}
-							>
-								<div style={{ minWidth: '51px', paddingRight: '10px' }}>
-									<label className="switch-btn-warehouse">
-										<input
-											type="checkbox"
-											className="status-all"
-											// onChange={switchBtn}
-											// defaultChecked={objProduct[index].status.all}
-											// checked={objProduct[index  + getStart()].status.all}
-										/>
-										<span className="slider round"></span>
-									</label>
-								</div>
-
-								<div
-									className="animationFrame"
-									style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
-								>
-									<label
-										// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
-										className="switch-btn-small"
-									>
-										<input
-											type="checkbox"
-											className="status-crm"
-											// onChange={switchBtn}
-											// defaultChecked={objProduct[index].status.crm}
-											// checked={objProduct[index  + getStart()].status.crm}
-										/>
-										<span className="slider round"></span>
-									</label>
-
-									<label
-										// style={
-										// 	!objProduct[index  + getStart()].status.all
-										// 		? { opacity: 0.4, margin: '0 15px' }
-										// 		: { margin: '0 15px' }
-										// }
-										className="switch-btn-small"
-									>
-										<input
-											type="checkbox"
-											className="status-rozetka"
-											// onChange={switchBtn}
-											// defaultChecked={objProduct[index].status.rozetka}
-											// checked={objProduct[index  + getStart()].status.rozetka}
-										/>
-										<span className="slider round"></span>
-									</label>
-
-									<label
-										// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
-										className="switch-btn-small"
-									>
-										<input
-											type="checkbox"
-											className="status-prom"
-											// onChange={switchBtn}
-											// defaultChecked={objProduct[index].status.prom}
-											// checked={objProduct[index  + getStart()].status.prom}
-										/>
-										<span className="slider round"></span>
-									</label>
-									<div className="gradi"></div>
-								</div>
-							</div>
-
-							<div
-								className="id-width"
-								// onMouseLeave={tooltipOff}
-								// onMouseEnter={tooltipOn}
-								// style={
-								// 	!objProduct[index  + getStart()].status.all
-								// 		? {
-								// 				color: 'rgba(0,0,0,0.4)',
-								// 				textAlign: 'left',
-								// 				paddingRight: '10px',
-								// 				width: widthColum.id + 'px',
-								// 		  }
-								// 		: { textAlign: 'left', paddingRight: '10px', width: widthColum.id + 'px' }
-								// }
-							>
-								{objProduct[index + getStart()]?.id}
-							</div>
-							<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
-								<span
-									// style={
-									// 	!objProduct[index  + getStart()].status.all
-									// 		? { opacity: 0.4, color: 'rgba(0,0,0,1)' }
-									// 		: { color: 'rgba(0,0,0,1)' }
-									// }
-									className="flags"
-									// onMouseLeave={tooltipOff}
-									// onMouseEnter={tooltipOn}
-								>
-									{objProduct[index  + getStart()]?.country}
-								</span>
-							</div>
-							<div
-								// onMouseLeave={tooltipOff}
-								// onMouseEnter={tooltipOn}
-								// style={
-								// 	!objProduct[index  + getStart()].status.all
-								// 		? {
-								// 				color: 'rgba(0,0,0,0.4)',
-								// 				textAlign: 'center',
-								// 				minWidth: 51,
-								// 				paddingRight: '10px',
-								// 		  }
-								// 		: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
-								// }
-							>
-								{objProduct[index  + getStart()]?.currency}
-							</div>
-							<div
-								className="name-width"
-								style={{
-									overflow: 'hidden',
-									paddingRight: '15px',
-									// width: widthColum.name - 15 + 'px',
-									maxWidth: '172px',
-								}}
-							>
-								<span
-									// className={
-									// 	objProduct[index  + getStart()].podProduct === 0
-									// 		? 'arrow'
-									// 		: objProduct[index  + getStart()].podProduct === 1
-									// 		? 'arrowDeg'
-									// 		: ''
-									// }
-									// style={objProduct[index  + getStart()].podProduct === 1 ? { opacity: 0.4 } : {}}
-								></span>
-								<span
-									// onMouseLeave={tooltipOff}
-									// onMouseEnter={tooltipOn}
-									style={
-										!objProduct[index + getStart()]?.status.all
-											? {
-													opacity: 0.4,
-													whiteSpace: 'nowrap',
-													overflow: 'hidden',
-													textOverflow: 'ellipsis',
-													display: 'block',
-											  }
-											: {
-													whiteSpace: 'nowrap',
-													overflow: 'hidden',
-													textOverflow: 'ellipsis',
-													display: 'block',
-													opacity: `${objProduct[index + getStart()]?.podProduct === 1 ? 0.4 : ''}`,
-											  }
-									}
-								>
-									{objProduct[index  + getStart()]?.name}
-								</span>
-							</div>
-							<div
-								className="attribute-width"
-								// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
-							>
-								<img
-									style={{ width: 16, height: 16, position: 'absolute' }}
-									src={objProduct[index + getStart()]?.images}
-									alt=""
-								/>
-								<span
-									// onMouseLeave={tooltipOff}
-									// onMouseEnter={tooltipOn}
+								<td
+									className="sticky-body"
 									style={{
-										marginLeft: 20,
-										whiteSpace: 'nowrap',
-										overflow: 'hidden',
-										textOverflow: 'ellipsis',
-										display: 'block',
-										// width: widthColum.attribute + 'px',
-										maxWidth: 85,
+										position: 'sticky',
+										zIndex: 2,
+										left: 13,
+										background: 'white',
+										transform: 'translate3d(0,0,0)',
+										willChange: 'transform,scroll-position',
 									}}
 								>
-									{objProduct[index  + getStart()]?.attribute}
-								</span>
-							</div>
-							<div className="shadow-left"></div>
-						</div>
-						{/* <div className='hover'></div> */}
-					</td>
+									<div className="sticky-block">
+										<div
+											onMouseEnter={() => setSwitchMenu(true)}
+											onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+											style={{ display: 'flex', height: '20px', alignItems: 'center' }}
+										>
+											<div style={{ minWidth: '51px', paddingRight: '10px' }}>
+												<label className="switch-btn-warehouse">
+													<input
+														type="checkbox"
+														className="status-all"
+														// onChange={switchBtn}
+														// defaultChecked={objProduct[index].status.all}
+														// checked={objProduct[index  + getStart()].status.all}
+													/>
+													<span className="slider round"></span>
+												</label>
+											</div>
 
-					{/* <td
+											<div
+												className="animationFrame"
+												style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
+											>
+												<label
+													// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+													className="switch-btn-small"
+												>
+													<input
+														type="checkbox"
+														className="status-crm"
+														// onChange={switchBtn}
+														// defaultChecked={objProduct[index].status.crm}
+														// checked={objProduct[index  + getStart()].status.crm}
+													/>
+													<span className="slider round"></span>
+												</label>
+
+												<label
+													// style={
+													// 	!objProduct[index  + getStart()].status.all
+													// 		? { opacity: 0.4, margin: '0 15px' }
+													// 		: { margin: '0 15px' }
+													// }
+													className="switch-btn-small"
+												>
+													<input
+														type="checkbox"
+														className="status-rozetka"
+														// onChange={switchBtn}
+														// defaultChecked={objProduct[index].status.rozetka}
+														// checked={objProduct[index  + getStart()].status.rozetka}
+													/>
+													<span className="slider round"></span>
+												</label>
+
+												<label
+													// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+													className="switch-btn-small"
+												>
+													<input
+														type="checkbox"
+														className="status-prom"
+														// onChange={switchBtn}
+														// defaultChecked={objProduct[index].status.prom}
+														// checked={objProduct[index  + getStart()].status.prom}
+													/>
+													<span className="slider round"></span>
+												</label>
+												<div className="gradi"></div>
+											</div>
+										</div>
+
+										<div
+											className="id-width"
+											// onMouseLeave={tooltipOff}
+											// onMouseEnter={tooltipOn}
+											// style={
+											// 	!objProduct[index  + getStart()].status.all
+											// 		? {
+											// 				color: 'rgba(0,0,0,0.4)',
+											// 				textAlign: 'left',
+											// 				paddingRight: '10px',
+											// 				width: widthColum.id + 'px',
+											// 		  }
+											// 		: { textAlign: 'left', paddingRight: '10px', width: widthColum.id + 'px' }
+											// }
+										>
+											{objProduct[index + getStart()]?.id}
+										</div>
+										<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
+											<span
+												// style={
+												// 	!objProduct[index  + getStart()].status.all
+												// 		? { opacity: 0.4, color: 'rgba(0,0,0,1)' }
+												// 		: { color: 'rgba(0,0,0,1)' }
+												// }
+												className="flags"
+												// onMouseLeave={tooltipOff}
+												// onMouseEnter={tooltipOn}
+											>
+												{objProduct[index + getStart()]?.country}
+											</span>
+										</div>
+										<div
+										// onMouseLeave={tooltipOff}
+										// onMouseEnter={tooltipOn}
+										// style={
+										// 	!objProduct[index  + getStart()].status.all
+										// 		? {
+										// 				color: 'rgba(0,0,0,0.4)',
+										// 				textAlign: 'center',
+										// 				minWidth: 51,
+										// 				paddingRight: '10px',
+										// 		  }
+										// 		: { textAlign: 'center', minWidth: 51, paddingRight: '10px' }
+										// }
+										>
+											{objProduct[index + getStart()]?.currency}
+										</div>
+										<div
+											className="name-width"
+											style={{
+												overflow: 'hidden',
+												paddingRight: '15px',
+												// width: widthColum.name - 15 + 'px',
+												maxWidth: '172px',
+											}}
+										>
+											<span
+											// className={
+											// 	objProduct[index  + getStart()].podProduct === 0
+											// 		? 'arrow'
+											// 		: objProduct[index  + getStart()].podProduct === 1
+											// 		? 'arrowDeg'
+											// 		: ''
+											// }
+											// style={objProduct[index  + getStart()].podProduct === 1 ? { opacity: 0.4 } : {}}
+											></span>
+											<span
+												// onMouseLeave={tooltipOff}
+												// onMouseEnter={tooltipOn}
+												style={
+													!objProduct[index + getStart()]?.status.all
+														? {
+																opacity: 0.4,
+																whiteSpace: 'nowrap',
+																overflow: 'hidden',
+																textOverflow: 'ellipsis',
+																display: 'block',
+														  }
+														: {
+																whiteSpace: 'nowrap',
+																overflow: 'hidden',
+																textOverflow: 'ellipsis',
+																display: 'block',
+																opacity: `${
+																	objProduct[index + getStart()]?.podProduct === 1 ? 0.4 : ''
+																}`,
+														  }
+												}
+											>
+												{objProduct[index + getStart()]?.name}
+											</span>
+										</div>
+										<div
+											className="attribute-width"
+											// style={!objProduct[index  + getStart()].status.all ? { opacity: 0.4 } : {}}
+										>
+											<img
+												style={{ width: 16, height: 16, position: 'absolute' }}
+												src={objProduct[index + getStart()]?.images}
+												alt=""
+											/>
+											<span
+												// onMouseLeave={tooltipOff}
+												// onMouseEnter={tooltipOn}
+												style={{
+													marginLeft: 20,
+													whiteSpace: 'nowrap',
+													overflow: 'hidden',
+													textOverflow: 'ellipsis',
+													display: 'block',
+													// width: widthColum.attribute + 'px',
+													maxWidth: 85,
+												}}
+											>
+												{objProduct[index + getStart()]?.attribute}
+											</span>
+										</div>
+										<div className="shadow-left"></div>
+									</div>
+									{/* <div className='hover'></div> */}
+								</td>
+
+								{/* <td
 						onMouseLeave={tooltipOff}
 						onMouseEnter={tooltipOn}
 						className="id-tovara while2"
@@ -1154,12 +1161,12 @@ const WarehouseBlock = ({
 					>
 						{objProduct[index].id}
 					</td> */}
-					{/* <td className="while2" style={{ textAlign: 'center' }}>
+								{/* <td className="while2" style={{ textAlign: 'center' }}>
 						<span style={!swtichChecked ? { opacity: 0.4 } : {}} className="flags">
 							{objProduct[index].country}
 						</span>
 					</td> */}
-					{/* <td
+								{/* <td
 						className="while2"
 						style={
 							!swtichChecked
@@ -1169,7 +1176,7 @@ const WarehouseBlock = ({
 					>
 						{objProduct[index].currency}
 					</td> */}
-					{/* <td className="name-tovara while2" onMouseLeave={tooltipOff} onMouseEnter={tooltipOn}>
+								{/* <td className="name-tovara while2" onMouseLeave={tooltipOff} onMouseEnter={tooltipOn}>
 						<span
 							style={!swtichChecked ? { opacity: 0.4 } : {}}
 							className={
@@ -1183,7 +1190,7 @@ const WarehouseBlock = ({
 							{objProduct[index].name}
 						</span>
 					</td> */}
-					{/* <td className="while2">
+								{/* <td className="while2">
 						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
 							<img
 								style={{ width: 16, height: 16, position: 'absolute' }}
@@ -1207,619 +1214,285 @@ const WarehouseBlock = ({
 						</div>
 					</td> */}
 
-					{/* <td className="shadow">
+								{/* <td className="shadow">
 						<div className="shadow-left"></div>
 					
 					</td> */}
-					<td
-						style={{ paddingLeft: '12px' }}
-						// onMouseLeave={PlusMinusClose}
-						// onMouseEnter={PlusMinusOpen}
-						className="nal-ostatok"
-					>
-						<div
-							// ref={btnRef}
-							style={
-								!objProduct[index]?.status.all
-									? {
-											opacity: 0.4,
-											display: 'flex',
-											justifyContent: 'flex-end',
-											paddingRight: '3px',
-									  }
-									: { display: 'flex', justifyContent: 'flex-end', paddingRight: '3px' }
-							}
-						>
-							<div className="wrap-nal-ostatok" style={{ display: 'flex', position: 'absolute' }}>
-								<button
-									style={btnMenu ? { width: '16px' } : {}}
-									onDoubleClick={(e) => e.stopPropagation()}
-									// onClick={BtnMinus}
+								<td
+									style={{ paddingLeft: '12px' }}
+									// onMouseLeave={PlusMinusClose}
+									// onMouseEnter={PlusMinusOpen}
+									className="nal-ostatok"
 								>
-									<svg
-										width="9"
-										height="7"
-										viewBox="0 0 9 7"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
+									<div
+										// ref={btnRef}
+										style={
+											!objProduct[index]?.status.all
+												? {
+														opacity: 0.4,
+														display: 'flex',
+														justifyContent: 'flex-end',
+														paddingRight: '3px',
+												  }
+												: { display: 'flex', justifyContent: 'flex-end', paddingRight: '3px' }
+										}
 									>
-										<path
-											d="M1.26782 3.44748L8.08752 3.44747"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-									</svg>
-								</button>
+										<div
+											className="wrap-nal-ostatok"
+											style={{ display: 'flex', position: 'absolute' }}
+										>
+											<button
+												style={btnMenu ? { width: '16px' } : {}}
+												onDoubleClick={(e) => e.stopPropagation()}
+												// onClick={BtnMinus}
+											>
+												<svg
+													width="9"
+													height="7"
+													viewBox="0 0 9 7"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+												>
+													<path
+														d="M1.26782 3.44748L8.08752 3.44747"
+														stroke="black"
+														strokeOpacity="0.7"
+														strokeWidth="1.09116"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													></path>
+												</svg>
+											</button>
 
-								<input
-									// ref={inputRef}
-									type="text"
-									// onChange={inputChange}
-									// onKeyUp={enterInput}
-									maxLength={5}
-									onClick={(e) => {
-										setFocusInput(true);
-										setPodlozhka(true);
-										// setInputFormat(true);
-										e.stopPropagation();
-									}}
-									// value={focusInput && inputFormat ? memoryInput : formatNumber2(+memoryInput)}
-									onDoubleClick={(e) => e.stopPropagation()}
-									style={{
-										color: 'rgba(0,0,0,0.7)',
-										// width: inputLength(memoryInput.toString()),
-									}}
-								/>
+											<input
+												// ref={inputRef}
+												type="text"
+												// onChange={inputChange}
+												// onKeyUp={enterInput}
+												maxLength={5}
+												onClick={(e) => {
+													setFocusInput(true);
+													setPodlozhka(true);
+													// setInputFormat(true);
+													e.stopPropagation();
+												}}
+												// value={focusInput && inputFormat ? memoryInput : formatNumber2(+memoryInput)}
+												onDoubleClick={(e) => e.stopPropagation()}
+												style={{
+													color: 'rgba(0,0,0,0.7)',
+													// width: inputLength(memoryInput.toString()),
+												}}
+											/>
 
-								<button
-									style={btnMenu ? { width: '16px' } : {}}
-									onDoubleClick={(e) => e.stopPropagation()}
-									// onClick={BtnPlus}
+											<button
+												style={btnMenu ? { width: '16px' } : {}}
+												onDoubleClick={(e) => e.stopPropagation()}
+												// onClick={BtnPlus}
+											>
+												<svg
+													width="15"
+													height="15"
+													viewBox="3 2 15 15"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+													style={{ transform: 'rotate(45deg)', marginTop: '1px' }}
+												>
+													<path
+														d="M7.26655 8.03662L12.0888 12.8589"
+														stroke="black"
+														strokeOpacity="0.7"
+														strokeWidth="1.09116"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													></path>
+													<path
+														d="M7.26655 12.8589L12.0888 8.03659"
+														stroke="black"
+														strokeOpacity="0.7"
+														strokeWidth="1.09116"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													></path>
+													<path
+														d="M7.26655 8.03662L12.0888 12.8589"
+														stroke="black"
+														strokeOpacity="0.7"
+														strokeWidth="1.09116"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													></path>
+													<path
+														d="M7.26655 12.8589L12.0888 8.03659"
+														stroke="black"
+														strokeOpacity="0.7"
+														strokeWidth="1.09116"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													></path>
+													<path
+														d="M7.26655 8.03662L12.0888 12.8589"
+														stroke="black"
+														strokeOpacity="0.7"
+														strokeWidth="1.09116"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													></path>
+													<path
+														d="M7.26655 12.8589L12.0888 8.03659"
+														stroke="black"
+														strokeOpacity="0.7"
+														strokeWidth="1.09116"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													></path>
+												</svg>
+											</button>
+										</div>
+
+										<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
+									</div>
+								</td>
+								<td className="nal-rezerv">
+									<div
+									// style={
+									// 	!objProduct[index  + getStart()].status.all
+									// 		? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+									// 		: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+									// }
+									>
+										{objProduct[index + getStart()]?.rezerv}
+									</div>
+								</td>
+								<td className="nal-otpr">
+									<div
+									// style={
+									// 	!objProduct[index  + getStart()].status.all
+									// 		? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+									// 		: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
+									// }
+									>
+										{objProduct[index + getStart()]?.otpr}
+									</div>
+								</td>
+								<td className="nal-vozvrat">
+									<div
+										style={
+											!objProduct[index]?.status.all
+												? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
+												: { color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
+										}
+									>
+										{objProduct[index + getStart()]?.vozvrat}
+									</div>
+								</td>
+								{/* <td
+						style={
+							!objProduct[index]?.status.all
+								? {
+										color: 'rgba(0,0,0,0.4)',
+										textAlign: 'right',
+										paddingRight: '15px',
+										position: 'relative',
+								  }
+								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+						}
+					>
+						{objProduct[index + getStart()]?.zakupka}
+					</td> */}
+								<td
+									style={
+										!objProduct[index]?.status.all
+											? {
+													color: 'rgba(0,0,0,0.4)',
+													textAlign: 'right',
+													paddingRight: '15px',
+													position: 'relative',
+											  }
+											: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+									}
 								>
-									<svg
-										width="15"
-										height="15"
-										viewBox="3 2 15 15"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-										style={{ transform: 'rotate(45deg)', marginTop: '1px' }}
+									{objProduct[index + getStart()]?.zakupka}
+								</td>
+								<td
+									style={
+										!objProduct[index]?.status.all
+											? {
+													color: 'rgba(0,0,0,0.4)',
+													textAlign: 'right',
+													paddingRight: '15px',
+													position: 'relative',
+											  }
+											: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+									}
+								>
+									{objProduct[index + getStart()]?.prodazha}
+								</td>
+								<td
+									style={
+										!objProduct[index]?.status.all
+											? {
+													color: 'rgba(0,0,0,0.4)',
+													textAlign: 'right',
+													paddingRight: '15px',
+													position: 'relative',
+											  }
+											: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
+									}
+								>
+									{objProduct[index + getStart()]?.marzha}
+								</td>
+								<td className="summa-suma1">
+									<div
+										style={
+											!objProduct[index].status.all
+												? {
+														opacity: 0.4,
+														textAlign: 'right',
+														display: 'flex',
+														justifyContent: 'end',
+														paddingRight: '3px',
+												  }
+												: {
+														textAlign: 'right',
+														display: 'flex',
+														justifyContent: 'end',
+														paddingRight: '3px',
+												  }
+										}
 									>
-										<path
-											d="M7.26655 8.03662L12.0888 12.8589"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 12.8589L12.0888 8.03659"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 8.03662L12.0888 12.8589"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 12.8589L12.0888 8.03659"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 8.03662L12.0888 12.8589"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 12.8589L12.0888 8.03659"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-									</svg>
-								</button>
-							</div>
-
-							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
-						</div>
-					</td>
-					<td className="nal-rezerv">
-						<div
-							// style={
-							// 	!objProduct[index  + getStart()].status.all
-							// 		? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
-							// 		: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
-							// }
-						>
-							{objProduct[index  + getStart()]?.rezerv}
-						</div>
-					</td>
-					<td className="nal-otpr">
-						<div
-							// style={
-							// 	!objProduct[index  + getStart()].status.all
-							// 		? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
-							// 		: { color: 'rgba(0,0,0,0.5)', paddingRight: '4px' }
-							// }
-						>
-							{objProduct[index  + getStart()]?.otpr}
-						</div>
-					</td>
-					<td className="nal-vozvrat">
-						<div
-							style={
-								!objProduct[index]?.status.all
-									? { opacity: 0.4, color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
-									: { color: 'rgba(0,0,0,0.5)', paddingRight: '15px' }
-							}
-						>
-							{objProduct[index  + getStart()]?.vozvrat}
-						</div>
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index + getStart()]?.zakupka}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index  + getStart()]?.prodazha}
-					</td>
-					<td
-						style={
-							!objProduct[index]?.status.all
-								? {
-										color: 'rgba(0,0,0,0.4)',
-										textAlign: 'right',
-										paddingRight: '15px',
-										position: 'relative',
-								  }
-								: { textAlign: 'right', paddingRight: '15px', position: 'relative' }
-						}
-					>
-						{objProduct[index  + getStart()]?.marzha}
-					</td>
-					<td className="summa-suma1">
-						<div
-							style={
-								!objProduct[index].status.all
-									? {
-											opacity: 0.4,
-											textAlign: 'right',
-											display: 'flex',
-											justifyContent: 'end',
-											paddingRight: '3px',
-									  }
-									: {
-											textAlign: 'right',
-											display: 'flex',
-											justifyContent: 'end',
-											paddingRight: '3px',
-									  }
-							}
-						>
-							{objProduct[index  + getStart()]?.ostatok * objProduct[index  + getStart()]?.zakupka}
-							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
-						</div>
-					</td>
-					<td className="summa-suma2">
-						<div
-							style={
-								!objProduct[index]?.status.all
-									? { opacity: 0.4, paddingRight: '4px' }
-									: { paddingRight: '4px' }
-							}
-						>
-							{objProduct[index  + getStart()]?.suma2}
-						</div>
-					</td>
-					<td className="summa-suma3">
-						<div
-							style={
-								!objProduct[index].status.all
-									? { opacity: 0.4, paddingRight: '4px' }
-									: { paddingRight: '4px' }
-							}
-						>
-							{objProduct[index  + getStart()]?.suma3}
-						</div>
-					</td>
-					<td className="summa-suma4">
-						<div 
-						// style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
-						>
-							{objProduct[index  + getStart()]?.suma4}
-						</div>
-					</td>
-				</tr>
+										{objProduct[index + getStart()]?.ostatok *
+											objProduct[index + getStart()]?.zakupka}
+										<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
+									</div>
+								</td>
+								<td className="summa-suma2">
+									<div
+										style={
+											!objProduct[index]?.status.all
+												? { opacity: 0.4, paddingRight: '4px' }
+												: { paddingRight: '4px' }
+										}
+									>
+										{objProduct[index + getStart()]?.suma2}
+									</div>
+								</td>
+								<td className="summa-suma3">
+									<div
+										style={
+											!objProduct[index].status.all
+												? { opacity: 0.4, paddingRight: '4px' }
+												: { paddingRight: '4px' }
+										}
+									>
+										{objProduct[index + getStart()]?.suma3}
+									</div>
+								</td>
+								<td className="summa-suma4">
+									<div style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}>
+										{objProduct[index + getStart()]?.suma4}
+									</div>
+								</td>
+							</tr>
 						))}
 
 						<tr style={{ height: getBottomHeight() }}></tr>
@@ -1834,6 +1507,60 @@ const WarehouseBlock = ({
 					</tfoot>
 				</table>
 				{/* <div style={{ height: getBottomHeight() }} />   */}
+			</div>
+			<div
+				style={{
+					display: 'flex',
+					maxHeight: 'calc(100vh - 149px)',
+					marginBottom: '10px',
+					// maxWidth: 1150,
+					transform: 'translate3d(0,0,0)',
+					willChange: 'transform, scroll-position',
+					width: '100%',
+					overflow: 'auto',
+				}}
+				onScroll={(e) => throttle(onScroll(e), 40)}
+			>
+				<table>
+					<tbody>
+						<tr style={{ height: 1 + getTopHeight() }}></tr>
+						{todo.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
+							<tr
+								key={index + getStart()}
+								style={{
+									height: rowHeight,
+									transform: 'translate3d(0,0,0)',
+									willChange: 'transform, scroll-position',
+								}}
+							>
+								<td
+									style={{
+										whiteSpace: 'nowrap',
+										height: rowHeight,
+										transform: 'translate3d(0,0,0)',
+										willChange: 'transform, scroll-position',
+										maxWidth: '400px',
+										overflow: 'hidden',
+										textOverflow: 'ellipsis',
+									}}
+								>
+									{x.title}
+								</td>
+								<td
+									style={{
+										whiteSpace: 'nowrap',
+										height: rowHeight,
+										transform: 'translate3d(0,0,0)',
+										willChange: 'transform, scroll-position',
+									}}
+								>
+									{x.id}
+								</td>
+							</tr>
+						))}
+						<tr style={{ height: 1 + getBottomHeight() }}></tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	);

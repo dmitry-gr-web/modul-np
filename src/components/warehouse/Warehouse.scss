@@ -36,15 +36,15 @@
 // ::-webkit-scrollbar-thumb {
 // 	background: none;
 //   }
+// body {
+// 	left: 0;
+//     position: fixed;
+//     top: 0;
+// 	width: 100%;
+// 	transform: translate3d(0,0,0);
+// 	will-change: transform, scroll-position;
+// }
 body {
-	left: 0;
-    position: fixed;
-    top: 0;
-	width: 100%;
-	transform: translate3d(0,0,0);
-	will-change: transform, scroll-position;
-}
-html {
 	overscroll-behavior-x: none;
 	overscroll-behavior-y: none;
 }
