@@ -1561,42 +1561,7 @@ const WarehouseBlock = ({
 									>
 										{x.id}
 									</td>
-									<td
-										style={{
-											whiteSpace: 'nowrap',
-											height: rowHeight,
-											transform: 'translate3d(0,0,0)',
-											willChange: 'transform, scroll-position',
-											maxWidth: '400px',
-											overflow: 'hidden',
-											textOverflow: 'ellipsis',
-										}}
-									>
-										{x.title}
-									</td>
-									<td
-										style={{
-											whiteSpace: 'nowrap',
-											height: rowHeight,
-											transform: 'translate3d(0,0,0)',
-											willChange: 'transform, scroll-position',
-										}}
-									>
-										{x.id}
-									</td>
-									<td
-										style={{
-											whiteSpace: 'nowrap',
-											height: rowHeight,
-											transform: 'translate3d(0,0,0)',
-											willChange: 'transform, scroll-position',
-											maxWidth: '400px',
-											overflow: 'hidden',
-											textOverflow: 'ellipsis',
-										}}
-									>
-										{x.title}
-									</td>
+									
 							
 								
 								</tr>
