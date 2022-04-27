@@ -28,7 +28,7 @@ const WarehouseBlock = ({
 	load,
 	translator,
 }) => {
-	const linkTR = useRef();
+	// const linkTR = useRef();
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
 	const [checked, setChecked] = useState(true);
@@ -433,6 +433,11 @@ const WarehouseBlock = ({
 	// 		});
 	// 	}
 	// }, [switchMenu]);
+	// const [color,setcolor]= useState(true);
+	// const style = {
+	// 	background: `${color ? 'pink': 'green'}`
+	// }
+
 	return (
 		<div className="warehouse-products">
 			<div className="warehouse-products-title">
@@ -447,7 +452,7 @@ const WarehouseBlock = ({
 				className="warehouse-table"
 				style={{
 					display: 'flex',
-					// maxHeight: 'calc(100vh - 149px)',
+					maxHeight: 'calc(100vh - 149px)',
 					marginBottom: '10px',
 					// maxWidth: 1150,
 					width: '100%',
@@ -598,7 +603,7 @@ const WarehouseBlock = ({
 							</th>
 							<th colSpan={4}>{translator.getTranslation('warehouse', 'total')}</th>
 						</tr>
-						<tr ref={linkTR}>
+						<tr>
 							<th className="hoverr">
 								<div></div>
 							</th>
@@ -863,17 +868,18 @@ const WarehouseBlock = ({
 					}
 					style={{height: rowHeight}}
 					// onClick={clickTr}
-					ref={linkTR}
+					// ref={linkTR}
 					// key={index}
 					// style={{transition: '0.2s',opacity: 0}}
 					// onDoubleClick={dblClick}
 					key={index  + getStart()}
-				>
-					<td className="hoverr">
+				>	
+					{objProduct.length > 0  && 		<td className="hoverr">
 						<div></div>
 						{/* <div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div> */}
 						<div className='div'></div>
-					</td>
+					</td>}
+			
 					{/* <td
 						className="sticky-body-row1"
 						onMouseEnter={() => setSwitchMenu(true)}
@@ -943,7 +949,7 @@ const WarehouseBlock = ({
 							</label>
 						</div>
 					</td> */}
-					<td className="sticky-body" style={{position:'sticky !important',zIndex:2,left:13,background:'white', transform:'translate3d(0,0,0)',willChange:'transform,scroll-position'}}>
+					<td className="sticky-body" style={{position:'sticky',zIndex:2,left:13,background:'white', transform:'translate3d(0,0,0)',willChange:'transform,scroll-position'}}>
 						<div className="sticky-block">
 							<div
 								onMouseEnter={() => setSwitchMenu(true)}

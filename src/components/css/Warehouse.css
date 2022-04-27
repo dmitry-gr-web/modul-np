@@ -32,6 +32,15 @@
     max-width: 100px !important;
   }
 }
+body {
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, scroll-position;
+}
+
 html {
   overscroll-behavior-x: none;
   overscroll-behavior-y: none;
@@ -779,10 +788,6 @@ html {
   transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
 }
-.warehouse-products table .first-tab-body .sticky-body {
-  transform: translate3d(0, 0, 0);
-  will-change: transform, scroll-position;
-}
 .warehouse-products table .first-tab-body td {
   padding: 0;
   font-size: 14px;
@@ -831,7 +836,7 @@ html {
   top: 0;
   left: 0;
   width: 100%;
-  visibility: hidden;
+  display: none;
   background: #cacaca;
 }
 .warehouse-products table .first-tab-body .hoverr .div {
@@ -841,11 +846,11 @@ html {
   top: 0;
   left: 0;
   width: calc(100vw - 386px);
-  visibility: hidden;
+  display: none;
   background: #858585;
 }
 .warehouse-products table .first-tab-body tr:hover .hoverr div:first-child {
-  visibility: visible;
+  display: block;
 }
 .warehouse-products table .first-tab-body tr:hover .sticky-block {
   background: #cacaca;
@@ -872,7 +877,7 @@ html {
   top: 0;
 }
 .warehouse-products table .first-tab-body .select .hoverr .div {
-  visibility: visible;
+  display: block;
 }
 .warehouse-products table .first-tab-body .select .animationFrame {
   background-color: #858585;

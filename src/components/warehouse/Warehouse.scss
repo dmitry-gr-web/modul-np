@@ -36,12 +36,14 @@
 // ::-webkit-scrollbar-thumb {
 // 	background: none;
 //   }
-// body {
-// 	left: 0;
-//     position: fixed;
-//     top: 0;
-// 	width: 100%;
-// }
+body {
+	left: 0;
+    position: fixed;
+    top: 0;
+	width: 100%;
+	transform: translate3d(0,0,0);
+	will-change: transform, scroll-position;
+}
 html {
 	overscroll-behavior-x: none;
 	overscroll-behavior-y: none;
@@ -1249,8 +1251,8 @@ html {
 			.sticky-body {
 				// -webkit-backface-visibility: hidden;
 				// -webkit-perspective: 1000;
-				transform: translate3d(0, 0, 0);
-				will-change: transform, scroll-position;
+				// transform: translate3d(0, 0, 0);
+				// will-change: transform, scroll-position;
 			}
 			// tr {
 			// 	height: 20px;
@@ -1445,7 +1447,8 @@ html {
 					// display: none;
 					// transform: translateZ(0);
 					// will-change: transform, scroll-position;
-					visibility: hidden;
+					// visibility: hidden;
+					display: none;
 					background: #cacaca;
 				}
 				.div {
@@ -1459,14 +1462,15 @@ html {
 					// display: none;
 					// transform: translateZ(0);
 					// will-change: transform, scroll-position;
-					visibility: hidden;
+					// visibility: hidden;
+					display: none;
 					background: #858585;
 				}
 			}
 			tr:hover .hoverr div:first-child {
-				// display: block;
+				display: block;
 				// transform: translateZ(0px);
-				visibility: visible;
+				// visibility: visible;
 			}
 			tr:hover .sticky-block {
 				background: #cacaca;
@@ -1550,7 +1554,8 @@ html {
 				// background-color: rgba(81, 81, 81, 0.7);
 				// background-color: #858585;
 				.hoverr .div {
-					visibility: visible;
+					// visibility: visible;
+					display: block;
 				}
 				.animationFrame {
 					background-color: #858585;
