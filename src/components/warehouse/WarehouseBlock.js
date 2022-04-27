@@ -1522,7 +1522,7 @@ const WarehouseBlock = ({
 				onScroll={(e) => throttle(onScroll(e), 40)}
 			>
 				<table
-					style={{ transform: 'translate3d(0,0,0)', willChange: 'transform, scroll-position' }}
+					style={{ transform: 'translate3d(0,0,0)', willChange: 'transform, scroll-position',    borderCollapse: 'collapse', zIndex: 999 }}
 				>
 					{todo.length > 0 && (
 						<tbody
@@ -1538,6 +1538,19 @@ const WarehouseBlock = ({
 										willChange: 'transform, scroll-position',
 									}}
 								>
+									<td
+										style={{
+											whiteSpace: 'nowrap',
+											height: rowHeight,
+											transform: 'translate3d(0,0,0)',
+											willChange: 'transform, scroll-position',
+											maxWidth: '400px',
+											overflow: 'hidden',
+											textOverflow: 'ellipsis',
+										}}
+									>
+										{x.title}
+									</td>
 									<td
 										style={{
 											whiteSpace: 'nowrap',
