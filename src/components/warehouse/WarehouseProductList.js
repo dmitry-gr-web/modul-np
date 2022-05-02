@@ -193,6 +193,16 @@ const WarehouseProductList = ({
 				tooltipBlock.style.animation = 'delay-header 1s forwards';
 			}, 150);
 		}
+		if(objProduct[index].lock) {
+			plusminus = setTimeout(() => {
+				const name = 'Олександр'
+				tooltipBlock.style.fontSize = '14px';
+				tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-header 1s forwards';
+			}, 150);
+		}
 
 		// console.log(e.target.querySelector('input'))
 	}
@@ -372,8 +382,11 @@ const WarehouseProductList = ({
 			x.classList.add('showBtn');
 		});
 		plusminus = setTimeout(() => {
-			inputRef?.current?.select();
-			inputRef?.current?.focus();
+			if(!objProduct[index].lock){
+				inputRef?.current?.select();
+				inputRef?.current?.focus();
+			}
+		
 		}, 150);
 	}
 	function PlusMinusClose(e) {
@@ -385,19 +398,6 @@ const WarehouseProductList = ({
 		}
 		clearTimeout(plusminus);
 	}
-	// const [leftShadow,setLeftShadow] = useState(0);
-	// useEffect(() => {
-	// 	let width = document.querySelector('.sticky-body')?.offsetWidth;
-	// 	// setLeftShadow(width);
-	// 	document.querySelectorAll('.shadow').forEach((x) => {
-	// 		x.style.left = width + 7 + 'px';
-	// 	});
-	// }, [objProduct, switchMenu]);
-	// useMemo(()=> {
-	// 	PlusMinusClose()
-	// 	PlusMinusOpen()
-	// }, [])
-	// console.log(objProduct[index].status.all);
 	function dblClick(e) {
 		if (
 			e.target.localName === 'button' ||
@@ -425,12 +425,14 @@ const WarehouseProductList = ({
 					onClick={clickTr}
 					ref={linkTR}
 					// key={index}
+					onMouseEnter={objProduct[index].lock ? tooltipOn : ()=>{}}
+					onMouseLeave={objProduct[index].lock ? tooltipOff : ()=>{}}
 					// style={{transition: '0.2s',opacity: 0}}
-					onDoubleClick={dblClick}
+					onDoubleClick={!objProduct[index].lock ? dblClick : ()=>{}}
 					key={index}
 				>
 					<td className="hoverr">
-						<div style={{width: document.querySelector('.warehouse-products')?.offsetWidth - 40 + 'px'}}></div>
+						<div style={{width: document.querySelector('.warehouse-products')?.offsetWidth + 'px'}}></div>
 						<div className='div'></div>
 					</td>
 					{/* <td
@@ -683,7 +685,7 @@ const WarehouseProductList = ({
 										overflow: 'hidden',
 										textOverflow: 'ellipsis',
 										display: 'block',
-										width: widthColum.attribute + 'px',
+										width: widthColum.attribute - 20 + 'px',
 										maxWidth: 85,
 									}}
 								>
@@ -695,75 +697,7 @@ const WarehouseProductList = ({
 						{/* <div className='hover'></div> */}
 					</td>
 
-					{/* <td
-						onMouseLeave={tooltipOff}
-						onMouseEnter={tooltipOn}
-						className="id-tovara while2"
-						style={
-							!swtichChecked
-								? { color: 'rgba(0,0,0,0.4)', textAlign: 'left' }
-								: { textAlign: 'left' }
-						}
-					>
-						{objProduct[index].id}
-					</td> */}
-					{/* <td className="while2" style={{ textAlign: 'center' }}>
-						<span style={!swtichChecked ? { opacity: 0.4 } : {}} className="flags">
-							{objProduct[index].country}
-						</span>
-					</td> */}
-					{/* <td
-						className="while2"
-						style={
-							!swtichChecked
-								? { color: 'rgba(0,0,0,0.4)', textAlign: 'center' }
-								: { textAlign: 'center' }
-						}
-					>
-						{objProduct[index].currency}
-					</td> */}
-					{/* <td className="name-tovara while2" onMouseLeave={tooltipOff} onMouseEnter={tooltipOn}>
-						<span
-							style={!swtichChecked ? { opacity: 0.4 } : {}}
-							className={
-								objProduct[index].podProduct === 0
-									? 'arrow'
-									: objProduct[index].podProduct === 1
-									? 'arrowDeg'
-									: ''
-							}
-						>
-							{objProduct[index].name}
-						</span>
-					</td> */}
-					{/* <td className="while2">
-						<div style={!swtichChecked ? { opacity: 0.4 } : {}}>
-							<img
-								style={{ width: 16, height: 16, position: 'absolute' }}
-								src={objProduct[index].images}
-								alt=""
-							/>
-							<span
-								onMouseLeave={tooltipOff}
-								onMouseEnter={tooltipOn}
-								style={{
-									marginLeft: 20,
-									whiteSpace: 'nowrap',
-									overflow: 'hidden',
-									textOverflow: 'ellipsis',
-									display: 'block',
-									maxWidth: 85,
-								}}
-							>
-								{objProduct[index].attribute}
-							</span>
-						</div>
-					</td> */}
-
-					{/* <td className="shadow">
-						<div className="shadow-left"></div>
-					
-					</td> */}
+			
 					<td
 						style={{ paddingLeft: '12px' }}
 						onMouseLeave={PlusMinusClose}
@@ -825,6 +759,7 @@ const WarehouseProductList = ({
 										color: 'rgba(0,0,0,0.7)',
 										width: inputLength(memoryInput.toString()),
 									}}
+									readOnly={objProduct[index].lock ? true : false}
 								/>
 
 								<button

@@ -16,7 +16,7 @@
   }
 
   .attribute-width.btn {
-    max-width: 270px !important;
+    max-width: 250px !important;
   }
 }
 @media (-webkit-min-device-pixel-ratio: 2) {
@@ -272,8 +272,7 @@ body {
 .warehouse-products .warehouse-dropmenu .dropmenu .simplebar-content-wrapper {
   padding: 0;
 }
-.warehouse-products .warehouse-dropmenu .dropmenu li {
-  list-style: none;
+.warehouse-products .warehouse-dropmenu .dropmenu .list {
   padding-left: 15px;
   padding-right: 10px;
   height: 20px;
@@ -281,10 +280,17 @@ body {
   white-space: nowrap;
   position: relative;
   overflow: hidden;
-  display: block;
   text-overflow: ellipsis;
 }
 .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list {
+  padding-left: 15px;
+  padding-right: 10px;
+  height: 20px;
+  line-height: 20px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
   width: calc(100% - 25px) !important;
 }
 .warehouse-products .warehouse-dropmenu .dropmenu .findUnderline {
@@ -302,13 +308,13 @@ body {
 .warehouse-products .warehouse-dropmenu .dropmenu .flags {
   color: black !important;
 }
-.warehouse-products .warehouse-dropmenu .dropmenu li:hover {
+.warehouse-products .warehouse-dropmenu .dropmenu .list, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover {
   color: rgba(0, 0, 0, 0.5);
 }
-.warehouse-products .warehouse-dropmenu .dropmenu li:hover .status {
+.warehouse-products .warehouse-dropmenu .dropmenu .list, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover .status {
   opacity: 0.5;
 }
-.warehouse-products .warehouse-dropmenu .dropmenu li:hover .flags {
+.warehouse-products .warehouse-dropmenu .dropmenu .list, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover .flags {
   opacity: 0.5;
 }
 .warehouse-products .warehouse-dropmenu .dropmenu .select-btn:before {
@@ -826,7 +832,7 @@ body {
   background-color: #e1dedd !important;
 }
 .warehouse-products table .first-tab-body .lockOrder label,
-.warehouse-products table .first-tab-body .lockOrder input {
+.warehouse-products table .first-tab-body .lockOrder input, .warehouse-products table .first-tab-body .lockOrder button {
   pointer-events: none;
 }
 .warehouse-products table .first-tab-body .lockOrder .shadow-left {
@@ -915,6 +921,7 @@ body {
   padding: 0 2px;
   position: relative;
   min-width: 76px;
+  min-width: 91px;
 }
 .warehouse-products table .nal-ostatok .wrap-nal-ostatok {
   transition: transform 0.3s;

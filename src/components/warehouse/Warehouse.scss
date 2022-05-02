@@ -15,7 +15,7 @@
 		max-width: 250px !important;
 	}
 	.attribute-width.btn {
-		max-width: 270px !important;
+		max-width: 250px !important;
 	}
 }
 @media (-webkit-min-device-pixel-ratio: 2) {
@@ -336,8 +336,8 @@ body {
 				padding: 0;
 			}
 
-			li {
-				list-style: none;
+			.list {
+				// list-style: none;
 				padding-left: 15px;
 				padding-right: 10px;
 				height: 20px;
@@ -347,10 +347,21 @@ body {
 				white-space: nowrap;
 				position: relative;
 				overflow: hidden;
-				display: block;
+				// display: block;
 				text-overflow: ellipsis;
 			}
 			.infinity-list {
+				padding-left: 15px;
+				padding-right: 10px;
+				height: 20px;
+				line-height: 20px;
+				// display: flex;
+				// align-items: center;
+				white-space: nowrap;
+				position: relative;
+				overflow: hidden;
+				// display: block;
+				text-overflow: ellipsis;
 				width: calc(100% - 25px) !important;
 			}
 			.findUnderline {
@@ -371,13 +382,13 @@ body {
 			.flags {
 				color: rgba(0, 0, 0, 1) !important;
 			}
-			li:hover {
+			.list, .infinity-list:hover {
 				color: rgba(0, 0, 0, 0.5);
 			}
-			li:hover .status {
+			.list, .infinity-list:hover .status {
 				opacity: 0.5;
 			}
-			li:hover .flags {
+			.list, .infinity-list:hover .flags {
 				opacity: 0.5;
 			}
 			.select-btn:before {
@@ -1307,6 +1318,7 @@ body {
 				top: 3px;
 			}
 			.lockOrder {
+				// pointer-events: none;
 				td,
 				div,
 				input {
@@ -1319,7 +1331,7 @@ body {
 				// user-select: none;
 				// pointer-events: none;npm
 				label,
-				input {
+				input, button {
 					pointer-events: none;
 				}
 				// .nal-ostatok {
@@ -1609,70 +1621,12 @@ body {
 				border-radius: 3px 0 0 3px;
 				top: 0;
 			}
-			// tr:hover {
-			// 	background: #cacaca;
-			// 	.sticky-body {
-			// 		background: #cacaca;
-			// 	}
-			// 	label span {
-			// 		background: #adaaaa;
-			// 	}
-			// }
 		}
-
-		// .id-tovara {
-		// 	text-align: center;
-		// 	max-width: 60px;
-		// 	text-overflow: ellipsis;
-		// 	white-space: nowrap;
-		// 	overflow: hidden;
-		// }
-		// .name-tovara {
-		// 	max-width: 172px;
-		// 	overflow: hidden;
-		// 	text-overflow: ellipsis;
-		// 	white-space: nowrap;
-		// 	span {
-		// 		position: relative;
-		// 	}
-		// 	.arrow {
-		// 		margin-left: 13px;
-		// 		position: relative;
-		// 		&:before {
-		// 			background-image: url('../../img/arrow-down.svg');
-		// 			content: '';
-		// 			background-repeat: no-repeat;
-		// 			background-size: contain;
-		// 			width: 9px;
-		// 			height: 4px;
-		// 			position: absolute;
-		// 			left: -13px;
-		// 			top: 6px;
-		// 			// opacity: 0.8;
-		// 		}
-		// 	}
-		// 	.arrowDeg {
-		// 		margin-left: 25px;
-		// 		&:before {
-		// 			background-image: url('../../img/arrow-down.svg');
-		// 			content: '';
-		// 			background-repeat: no-repeat;
-		// 			background-size: contain;
-
-		// 			width: 9px;
-		// 			height: 4px;
-		// 			position: absolute;
-		// 			left: -13px;
-		// 			transform: rotate(-90deg);
-		// 			top: 4px;
-		// 			// opacity: 0.8;
-		// 		}
-		// 	}
-		// }
 		.nal-ostatok {
 			padding: 0 2px;
 			position: relative;
 			min-width: 76px;
+			min-width: 91px;
 			.wrap-nal-ostatok {
 				transition: transform 0.3s;
 				transform: translateX(8px);
@@ -1684,75 +1638,27 @@ body {
 				background-color: transparent;
 				font-weight: 300;
 				text-align: right;
-				// position: absolute;
 			}
 			input::selection {
-				// background-color: rgb(71, 74, 81, 0.7);
 				background-color: #afafb3;
 			}
 			button {
-				// transform: translateZ(0);
-				// will-change: transform;
 				position: relative;
 				width: 0px;
 				width: 16px;
 				height: 16px;
 				padding: 0;
-				// transition: 0.2s;
 				opacity: 0;
 				outline: none;
 				background-color: transparent;
 				border: none;
 				overflow: hidden;
 				transition: opacity 0.3s;
-
-				// visibility: hidden;
-				// transition: width 0.2s;
 				cursor: pointer;
 			}
 			span {
 				z-index: 1;
 			}
-			// &:hover button {
-			// 	width: 16px !important;
-			// }
-			// button:first-child {
-			// 	// position: relative;
-			// 	&:before {
-			// 		content: '';
-			// 		position: absolute;
-			// 		width: 8px;
-			// 		height: 0px;
-			// 		top: 6px;
-			// 		left: 3px;
-			// 		border: 0.5px solid #636363;
-			// 		border-radius: 2px;
-			// 	}
-			// }
-			// button:nth-child(3) {
-			// 	// position: relative;
-			// 	&:before {
-			// 		content: '';
-			// 		position: absolute;
-			// 		width: 8px;
-			// 		height: 0px;
-			// 		top: 6px;
-			// 		left: 3px;
-			// 		border: 0.5px solid #636363;
-			// 		border-radius: 2px;
-			// 	}
-			// 	&:after {
-			// 		content: '';
-			// 		position: absolute;
-			// 		width: 0px;
-			// 		height: 8px;
-			// 		top: 2px;
-			// 		left: 7px;
-			// 		border: 0.5px solid #636363;
-			// 		border-radius: 2px;
-			// 	}
-			// }
-			// button:hover:before,
 			button:nth-child(3) svg {
 				opacity: 0.7;
 			}
@@ -1833,8 +1739,6 @@ body {
 	}
 	.hoverOff {
 		pointer-events: none !important;
-		// transform: translate3d(0, 0, 0);
-		// will-change: transform, scroll-position;
 	}
 	.switch-btn-warehouse {
 		position: relative;

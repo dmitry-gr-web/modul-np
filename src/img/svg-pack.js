@@ -9,7 +9,7 @@ import addImg from './circleplus.svg';
 const SvgCalendar = () => {
 	return (
 <svg
-		class="data-user-btn"
+	
 		width="15"
 		height="15"
 		viewBox="0 0 15 15"
@@ -19,26 +19,26 @@ const SvgCalendar = () => {
 		<path
 			d="M11.4 14H3.6C2.17 14 1 12.83 1 11.4V4.90005C1 3.47005 2.17 2.30005 3.6 2.30005H11.4C12.83 2.30005 14 3.47005 14 4.90005V11.4C14 12.83 12.83 14 11.4 14Z"
 			stroke="black"
-			stroke-width="0.666667"
-			stroke-miterlimit="10"
-			stroke-linecap="round"
-			stroke-linejoin="round"
+			strokeWidth="0.666667"
+			strokeMiterlimit="10"
+			strokeLinecap="round"
+			strokeLinejoin="round"
 		></path>
 		<path
 			d="M10.75 1V3.6"
 			stroke="black"
-			stroke-width="0.666667"
-			stroke-miterlimit="10"
-			stroke-linecap="round"
-			stroke-linejoin="round"
+			strokeWidth="0.666667"
+			strokeMiterlimit="10"
+			strokeLinecap="round"
+			strokeLinejoin="round"
 		></path>
 		<path
 			d="M4.25 1V3.6"
 			stroke="black"
-			stroke-width="0.666667"
-			stroke-miterlimit="10"
-			stroke-linecap="round"
-			stroke-linejoin="round"
+			strokeWidth="0.666667"
+			strokeMiterlimit="10"
+			strokeLinecap="round"
+			strokeLinejoin="round"
 		></path>
 		<path
 			d="M4.25004 7.50007C4.60902 7.50007 4.90004 7.20906 4.90004 6.85007C4.90004 6.49109 4.60902 6.20007 4.25004 6.20007C3.89105 6.20007 3.60004 6.49109 3.60004 6.85007C3.60004 7.20906 3.89105 7.50007 4.25004 7.50007Z"

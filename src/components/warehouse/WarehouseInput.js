@@ -1,16 +1,21 @@
 import React,{useState} from 'react'
 
-const WarehouseInput = ({setPodlozhka}) => {
+const WarehouseInput = ({setPodlozhka, podlozhka}) => {
     const [inputID, setInputID] = useState('');
     function warehouseInputOn(e) {
 		e.currentTarget.querySelector('input').focus();
 		// e.currentTarget.querySelector('.underline').style.width = '100%';
 	}
 	function warehouseInputOff(e) {
-		e.currentTarget.querySelector('input').blur();
+        if(podlozhka){
+
+        } else {
+            
+            e.currentTarget.querySelector('input').blur();
+        }
 		// e.currentTarget.querySelector('.underline').style.width = '0%';
 	}
-    function changeInput (e) {
+    function changeInput(e) {
 		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 		// 	x.style.visibility = 'hidden';
 		// });
@@ -28,6 +33,16 @@ const WarehouseInput = ({setPodlozhka}) => {
         }
 		setPodlozhka(true);
 	}
+    function enter(e) {
+        if(e.key === "Enter") {
+            document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+                // x.style.visibility = 'visible';
+                x.classList.remove('hide-menu');
+            });
+            setPodlozhka(false);
+            e.currentTarget.blur();
+        }
+    }
   return (
     <div
     onMouseLeave={warehouseInputOff}
@@ -36,6 +51,7 @@ const WarehouseInput = ({setPodlozhka}) => {
 >
     <input
         onChange={changeInput}
+        onKeyDown={enter}
         value={inputID}
         type="text"
     />

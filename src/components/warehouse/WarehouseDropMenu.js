@@ -91,11 +91,45 @@ const WarehouseDropMenu = ({
 	// 	newarr = [{ id: 0, attribute: translator?.getTranslation('btnAll','all') ?? 'Все', select: true }, ...newarr];
 	// },[])
 	const [obj, setObj] = useState(newarr);
+	const [objCopy, setObjCopy] = useState(newarr);
 	// obj[0].attribute = translator.getTranslation('btnAll', 'all');
 	// setObj(obj)
 	// newarr = newarr[0].attribute = translator.getTranslation('btnAll', 'all');
 
 	const [value, setValue] = useState('');
+	function infinityClick(index,e) {
+		setPodlozhka(true);
+	
+		// if(obj[0].select) {
+		// 	obj[0].select = !obj[0].select;
+		// }
+		if(obj[index].attribute === 'all') {
+			obj.map(x => x.select = false);
+			obj[index].select = true;
+			
+			setOpenMenu(false);
+			setPodlozhka(false);
+			document.querySelector('.warehouse-table').style.overflow = '';
+			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+				x.classList.remove('hide-menu');
+			});
+		} else {
+			obj[index].select = !obj[index].select;
+			obj.map(x => {if(x.attribute ==='all'){
+				x.select = false;
+			}});
+			objCopy.map(x => {if(x.attribute ==='all'){
+				x.select = false;
+			}});
+			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+				x.classList.add('hide-menu');
+			});
+			e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+		}
+		setObjCopy([...objCopy]);
+		
+		setObj([...obj]);
+	}
 	function clickList(index, e) {
 		setPodlozhka(true);
 		// document.querySelector('.warehouse-table').style.overflow = 'hidden';
@@ -162,30 +196,62 @@ const WarehouseDropMenu = ({
 			// x.style.visibility = 'hidden';
 			x.classList.add('hide-menu');
 		});
+		setValue(e.target.value);
 		// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
 		e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
-		setValue(e.target.value);
 		if (ref.current.value.length === 1) {
 			ref.current.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
 			setValue(e.target.value);
 		}
+		if (type === 'name' || type === 'attribute') {
+			// console.log(objCopy[1].attribute)
+			if (e.target.value !== "") {
+				const results = objCopy.filter((x) => {
+				  return x.attribute.toLowerCase().includes(e.target.value.toLowerCase());
+				});
+				setObj(results);
+			
+			} else {
+				setObj(objCopy);
+
+			}
+			
+		}
 		setPodlozhka(true);
 	}
+	// const listRef = React.createRef();
+	const warehouse = useRef();
 	function menuOn(e) {
-		setValue('');
-		setOpenMenu(true);
-		// e.currentTarget.querySelector('.underline').style.width = '100%';
-		if (inputOn) {
-			ref.current.focus();
+		if (!podlozhka) {
+			setObj(objCopy);//dlya infinity scroll
+			setValue('');
+			setOpenMenu(true);
 			// e.currentTarget.querySelector('.underline').style.width = '100%';
+			if (inputOn) {
+				ref.current.focus();
+				// e.currentTarget.querySelector('.underline').style.width = '100%';
+			}
+			if (adaptive) {
+				e.currentTarget.style.width = '51px';
+				document.querySelector('.width21px').style.maxWidth = '21px';
+			}
+			warehouse.current.querySelector('.simplebar-content-wrapper')?.scrollTo({
+				top: 0,
+			});
+			if (type === 'name'){
+				warehouse.current.querySelector('.scrollOff').scrollTo({top:0});
+			}
+			// e.currentTarget.closest('.simplebar-content-wrapper').scrollTo({
+			// 	top: 0,
+			// });
+			// console.log(e)
+			// listRef.current.el.querySelector('.scrollOff div').scrollToItem(0);
+			// e.target?.querySelector('.scrollOff div')?.scrollTo({top:0})
+			// ref.current.closest('.simplebar-content-wrapper').scrollTo({
+			// 	top: 0,
+			// });
 		}
-		if (adaptive) {
-			e.currentTarget.style.width = '51px';
-			document.querySelector('.width21px').style.maxWidth = '21px';
-		}
-		e.currentTarget?.querySelector('.simplebar-content-wrapper')?.scrollTo({
-			top: 0,
-		});
+
 	}
 	function menuOff(e) {
 		if (podlozhka) {
@@ -285,11 +351,6 @@ const WarehouseDropMenu = ({
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 			} else if (type === 'currency') {
-				console.log(e);
-				// { id: 1, attribute: '$', select: false },
-				// { id: 2, attribute: '€', select: false },
-				// { id: 3, attribute: '₴', select: false },
-				// { id: 4, attribute: '₽', select: false },
 				if (e.currentTarget.innerText === '$') {
 					tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'dollar');
@@ -336,12 +397,14 @@ const WarehouseDropMenu = ({
 		});
 	}, [podlozhka, openMenu]);
 
+
 	return (
 		<div
 			style={adaptive ? { width: 21, transition: 'width 0.3s' } : {}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
 			className={'warehouse-dropmenu'}
+			ref={warehouse}
 		>
 			{inputOn ? (
 				<>
@@ -350,7 +413,7 @@ const WarehouseDropMenu = ({
 						type="text"
 						style={{ color: 'rgba(0, 0, 0, 0.65)' }}
 						value={value}
-						onChange={changeInput}
+						onChange={e => changeInput(e)}
 					/>
 					{/* <span className="underline"></span> */}
 				</>
@@ -376,38 +439,41 @@ const WarehouseDropMenu = ({
 				</div>
 			)}
 			<span className="underline"></span>
-			{type === 'name' ? (
+			{type === 'name' || type === 'attribute' ? (
 				<SimpleBar
-				className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'} autoHide={false}>
+					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+					autoHide={false}
+				>
 					{({ scrollableNodeRef, contentNodeRef }) => {
 						return (
 							<List
 								height={83}
 								itemCount={obj.length}
 								itemSize={20}
+								className="scrollOff"
 							
-								className='scrollOff'
-								// ref={listRef}
 								innerRef={contentNodeRef}
 								outerRef={scrollableNodeRef}
 							>
-								{({ index, style }) => (
-									<li 
+								{({index, style }) => (
+									<div 
 									onMouseEnter={tooltipOn}
 									onMouseLeave={tooltipOff}
-							
+									
 									className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
-									onClick={(e) => clickList(obj[index].id, e)} key={index} style={style}
+									onClick={(e) => infinityClick(index,e)} key={index} style={style}
 									
 									dangerouslySetInnerHTML={{
 										__html: searchLine(
-											translator.getTranslation('btnAll', obj[index].attribute) ?? obj[index].attribute,
+											translator.getTranslation('btnAll', obj[index]?.attribute) ?? obj[index]?.attribute,
 											value
 										),
-									}}>
-										{/* {obj[index].attribute} */}
-									</li>
+									}}
+									>
+									{/* {obj[index]?.attribute} */}
+									</div>
 								)}
+							
 							</List>
 						);
 					}}
@@ -422,11 +488,11 @@ const WarehouseDropMenu = ({
 						? obj
 								.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
 								.map((x, index) => (
-									<li
+									<div
 										key={index}
 										onMouseEnter={tooltipOn}
 										onMouseLeave={tooltipOff}
-										className={x.select ? 'select-btn' : ''}
+										className={x.select ? 'select-btn list' : 'list'}
 										onClick={(e) => clickList(x.id, e)}
 									>
 										<span
@@ -437,14 +503,14 @@ const WarehouseDropMenu = ({
 												),
 											}}
 										></span>
-									</li>
+									</div>
 								))
 						: obj.map((x, index) => (
-								<li
+								<div
 									key={index}
 									onMouseEnter={tooltipOn}
 									onMouseLeave={tooltipOff}
-									className={x.select ? 'select-btn' : ''}
+									className={x.select ? 'select-btn list' : 'list'}
 									onClick={(e) => clickList(x.id, e)}
 									style={type === 'status' ? { overflow: 'visible' } : {}}
 								>
@@ -458,7 +524,7 @@ const WarehouseDropMenu = ({
 										{/* {console.log(translator.getTranslation('btnAll', x.attribute), x.attribute)} */}
 										{translator.getTranslation('btnAll', x.attribute) ?? x.attribute}
 									</span>
-								</li>
+								</div>
 						  ))}
 				</SimpleBar>
 			)}

@@ -98,7 +98,7 @@ const WarehouseBlock = ({
 	function searchLine(text, value) {
 		if (value !== '') {
 			let re = new RegExp(value, 'gui');
-			let text_pr = text.replace(re, (x) => '<span class="findUnderline">' + x + '</span>');
+			let text_pr = text?.replace(re, (x) => '<span class="findUnderline">' + x + '</span>');
 
 			return text_pr;
 		} else {
@@ -561,6 +561,7 @@ const WarehouseBlock = ({
 											paddingRight: '15px',
 											justifyContent: 'center',
 											width: widthColum.name - 15 + 'px',
+											maxWidth: '172px'
 										}}
 									>
 										{translator.getTranslation('warehouse', 'name')}
@@ -571,7 +572,7 @@ const WarehouseBlock = ({
 									>
 										{translator.getTranslation('warehouse', 'attribute')}
 									</div>
-									<div className="shadow-left" style={{ right: '-30px' }}></div>
+									<div className="shadow-left"></div>
 								</div>
 							</th>
 
@@ -696,7 +697,7 @@ const WarehouseBlock = ({
 										</div>
 										<div
 											className="name-width"
-											style={{ paddingRight: '15px', width: widthColum.name - 15 + 'px' }}
+											style={{ paddingRight: '15px', width: widthColum.name - 15 + 'px',maxWidth: '172px' }}
 										>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
