@@ -16,7 +16,6 @@ import WarehouseProductList from './WarehouseProductList';
 import WarehouseDropMenu from './WarehouseDropMenu';
 // import { dataWarehouse } from '../data/dataWarehouse';
 import WarehouseInput from './WarehouseInput';
-
 import todo from '../data/todo.json';
 // import { render } from 'react-dom';
 // import { FixedSizeList as List } from 'react-window';
@@ -323,18 +322,18 @@ const WarehouseBlock = ({
 		// simpleBar.addEventListener('scroll', onScroll);
 		// simpleBar.getScrollElement();
 
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('mousedown', onMouseDown);
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('mouseleave', onMouseLeave);
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('mouseup', onMouseLeave);
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('mousemove', onMouseMove);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('mousedown', onMouseDown);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('mouseleave', onMouseLeave);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('mouseup', onMouseLeave);
+		rootRef.current.el
+			.querySelector('.simplebar-content-wrapper')
+			.addEventListener('mousemove', onMouseMove);
 
 		return () => {
 			// rootRef.current.removeEventListener('scroll', onScroll);
@@ -342,6 +341,18 @@ const WarehouseBlock = ({
 			rootRef.current.el
 				.querySelector('.simplebar-content-wrapper')
 				.removeEventListener('scroll', onScroll);
+			rootRef.current.el
+				.querySelector('.simplebar-content-wrapper')
+				.removeEventListener('mousedown', onMouseDown);
+			rootRef.current.el
+				.querySelector('.simplebar-content-wrapper')
+				.removeEventListener('mouseleave', onMouseLeave);
+			rootRef.current.el
+				.querySelector('.simplebar-content-wrapper')
+				.removeEventListener('mouseup', onMouseLeave);
+			rootRef.current.el
+				.querySelector('.simplebar-content-wrapper')
+				.removeEventListener('mousemove', onMouseMove);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
 	// function root () {

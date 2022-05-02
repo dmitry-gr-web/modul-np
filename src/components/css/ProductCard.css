@@ -88,6 +88,7 @@
 }
 .product-card .attr-block {
   width: 820px;
+  margin-left: 40px;
 }
 .product-card th,
 .product-card td {

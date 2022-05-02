@@ -285,7 +285,7 @@ body {
 			position: absolute;
 			text-align: left;
 			// height: 90px;
-			height: 83px;
+			height:102px;
 			box-shadow: 4px 4px 9px rgb(0 0 0 / 15%);
 			width: 100%;
 			top: 0;
@@ -382,13 +382,13 @@ body {
 			.flags {
 				color: rgba(0, 0, 0, 1) !important;
 			}
-			.list, .infinity-list:hover {
+			.list:hover, .infinity-list:hover {
 				color: rgba(0, 0, 0, 0.5);
 			}
-			.list, .infinity-list:hover .status {
+			.list:hover .status, .infinity-list:hover .status {
 				opacity: 0.5;
 			}
-			.list, .infinity-list:hover .flags {
+			.list:hover .flags, .infinity-list:hover .flags {
 				opacity: 0.5;
 			}
 			.select-btn:before {

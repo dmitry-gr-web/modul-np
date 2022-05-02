@@ -225,7 +225,7 @@ body {
   opacity: 0;
   position: absolute;
   text-align: left;
-  height: 83px;
+  height: 102px;
   box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.15);
   width: 100%;
   top: 0;
@@ -308,13 +308,13 @@ body {
 .warehouse-products .warehouse-dropmenu .dropmenu .flags {
   color: black !important;
 }
-.warehouse-products .warehouse-dropmenu .dropmenu .list, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover {
+.warehouse-products .warehouse-dropmenu .dropmenu .list:hover, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover {
   color: rgba(0, 0, 0, 0.5);
 }
-.warehouse-products .warehouse-dropmenu .dropmenu .list, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover .status {
+.warehouse-products .warehouse-dropmenu .dropmenu .list:hover .status, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover .status {
   opacity: 0.5;
 }
-.warehouse-products .warehouse-dropmenu .dropmenu .list, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover .flags {
+.warehouse-products .warehouse-dropmenu .dropmenu .list:hover .flags, .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover .flags {
   opacity: 0.5;
 }
 .warehouse-products .warehouse-dropmenu .dropmenu .select-btn:before {

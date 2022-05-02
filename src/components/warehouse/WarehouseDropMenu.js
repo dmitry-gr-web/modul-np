@@ -447,7 +447,7 @@ const WarehouseDropMenu = ({
 					{({ scrollableNodeRef, contentNodeRef }) => {
 						return (
 							<List
-								height={83}
+								height={102}
 								itemCount={obj.length}
 								itemSize={20}
 								className="scrollOff"
