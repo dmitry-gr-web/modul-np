@@ -462,9 +462,9 @@ const WarehouseBlock = ({
 											}}
 										>
 											<div className="box"></div>
-											{/* <img className="logo-mail" src={crmLogo} alt="" /> */}
-											{/* <img className="logo-mail" src={rozetkaLogo} alt="" />
-											<img className="logo-mail" src={promLogo} alt="" /> */}
+											<img className="logo-mail" src={crmLogo} alt="" />
+											<img className="logo-mail" src={rozetkaLogo} alt="" />
+											<img className="logo-mail" src={promLogo} alt="" />
 											{/* <div className='shadow-block'></div> */}
 										</div>
 									</div>
@@ -550,7 +550,7 @@ const WarehouseBlock = ({
 											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 											className="block-3-btn"
 										>
-											{/* <div className='marginBtn'>
+											<div className='marginBtn'>
 												<WarehouseDropMenu
 													adaptive={true}
 													setPodlozhka={setPodlozhka}
@@ -562,9 +562,9 @@ const WarehouseBlock = ({
 													switchMenu={switchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
 												/>
-											</div> */}
+											</div>
 
-											{/* <div className='marginBtn'
+											<div className='marginBtn'
 				
 											>
 												<WarehouseDropMenu
@@ -591,7 +591,7 @@ const WarehouseBlock = ({
 													switchMenu={switchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
 												/>
-											</div> */}
+											</div>
 											{/* {console.log(document.querySelectorAll('.block-3-btn').children)} */}
 										</div>
 									</div>

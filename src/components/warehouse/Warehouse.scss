@@ -762,8 +762,8 @@ body {
 		.animationFrame {
 			// transition: width 0.3s;
 			// transform: translateZ(0);
-			// transform: translate3d(0, 0, 0);
-			// will-change:transform, scroll-position;
+			transform: translate3d(0, 0, 0);
+			will-change:transform, scroll-position;
 			position: absolute;
 			// left: 60px;
 			// width: 0px;
@@ -1390,7 +1390,7 @@ body {
 					height: 18px;
 					top: 0;
 					left: 0;
-					width: calc(100vw - 386px);
+					width: calc(100vw - 394px);
 					// width: calc(100vw - 394px);
 					// display: none;
 					// transform: translateZ(0);

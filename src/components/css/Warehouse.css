@@ -505,6 +505,8 @@ body {
   z-index: -1;
 }
 .warehouse-products table .animationFrame {
+  transform: translate3d(0, 0, 0);
+  will-change: transform, scroll-position;
   position: absolute;
   display: flex;
   align-items: center;
@@ -826,7 +828,7 @@ body {
   height: 18px;
   top: 0;
   left: 0;
-  width: calc(100vw - 386px);
+  width: calc(100vw - 394px);
   display: none;
   background: #858585;
 }
