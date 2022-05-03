@@ -25,6 +25,9 @@
 	.name-width {
 		max-width: 172px !important;
 	}
+	.attribute-width.btn {
+		max-width: 100px !important;
+	}
 	.attribute-width span {
 		max-width: 100px !important;
 	}
@@ -742,6 +745,9 @@ body {
 			// 	transition: 0.2s;
 			// 	z-index: -1;
 			// }
+			.marginBtn {
+				margin: 0 3px;
+			}
 		}
 		.shadow-block {
 			box-shadow: 3px 0px 3px 0px grey;
@@ -811,6 +817,13 @@ body {
 
 			img {
 				height: 16px;
+				width: 16px;
+				// &:last-child {
+				// 	margin-right: 7px;
+				// }
+				// &:first-child {
+				// 	margin-left: 7px;
+				// }
 			}
 			label {
 				margin: 0 6px;

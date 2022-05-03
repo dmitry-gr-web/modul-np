@@ -28,6 +28,10 @@
     max-width: 172px !important;
   }
 
+  .attribute-width.btn {
+    max-width: 100px !important;
+  }
+
   .attribute-width span {
     max-width: 100px !important;
   }
@@ -487,6 +491,9 @@ body {
   visibility: hidden;
   transform: translateX(-60px);
 }
+.warehouse-products table .block-3-btn .marginBtn {
+  margin: 0 3px;
+}
 .warehouse-products table .shadow-block {
   box-shadow: 3px 0px 3px 0px grey;
   position: absolute;
@@ -511,6 +518,7 @@ body {
 }
 .warehouse-products table .animationFrame img {
   height: 16px;
+  width: 16px;
 }
 .warehouse-products table .animationFrame label {
   margin: 0 6px;

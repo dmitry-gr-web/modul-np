@@ -413,7 +413,7 @@ const WarehouseProductList = ({
 									className="animationFrame"
 									style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
 								>
-									<label
+									{/* <label
 										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
 										className="switch-btn-small"
 									>
@@ -425,9 +425,9 @@ const WarehouseProductList = ({
 											checked={objProduct[index].status.crm}
 										/>
 										<span className="slider round"></span>
-									</label>
+									</label> */}
 
-									<label
+									{/* <label
 										style={
 											!objProduct[index].status.all
 												? { opacity: 0.4} : {}
@@ -457,7 +457,7 @@ const WarehouseProductList = ({
 											checked={objProduct[index].status.prom}
 										/>
 										<span className="slider round"></span>
-									</label>
+									</label> */}
 									<div className="gradi"></div>
 								</div>
 							</div>

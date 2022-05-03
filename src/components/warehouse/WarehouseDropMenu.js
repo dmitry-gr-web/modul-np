@@ -320,7 +320,7 @@ const WarehouseDropMenu = ({
 				ref.current.blur();
 			}
 			if (adaptive) {
-				e.currentTarget.style.width = '21px';
+				e.currentTarget.style.width = '22px';
 				document.querySelector('.width21px').style.maxWidth = '51px';
 			}
 			// e.currentTarget.querySelector('.underline').style.width = '0%';
@@ -439,7 +439,7 @@ const WarehouseDropMenu = ({
 
 	return (
 		<div
-			style={adaptive ? { width: 21, transition: 'width 0.3s' } : {}}
+			style={adaptive ? { width: 22, transition: 'width 0.3s' } : {}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
 			className={'warehouse-dropmenu'}
