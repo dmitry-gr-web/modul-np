@@ -47,9 +47,7 @@ const WarehouseBlock = ({
 		setFocusInput(false);
 		setFlagSwitchMenu(false);
 		setSwitchMenu(false);
-		// document.querySelectorAll('.warehouse-dropmenu .underline').forEach((x) => {
-		// 	x.style.width = '0%';
-		// });
+	
 		document.querySelector('.warehouse-table').style.overflow = '';
 		// document.querySelector('.warehouse-table').style.overflow = 'auto';
 
@@ -65,21 +63,7 @@ const WarehouseBlock = ({
 			x.classList.remove('showBtn');
 		});
 		document.querySelector('.width21px').style.maxWidth = '51px';
-		// document.querySelectorAll('.adaptive-switch').forEach((x) => {
-		// 	x.classList.remove('adaptive-switch-on');
-		// });
-		// document.querySelectorAll('.adaptive-switch2').forEach((x) => {
-		// 	x.classList.remove('adaptive-switch-on2');
-		// });
-		// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-		// 	x.style.width = '0px';
-		// });
-		// document.querySelectorAll('.nal-ostatok button').forEach((x) => {
-		// 	x.style.opacity = '0';
-		// });
-		// document.querySelectorAll('.gus').forEach((x) => {
-		// 	x.style.right = '-5px';
-		// });
+
 
 		let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
 
@@ -177,7 +161,7 @@ const WarehouseBlock = ({
 
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
-	let rowHeight = 20;
+	let rowHeight = 18;
 	const visibleRows = Math.floor((document.body.clientHeight * 2) / rowHeight);
 	// const [visibleRows, setVisible] = useState(Math.round((document.body.clientHeight * 1.5- 140) / 20));
 	// Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))
@@ -209,31 +193,7 @@ const WarehouseBlock = ({
 					1))
 		);
 	}
-	// function getTopHeight() {
 
-	// 	let temp = top - document.body.clientHeight * 0.5;
-
-	// 	return rowHeight * Math.min(
-	// 	  (data.length - visible - 1),
-	// 	  Math.floor(temp < 0 ? 0 : temp / rowHeight)
-	// 	);
-	//   }
-
-	//   function getStart() {
-	// 	let temp = top - document.body.clientHeight * 0.5;
-
-	// 	return Math.min(
-	// 	  (data.length - visible - 1),
-	// 	  Math.floor(temp < 0 ? 0 : temp / rowHeight)
-	// 	);
-	//   }
-	//   function getBottomHeight() {
-	// 	let temp = top - document.body.clientHeight * 0.5;
-	// 	return rowHeight * (data.length - (Math.min(
-	// 	  (data.length - visible - 1),
-	// 	  Math.floor(temp < 0 ? 0 : temp / rowHeight)
-	// 	) + visible + 1));
-	//   }
 	function throttle(func, ms) {
 		let isThrottled = false,
 			savedArgs,
@@ -306,22 +266,9 @@ const WarehouseBlock = ({
 			setStart(e.target.scrollTop);
 			updateHover();
 		}
-		// rootRef.current.addEventListener('scroll', onScroll);
-		// rootRef.current.addEventListener('mousedown', onMouseDown);
-		// rootRef.current.addEventListener('mouseleave', onMouseLeave);
-		// rootRef.current.addEventListener('mouseup', onMouseLeave);
-		// rootRef.current.addEventListener('mousemove', onMouseMove);
-		// rootRef.current.recalculate();
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
 			.addEventListener('scroll', onScroll);
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('scroll', onScroll);
-		// const simpleBar = new SimpleBar(document.querySelector('.warehouse-table .simplebar-content-wrapper'));
-		// simpleBar.addEventListener('scroll', onScroll);
-		// simpleBar.getScrollElement();
-
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
 			.addEventListener('mousedown', onMouseDown);
@@ -336,8 +283,6 @@ const WarehouseBlock = ({
 			.addEventListener('mousemove', onMouseMove);
 
 		return () => {
-			// rootRef.current.removeEventListener('scroll', onScroll);
-			// rootRef.current.recalculate();
 			rootRef.current.el
 				.querySelector('.simplebar-content-wrapper')
 				.removeEventListener('scroll', onScroll);
@@ -355,15 +300,7 @@ const WarehouseBlock = ({
 				.removeEventListener('mousemove', onMouseMove);
 		};
 	}, [objProduct.length, visibleRows, rowHeight]);
-	// function root () {
-	// 	return rootRef.current.recalculate();
-	// }
 
-	// useEffect(() => {
-	// 	rootRef.current.recalculate();
-	// 	// rootRef.current.el.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px,${getStart()}px,0px)`;
-	// console.log(scrollableNodeRef)
-	// }, [start]);
 	const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
 	async function width() {
@@ -447,7 +384,7 @@ const WarehouseBlock = ({
 				className="warehouse-table"
 				style={{
 					display: 'flex',
-					maxHeight: 'calc(100vh - 149px)',
+					maxHeight: 'calc(100vh - 170px)',
 					marginBottom: '10px',
 					// maxWidth: 1150,
 					// display: 'none',
@@ -455,7 +392,7 @@ const WarehouseBlock = ({
 					// overflow: 'auto',
 					// height: '800px',
 					// willChange:'transform, scroll-position',
-					height: document.body.clientHeight - 180 + 'px',
+					height: document.body.clientHeight - 170 + 'px',
 				}}
 				autoHide={false}
 				// direction={'rtl'}
@@ -489,41 +426,16 @@ const WarehouseBlock = ({
 						</tr>
 
 						<tr>
-							{/* <th style={{width: '0px',position:'absolute'}}>
-						<div></div>
-						</th> */}
 							<th className="hoverr">
 								<div></div>
 							</th>
-							{/* <th
-								className="sticky-head-row1"
-								onMouseEnter={() => setSwitchMenu(true)}
-								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-							>
-								Статус
-							</th>
-							<th
-								className="sticky-head-row2"
-								onMouseEnter={() => setSwitchMenu(true)}
-								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-							
-							
-							>
-								<div 	style={switchMenu ? { width:'100px' } : {}}>
-									<img className="logo-mail" src={crmLogo} alt="" />
-									<img className="logo-mail" src={rozetkaLogo} alt="" />
-									<img className="logo-mail" src={promLogo} alt="" />
-								</div>
-
-								
-							</th> */}
 							<th className="statusBefore sticky-head">
-								<div className="sticky-block">
+								<div className="sticky-block" style={{height:20}}>
 									<div
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-										// style={{ display: 'flex' }}
 										className="sticky-block-children"
+										style={{height: 20}}
 									>
 										<div
 											style={{
@@ -531,22 +443,25 @@ const WarehouseBlock = ({
 												paddingLeft: 0,
 												minWidth: 51,
 												paddingRight: '10px',
+												
 											}}
 										>
 											{translator.getTranslation('warehouse', 'status')}
 										</div>
 										<div
-											className="animationFrame"
+											className="animationFrame beforeWhite"
 											style={{
 												// transition:'0.2s',
 												// overflow: 'hidden',
 												// width: '0px',
 												// paddingRight: '0px',
-												justifyContent: 'space-between',
+												// justifyContent: 'space-between',
 												display: 'flex',
+												height: 20
 												// height: '16px',
 											}}
 										>
+											<div className="box"></div>
 											<img className="logo-mail" src={crmLogo} alt="" />
 											<img className="logo-mail" src={rozetkaLogo} alt="" />
 											<img className="logo-mail" src={promLogo} alt="" />
@@ -606,13 +521,13 @@ const WarehouseBlock = ({
 								<div></div>
 							</th>
 
-							<th className="sticky-head">
-								<div className="sticky-block">
+							<th className="sticky-head" style={{zIndex:3}}>
+								<div className="sticky-block" style={{height: 20}}>
 									<div
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 										className="sticky-block-children"
-										style={{ width: '156px', position: 'absolute', left: 0 }}
+										style={{ width: '100%', position: 'absolute', left: 0,height:20, background:'white',zIndex:`${switchMenu ? 5 : ''}` }}
 									>
 										<div
 											className="width21px"
@@ -635,7 +550,7 @@ const WarehouseBlock = ({
 											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 											className="block-3-btn"
 										>
-											<div>
+											<div style={{margin: '0 3px'}}>
 												<WarehouseDropMenu
 													adaptive={true}
 													setPodlozhka={setPodlozhka}
@@ -649,7 +564,9 @@ const WarehouseBlock = ({
 												/>
 											</div>
 
-											<div style={{ margin: '0 11px' }}>
+											<div style={{margin: '0 3px'}}
+				
+											>
 												<WarehouseDropMenu
 													adaptive={true}
 													setPodlozhka={setPodlozhka}
@@ -662,7 +579,7 @@ const WarehouseBlock = ({
 													setFlagSwitchMenu={setFlagSwitchMenu}
 												/>
 											</div>
-											<div>
+											<div style={{margin: '0 3px'}}>
 												<WarehouseDropMenu
 													adaptive={true}
 													setPodlozhka={setPodlozhka}
@@ -675,16 +592,17 @@ const WarehouseBlock = ({
 													setFlagSwitchMenu={setFlagSwitchMenu}
 												/>
 											</div>
+											{/* {console.log(document.querySelectorAll('.block-3-btn').children)} */}
 										</div>
 									</div>
-									<div style={{ position: 'relative', left: 60, display: 'flex' }}>
+									<div style={{ position: 'relative', left: 60, display: 'flex' , zIndex: 4}}>
 										<div
 											className="id-width"
 											style={{ paddingRight: '10px', width: widthColum.id + 'px' }}
 										>
 											<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
 										</div>
-										<div style={{ paddingRight: '10px', minWidth: 51, zIndex: 2 }}>
+										<div style={{ paddingRight: '10px', minWidth: 51, zIndex: 5 }}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
@@ -821,7 +739,7 @@ const WarehouseBlock = ({
 					</thead>
 
 					<tbody className="first-tab-body">
-						<tr style={{ height: 1 + getTopHeight() }}></tr>
+						<tr style={{ height:  getTopHeight() }}></tr>
 
 						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
 							<WarehouseProductList

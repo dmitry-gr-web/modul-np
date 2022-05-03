@@ -97,16 +97,16 @@ const WarehouseDropMenu = ({
 	// newarr = newarr[0].attribute = translator.getTranslation('btnAll', 'all');
 
 	const [value, setValue] = useState('');
-	function infinityClick(index,e) {
+	function infinityClick(index, e) {
 		setPodlozhka(true);
-	
+
 		// if(obj[0].select) {
 		// 	obj[0].select = !obj[0].select;
 		// }
-		if(obj[index].attribute === 'all') {
-			obj.map(x => x.select = false);
+		if (obj[index].attribute === 'all') {
+			obj.map((x) => (x.select = false));
 			obj[index].select = true;
-			
+
 			setOpenMenu(false);
 			setPodlozhka(false);
 			document.querySelector('.warehouse-table').style.overflow = '';
@@ -115,80 +115,121 @@ const WarehouseDropMenu = ({
 			});
 		} else {
 			obj[index].select = !obj[index].select;
-			obj.map(x => {if(x.attribute ==='all'){
-				x.select = false;
-			}});
-			objCopy.map(x => {if(x.attribute ==='all'){
-				x.select = false;
-			}});
+			obj.map((x) => {
+				if (x.attribute === 'all') {
+					x.select = false;
+				}
+			});
+			objCopy.map((x) => {
+				if (x.attribute === 'all') {
+					x.select = false;
+				}
+			});
 			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 				x.classList.add('hide-menu');
 			});
 			e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		}
 		setObjCopy([...objCopy]);
-		
+
 		setObj([...obj]);
 	}
 	function clickList(index, e) {
 		setPodlozhka(true);
 		// document.querySelector('.warehouse-table').style.overflow = 'hidden';
 		document.querySelector('.warehouse-table').style.overflow = 'hidden';
-		let newobj = obj.map((x, i) => {
-			if (i === index) {
-				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					// x.style.visibility = 'hidden';
-					x.classList.add('hide-menu');
-				});
-				e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
-				// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
-				return { ...x, select: !x.select };
-			} else if (index === 0 && i === 0) {
-				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					// x.style.visibility = 'visible';
-					x.classList.remove('hide-menu');
-				});
-				return { ...x, select: true };
-			} else if (index === 0 && i !== 0) {
+		if (type === 'status') {
+			let newobj = obj.map((x, i) => {
+				if (i === index) {
+					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+						// x.style.visibility = 'hidden';
+						x.classList.add('hide-menu');
+					});
+					e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+					// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
+					return { ...x, select: !x.select };
+				} else {
+					return { ...x, select: false };
+				}
+			});
+			if (newobj.filter((x) => x.select === true).length === 0) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 					// x.style.visibility = 'visible';
 					x.classList.remove('hide-menu');
 				});
 				setOpenMenu(false);
 				setPodlozhka(false);
-				document.querySelector('.warehouse-table').style.overflow = '';
 				// document.querySelector('.warehouse-table').style.overflow = 'auto';
-
-				return { ...x, select: false };
-			} else if (index !== 0 && i === 0) {
-				return { ...x, select: false };
-			} else {
-				return { ...x };
+				document.querySelector('.warehouse-table').style.overflow = '';
+				newobj[0].select = true;
+				if (adaptive) {
+					setFlagSwitchMenu(false);
+				}
+				// setObj(newobj);
 			}
-		});
+			setObj(newobj);
+			setObj(newobj);
+		} else {
+			let newobj = obj.map((x, i) => {
+				if (i === index) {
+					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+						// x.style.visibility = 'hidden';
+						x.classList.add('hide-menu');
+					});
+					e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+					// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
+					return { ...x, select: !x.select };
+				} else if (index === 0 && i === 0) {
+					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+						// x.style.visibility = 'visible';
+						x.classList.remove('hide-menu');
+					});
+					return { ...x, select: true };
+				} else if (index === 0 && i !== 0) {
+					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+						// x.style.visibility = 'visible';
+						x.classList.remove('hide-menu');
+					});
+					setOpenMenu(false);
+					setPodlozhka(false);
+					document.querySelector('.warehouse-table').style.overflow = '';
+					// document.querySelector('.warehouse-table').style.overflow = 'auto';
+
+					return { ...x, select: false };
+				} else if (index !== 0 && i === 0) {
+					return { ...x, select: false };
+				} else {
+					return { ...x };
+				}
+			});
+			if (newobj.filter((x) => x.select === true).length === 0) {
+				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+					// x.style.visibility = 'visible';
+					x.classList.remove('hide-menu');
+				});
+				setOpenMenu(false);
+				setPodlozhka(false);
+				// document.querySelector('.warehouse-table').style.overflow = 'auto';
+				document.querySelector('.warehouse-table').style.overflow = '';
+				newobj[0].select = true;
+				if (adaptive) {
+					setFlagSwitchMenu(false);
+				}
+				// setObj(newobj);
+			}
+			setObj(newobj);
+		}
+
 		if (adaptive) {
 			setFlagSwitchMenu(true);
 		}
-		if (newobj.filter((x) => x.select === true).length === 0) {
-			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-				// x.style.visibility = 'visible';
-				x.classList.remove('hide-menu');
-			});
-			setOpenMenu(false);
-			setPodlozhka(false);
-			// document.querySelector('.warehouse-table').style.overflow = 'auto';
-			document.querySelector('.warehouse-table').style.overflow = '';
-			newobj[0].select = true;
-			if (adaptive) {
-				setFlagSwitchMenu(false);
-			}
-		}
+
 		// if(adaptive){
 		// 	setSwitchMenu(true);
 		// }git
 
 		// e.target?.closest('.warehouse-input').style.display = 'block';
-		setObj(newobj);
+		// setObj(newobj);
 	}
 	const ref = useRef();
 	function changeInput(e) {
@@ -205,17 +246,14 @@ const WarehouseDropMenu = ({
 		}
 		if (type === 'name' || type === 'attribute') {
 			// console.log(objCopy[1].attribute)
-			if (e.target.value !== "") {
+			if (e.target.value !== '') {
 				const results = objCopy.filter((x) => {
-				  return x.attribute.toLowerCase().includes(e.target.value.toLowerCase());
+					return x.attribute.toLowerCase().includes(e.target.value.toLowerCase());
 				});
 				setObj(results);
-			
 			} else {
 				setObj(objCopy);
-
 			}
-			
 		}
 		setPodlozhka(true);
 	}
@@ -223,7 +261,10 @@ const WarehouseDropMenu = ({
 	const warehouse = useRef();
 	function menuOn(e) {
 		if (!podlozhka) {
-			setObj(objCopy);//dlya infinity scroll
+			if (type === 'name' || type === 'attribute') {
+				setObj(objCopy); //dlya infinity scroll
+				warehouse.current.querySelector('.scrollOff').scrollTo({ top: 0 });
+			}
 			setValue('');
 			setOpenMenu(true);
 			// e.currentTarget.querySelector('.underline').style.width = '100%';
@@ -238,9 +279,9 @@ const WarehouseDropMenu = ({
 			warehouse.current.querySelector('.simplebar-content-wrapper')?.scrollTo({
 				top: 0,
 			});
-			if (type === 'name'){
-				warehouse.current.querySelector('.scrollOff').scrollTo({top:0});
-			}
+			// if (type === 'name'){
+
+			// }
 			// e.currentTarget.closest('.simplebar-content-wrapper').scrollTo({
 			// 	top: 0,
 			// });
@@ -251,7 +292,6 @@ const WarehouseDropMenu = ({
 			// 	top: 0,
 			// });
 		}
-
 	}
 	function menuOff(e) {
 		if (podlozhka) {
@@ -397,7 +437,6 @@ const WarehouseDropMenu = ({
 		});
 	}, [podlozhka, openMenu]);
 
-
 	return (
 		<div
 			style={adaptive ? { width: 21, transition: 'width 0.3s' } : {}}
@@ -413,7 +452,7 @@ const WarehouseDropMenu = ({
 						type="text"
 						style={{ color: 'rgba(0, 0, 0, 0.65)' }}
 						value={value}
-						onChange={e => changeInput(e)}
+						onChange={(e) => changeInput(e)}
 					/>
 					{/* <span className="underline"></span> */}
 				</>
@@ -447,33 +486,32 @@ const WarehouseDropMenu = ({
 					{({ scrollableNodeRef, contentNodeRef }) => {
 						return (
 							<List
-								height={102}
+								height={83}
 								itemCount={obj.length}
 								itemSize={20}
 								className="scrollOff"
-							
 								innerRef={contentNodeRef}
 								outerRef={scrollableNodeRef}
 							>
-								{({index, style }) => (
-									<div 
-									onMouseEnter={tooltipOn}
-									onMouseLeave={tooltipOff}
-									
-									className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
-									onClick={(e) => infinityClick(index,e)} key={index} style={style}
-									
-									dangerouslySetInnerHTML={{
-										__html: searchLine(
-											translator.getTranslation('btnAll', obj[index]?.attribute) ?? obj[index]?.attribute,
-											value
-										),
-									}}
+								{({ index, style }) => (
+									<div
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
+										className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
+										onClick={(e) => infinityClick(index, e)}
+										key={index}
+										style={style}
+										dangerouslySetInnerHTML={{
+											__html: searchLine(
+												translator.getTranslation('btnAll', obj[index]?.attribute) ??
+													obj[index]?.attribute,
+												value
+											),
+										}}
 									>
-									{/* {obj[index]?.attribute} */}
+										{/* {obj[index]?.attribute} */}
 									</div>
 								)}
-							
 							</List>
 						);
 					}}

@@ -13,6 +13,12 @@ const Warehouse = () => {
 	// const ProductCard = React.createContext();
 
 	const [toggleCard, setToggleCard] = useState(false);
+	// console.log(dataWarehouse)
+	// const obj = [...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse]
+	// console.log(obj)
+	// const obj1 = JSON.parse(JSON.stringify(dataWarehouse));
+	// // console.log(obj.length)
+	// const obj = [...dataWarehouse, ...obj1]
 	const [objProduct, setObjProduct] = useState(dataWarehouse);
 	const [getIndex, setGetIndex] = useState(0);
 
