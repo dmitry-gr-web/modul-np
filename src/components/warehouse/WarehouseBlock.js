@@ -47,7 +47,7 @@ const WarehouseBlock = ({
 		setFocusInput(false);
 		setFlagSwitchMenu(false);
 		setSwitchMenu(false);
-	
+
 		document.querySelector('.warehouse-table').style.overflow = '';
 		// document.querySelector('.warehouse-table').style.overflow = 'auto';
 
@@ -64,18 +64,17 @@ const WarehouseBlock = ({
 		});
 		document.querySelector('.width21px').style.maxWidth = '51px';
 
-
 		let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
 
 		if (input.value.length >= 4) {
 			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-			input.style.width = input.value.length * 8 + 4 + 'px';
+			input.style.width = input.value.length * 7 + 3 + 'px';
 		}
 		if (input.value.length >= 7) {
-			input.style.width = input.value.length * 8 + 8 + 'px';
+			input.style.width = input.value.length * 7 + 7 + 'px';
 		}
 		if (input.value.length < 4) {
-			input.style.width = input.value.length * 8 + 'px';
+			input.style.width = input.value.length * 7 + 'px';
 		}
 	}
 	function searchLine(text, value) {
@@ -169,7 +168,10 @@ const WarehouseBlock = ({
 		let temp = start - document.body.clientHeight * 0.5;
 		// let temp = start - 50 * rowHeight;
 
-		return Math.min(objProduct.length - visibleRows - 1, Math.floor(temp < 0 ? 0 : temp / rowHeight));
+		return Math.min(
+			objProduct.length - visibleRows - 1,
+			Math.floor(temp < 0 ? 0 : temp / rowHeight)
+		);
 	}
 
 	function getTopHeight() {
@@ -188,7 +190,10 @@ const WarehouseBlock = ({
 		return (
 			rowHeight *
 			(objProduct.length -
-				(Math.min(objProduct.length - visibleRows - 1, Math.floor(temp < 0 ? 0 : temp / rowHeight)) +
+				(Math.min(
+					objProduct.length - visibleRows - 1,
+					Math.floor(temp < 0 ? 0 : temp / rowHeight)
+				) +
 					visibleRows +
 					1))
 		);
@@ -260,11 +265,25 @@ const WarehouseBlock = ({
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	// const scrollableNodeRef = React.createRef();
-
+	// console.log(start)
+	useEffect(() => {
+		if (start > 600) {
+			document.querySelector('.btnUp').style.visibility = 'visible';
+		} else {
+			document.querySelector('.btnUp').style.visibility = 'hidden';
+		}
+	}, [start]);
+	function clickScrollUp() {
+		rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
+	}
 	useEffect(async () => {
 		async function onScroll(e) {
 			setStart(e.target.scrollTop);
+
+			// console.log(start)
 			updateHover();
+			setSwitchMenu(false);
+			// document.querySelectorAll('.animationFrame').forEach(x=> x.style.visibility = 'hidden');
 		}
 		rootRef.current.el
 			.querySelector('.simplebar-content-wrapper')
@@ -318,6 +337,7 @@ const WarehouseBlock = ({
 			arr2.push(x.offsetWidth);
 		});
 		let maxwidth2 = Math.max(...arr2);
+		console.log(arr2);
 		// document.querySelectorAll('.name-width').forEach((x) => {
 		// 	x.style.width = maxwidth2 + 'px';
 		// });
@@ -365,13 +385,15 @@ const WarehouseBlock = ({
 			});
 		}
 	}, [switchMenu]);
+
 	// const [color,setcolor]= useState(true);
 	// const style = {
 	// 	background: `${color ? 'pink': 'green'}`
 	// }
-
+	// const [hoverWidth, setHoverWidth] = useState(rootRef.current?.el.offsetWidth);
+	// console.log(rootRef.current?.el.offsetWidth)
 	return (
-		<div className="warehouse-products">
+		<div  className="warehouse-products">
 			<div className="warehouse-products-title">
 				{translator.getTranslation('warehouse', 'goods')}
 				<button>
@@ -402,7 +424,7 @@ const WarehouseBlock = ({
 			>
 				<table
 					tabIndex={-1}
-
+					style={{ width: '100%' }}
 					// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 				>
 					<thead className="first-tab-header">
@@ -430,12 +452,12 @@ const WarehouseBlock = ({
 								<div></div>
 							</th>
 							<th className="statusBefore sticky-head">
-								<div className="sticky-block" style={{height:20}}>
+								<div className="sticky-block" style={{ height: 20 }}>
 									<div
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 										className="sticky-block-children"
-										style={{height: 20}}
+										style={{ height: 20 }}
 									>
 										<div
 											style={{
@@ -443,7 +465,6 @@ const WarehouseBlock = ({
 												paddingLeft: 0,
 												minWidth: 51,
 												paddingRight: '10px',
-												
 											}}
 										>
 											{translator.getTranslation('warehouse', 'status')}
@@ -457,7 +478,7 @@ const WarehouseBlock = ({
 												// paddingRight: '0px',
 												// justifyContent: 'space-between',
 												display: 'flex',
-												height: 20
+												height: 20,
 												// height: '16px',
 											}}
 										>
@@ -487,7 +508,7 @@ const WarehouseBlock = ({
 											paddingRight: '15px',
 											justifyContent: 'center',
 											width: widthColum.name - 15 + 'px',
-											maxWidth: '172px'
+											maxWidth: '172px',
 										}}
 									>
 										{translator.getTranslation('warehouse', 'name')}
@@ -521,13 +542,20 @@ const WarehouseBlock = ({
 								<div></div>
 							</th>
 
-							<th className="sticky-head" style={{zIndex:3}}>
-								<div className="sticky-block" style={{height: 20}}>
+							<th className="sticky-head" style={{ zIndex: 3 }}>
+								<div className="sticky-block" style={{ height: 20 }}>
 									<div
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 										className="sticky-block-children"
-										style={{ width: '100%', position: 'absolute', left: 0,height:20, background:'white',zIndex:`${switchMenu ? 5 : ''}` }}
+										style={{
+											width: '100%',
+											position: 'absolute',
+											left: 0,
+											height: 20,
+											background: 'white',
+											zIndex: `${switchMenu ? 5 : ''}`,
+										}}
 									>
 										<div
 											className="width21px"
@@ -550,7 +578,7 @@ const WarehouseBlock = ({
 											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 											className="block-3-btn"
 										>
-											<div className='marginBtn'>
+											<div className="marginBtn">
 												<WarehouseDropMenu
 													adaptive={true}
 													setPodlozhka={setPodlozhka}
@@ -564,9 +592,7 @@ const WarehouseBlock = ({
 												/>
 											</div>
 
-											<div className='marginBtn'
-				
-											>
+											<div className="marginBtn">
 												<WarehouseDropMenu
 													adaptive={true}
 													setPodlozhka={setPodlozhka}
@@ -579,7 +605,7 @@ const WarehouseBlock = ({
 													setFlagSwitchMenu={setFlagSwitchMenu}
 												/>
 											</div>
-											<div className='marginBtn'>
+											<div className="marginBtn">
 												<WarehouseDropMenu
 													adaptive={true}
 													setPodlozhka={setPodlozhka}
@@ -595,7 +621,7 @@ const WarehouseBlock = ({
 											{/* {console.log(document.querySelectorAll('.block-3-btn').children)} */}
 										</div>
 									</div>
-									<div style={{ position: 'relative', left: 60, display: 'flex' , zIndex: 4}}>
+									<div style={{ position: 'relative', left: 60, display: 'flex', zIndex: 4 }}>
 										<div
 											className="id-width"
 											style={{ paddingRight: '10px', width: widthColum.id + 'px' }}
@@ -626,7 +652,11 @@ const WarehouseBlock = ({
 										</div>
 										<div
 											className="name-width"
-											style={{ paddingRight: '15px', width: widthColum.name - 15 + 'px',maxWidth: '172px' }}
+											style={{
+												paddingRight: '15px',
+												width: widthColum.name - 15 + 'px',
+												maxWidth: '172px',
+											}}
 										>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
@@ -643,7 +673,7 @@ const WarehouseBlock = ({
 										<div
 											className="attribute-width btn"
 											style={{
-												paddingRight: '3px',
+												// paddingRight: '3px',
 												width: widthColum.attribute + 'px',
 												maxWidth: '105px',
 											}}
@@ -660,7 +690,7 @@ const WarehouseBlock = ({
 												switchMenu={switchMenu}
 											/>
 										</div>
-										<div className="shadow-left"></div>
+										<div className="shadow-left" style={{right: -16, height: 20}}></div>
 									</div>
 								</div>
 							</th>
@@ -708,23 +738,22 @@ const WarehouseBlock = ({
 						</tr>
 
 						<tr>
-							<th className="hoverr" style={{ height: '12px' }}>
+							{/* <th className="hoverr" style={{ height: '12px' }}>
 								<div></div>
-							</th>
-							<th className="shadow-vertical" colSpan={1}>
+							</th> */}
+							<th className="shadow-vertical" colSpan={19}>
 								<div
-									onMouseEnter={() => setSwitchMenu(true)}
-									onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
-									style={switchMenu ? { width: '171px' } : { width: '74px' }}
+
+								// style={switchMenu ? { width: '171px' } : { width: '74px' }}
 								></div>
-								<div
-									style={
-										switchMenu ? { width: 'calc(100% - 158px)' } : { width: 'calc(100% - 61px)' }
-									}
-								></div>
+
+								{/* <div style={{display:'flex',position:'sticky',left:0}}>
+								<span style={{display:'block',position:'sticky',left:0, height: 12, width:61}}></span>
+								<span style={{display:'block',position:'sticky',left:60, height: 12, width:61}}></span>
+								</div> */}
 							</th>
 
-							<th colSpan={17} className="shadow-vertical-3">
+							{/* <th colSpan={17} className="shadow-vertical-3">
 								<div
 									style={{
 										width:
@@ -734,12 +763,12 @@ const WarehouseBlock = ({
 											'px',
 									}}
 								></div>
-							</th>
+							</th> */}
 						</tr>
 					</thead>
 
 					<tbody className="first-tab-body">
-						<tr style={{ height:  getTopHeight() }}></tr>
+						<tr style={{ height: getTopHeight() }}></tr>
 
 						{objProduct.slice(getStart(), getStart() + visibleRows + 1).map((x, index, arr) => (
 							<WarehouseProductList
@@ -769,13 +798,16 @@ const WarehouseBlock = ({
 								setToggleCard={setToggleCard}
 								selectAll={selectAll}
 								translator={translator}
+								// setHoverWidth={setHoverWidth}
+								// hoverWidth={hoverWidth}
 								setSelectAll={setSelectAll}
 								flagSwitchMenu={flagSwitchMenu}
 							/>
-							
 						))}
 
-						<tr colSpan={18} style={{ height: getBottomHeight() }}><td style={{paddingBottom: 16}}></td></tr>
+						<tr colSpan={18} style={{ height: getBottomHeight() }}>
+							<td style={{ paddingBottom: 16 }}></td>
+						</tr>
 					</tbody>
 
 					<tfoot>
@@ -786,8 +818,27 @@ const WarehouseBlock = ({
 						</tr>
 					</tfoot>
 				</table>
+
 				{/* <div style={{ height: getBottomHeight() }} />   */}
 			</SimpleBar>
+			<div
+				onClick={clickScrollUp}
+				className="btnUp"
+			>
+				<svg
+					width="20"
+					height="20"
+					viewBox="0 0 12 12"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				
+				>
+					<path
+						d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z"
+						fill="black"
+					></path>
+				</svg>
+			</div>
 			{/* <div
 				style={{
 					display: 'flex',

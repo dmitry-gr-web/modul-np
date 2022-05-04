@@ -6,11 +6,7 @@ const WarehouseProductList = ({
 	objProduct,
 	setSwitchMenu,
 	index,
-	switchMenu,
-	setChecked,
 	setObjProduct,
-	checked,
-	setBtnMenu,
 	podlozhka,
 	setPodlozhka,
 	focusInput,
@@ -19,23 +15,16 @@ const WarehouseProductList = ({
 	lastIndex,
 	setLastIndex,
 	btnMenu,
-	selectAll,
-	setSelectAll,
 	flagSwitchMenu,
-	// rowHeight,
-	// key,
 	translator,
 	start,
 	widthColum,
 	height,
 	setToggleCard,
 	setGetIndex,
-	indexParent,
-	// widthColum,
-	// setWidthColum
+	// hoverWidth,
+	// setHoverWidth,
 }) => {
-
-
 	function switchBtn(e) {
 		e.stopPropagation();
 		if (e.target.className === 'status-all') {
@@ -114,7 +103,7 @@ const WarehouseProductList = ({
 			// tooltipBlock.style.fontSize = '12px';
 			plusminus = setTimeout(() => {
 				// tooltipBlock.innerHTML = html;
-		
+
 				tooltipBlock.innerText = e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -123,7 +112,6 @@ const WarehouseProductList = ({
 		}
 		if (e.currentTarget.innerText === '🇺🇦') {
 			plusminus = setTimeout(() => {
-	
 				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'ukraine');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -132,7 +120,6 @@ const WarehouseProductList = ({
 		}
 		if (e.currentTarget.innerText === '🇷🇺') {
 			plusminus = setTimeout(() => {
-			
 				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'russia');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -141,7 +128,6 @@ const WarehouseProductList = ({
 		}
 		if (e.currentTarget.innerText === '🇹🇷') {
 			plusminus = setTimeout(() => {
-		
 				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'turkey');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -151,7 +137,6 @@ const WarehouseProductList = ({
 
 		if (e.currentTarget.innerText === '€') {
 			plusminus = setTimeout(() => {
-		
 				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'eur');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -160,7 +145,6 @@ const WarehouseProductList = ({
 		}
 		if (e.currentTarget.innerText === '₽') {
 			plusminus = setTimeout(() => {
-		
 				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'rub');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -169,7 +153,6 @@ const WarehouseProductList = ({
 		}
 		if (e.currentTarget.innerText === '₴') {
 			plusminus = setTimeout(() => {
-
 				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'uah');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -178,7 +161,6 @@ const WarehouseProductList = ({
 		}
 		if (e.currentTarget.innerText === '$') {
 			plusminus = setTimeout(() => {
-
 				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'dollar');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -255,13 +237,13 @@ const WarehouseProductList = ({
 		if (e.key === 'Enter') {
 			if (podlozhka && prev !== memoryInput) {
 				if (e.target.value.length >= 4) {
-					e.target.style.width = e.target.value.length * 8 + 4 + 'px';
+					e.target.style.width = e.target.value.length * 7 + 3 + 'px';
 				}
 				if (e.target.value.length >= 7) {
-					e.target.style.width = e.target.value.length * 8 + 8 + 'px';
+					e.target.style.width = e.target.value.length * 7 + 7 + 'px';
 				}
 				if (e.target.value.length < 4) {
-					e.target.style.width = e.target.value.length * 8 + 'px';
+					e.target.style.width = e.target.value.length * 7 + 'px';
 				}
 				e.target.blur();
 				console.log('enter');
@@ -282,17 +264,16 @@ const WarehouseProductList = ({
 	function inputLength(input) {
 		if (input.replaceAll(' ', '').length >= 4) {
 			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-			return input.replaceAll(' ', '').length * 8 + 4 + 'px';
+			return input.replaceAll(' ', '').length * 7 + 3 + 'px';
 		}
 		if (input.replaceAll(' ', '').length >= 7) {
-			return input.replaceAll(' ', '').length * 8 + 8 + 'px';
+			return input.replaceAll(' ', '').length * 7 + 7 + 'px';
 		}
 		if (input.replaceAll(' ', '').length < 4) {
-			return input.replaceAll(' ', '').length * 8 + 'px';
+			return input.replaceAll(' ', '').length * 7 + 'px';
 		}
 	}
 	const linkTR = useRef();
-
 
 	function clickTr(e) {
 		// e.preventDefault();
@@ -361,7 +342,14 @@ const WarehouseProductList = ({
 			setGetIndex(index);
 		}
 	}
-
+	// console.log(hoverWidth)
+	const [hoverWidth, setHoverWidth] = useState(document.querySelector('.warehouse-products')?.offsetWidth);
+	useEffect(()=> {
+		window.addEventListener('resize', function(event) {
+		
+			setHoverWidth(document.querySelector('.warehouse-products')?.offsetWidth)
+		}, true);
+	},[objProduct.length])
 	return (
 		<>
 			{objProduct[index] && (
@@ -385,7 +373,8 @@ const WarehouseProductList = ({
 				>
 					<td className="hoverr">
 						<div
-							style={{ width: document.querySelector('.warehouse-products')?.offsetWidth - 23 + 'px' }}
+							// {23}
+							style={{ width: hoverWidth  + 'px' }}
 						></div>
 						<div className="div"></div>
 					</td>
@@ -396,7 +385,15 @@ const WarehouseProductList = ({
 								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 								style={{ display: 'flex', alignItems: 'center' }}
 							>
-								<div style={{ minWidth: '51px', paddingRight: '10px' , height: '18px', display:'flex',alignItems:'center'}}>
+								<div
+									style={{
+										minWidth: '51px',
+										paddingRight: '10px',
+										height: '18px',
+										display: 'flex',
+										alignItems: 'center',
+									}}
+								>
 									<label className="switch-btn-warehouse">
 										<input
 											type="checkbox"
@@ -428,11 +425,7 @@ const WarehouseProductList = ({
 									</label>
 
 									<label
-										style={
-											!objProduct[index].status.all
-												? { opacity: 0.4} : {}
-
-										}
+										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
 										className="switch-btn-small"
 									>
 										<input
@@ -481,11 +474,10 @@ const WarehouseProductList = ({
 							</div>
 							<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
 								<span
-									style={
-										!objProduct[index].status.all
-											? { opacity: 0.4, color: 'rgba(0,0,0,1)' }
-											: { color: 'rgba(0,0,0,1)' }
-									}
+									style={{
+										opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
+										color: 'rgba(0,0,0,1)',
+									}}
 									className="flags"
 									onMouseLeave={tooltipOff}
 									onMouseEnter={tooltipOn}
@@ -520,7 +512,7 @@ const WarehouseProductList = ({
 								style={{
 									overflow: 'hidden',
 									paddingRight: '15px',
-									width: widthColum.name - 15 + 'px',
+									width: widthColum.name + 'px',
 									maxWidth: '172px',
 								}}
 							>
@@ -542,12 +534,13 @@ const WarehouseProductList = ({
 										lineHeight: '18px',
 										whiteSpace: 'nowrap',
 										overflow: 'hidden',
+										width: widthColum.name -15+'px',
 										textOverflow: 'ellipsis',
 										display: 'block',
 										opacity: `${
 											objProduct[index].podProduct === 1 || !objProduct[index].status.all ? 0.4 : ''
 										}`,
-										fontSize:`${objProduct[index].podProduct === 1 ? '10px': ''}`
+										fontSize: `${objProduct[index].podProduct === 1 ? '10px' : ''}`,
 									}}
 								>
 									{objProduct[index].name}
@@ -664,7 +657,7 @@ const WarehouseProductList = ({
 										viewBox="3 2 15 15"
 										fill="none"
 										xmlns="http://www.w3.org/2000/svg"
-										style={{ transform: 'rotate(45deg)'}}
+										style={{ transform: 'rotate(45deg)' }}
 									>
 										<path
 											d="M7.26655 8.03662L12.0888 12.8589"
@@ -834,7 +827,7 @@ const WarehouseProductList = ({
 					<td className="summa-suma4">
 						<div
 							style={{
-								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`
+								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
 							}}
 						>
 							{formatNumber(objProduct[index].suma4)}

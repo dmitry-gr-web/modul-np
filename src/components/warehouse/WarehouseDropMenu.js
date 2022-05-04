@@ -87,22 +87,14 @@ const WarehouseDropMenu = ({
 		}
 	}
 
-	// useEffect(()=> {
-	// 	newarr = [{ id: 0, attribute: translator?.getTranslation('btnAll','all') ?? 'Все', select: true }, ...newarr];
-	// },[])
+
 	const [obj, setObj] = useState(newarr);
 	const [objCopy, setObjCopy] = useState(newarr);
-	// obj[0].attribute = translator.getTranslation('btnAll', 'all');
-	// setObj(obj)
-	// newarr = newarr[0].attribute = translator.getTranslation('btnAll', 'all');
+
 
 	const [value, setValue] = useState('');
 	function infinityClick(index, e) {
 		setPodlozhka(true);
-
-		// if(obj[0].select) {
-		// 	obj[0].select = !obj[0].select;
-		// }
 		if (obj[index].attribute === 'all') {
 			obj.map((x) => (x.select = false));
 			obj[index].select = true;
@@ -125,6 +117,18 @@ const WarehouseDropMenu = ({
 					x.select = false;
 				}
 			});
+			if(objCopy.filter(x => x.select).length === 0 || obj.filter(x => x.select).length === 0) {
+				obj.map(x => {
+					if (x.attribute === 'all') {
+						x.select = true;
+					}
+				})
+				objCopy.map(x => {
+					if (x.attribute === 'all') {
+						x.select = true;
+					}
+				})
+			}
 			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 				x.classList.add('hide-menu');
 			});
@@ -140,7 +144,10 @@ const WarehouseDropMenu = ({
 		document.querySelector('.warehouse-table').style.overflow = 'hidden';
 		if (type === 'status') {
 			let newobj = obj.map((x, i) => {
-				if (i === index) {
+				if (i === index && x.attribute !== 'all') {
+					if (adaptive) {
+						setFlagSwitchMenu(true);
+					}
 					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 						// x.style.visibility = 'hidden';
 						x.classList.add('hide-menu');
@@ -151,6 +158,7 @@ const WarehouseDropMenu = ({
 				} else {
 					return { ...x, select: false };
 				}
+				
 			});
 			if (newobj.filter((x) => x.select === true).length === 0) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
@@ -167,8 +175,9 @@ const WarehouseDropMenu = ({
 				}
 				// setObj(newobj);
 			}
+		
 			setObj(newobj);
-			setObj(newobj);
+			// setObj(newobj);
 		} else {
 			let newobj = obj.map((x, i) => {
 				if (i === index) {
@@ -212,17 +221,17 @@ const WarehouseDropMenu = ({
 				// document.querySelector('.warehouse-table').style.overflow = 'auto';
 				document.querySelector('.warehouse-table').style.overflow = '';
 				newobj[0].select = true;
-				if (adaptive) {
-					setFlagSwitchMenu(false);
-				}
+				// if (adaptive) {
+				// 	setFlagSwitchMenu(false);
+				// }
 				// setObj(newobj);
 			}
 			setObj(newobj);
 		}
 
-		if (adaptive) {
-			setFlagSwitchMenu(true);
-		}
+		// if (adaptive) {
+		// 	setFlagSwitchMenu(true);
+		// }
 
 		// if(adaptive){
 		// 	setSwitchMenu(true);
@@ -279,18 +288,6 @@ const WarehouseDropMenu = ({
 			warehouse.current.querySelector('.simplebar-content-wrapper')?.scrollTo({
 				top: 0,
 			});
-			// if (type === 'name'){
-
-			// }
-			// e.currentTarget.closest('.simplebar-content-wrapper').scrollTo({
-			// 	top: 0,
-			// });
-			// console.log(e)
-			// listRef.current.el.querySelector('.scrollOff div').scrollToItem(0);
-			// e.target?.querySelector('.scrollOff div')?.scrollTo({top:0})
-			// ref.current.closest('.simplebar-content-wrapper').scrollTo({
-			// 	top: 0,
-			// });
 		}
 	}
 	function menuOff(e) {
@@ -301,10 +298,13 @@ const WarehouseDropMenu = ({
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? translator.getTranslation('btnFiltr', 'filtr')
-						: obj.filter((x) => x.select === true)[0].attribute.includes('all')
+						: obj.filter((x) => x.select === true)[0]?.attribute.includes('all')
 						? ''
-						: obj.filter((x) => x.select === true)[0].attribute
+						: obj.filter((x) => x.select === true)[0]?.attribute
 				);
+				if(obj.filter((x) => x.select === true).length === 0 ) {
+					setValue('');
+				}
 			} else {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
@@ -315,30 +315,32 @@ const WarehouseDropMenu = ({
 				);
 			}
 			setOpenMenu(false);
+
 			if (inputOn) {
-				// e.currentTarget.querySelector('.underline').style.width = '0%';
 				ref.current.blur();
 			}
 			if (adaptive) {
 				e.currentTarget.style.width = '22px';
 				document.querySelector('.width21px').style.maxWidth = '51px';
 			}
-			// e.currentTarget.querySelector('.underline').style.width = '0%';
+
 		}
 	}
 	useEffect(() => {
 		if (podlozhka) {
-			// setOpenMenu(true);
-			// setValue('');
+
 		} else {
 			if (type !== 'status') {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
 						? translator.getTranslation('btnFiltr', 'filtr')
-						: obj.filter((x) => x.select === true)[0].attribute.includes('all')
+						: obj.filter((x) => x.select === true)[0]?.attribute.includes('all')
 						? ''
-						: obj.filter((x) => x.select === true)[0].attribute
+						: obj.filter((x) => x.select === true)[0]?.attribute
 				);
+				if(obj.filter((x) => x.select === true).length === 0 ) {
+					setValue('');
+				}
 			} else {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
@@ -348,7 +350,6 @@ const WarehouseDropMenu = ({
 						: obj.filter((x) => x.select === true)[0].attribute
 				);
 			}
-
 			setOpenMenu(false);
 		}
 	}, [podlozhka]);
@@ -420,12 +421,22 @@ const WarehouseDropMenu = ({
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 			}
+			if(e.currentTarget.className === 'countBlock') {
+				tooltipBlock.style.fontSize = '12px';
+				tooltipBlock.innerHTML =  `${type === 'attribute' ? 'Атрибутов' : 'Товаров'} в фильтре:<br>- найдено ${e.currentTarget.children[0].innerText}<br>- выбрано ${e.currentTarget.children[1].innerText}`;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 25 +'px';
+				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+			}
 		}
 	}
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-
+	const [sortBtn, setSortBtn] = useState(true);
+	// function sortBtn(e) {
+	// 	e.currentTarget.children[0].style.transform = '';
+	// }
 	useEffect(() => {
 		console.log();
 		document.querySelectorAll('.status-result').forEach((x, i) => {
@@ -442,7 +453,7 @@ const WarehouseDropMenu = ({
 			style={adaptive ? { width: 22, transition: 'width 0.3s' } : {}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
-			className={'warehouse-dropmenu'}
+			className={`warehouse-dropmenu ${openMenu ? 'hide-arrow': ''}`}
 			ref={warehouse}
 		>
 			{inputOn ? (
@@ -454,9 +465,11 @@ const WarehouseDropMenu = ({
 						value={value}
 						onChange={(e) => changeInput(e)}
 					/>
-					{/* <span className="underline"></span> */}
+					{openMenu ? <div className='sortBtn'><svg onClick={() => setSortBtn(!sortBtn)} style={{transform: `${sortBtn ? '' : 'scaleY(-1)'}`}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div> : ''}
+					{openMenu ? <div onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='countBlock'>(<span>{obj.filter(x => x.attribute !== 'all').length}</span>/<span>{obj.filter(x => x.attribute !== 'all' && x.select).length}</span>)</div> : ''}
 				</>
 			) : type === 'status' ? (
+				<>
 				<div className="status-result">
 					{obj.filter((x) => x.select === true).length > 1
 						? translator.getTranslation('btnFiltr', 'filtr')
@@ -464,7 +477,10 @@ const WarehouseDropMenu = ({
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute}
 				</div>
+				</>
+				
 			) : (
+				<>
 				<div className="text-result">
 					{obj.filter((x) => x.select === true).length > 1 ? (
 						translator.getTranslation('btnFiltr', 'filtr')
@@ -476,6 +492,7 @@ const WarehouseDropMenu = ({
 						</span>
 					)}
 				</div>
+				</>
 			)}
 			<span className="underline"></span>
 			{type === 'name' || type === 'attribute' ? (
