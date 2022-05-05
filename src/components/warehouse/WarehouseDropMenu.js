@@ -10,11 +10,11 @@ const WarehouseDropMenu = ({
 	podlozhka,
 	type,
 	adaptive,
-	setSwitchMenu,
-	switchMenu,
 	setFlagSwitchMenu,
 	searchLine,
 	translator,
+	sortActive,
+	setSortActive
 }) => {
 	const [openMenu, setOpenMenu] = useState(false);
 
@@ -175,7 +175,7 @@ const WarehouseDropMenu = ({
 				}
 				// setObj(newobj);
 			}
-		
+
 			setObj(newobj);
 			// setObj(newobj);
 		} else {
@@ -284,6 +284,11 @@ const WarehouseDropMenu = ({
 			if (adaptive) {
 				e.currentTarget.style.width = '51px';
 				document.querySelector('.width21px').style.maxWidth = '21px';
+				e.currentTarget.querySelector(".sortBtn").style.display = "block";
+				// e.currentTarget.classList.remove('hide-arrow');
+
+		
+
 			}
 			warehouse.current.querySelector('.simplebar-content-wrapper')?.scrollTo({
 				top: 0,
@@ -322,6 +327,17 @@ const WarehouseDropMenu = ({
 			if (adaptive) {
 				e.currentTarget.style.width = '22px';
 				document.querySelector('.width21px').style.maxWidth = '51px';
+				// if(e.currentTarget.querySelector('.status-result').innerHTML !== '') {
+					e.currentTarget.querySelector(".sortBtn").style.display = "none";
+					if(e.currentTarget.querySelector('.status-result').innerHTML !== '') {
+
+						e.currentTarget.classList.add('hide-arrow');
+					}
+				// 	e.currentTarget.classList.add('hide-arrow');
+				// }
+				// if(e.currentTarget.querySelector('.status-result').innerHTML === '') {
+				// 	e.currentTarget.classList.remove('hide-arrow');
+				// }
 			}
 
 		}
@@ -428,32 +444,73 @@ const WarehouseDropMenu = ({
 				tooltipBlock.style.top = posElement.y + 25 +'px';
 				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 			}
+			if(e.currentTarget.className === 'sortBtn') {
+				tooltipBlock.style.fontSize = '12px';
+				tooltipBlock.innerHTML =  `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 25 +'px';
+				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+			}
 		}
 	}
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-	const [sortBtn, setSortBtn] = useState(true);
+	const [sortBtn, setSortBtn] = useState(false);
+	const [active, setActive] = useState(false);
+
 	// function sortBtn(e) {
 	// 	e.currentTarget.children[0].style.transform = '';
 	// }
 	useEffect(() => {
 		console.log();
-		document.querySelectorAll('.status-result').forEach((x, i) => {
-			if (i !== 0 && x.innerHTML !== '') {
-				x.closest('.warehouse-dropmenu').classList.add('hide-arrow');
-			} else {
-				x.closest('.warehouse-dropmenu').classList.remove('hide-arrow');
-			}
+		// document.querySelectorAll('.status-result').forEach((x, i) => {
+		// 	if (i !== 0 && x.innerHTML !== '') {
+		// 		console.log(x.nextSibling)
+		// 		x.closest('.warehouse-dropmenu').classList.add('hide-arrow');
+		// 		x.nextSibling.style.display = "none";
+		// 	} else {
+		// 		// x.closest('.warehouse-dropmenu').classList.remove('hide-arrow');
+		// 		// x.nextSibling.style.display = "block";
+		// 	}
+		// });
+	}, [podlozhka, openMenu, active]);
+	useEffect(()=> {
+		setActive(false);
+		// console.log(active)
+		// if(sortActive) {
+			
+		// }
+		setSortBtn(false);
+		// setSortBtn(sortActive)
+		// setSortBtn(true);
+		// setSortBtn((prevstate) => {
+	
+		// 	return prevstate ? true : false
+		// });
+	},[sortActive])
+	function sortClickBtn() {
+		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+			// x.style.visibility = 'hidden';
+			x.classList.remove('hide-menu');
 		});
-	}, [podlozhka, openMenu]);
-
+		setFlagSwitchMenu(false);
+		setOpenMenu(false);
+		setPodlozhka(false);
+		setSortBtn((prev)=>!prev);
+		setSortActive(!sortActive);
+		setTimeout(() => {
+			setActive(true)
+			setSortBtn(!sortBtn);
+		}, 0);
+		
+	}
 	return (
 		<div
 			style={adaptive ? { width: 22, transition: 'width 0.3s' } : {}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
-			className={`warehouse-dropmenu ${openMenu ? 'hide-arrow': ''}`}
+			className={`warehouse-dropmenu ${openMenu || active ? 'hide-arrow': ''}`}
 			ref={warehouse}
 		>
 			{inputOn ? (
@@ -465,7 +522,7 @@ const WarehouseDropMenu = ({
 						value={value}
 						onChange={(e) => changeInput(e)}
 					/>
-					{openMenu ? <div className='sortBtn'><svg onClick={() => setSortBtn(!sortBtn)} style={{transform: `${sortBtn ? '' : 'scaleY(-1)'}`}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div> : ''}
+					<div style={{display: `${openMenu || active ? 'block': 'none'}`}} onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='sortBtn'><svg onClick={sortClickBtn} style={{transform: `${sortBtn ? 'scaleY(-1)' : ''}`}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>
 					{openMenu ? <div onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='countBlock'>(<span>{obj.filter(x => x.attribute !== 'all').length}</span>/<span>{obj.filter(x => x.attribute !== 'all' && x.select).length}</span>)</div> : ''}
 				</>
 			) : type === 'status' ? (
@@ -477,6 +534,8 @@ const WarehouseDropMenu = ({
 						? ''
 						: obj.filter((x) => x.select === true)[0].attribute}
 				</div>
+				<div style={{display: `${openMenu || active ? 'block': 'none'}`}} onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='sortBtn'><svg onClick={sortClickBtn} style={{transform: `${sortBtn ? 'scaleY(-1)' : ''}`}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>
+
 				</>
 				
 			) : (
@@ -492,6 +551,8 @@ const WarehouseDropMenu = ({
 						</span>
 					)}
 				</div>
+				<div style={{display: `${openMenu || active ? 'block': 'none'}`}} onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='sortBtn'><svg onClick={sortClickBtn} style={{transform: `${sortBtn ? 'scaleY(-1)' : ''}`}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>
+
 				</>
 			)}
 			<span className="underline"></span>

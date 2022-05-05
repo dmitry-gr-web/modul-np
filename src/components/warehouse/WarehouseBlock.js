@@ -55,6 +55,16 @@ const WarehouseBlock = ({
 			// x.style.visibility = 'visible';
 			x.classList.remove('hide-menu');
 		});
+		document.querySelectorAll('.status-result').forEach((x, i) => {
+			if (i !== 0 && x.innerHTML !== '') {
+				console.log(x.nextSibling)
+				x.closest('.warehouse-dropmenu').classList.add('hide-arrow');
+				x.nextSibling.style.display = "none";
+			} else {
+				// x.closest('.warehouse-dropmenu').classList.remove('hide-arrow');
+				// x.nextSibling.style.display = "block";
+			}
+		});
 		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
 			x.style.width = '21px';
 		});
@@ -277,10 +287,13 @@ const WarehouseBlock = ({
 		rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
 	}
 	useEffect(async () => {
-		async function onScroll(e) {
+	function onScroll(e) {
 			setStart(e.target.scrollTop);
+			// console.log(e.target.scrollTop)
+			// rootRef.current.el.querySelector('.simplebar-track simplebar-vertical div').style.transform = `translate3d(0px, ${rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop}px, 0px)`
+			// rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = start
+			// console.log(e.target.querySelector('.simplebar-content-wrapper').scrollTop)
 
-			// console.log(start)
 			updateHover();
 			setSwitchMenu(false);
 			// document.querySelectorAll('.animationFrame').forEach(x=> x.style.visibility = 'hidden');
@@ -385,7 +398,7 @@ const WarehouseBlock = ({
 			});
 		}
 	}, [switchMenu]);
-
+	const [sortActive, setSortActive] = useState(false);
 	// const [color,setcolor]= useState(true);
 	// const style = {
 	// 	background: `${color ? 'pink': 'green'}`
@@ -448,11 +461,15 @@ const WarehouseBlock = ({
 						</tr>
 
 						<tr>
-							<th className="hoverr">
+							{/* <th className="hoverr">
 								<div></div>
-							</th>
-							<th className="statusBefore sticky-head">
+							</th> */}
+							{/* <th className='stickyBeforeHead'>
+
+							</th> */}
+							<th className="sticky-head">
 								<div className="sticky-block" style={{ height: 20 }}>
+									<div className='stickyBeforeHead'></div>
 									<div
 										onMouseEnter={() => setSwitchMenu(true)}
 										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
@@ -538,27 +555,30 @@ const WarehouseBlock = ({
 							<th colSpan={4}>{translator.getTranslation('warehouse', 'total')}</th>
 						</tr>
 						<tr>
-							<th className="hoverr">
+							{/* <th className="hoverr">
 								<div></div>
-							</th>
+							</th> */}
 
 							<th className="sticky-head" style={{ zIndex: 3 }}>
 								<div className="sticky-block" style={{ height: 20 }}>
+						
 									<div
-										onMouseEnter={() => setSwitchMenu(true)}
-										onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
+								
 										className="sticky-block-children"
 										style={{
 											width: '100%',
 											position: 'absolute',
-											left: 0,
+											left: 13,
 											height: 20,
 											background: 'white',
 											zIndex: `${switchMenu ? 5 : ''}`,
 										}}
 									>
+										{/* <div className='stickyBeforeHead'></div> */}
 										<div
 											className="width21px"
+											onMouseEnter={() => setSwitchMenu(true)}
+											onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 											style={{
 												transition: '0.3s',
 												maxWidth: '51px',
@@ -572,9 +592,13 @@ const WarehouseBlock = ({
 												type={'status'}
 												translator={translator}
 												objProduct={objProduct}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
 											/>
 										</div>
 										<div
+												onMouseEnter={() => setSwitchMenu(true)}
+												onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 											// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 											className="block-3-btn"
 										>
@@ -589,6 +613,8 @@ const WarehouseBlock = ({
 													setSwitchMenu={setSwitchMenu}
 													switchMenu={switchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
+													sortActive={sortActive}
+													setSortActive={setSortActive}
 												/>
 											</div>
 
@@ -603,6 +629,8 @@ const WarehouseBlock = ({
 													setSwitchMenu={setSwitchMenu}
 													switchMenu={switchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
+													sortActive={sortActive}
+													setSortActive={setSortActive}
 												/>
 											</div>
 											<div className="marginBtn">
@@ -616,12 +644,14 @@ const WarehouseBlock = ({
 													setSwitchMenu={setSwitchMenu}
 													switchMenu={switchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
+													sortActive={sortActive}
+												setSortActive={setSortActive}
 												/>
 											</div>
 											{/* {console.log(document.querySelectorAll('.block-3-btn').children)} */}
 										</div>
 									</div>
-									<div style={{ position: 'relative', left: 60, display: 'flex', zIndex: 4 }}>
+									<div style={{ position: 'relative', left: 74, display: 'flex', zIndex: 4 }}>
 										<div
 											className="id-width"
 											style={{ paddingRight: '10px', width: widthColum.id + 'px' }}
@@ -637,6 +667,8 @@ const WarehouseBlock = ({
 												setSwitchMenu={setSwitchMenu}
 												switchMenu={switchMenu}
 												translator={translator}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
 											/>
 										</div>
 										<div style={{ paddingRight: '10px', minWidth: 51 }}>
@@ -648,6 +680,8 @@ const WarehouseBlock = ({
 												objProduct={objProduct}
 												setSwitchMenu={setSwitchMenu}
 												switchMenu={switchMenu}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
 											/>
 										</div>
 										<div
@@ -668,6 +702,8 @@ const WarehouseBlock = ({
 												objProduct={objProduct}
 												setSwitchMenu={setSwitchMenu}
 												switchMenu={switchMenu}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
 											/>
 										</div>
 										<div
@@ -688,6 +724,8 @@ const WarehouseBlock = ({
 												objProduct={objProduct}
 												setSwitchMenu={setSwitchMenu}
 												switchMenu={switchMenu}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
 											/>
 										</div>
 										<div className="shadow-left" style={{right: -16, height: 20}}></div>

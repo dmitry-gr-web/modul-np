@@ -3,52 +3,55 @@
 		"order": "Заказ"
 	},
 	"warehouse": {
-		"goods":"Товары",
-		"attributes":"Атрибуты",
-		"attribute":"Атрибут",
-		"suppliers":"Поставщики",
+		"goods": "Товары",
+		"attributes": "Атрибуты",
+		"attribute": "Атрибут",
+		"suppliers": "Поставщики",
 		"movementOfGoods": "Движение товара",
-		"warehouse":"Склад",
+		"warehouse": "Склад",
 		"status": "Статус",
 		"country": "Страна",
 		"name": "Название",
-		"currency":"Валюта",
-		"available":"Наличие",
-		"purchase":"Закупка",
-		"sales":"Продажа",
+		"currency": "Валюта",
+		"available": "Наличие",
+		"purchase": "Закупка",
+		"sales": "Продажа",
 		"margin": "Маржа",
 		"total": "Сумма"
 	},
 	"tooltipCountries": {
-		"ukraine":"Украина",
-		"russia":"Россия",
-		"kazakhstan":"Казахстан",
-		"turkey":"Турция"
+		"ukraine": "Украина",
+		"russia": "Россия",
+		"kazakhstan": "Казахстан",
+		"turkey": "Турция"
 	},
 	"tooltipCurrency": {
-		"uah":"Гривна",
-		"dollar":"Доллар",
-		"eur":"Евро",
-		"rub":"Рубль"
+		"uah": "Гривна",
+		"dollar": "Доллар",
+		"eur": "Евро",
+		"rub": "Рубль"
 	},
 	"tooltipPlatform": {
-		"rozetka":"Rozetka",
-		"lpcrm":"Lp-crm",
-		"prom":"Prom"
+		"rozetka": "Rozetka",
+		"lpcrm": "Lp-crm",
+		"prom": "Prom"
 	},
 	"tooltipDelivery": {
-		"novapochta":"Новая почта",
-		"ukrpochta":"Укрпочта",
-		"justin":"Justin",
-		"samovivoz":"Самовывоз"
+		"novapochta": "Новая почта",
+		"ukrpochta": "Укрпочта",
+		"justin": "Justin",
+		"samovivoz": "Самовывоз"
 	},
 	"btnAll": {
-		"all":"Все"
+		"all": "Все"
 	},
 	"btnFiltr": {
-		"filtr":"Фильтр"
+		"filtr": "Фильтр"
 	},
 	"lockOrder": {
-		"lock":"Заказ заблокирован пользователем"
+		"lock": "Заказ заблокирован пользователем"
+	},
+	"sortData": {
+		"sortTooltip": "Сортировать данные"
 	}
 }

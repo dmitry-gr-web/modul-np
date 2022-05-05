@@ -19,6 +19,10 @@ const Warehouse = () => {
 	// const obj1 = JSON.parse(JSON.stringify(dataWarehouse));
 	// // console.log(obj.length)
 	// const obj = [...dataWarehouse, ...obj1]
+	// setTimeout(() => {
+	// 	// Сортировать данные
+	// 	setObjProduct(dataWarehouse);
+	// }, 2000);
 	const [objProduct, setObjProduct] = useState(dataWarehouse);
 	const [getIndex, setGetIndex] = useState(0);
 

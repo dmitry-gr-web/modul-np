@@ -508,7 +508,7 @@ body {
   background: white;
   position: sticky;
   z-index: 4;
-  left: 13px;
+  left: 0px;
 }
 .warehouse-products table .block-3-btn {
   display: flex;
@@ -585,68 +585,19 @@ body {
   background: white;
   position: sticky !important;
   z-index: 2;
-  left: 13px;
+  left: 0px;
   transform: translate3d(0, 0, 0);
   will-change: transform, scroll-position;
 }
-.warehouse-products table .sticky-row-0 {
-  position: sticky;
-  left: 13px;
-  z-index: 5;
+.warehouse-products table .stickyBeforeHead {
+  background-color: white;
+  height: 20px;
+  width: 13px;
 }
-.warehouse-products table .sticky-row {
-  position: sticky;
-  transition: 0.2s;
-  left: 60px;
-  max-width: 0px;
-  width: 0px;
-  min-width: 0px;
-  z-index: 2;
-  max-width: 0px;
-}
-.warehouse-products table .sticky-head-row2 {
-  background: white;
-  position: sticky;
-  z-index: 5;
-  left: 64px;
-  max-width: 0px;
-  width: 0px;
-  padding-right: 0;
-}
-.warehouse-products table .sticky-head-row2 div {
-  width: 0px;
-  transition: 0.3s;
-  overflow: hidden;
-  display: flex;
-}
-.warehouse-products table .sticky-head-row1 {
-  background: white;
-  position: sticky;
-  z-index: 4;
-  left: 13px;
-  text-align: left;
-}
-.warehouse-products table .sticky-body-row2 {
-  background: white;
-  position: sticky;
-  z-index: 2;
-  left: 64px;
-  max-width: 0px;
-  width: 0px;
-}
-.warehouse-products table .sticky-body-row2 div {
-  width: 0px;
-  transition: 0.3s;
-  overflow: hidden;
-  display: flex;
-}
-.warehouse-products table .sticky-body-row1 {
-  background: white;
-  position: sticky;
-  z-index: 1;
-  left: 13px;
-  min-width: 51px;
-  padding-right: 10px;
+.warehouse-products table .stickyBeforeBody {
+  background: white !important;
+  height: 18px;
+  width: 13px;
 }
 .warehouse-products table .id-width {
   overflow: hidden;
@@ -715,15 +666,6 @@ body {
 .warehouse-products table .first-tab-header tr:nth-child(3) th {
   background: white;
 }
-.warehouse-products table .first-tab-header .statusBefore:before {
-  content: "";
-  left: -13px;
-  width: 13px;
-  height: 40px;
-  background: white;
-  position: absolute;
-  top: 0;
-}
 .warehouse-products table .first-tab-header .summa-suma4:after {
   content: "";
   right: -10px;
@@ -784,90 +726,35 @@ body {
   padding: 0;
   color: rgba(0, 0, 0, 0.7);
 }
-.warehouse-products table .first-tab-body .lockOrder .sticky-body:after {
-  content: "";
-  background-image: url("../../img/lockOrder.svg");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  left: -13px;
-  top: 3px;
+.warehouse-products table .first-tab-body tr:hover:not(.lockOrder) td {
+  background: #cacaca !important;
 }
-.warehouse-products table .first-tab-body .lockOrder td,
-.warehouse-products table .first-tab-body .lockOrder div,
-.warehouse-products table .first-tab-body .lockOrder input {
-  color: rgba(0, 0, 0, 0.2) !important;
-  background-color: #e1dedd !important;
+.warehouse-products table .first-tab-body tr:hover:not(.lockOrder) .sticky-block .animationFrame {
+  background: #cacaca !important;
 }
-.warehouse-products table .first-tab-body .lockOrder label,
-.warehouse-products table .first-tab-body .lockOrder input,
-.warehouse-products table .first-tab-body .lockOrder button {
-  pointer-events: none;
-}
-.warehouse-products table .first-tab-body .lockOrder .shadow-left {
-  background: linear-gradient(90deg, #e1dedd 0%, rgba(225, 222, 221, 0.95) 20%, rgba(225, 222, 221, 0.7) 45%, rgba(225, 222, 221, 0.5) 65%, rgba(225, 222, 221, 0) 100%) !important;
-}
-.warehouse-products table .first-tab-body .hoverr {
-  position: sticky !important;
-  left: 13px;
-  width: 0px;
-  transform: translate3d(0, 0, 0);
-  will-change: transform, scroll-position;
-}
-.warehouse-products table .first-tab-body .hoverr div {
-  position: absolute;
-  z-index: -1;
-  height: 18px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: none;
-  background: #cacaca;
-}
-.warehouse-products table .first-tab-body .hoverr .div {
-  position: absolute;
-  z-index: -2;
-  height: 18px;
-  top: 0;
-  left: 0;
-  width: calc(100vw - 385px);
-  display: none;
-  background: #858585;
-}
-.warehouse-products table .first-tab-body tr:hover .hoverr div:first-child {
-  display: block;
-}
-.warehouse-products table .first-tab-body tr:hover .sticky-block {
-  background: #cacaca;
-}
-.warehouse-products table .first-tab-body tr:hover .sticky-block .animationFrame {
-  background: #cacaca;
-}
-.warehouse-products table .first-tab-body tr:hover .sticky-block label span {
+.warehouse-products table .first-tab-body tr:hover:not(.lockOrder) .sticky-block label span {
   background: #adaaaa;
 }
 .warehouse-products table .first-tab-body tr:not(.lockOrder):hover .shadow-left {
   background: linear-gradient(90deg, #cacaca 0%, rgba(202, 202, 202, 0.95) 20%, rgba(202, 202, 202, 0.7) 45%, rgba(202, 202, 202, 0.5) 65%, rgba(202, 202, 202, 0) 100%) !important;
 }
-.warehouse-products table .first-tab-body tr:not(.lockOrder):hover td:first-child:before {
+.warehouse-products table .first-tab-body tr:not(.lockOrder):hover .stickyBeforeBody:before {
   content: "";
 }
-.warehouse-products table .first-tab-body td:first-child:before {
+.warehouse-products table .first-tab-body .stickyBeforeBody:before {
   width: 7px;
   height: 18px;
   position: absolute;
   background: #515151;
-  left: -7px;
+  left: 6px;
   border-radius: 3px 0 0 3px;
   top: 0;
 }
 .warehouse-products table .first-tab-body .select td, .warehouse-products table .first-tab-body .select div, .warehouse-products table .first-tab-body .select input {
   color: white !important;
 }
-.warehouse-products table .first-tab-body .select .hoverr .div {
-  display: block;
+.warehouse-products table .first-tab-body .select td {
+  background: #858585;
 }
 .warehouse-products table .first-tab-body .select .animationFrame {
   background-color: #858585;
@@ -882,15 +769,40 @@ body {
 .warehouse-products table .first-tab-body .select label span {
   background: #adaaaa;
 }
-.warehouse-products table .first-tab-body .select td:first-child:before {
+.warehouse-products table .first-tab-body .select .stickyBeforeBody:before {
   content: "";
   width: 7px;
   height: 18px;
   position: absolute;
   background: #515151;
-  left: -7px;
+  left: 6px;
   border-radius: 3px 0 0 3px;
   top: 0;
+}
+.warehouse-products table .first-tab-body .lockOrder .stickyBeforeBody:after {
+  content: "";
+  background-image: url("../../img/lockOrder.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: -1px;
+  top: 3px;
+}
+.warehouse-products table .first-tab-body .lockOrder td:not(.stickyBeforeBody),
+.warehouse-products table .first-tab-body .lockOrder div:not(.stickyBeforeBody),
+.warehouse-products table .first-tab-body .lockOrder input {
+  color: rgba(0, 0, 0, 0.2) !important;
+  background-color: #e1dedd !important;
+}
+.warehouse-products table .first-tab-body .lockOrder label,
+.warehouse-products table .first-tab-body .lockOrder input,
+.warehouse-products table .first-tab-body .lockOrder button {
+  pointer-events: none;
+}
+.warehouse-products table .first-tab-body .lockOrder .shadow-left {
+  background: linear-gradient(90deg, #e1dedd 0%, rgba(225, 222, 221, 0.95) 20%, rgba(225, 222, 221, 0.7) 45%, rgba(225, 222, 221, 0.5) 65%, rgba(225, 222, 221, 0) 100%) !important;
 }
 .warehouse-products table .nal-ostatok {
   padding: 0 2px;

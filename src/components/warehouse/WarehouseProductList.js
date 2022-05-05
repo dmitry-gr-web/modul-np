@@ -19,9 +19,10 @@ const WarehouseProductList = ({
 	translator,
 	start,
 	widthColum,
-	height,
+
 	setToggleCard,
 	setGetIndex,
+
 	// hoverWidth,
 	// setHoverWidth,
 }) => {
@@ -285,26 +286,44 @@ const WarehouseProductList = ({
 				e.preventDefault();
 				e.stopPropagation();
 				newobj[index].select = !newobj[index].select;
-			} else {
-				// e.preventDefault();
-				e.stopPropagation();
-				if (newobj[index].select !== true) {
-					newobj.map((x) => (x.select = false));
-				}
-				newobj[index].select = !newobj[index].select;
-			}
-			if (e.shiftKey) {
+			} else if (e.shiftKey) {
 				e.preventDefault();
 				e.stopPropagation();
-				newobj.slice(lastIndex, index).map((x, i) => {
-					if (x.lock) {
+				newobj = newobj.map((x) => {
+					return { ...x, select: false };
+				});
+				if (lastIndex < index) {
+					newobj.slice(lastIndex, index).map((x, i) => {
+						if (x.lock) {
+							x.select = false;
+						} else {
+							x.select = true;
+						}
+					});
+				} else {
+					newobj.slice(index, lastIndex).map((x, i) => {
+						if (x.lock) {
+							x.select = false;
+						} else {
+							x.select = true;
+						}
+					});
+				}
+			} else {
+				// e.preventDefault();
+				setLastIndex(index);
+				e.stopPropagation();
+				newobj.map((x, i) => {
+					if (i !== index) {
 						x.select = false;
-					} else {
-						x.select = true;
 					}
 				});
+				// if (newobj[index].select !== true) {
+				// 	newobj.map((x) => (x.select = !newobj[index].select));
+				// }
+
+				newobj[index].select = !newobj[index].select;
 			}
-			setLastIndex(index);
 			setObjProduct(newobj);
 		}
 	}
@@ -343,13 +362,18 @@ const WarehouseProductList = ({
 		}
 	}
 	// console.log(hoverWidth)
-	const [hoverWidth, setHoverWidth] = useState(document.querySelector('.warehouse-products')?.offsetWidth);
-	useEffect(()=> {
-		window.addEventListener('resize', function(event) {
-		
-			setHoverWidth(document.querySelector('.warehouse-products')?.offsetWidth)
-		}, true);
-	},[objProduct.length])
+	const [hoverWidth, setHoverWidth] = useState(
+		document.querySelector('.warehouse-products')?.offsetWidth
+	);
+	useEffect(() => {
+		window.addEventListener(
+			'resize',
+			function (event) {
+				setHoverWidth(document.querySelector('.warehouse-products')?.offsetWidth);
+			},
+			true
+		);
+	}, [objProduct.length]);
 	return (
 		<>
 			{objProduct[index] && (
@@ -371,15 +395,16 @@ const WarehouseProductList = ({
 					onDoubleClick={!objProduct[index].lock ? dblClick : () => {}}
 					key={index}
 				>
-					<td className="hoverr">
+					{/* <td className="hoverr">
 						<div
 							// {23}
-							style={{ width: hoverWidth  + 'px' }}
+							// style={{ width: hoverWidth  + 'px' }}
 						></div>
 						<div className="div"></div>
-					</td>
+					</td> */}
 					<td className="sticky-body">
 						<div className="sticky-block">
+							<div className="stickyBeforeBody"></div>
 							<div
 								onMouseEnter={() => setSwitchMenu(true)}
 								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
@@ -488,22 +513,14 @@ const WarehouseProductList = ({
 							<div
 								onMouseLeave={tooltipOff}
 								onMouseEnter={tooltipOn}
-								style={
-									!objProduct[index].status.all
-										? {
-												color: 'rgba(0,0,0,0.4)',
-												textAlign: 'center',
-												minWidth: 51,
-												paddingRight: '10px',
-										  }
-										: {
-												textAlign: 'center',
-												minWidth: 51,
-												paddingRight: '10px',
-												height: 18,
-												lineHeight: '18px',
-										  }
-								}
+								style={{
+									color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
+									textAlign: 'center',
+									minWidth: 51,
+									paddingRight: '10px',
+									height: 18,
+									lineHeight: '18px',
+								}}
 							>
 								{objProduct[index].currency}
 							</div>
@@ -534,7 +551,7 @@ const WarehouseProductList = ({
 										lineHeight: '18px',
 										whiteSpace: 'nowrap',
 										overflow: 'hidden',
-										width: widthColum.name -15+'px',
+										width: widthColum.name - 15 + 'px',
 										textOverflow: 'ellipsis',
 										display: 'block',
 										opacity: `${
