@@ -1,31 +1,40 @@
-import React, { useEffect, useState, useRef, useMemo, useContext } from 'react';
+import React, { useEffect, useState, useRef,useMemo } from 'react';
+import StatusBlock from './statusBlock';
 // import ProductCard from '../warehouse/Warehouse';
 // import PodProductList from './PodProductList';
+// import useOutsideAlert from './outSideHook';
 let plusminus;
 const WarehouseProductList = ({
 	objProduct,
 	setSwitchMenu,
+	switchMenu,
 	index,
 	setObjProduct,
 	podlozhka,
 	setPodlozhka,
-	focusInput,
-	setFocusInput,
+	// focusInput,
+	// setFocusInput,
 	setIndexInput,
 	lastIndex,
 	setLastIndex,
-	btnMenu,
+	setLoadedLabelBlock,
+	loadedLabelBlock,
 	flagSwitchMenu,
 	translator,
 	start,
-	widthColum,
+	// widthColum,
 
 	setToggleCard,
 	setGetIndex,
-
+	// rowHeight
 	// hoverWidth,
 	// setHoverWidth,
 }) => {
+	const [memoryInput, setMemoryInput] = useState(objProduct[index]?.ostatok);
+	// const [inputFormat, setInputFormat] = useState(false);
+	// const [ref, isShow, setIsShow ] = useOutsideAlert(false);
+
+	// console.log('list')
 	function switchBtn(e) {
 		e.stopPropagation();
 		if (e.target.className === 'status-all') {
@@ -110,6 +119,21 @@ const WarehouseProductList = ({
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-header 1s forwards';
 			}, 150);
+		} else {
+			if (e.currentTarget.className === 'attribute-width') {
+				// console.log(e.currentTarget.children[0].getAttribute('src'))
+				const src = e.currentTarget.children[0].getAttribute('src');
+				const memory = e.currentTarget.children[1].innerText;
+				const img = `<img style='width:100%;height:100%;object-fit:cover' src="${src}"/>`;
+				plusminus = setTimeout(() => {
+					// tooltipBlock.innerHTML = html;
+
+					tooltipBlock.innerHTML = `<div class="img-tooltip" style='display: flex; flex-direction: column;width:300px;height:300px;'>${memory}${img}</div>`;
+					tooltipBlock.style.left = posElement.x + 'px';
+					tooltipBlock.style.top = posElement.y + 23 + 'px';
+					tooltipBlock.style.animation = 'delay-header 1s forwards';
+				}, 150);
+			}
 		}
 		if (e.currentTarget.innerText === '🇺🇦') {
 			plusminus = setTimeout(() => {
@@ -171,7 +195,6 @@ const WarehouseProductList = ({
 		if (objProduct[index].lock) {
 			plusminus = setTimeout(() => {
 				const name = 'Олександр';
-
 				tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -186,43 +209,79 @@ const WarehouseProductList = ({
 		clearTimeout(plusminus);
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-
+	// console.log(objProduct[0].ostatok);
+	// let mem =  objProduct[0].ostatok;
+	// mem = +mem.replaceAll(' ','');
+	// console.log(mem)
 	function BtnMinus(e) {
 		e.stopPropagation();
 		let newobj = [...objProduct];
-		if (newobj[index].ostatok !== 0) {
-			newobj[index].ostatok = newobj[index].ostatok - 1;
+		if (newobj[index].ostatok !== '0') {
+			let ostatok = newobj[index].ostatok;
+			let zakupka = newobj[index].zakupka;
+			zakupka = +zakupka.replaceAll(/\s/gmu, '');
+			ostatok = +ostatok.replaceAll(/\s/gmu, '');
+			ostatok = ostatok - 1;
+			zakupka = zakupka * ostatok;
+			ostatok = ostatok.toLocaleString('ru-RU', {
+				minimumFractionDigits: 0,
+				maximumFractionDigits: 0,
+			});
+			zakupka = zakupka.toLocaleString('ru-RU', {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			}).replace(',','.');
+
+			newobj[index].ostatok = ostatok;
+			newobj[index].suma1 = zakupka;
+			setObjProduct([...newobj]);
+			setMemoryInput(ostatok);
 		}
-		setObjProduct(newobj);
-		setMemoryInput(newobj[index].ostatok);
 	}
 	function BtnPlus(e) {
 		e.stopPropagation();
 		let newobj = [...objProduct];
-		newobj[index].ostatok = newobj[index].ostatok + 1;
-		setObjProduct(newobj);
-		setMemoryInput(newobj[index].ostatok);
-	}
-	function formatNumber(number) {
-		let newnum = number
-			.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-			.replace(',', '.');
-		return newnum;
-	}
-	function formatNumber2(number) {
-		let newnum = number.toLocaleString('ru-RU', {
+		let ostatok = newobj[index].ostatok;
+		let zakupka = newobj[index].zakupka;
+		zakupka = +zakupka.replaceAll(/\s/gmu, '');
+		ostatok = +ostatok.replaceAll(/\s/gmu, '');
+		ostatok = ostatok + 1;
+		zakupka = zakupka * ostatok;
+		ostatok = ostatok.toLocaleString('ru-RU', {
 			minimumFractionDigits: 0,
 			maximumFractionDigits: 0,
 		});
-		return newnum;
+		zakupka = zakupka.toLocaleString('ru-RU', {
+			minimumFractionDigits: 2,
+			maximumFractionDigits: 2,
+		}).replace(',','.');
+
+		newobj[index].ostatok = ostatok;
+		newobj[index].suma1 = zakupka;
+		setObjProduct([...newobj]);
+		setMemoryInput(ostatok);
 	}
-	const [memoryInput, setMemoryInput] = useState(objProduct[index]?.ostatok);
-	const [inputFormat, setInputFormat] = useState(false);
+
+	// function formatNumber(number) {
+	// 	let newnum = number
+	// 		.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	// 		.replace(',', '.');
+	// 	return newnum;
+	// }
+	// function formatNumber2(number) {
+	// 	let newnum = number.toLocaleString('ru-RU', {
+	// 		minimumFractionDigits: 0,
+	// 		maximumFractionDigits: 0,
+	// 	});
+	// 	return newnum;
+	// }
+
 	function inputChange(e) {
 		setIndexInput(index - start);
-		setFocusInput(true);
+		// setFocusInput(true);
 		setPodlozhka(true);
-		setInputFormat(true);
+		// setInputFormat(true);
+		console.log(e.target.value);
 		e.target.value = e.target.value.replace(/[^0-9]/g, '');
 		setMemoryInput(e.target.value);
 	}
@@ -248,39 +307,69 @@ const WarehouseProductList = ({
 				}
 				e.target.blur();
 				console.log('enter');
-				setFocusInput(false);
+				// setFocusInput(false);
 			}
 			setPodlozhka(false);
 		}
 	}
 	useEffect(() => {
+		// console.log(objProduct)
+		// console.log(podlozhka)
+		// console.log(memoryInput)
+		console.log(podlozhka)
 		if (!podlozhka) {
-			setInputFormat(false);
+			// console.log('s')
+			// setInputFormat(false);
 			let newobj = [...objProduct];
-			newobj[index].ostatok = +memoryInput;
-			setObjProduct(newobj);
+			let ostatok = memoryInput ;
+			let zakupka = newobj[index].zakupka;
+			zakupka = +zakupka.replace(/\s/gmu, '');
+			ostatok = +ostatok.replace(/\s/gmu, '');
+			
+			// ostatok = ostatok + 1;
+			zakupka = zakupka * ostatok;
+			ostatok = ostatok.toLocaleString('ru-RU', {
+				minimumFractionDigits: 0,
+				maximumFractionDigits: 0,
+			});
+			zakupka = zakupka.toLocaleString('ru-RU', {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			}).replace(',','.');
+
+			newobj[index].ostatok = ostatok;
+			newobj[index].suma1 = zakupka;
+			// console.log(newobj[index].ostatok)
+			setMemoryInput(ostatok)
+			// if(objProduct.length > 0) {
+			// newobj[index].ostatok = memoryInput;
+			setObjProduct([...newobj]);
+			// }
+			
+		// console.log('ASDASD')
 		}
 	}, [podlozhka]);
-
+	
 	function inputLength(input) {
-		if (input.replaceAll(' ', '').length >= 4) {
+		// if (input.replaceAll(' ', '').length >= 4) {   !probel tut
+		if (input.replaceAll(/\s/gmu, '').length >= 4) {
 			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-			return input.replaceAll(' ', '').length * 7 + 3 + 'px';
+			return input.replaceAll(/\s/gmu, '').length * 7 + 3 + 'px';
 		}
-		if (input.replaceAll(' ', '').length >= 7) {
-			return input.replaceAll(' ', '').length * 7 + 7 + 'px';
+		if (input.replaceAll(/\s/gmu, '').length >= 7) {
+			return input.replaceAll(/\s/gmu, '').length * 7 + 7 + 'px';
 		}
-		if (input.replaceAll(' ', '').length < 4) {
-			return input.replaceAll(' ', '').length * 7 + 'px';
+		if (input.replaceAll(/\s/gmu, '').length < 4) {
+			return input.replaceAll(/\s/gmu, '').length * 7 + 'px';
 		}
 	}
-	const linkTR = useRef();
+	// const linkTR = useRef();
 
 	function clickTr(e) {
 		// e.preventDefault();
 		// e.stopPropagation();
 		// console.log(e.currentTarget)
-		if (e.currentTarget) {
+		if (e.currentTarget && !objProduct[index].lock) {
 			let newobj = [...objProduct];
 			if (e.ctrlKey || e.metaKey) {
 				e.preventDefault();
@@ -361,33 +450,33 @@ const WarehouseProductList = ({
 			setGetIndex(index);
 		}
 	}
-	// console.log(hoverWidth)
-	const [hoverWidth, setHoverWidth] = useState(
-		document.querySelector('.warehouse-products')?.offsetWidth
-	);
-	useEffect(() => {
-		window.addEventListener(
-			'resize',
-			function (event) {
-				setHoverWidth(document.querySelector('.warehouse-products')?.offsetWidth);
-			},
-			true
-		);
-	}, [objProduct.length]);
+
+
+	// useEffect(() => {
+	// 	window.addEventListener(
+	// 		'resize',
+	// 		function (event) {
+	// 			setHoverWidth(document.querySelector('.warehouse-products')?.offsetWidth);
+	// 		},
+	// 		true
+	// 	);
+	// }, [objProduct.length]);
+	// console.log(objProduct[index] > 0,index)
 	return (
 		<>
 			{objProduct[index] && (
 				<tr
 					// style={height}
 					className={
-						objProduct[index].select && !objProduct[index].lock
+						objProduct[index].select
 							? 'select speed'
 							: objProduct[index].lock
 							? 'lockOrder speed'
 							: 'speed'
 					}
 					onClick={clickTr}
-					ref={linkTR}
+					// ref={linkTR}
+					// style={{height: rowHeight}}
 					// key={index}
 					onMouseEnter={objProduct[index].lock ? tooltipOn : () => {}}
 					onMouseLeave={objProduct[index].lock ? tooltipOff : () => {}}
@@ -406,7 +495,7 @@ const WarehouseProductList = ({
 						<div className="sticky-block">
 							<div className="stickyBeforeBody"></div>
 							<div
-								onMouseEnter={() => setSwitchMenu(true)}
+								onMouseEnter={() => {setSwitchMenu(true) }}
 								onMouseLeave={() => setSwitchMenu(flagSwitchMenu ? true : false)}
 								style={{ display: 'flex', alignItems: 'center' }}
 							>
@@ -435,48 +524,14 @@ const WarehouseProductList = ({
 									className="animationFrame"
 									style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
 								>
-									<label
-										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
-										className="switch-btn-small"
-									>
-										<input
-											type="checkbox"
-											className="status-crm"
-											onChange={switchBtn}
-											// defaultChecked={objProduct[index].status.crm}
-											checked={objProduct[index].status.crm}
-										/>
-										<span className="slider round"></span>
-									</label>
+									{/* <div  style={{width: 84, height: 18}}> */}
+									{/* const [ref, isShow, setIsShow ] = useOutsideAlert(false); */}
 
-									<label
-										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
-										className="switch-btn-small"
-									>
-										<input
-											type="checkbox"
-											className="status-rozetka"
-											onChange={switchBtn}
-											// defaultChecked={objProduct[index].status.rozetka}
-											checked={objProduct[index].status.rozetka}
-										/>
-										<span className="slider round"></span>
-									</label>
-
-									<label
-										style={!objProduct[index].status.all ? { opacity: 0.4 } : {}}
-										className="switch-btn-small"
-									>
-										<input
-											type="checkbox"
-											className="status-prom"
-											onChange={switchBtn}
-											// defaultChecked={objProduct[index].status.prom}
-											checked={objProduct[index].status.prom}
-										/>
-										<span className="slider round"></span>
-									</label>
-									<div className="gradi"></div>
+									{
+										loadedLabelBlock ? <StatusBlock objProduct={objProduct} setObjProduct={setObjProduct} index={index}/> : ''
+									}
+									{/* <div className="gradi"></div> */}
+									{/* </div> */}
 								</div>
 							</div>
 
@@ -490,36 +545,27 @@ const WarehouseProductList = ({
 												color: 'rgba(0,0,0,0.4)',
 												textAlign: 'left',
 												paddingRight: '10px',
-												width: widthColum.id + 'px',
+												// width: widthColum.id + 'px',
 										  }
-										: { textAlign: 'left', paddingRight: '10px', width: widthColum.id + 'px' }
+										: { textAlign: 'left', paddingRight: '10px' }
 								}
 							>
 								{objProduct[index].id}
 							</div>
-							<div style={{ minWidth: 51, paddingRight: '10px', textAlign: 'center' }}>
-								<span
-									style={{
-										opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
-										color: 'rgba(0,0,0,1)',
-									}}
-									className="flags"
-									onMouseLeave={tooltipOff}
-									onMouseEnter={tooltipOn}
-								>
-									{objProduct[index].country}
-								</span>
+							<div
+								className="flags"
+								onMouseLeave={tooltipOff}
+								onMouseEnter={tooltipOn}
+								style={{ opacity: `${!objProduct[index].status.all ? 0.4 : ''}` }}
+							>
+								{objProduct[index].country}
 							</div>
 							<div
+								className="currency"
 								onMouseLeave={tooltipOff}
 								onMouseEnter={tooltipOn}
 								style={{
 									color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
-									textAlign: 'center',
-									minWidth: 51,
-									paddingRight: '10px',
-									height: 18,
-									lineHeight: '18px',
 								}}
 							>
 								{objProduct[index].currency}
@@ -529,31 +575,35 @@ const WarehouseProductList = ({
 								style={{
 									overflow: 'hidden',
 									paddingRight: '15px',
-									width: widthColum.name + 'px',
-									maxWidth: '172px',
+									// width: widthColum.name + 'px',
+									width: 200,
+									// maxWidth: '172px',
 								}}
 							>
+								{objProduct[index].podProduct === 1 || objProduct[index].podProduct === 0 ? (
+									<span
+										className={
+											objProduct[index].podProduct === 0
+												? 'arrow'
+												: objProduct[index].podProduct === 1
+												? 'arrowDeg'
+												: ''
+										}
+										style={
+											objProduct[index].podProduct === 1 ||
+											(objProduct[index].podProduct === 0 && objProduct[index].lock)
+												? { opacity: 0.4 }
+												: {}
+										}
+									></span>
+								) : (
+									''
+								)}
 								<span
-									className={
-										objProduct[index].podProduct === 0
-											? 'arrow'
-											: objProduct[index].podProduct === 1
-											? 'arrowDeg'
-											: ''
-									}
-									style={objProduct[index].podProduct === 1 ? { opacity: 0.4 } : {}}
-								></span>
-								<span
+									className="name"
 									onMouseLeave={tooltipOff}
 									onMouseEnter={tooltipOn}
 									style={{
-										height: '18px',
-										lineHeight: '18px',
-										whiteSpace: 'nowrap',
-										overflow: 'hidden',
-										width: widthColum.name - 15 + 'px',
-										textOverflow: 'ellipsis',
-										display: 'block',
 										opacity: `${
 											objProduct[index].podProduct === 1 || !objProduct[index].status.all ? 0.4 : ''
 										}`,
@@ -565,10 +615,13 @@ const WarehouseProductList = ({
 							</div>
 							<div
 								className="attribute-width"
+								onMouseLeave={tooltipOff}
+								onMouseEnter={tooltipOn}
 								style={{
 									opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
 									display: 'flex',
 									alignItems: 'center',
+									width: 150,
 								}}
 							>
 								<img
@@ -577,19 +630,19 @@ const WarehouseProductList = ({
 									alt=""
 								/>
 								<span
-									onMouseLeave={tooltipOff}
-									onMouseEnter={tooltipOn}
-									style={{
-										height: '18px',
-										lineHeight: '18px',
-										marginLeft: 20,
-										whiteSpace: 'nowrap',
-										overflow: 'hidden',
-										textOverflow: 'ellipsis',
-										display: 'block',
-										width: widthColum.attribute - 20 + 'px',
-										maxWidth: 85,
-									}}
+									className="attribute"
+									// style={{
+									// 	height: '18px',
+									// 	lineHeight: '18px',
+									// 	marginLeft: 20,
+									// 	whiteSpace: 'nowrap',
+									// 	overflow: 'hidden',
+									// 	textOverflow: 'ellipsis',
+									// 	display: 'block',
+									// 	// width: widthColum.attribute - 20 + 'px',
+									// 	// maxWidth: 85,
+									// 	// width:150
+									// }}
 								>
 									{objProduct[index].attribute}
 								</span>
@@ -600,255 +653,294 @@ const WarehouseProductList = ({
 					</td>
 
 					<td
-						style={{ paddingLeft: '12px' }}
 						onMouseLeave={PlusMinusClose}
 						onMouseEnter={PlusMinusOpen}
 						className="nal-ostatok"
+						ref={btnRef}
+						style={
+							// !objProduct[index].status.all
+							// 	? {
+							// 			// opacity: 0.4,
+							// 			color:'rgba(0, 0, 0, 0.4)',
+
+							// 			paddingRight: 3,
+							// 	  }
+							// 	: 
+								{ paddingRight: 3 }
+						}
 					>
 						<div
-							ref={btnRef}
-							style={
-								!objProduct[index].status.all
-									? {
-											opacity: 0.4,
-											display: 'flex',
-											justifyContent: 'flex-end',
-											paddingRight: '3px',
-									  }
-									: { display: 'flex', justifyContent: 'flex-end', paddingRight: '3px' }
-							}
+							className="wrap-nal-ostatok"
+							style={{ display: 'flex', position: 'absolute', lineHeight: '18px', height: 18 }}
 						>
-							<div className="wrap-nal-ostatok" style={{ display: 'flex', position: 'absolute' }}>
-								<button
-									style={btnMenu ? { width: '16px' } : {}}
-									onDoubleClick={(e) => e.stopPropagation()}
-									onClick={BtnMinus}
+							<button
+								// style={btnMenu ? { width: '16px' } : {}}
+								onDoubleClick={(e) => e.stopPropagation()}
+								onClick={BtnMinus}
+							>
+								<svg
+									width="9"
+									height="7"
+									viewBox="0 0 9 7"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
 								>
-									<svg
-										width="9"
-										height="7"
-										viewBox="0 0 9 7"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M1.26782 3.44748L8.08752 3.44747"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-									</svg>
-								</button>
+									<path
+										d="M1.26782 3.44748L8.08752 3.44747"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+								</svg>
+							</button>
 
-								<input
-									ref={inputRef}
-									type="text"
-									onChange={inputChange}
-									onKeyUp={enterInput}
-									maxLength={5}
-									onClick={(e) => {
-										setFocusInput(true);
-										setPodlozhka(true);
-										setInputFormat(true);
-										e.stopPropagation();
-									}}
-									value={focusInput && inputFormat ? memoryInput : formatNumber2(+memoryInput)}
-									onDoubleClick={(e) => e.stopPropagation()}
-									style={{
-										color: 'rgba(0,0,0,0.7)',
-										width: inputLength(memoryInput.toString()),
-									}}
-									readOnly={objProduct[index].lock ? true : false}
-								/>
+							<input
+								ref={inputRef}
+								type="text"
+								onChange={inputChange}
+								onKeyUp={enterInput}
+								maxLength={5}
+								onClick={(e) => {
+									// setFocusInput(true);
+									setPodlozhka(true);
+									// setInputFormat(true);
+									e.stopPropagation();
+								}}
+								// value={focusInput && inputFormat ? memoryInput : +memoryInput}
+								value={memoryInput}
+								onDoubleClick={(e) => e.stopPropagation()}
+								style={{
+									color: `${!objProduct[index].status.all ?'rgba(0,0,0,0.4)' :'rgba(0,0,0,0.7)'}`,
+									lineHeight: '18px',
+									width: inputLength(memoryInput.toString()),
+								}}
+								readOnly={objProduct[index].lock ? true : false}
+							/>
 
-								<button
-									style={btnMenu ? { width: '16px' } : {}}
-									onDoubleClick={(e) => e.stopPropagation()}
-									onClick={BtnPlus}
+							<button
+								// style={btnMenu ? { width: '16px' } : {}}
+								onDoubleClick={(e) => e.stopPropagation()}
+								onClick={BtnPlus}
+							>
+								<svg
+									width="15"
+									height="15"
+									viewBox="3 2 15 15"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+									style={{ transform: 'rotate(45deg)' }}
 								>
-									<svg
-										width="15"
-										height="15"
-										viewBox="3 2 15 15"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-										style={{ transform: 'rotate(45deg)' }}
-									>
-										<path
-											d="M7.26655 8.03662L12.0888 12.8589"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 12.8589L12.0888 8.03659"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 8.03662L12.0888 12.8589"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 12.8589L12.0888 8.03659"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 8.03662L12.0888 12.8589"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-										<path
-											d="M7.26655 12.8589L12.0888 8.03659"
-											stroke="black"
-											strokeOpacity="0.7"
-											strokeWidth="1.09116"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										></path>
-									</svg>
-								</button>
-							</div>
+									<path
+										d="M7.26655 8.03662L12.0888 12.8589"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 12.8589L12.0888 8.03659"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 8.03662L12.0888 12.8589"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 12.8589L12.0888 8.03659"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 8.03662L12.0888 12.8589"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 12.8589L12.0888 8.03659"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+								</svg>
+							</button>
+						</div>
 
-							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
-						</div>
-					</td>
-					<td className="nal-rezerv">
-						<div
-							style={{
-								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
-								color: 'rgba(0,0,0,0.5)',
-								paddingRight: '4px',
-								height: '18px',
-								lineHeight: '18px',
-							}}
-						>
-							{formatNumber2(objProduct[index].rezerv)}
-						</div>
-					</td>
-					<td className="nal-otpr">
-						<div
-							style={{
-								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
-								height: '18px',
-								lineHeight: '18px',
-								color: 'rgba(0,0,0,0.5)',
-								paddingRight: '4px',
-							}}
-						>
-							{formatNumber2(objProduct[index].otpr)}
-						</div>
-					</td>
-					<td className="nal-vozvrat">
-						<div
-							style={{
-								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
-								height: '18px',
-								lineHeight: '18px',
-								color: 'rgba(0,0,0,0.5)',
-								paddingRight: '15px',
-							}}
-						>
-							{formatNumber2(objProduct[index].vozvrat)}
-						</div>
+						<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
 					</td>
 					<td
+						className="nal-rezerv"
 						style={{
-							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
-							textAlign: 'right',
-							paddingRight: '15px',
-							position: 'relative',
-							lineHeight: '14px',
-							height: '14px',
-						}}
-					>
-						{formatNumber(objProduct[index].zakupka)}
-					</td>
-					<td
-						style={{
-							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
-							textAlign: 'right',
-							paddingRight: '15px',
-							position: 'relative',
-							lineHeight: '14px',
-							height: '14px',
-						}}
-					>
-						{formatNumber(objProduct[index].prodazha)}
-					</td>
-					<td
-						style={{
-							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
-							textAlign: 'right',
-							paddingRight: '15px',
-							position: 'relative',
-							lineHeight: '14px',
-							height: '14px',
-						}}
-					>
-						{formatNumber(objProduct[index].marzha)}
-					</td>
-					<td className="summa-suma1">
-						<div
-							style={{
-								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : 'rgba(0, 0, 0, 0.5)'}`,
 
-								textAlign: 'right',
-								display: 'flex',
-								justifyContent: 'end',
-								paddingRight: '3px',
-							}}
-						>
-							{formatNumber(objProduct[index].ostatok * objProduct[index].zakupka)}
-							<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
-						</div>
-					</td>
-					<td className="summa-suma2">
-						<div
+							paddingRight: '4px',
+						}}
+					>
+						{/* <div
 							style={{
 								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
+								color: 'rgba(0,0,0,0.5)',
+								paddingRight: '4px',
+								height: '18px',
+								lineHeight: '18px',
+							}}
+						>
+						</div> */}
+						{/* {formatNumber2(objProduct[index].rezerv)} */}
+						{objProduct[index].rezerv}
+						<span></span>
+					</td>
+					<td
+						className="nal-otpr"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : 'rgba(0, 0, 0, 0.5)'}`,
+							// height: '18px',
+							// lineHeight: '18px',
+							// color: 'rgba(0,0,0,0.5)',
+							paddingRight: '4px',
+						}}
+					>
+						{/* <div
+							style={{
+								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
+								height: '18px',
+								lineHeight: '18px',
+								color: 'rgba(0,0,0,0.5)',
 								paddingRight: '4px',
 							}}
 						>
-							{formatNumber(objProduct[index].suma2)}
-						</div>
+						</div> */}
+						{/* {formatNumber2(objProduct[index].otpr)} */}
+						{objProduct[index].otpr}
+						<span></span>
 					</td>
-					<td className="summa-suma3">
-						<div
-							style={{
-								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
-								paddingRight: '4px',
-							}}
+					<td
+						className="nal-vozvrat"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : 'rgba(0, 0, 0, 0.5)'}`,
+							// height: '18px',
+							// lineHeight: '18px',
+							// color: 'rgba(0,0,0,0.5)',
+							paddingRight: '15px',
+						}}
+					>
+						{/* <div
+						
 						>
-							{formatNumber(objProduct[index].suma3)}
-						</div>
+						</div> */}
+						{/* {formatNumber2(objProduct[index].vozvrat)} */}
+						{objProduct[index].vozvrat}
+						<span></span>
 					</td>
-					<td className="summa-suma4">
-						<div
-							style={{
-								opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
-							}}
+					<td
+						className="nal-zakupka"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
+						}}
+					>
+						{objProduct[index].zakupka}
+						{/* {formatNumber(objProduct[index].zakupka)} */}
+					</td>
+					<td
+						className="nal-prodazha"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
+						}}
+					>
+						{objProduct[index].prodazha}
+						{/* {formatNumber(objProduct[index].prodazha)} */}
+					</td>
+					<td
+						className="nal-marzha"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
+						}}
+					>
+						{/* {formatNumber(objProduct[index].marzha)} */}
+						{objProduct[index].marzha}
+					</td>
+					<td
+						className="summa-suma1"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : ''}`,
+
+							textAlign: 'right',
+							display: 'flex',
+							justifyContent: 'end',
+							paddingRight: '3px',
+						}}
+					>
+						{/* <div
+					
+						> */}
+						{objProduct[index].suma1}
+						{/* {objProduct[index].ostatok * objProduct[index].zakupka} */}
+						{/* {formatNumber(objProduct[index].ostatok * objProduct[index].zakupka)} */}
+						<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
+						{/* </div> */}
+					</td>
+					<td
+						className="summa-suma2"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : 'rgba(0, 0, 0, 0.5)'}`,
+							paddingRight: '4px',
+							color: 'rgba(0,0,0,0.5)',
+						}}
+					>
+						{/* <div
+						
 						>
-							{formatNumber(objProduct[index].suma4)}
-						</div>
+						</div> */}
+						{/* {formatNumber(objProduct[index].suma2)} */}
+						{objProduct[index].suma2}
+						<span></span>
+					</td>
+					<td
+						className="summa-suma3"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : 'rgba(0, 0, 0, 0.5)'}`,
+							paddingRight: '4px',
+						}}
+					>
+						{/* <div
+						
+						>
+						</div> */}
+						{objProduct[index].suma3}
+						<span></span>
+						{/* {formatNumber(objProduct[index].suma3)} */}
+					</td>
+					<td
+						className="summa-suma4"
+						style={{
+							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : 'rgba(0, 0, 0, 0.5)'}`,
+						}}
+					>
+						{/* <div
+						
+						>
+						</div> */}
+						{/* {formatNumber(objProduct[index].suma4)} */}
+						{objProduct[index].suma4}
+						<span></span>
 					</td>
 				</tr>
 			)}

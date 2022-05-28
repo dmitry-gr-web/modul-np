@@ -126,7 +126,7 @@ html {
 	
 }
 
-#tooltipBtn div {
+#tooltipBtn div:not(.img-tooltip) {
 	display: block !important;
 }
 #tooltipBtn .findUnderline {

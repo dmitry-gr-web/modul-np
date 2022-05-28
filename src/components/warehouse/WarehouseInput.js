@@ -24,6 +24,10 @@ const WarehouseInput = ({setPodlozhka, podlozhka}) => {
 			x.classList.add('hide-menu');
 		});
         e.target.closest('.warehouse-input').classList.remove('hide-menu');
+        document.querySelector('.contentScroll').style.overflow = 'hidden';
+
+        // document.querySelector('.warehouse-table').style.overflow = 'hidden';
+
 		// e.target.closest('.warehouse-input').style.visibility = 'visible';
         setInputID(e.target.value);
         if (e.target.value.length === 1) {
@@ -39,6 +43,8 @@ const WarehouseInput = ({setPodlozhka, podlozhka}) => {
                 // x.style.visibility = 'visible';
                 x.classList.remove('hide-menu');
             });
+            document.querySelector('.warehouse-table').style.overflow = '';
+
             setPodlozhka(false);
             e.currentTarget.blur();
         }
@@ -54,6 +60,7 @@ const WarehouseInput = ({setPodlozhka, podlozhka}) => {
         onKeyDown={enter}
         value={inputID}
         type="text"
+        style={{color: 'rgba(0, 0, 0, 0.65)'}}
     />
     <span className="underline"></span>
 </div>

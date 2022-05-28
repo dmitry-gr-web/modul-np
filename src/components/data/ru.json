@@ -53,5 +53,9 @@
 	},
 	"sortData": {
 		"sortTooltip": "Сортировать данные"
+	},
+	"tooltipCount": {
+		"attribute": "Атрибутов в фильтре:<br>- найдено % <br>- выбрано %"
 	}
+
 }

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import { FixedSizeList as List } from 'react-window';
+// import './range.scss';
 
 const WarehouseDropMenu = ({
 	objProduct,
@@ -10,11 +11,20 @@ const WarehouseDropMenu = ({
 	podlozhka,
 	type,
 	adaptive,
+	switchMenu,
 	setFlagSwitchMenu,
 	searchLine,
 	translator,
 	sortActive,
-	setSortActive
+	setSortActive,
+	labelForWidth,
+	setLabelForWidth,
+	// toggleSort,
+	setWidth21px,
+	width21px,
+	// activity,
+	// setActivity,
+	zIndex,
 }) => {
 	const [openMenu, setOpenMenu] = useState(false);
 
@@ -44,7 +54,6 @@ const WarehouseDropMenu = ({
 			</label>
 		);
 	};
-	// console.log(translator?.getTranslation('btnAll','all') ?? 'Все')
 	let newarr = [];
 	if (inputOn) {
 		objProduct.map((x) => {
@@ -57,9 +66,6 @@ const WarehouseDropMenu = ({
 			return { id: index + 1, attribute: x, select: false };
 		});
 		newarr = [{ id: 0, attribute: 'all', select: true }, ...newarr];
-		// newarr.map(x => x.attribute)[0]translator.getTranslation('btnAll', 'all')
-		// newarr[0].attribute = translator.getTranslation('btnAll', 'all')
-		//  console.log(newarr[0].attribute = 'дщі')
 	} else {
 		if (type === 'country') {
 			newarr = [
@@ -87,21 +93,20 @@ const WarehouseDropMenu = ({
 		}
 	}
 
-
 	const [obj, setObj] = useState(newarr);
 	const [objCopy, setObjCopy] = useState(newarr);
-
 
 	const [value, setValue] = useState('');
 	function infinityClick(index, e) {
 		setPodlozhka(true);
+		document.querySelector('.contentScroll').style.overflow = 'hidden';
 		if (obj[index].attribute === 'all') {
 			obj.map((x) => (x.select = false));
 			obj[index].select = true;
-
 			setOpenMenu(false);
 			setPodlozhka(false);
-			document.querySelector('.warehouse-table').style.overflow = '';
+			setArrowToggle(false);
+			document.querySelector('.contentScroll').style.overflow = 'auto';
 			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 				x.classList.remove('hide-menu');
 			});
@@ -117,17 +122,20 @@ const WarehouseDropMenu = ({
 					x.select = false;
 				}
 			});
-			if(objCopy.filter(x => x.select).length === 0 || obj.filter(x => x.select).length === 0) {
-				obj.map(x => {
+			if (
+				objCopy.filter((x) => x.select).length === 0 ||
+				obj.filter((x) => x.select).length === 0
+			) {
+				obj.map((x) => {
 					if (x.attribute === 'all') {
 						x.select = true;
 					}
-				})
-				objCopy.map(x => {
+				});
+				objCopy.map((x) => {
 					if (x.attribute === 'all') {
 						x.select = true;
 					}
-				})
+				});
 			}
 			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 				x.classList.add('hide-menu');
@@ -135,75 +143,82 @@ const WarehouseDropMenu = ({
 			e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		}
 		setObjCopy([...objCopy]);
-
 		setObj([...obj]);
 	}
 	function clickList(index, e) {
 		setPodlozhka(true);
-		// document.querySelector('.warehouse-table').style.overflow = 'hidden';
-		document.querySelector('.warehouse-table').style.overflow = 'hidden';
+		document.querySelector('.contentScroll').style.overflow = 'hidden';
 		if (type === 'status') {
 			let newobj = obj.map((x, i) => {
 				if (i === index && x.attribute !== 'all') {
 					if (adaptive) {
 						setFlagSwitchMenu(true);
+						if (activity) {
+							document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+								x.classList.remove('smallsort');
+							});
+							warehouse.current.classList.add('smallsort');
+						}
+						if (setLabelForWidth) {
+							setLabelForWidth(true); //melkie menu
+						}
+					} else {
+						setLabelForWidth(false); //menu width21px
 					}
 					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-						// x.style.visibility = 'hidden';
 						x.classList.add('hide-menu');
 					});
 					e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
-					// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
 					return { ...x, select: !x.select };
 				} else {
 					return { ...x, select: false };
 				}
-				
 			});
 			if (newobj.filter((x) => x.select === true).length === 0) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					// x.style.visibility = 'visible';
 					x.classList.remove('hide-menu');
 				});
 				setOpenMenu(false);
 				setPodlozhka(false);
-				// document.querySelector('.warehouse-table').style.overflow = 'auto';
-				document.querySelector('.warehouse-table').style.overflow = '';
+				document.querySelector('.contentScroll').style.overflow = 'auto';
+				setArrowToggle(false);
 				newobj[0].select = true;
 				if (adaptive) {
+					setTimeout(() => {
+						let hui = [...document.querySelectorAll('.block-3-btn .status-result')].every(x => x.innerHTML === '');
+						if(hui) {
+							setLabelForWidth(false);
+						}
+					}, 0);
 					setFlagSwitchMenu(false);
+					warehouse.current.classList.remove('smallsort');
+					e.currentTarget.closest('.warehouse-dropmenu').style.width = '22px';
+					document.querySelector('.width21px').style.maxWidth = '51px';
 				}
-				// setObj(newobj);
 			}
-
 			setObj(newobj);
-			// setObj(newobj);
 		} else {
 			let newobj = obj.map((x, i) => {
 				if (i === index) {
 					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-						// x.style.visibility = 'hidden';
 						x.classList.add('hide-menu');
 					});
 					e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
-					// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
 					return { ...x, select: !x.select };
 				} else if (index === 0 && i === 0) {
 					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-						// x.style.visibility = 'visible';
 						x.classList.remove('hide-menu');
+						setArrowToggle(false);
 					});
 					return { ...x, select: true };
 				} else if (index === 0 && i !== 0) {
 					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-						// x.style.visibility = 'visible';
 						x.classList.remove('hide-menu');
+						setArrowToggle(false);
 					});
 					setOpenMenu(false);
 					setPodlozhka(false);
-					document.querySelector('.warehouse-table').style.overflow = '';
-					// document.querySelector('.warehouse-table').style.overflow = 'auto';
-
+					document.querySelector('.contentScroll').style.overflow = 'auto';
 					return { ...x, select: false };
 				} else if (index !== 0 && i === 0) {
 					return { ...x, select: false };
@@ -213,48 +228,29 @@ const WarehouseDropMenu = ({
 			});
 			if (newobj.filter((x) => x.select === true).length === 0) {
 				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					// x.style.visibility = 'visible';
 					x.classList.remove('hide-menu');
 				});
 				setOpenMenu(false);
 				setPodlozhka(false);
-				// document.querySelector('.warehouse-table').style.overflow = 'auto';
-				document.querySelector('.warehouse-table').style.overflow = '';
+				setArrowToggle(false);
+				document.querySelector('.contentScroll').style.overflow = 'auto';
 				newobj[0].select = true;
-				// if (adaptive) {
-				// 	setFlagSwitchMenu(false);
-				// }
-				// setObj(newobj);
 			}
 			setObj(newobj);
 		}
-
-		// if (adaptive) {
-		// 	setFlagSwitchMenu(true);
-		// }
-
-		// if(adaptive){
-		// 	setSwitchMenu(true);
-		// }git
-
-		// e.target?.closest('.warehouse-input').style.display = 'block';
-		// setObj(newobj);
 	}
 	const ref = useRef();
 	function changeInput(e) {
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			// x.style.visibility = 'hidden';
 			x.classList.add('hide-menu');
 		});
 		setValue(e.target.value);
-		// e.target.closest('.warehouse-dropmenu').style.visibility = 'visible';
 		e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		if (ref.current.value.length === 1) {
 			ref.current.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
 			setValue(e.target.value);
 		}
 		if (type === 'name' || type === 'attribute') {
-			// console.log(objCopy[1].attribute)
 			if (e.target.value !== '') {
 				const results = objCopy.filter((x) => {
 					return x.attribute.toLowerCase().includes(e.target.value.toLowerCase());
@@ -266,29 +262,58 @@ const WarehouseDropMenu = ({
 		}
 		setPodlozhka(true);
 	}
-	// const listRef = React.createRef();
 	const warehouse = useRef();
+	const [arrowToggle, setArrowToggle] = useState(false);
+	const [arrowActive, setArrowActive] = useState('down');
+	const [activity, setActivity] = useState(false);
 	function menuOn(e) {
 		if (!podlozhka) {
+			console.log('start');
+			setValue('');
+			setArrowToggle(true);
+			// if(activity){
+
+			// 	setArrowToggle(true);
+			// 	setActivity(true);
+			// }else {
+
+			// 	setArrowToggle(false);
+			// 	setActivity(false);
+			// }
+			setOpenMenu(true);
+			// if(activity){
+			// 	setArrowToggle(true);
+
+			// } else {
+			// 	setArrowToggle(false);
+
+			// }
+			// setArrowActive('')
 			if (type === 'name' || type === 'attribute') {
 				setObj(objCopy); //dlya infinity scroll
-				warehouse.current.querySelector('.scrollOff').scrollTo({ top: 0 });
+				warehouse.current.querySelector('.scrollOff')?.scrollTo({ top: 0 });
 			}
-			setValue('');
-			setOpenMenu(true);
-			// e.currentTarget.querySelector('.underline').style.width = '100%';
 			if (inputOn) {
 				ref.current.focus();
-				// e.currentTarget.querySelector('.underline').style.width = '100%';
 			}
+			// if (type === 'range') {
+			// 	e.currentTarget.style.zIndex = '9999';
+			// 	document.querySelector('.contentScroll').style.overflow = 'hidden';
+			// }
 			if (adaptive) {
+				if (refStatusText.current.innerHTML !== '') {
+					warehouse.current.classList.add('hide-arrow');
+				} else if (refStatusText.current.innerHTML !== '' && activity) {
+					warehouse.current.classList.add('hide-arrow');
+				} else {
+					if (activity) {
+						warehouse.current.classList.add('hide-arrow');
+					} else {
+						warehouse.current.classList.remove('hide-arrow');
+					}
+				}
 				e.currentTarget.style.width = '51px';
 				document.querySelector('.width21px').style.maxWidth = '21px';
-				e.currentTarget.querySelector(".sortBtn").style.display = "block";
-				// e.currentTarget.classList.remove('hide-arrow');
-
-		
-
 			}
 			warehouse.current.querySelector('.simplebar-content-wrapper')?.scrollTo({
 				top: 0,
@@ -299,6 +324,12 @@ const WarehouseDropMenu = ({
 		if (podlozhka) {
 			setOpenMenu(true);
 		} else {
+			setOpenMenu(false);
+			if (activity) {
+				setArrowToggle(true);
+			} else {
+				setArrowToggle(false);
+			}
 			if (type !== 'status') {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
@@ -307,7 +338,7 @@ const WarehouseDropMenu = ({
 						? ''
 						: obj.filter((x) => x.select === true)[0]?.attribute
 				);
-				if(obj.filter((x) => x.select === true).length === 0 ) {
+				if (obj.filter((x) => x.select === true).length === 0) {
 					setValue('');
 				}
 			} else {
@@ -319,32 +350,28 @@ const WarehouseDropMenu = ({
 						: obj.filter((x) => x.select === true)[0].attribute
 				);
 			}
-			setOpenMenu(false);
-
 			if (inputOn) {
 				ref.current.blur();
 			}
 			if (adaptive) {
+				if (refStatusText.current.innerHTML !== '') {
+					warehouse.current.classList.add('hide-arrow');
+				} else if (refStatusText.current.innerHTML !== '' && activity) {
+					warehouse.current.classList.add('hide-arrow');
+				} else {
+					if (activity) {
+						warehouse.current.classList.add('hide-arrow');
+					} else {
+						warehouse.current.classList.remove('hide-arrow');
+					}
+				}
 				e.currentTarget.style.width = '22px';
 				document.querySelector('.width21px').style.maxWidth = '51px';
-				// if(e.currentTarget.querySelector('.status-result').innerHTML !== '') {
-					e.currentTarget.querySelector(".sortBtn").style.display = "none";
-					if(e.currentTarget.querySelector('.status-result').innerHTML !== '') {
-
-						e.currentTarget.classList.add('hide-arrow');
-					}
-				// 	e.currentTarget.classList.add('hide-arrow');
-				// }
-				// if(e.currentTarget.querySelector('.status-result').innerHTML === '') {
-				// 	e.currentTarget.classList.remove('hide-arrow');
-				// }
 			}
-
 		}
 	}
 	useEffect(() => {
 		if (podlozhka) {
-
 		} else {
 			if (type !== 'status') {
 				setValue(
@@ -354,7 +381,7 @@ const WarehouseDropMenu = ({
 						? ''
 						: obj.filter((x) => x.select === true)[0]?.attribute
 				);
-				if(obj.filter((x) => x.select === true).length === 0 ) {
+				if (obj.filter((x) => x.select === true).length === 0) {
 					setValue('');
 				}
 			} else {
@@ -437,18 +464,31 @@ const WarehouseDropMenu = ({
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 			}
-			if(e.currentTarget.className === 'countBlock') {
+
+			if (e.currentTarget.className === 'countBlock') {
 				tooltipBlock.style.fontSize = '12px';
-				tooltipBlock.innerHTML =  `${type === 'attribute' ? 'Атрибутов' : 'Товаров'} в фильтре:<br>- найдено ${e.currentTarget.children[0].innerText}<br>- выбрано ${e.currentTarget.children[1].innerText}`;
+				// tooltipBlock.innerHTML = `${
+				// 	type === 'attribute' ? 'Атрибутов' : 'Товаров'
+				// } в фильтре:<br>- найдено ${e.currentTarget.children[0].innerText}<br>- выбрано ${
+				// 	e.currentTarget.children[1].innerText
+				// }`;
+				tooltipBlock.innerHTML = `${translator.getTranslation(
+					'tooltipCount',
+					'attribute',
+					e.currentTarget.children[0].innerText,
+					e.currentTarget.children[1].innerText
+				)}`;
+
 				tooltipBlock.style.left = posElement.x + 'px';
-				tooltipBlock.style.top = posElement.y + 25 +'px';
+				tooltipBlock.style.top = posElement.y + 25 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 			}
-			if(e.currentTarget.className === 'sortBtn') {
+			if (e.currentTarget.closest('.sortBtn')) {
 				tooltipBlock.style.fontSize = '12px';
-				tooltipBlock.innerHTML =  `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
+				// console.log('asdsadas')
+				tooltipBlock.innerHTML = `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
 				tooltipBlock.style.left = posElement.x + 'px';
-				tooltipBlock.style.top = posElement.y + 25 +'px';
+				tooltipBlock.style.top = posElement.y + 25 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 			}
 		}
@@ -456,61 +496,83 @@ const WarehouseDropMenu = ({
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-	const [sortBtn, setSortBtn] = useState(false);
-	const [active, setActive] = useState(false);
-
-	// function sortBtn(e) {
-	// 	e.currentTarget.children[0].style.transform = '';
-	// }
 	useEffect(() => {
-		console.log();
-		// document.querySelectorAll('.status-result').forEach((x, i) => {
-		// 	if (i !== 0 && x.innerHTML !== '') {
-		// 		console.log(x.nextSibling)
-		// 		x.closest('.warehouse-dropmenu').classList.add('hide-arrow');
-		// 		x.nextSibling.style.display = "none";
-		// 	} else {
-		// 		// x.closest('.warehouse-dropmenu').classList.remove('hide-arrow');
-		// 		// x.nextSibling.style.display = "block";
-		// 	}
-		// });
-	}, [podlozhka, openMenu, active]);
-	useEffect(()=> {
-		setActive(false);
-		// console.log(active)
-		// if(sortActive) {
-			
-		// }
-		setSortBtn(false);
-		// setSortBtn(sortActive)
-		// setSortBtn(true);
-		// setSortBtn((prevstate) => {
-	
-		// 	return prevstate ? true : false
-		// });
-	},[sortActive])
-	function sortClickBtn() {
+		if (!podlozhka && !activity) {
+			setArrowActive('down');
+			setArrowToggle(false);
+			setActivity(false);
+		}
+	}, [podlozhka]);
+	useEffect(() => {
+		setArrowActive('down');
+		setArrowToggle(false);
+		setActivity(false);
+	}, [sortActive]);
+	function sortClickBtn(e) {
+		if (switchMenu && adaptive && setWidth21px) {
+			setWidth21px(true);
+		} else if (!width21px && !switchMenu && !adaptive && !activity) {
+			setWidth21px(false);
+		}
+
+		if (arrowActive === 'down') {
+			setArrowActive('up');
+		} else if (arrowActive === 'up') {
+			setArrowActive('down');
+		}
+		setSortActive(!sortActive);
+		document.querySelector('.contentScroll').style.overflow = 'scroll';
+		setTimeout(() => {
+			setActivity(true);
+			setArrowToggle(true);
+			if (arrowActive === 'down') {
+				setArrowActive('up');
+			} else {
+				setArrowActive('down');
+			}
+		}, 0);
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			// x.style.visibility = 'hidden';
 			x.classList.remove('hide-menu');
 		});
-		setFlagSwitchMenu(false);
+		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+			x.classList.remove('smallsort');
+		});
+		if (adaptive) {
+			setFlagSwitchMenu(false);
+		}
 		setOpenMenu(false);
 		setPodlozhka(false);
-		setSortBtn((prev)=>!prev);
-		setSortActive(!sortActive);
-		setTimeout(() => {
-			setActive(true)
-			setSortBtn(!sortBtn);
-		}, 0);
-		
 	}
+	const refStatusText = useRef();
+	useEffect(() => {
+		if (activity && adaptive && refStatusText.current.innerHTML !== '') {
+			document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+				x.classList.remove('smallsort');
+			});
+			warehouse.current.classList.add('smallsort');
+		} else if (activity && adaptive && refStatusText.current.innerHTML === '') {
+			document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+				x.classList.remove('smallsort');
+			});
+		} else if (activity && !adaptive) {
+			document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+				x.classList.remove('smallsort');
+			});
+		}
+	}, [activity, sortActive]);
 	return (
 		<div
-			style={adaptive ? { width: 22, transition: 'width 0.3s' } : {}}
+			style={adaptive ? { width: 22, transition: 'width 0.3s' } : zIndex ? { zIndex: 1 } : {}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
-			className={`warehouse-dropmenu ${openMenu || active ? 'hide-arrow': ''}`}
+			className={`warehouse-dropmenu ${
+				arrowToggle ||
+				activity ||
+				(refStatusText.current?.innerHTML !== '' && adaptive) ||
+				(width21px === true && !switchMenu)
+					? 'hide-arrow'
+					: ''
+			}`}
 			ref={warehouse}
 		>
 			{inputOn ? (
@@ -522,106 +584,161 @@ const WarehouseDropMenu = ({
 						value={value}
 						onChange={(e) => changeInput(e)}
 					/>
-					<div style={{display: `${openMenu || active ? 'block': 'none'}`}} onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='sortBtn'><svg onClick={sortClickBtn} style={{transform: `${sortBtn ? 'scaleY(-1)' : ''}`}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>
-					{openMenu ? <div onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='countBlock'>(<span>{obj.filter(x => x.attribute !== 'all').length}</span>/<span>{obj.filter(x => x.attribute !== 'all' && x.select).length}</span>)</div> : ''}
+					{openMenu ? (
+						<div onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className="countBlock">
+							(<span>{obj.filter((x) => x.attribute !== 'all').length}</span>/
+							<span>{obj.filter((x) => x.attribute !== 'all' && x.select).length}</span>)
+						</div>
+					) : (
+						''
+					)}
+
+					{/* <div style={{display: `${active ? 'block': 'none'}`,width: '100%', background: 'rgb(117, 117, 117)',position: 'absolute', left:0, top:`${upDown ? '0px' : '18px'}`,height: 2, borderRadius: '2px'}} className='border'/> */}
 				</>
 			) : type === 'status' ? (
 				<>
-				<div className="status-result">
-					{obj.filter((x) => x.select === true).length > 1
-						? translator.getTranslation('btnFiltr', 'filtr')
-						: obj.filter((x) => x.select === true)[0].attribute === 'all'
-						? ''
-						: obj.filter((x) => x.select === true)[0].attribute}
-				</div>
-				<div style={{display: `${openMenu || active ? 'block': 'none'}`}} onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='sortBtn'><svg onClick={sortClickBtn} style={{transform: `${sortBtn ? 'scaleY(-1)' : ''}`}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>
+					<div ref={refStatusText} className="status-result">
+						{(obj.filter((x) => x.select === true).length > 1)
+							? translator.getTranslation('btnFiltr', 'filtr')
+							: obj.filter((x) => x.select === true)[0].attribute === 'all' || (labelForWidth && !switchMenu)
+							? ''
+							: obj.filter((x) => x.select === true)[0].attribute}
 
+						{labelForWidth && !switchMenu ? <LabelOn /> : ''}
+					</div>
+
+					{/* <div style={{display: `${active ? 'block': 'none'}`,width: '100%', background: 'rgb(117, 117, 117)',position: 'absolute', left:0, top:`${upDown ? '0px' : '18px'}`,height: 2, borderRadius: '2px'}} className='border'/> */}
 				</>
-				
 			) : (
 				<>
-				<div className="text-result">
-					{obj.filter((x) => x.select === true).length > 1 ? (
-						translator.getTranslation('btnFiltr', 'filtr')
-					) : obj.filter((x) => x.select === true)[0].attribute.includes('all') ? (
-						''
-					) : (
-						<span className={type === 'country' ? 'flags' : ''} style={{ paddingLeft: 10 }}>
-							{obj.filter((x) => x.select === true)[0].attribute}
-						</span>
-					)}
-				</div>
-				<div style={{display: `${openMenu || active ? 'block': 'none'}`}} onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='sortBtn'><svg onClick={sortClickBtn} style={{transform: `${sortBtn ? 'scaleY(-1)' : ''}`}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>
+					<div className="text-result">
+						{obj.filter((x) => x.select === true).length > 1 ? (
+							translator.getTranslation('btnFiltr', 'filtr')
+						) : obj.filter((x) => x.select === true)[0].attribute.includes('all') ? (
+							''
+						) : (
+							<span className={type === 'country' ? 'flags' : ''} style={{ paddingLeft: 10 }}>
+								{obj.filter((x) => x.select === true)[0].attribute}
+							</span>
+						)}
+					</div>
 
+					{/* <div style={{display: `${active ? 'block': 'none'}`,width: '100%', background: 'rgb(117, 117, 117)',position: 'absolute', left:0, top:`${upDown ? '0px' : '18px'}`,height: 2, borderRadius: '2px'}} className='border'/> */}
 				</>
 			)}
-			<span className="underline"></span>
-			{type === 'name' || type === 'attribute' ? (
-				<SimpleBar
-					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
-					autoHide={false}
+			<div
+				onMouseEnter={tooltipOn}
+				onMouseLeave={tooltipOff}
+				// className="sortBtn"
+				className={`sortBtn ${
+					arrowToggle || activity || (arrowToggle && activity) || (width21px && !switchMenu)
+						? 'on'
+						: ''
+				}`}
+				onClick={sortClickBtn}
+			>
+				<svg
+					// onClick={sortClickBtn}
+					width="10"
+					height="10"
+					viewBox="0 0 12 12"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					style={
+						arrowActive === 'down'
+							? {}
+							: arrowActive === 'up'
+							? { transform: 'scaleY(-1) scale(1) translateX(0px) translateY(0px)' }
+							: { transform: 'scaleY(-1) scale(1) translateX(0px) translateY(0px)' }
+					}
 				>
-					{({ scrollableNodeRef, contentNodeRef }) => {
-						return (
-							<List
-								height={83}
-								itemCount={obj.length}
-								itemSize={20}
-								className="scrollOff"
-								innerRef={contentNodeRef}
-								outerRef={scrollableNodeRef}
-							>
-								{({ index, style }) => (
-									<div
-										onMouseEnter={tooltipOn}
-										onMouseLeave={tooltipOff}
-										className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
-										onClick={(e) => infinityClick(index, e)}
-										key={index}
-										style={style}
+					<path
+						d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z"
+						fill="black"
+					></path>
+				</svg>
+			</div>
+			<span className="underline"></span>
+			{/* {console.log(openMenu)} */}
+
+			{type === 'name' || type === 'attribute' ? (
+				<div
+					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+				>
+					<SimpleBar
+						style={{ height: 90, overflowX: 'hidden' }}
+						// className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+						autoHide={false}
+					>
+						{({ scrollableNodeRef, contentNodeRef }) => {
+							return (
+								<List
+									height={90}
+									itemCount={obj.length}
+									itemSize={18}
+									className="scrollOff"
+									innerRef={contentNodeRef}
+									outerRef={scrollableNodeRef}
+								>
+									{({ index, style }) =>
+										openMenu && (
+											<div
+												onMouseEnter={tooltipOn}
+												onMouseLeave={tooltipOff}
+												className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
+												onClick={(e) => infinityClick(index, e)}
+												key={index}
+												style={style}
+												dangerouslySetInnerHTML={{
+													__html: searchLine(
+														translator.getTranslation('btnAll', obj[index]?.attribute) ??
+															obj[index]?.attribute,
+														value
+													),
+												}}
+											></div>
+										)
+									}
+								</List>
+							);
+						}}
+					</SimpleBar>
+				</div>
+			) : (
+				<div
+					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+				>
+					<SimpleBar
+						// style={adaptive ? { transitionDelay: '0.1s' } : {}}
+						style={{ height: 90 }}
+						autoHide={false}
+						forceVisible="x"
+						// className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+					>
+						{/* {inputOn ? (
+						obj
+							.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
+							.map((x, index) => (
+								<div
+									key={index}
+									onMouseEnter={tooltipOn}
+									onMouseLeave={tooltipOff}
+									className={x.select ? 'select-btn list' : 'list'}
+									onClick={(e) => clickList(x.id, e)}
+								>
+									<span
 										dangerouslySetInnerHTML={{
 											__html: searchLine(
-												translator.getTranslation('btnAll', obj[index]?.attribute) ??
-													obj[index]?.attribute,
+												translator.getTranslation('btnAll', x.attribute) ?? x.attribute,
 												value
 											),
 										}}
-									>
-										{/* {obj[index]?.attribute} */}
-									</div>
-								)}
-							</List>
-						);
-					}}
-				</SimpleBar>
-			) : (
-				<SimpleBar
-					// style={adaptive ? { transitionDelay: '0.1s' } : {}}
-					autoHide={false}
-					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
-				>
-					{inputOn
-						? obj
-								.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
-								.map((x, index) => (
-									<div
-										key={index}
-										onMouseEnter={tooltipOn}
-										onMouseLeave={tooltipOff}
-										className={x.select ? 'select-btn list' : 'list'}
-										onClick={(e) => clickList(x.id, e)}
-									>
-										<span
-											dangerouslySetInnerHTML={{
-												__html: searchLine(
-													translator.getTranslation('btnAll', x.attribute) ?? x.attribute,
-													value
-												),
-											}}
-										></span>
-									</div>
-								))
-						: obj.map((x, index) => (
+									></span>
+								</div>
+							))
+					) : ( */}
+						{openMenu &&
+							obj.map((x, index) => (
 								<div
 									key={index}
 									onMouseEnter={tooltipOn}
@@ -637,12 +754,13 @@ const WarehouseDropMenu = ({
 												: ''
 										}
 									>
-										{/* {console.log(translator.getTranslation('btnAll', x.attribute), x.attribute)} */}
 										{translator.getTranslation('btnAll', x.attribute) ?? x.attribute}
 									</span>
 								</div>
-						  ))}
-				</SimpleBar>
+							))}
+						{/* )} */}
+					</SimpleBar>
+				</div>
 			)}
 		</div>
 	);

@@ -7,11 +7,13 @@ import Suppliers from './Suppliers';
 import AttributeBlock from './AttributeBlock';
 import ProductCard from './ProductCard';
 import translator from '../data/translator';
+import { useFetch } from '../data/useFetch';
 // const WarehouseBlock = lazy(() => import('./WarehouseBlock'));
 const Warehouse = () => {
 	// let newarr = [...dataWarehouse, ...dataWarehouse];
 	// const ProductCard = React.createContext();
-
+	const {data,error,isLoading} = useFetch('');
+	console.log(data)
 	const [toggleCard, setToggleCard] = useState(false);
 	// console.log(dataWarehouse)
 	// const obj = [...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse]
@@ -26,80 +28,13 @@ const Warehouse = () => {
 	const [objProduct, setObjProduct] = useState(dataWarehouse);
 	const [getIndex, setGetIndex] = useState(0);
 
-	// useEffect(() => {
-	// 	let curent = linkTR.current.querySelectorAll('th');
-	// 	let width = [];
-	// 	let res = 0;
-	// 	setTimeout(() => {
-	// 		for (let i = 0; i < 8; i++) {
-	// 			if (!switchMenu) {
-	// 				width.push(curent[i].offsetWidth);
-	// 			} else if (switchMenu) {
-	// 				width.push(curent[i].offsetWidth);
-	// 			} else if (switchMenu && i === 1) {
-	// 				width.push(0);
-	// 			}
-	// 			curent[i].style.left = res + 7 + 'px';
-	// 			res = width.reduce((prev, curr) => prev + curr, 0);
-	// 			curent[0].style.left = '7px';
-	// 		}
-	// 	}, 200);
-	// }, [objProduct, switchMenu]);
-
-	// useEffect(()=> {
-	// 	document.addEventListener('click',function(e){
-	// 		if(!e.target.className.includes('warehouse-table')) {
-	// 			setSelectAll(false);
-	// 			let newobj = [...objProduct];
-	// 			newobj.map(x => x.select = false);
-	// 			setObjProduct(newobj);
-	// 		}
-	// 	});
-	// },[selectAll])
-
-	// const rootRef = useRef();
-	// const [start, setStart] = useState(0);
-	// // console.log(objProduct.length);
-
-	// // console.log(	Math.round((document.querySelector('.warehouse-table')?.offsetHeight - 52) / 20))
-	// let rowHeight = 20;
-	// let visibleRows = Math.round((window.innerHeight - 149 - 52) / 20);
-	// console.log(visibleRows)
-	// function getTopHeight() {
-	// 	return rowHeight * start;
-	// }
-	// function getBottomHeight() {
-	// 	return rowHeight * (objProduct.length - (start + visibleRows + 1));
-	// }
-	// console.log(objProduct.length)
-
-	// useEffect(() => {
-	// 	function onScroll(e) {
-	// 		setStart(
-	// 			Math.min(objProduct.length - visibleRows - 1, Math.floor(e.target.scrollTop / rowHeight))
-	// 		);
-	// 	}
-	// 	// console.log(rootRef.current.el.children[0].children[1].children[0].children[0]);
-	// 	console.log(rootRef.current)
-	// 	rootRef.current.addEventListener(
-	// 		'scroll',
-	// 		onScroll
-	// 	);
-
-	// 	return () => {
-	// 		rootRef.current.removeEventListener(
-	// 			'scroll',
-	// 			onScroll
-	// 		);
-	// 	};
-	// }, [objProduct.length, visibleRows, rowHeight]);
+	
 	const [ul, setUl] = useState([
 		{ id: 0, name: "goods", select: true },
 		{ id: 1, name: "attributes", select: false },
 		{ id: 2, name: "suppliers", select: false },
 		{ id: 3, name: "movementOfGoods", select: false },
 	]);
-	// .map(x => ({...x,['name']:translator.getTranslation('card',x.name)}))
 	function clickNav(i) {
 		let obj = ul.map((x, index) => {
 			if (index === i) {
@@ -111,27 +46,24 @@ const Warehouse = () => {
 		setUl(obj);
 	}
 	function ruBtn() {
-		// translator.setLang('UA');
-		// console.log(translator.getTranslation('order'));
 		translator.setLang('RU');
-		console.log(this)
-
-		// let obj = ul.map(x => ({...x,['name']:translator.getTranslation('warehouse',x.name)}));
-		// setUl(obj);
-
 	}
-	
 	function uaBtn () {
 		translator.setLang('UA');
-
-		// let obj = ul.map(x => ({...x,['name']:translator.getTranslation('warehouse',x.name)}));
-		// setUl(obj);
 	}
+	const Preloaded = () => (
+		<svg id="" className="header-logo__svg-logo" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+                            <path className="logo-yellow" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/>
+                            <path className="logo-red" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/>
+                            <path className="logo-blue" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/></svg>
+	)
 
-
-	// useEffect(()=> {
-	// },[translator])
-	// console.log(ul)
 	return (
 		<div
 			style={{
@@ -141,6 +73,12 @@ const Warehouse = () => {
 				background: 'white',
 			}}
 		>
+			{/* <Preloaded/> */}
+			{/* {isLoading ? (<div className='loading'><Preloaded/></div>) : 
+				<div style={{position: 'absolute'}}>
+					{data?.map(x=> <div>{x.title}</div>)}
+				</div>
+			} */}
 			<div style={{ position: 'absolute', top: 0, left: '200px' }}>
 				<button onClick={ruBtn}>RU</button>
 				<button onClick={uaBtn}>UA</button>
@@ -154,14 +92,14 @@ const Warehouse = () => {
 					marginLeft: 74,
 					paddingTop: 28,
 					height: '100vh',
-					width: 'calc(100vw - 200px)',
+					width: 'calc(100vw - 180px)',
 					background: 'white',
 					display: 'flex',
 					cursor: 'default',
 					justifyContent: 'space-between',
 				}}
 			>
-				<div style={{position:'absolute', width: 54,height: 400, left: '100px',backdropFilter: 'blur(4px)',    boxShadow: '-4px 4px 4px rgb(0 0 0 / 25%)',background: 'rgba(81,81,81,.7)'}}>
+				<div style={{position:'absolute', width: 54,height: 500, left: '100px',backdropFilter: 'blur(4px)',    boxShadow: '-4px 4px 4px rgb(0 0 0 / 25%)',background: 'rgba(81,81,81,.7)'}}>
 
 				</div>
 				<aside>
@@ -180,17 +118,20 @@ const Warehouse = () => {
 						</ul>
 					</nav>
 				</aside>
-				{ul[0].select && (
-					// <Suspense fallback={<div>Loading</div>}>
-						<WarehouseBlock
-						setToggleCard={setToggleCard}
-						setGetIndex={setGetIndex}
-						setObjProduct={setObjProduct}
-						objProduct={objProduct}
-						translator={translator}
-						/>
-					// {/* </Suspense> */}
-				)}
+				{isLoading ? (<div className='loading'><Preloaded/></div>) : 
+					ul[0].select && (
+						// <Suspense fallback={<div>Loading</div>}>
+							<WarehouseBlock
+							setToggleCard={setToggleCard}
+							setGetIndex={setGetIndex}
+							setObjProduct={setObjProduct}
+							objProduct={objProduct}
+							translator={translator}
+							/>
+						// {/* </Suspense> */}
+					)
+				}
+		
 				{ul[1].select && <AttributeBlock />}
 				{ul[2].select && <Suppliers />}
 				{ul[3].select && <div />}

@@ -6,34 +6,70 @@
   .id-width {
     width: 100px !important;
   }
-
-  .name-width {
-    max-width: 295px !important;
+}
+@media (max-width: 1300px) {
+  .id-width {
+    width: 50px !important;
   }
 
-  .attribute-width span {
-    max-width: 250px !important;
+  .name-width {
+    width: 150px !important;
   }
 
   .attribute-width.btn {
-    max-width: 250px !important;
+    width: 100px !important;
+  }
+
+  .attribute-width {
+    width: 100px !important;
   }
 }
+@media (min-width: 1900px) {
+  .id-width {
+    width: 100px !important;
+  }
+
+  .name-width {
+    width: 295px !important;
+  }
+
+  .attribute-width.btn {
+    width: 250px !important;
+  }
+
+  .attribute-width {
+    width: 250px !important;
+  }
+}
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 9999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.loading svg {
+  width: 70px;
+  height: 70px;
+}
+
 @media (-webkit-min-device-pixel-ratio: 2) {
   .id-width {
     width: 60px !important;
   }
 
   .name-width {
-    max-width: 172px !important;
+    width: 172px !important;
   }
 
-  .attribute-width.btn {
-    max-width: 100px !important;
-  }
-
-  .attribute-width span {
-    max-width: 100px !important;
+  .attribute-width {
+    width: 100px !important;
   }
 }
 body {
@@ -94,16 +130,84 @@ body {
   border-radius: 2px 0 0 2px;
 }
 
-.warehouse-table {
-  transform: translate3d(0, 0, 0);
+.scroll {
+  position: absolute;
+  height: calc(100% - 40px);
+  width: 6px;
+  top: 40px;
+  right: 0;
+  background-color: pink;
+}
+.scroll div {
+  position: absolute;
+  width: 6px;
+  top: 0;
+  right: 0;
+  transition: transform 0.3s;
+  transform: translateY(0px);
+  height: 40px;
+  background-color: grey;
+}
+
+.scrollbox {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.contentScroll {
+  width: calc(100% - 20px);
+  overflow: auto;
+  height: 100%;
+  transform: scale(1);
   will-change: transform, scroll-position;
   transform-origin: 0 0;
+  scrollbar-width: none;
+}
+.contentScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar {
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  height: 100%;
+  right: 10px;
+  top: 40px;
+  border-radius: 3px;
+}
+.scrollbar .thumb {
+  transition: width 0.15s, transform 0.3s;
+  user-select: none;
+  cursor: pointer;
+  width: 6px;
+  left: 0;
+  border-radius: 3px;
+}
+
+.scrollbarHorizont {
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  height: 6px;
+  width: 100%;
+  right: 30px;
+  bottom: 0;
+  border-radius: 3px;
+}
+.scrollbarHorizont .thumbHorizont {
+  transition: width 0.15s, transform 0.3s;
+  user-select: none;
+  cursor: pointer;
+  height: 6px;
+  left: 0;
+  border-radius: 3px;
 }
 
 .warehouse-products {
   margin-left: 30px;
   width: 100%;
-  width: calc(100vw - 350px);
+  width: calc(100vw - 330px);
   position: relative;
 }
 .warehouse-products .warehouse-input {
@@ -137,7 +241,7 @@ body {
   display: flex;
   cursor: pointer;
 }
-.warehouse-products .warehouse-dropmenu input {
+.warehouse-products .warehouse-dropmenu input:not(.min, .max, .inputDataMin, .inputDataMax) {
   outline: none;
   border: none;
   font-weight: 300;
@@ -170,6 +274,8 @@ body {
 .warehouse-products .warehouse-dropmenu .sortBtn {
   position: absolute;
   right: 3px;
+  display: none;
+  transition: 0.2s;
   transform: rotate(180deg);
 }
 .warehouse-products .warehouse-dropmenu .sortBtn svg {
@@ -180,6 +286,12 @@ body {
 }
 .warehouse-products .warehouse-dropmenu .sortBtn:hover svg {
   opacity: 0.5;
+}
+.warehouse-products .warehouse-dropmenu .sortBtn.on {
+  display: block !important;
+}
+.warehouse-products .warehouse-dropmenu .sortBtn.arrowTransform svg {
+  transform: scaleY(-1) !important;
 }
 .warehouse-products .warehouse-dropmenu .text-result,
 .warehouse-products .warehouse-dropmenu .status-result {
@@ -222,12 +334,11 @@ body {
   opacity: 0;
   position: absolute;
   text-align: left;
-  height: 83px;
+  height: 90px;
   box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.15);
   width: 100%;
   top: 0;
   transform: translateY(0px);
-  overflow-x: hidden;
 }
 .warehouse-products .warehouse-dropmenu .dropmenu .scrollOff::-webkit-scrollbar {
   width: 0;
@@ -260,6 +371,9 @@ body {
   bottom: 0;
   top: 0;
 }
+.warehouse-products .warehouse-dropmenu .dropmenu .simplebar-track.simplebar-horizontal {
+  display: none;
+}
 .warehouse-products .warehouse-dropmenu .dropmenu .simplebar-content {
   display: block;
 }
@@ -272,8 +386,8 @@ body {
 .warehouse-products .warehouse-dropmenu .dropmenu .list {
   padding-left: 15px;
   padding-right: 10px;
-  height: 20px;
-  line-height: 20px;
+  height: 18px;
+  line-height: 18px;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
@@ -282,16 +396,22 @@ body {
 .warehouse-products .warehouse-dropmenu .dropmenu .list .status {
   margin: 0 2px;
 }
+.warehouse-products .warehouse-dropmenu .dropmenu .list:last-child {
+  padding-bottom: 5px;
+}
 .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list {
   padding-left: 15px;
   padding-right: 10px;
-  height: 20px;
-  line-height: 20px;
+  height: 18px;
+  line-height: 18px;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
   text-overflow: ellipsis;
   width: calc(100% - 25px) !important;
+}
+.warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:last-child {
+  padding-bottom: 5px;
 }
 .warehouse-products .warehouse-dropmenu .dropmenu .findUnderline {
   position: relative;
@@ -346,6 +466,12 @@ body {
 .warehouse-products .warehouse-dropmenu.hide-arrow:before {
   content: none;
 }
+.warehouse-products .warehouse-dropmenu.smallsort .status-result label {
+  transform: scale(0.7) translateX(-6px) !important;
+}
+.warehouse-products .warehouse-dropmenu.smallsort .sortBtn {
+  transform: scaleY(-1) scale(0.7) translateX(5px) !important;
+}
 .warehouse-products .warehouse-dropmenu .status-result {
   width: 100%;
   text-align: left;
@@ -360,7 +486,7 @@ body {
   font-size: 14px;
   text-align: center;
   padding-left: 13px;
-  padding-right: 10px;
+  padding-right: 33px;
   position: relative;
 }
 .warehouse-products .warehouse-products-title button {
@@ -368,7 +494,7 @@ body {
   background: none;
   border: none;
   position: absolute;
-  right: -32px;
+  right: 0px;
   cursor: pointer;
 }
 .warehouse-products .warehouse-products-title button:hover {
@@ -379,7 +505,7 @@ body {
   content: "";
   width: 40%;
   height: 1px;
-  right: 10px;
+  right: 33px;
   top: 7px;
   background-color: #000000;
 }
@@ -405,7 +531,7 @@ body {
   position: absolute;
   height: 100vh;
   top: 60px;
-  right: 0;
+  right: 18px;
   width: 12px;
   z-index: 5;
   background: linear-gradient(270deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
@@ -420,7 +546,7 @@ body {
   border-radius: 5px;
 }
 .warehouse-products .simplebar-track.simplebar-vertical div {
-  transition: 0.2s;
+  transition: 0.3s;
 }
 .warehouse-products .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
   background: rgba(0, 0, 0, 0.3);
@@ -499,10 +625,10 @@ body {
 .warehouse-products table .sticky-block .sticky-block-children .width21px:before {
   content: "";
   position: absolute;
-  bottom: -12px;
+  bottom: -35px;
   left: 0;
   width: 60px;
-  height: 12px;
+  height: 35px;
 }
 .warehouse-products table .sticky-head {
   background: white;
@@ -524,16 +650,6 @@ body {
 }
 .warehouse-products table .block-3-btn .marginBtn {
   margin: 0 3px;
-}
-.warehouse-products table .shadow-block {
-  box-shadow: 3px 0px 3px 0px grey;
-  position: absolute;
-  width: 2px;
-  top: 1px;
-  right: 0;
-  height: 100vh;
-  transition: 0.2s;
-  z-index: -1;
 }
 .warehouse-products table .animationFrame {
   position: absolute;
@@ -576,10 +692,10 @@ body {
 .warehouse-products table .block-3-btn.show:before {
   content: "";
   position: absolute;
-  bottom: -12px;
+  bottom: -35px;
   left: 0;
   width: 100%;
-  height: 12px;
+  height: 35px;
 }
 .warehouse-products table .sticky-body {
   background: white;
@@ -654,16 +770,19 @@ body {
   padding-bottom: 17px;
 }
 .warehouse-products table .first-tab-header tr:nth-child(3) th {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 300;
+  background: white;
+}
+.warehouse-products table .first-tab-header tr:nth-child(4) th {
+  font-size: 10px;
+  font-weight: 300;
+  background: white;
 }
 .warehouse-products table .first-tab-header th {
   padding: 0;
 }
 .warehouse-products table .first-tab-header tr:nth-child(2) th {
-  background: white;
-}
-.warehouse-products table .first-tab-header tr:nth-child(3) th {
   background: white;
 }
 .warehouse-products table .first-tab-header .summa-suma4:after {
@@ -676,7 +795,7 @@ body {
   top: -20px;
 }
 .warehouse-products table .first-tab-header .shadow-vertical {
-  height: 12px;
+  height: 15px;
   pointer-events: none;
   width: 100%;
   left: 13px;
@@ -684,12 +803,20 @@ body {
   position: sticky;
 }
 .warehouse-products table .first-tab-header .shadow-vertical div:first-child {
-  top: 0;
+  bottom: 0;
   height: 12px;
   width: calc(100% + 20px);
   position: absolute;
   left: -13px;
   background: linear-gradient(180deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
+}
+.warehouse-products table .first-tab-header .shadow-vertical div:last-child {
+  top: 0;
+  position: absolute;
+  left: -13px;
+  height: 3px;
+  background: white;
+  width: calc(100% + 20px);
 }
 .warehouse-products table thead {
   position: sticky;
@@ -704,7 +831,7 @@ body {
 .warehouse-products table tfoot td {
   padding: 0;
 }
-.warehouse-products table tfoot .shadow-vertical-2 {
+.warehouse-products table tfoot .shadow-vertical-footer {
   height: 12px;
   width: calc(100% + 7px);
   left: -7px;
@@ -723,8 +850,48 @@ body {
   font-weight: 300;
 }
 .warehouse-products table .first-tab-body td {
+  white-space: nowrap;
   padding: 0;
   color: rgba(0, 0, 0, 0.7);
+}
+.warehouse-products table .first-tab-body .currency {
+  text-align: center;
+  min-width: 51px;
+  padding-right: 10px;
+  height: 18px;
+  line-height: 18px;
+}
+.warehouse-products table .first-tab-body .flags {
+  color: black;
+  min-width: 51px;
+  padding-right: 10px;
+  text-align: center;
+}
+.warehouse-products table .first-tab-body .name {
+  height: 18px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.warehouse-products table .first-tab-body .attribute {
+  height: 18px;
+  line-height: 18px;
+  margin-left: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.warehouse-products table .first-tab-body .nal-zakupka,
+.warehouse-products table .first-tab-body .nal-prodazha,
+.warehouse-products table .first-tab-body .nal-marzha {
+  text-align: right;
+  padding-right: 15px;
+  position: relative;
+  line-height: 14px;
+  height: 14px;
 }
 .warehouse-products table .first-tab-body tr:hover:not(.lockOrder) td {
   background: #cacaca !important;
@@ -750,7 +917,9 @@ body {
   border-radius: 3px 0 0 3px;
   top: 0;
 }
-.warehouse-products table .first-tab-body .select td, .warehouse-products table .first-tab-body .select div, .warehouse-products table .first-tab-body .select input {
+.warehouse-products table .first-tab-body .select td,
+.warehouse-products table .first-tab-body .select div,
+.warehouse-products table .first-tab-body .select input {
   color: white !important;
 }
 .warehouse-products table .first-tab-body .select td {
@@ -791,7 +960,7 @@ body {
   top: 3px;
 }
 .warehouse-products table .first-tab-body .lockOrder td:not(.stickyBeforeBody),
-.warehouse-products table .first-tab-body .lockOrder div:not(.stickyBeforeBody),
+.warehouse-products table .first-tab-body .lockOrder div:not(.stickyBeforeBody, .shadow-left, .flags),
 .warehouse-products table .first-tab-body .lockOrder input {
   color: rgba(0, 0, 0, 0.2) !important;
   background-color: #e1dedd !important;
@@ -808,6 +977,12 @@ body {
   padding: 0 2px;
   position: relative;
   min-width: 81px;
+  height: 18px;
+  line-height: 18px;
+  display: flex;
+  padding-left: 12px;
+  justify-content: flex-end;
+  padding-right: 3px;
 }
 .warehouse-products table .nal-ostatok .wrap-nal-ostatok {
   transition: transform 0.3s;
@@ -831,7 +1006,7 @@ body {
   height: 16px;
   padding: 0;
   opacity: 0;
-  top: -1px;
+  top: 1px;
   outline: none;
   background-color: transparent;
   border: none;
@@ -859,16 +1034,13 @@ body {
 .warehouse-products table .nal-vozvrat {
   padding: 0 2px;
   position: relative;
-}
-.warehouse-products table .nal-rezerv div,
-.warehouse-products table .nal-otpr div,
-.warehouse-products table .nal-vozvrat div {
+  height: 18px;
+  line-height: 18px;
   text-align: right;
 }
-.warehouse-products table .nal-rezerv div:before,
-.warehouse-products table .nal-otpr div:before,
-.warehouse-products table .nal-vozvrat div:before {
-  content: "";
+.warehouse-products table .nal-rezerv span,
+.warehouse-products table .nal-otpr span,
+.warehouse-products table .nal-vozvrat span {
   position: absolute;
   width: calc(100% - 4px);
   left: 0;
@@ -876,13 +1048,13 @@ body {
   bottom: 1px;
   border-radius: 2px;
 }
-.warehouse-products table .nal-rezerv div:before {
+.warehouse-products table .nal-rezerv span {
   background: rgba(0, 0, 0, 0.2);
 }
-.warehouse-products table .nal-otpr div:before {
+.warehouse-products table .nal-otpr span {
   background: rgba(0, 146, 70, 0.75);
 }
-.warehouse-products table .nal-vozvrat div:before {
+.warehouse-products table .nal-vozvrat span {
   background: rgba(206, 43, 55, 0.75);
   width: calc(100% - 15px);
 }
@@ -899,16 +1071,11 @@ body {
   line-height: 18px;
   padding: 0 2px;
   position: relative;
-}
-.warehouse-products table .summa-suma2 div,
-.warehouse-products table .summa-suma3 div,
-.warehouse-products table .summa-suma4 div {
   text-align: right;
 }
-.warehouse-products table .summa-suma2 div:before,
-.warehouse-products table .summa-suma3 div:before,
-.warehouse-products table .summa-suma4 div:before {
-  content: "";
+.warehouse-products table .summa-suma2 span,
+.warehouse-products table .summa-suma3 span,
+.warehouse-products table .summa-suma4 span {
   position: absolute;
   width: calc(100% - 4px);
   left: 0px;
@@ -916,17 +1083,18 @@ body {
   bottom: 1px;
   border-radius: 2px;
 }
-.warehouse-products table .summa-suma2 div:before {
+.warehouse-products table .summa-suma2 span {
   background: rgba(0, 0, 0, 0.2);
 }
-.warehouse-products table .summa-suma3 div:before {
+.warehouse-products table .summa-suma3 span {
   background: rgba(0, 146, 70, 0.75);
 }
-.warehouse-products table .summa-suma4 div:before {
+.warehouse-products table .summa-suma4 span {
   background: rgba(206, 43, 55, 0.75);
   width: 100%;
 }
 .warehouse-products .hoverOff {
+  cursor: none;
   pointer-events: none !important;
 }
 .warehouse-products .switch-btn-warehouse {
@@ -1088,23 +1256,62 @@ body {
   box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.15);
 }
 
-@keyframes trAnimtaion {
+.header-logo__svg-logo {
+  width: 125px;
+  height: 125px;
+}
+
+.logo-red {
+  fill: #ff0483;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: 1.5s linear infinite logo-red;
+  animation: 1.5s linear infinite logo-red;
+}
+
+.logo-blue {
+  fill: #6a91cc;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: 1.5s linear infinite logo-blue;
+  animation: 1.5s linear infinite logo-blue;
+}
+
+.logo-yellow {
+  fill: #fe0;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: 1.5s linear infinite logo-yellow;
+  animation: 1.5s linear infinite logo-yellow;
+}
+
+@keyframes logo-red {
   0% {
-    transition: 0.2s;
-    opacity: 0;
+    -webkit-transform: rotateX(75deg) rotateY(330deg) rotateZ(85deg);
+    transform: rotateX(75deg) rotateY(330deg) rotateZ(85deg);
   }
   100% {
-    transition: 0.2s;
-    opacity: 1;
+    -webkit-transform: rotateX(75deg) rotateY(330deg) rotateZ(-275deg);
+    transform: rotateX(75deg) rotateY(330deg) rotateZ(-275deg);
   }
 }
-@keyframes suka {
+@keyframes logo-blue {
   0% {
-    padding-right: 0px;
-    width: 0px !important;
+    -webkit-transform: rotateX(105deg) rotateY(30deg) rotateZ(265deg);
+    transform: rotateX(105deg) rotateY(30deg) rotateZ(265deg);
   }
   100% {
-    width: 85px !important;
-    padding-right: 10px;
+    -webkit-transform: rotateX(105deg) rotateY(30deg) rotateZ(-95deg);
+    transform: rotateX(105deg) rotateY(30deg) rotateZ(-95deg);
+  }
+}
+@keyframes logo-yellow {
+  0% {
+    -webkit-transform: rotateX(0) rotateY(105deg) rotateZ(-180deg);
+    transform: rotateX(0) rotateY(105deg) rotateZ(-180deg);
+  }
+  100% {
+    -webkit-transform: rotateX(0) rotateY(105deg) rotateZ(180deg);
+    transform: rotateX(0) rotateY(105deg) rotateZ(180deg);
   }
 }
