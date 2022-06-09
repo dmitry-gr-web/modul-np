@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from 'react';
 import './range.scss';
-const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator }) => {
+const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
 	let arr = [
 		'0',
 		'1',
@@ -56,15 +56,18 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		'51',
 		'∞',
 	];
-	const [minRange, setMinRange] = useState(0);
-	const [maxRange, setMaxRange] = useState(52);
+	const min = 0;
+	const max = arr.length - 1;
+	// console.log(max)
+	const [minRange, setMinRange] = useState(min);
+	const [maxRange, setMaxRange] = useState(max);
 	const [activity, setActivity] = useState(false);
 	const [arrowToggle, setArrowToggle] = useState(false);
 	const [arrowActive, setArrowActive] = useState('down');
 
 	const [rangesData, setRangesData] = useState([
 		{ name: 'all', select: true},
-		{ name: '< 0 шт', select: false },
+		{ name: '< 0', select: false },
 	]);
     const [openMenu, setOpenMenu] = useState(false);
 
@@ -72,12 +75,14 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		// this.setState({ self: e.target })
 		// document.addEventListener('keydown', inputKeyUp, false)
 		// inputKeyUp(e);
+		tooltipOn(e);
 		e.currentTarget.querySelector('input').select();
 		e.currentTarget.querySelector('.arrowsInc').style.opacity = 1;
 		e.target.closest('.rangeslider')?.querySelector('.min').classList.add('inputThumbColor');
 	}
 
 	function incMouseLeave(e) {
+		tooltipOff(e);
 		e.currentTarget.querySelector('input').blur();
 		// document.removeEventListener('keydown', inputKeyUp)
 		e.currentTarget.querySelector('.arrowsInc').style.opacity = 0;
@@ -88,12 +93,14 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		// this.setState({ self: e.target })
 		// document.addEventListener('keydown', this.inputKeyDown, false)
 		// e.target.focus();
+		tooltipOn(e);
 		e.currentTarget.querySelector('input').select();
 		e.currentTarget.querySelector('.arrowsDec').style.opacity = 1;
 		e.target.closest('.rangeslider')?.querySelector('.max').classList.add('inputThumbColor');
 	}
 
 	function decMouseLeave(e) {
+		tooltipOff(e);
 		// document.removeEventListener('keydown', this.inputKeyDown)
 		e.currentTarget.querySelector('input').blur();
 		e.currentTarget.querySelector('.arrowsDec').style.opacity = 0;
@@ -105,28 +112,57 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 	const [maxInput, setMaxInput] = useState('');
 	function rangeInput(e) {
 		setDivInput(true);
-		e.target.value = e.target.value.replace(/[^0-9]/g, '');
-		e.target.style.width = e.target.value.length * 7 + 'px';
-		setMinInput(e.target.value);
-		setMinRange(0);
-		setMaxRange(52);
+
+			// e.target.value = e.target.value.replace(/[^0-9]/g, '');
+			let temp = e.target.value.replace(/[^0-9]/g, '');
+			e.target.value = temp.length === 0 ? ' ' : temp;
+			e.target.style.width = e.target.value.length * 7 + 'px';
+			setMinInput(e.target.value);
+	
+
+		setMinRange(min);
+		setMaxRange(max);
+		
+		if(!divInput2){
+			// if(maxRange === max){
+
+			// 	setMaxInput('∞');
+			// } else {
+			// }
+			setMaxInput(maxRange);
+		}
 		// setDivInput2(true);
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
 		// setMaxInput(e.target.value);
-		e.target.closest('.rangeslider').querySelector('.minBG, .maxBG').style.width = 0;
+		// e.target.closest('.rangeslider').querySelector('.minBG, .maxBG').style.width = 0;
+		warehouse.current.querySelector('.minBG').style.width = '0px';
+		warehouse.current.querySelector('.maxBG').style.width = '0px';
 	}
 	function rangeInput2(e) {
 		setDivInput2(true);
-		e.target.value = e.target.value.replace(/[^0-9]/g, '');
+		let temp = e.target.value.replace(/[^0-9]/g, '');
+		e.target.value = temp.length === 0 ? ' ' : temp;
 		e.target.style.width = e.target.value.length * 7 + 'px';
+
+
 		setMaxInput(e.target.value);
+	
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
 
-		setMinRange(0);
-		setMaxRange(52);
-		e.target.closest('.rangeslider').querySelector('.minBG, .maxBG').style.width = 0;
+
+		if(!divInput){
+			setMinInput(minRange);
+		}
+		setMinRange(min);
+		setMaxRange(max);
+		warehouse.current.querySelector('.minBG').style.width = '0px';
+		warehouse.current.querySelector('.maxBG').style.width = '0px';
+		// e.target.closest('.rangeslider').querySelector('.minBG, .maxBG').style.width = 0;
+	}
+	function click (e) {
+		e.currentTarget.querySelector('input').focus();
 	}
 	function onWheel(e) {
 		setDivInput(false);
@@ -139,73 +175,65 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		e.currentTarget.querySelector('input').focus();
 		e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		let wDelta = e.deltaY > 0 ? 'down' : 'up';
-		if (e.target.classList.contains('range_min') && wDelta === 'down' && minRange + 1 < maxRange) {
+		if (e.target.classList.contains('range_min') && wDelta === 'down' && minRange < maxRange && minRange !== max - 1 ) {
 			e.target.offsetParent.querySelector('.minBG').style.width =
-				Math.round(minRange / 0.52, 2) + '%';
+				Math.round(minRange / (max / 100), 2) + '%';
 			setMinRange((prev) => {
-				console.log('down');
+				// console.log('down');
 
 				return prev + 1;
 			});
 			// console.log('down')
 		} else if (e.target.classList.contains('range_min') && wDelta === 'up' && minRange - 1 >= 0) {
 			e.target.offsetParent.querySelector('.minBG').style.width =
-				Math.round(minRange / 0.52, 2) + '%';
+				Math.round(minRange / (max / 100), 2) + '%';
 			setMinRange((prev) => {
-				console.log('up');
+				// console.log('up');
 
 				return prev - 1;
 			});
-		} else if (
-			e.target.classList.contains('range_max') &&
-			wDelta === 'down' &&
-			maxRange + 1 <= 52
-		) {
+		} else if (e.target.classList.contains('range_max') && wDelta === 'down' && maxRange + 1 <= max) {
 			e.target.offsetParent.querySelector('.maxBG').style.width =
-				100 - Math.round(maxRange / 0.52, 2) + '%';
+				100 - Math.round(maxRange / (max / 100), 2) + '%';
 			setMaxRange((prev) => prev + 1);
-		} else if (
-			e.target.classList.contains('range_max') &&
-			wDelta === 'up' &&
-			minRange < maxRange - 1
-		) {
+		} else if (e.target.classList.contains('range_max') && wDelta === 'up' && minRange < maxRange && minRange !== max - 1) {
 			e.target.offsetParent.querySelector('.maxBG').style.width =
-				100 - Math.round(maxRange / 0.52, 2) + '%';
+				100 - Math.round(maxRange / (max / 100), 2) + '%';
 			setMaxRange((prev) => prev - 1);
 		}
 
-		console.log(maxRange, minRange);
+		// console.log(maxRange, minRange);
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
 	}
 	useEffect(() => {
 		if (openMenu) {
-			document.querySelector('.arrowsInc .arrowUp').style.top = '2px';
+			document.querySelector('.arrowsInc .arrowUp').style.top = '1px';
 			document.querySelector('.arrowsInc .arrowUp').style.opacity = 0.8;
 			document.querySelector('.arrowsInc .arrowDown').style.opacity = 0.8;
-			document.querySelector('.arrowsInc .arrowDown').style.top = '7px';
-			if (minRange === 0) {
+			document.querySelector('.arrowsInc .arrowDown').style.top = '6px';
+			if (minRange === min) {
 				document.querySelector('.arrowsInc .arrowUp').style.opacity = 0;
-				document.querySelector('.arrowsInc .arrowUp').style.top = '2px';
-			} else if (minRange === 51) {
-				document.querySelector('.arrowsInc .arrowUp').style.top = '5px';
-				document.querySelector('.arrowsInc .arrowDown').style.opacity = 0;
+				document.querySelector('.arrowsInc .arrowUp').style.top = '1px';
+			} else if (minRange === max-1) {
+				// document.querySelector('.arrowsInc .arrowUp').style.top = '6px';
+				// document.querySelector('.arrowsInc .arrowDown').style.opacity = 0;
 			}
-			document.querySelector('.arrowsDec .arrowUp').style.top = '2px';
+			document.querySelector('.arrowsDec .arrowUp').style.top = '1px';
 			document.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
 			document.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
-			document.querySelector('.arrowsDec .arrowDown').style.top = '7px';
-			if (maxRange === 52) {
+			document.querySelector('.arrowsDec .arrowDown').style.top = '6px';
+			if (maxRange === max) {
 				document.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
-				document.querySelector('.arrowsDec .arrowUp').style.top = '2px';
+				document.querySelector('.arrowsDec .arrowUp').style.top = '1px';
 				document.querySelector('.arrowsDec .arrowDown').style.opacity = 0;
 				// document.querySelector('.arrowsDec .arrowUp').style.top = '5px';
-			} else if (maxRange !== 52) {
+			} else if (maxRange !== max) {
 				document.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
 				document.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
-				document.querySelector('.arrowsDec .arrowDown').style.top = '7px';
+				document.querySelector('.arrowsDec .arrowDown').style.top = '6px';
 			}
-			if(maxRange === 52 && minRange === 0 && !rangesData[1].select){
+			if(maxRange === max && minRange === min && !rangesData[1].select){
 				rangesData[0].select = true;
 				setRangesData([...rangesData]);
 			}
@@ -242,12 +270,12 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		if (40 === e.keyCode) {
 			e.preventDefault();
 			setDivInput(false);
-			if (e.currentTarget.classList.contains('range_min') && minRange + 1 < maxRange) {
+			if (e.currentTarget.classList.contains('range_min') && minRange < maxRange) {
 				setMinRange((prev) => prev + 1);
 			} 
 		}
 		e.currentTarget.closest('.rangeslider').querySelector('.minBG').style.width =
-			Math.round(minRange / 0.52, 2) + '%';
+			Math.round(minRange / (max / 100), 2) + '%';
 	}
 	function inputKeyDown(e) {
 		setPodlozhka(true);
@@ -260,19 +288,19 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		if (38 === e.keyCode) {
 			e.preventDefault();
 			setDivInput2(false);
-			if (e.currentTarget.classList.contains('range_max') && maxRange - 1 > minRange) {
+			if (e.currentTarget.classList.contains('range_max') && maxRange > minRange) {
 				setMaxRange((prev) => prev - 1);
 			} 
 		}
 		if (40 === e.keyCode) {
 			e.preventDefault();
 			setDivInput2(false);
-			if (e.currentTarget.classList.contains('range_max') && maxRange + 1 <= 52) {
+			if (e.currentTarget.classList.contains('range_max') && maxRange + 1 <= max) {
 				setMaxRange((prev) => prev + 1);
 			} 
 		}
 		e.currentTarget.closest('.rangeslider').querySelector('.maxBG').style.width =
-			100 - Math.round(maxRange / 0.52, 2) + '%';
+			100 - Math.round(maxRange / (max / 100), 2) + '%';
 	}
 	const resultRef = useRef();
 	const warehouse = useRef();
@@ -280,8 +308,8 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		setPodlozhka(true);
 		setDivInput(false);
 		setDivInput2(false);
-		setMinRange(0);
-		setMaxRange(52);
+		setMinRange(min);
+		setMaxRange(max);
 		if (index === 0) {
 			console.log('vse');
 			rangesData[0].select = true;
@@ -293,13 +321,15 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 			});
 			setArrowToggle(false);
 			document.querySelector('.contentScroll').style.overflow = 'auto';
+			document.querySelector('.scrollbar').style.opacity = 1;
+			document.querySelector('.scrollbarHorizont').style.opacity = 1;
 			// document.querySelector('.warehouse-table .simplebar-content-wrapper').style.overflow = 'scroll';
 			setOpenMenu(false);
 			setPodlozhka(false);
 		}
 		if (index === 1) {
 			console.log('0');
-			resultRef.current.innerHTML = '< 0 шт';
+			resultRef.current.innerHTML = '< 0';
 			rangesData[0].select = false;
 			rangesData[1].select = true;
 		}
@@ -321,37 +351,38 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		if (warehouse?.current !== null && warehouse.current.querySelector('.inputDataMin') !== null && warehouse.current.querySelector('.inputDataMax') !== null){
 			warehouse.current.querySelector('.inputDataMin').style.width = warehouse.current.querySelector('.inputDataMin').value.length * 7 + 'px'
 			warehouse.current.querySelector('.inputDataMax').style.width = warehouse.current.querySelector('.inputDataMax').value.length * 7 + 'px'
-			warehouse.current.querySelector('.minBG').style.width = Math.round(minRange / 0.52, 2) + '%';
-			warehouse.current.querySelector('.maxBG').style.width = 100 - Math.round(maxRange / 0.52, 2) + '%';
+			// console.log(warehouse.current.querySelector('.inputDataMin').value.length)
+			warehouse.current.querySelector('.minBG').style.width = Math.round(minRange / (max / 100), 2) + '%';
+			warehouse.current.querySelector('.maxBG').style.width = 100 - Math.round(maxRange / (max / 100), 2) + '%';
 
 
-			warehouse.current.querySelector('.arrowsInc .arrowUp').style.top = '2px';
+			warehouse.current.querySelector('.arrowsInc .arrowUp').style.top = '1px';
 			warehouse.current.querySelector('.arrowsInc .arrowUp').style.opacity = 0.8;
 			warehouse.current.querySelector('.arrowsInc .arrowDown').style.opacity = 0.8;
-			warehouse.current.querySelector('.arrowsInc .arrowDown').style.top = '7px';
-			if (minRange === 0) {
+			warehouse.current.querySelector('.arrowsInc .arrowDown').style.top = '6px';
+			if (minRange === min) {
 				warehouse.current.querySelector('.arrowsInc .arrowUp').style.opacity = 0;
-				warehouse.current.querySelector('.arrowsInc .arrowUp').style.top = '2px';
-			} else if (minRange === 51) {
-				warehouse.current.querySelector('.arrowsInc .arrowUp').style.top = '5px';
-				warehouse.current.querySelector('.arrowsInc .arrowDown').style.opacity = 0;
+				warehouse.current.querySelector('.arrowsInc .arrowUp').style.top = '1px';
+			} else if (minRange === max-1) {
+				// warehouse.current.querySelector('.arrowsInc .arrowUp').style.top = '6px';
+				// warehouse.current.querySelector('.arrowsInc .arrowDown').style.opacity = 0;
 			}
-			warehouse.current.querySelector('.arrowsDec .arrowUp').style.top = '2px';
+			warehouse.current.querySelector('.arrowsDec .arrowUp').style.top = '1px';
 			warehouse.current.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
 			warehouse.current.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
-			warehouse.current.querySelector('.arrowsDec .arrowDown').style.top = '7px';
-			if (maxRange === 52) {
+			warehouse.current.querySelector('.arrowsDec .arrowDown').style.top = '6px';
+			if (maxRange === max) {
 				warehouse.current.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
-				warehouse.current.querySelector('.arrowsDec .arrowUp').style.top = '2px';
+				warehouse.current.querySelector('.arrowsDec .arrowUp').style.top = '1px';
 				warehouse.current.querySelector('.arrowsDec .arrowDown').style.opacity = 0;
 				// document.querySelector('.arrowsDec .arrowUp').style.top = '5px';
-			} else if (maxRange !== 52) {
+			} else if (maxRange !== max) {
 				warehouse.current.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
 				warehouse.current.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
-				warehouse.current.querySelector('.arrowsDec .arrowDown').style.top = '7px';
+				warehouse.current.querySelector('.arrowsDec .arrowDown').style.top = '6px';
 			}
 		}
-
+		
 	},[openMenu]);
 	//ZAPOMNIT PRI VHODE ZNACHENIYA
 	function menuOn(e) {
@@ -359,7 +390,9 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 			setOpenMenu(true);
 			setArrowToggle(true);
 			e.currentTarget.style.zIndex = '9999';
-			document.querySelector('.contentScroll').style.overflow = 'hidden';			
+			document.querySelector('.contentScroll').style.overflow = 'hidden';	
+			// document.querySelector('.scrollbar').style.opacity = 0;
+			// document.querySelector('.scrollbarHorizont').style.opacity = 0;		
 		}
 	}
 	function menuOff(e) {
@@ -369,6 +402,8 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 			setOpenMenu(false);
 			e.currentTarget.style.zIndex = '1';
 			document.querySelector('.contentScroll').style.overflow = 'auto';
+			// document.querySelector('.scrollbar').style.opacity = 1;
+			// document.querySelector('.scrollbarHorizont').style.opacity = 1;
 			if (activity) {
 				setArrowToggle(true);
 			} else {
@@ -386,6 +421,15 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 			setArrowToggle(false);
 			setActivity(false);
 		}
+
+		if(minInput.length === 0 || minInput === ' '){
+			setMinInput(0);
+		}
+		if(maxInput.length === 0 || maxInput === ' '){
+			setMaxInput('∞');
+		}
+		// const [minInput, setMinInput] = useState('');
+		// const [maxInput, setMaxInput] = useState('');
 	}, [podlozhka]);
 	// useEffect(() => {
 	// 	if (!podlozhka && !activity) {
@@ -413,6 +457,8 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		}
 		setSortActive(!sortActive);
 		document.querySelector('.contentScroll').style.overflow = 'scroll';
+		document.querySelector('.scrollbar').style.opacity = 1;
+		document.querySelector('.scrollbarHorizont').style.opacity = 1;
 
 		setTimeout(() => {
 			setActivity(true);
@@ -436,33 +482,79 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 		setPodlozhka(false);
 
 	}
+	function tooltipOn(e) {
+		const tooltipBlock = document.getElementById('tooltipBtn');
+		let posElement = e.currentTarget.getBoundingClientRect();
+		tooltipBlock.style.fontSize = '10px';
+		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
+			// tooltipBlock.innerText = e.target.innerText;
+		
+		} 
+		if (e.currentTarget.closest('.sortBtn')) {
+			// tooltipBlock.style.fontSize = '12px';
+			// console.log('asdsadas')
+			tooltipBlock.innerHTML = `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
+			tooltipBlock.style.left = posElement.x + 'px';
+			tooltipBlock.style.top = posElement.y + 25 + 'px';
+			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+		}
+		if (e.currentTarget.querySelector('.inputDataMin')){
+			tooltipBlock.innerHTML = translator.getTranslation('tooltipRangeValue', 'value' );
+			tooltipBlock.style.left = posElement.x - tooltipBlock.offsetWidth + 'px';
+			tooltipBlock.style.top = posElement.y + 'px';
+			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+		}
+		if (e.currentTarget.querySelector('.inputDataMax')){
+			tooltipBlock.innerHTML = translator.getTranslation('tooltipRangeValue2', 'value' );
+			tooltipBlock.style.left = posElement.x - tooltipBlock.offsetWidth + 'px';
+			tooltipBlock.style.top = posElement.y + 'px';
+			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+		}
+		if (e.currentTarget.innerText === '< 0'){
+			tooltipBlock.innerHTML = translator.getTranslation('tooltipRange<0', '<0' );
+			tooltipBlock.style.left = posElement.x - tooltipBlock.offsetWidth + 'px';
+			tooltipBlock.style.top = posElement.y + 'px';
+			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+		}
+		
+	}
+	function tooltipOff() {
+		document.getElementById('tooltipBtn').style.animation = '';
+	}
+	useEffect(()=> {
+		if(!podlozhka){
+			if((divInput && divInput2 && +minInput > +maxInput)) {
+				const newNumber = +minInput + 1;
+				setMaxInput(newNumber)
+			}
+			// if(divInput ){}
+		}
+	
+	},[podlozhka])
+	// console.log(minInput, maxInput)
 	return (
 		<>
 			<div
-				style={zIndex ? { zIndex: 1 } : {}}
+				style={zIndex ? { zIndex: 1 ,width: width+'px'} : {width: width+'px'}}
 				onMouseEnter={menuOn}
 				onMouseLeave={menuOff}
 				// className={`warehouse-dropmenu ranges`}
 				className={`warehouse-dropmenu ranges ${
 					arrowToggle ||
-					activity 
-					
-						? 'hide-arrow'
-						: ''
+					activity || !treugolka ? 'hide-arrow' : ''
 				}`}
 				ref={warehouse}
 			>
 				<div ref={resultRef} className="range-result">
-					{divInput || divInput2 || (divInput && divInput2)
-						? minInput + ' - ' + maxInput
-						: minRange > 0 || maxRange < 52
-						? 'Фильтр'
-						: rangesData[1].select ? '< 0 шт' : ''}
+					{divInput && !divInput2 ? `${minInput} - ${arr[maxRange] === '∞' ? '∞' : maxInput}` :
+						( divInput2 && divInput) || (divInput2 && !divInput) ? `${minInput} - ${maxInput}` : minRange > min || maxRange < max
+						? `${arr[minRange]} - ${arr[maxRange]}`
+						: rangesData[1].select ? '< 0' : ''}
 				</div>
 				<div
 					// style={{ display: `${openMenu || active ? 'block' : 'none'}` }}
-					// onMouseEnter={tooltipOn}
-					// onMouseLeave={tooltipOff}
+					onMouseEnter={tooltipOn}
+					onMouseLeave={tooltipOff}
 					// className="sortBtn"
 					className={`sortBtn ${
 						arrowToggle || activity || (arrowToggle && activity)
@@ -503,9 +595,9 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 									className="min"
 									name="range_1"
 									type="range"
-									min="0"
+									min={min}
 									readOnly
-									max="52"
+									max={max}
 									value={minRange}
 								/>
 								<span className="minBG"></span>
@@ -513,9 +605,9 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 									className="max"
 									name="range_1"
 									type="range"
-									min="0"
+									min={min}
 									readOnly
-									max="52"
+									max={max}
 									value={maxRange}
 								/>
 								<span className="maxBG"></span>
@@ -525,6 +617,8 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 									<div
 										key={i}
 										onClick={(e) => rangesListClick(i, e)}
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
 										className={x.select ? `rangesList select-btn` : 'rangesList'}
 									>
 										{translator.getTranslation('btnAll', x.name ) ?? x.name }
@@ -539,9 +633,13 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 								onKeyDown={inputKeyUp}
 								// onKeyUp={lenghtInput}
 								onWheel={onWheel}
+								onClick={click}
+
 								// onScroll={e => {e.stopPropagation();e.preventDefault()}}
 								onMouseEnter={incMouseEnter}
 								onMouseLeave={incMouseLeave}
+								// onMouseEnter={(e) => {decMouseEnter(e); tooltipOn(e)}}
+								// onMouseLeave={(e) => {decMouseLeave(e); tooltipOff(e)}}
 							>
 								<div className="arrowsInc" style={{ pointerEvents: 'none', zIndex: 2 }}>
 									<span className="arrowUp"></span>
@@ -549,14 +647,14 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 								</div>
 								<input
 									onChange={rangeInput}
-									maxLength="5"
+									maxLength="4"
 									value={divInput ? minInput : arr[minRange]}
 									className="inputDataMin"
 								/>
-								<span style={{ lineHeight: '18px', pointerEvents: 'none', paddingLeft: 3 }}>
+								{/* <span style={{ lineHeight: '18px', pointerEvents: 'none', paddingLeft: 3 }}>
 									{' '}
 									шт
-								</span>
+								</span> */}
 							</div>
 							<div
 								className="range_max dec"
@@ -565,11 +663,16 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 								style={{ outline: 'none' }}
 								onKeyDown={inputKeyDown}
 								onWheel={onWheel}
+								onClick={click}
+								// onMouseEnter={tooltipOn}
+								// onMouseDown={tooltipOff}
+								onMouseEnter={decMouseEnter}
+								onMouseLeave={decMouseLeave}
 								// onKeyUp={lenghtInput}
 								// onScroll={e => {e.stopPropagation();e.preventDefault()}}
 
-								onMouseEnter={decMouseEnter}
-								onMouseLeave={decMouseLeave}
+								// onMouseEnter={(e) => {decMouseEnter(e); tooltipOn(e)}}
+								// onMouseLeave={(e) => {decMouseLeave(e); tooltipOff(e)}}
 							>
 								<div className="arrowsDec" style={{ pointerEvents: 'none', zIndex: 2 }}>
 									<span className="arrowUp"></span>
@@ -577,15 +680,15 @@ const WarehouseDropRange = ({setSortActive,sortActive, setPodlozhka, podlozhka, 
 								</div>
 								<input
 									onChange={rangeInput2}
-									maxLength="5"
+									maxLength="4"
 									value={divInput2 ? maxInput : arr[maxRange]}
 									className="inputDataMax"
 
 								/>
-								<span style={{ lineHeight: '18px', pointerEvents: 'none', paddingLeft: 3 }}>
+								{/* <span style={{ lineHeight: '18px', pointerEvents: 'none', paddingLeft: 3 }}>
 									{' '}
 									шт
-								</span>
+								</span> */}
 							</div>
 						</div>
 					)}

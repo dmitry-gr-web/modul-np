@@ -31,14 +31,17 @@ class ScrollBox extends Component {
 		const thumbHeight = viewportHeight * ratio * this.props.percent; // 0.93 tut - 7%
 		const thumbWidth = viewportWidth * ratioWidth * 2;
 		// console.log(ratioWidth)
-		thumb.style.height = `${thumbHeight}px`;
-		thumbHorizont.style.width = `${thumbWidth}px`;
-		if (content.offsetHeight > content.children[0].offsetHeight) {
-			scrollbar.style.display = 'none';
+		if(thumb?.style){
+			thumb.style.height = `${thumbHeight}px`;
+			thumbHorizont.style.width = `${thumbWidth}px`;
+			if (content.offsetHeight > content.children[0].offsetHeight) {
+				scrollbar.style.display = 'none';
+			}
+			if (content.offsetWidth > content.children[0].offsetWidth) {
+				scrollbarHorizont.style.display = 'none';
+			}
 		}
-		if (content.offsetWidth > content.children[0].offsetWidth) {
-			scrollbarHorizont.style.display = 'none';
-		}
+
 	}
 
 	componentDidMount() {
@@ -53,30 +56,31 @@ class ScrollBox extends Component {
 		// console.log(ratioWidth)
 		thumb.style.height = `${thumbHeight}px`;
 		thumbHorizont.style.width = `${thumbWidth}px`;
+		if(content?.offsetHeight){
 		if (content.offsetHeight > content.children[0].offsetHeight) {
 			scrollbar.style.display = 'none';
 		}
 		if (content.offsetWidth > content.children[0].offsetWidth) {
 			scrollbarHorizont.style.display = 'none';
-		}
+		}}
 		// console.log(viewportHeight, ratio, contentHeight,thumbHeight);
 	}
 
 	get viewportHeight() {
-		return (this.content.offsetHeight);
+		return (this.content?.offsetHeight);
 	}
 	get contentHeight() {
-		return this.content.scrollHeight;
+		return this.content?.scrollHeight;
 	}
 	get ratio() {
 		return (this.viewportHeight / this.contentHeight);
 	}
 
 	get viewportWidth() {
-		return this.content.offsetWidth * 0.5;
+		return this.content?.offsetWidth * 0.5;
 	}
 	get contentWidth() {
-		return this.content.scrollWidth;
+		return this.content?.scrollWidth;
 	}
 	get ratioWidth() {
 		return this.viewportWidth / this.contentWidth;
@@ -157,9 +161,19 @@ class ScrollBox extends Component {
 		// });
 
 		// console.log(content?.children[0].offsetHeight, content?.offsetHeight)
-
+		function showScrollbar () {
+			document.querySelector('.scrollbar').style.opacity = 1;
+			document.querySelector('.scrollbarHorizont').style.opacity = 1;
+		}
+		function hideScrollbar () {
+			document.querySelector('.scrollbar').style.opacity = 0;
+			document.querySelector('.scrollbarHorizont').style.opacity = 0;
+		}
 		return (
-			<div className="scrollbox">
+			<div className="scrollbox" 	
+				onMouseEnter={showScrollbar}
+				onMouseLeave={hideScrollbar}
+			>
 				<div
 					onScroll={this.handleScroll}
 					ref={(div) => (this.content = div)}
@@ -170,7 +184,7 @@ class ScrollBox extends Component {
 				<div
 					className="scrollbar"
 					ref={(div) => (this.scrollbar = div)}
-					style={{ height: `calc(100% - 7%)` }} //tut props percent 7%
+					style={{ height: `${this.props.percent * 100}%` }} //tut props percent 7%
 				>
 					<div
 						className="thumb"

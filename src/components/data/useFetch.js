@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-export const useFetch = (url) => {
+export const useFetch = (url , param) => {
 	const [data, setData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState('');
@@ -8,19 +8,27 @@ export const useFetch = (url) => {
             try {
                 // setIsLoading(true)
 
-                    // const fetchData = async () => {
-                    //     const res = await fetch(url);
-                    //     const data = await res.json();
-                    //     setData(data);
-                    // };
-                    // fetchData();
+                    const fetchData = async () => {
+                        const res = await fetch(url, param);
+                        const data = await res.json();
+                        setData(data);
+                    };
+                    fetchData();
             
             } catch (error) {
                 setError(error);
             } finally {
                 setIsLoading(false);
             }
-        }, 0);
+        }, 500);
+        // return () => {
+        //     const fetchData = async () => {
+        //         const res = await fetch(url, param);
+        //         const data = await res.json();
+        //         setData(data);
+        //     };
+        //     fetchData();
+        // }
 	}, [url]);
 	//const {data, error, isLoading} = useFetch()  uzaem
 	return { data, isLoading, error };

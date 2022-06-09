@@ -213,6 +213,7 @@ body {
 .warehouse-products .warehouse-input {
   position: relative;
   height: 20px;
+  display: flex;
 }
 .warehouse-products .warehouse-input input {
   width: 100%;
@@ -222,6 +223,10 @@ body {
   font-weight: 300;
   text-overflow: ellipsis;
   height: 20px;
+  padding-right: 18px;
+}
+.warehouse-products .warehouse-input input::selection {
+  background-color: #afafb3;
 }
 .warehouse-products .warehouse-input .underline {
   transition: 0.2s;
@@ -233,6 +238,28 @@ body {
   z-index: 4;
   position: absolute;
 }
+.warehouse-products .warehouse-input .sortBtn {
+  position: absolute;
+  right: 3px;
+  display: none;
+  transition: 0.2s;
+  transform: rotate(180deg);
+}
+.warehouse-products .warehouse-input .sortBtn svg {
+  position: relative;
+  top: 1px;
+  fill-opacity: 0.5;
+  transition: 0.2s;
+}
+.warehouse-products .warehouse-input .sortBtn:hover svg {
+  opacity: 0.5;
+}
+.warehouse-products .warehouse-input .sortBtn.on {
+  display: block !important;
+}
+.warehouse-products .warehouse-input .sortBtn.arrowTransform svg {
+  transform: scaleY(-1) !important;
+}
 .warehouse-products .warehouse-dropmenu {
   width: 100%;
   height: 100%;
@@ -241,7 +268,7 @@ body {
   display: flex;
   cursor: pointer;
 }
-.warehouse-products .warehouse-dropmenu input:not(.min, .max, .inputDataMin, .inputDataMax) {
+.warehouse-products .warehouse-dropmenu input:not(.min, .max, .inputDataMin, .inputDataMax, .listInput) {
   outline: none;
   border: none;
   font-weight: 300;
@@ -307,6 +334,13 @@ body {
   float: left;
   top: 5px;
   left: 3px;
+}
+.warehouse-products .warehouse-dropmenu .range-result {
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  width: calc(100% - 18px);
+  white-space: nowrap;
 }
 .warehouse-products .warehouse-dropmenu .text-result {
   text-align: center;
@@ -396,6 +430,17 @@ body {
 .warehouse-products .warehouse-dropmenu .dropmenu .list .status {
   margin: 0 2px;
 }
+.warehouse-products .warehouse-dropmenu .dropmenu .list .listInput {
+  width: 7px;
+  outline: none;
+  font-weight: 300;
+  padding: 0;
+  border: none;
+  pointer-events: none;
+}
+.warehouse-products .warehouse-dropmenu .dropmenu .list .listInput::selection {
+  background-color: #afafb3;
+}
 .warehouse-products .warehouse-dropmenu .dropmenu .list:last-child {
   padding-bottom: 5px;
 }
@@ -432,6 +477,9 @@ body {
 .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover {
   color: rgba(0, 0, 0, 0.5);
 }
+.warehouse-products .warehouse-dropmenu .dropmenu .list:hover .listInput {
+  color: rgba(0, 0, 0, 0.5);
+}
 .warehouse-products .warehouse-dropmenu .dropmenu .list:hover .status,
 .warehouse-products .warehouse-dropmenu .dropmenu .infinity-list:hover .status {
   opacity: 0.5;
@@ -465,6 +513,9 @@ body {
 }
 .warehouse-products .warehouse-dropmenu.hide-arrow:before {
   content: none;
+}
+.warehouse-products .warehouse-dropmenu.adaptive:before {
+  right: 3px;
 }
 .warehouse-products .warehouse-dropmenu.smallsort .status-result label {
   transform: scale(0.7) translateX(-6px) !important;
@@ -647,9 +698,6 @@ body {
   opacity: 0;
   visibility: hidden;
   transform: translateX(-60px);
-}
-.warehouse-products table .block-3-btn .marginBtn {
-  margin: 0 3px;
 }
 .warehouse-products table .animationFrame {
   position: absolute;
@@ -976,7 +1024,7 @@ body {
 .warehouse-products table .nal-ostatok {
   padding: 0 2px;
   position: relative;
-  min-width: 81px;
+  min-width: 51px;
   height: 18px;
   line-height: 18px;
   display: flex;
@@ -1034,6 +1082,7 @@ body {
 .warehouse-products table .nal-vozvrat {
   padding: 0 2px;
   position: relative;
+  min-width: 21px;
   height: 18px;
   line-height: 18px;
   text-align: right;

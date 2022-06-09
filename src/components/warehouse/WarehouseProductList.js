@@ -14,14 +14,14 @@ const WarehouseProductList = ({
 	setPodlozhka,
 	// focusInput,
 	// setFocusInput,
-	setIndexInput,
+	// setIndexInput,
 	lastIndex,
 	setLastIndex,
 	setLoadedLabelBlock,
 	loadedLabelBlock,
 	flagSwitchMenu,
 	translator,
-	start,
+	// start,
 	// widthColum,
 
 	setToggleCard,
@@ -50,7 +50,7 @@ const WarehouseProductList = ({
 				newobj[index].status.crm = true;
 			}
 			setObjProduct(newobj);
-			console.log(objProduct);
+			// console.log(objProduct);
 		}
 		if (e.target.className === 'status-rozetka') {
 			let newobj = [...objProduct];
@@ -117,8 +117,8 @@ const WarehouseProductList = ({
 				tooltipBlock.innerText = e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		} else {
 			if (e.currentTarget.className === 'attribute-width') {
 				// console.log(e.currentTarget.children[0].getAttribute('src'))
@@ -131,8 +131,8 @@ const WarehouseProductList = ({
 					tooltipBlock.innerHTML = `<div class="img-tooltip" style='display: flex; flex-direction: column;width:300px;height:300px;'>${memory}${img}</div>`;
 					tooltipBlock.style.left = posElement.x + 'px';
 					tooltipBlock.style.top = posElement.y + 23 + 'px';
-					tooltipBlock.style.animation = 'delay-header 1s forwards';
-				}, 150);
+					tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+				}, 250);
 			}
 		}
 		if (e.currentTarget.innerText === '🇺🇦') {
@@ -140,24 +140,24 @@ const WarehouseProductList = ({
 				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'ukraine');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		}
 		if (e.currentTarget.innerText === '🇷🇺') {
 			plusminus = setTimeout(() => {
 				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'russia');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		}
 		if (e.currentTarget.innerText === '🇹🇷') {
 			plusminus = setTimeout(() => {
 				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'turkey');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		}
 
 		if (e.currentTarget.innerText === '€') {
@@ -165,32 +165,32 @@ const WarehouseProductList = ({
 				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'eur');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		}
 		if (e.currentTarget.innerText === '₽') {
 			plusminus = setTimeout(() => {
 				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'rub');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		}
 		if (e.currentTarget.innerText === '₴') {
 			plusminus = setTimeout(() => {
 				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'uah');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		}
 		if (e.currentTarget.innerText === '$') {
 			plusminus = setTimeout(() => {
 				tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'dollar');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		}
 		if (objProduct[index].lock) {
 			plusminus = setTimeout(() => {
@@ -198,8 +198,8 @@ const WarehouseProductList = ({
 				tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
-				tooltipBlock.style.animation = 'delay-header 1s forwards';
-			}, 150);
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
 		}
 
 		// console.log(e.target.querySelector('input'))
@@ -237,6 +237,21 @@ const WarehouseProductList = ({
 			setObjProduct([...newobj]);
 			setMemoryInput(ostatok);
 		}
+		// if(inputRef.current.value) {
+		// 	// inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
+	
+		// 		if (inputRef.current.value.length >= 4) {
+		// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 3 + 'px';
+		// 		}
+		// 		if (inputRef.current.value.length >= 7) {
+		// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 7 + 'px';
+		// 		}
+		// 		if (inputRef.current.value.length < 4) {
+		// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
+		// 		}
+	
+		
+		// }
 	}
 	function BtnPlus(e) {
 		e.stopPropagation();
@@ -260,6 +275,21 @@ const WarehouseProductList = ({
 		newobj[index].suma1 = zakupka;
 		setObjProduct([...newobj]);
 		setMemoryInput(ostatok);
+		// if(inputRef.current.value) {
+		// 	// inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
+	
+		// 		if (inputRef.current.value.length >= 4) {
+		// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 3 + 'px';
+		// 		}
+		// 		if (inputRef.current.value.length >= 7) {
+		// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 7 + 'px';
+		// 		}
+		// 		if (inputRef.current.value.length < 4) {
+		// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
+		// 		}
+	
+		
+		// }
 	}
 
 	// function formatNumber(number) {
@@ -275,14 +305,24 @@ const WarehouseProductList = ({
 	// 	});
 	// 	return newnum;
 	// }
-
+	const [flag,setFlag] = useState(false);
 	function inputChange(e) {
-		setIndexInput(index - start);
+		// setIndexInput(index - start);
 		// setFocusInput(true);
+		setFlag(true);
 		setPodlozhka(true);
+		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+			// x.style.visibility = 'visible';
+			x.classList.add('hide-menu');
+		});
+		document.querySelector('.contentScroll').style.overflow = 'hidden';
+		document.querySelector('.scrollbar').style.opacity = 0;
+		document.querySelector('.scrollbarHorizont').style.opacity = 0;
 		// setInputFormat(true);
-		console.log(e.target.value);
-		e.target.value = e.target.value.replace(/[^0-9]/g, '');
+		// console.log(e.target.value);
+		let temp = e.target.value.replace(/[^0-9]/g, '');
+		e.target.value = temp.length === 0 ? ' ' : temp;
+		e.target.style.width = e.target.value.length * 7 + 'px';
 		setMemoryInput(e.target.value);
 	}
 	function usePrevious(value) {
@@ -306,63 +346,113 @@ const WarehouseProductList = ({
 					e.target.style.width = e.target.value.length * 7 + 'px';
 				}
 				e.target.blur();
-				console.log('enter');
-				// setFocusInput(false);
 			}
+			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+				// x.style.visibility = 'visible';
+				x.classList.remove('hide-menu');
+			});
+			if(memoryInput.length === 0 || memoryInput === ' '){
+				setMemoryInput(0)
+			}
+			if (podlozhka && flag) {
+				let newobj = [...objProduct];
+				if(memoryInput.length !== 0 || memoryInput !== ' '){
+					let ostatok = memoryInput ;
+					let zakupka = newobj[index].zakupka;
+					zakupka = +zakupka.replace(/\s/gmu, '');
+					ostatok = +ostatok.replace(/\s/gmu, '');
+					zakupka = zakupka * ostatok;
+					ostatok = ostatok.toLocaleString('ru-RU', {
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 0,
+					});
+					zakupka = zakupka.toLocaleString('ru-RU', {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2,
+					}).replace(',','.');
+		
+					newobj[index].ostatok = ostatok;
+					newobj[index].suma1 = zakupka;
+					setMemoryInput(ostatok)
+					setObjProduct([...newobj]);
+				}
+			}
+			setFlag(false);
 			setPodlozhka(false);
 		}
 	}
 	useEffect(() => {
-		// console.log(objProduct)
-		// console.log(podlozhka)
-		// console.log(memoryInput)
-		console.log(podlozhka)
-		if (!podlozhka) {
-			// console.log('s')
-			// setInputFormat(false);
+		if (!podlozhka && flag) {
 			let newobj = [...objProduct];
-			let ostatok = memoryInput ;
-			let zakupka = newobj[index].zakupka;
-			zakupka = +zakupka.replace(/\s/gmu, '');
-			ostatok = +ostatok.replace(/\s/gmu, '');
+			if(memoryInput.length !== 0 || memoryInput !== ' '){
+				let ostatok = memoryInput ;
+				let zakupka = newobj[index].zakupka;
+				zakupka = +zakupka.replace(/\s/gmu, '');
+				ostatok = +ostatok.replace(/\s/gmu, '');
+				zakupka = zakupka * ostatok;
+				ostatok = ostatok.toLocaleString('ru-RU', {
+					minimumFractionDigits: 0,
+					maximumFractionDigits: 0,
+				});
+				zakupka = zakupka.toLocaleString('ru-RU', {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+				}).replace(',','.');
+	
+				newobj[index].ostatok = ostatok;
+				newobj[index].suma1 = zakupka;
+				setMemoryInput(ostatok)
+				setObjProduct([...newobj]);
+				if(inputRef.current.value) {
+					// inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
 			
-			// ostatok = ostatok + 1;
-			zakupka = zakupka * ostatok;
-			ostatok = ostatok.toLocaleString('ru-RU', {
-				minimumFractionDigits: 0,
-				maximumFractionDigits: 0,
-			});
-			zakupka = zakupka.toLocaleString('ru-RU', {
-				minimumFractionDigits: 2,
-				maximumFractionDigits: 2,
-			}).replace(',','.');
-
-			newobj[index].ostatok = ostatok;
-			newobj[index].suma1 = zakupka;
-			// console.log(newobj[index].ostatok)
-			setMemoryInput(ostatok)
-			// if(objProduct.length > 0) {
-			// newobj[index].ostatok = memoryInput;
-			setObjProduct([...newobj]);
-			// }
+						if (inputRef.current.value.length >= 4) {
+							inputRef.current.style.width = inputRef.current.value.length * 7 + 3 + 'px';
+						}
+						if (inputRef.current.value.length >= 7) {
+							inputRef.current.style.width = inputRef.current.value.length * 7 + 7 + 'px';
+						}
+						if (inputRef.current.value.length < 4) {
+							inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
+						}
 			
-		// console.log('ASDASD')
+				
+				}
+			}
+		setFlag(false);
 		}
 	}, [podlozhka]);
 	
-	function inputLength(input) {
-		// if (input.replaceAll(' ', '').length >= 4) {   !probel tut
-		if (input.replaceAll(/\s/gmu, '').length >= 4) {
-			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-			return input.replaceAll(/\s/gmu, '').length * 7 + 3 + 'px';
+	// function inputLength(input) {
+	// 	// if (input.replaceAll(' ', '').length >= 4) {   !probel tut
+	// 	if (input.replace(/\s/gmu, '').length >= 4) {
+	// 		// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
+	// 		return input.replace(/\s/gmu, '').length * 7 + 3 + 'px';
+	// 	}
+	// 	if (input.replace(/\s/gmu, '').length >= 7) {
+	// 		return input.replace(/\s/gmu, '').length * 7 + 7 + 'px';
+	// 	}
+	// 	if (input.replace(/\s/gmu, '').length < 4) {
+	// 		return input.replace(/\s/gmu, '').length * 7 + 'px';
+	// 	}
+	// }
+	useEffect(()=> {
+		if(inputRef.current.value) {
+			inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
+				
+				// if (inputRef.current.value.length >= 4) {
+				// 	inputRef.current.style.width = inputRef.current.value.length * 7 - 5 + 'px';
+				// }
+				// if (inputRef.current.value.length >= 7) {
+				// 	inputRef.current.style.width = inputRef.current.value.length * 7 - 11 + 'px';
+				// }
+				// if (inputRef.current.value.length < 4) {
+				// 	inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
+				// }
+	
+		
 		}
-		if (input.replaceAll(/\s/gmu, '').length >= 7) {
-			return input.replaceAll(/\s/gmu, '').length * 7 + 7 + 'px';
-		}
-		if (input.replaceAll(/\s/gmu, '').length < 4) {
-			return input.replaceAll(/\s/gmu, '').length * 7 + 'px';
-		}
-	}
+	},[memoryInput])
 	// const linkTR = useRef();
 
 	function clickTr(e) {
@@ -416,9 +506,8 @@ const WarehouseProductList = ({
 			setObjProduct(newobj);
 		}
 	}
-
 	const inputRef = useRef();
-	const btnRef = useRef();
+	// const btnRef = useRef();
 	function PlusMinusOpen(e) {
 		document.querySelectorAll('.nal-ostatok').forEach((x) => {
 			x.classList.add('showBtn');
@@ -591,7 +680,7 @@ const WarehouseProductList = ({
 										}
 										style={
 											objProduct[index].podProduct === 1 ||
-											(objProduct[index].podProduct === 0 && objProduct[index].lock)
+											(objProduct[index].podProduct === 0 && objProduct[index].lock) ||!objProduct[index].status.all
 												? { opacity: 0.4 }
 												: {}
 										}
@@ -656,25 +745,11 @@ const WarehouseProductList = ({
 						onMouseLeave={PlusMinusClose}
 						onMouseEnter={PlusMinusOpen}
 						className="nal-ostatok"
-						ref={btnRef}
-						style={
-							// !objProduct[index].status.all
-							// 	? {
-							// 			// opacity: 0.4,
-							// 			color:'rgba(0, 0, 0, 0.4)',
-
-							// 			paddingRight: 3,
-							// 	  }
-							// 	: 
-								{ paddingRight: 3 }
-						}
 					>
 						<div
 							className="wrap-nal-ostatok"
-							style={{ display: 'flex', position: 'absolute', lineHeight: '18px', height: 18 }}
 						>
 							<button
-								// style={btnMenu ? { width: '16px' } : {}}
 								onDoubleClick={(e) => e.stopPropagation()}
 								onClick={BtnMinus}
 							>
@@ -703,9 +778,7 @@ const WarehouseProductList = ({
 								onKeyUp={enterInput}
 								maxLength={5}
 								onClick={(e) => {
-									// setFocusInput(true);
 									setPodlozhka(true);
-									// setInputFormat(true);
 									e.stopPropagation();
 								}}
 								// value={focusInput && inputFormat ? memoryInput : +memoryInput}
@@ -714,7 +787,8 @@ const WarehouseProductList = ({
 								style={{
 									color: `${!objProduct[index].status.all ?'rgba(0,0,0,0.4)' :'rgba(0,0,0,0.7)'}`,
 									lineHeight: '18px',
-									width: inputLength(memoryInput.toString()),
+									// width: ''
+									// width: inputLength(memoryInput.toString()),
 								}}
 								readOnly={objProduct[index].lock ? true : false}
 							/>
@@ -784,7 +858,7 @@ const WarehouseProductList = ({
 							</button>
 						</div>
 
-						<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
+						<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)', position:'absolute',right:3,top:3 }}>/</span>
 					</td>
 					<td
 						className="nal-rezerv"
@@ -806,7 +880,7 @@ const WarehouseProductList = ({
 						</div> */}
 						{/* {formatNumber2(objProduct[index].rezerv)} */}
 						{objProduct[index].rezerv}
-						<span></span>
+						<span style={{opacity: `${!objProduct[index].status.all ? '0.4': ''}`}}></span>
 					</td>
 					<td
 						className="nal-otpr"
@@ -830,7 +904,7 @@ const WarehouseProductList = ({
 						</div> */}
 						{/* {formatNumber2(objProduct[index].otpr)} */}
 						{objProduct[index].otpr}
-						<span></span>
+						<span style={{opacity: `${!objProduct[index].status.all ? '0.4': ''}`}}></span>
 					</td>
 					<td
 						className="nal-vozvrat"
@@ -839,7 +913,7 @@ const WarehouseProductList = ({
 							// height: '18px',
 							// lineHeight: '18px',
 							// color: 'rgba(0,0,0,0.5)',
-							paddingRight: '15px',
+							paddingRight: '10px',
 						}}
 					>
 						{/* <div
@@ -848,7 +922,7 @@ const WarehouseProductList = ({
 						</div> */}
 						{/* {formatNumber2(objProduct[index].vozvrat)} */}
 						{objProduct[index].vozvrat}
-						<span></span>
+						<span style={{opacity: `${!objProduct[index].status.all ? '0.4': ''}`}}></span>
 					</td>
 					<td
 						className="nal-zakupka"
@@ -894,7 +968,7 @@ const WarehouseProductList = ({
 						{objProduct[index].suma1}
 						{/* {objProduct[index].ostatok * objProduct[index].zakupka} */}
 						{/* {formatNumber(objProduct[index].ostatok * objProduct[index].zakupka)} */}
-						<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)' }}>/</span>
+						<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)'}}>/</span>
 						{/* </div> */}
 					</td>
 					<td
@@ -902,7 +976,7 @@ const WarehouseProductList = ({
 						style={{
 							color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : 'rgba(0, 0, 0, 0.5)'}`,
 							paddingRight: '4px',
-							color: 'rgba(0,0,0,0.5)',
+							// color: 'rgba(0,0,0,0.5)',
 						}}
 					>
 						{/* <div
@@ -911,7 +985,7 @@ const WarehouseProductList = ({
 						</div> */}
 						{/* {formatNumber(objProduct[index].suma2)} */}
 						{objProduct[index].suma2}
-						<span></span>
+						<span style={{opacity: `${!objProduct[index].status.all ? '0.4': ''}`}}></span>
 					</td>
 					<td
 						className="summa-suma3"
@@ -925,7 +999,7 @@ const WarehouseProductList = ({
 						>
 						</div> */}
 						{objProduct[index].suma3}
-						<span></span>
+						<span style={{opacity: `${!objProduct[index].status.all ? '0.4': ''}`}}></span>
 						{/* {formatNumber(objProduct[index].suma3)} */}
 					</td>
 					<td
@@ -940,7 +1014,7 @@ const WarehouseProductList = ({
 						</div> */}
 						{/* {formatNumber(objProduct[index].suma4)} */}
 						{objProduct[index].suma4}
-						<span></span>
+						<span style={{opacity: `${!objProduct[index].status.all ? '0.4': ''}`}}></span>
 					</td>
 				</tr>
 			)}

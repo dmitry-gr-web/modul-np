@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import './Warehouse.scss';
-import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus } from '../../img/svg-pack';
+import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus,Preloaded } from '../../img/svg-pack';
 // import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+// import 'simplebar/dist/simplebar.min.css';
 import WarehouseProductList from './WarehouseProductList';
 import WarehouseDropMenu from './WarehouseDropMenu';
 // import { dataWarehouse } from '../data/dataWarehouse';
@@ -13,6 +13,8 @@ import _, { set } from 'lodash';
 // import FreeScrollBar from 'react-free-scrollbar';
 import ScrollBox from './reactScroll';
 import WarehouseDropRange from './WarehouseDropRange';
+import WarehouseDropInput from './WarehouseDropInput';
+import { useFetch } from '../data/useFetch';
 
 // let timer;
 let hover;
@@ -21,12 +23,25 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
 	// const [checked, setChecked] = useState(true);
-
+	const {data,error,isLoading} = useFetch('http://192.168.0.197:3005/folders', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"query": {},
+				"start": 10,
+				// "start": props.folder.at(-1)?.id,
+				"end": 20
+			})
+		});
+	console.log(data)
 	const [podlozhka, setPodlozhka] = useState(false);
 	const [switchMenu, setSwitchMenu] = useState(false);
 	// const [focusInput, setFocusInput] = useState(false);
 
-	const [indexInput, setIndexInput] = useState(0);
+	// const [indexInput, setIndexInput] = useState(0);
 	// const [btnMenu, setBtnMenu] = useState(false);
 	const [flagSwitchMenu, setFlagSwitchMenu] = useState(false);
 	// console.log('block')
@@ -37,6 +52,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		setSwitchMenu(false);
 
 		document.querySelector('.contentScroll').style.overflow = 'auto';
+		document.querySelector('.scrollbar').style.opacity = 1;
+		document.querySelector('.scrollbarHorizont').style.opacity = 1;
 		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 			x.classList.remove('hide-menu');
 		});
@@ -50,17 +67,17 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			x.classList.remove('showBtn');
 		});
 		document.querySelector('.width21px').style.maxWidth = '51px';
-		let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
-		if (input.value.length >= 4) {
-			// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-			input.style.width = input.value.length * 7 + 3 + 'px';
-		}
-		if (input.value.length >= 7) {
-			input.style.width = input.value.length * 7 + 7 + 'px';
-		}
-		if (input.value.length < 4) {
-			input.style.width = input.value.length * 7 + 'px';
-		}
+		// let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
+		// if (input.value.length >= 4) {
+		// 	// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
+		// 	input.style.width = input.value.length * 7 + 3 + 'px';
+		// }
+		// if (input.value.length >= 7) {
+		// 	input.style.width = input.value.length * 7 + 7 + 'px';
+		// }
+		// if (input.value.length < 4) {
+		// 	input.style.width = input.value.length * 7 + 'px';
+		// }
 	}
 	function searchLine(text, value) {
 		if (value !== '') {
@@ -122,71 +139,66 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	}
 
 	//rascheti
-	const [ostatok , setostatok] = useState('');
-	const [rezerv , setrezerv] = useState('');
-	const [otpr , setotpr] = useState('');
-	const [vozvrat , setvozvrat] = useState('');
-	const [zakupka , setzakupka] = useState('');
-	const [prodazha , setprodazha] = useState('');
-	const [marzha , setmarzha] = useState('');
-	const [suma1 , setsuma1] = useState('');
-	const [suma2 , setsuma2] = useState('');
-	const [suma3 , setsuma3] = useState('');
-	const [suma4 , setsuma4] = useState('');
-	useEffect(()=> {
-	let ostatok = 
-		formatNumber2(objProduct.reduce((prev, curr) => {
+	// const [ostatok , setostatok] = useState('');
+	// const [rezerv , setrezerv] = useState('');
+	// const [otpr , setotpr] = useState('');
+	// const [vozvrat , setvozvrat] = useState('');
+	// const [zakupka , setzakupka] = useState('');
+	// const [prodazha , setprodazha] = useState('');
+	// const [marzha , setmarzha] = useState('');
+	// const [suma1 , setsuma1] = useState('');
+	// const [suma2 , setsuma2] = useState('');
+	// const [suma3 , setsuma3] = useState('');
+	// const [suma4 , setsuma4] = useState('');
+	const [pereschetiHeaders, setPereschetiHeaders] = useState(null);
+	useLayoutEffect(()=> {
+		let ostatok = formatNumber2(objProduct.reduce((prev, curr) => {
 			return prev + (+curr.ostatok.replace(/\s/gmu,''))
 		}, 0))
-		
-	setostatok(ostatok);
+		let rezerv = formatNumber2(objProduct.reduce((prev, curr) => {
+			return prev + (+curr.rezerv.replace(/\s/gmu,''))
+		}, 0))
+		let otpr = formatNumber2(objProduct.reduce((prev, curr) => {
+			return prev + (+curr.otpr.replace(/\s/gmu,''))
+		}, 0))
+		let vozvrat = formatNumber2(objProduct.reduce((prev, curr) => {
+			return prev + (+curr.vozvrat.replace(/\s/gmu,''))
+		}, 0))
+		let zakupka = formatNumber(objProduct.reduce((prev, curr,_,array) => {
+			return prev + (+curr.zakupka.replace(/\s/gmu,'')) / array.length;
+		}, 0))
+		let prodazha = formatNumber(objProduct.reduce((prev, curr,_,array) => {
+			return prev + (+curr.prodazha.replace(/\s/gmu,'')) / array.length;
+		}, 0))
+		let marzha = formatNumber(objProduct.reduce((prev, curr,_,array) => {
+			return prev + (+curr.marzha.replace(/\s/gmu,'')) / array.length;
+		}, 0))
+		let suma1 = formatNumber(objProduct.reduce((prev, curr) => {
+			return prev + (+curr.suma1.replace(/\s/gmu,''))
+		}, 0))
+		let suma2 = formatNumber(objProduct.reduce((prev, curr) => {
+			return prev + (+curr.suma2.replace(/\s/gmu,''))
+		}, 0))
+		let suma3 = formatNumber(objProduct.reduce((prev, curr) => {
+			return prev + (+curr.suma3.replace(/\s/gmu,''))
+		}, 0))
+		let suma4 = formatNumber(objProduct.reduce((prev, curr) => {
+			return prev + (+curr.suma4.replace(/\s/gmu,''))
+		}, 0))
 	
-	let rezerv = formatNumber2(objProduct.reduce((prev, curr) => {
-		return prev + (+curr.rezerv.replace(/\s/gmu,''))
-	}, 0))
-	setrezerv(rezerv)
-	let otpr = formatNumber2(objProduct.reduce((prev, curr) => {
-		return prev + (+curr.otpr.replace(/\s/gmu,''))
-	}, 0))
-	setotpr(otpr);
-	let vozvrat = formatNumber2(objProduct.reduce((prev, curr) => {
-		return prev + (+curr.vozvrat.replace(/\s/gmu,''))
-	}, 0))
-	setvozvrat(vozvrat);
-	
-
-	let zakupka = formatNumber(objProduct.reduce((prev, curr,_,array) => {
-		return prev + (+curr.zakupka.replace(/\s/gmu,'')) / array.length;
-	}, 0))
-	setzakupka(zakupka);
-	let prodazha = formatNumber(objProduct.reduce((prev, curr,_,array) => {
-		return prev + (+curr.prodazha.replace(/\s/gmu,'')) / array.length;
-	}, 0))
-	setprodazha(prodazha)
-	let marzha = formatNumber(objProduct.reduce((prev, curr,_,array) => {
-		return prev + (+curr.marzha.replace(/\s/gmu,'')) / array.length;
-	}, 0))
-	setmarzha(marzha);
-
-	let suma1 = formatNumber(objProduct.reduce((prev, curr) => {
-		return prev + (+curr.suma1.replace(/\s/gmu,''))
-	}, 0))
-	setsuma1(suma1);
-	let suma2 = formatNumber(objProduct.reduce((prev, curr) => {
-		return prev + (+curr.suma2.replace(/\s/gmu,''))
-	}, 0))
-	setsuma2(suma2);
-	let suma3 = formatNumber(objProduct.reduce((prev, curr) => {
-		return prev + (+curr.suma3.replace(/\s/gmu,''))
-	}, 0))
-	setsuma3(suma3);
-	let suma4 = formatNumber(objProduct.reduce((prev, curr) => {
-		return prev + (+curr.suma4.replace(/\s/gmu,''))
-	}, 0))
-	setsuma4(suma4);
-	// let suma2 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma2, 0));
-	// let suma3 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma3, 0));
-	// let suma4 = parseInt(objProduct.reduce((prev, curr) => prev + curr.suma4, 0));
+		setPereschetiHeaders({
+			ostatok: ostatok,
+			rezerv:rezerv,
+			otpr:otpr,
+			vozvrat:vozvrat,
+			zakupka:zakupka,
+			prodazha:prodazha,
+			marzha:marzha,
+			suma1:suma1,
+			suma2:suma2,
+			suma3:suma3,
+			suma4:suma4,
+		});
 	},[objProduct])
 	
 	const rootRef = useRef();
@@ -287,12 +299,16 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	}
 	// const scrollableNodeRef = React.createRef();
 	// console.log(start)
+	const btnUp = useRef();
 	useEffect(() => {
-		if (start > 600) {
-			document.querySelector('.btnUp').style.visibility = 'visible';
-		} else {
-			document.querySelector('.btnUp').style.visibility = 'hidden';
+		if(btnUp.current){
+			if (start > 600) {
+				btnUp.current.style.visibility = 'visible';
+			} else {
+				btnUp.current.style.visibility = 'hidden';
+			}
 		}
+	
 	}, [start]);
 	function clickScrollUp() {
 		// rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
@@ -305,25 +321,38 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		updateHover();
 		setSwitchMenu(false);
 	}
+	const [percentScroll, setPercentScroll] = useState(0.87);
+
 	useEffect(() => {
 		// rootRef.current.el
 		// 	.querySelector('.simplebar-content-wrapper')
 		// 	.addEventListener('scroll', onScroll);
-		rootRef.current.content.addEventListener('mousedown', onMouseDown);
-		rootRef.current.content.addEventListener('mouseleave', onMouseLeave);
-		rootRef.current.content.addEventListener('mouseup', onMouseLeave);
-		rootRef.current.content.addEventListener('mousemove', onMouseMove);
+	
+	
+		if(rootRef.current){
+			if(rootRef.current.content.offsetHeight < 614) {
+				setPercentScroll(0.81);
+			}
+		
+				rootRef.current.content.addEventListener('mousedown', onMouseDown);
+				rootRef.current.content.addEventListener('mouseleave', onMouseLeave);
+				rootRef.current.content.addEventListener('mouseup', onMouseLeave);
+				rootRef.current.content.addEventListener('mousemove', onMouseMove);
+		
+		
+		}
+
 
 		return () => {
-			rootRef.current.content.removeEventListener('mousedown', onMouseDown);
-			rootRef.current.content.removeEventListener('mouseleave', onMouseLeave);
-			rootRef.current.content.removeEventListener('mouseup', onMouseLeave);
-			rootRef.current.content.removeEventListener('mousemove', onMouseMove);
+			// rootRef.current.content.removeEventListener('mousedown', onMouseDown);
+			// rootRef.current.content.removeEventListener('mouseleave', onMouseLeave);
+			// rootRef.current.content.removeEventListener('mouseup', onMouseLeave);
+			// rootRef.current.content.removeEventListener('mousemove', onMouseMove);
 			// rootRef.current.el
 			// 	.querySelector('.simplebar-content-wrapper')
 			// 	.removeEventListener('scroll',  _.throttle(onScroll, 500));
 		};
-	}, []);
+	}, [objProduct]);
 
 	// const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
@@ -393,12 +422,65 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 
 
 
+	//adaptive scroll height dlya Valeri
+	const queryWidthTr = useRef();
 
 
+	const [dimensions, setDimensions] = useState(null);
+
+	useLayoutEffect(() => {
+	  if (queryWidthTr.current) {
 	
+			setDimensions({
+				width1: queryWidthTr.current.querySelector('.nal-ostatok').offsetWidth,
+				width3: queryWidthTr.current.querySelector('.nal-otpr').offsetWidth,
+				width2: queryWidthTr.current.querySelector('.nal-rezerv').offsetWidth,
+				width4: queryWidthTr.current.querySelector('.nal-vozvrat').offsetWidth,
+				widthsuma1: queryWidthTr.current.querySelector('.summa-suma1').offsetWidth,
+				widthsuma2: queryWidthTr.current.querySelector('.summa-suma2').offsetWidth,
+				widthsuma3: queryWidthTr.current.querySelector('.summa-suma3').offsetWidth,
+				widthsuma4: queryWidthTr.current.querySelector('.summa-suma4').offsetWidth,
+				
+			  });
+	
+	
+	  }
+	}, [pereschetiHeaders]);
+	useEffect(() => {
+	 setTimeout(() => {
+		setDimensions({
+			width1: queryWidthTr.current.querySelector('.nal-ostatok').offsetWidth,
+			width3: queryWidthTr.current.querySelector('.nal-otpr').offsetWidth,
+			width2: queryWidthTr.current.querySelector('.nal-rezerv').offsetWidth,
+			width4: queryWidthTr.current.querySelector('.nal-vozvrat').offsetWidth,
+			widthsuma1: queryWidthTr.current.querySelector('.summa-suma1').offsetWidth,
+			widthsuma2: queryWidthTr.current.querySelector('.summa-suma2').offsetWidth,
+			widthsuma3: queryWidthTr.current.querySelector('.summa-suma3').offsetWidth,
+			widthsuma4: queryWidthTr.current.querySelector('.summa-suma4').offsetWidth,
+			
+		  });
+	 }, 600);
 
+	}, []);
+	//adaptive scroll height dlya Valeri
+	// const tablescroll = useRef();
+
+	const [treugolka, setTreugolka]=useState(false);
+	function treugolnikEpptaOn () {
+		setTreugolka(true);
+		// document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+		// 	x.classList.remove('hide-arrow');
+		// });
+	}
+	function treugolnikEpptaOff () {
+		setTreugolka(false);
+		// document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+		// 	x.classList.add('hide-arrow');
+		// });
+	}
 	return (
-		<div className="warehouse-products">
+		<>
+		{isLoading ? <div className='loading'><Preloaded/></div> :<div className="warehouse-products">
 			<div className="warehouse-products-title">
 				{translator.getTranslation('warehouse', 'goods')}
 				<button>
@@ -410,46 +492,30 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			<div
 				style={{
 					position: 'relative',
-					maxHeight: 'calc(100vh - 170px)',
+					// maxHeight: 'calc(100vh - 170px)',
 					width: '100%',
-					height: document.body.clientHeight - 170 + 'px',
+					// height: 'calc(100vh - 216px)',
+					height: 'calc(100vh - 190px)',
 				}}
 			>
 				<ScrollBox
 					ref={rootRef}
 					// scrollVertMinus={0.07}
-					percent={0.93}
+					percent={percentScroll}
 					scroll={_.throttle(onScroll, 500)}
 					color="rgba(0, 0, 0, 0.3)"
 				>
-					{/* <div
-				// scrollableNodeProps={{ref: scrollableNodeRef}}
-				className="warehouse-table"
-				style={{
-					// display: 'flex',
-					// marginBottom: '10px',
-					// maxHeight: 'calc(100vh - 170px)',
-					// width: '100%',
-					// height: document.body.clientHeight - 170 + 'px',
-					// maxWidth: 1150,
-					// display: 'none',
-					// overflow: 'auto',
-					// height: '800px',
-					// willChange:'transform, scroll-position',
-				}}
-				// autoHide={false}
-				// direction={'rtl'}
-				ref={rootRef}
-				// direction='rtl'
-				// onScroll={_.throttle(onScroll, 500)}
-			> */}
+	
 
 					<table
 						tabIndex={-1}
 						style={{ width: '100%' }}
+				
+					
+						// onMouseEnter={}
 						// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 					>
-						<thead className="first-tab-header">
+						<thead onMouseEnter={treugolnikEpptaOn} onMouseLeave={treugolnikEpptaOff} className="first-tab-header">
 							<tr>
 								{podlozhka && (
 									<td style={{ padding: '0px' }}>
@@ -470,7 +536,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 							</tr>
 
 							<tr>
-			
+
 								<th className="sticky-head">
 									<div className="sticky-block" style={{ height: 20 }}>
 										<div className="stickyBeforeHead"></div>
@@ -534,9 +600,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										<div
 											className="attribute-width"
 											style={{
-												paddingRight: '3px',
+												// paddingRight: '3px',
 												//  width: widthColum.attribute + 'px',
 												width: 150,
+												// whiteSpace:'pre'
 											}}
 										>
 											{translator.getTranslation('warehouse', 'attribute')}
@@ -545,25 +612,21 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 									</div>
 								</th>
 
-								<th style={{ paddingLeft: '12px', paddingRight: '15px' }} colSpan={4}>
+								<th style={{ paddingLeft: '12px', paddingRight: '10px' }} colSpan={4}>
 									{translator.getTranslation('warehouse', 'available')}
 								</th>
-								<th style={{ paddingRight: '15px' }}>
+								<th style={{ paddingRight: '10px' }}>
 									{translator.getTranslation('warehouse', 'purchase')}
 								</th>
-								<th style={{ paddingRight: '15px' }}>
+								<th style={{ paddingRight: '10px' }}>
 									{translator.getTranslation('warehouse', 'sales')}
 								</th>
-								<th style={{ paddingRight: '15px' }}>
+								<th style={{ paddingRight: '10px' }}>
 									{translator.getTranslation('warehouse', 'margin')}
 								</th>
 								<th colSpan={4}>{translator.getTranslation('warehouse', 'total')}</th>
 							</tr>
 							<tr>
-								{/* <th className="hoverr">
-								<div></div>
-							</th> */}
-
 								<th className="sticky-head" style={{ zIndex: 3 }}>
 									<div className="sticky-block" style={{ height: 20 }}>
 										<div
@@ -604,6 +667,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSwitchMenu={setSwitchMenu}
 													switchMenu={switchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
+													treugolka={treugolka}
 												/>
 											</div>
 											<div
@@ -612,7 +676,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												// style={switchMenu ? { overflow: '', position:'relative',left:0,width:'max-content' ,paddingLeft:10} : {overflow:'hidden',paddingLeft:0, position:'relative',left:0,width:'0px'}}
 												className="block-3-btn"
 											>
-												<div className="marginBtn">
+												
 													<WarehouseDropMenu
 														adaptive={true}
 														setPodlozhka={setPodlozhka}
@@ -627,10 +691,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setSortActive={setSortActive}
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
+														treugolka={treugolka}
+												
 													/>
-												</div>
+											
 
-												<div className="marginBtn">
+											
 													<WarehouseDropMenu
 														adaptive={true}
 														setPodlozhka={setPodlozhka}
@@ -645,9 +711,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setSortActive={setSortActive}
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
+														treugolka={treugolka}
 													/>
-												</div>
-												<div className="marginBtn">
+											
+								
 													<WarehouseDropMenu
 														adaptive={true}
 														setPodlozhka={setPodlozhka}
@@ -662,8 +729,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setSortActive={setSortActive}
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
+														treugolka={treugolka}
 													/>
-												</div>
+											
 												{/* {console.log(document.querySelectorAll('.block-3-btn').children)} */}
 											</div>
 										</div>
@@ -671,7 +739,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											style={{
 												position: 'relative',
 												left: 74,
-												display: `${switchMenu ? 'none' : 'flex'}`,
+												// display: `${switchMenu ? 'none' : 'flex'}`,
+												display: `flex`,
+												visibility: `${switchMenu ? 'hidden': ''}`,
 												zIndex: 4,
 											}}
 										>
@@ -679,7 +749,13 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												className="id-width"
 												style={{ paddingRight: '10px' }}
 											>
-												<WarehouseInput podlozhka={podlozhka} setPodlozhka={setPodlozhka} />
+												<WarehouseInput 
+												podlozhka={podlozhka} 
+												setPodlozhka={setPodlozhka} 
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												translator={translator}
+												/>
 											</div>
 											<div style={{ paddingRight: '10px', minWidth: 51, zIndex: 5 }}>
 												<WarehouseDropMenu
@@ -694,6 +770,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSortActive={setSortActive}
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
+													treugolka={treugolka}
 													// setActivity={setActivity}
 													// activity={activity}
 												/>
@@ -711,6 +788,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSortActive={setSortActive}
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
+													treugolka={treugolka}
 													// setActivity={setActivity}
 													// activity={activity}
 												/>
@@ -738,6 +816,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSortActive={setSortActive}
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
+													treugolka={treugolka}
 												/>
 											</div>
 											<div
@@ -763,6 +842,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSortActive={setSortActive}
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
+													treugolka={treugolka}
 												/>
 											</div>
 										</div>
@@ -770,33 +850,13 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 									</div>
 								</th>
 
-								<th style={{ paddingLeft: '12px', paddingRight: '3px' }}>
+								{/* <th style={{ paddingLeft: '12px', paddingRight: '3px' }}>
 									<div style={{ width: 'calc(100% - 7px)', height: 20 }}>
-										{/* <WarehouseDropMenu
-												setPodlozhka={setPodlozhka}
-												podlozhka={podlozhka}
-												type={'range'}
-												zIndex={true}
-												objProduct={objProduct}
-												setSwitchMenu={setSwitchMenu}
-												switchMenu={switchMenu}
-												translator={translator}
-												sortActive={sortActive}
-												setSortActive={setSortActive}
-											/> */}
-										<WarehouseDropRange
-											setPodlozhka={setPodlozhka}
-											podlozhka={podlozhka}
-											translator={translator}
-											zIndex={true}
-											sortActive={sortActive}
-											setSortActive={setSortActive}
-											// setWidth21px={setWidth21px}
-											// setLabelForWidth={setLabelForWidth}
-										/>
+								
+										
 									</div>
-								</th>
-								<th className="" style={{ paddingRight: '4px', position: 'relative' }}>
+								</th> */}
+								{/* <th className="" style={{ paddingRight: '4px', position: 'relative' }}>
 									<div
 										style={{
 											width: 'calc(100% - 4px)',
@@ -820,105 +880,186 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											position: 'absolute',
 										}}
 									></div>
+								</th> */}
+								<th colSpan={4} style={{paddingLeft:'12px', paddingRight: '10px', position: 'relative' }}>
+									<div className='block-4-btn' style={{display:'flex', position:'absolute', top:0,right:10,visibility: `${switchMenu ? 'hidden': ''}`}}>
+										{dimensions && <><div className='ostatokBtn' style={{height: 20,paddingRight:3,display:'flex',position:'relative'}}>
+											<WarehouseDropRange
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												sortActive={sortActive}
+												adaptive={true}
+												width={dimensions.width1-15}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+											/>
+										</div>
+										<div className='rezervBtn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
+											<WarehouseDropInput 
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												adaptive={true}
+												width={dimensions.width2-4}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+											/>
+										</div>
+										<div className='otprBtn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
+											<WarehouseDropInput 
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												width={dimensions.width3-4}
+												adaptive={true}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+											/>
+										</div>
+										<div className='vozvratBtn' style={{height: 20,display:'flex',position:'relative'}}>
+											<WarehouseDropInput 
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												adaptive={true}
+												width={dimensions.width4-10}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+											/>
+										</div></>}
+									</div>
 								</th>
-								<th className="" style={{ paddingRight: '15px', position: 'relative' }}>
-									<div
-										style={{
-											width: 'calc(100% - 15px)',
-											background: '#9c9b9e',
-											height: 1,
-											bottom: 2,
-											left: 0,
-											position: 'absolute',
-										}}
-									></div>
+								<th style={{ textAlign: 'right', paddingRight: '10px', position: 'relative' }}>
+									<div style={{height: 20,visibility: `${switchMenu ? 'hidden': ''}`}}>
+
+									
+										<WarehouseDropInput 
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											translator={translator}
+											zIndex={true}
+											adaptive={false}
+											// width={dimensions.width3-4}
+											// adaptive={true}
+											sortActive={sortActive}
+											setSortActive={setSortActive}
+											treugolka={treugolka}
+										/>
+									</div>
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '15px', position: 'relative' }}>
-									<div
-										style={{
-											width: 'calc(100% - 15px)',
-											background: '#9c9b9e',
-											height: 1,
-											bottom: 2,
-											left: 0,
-											position: 'absolute',
-										}}
-									></div>
+								<th style={{ textAlign: 'right', paddingRight: '10px', position: 'relative' }}>
+									<div style={{height:20,visibility: `${switchMenu ? 'hidden': ''}` }}>
+										<WarehouseDropInput 
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											translator={translator}
+											zIndex={true}
+											adaptive={false}
+
+											// width={dimensions.width3-4}
+											// adaptive={true}
+											sortActive={sortActive}
+											setSortActive={setSortActive}
+											treugolka={treugolka}
+										/>
+									</div>
+									
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '15px', position: 'relative' }}>
-									<div
-										style={{
-											width: 'calc(100% - 15px)',
-											background: '#9c9b9e',
-											height: 1,
-											bottom: 2,
-											left: 0,
-											position: 'absolute',
-										}}
-									></div>
+								<th style={{ textAlign: 'right', paddingRight: '10px', position: 'relative' }}>
+									<div style={{height: 20 ,visibility: `${switchMenu ? 'hidden': ''}` }}>
+										<WarehouseDropInput 
+											setPodlozhka={setPodlozhka}
+											podlozhka={podlozhka}
+											translator={translator}
+											zIndex={true}
+											adaptive={false}
+
+											// width={dimensions.width3-4}
+											// adaptive={true}
+											sortActive={sortActive}
+											setSortActive={setSortActive}
+											treugolka={treugolka}
+										/>
+									</div>
+									
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '15px', position: 'relative' }}>
-									<div
-										style={{
-											width: 'calc(100% - 15px)',
-											background: '#9c9b9e',
-											height: 1,
-											bottom: 2,
-											left: 0,
-											position: 'absolute',
-										}}
-									></div>
-								</th>
-								<th className="" style={{ position: 'relative' }}>
-									<div
-										style={{
-											width: 'calc(100% - 10px)',
-											background: '#9c9b9e',
-											height: 1,
-											bottom: 2,
-											left: 0,
-											position: 'absolute',
-										}}
-									></div>
-								</th>
-								<th className="" style={{ position: 'relative' }}>
-									<div
-										style={{
-											width: 'calc(100% - 4px)',
-											background: '#9c9b9e',
-											height: 1,
-											bottom: 2,
-											left: 0,
-											position: 'absolute',
-										}}
-									></div>
-								</th>
-								<th className="" style={{ position: 'relative' }}>
-									<div
-										style={{
-											width: 'calc(100% - 4px)',
-											background: '#9c9b9e',
-											height: 1,
-											bottom: 2,
-											left: 0,
-											position: 'absolute',
-										}}
-									></div>
-								</th>
-								<th className="" style={{ position: 'relative' }}>
-									<div
-										style={{
-											width: '100%',
-											background: '#9c9b9e',
-											height: 1,
-											bottom: 2,
-											left: 0,
-											position: 'absolute',
-										}}
-									></div>
+								<th colSpan={4} style={{ position: 'relative' }}>
+									<div className='block-4-btn' style={{display:'flex', position:'absolute', top:0,right: 0,visibility: `${switchMenu ? 'hidden': ''}`}}>
+										{dimensions && <><div className='suma1Btn' style={{height: 20,paddingRight:3,display:'flex',position:'relative'}}>
+											{/* <WarehouseDropRange
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												sortActive={sortActive}
+												adaptive={true}
+												width={dimensions.widthsuma1}
+												setSortActive={setSortActive}
+												
+											/> */}
+											<WarehouseDropInput 
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												adaptive={true}
+												width={dimensions.widthsuma1-3}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+											/>
+										</div>
+										<div className='suma2Btn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
+											<WarehouseDropInput 
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												adaptive={true}
+												width={dimensions.widthsuma2-4}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+											/>
+										</div>
+										<div className='suma3Btn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
+											<WarehouseDropInput 
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												width={dimensions.widthsuma3-4}
+												adaptive={true}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+											/>
+										</div>
+										<div className='suma4Btn' style={{height: 20,display:'flex',position:'relative'}}>
+											<WarehouseDropInput 
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												translator={translator}
+												zIndex={true}
+												adaptive={true}
+												width={dimensions.widthsuma4}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+											/>
+										</div></>}
+									</div>
 								</th>
 							</tr>
-							<tr>
+							<tr ref={queryWidthTr}>
 								<th style={{ position: 'sticky', left: 0, background: 'white', zIndex: 2 }}></th>
 								<th style={{ paddingLeft: '12px', paddingRight: '3px' }} className="nal-ostatok">
 									<div
@@ -929,40 +1070,40 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											color: 'rgba(0,0,0,0.9)',
 										}}
 									>
-										{ostatok}
+										{pereschetiHeaders && pereschetiHeaders.ostatok}
 										{/* {formatNumber2(ostatok)} */}
 										{/* {ostatok} */}
-										<span style={{ paddingLeft: 3 }}>/</span>
+										<span style={{ paddingLeft: 3,zIndex:0 }}>/</span>
 									</div>
 								</th>
 								<th className="nal-rezerv" style={{ paddingRight: '4px' }}>
 									<div style={{ color: 'rgba(0,0,0,0.7)' }}>
 										{/* {formatNumber2(rezerv)} */}
-										{rezerv}
+										{pereschetiHeaders && pereschetiHeaders.rezerv}
 									</div>
 									<span></span>
 								</th>
 								<th className="nal-otpr" style={{ paddingRight: '4px' }}>
 									{/* <div style={{ color: 'rgba(0,0,0,0.7)'}}>{formatNumber2(otpr)}</div> */}
-									<div style={{ color: 'rgba(0,0,0,0.7)' }}>{otpr}</div>
+									<div style={{ color: 'rgba(0,0,0,0.7)' }}>{pereschetiHeaders && pereschetiHeaders.otpr}</div>
 									<span></span>
 								</th>
-								<th className="nal-vozvrat" style={{ paddingRight: '15px' }}>
-									<div style={{ color: 'rgba(0,0,0,0.7)' }}>{vozvrat}</div>
+								<th className="nal-vozvrat" style={{ paddingRight: '10px' }}>
+									<div style={{ color: 'rgba(0,0,0,0.7)' }}>{pereschetiHeaders && pereschetiHeaders.vozvrat}</div>
 									{/* <div style={{ color: 'rgba(0,0,0,0.7)'}}>{formatNumber2(vozvrat)}</div> */}
 									<span></span>
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '15px', color: 'rgba(0,0,0,0.9)' }}>
-									<div>{zakupka}</div>
+								<th style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}>
+									<div>{pereschetiHeaders && pereschetiHeaders.zakupka}</div>
 									{/* <div>{formatNumber(zakupka)}</div> */}
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '15px', color: 'rgba(0,0,0,0.9)' }}>
+								<th style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}>
 									{/* <div>{formatNumber(prodazha)}</div> */}
-									<div>{prodazha}</div>
+									<div>{pereschetiHeaders && pereschetiHeaders.prodazha}</div>
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '15px', color: 'rgba(0,0,0,0.9)' }}>
+								<th style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}>
 									{/* <div>{formatNumber(marzha)}</div> */}
-									<div>{marzha}</div>
+									<div>{pereschetiHeaders && pereschetiHeaders.marzha}</div>
 								</th>
 								<th className="summa-suma1">
 									<div
@@ -975,28 +1116,28 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										}}
 									>
 										{/* {formatNumber(suma1)} */}
-										{suma1}
+										{pereschetiHeaders && pereschetiHeaders.suma1}
 										<span style={{ paddingLeft: 3 }}>/</span>
 									</div>
 								</th>
 								<th className="summa-suma2">
 									<div style={{ paddingRight: '4px', color: 'rgba(0,0,0,0.7)' }}>
 										{/* {formatNumber(suma2)} */}
-										{suma2}
+										{pereschetiHeaders && pereschetiHeaders.suma2}
 									</div>
 									<span></span>
 								</th>
 								<th className="summa-suma3">
 									<div style={{ paddingRight: '4px', color: 'rgba(0,0,0,0.7)' }}>
 										{/* {formatNumber(suma3)} */}
-										{suma3}
+										{pereschetiHeaders && pereschetiHeaders.suma3}
 									</div>
 									<span></span>
 								</th>
 								<th className="summa-suma4">
 									<div style={{ color: 'rgba(0,0,0,0.7)' }}>
 										{/* {formatNumber(suma4)} */}
-										{suma4}
+										{pereschetiHeaders && pereschetiHeaders.suma4}
 									</div>
 									<span></span>
 								</th>
@@ -1018,10 +1159,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										index={index + getStart()}
 										// rowHeight={rowHeight}
 										// style={{ height: rowHeight }}
-										indexParent={index}
+										// indexParent={index}
 										// widthColum={widthColum}
 										key={index + getStart()}
-										start={getStart()}
+										// start={getStart()}
 										// rowHeight={rowHeight}
 										// setChecked={setChecked}
 										setLoadedLabelBlock={setLoadedLabelBlock}
@@ -1036,7 +1177,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										setPodlozhka={setPodlozhka}
 										// focusInput={focusInput}
 										// setFocusInput={setFocusInput}
-										setIndexInput={setIndexInput}
+										// setIndexInput={setIndexInput}
 										setLastIndex={setLastIndex}
 										lastIndex={lastIndex}
 										// setBtnMenu={setBtnMenu}
@@ -1058,8 +1199,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 
 						<tfoot>
 							<tr>
-								<td colSpan={18} style={{ height: 12 }}>
+								<td colSpan={18} style={{ height: 18 }}>
 									<div className="shadow-vertical-footer"></div>
+									<div style={{position:'absolute',bottom:0,left:0,height:8,width:'100%',background:'white'}}></div>
 								</td>
 							</tr>
 						</tfoot>
@@ -1069,7 +1211,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 				</ScrollBox>
 			</div>
 
-			<div onClick={clickScrollUp} className="btnUp">
+			<div ref={btnUp} onClick={clickScrollUp} className="btnUp">
 				<svg
 					width="20"
 					height="20"
@@ -1083,7 +1225,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					></path>
 				</svg>
 			</div>
-		</div>
+		</div>}
+		</>
 	);
 };
 

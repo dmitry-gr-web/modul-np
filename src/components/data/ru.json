@@ -56,6 +56,16 @@
 	},
 	"tooltipCount": {
 		"attribute": "Атрибутов в фильтре:<br>- найдено % <br>- выбрано %"
+	},
+	"tooltipRangeValue": {
+		"value": "Искать значение от:"
+	},
+	"tooltipRangeValue2": {
+		"value": "Искать значение до:"
+	},
+	"tooltipRange<0": {
+		"<0": "Искать меньше нуля:"
 	}
+	
 
 }

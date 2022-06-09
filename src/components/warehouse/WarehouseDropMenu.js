@@ -22,6 +22,7 @@ const WarehouseDropMenu = ({
 	// toggleSort,
 	setWidth21px,
 	width21px,
+	treugolka,
 	// activity,
 	// setActivity,
 	zIndex,
@@ -100,6 +101,8 @@ const WarehouseDropMenu = ({
 	function infinityClick(index, e) {
 		setPodlozhka(true);
 		document.querySelector('.contentScroll').style.overflow = 'hidden';
+		document.querySelector('.scrollbar').style.opacity = 0;
+		document.querySelector('.scrollbarHorizont').style.opacity = 0;
 		if (obj[index].attribute === 'all') {
 			obj.map((x) => (x.select = false));
 			obj[index].select = true;
@@ -107,6 +110,8 @@ const WarehouseDropMenu = ({
 			setPodlozhka(false);
 			setArrowToggle(false);
 			document.querySelector('.contentScroll').style.overflow = 'auto';
+			document.querySelector('.scrollbar').style.opacity = 1;
+			document.querySelector('.scrollbarHorizont').style.opacity = 1;
 			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 				x.classList.remove('hide-menu');
 			});
@@ -148,6 +153,8 @@ const WarehouseDropMenu = ({
 	function clickList(index, e) {
 		setPodlozhka(true);
 		document.querySelector('.contentScroll').style.overflow = 'hidden';
+		document.querySelector('.scrollbar').style.opacity = 0;
+		document.querySelector('.scrollbarHorizont').style.opacity = 0;
 		if (type === 'status') {
 			let newobj = obj.map((x, i) => {
 				if (i === index && x.attribute !== 'all') {
@@ -163,7 +170,10 @@ const WarehouseDropMenu = ({
 							setLabelForWidth(true); //melkie menu
 						}
 					} else {
-						setLabelForWidth(false); //menu width21px
+						if(setLabelForWidth){
+
+							setLabelForWidth(false); //menu width21px
+						}
 					}
 					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 						x.classList.add('hide-menu');
@@ -181,6 +191,8 @@ const WarehouseDropMenu = ({
 				setOpenMenu(false);
 				setPodlozhka(false);
 				document.querySelector('.contentScroll').style.overflow = 'auto';
+				document.querySelector('.scrollbar').style.opacity = 1;
+				document.querySelector('.scrollbarHorizont').style.opacity = 1;
 				setArrowToggle(false);
 				newobj[0].select = true;
 				if (adaptive) {
@@ -219,6 +231,8 @@ const WarehouseDropMenu = ({
 					setOpenMenu(false);
 					setPodlozhka(false);
 					document.querySelector('.contentScroll').style.overflow = 'auto';
+					document.querySelector('.scrollbar').style.opacity = 1;
+					document.querySelector('.scrollbarHorizont').style.opacity = 1;
 					return { ...x, select: false };
 				} else if (index !== 0 && i === 0) {
 					return { ...x, select: false };
@@ -234,6 +248,8 @@ const WarehouseDropMenu = ({
 				setPodlozhka(false);
 				setArrowToggle(false);
 				document.querySelector('.contentScroll').style.overflow = 'auto';
+				document.querySelector('.scrollbar').style.opacity = 1;
+				document.querySelector('.scrollbarHorizont').style.opacity = 1;
 				newobj[0].select = true;
 			}
 			setObj(newobj);
@@ -268,7 +284,7 @@ const WarehouseDropMenu = ({
 	const [activity, setActivity] = useState(false);
 	function menuOn(e) {
 		if (!podlozhka) {
-			console.log('start');
+			// console.log('start');
 			setValue('');
 			setArrowToggle(true);
 			// if(activity){
@@ -400,7 +416,7 @@ const WarehouseDropMenu = ({
 	function tooltipOn(e) {
 		const tooltipBlock = document.getElementById('tooltipBtn');
 		let posElement = e.currentTarget.getBoundingClientRect();
-		tooltipBlock.style.fontSize = '12px';
+		tooltipBlock.style.fontSize = '10px';
 		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
 			// tooltipBlock.innerText = e.target.innerText;
 			if (type === 'country' || type === 'status') {
@@ -414,21 +430,21 @@ const WarehouseDropMenu = ({
 		} else {
 			if (type === 'country') {
 				if (e.currentTarget.innerText === '🇺🇦') {
-					tooltipBlock.style.fontSize = '12px';
+					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'ukraine');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 				if (e.currentTarget.innerText === '🇷🇺') {
-					tooltipBlock.style.fontSize = '12px';
+					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'russia');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 				if (e.currentTarget.innerText === '🇹🇷') {
-					tooltipBlock.style.fontSize = '12px';
+					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'turkey');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 'px';
@@ -436,28 +452,28 @@ const WarehouseDropMenu = ({
 				}
 			} else if (type === 'currency') {
 				if (e.currentTarget.innerText === '$') {
-					tooltipBlock.style.fontSize = '12px';
+					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'dollar');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 				if (e.currentTarget.innerText === '€') {
-					tooltipBlock.style.fontSize = '12px';
+					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'eur');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 				if (e.currentTarget.innerText === '₴') {
-					tooltipBlock.style.fontSize = '12px';
+					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'uah');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 				if (e.currentTarget.innerText === '₽') {
-					tooltipBlock.style.fontSize = '12px';
+					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'rub');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 'px';
@@ -466,7 +482,7 @@ const WarehouseDropMenu = ({
 			}
 
 			if (e.currentTarget.className === 'countBlock') {
-				tooltipBlock.style.fontSize = '12px';
+				// tooltipBlock.style.fontSize = '12px';
 				// tooltipBlock.innerHTML = `${
 				// 	type === 'attribute' ? 'Атрибутов' : 'Товаров'
 				// } в фильтре:<br>- найдено ${e.currentTarget.children[0].innerText}<br>- выбрано ${
@@ -484,7 +500,7 @@ const WarehouseDropMenu = ({
 				tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 			}
 			if (e.currentTarget.closest('.sortBtn')) {
-				tooltipBlock.style.fontSize = '12px';
+				// tooltipBlock.style.fontSize = '12px';
 				// console.log('asdsadas')
 				tooltipBlock.innerHTML = `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
 				tooltipBlock.style.left = posElement.x + 'px';
@@ -522,6 +538,8 @@ const WarehouseDropMenu = ({
 		}
 		setSortActive(!sortActive);
 		document.querySelector('.contentScroll').style.overflow = 'scroll';
+		document.querySelector('.scrollbar').style.opacity = 1;
+		document.querySelector('.scrollbarHorizont').style.opacity = 1;
 		setTimeout(() => {
 			setActivity(true);
 			setArrowToggle(true);
@@ -560,19 +578,24 @@ const WarehouseDropMenu = ({
 			});
 		}
 	}, [activity, sortActive]);
+	// useEffect(()=> {
+	// 	document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+	// 		x.classList.add('hide-arrow');
+	// 	});
+	// },[])
 	return (
 		<div
-			style={adaptive ? { width: 22, transition: 'width 0.3s' } : zIndex ? { zIndex: 1 } : {}}
+			style={adaptive ? { width: 22, transition: 'width 0.3s', padding: '0 3px' } : zIndex ? { zIndex: 1 } : {}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
 			className={`warehouse-dropmenu ${
 				arrowToggle ||
 				activity ||
 				(refStatusText.current?.innerHTML !== '' && adaptive) ||
-				(width21px === true && !switchMenu)
+				(width21px === true && !switchMenu) || !treugolka
 					? 'hide-arrow'
 					: ''
-			}`}
+			} ${adaptive && 'adaptive'}`}
 			ref={warehouse}
 		>
 			{inputOn ? (
@@ -658,7 +681,7 @@ const WarehouseDropMenu = ({
 					></path>
 				</svg>
 			</div>
-			<span className="underline"></span>
+			<span className="underline" style={adaptive && {left:'3px', width: 'calc(100% - 6px)' }}></span>
 			{/* {console.log(openMenu)} */}
 
 			{type === 'name' || type === 'attribute' ? (
@@ -707,6 +730,7 @@ const WarehouseDropMenu = ({
 			) : (
 				<div
 					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+					style={adaptive && {width: 'calc(100% - 6px)'}}
 				>
 					<SimpleBar
 						// style={adaptive ? { transitionDelay: '0.1s' } : {}}
@@ -715,28 +739,6 @@ const WarehouseDropMenu = ({
 						forceVisible="x"
 						// className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
 					>
-						{/* {inputOn ? (
-						obj
-							.filter((x) => x.attribute.toLowerCase().includes(value.toLowerCase()))
-							.map((x, index) => (
-								<div
-									key={index}
-									onMouseEnter={tooltipOn}
-									onMouseLeave={tooltipOff}
-									className={x.select ? 'select-btn list' : 'list'}
-									onClick={(e) => clickList(x.id, e)}
-								>
-									<span
-										dangerouslySetInnerHTML={{
-											__html: searchLine(
-												translator.getTranslation('btnAll', x.attribute) ?? x.attribute,
-												value
-											),
-										}}
-									></span>
-								</div>
-							))
-					) : ( */}
 						{openMenu &&
 							obj.map((x, index) => (
 								<div

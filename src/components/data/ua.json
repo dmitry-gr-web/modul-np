@@ -56,5 +56,14 @@
 	},
 	"tooltipCount": {
 		"attribute": "Атрибутів у фільтрі:<br>- знайдено % <br>- обрано %"
+	},
+	"tooltipRangeValue": {
+		"value": "Шукати значення вид:"
+	},
+	"tooltipRangeValue2": {
+		"value": "Шукати значення до:"
+	},
+	"tooltipRange<0": {
+		"<0": "Шукати менше нуля:"
 	}
 }

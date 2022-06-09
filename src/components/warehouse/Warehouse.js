@@ -7,13 +7,26 @@ import Suppliers from './Suppliers';
 import AttributeBlock from './AttributeBlock';
 import ProductCard from './ProductCard';
 import translator from '../data/translator';
-import { useFetch } from '../data/useFetch';
+// import { useFetch } from '../data/useFetch';
 // const WarehouseBlock = lazy(() => import('./WarehouseBlock'));
 const Warehouse = () => {
 	// let newarr = [...dataWarehouse, ...dataWarehouse];
 	// const ProductCard = React.createContext();
-	const {data,error,isLoading} = useFetch('');
-	console.log(data)
+	// const {data,error,isLoading} = useFetch('http://192.168.0.197:3005/folders', {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		'Accept': 'application/json',
+	// 		'Content-Type': 'application/json'
+	// 	},
+	// 	body: JSON.stringify({
+	// 		"query": {},
+	// 		"start": 10,
+	// 		// "start": props.folder.at(-1)?.id,
+	// 		"end": 20
+	// 	})
+	// });
+	// console.log(data)
+	// console.log(data)
 	const [toggleCard, setToggleCard] = useState(false);
 	// console.log(dataWarehouse)
 	// const obj = [...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse]
@@ -118,8 +131,8 @@ const Warehouse = () => {
 						</ul>
 					</nav>
 				</aside>
-				{isLoading ? (<div className='loading'><Preloaded/></div>) : 
-					ul[0].select && (
+				{
+					ul[0].select && 
 						// <Suspense fallback={<div>Loading</div>}>
 							<WarehouseBlock
 							setToggleCard={setToggleCard}
@@ -129,11 +142,11 @@ const Warehouse = () => {
 							translator={translator}
 							/>
 						// {/* </Suspense> */}
-					)
+					
 				}
-		
-				{ul[1].select && <AttributeBlock />}
-				{ul[2].select && <Suppliers />}
+				{/* {error && <div style={{fontSize: 100}}>PIZDA {error}</div>} */}
+				{ul[1].select && <AttributeBlock translator={translator}/>}
+				{ul[2].select && <Suppliers translator={translator}/>}
 				{ul[3].select && <div />}
 
 				{toggleCard && (
