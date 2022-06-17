@@ -1,6 +1,6 @@
 import React,{useState,useRef,useEffect} from 'react'
 
-const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,setSortActive,translator,width,adaptive}) => {
+const WarehouseDropInput = ({treugolka,setHideMenu, hideMenu,podlozhka,setPodlozhka,zIndex,sortActive,setSortActive,translator,width,adaptive}) => {
     const [openMenu, setOpenMenu] = useState(false);
     const warehouse = useRef();
     const [arrowToggle, setArrowToggle] = useState(false);
@@ -14,16 +14,27 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
         setInput1('0');
         setInput2('∞');
         setOpenMenu(false);
+		setPodlozhka(false);
+		// if(openMenu) {
+		// }
+		setHideMenu(false);
+		// setHideMenu(false);
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
     }
 
     
     function inputChange (e) {
         setAll(false);
+		setHideMenu(true);
+
         setPodlozhka(true);
-        document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-            x.classList.add('hide-menu');
-        });
-        e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal').style.opacity = 0;
+        // document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+        //     x.classList.add('hide-menu');
+        // });
+        // e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
         let temp = e.target.value.replace(/[^0-9]/g, '');
         e.target.value = temp.length === 0 ? ' ' : temp;
         e.target.style.width = e.target.value.length * 7 + 'px';
@@ -32,10 +43,13 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
     function inputChange2 (e) {
         setAll(false);
         setPodlozhka(true);
-        document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-            x.classList.remove('hide-menu');
-        });
-        e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+		setHideMenu(true);
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal').style.opacity = 0;
+        // document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+        //     x.classList.remove('hide-menu');
+        // });
+        // e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
         let temp = e.target.value.replace(/[^0-9]/g, '');
         e.target.value = temp.length === 0 ? ' ' : temp;
         e.target.style.width = e.target.value.length * 7 + 'px';
@@ -47,11 +61,12 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
 		if (!podlozhka) {
 			console.log('start');
 			// setValue('');
+			// setHideMenu(false);
 			setArrowToggle(true);
 			setOpenMenu(true);
             e.currentTarget.style.zIndex = '9999';
         
-            document.querySelector('.contentScroll').style.overflow = 'hidden';	
+            document.querySelector('.contentScroll').style.overflowY = 'hidden';	
 			// document.querySelector('.scrollbar').style.opacity = 0;
 			// document.querySelector('.scrollbarHorizont').style.opacity = 0;
             // if (!podlozhka) {
@@ -96,7 +111,7 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
 		} else {
 			setOpenMenu(false);
             e.currentTarget.style.zIndex = '1';
-            document.querySelector('.contentScroll').style.overflow = 'auto';
+            document.querySelector('.contentScroll').style.overflowY = 'auto';
 			// document.querySelector('.scrollbar').style.opacity = 1;
 			// document.querySelector('.scrollbarHorizont').style.opacity = 1;
             // if(e.currentTarget.offsetWidth === 51) {
@@ -116,15 +131,17 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
 		// } else if (!width21px && !switchMenu && !adaptive && !activity) {
 		// 	setWidth21px(false);
 		// }
+		setHideMenu(false);
+
 		if (arrowActive === 'down') {
 			setArrowActive('up');
 		} else if (arrowActive === 'up') {
 			setArrowActive('down');
 		}
 		setSortActive(!sortActive);
-		document.querySelector('.contentScroll').style.overflow = 'scroll';
-		document.querySelector('.scrollbar').style.opacity = 1;
-		document.querySelector('.scrollbarHorizont').style.opacity = 1;
+		document.querySelector('.contentScroll').style.overflowY = 'scroll';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
 
 		setTimeout(() => {
 			setActivity(true);
@@ -135,9 +152,9 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
 				setArrowActive('down');
 			}
 		}, 0);
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.remove('hide-menu');
-		});
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.remove('hide-menu');
+		// });
 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
 			x.classList.remove('smallsort');
 		});
@@ -152,6 +169,7 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
 		if (podlozhka) {
 		} else {
 			setOpenMenu(false);
+			// setHideMenu(false);
 		}
 		if (!podlozhka && !activity) {
 			setArrowActive('down');
@@ -172,7 +190,7 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
 	}, [sortActive]);
     useEffect(()=> {
         if(openMenu) {
-            let width = warehouse.current.offsetWidth;
+            // let width = warehouse.current.offsetWidth;
             warehouse.current.querySelector('.inputFirst').style.width = warehouse.current.querySelector('.inputFirst').value.length * 7 + 'px'
 			warehouse.current.querySelector('.inputSecond').style.width = warehouse.current.querySelector('.inputSecond').value.length * 7 + 'px'
         }
@@ -215,13 +233,13 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 		}
 		if (e.currentTarget.querySelector('.inputFirst')){
-			tooltipBlock.innerHTML = translator.getTranslation('tooltipRangeValue', 'value' );
+			tooltipBlock.innerHTML = translator.getTranslation('tooltipRange', 'value' );
 			tooltipBlock.style.left = posElement.x - tooltipBlock.offsetWidth + 'px';
 			tooltipBlock.style.top = posElement.y + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 		}
 		if (e.currentTarget.querySelector('.inputSecond')){
-			tooltipBlock.innerHTML = translator.getTranslation('tooltipRangeValue2', 'value' );
+			tooltipBlock.innerHTML = translator.getTranslation('tooltipRange', 'value2' );
 			tooltipBlock.style.left = posElement.x - tooltipBlock.offsetWidth + 'px';
 			tooltipBlock.style.top = posElement.y + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
@@ -237,7 +255,7 @@ const WarehouseDropInput = ({treugolka,podlozhka,setPodlozhka,zIndex,sortActive,
 				}
 				onMouseEnter={menuOn}
 				onMouseLeave={menuOff}
-				className={`warehouse-dropmenu ${arrowToggle || activity || !treugolka ? 'hide-arrow' : ''}`}
+				className={`warehouse-dropmenu ${arrowToggle || activity || !treugolka && !podlozhka ? 'hide-arrow' : ''} ${hideMenu && !openMenu ? 'hide-menu': ""}`}
 				ref={warehouse}
 			>
 				<div className="range-result">{!all && `${input1} - ${input2}`}</div>

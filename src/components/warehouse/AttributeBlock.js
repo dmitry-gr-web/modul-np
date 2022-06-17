@@ -1,34 +1,43 @@
-import React,{useEffect,useLayoutEffect,useRef,useState} from 'react'
+import React,{useEffect,useLayoutEffect,useRef,useState,useMemo} from 'react'
 import {SvGBtnPlus,Preloaded} from '../../img/svg-pack';
 import _, { set } from 'lodash';
 import ScrollBox from './reactScroll';
-import {dataAttribute} from '../data/dataAttribute';
+// import {dataAttribute} from '../data/dataAttribute';
 import WarehouseDropMenu from './WarehouseDropMenu';
 import WarehouseInput from './WarehouseInput';
 import { useFetch } from '../data/useFetch';
-
+import SwitchBtn from './SwitchBtn';
+import MaxaScroll from './MaxaScroll';
 let hover;
-const AttributeBlock = ({translator}) => {
-	const {data,error,isLoading} = useFetch('http://192.168.0.197:3005/goodAttributes', {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			"query": {},
-			// "start": 10,
-			// "start": props.folder.at(-1)?.id,
-			"end": 20
-		})
-	});
+const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
+	const {data,error,isLoading} = useFetch(
+	// 	'http://192.168.0.197:3005/goodAttributes', {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		'Accept': 'application/json',
+	// 		'Content-Type': 'application/json'
+	// 	},
+	// 	body: JSON.stringify({
+	// 		"query": {},
+	// 		// "start": 10,
+	// 		// "start": props.folder.at(-1)?.id,
+	// 		"end": 20
+	// 	})
+	// }
+	);
+
 	console.log(data)
-	const [objAttribute,setObjAttribute] = useState(dataAttribute);
+	const [lastIndex, setLastIndex] = useState(0);
+	const [hideMenu, setHideMenu] = useState(false);
+
+
 	const [podlozhka, setPodlozhka] = useState(false);
 	const rootRef = useRef();
 	const [start, setStart] = useState(0);
 	let rowHeight = 18;
+	// if (start >= data.length + getStart()){
 
+	// }
 	const [visibleRows, setVisible] = useState(
 		Math.floor((document.body.clientHeight * 1.2 - 170) / rowHeight)
 	);
@@ -67,7 +76,7 @@ const AttributeBlock = ({translator}) => {
 		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
 			document.querySelector('.first-tab-body').classList.add('hoverOff');
 		}
-
+		
 		hover = setTimeout(() => {
 			document.querySelector('.first-tab-body').classList.remove('hoverOff');
 		}, 400);
@@ -75,13 +84,15 @@ const AttributeBlock = ({translator}) => {
 	}
 	function clickPodlozhka() {
 		setPodlozhka(false);
+		setHideMenu(false);
 		// setFlagSwitchMenu(false);
 		// setSwitchMenu(false);
-
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
 		document.querySelector('.contentScroll').style.overflow = 'auto';
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.remove('hide-menu');
-		});
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.remove('hide-menu');
+		// });
 		// document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
 		// 	x.style.zIndex = 1;
 		// });
@@ -126,14 +137,68 @@ const AttributeBlock = ({translator}) => {
 		updateHover();
 		// setSwitchMenu(false);
 	}
-	const [percentScroll, setPercentScroll] = useState(0.87);
-
-	useEffect(() => {
-		
-			if(rootRef.current?.content.offsetHeight < 614) {
-				setPercentScroll(0.81);
+	
+	function clickTr(e,index) {
+		// e.preventDefault();
+		// e.stopPropagation();
+		// console.log(e.currentTarget)
+		if (e.currentTarget && !objAttribute[index].lock) {
+			let newobj = [...objAttribute];
+			if (e.ctrlKey || e.metaKey) {
+				e.preventDefault();
+				e.stopPropagation();
+				newobj[index].select = !newobj[index].select;
+			} else if (e.shiftKey) {
+				e.preventDefault();
+				e.stopPropagation();
+				newobj = newobj.map((x) => {
+					return { ...x, select: false };
+				});
+				if (lastIndex < index) {
+					newobj.slice(lastIndex , index + 1).map((x, i) => {
+						if (x.lock) {
+							x.select = false;
+						} else {
+							x.select = true;
+						}
+					});
+				} else {
+					newobj.slice(index , lastIndex + 1).map((x, i) => {
+						if (x.lock) {
+							x.select = false;
+						} else {
+							x.select = true;
+						}
+					});
+				}
+			} else {
+				// e.preventDefault();
+				setLastIndex(index);
+				e.stopPropagation();
+				newobj.map((x, i) => {
+					if (i !== index) {
+						x.select = false;
+					}
+				});
+				// if (newobj[index].select !== true) {
+				// 	newobj.map((x) => (x.select = !newobj[index].select));
+				// }
+				// if(newobj[index].select !== undefined)	
+				newobj[index].select = !newobj[index].select;
+				// else {}
+			
 			}
-	}, [objAttribute]);
+			setObjAttribute([...newobj]);
+		}
+	}
+	// const [percentScroll, setPercentScroll] = useState(0.87);
+
+	// useEffect(() => {
+		
+	// 		if(rootRef.current?.content.offsetHeight < 614) {
+	// 			setPercentScroll(0.81);
+	// 		}
+	// }, [objAttribute]);
 	function searchLine(text, value) {
 		if (value !== '') {
 			let re = new RegExp(value, 'gui');
@@ -153,41 +218,62 @@ const AttributeBlock = ({translator}) => {
 	// 	document.querySelector('.scrollbarHorizont').style.opacity = 0;
 	// }
 	const [sortActive, setSortActive] = useState(false);
-	const SwitchBtn = ({status,index}) => {
-		function switchBtn(e) {
-			e.stopPropagation();
-				let temp = (getStart() < 0 ? 0 : getStart());
-				console.log(index + temp);
-				// let newobj = [...objAttribute];
-				objAttribute[index + temp].status = !objAttribute[index + temp].status;
-				setObjAttribute([...objAttribute]);
-				// console.log(objProduct);
-			
-			
+	const [treugolka, setTreugolka] = useState(false);
+	// export default React.memo(SwitchBtn);
+	const [selectAll, setSelectAll] = useState(false);
+
+	useEffect(() => {
+		function clickDocument(e) {
+			if (!e.target.closest('.warehouse-table')) {
+				setSelectAll(false);
+				let newobj = [...objAttribute];
+				newobj.map((x) => (x.select = false));
+				setObjAttribute(newobj);
+			}
 		}
-		return (
-			<label className="switch-btn-warehouse">
-				<input
-					type="checkbox"
-					className="status-all"
-					onChange={switchBtn}
-					// defaultChecked={objProduct[index].status.all}
-					checked={status}
-				/>
-				<span className="slider round"></span>
-			</label>
-		)
-	}
-  	return (
+		if (!selectAll) {
+			document.addEventListener('keydown', function (e) {
+				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+					e.preventDefault();
+					setSelectAll(true);
+					let newobj = [...objAttribute];
+					newobj.map((x) => {
+						if (x.lock) {
+							return (x.select = false);
+						} else {
+							return (x.select = true);
+						}
+					});
+					setObjAttribute(newobj);
+					// console.log('asdasdasd');
+				}
+			});
+		}
+		document.addEventListener('click', clickDocument);
+
+		return () => {
+			document.removeEventListener('click', clickDocument);
+		};
+	}, [selectAll]);
+	console.log(getStart())
+	return (
 		<>
 		{isLoading ? (<div className='loading'><Preloaded/></div>) : (
 			<div className="warehouse-products">
-					<div className="warehouse-products-title">
+					{/* <div className="warehouse-products-title">
 						Атрибуты
 						<button>
 							<SvGBtnPlus />
 						</button>
+					</div> */}
+					<div className="warehouse-products-title">
+						<hr/>
+						<span>{translator.getTranslation('warehouse', 'attributes')}</span>
+						<button>
+							<SvGBtnPlus />
+						</button>
 					</div>
+					<div className="shadow-right"></div>
 					<div
 						style={{
 							position: 'relative',
@@ -196,18 +282,27 @@ const AttributeBlock = ({translator}) => {
 							height:  'calc(100vh - 216px)',
 							height:  'calc(100vh - 190px)',
 						}}
+						className='warehouseAttributeBlock'
 					>
-						<ScrollBox
+						{/* <ScrollBox
 							ref={rootRef}
 							// scrollVertMinus={0.07}
 							percent={percentScroll}
 							scroll={_.throttle(onScroll, 500)}
 							color="rgba(0, 0, 0, 0.3)"
-						>
+							setTreugolka={setTreugolka}
+						> */}
+							<MaxaScroll
+								setTreugolka={setTreugolka}
+								updateHover={updateHover}
+								podlozhka={podlozhka}
+								infiniteScroll={_.throttle(onScroll, 500)}
 			
+							>
 
 							<table
 								tabIndex={-1}
+						
 								// onMouseEnter={showScrollbar}
 								// onMouseLeave={hideScrollbar}
 								// style={{ width: '100%' }}
@@ -220,7 +315,7 @@ const AttributeBlock = ({translator}) => {
 												<div
 													className="warehouse-podlozhka"
 													style={{
-														width: '100%',
+														width: '100vw',
 														height: document.body.clientHeight + 'px',
 														position: 'absolute',
 														left: 0,
@@ -234,7 +329,8 @@ const AttributeBlock = ({translator}) => {
 									</tr>
 
 									<tr>
-										<th style={{ paddingLeft: '12px', paddingRight: '15px' }}>
+										<th></th>
+										<th style={{ paddingRight: '15px' }}>
 											Статус
 										</th>
 										<th style={{ paddingRight: '15px' }}>
@@ -248,7 +344,8 @@ const AttributeBlock = ({translator}) => {
 										</th>
 									</tr>
 									<tr>
-										<th style={{paddingLeft:12,paddingRight: '15px', minWidth:51}}>
+										<th></th>
+										<th style={{paddingRight: '15px', minWidth:51}}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
@@ -261,6 +358,9 @@ const AttributeBlock = ({translator}) => {
 												objProduct={objAttribute}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
+												treugolka={treugolka}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
 												// setSwitchMenu={setSwitchMenu}
 												// switchMenu={switchMenu}
 												// setFlagSwitchMenu={setFlagSwitchMenu}
@@ -275,6 +375,8 @@ const AttributeBlock = ({translator}) => {
 												bottom: 2,
 												left: 0,
 												position: 'absolute',
+												opacity: `${!hideMenu ? '1': '0'}`,
+												transition: 'opacity 0.2s'
 												}}
 											></div>
 										</th>
@@ -285,6 +387,8 @@ const AttributeBlock = ({translator}) => {
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												translator={translator}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
 											/>
 										</th>
 										<th>
@@ -300,6 +404,9 @@ const AttributeBlock = ({translator}) => {
 															// switchMenu={switchMenu}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
+												treugolka={treugolka}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
 															// setWidth21px={setWidth21px}
 															// setLabelForWidth={setLabelForWidth}
 											/>
@@ -317,12 +424,23 @@ const AttributeBlock = ({translator}) => {
 								<tbody className="first-tab-body">
 									<tr style={{ height: getTopHeight() }}></tr>
 									{objAttribute.length > 0 &&
-										objAttribute.slice(getStart(), getStart() + visibleRows +1).map((x, index) => (
-											<tr key={index+getStart()}>
-												<td style={{paddingLeft:12,paddingRight:15}}><SwitchBtn status={x.status} index={index}/></td>
-												<td style={{paddingRight:15}}>{x.product}</td>
-												<td style={{paddingRight:20}}>{x.id}</td>
-												<td>{x.attribute}</td>
+										objAttribute.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
+											<tr onClick={(e) => clickTr(e,(index + (getStart() < 0 ? 0 : getStart())))}
+											className={
+												objAttribute[index + (getStart() < 0 ? 0 : getStart())].select
+													? 'select speed hoverAttributeBlock'
+													: objAttribute[index + (getStart() < 0 ? 0 : getStart())].lock
+													? 'lockOrder speed hoverAttributeBlock'
+													: 'speed hoverAttributeBlock'
+											}
+											key={index+getStart()}>
+												<td><div className='stickyBeforeBody'></div></td>
+												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objAttribute} setData={setObjAttribute} getStart={getStart} index={index}/></td>
+												<td style={{paddingRight:15, color: `rgba(0,0,0,0.4)`}}>{x.product}</td>
+												<td style={{paddingRight:20,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.id}</td>
+												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, maxWidth: 500, overflow: 'hidden',textOverflow:'ellipsis'}}>
+													<input style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`}} className='attributeInput' value={x.attribute}/>
+												</td>
 											</tr>
 										))}
 
@@ -337,11 +455,11 @@ const AttributeBlock = ({translator}) => {
 									</tr>
 								</tfoot>
 							</table>
-						</ScrollBox>
+							</MaxaScroll>
+						{/* </ScrollBox> */}
 					</div>
 					<div ref={btnUp} onClick={clickScrollUp} className="btnUp">
 						<svg
-							width="20"
 							height="20"
 							viewBox="0 0 12 12"
 							fill="none"

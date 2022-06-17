@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from 'react';
 import './range.scss';
-const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
+const WarehouseDropRange = ({hideMenu,setHideMenu,treugolka,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
 	let arr = [
 		'0',
 		'1',
@@ -112,7 +112,9 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 	const [maxInput, setMaxInput] = useState('');
 	function rangeInput(e) {
 		setDivInput(true);
-
+		setHideMenu(true);
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal ').style.opacity = 0;
 			// e.target.value = e.target.value.replace(/[^0-9]/g, '');
 			let temp = e.target.value.replace(/[^0-9]/g, '');
 			e.target.value = temp.length === 0 ? ' ' : temp;
@@ -141,6 +143,9 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 	}
 	function rangeInput2(e) {
 		setDivInput2(true);
+		setHideMenu(true);
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal ').style.opacity = 0;
 		let temp = e.target.value.replace(/[^0-9]/g, '');
 		e.target.value = temp.length === 0 ? ' ' : temp;
 		e.target.style.width = e.target.value.length * 7 + 'px';
@@ -168,12 +173,15 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 		setDivInput(false);
 		setDivInput2(false);
 		setPodlozhka(true);
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.add('hide-menu');
-		});
+		setHideMenu(true);
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal ').style.opacity = 0;
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.add('hide-menu');
+		// });
 		e.currentTarget.querySelector('input').style.width = e.currentTarget.querySelector('input').value.length * 7 + 'px';
 		e.currentTarget.querySelector('input').focus();
-		e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+		// e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		let wDelta = e.deltaY > 0 ? 'down' : 'up';
 		if (e.target.classList.contains('range_min') && wDelta === 'down' && minRange < maxRange && minRange !== max - 1 ) {
 			e.target.offsetParent.querySelector('.minBG').style.width =
@@ -254,12 +262,15 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 	}, [maxRange, minRange]);
 	function inputKeyUp(e) {
 		setPodlozhka(true);
+		setHideMenu(true);
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.add('hide-menu');
-		});
-		e.currentTarget.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal ').style.opacity = 0;
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.add('hide-menu');
+		// });
+		// e.currentTarget.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		if (38 === e.keyCode) {
 			e.preventDefault();
 			setDivInput(false);
@@ -279,12 +290,15 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 	}
 	function inputKeyDown(e) {
 		setPodlozhka(true);
+		setHideMenu(true);
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.add('hide-menu');
-		});
-		e.currentTarget.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal ').style.opacity = 0;
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.add('hide-menu');
+		// });
+		// e.currentTarget.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		if (38 === e.keyCode) {
 			e.preventDefault();
 			setDivInput2(false);
@@ -315,21 +329,25 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 			rangesData[0].select = true;
 			rangesData[1].select = false;
 			resultRef.current.innerHTML = '';
-			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-				// x.style.visibility = 'visible';
-				x.classList.remove('hide-menu');
-			});
+			// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+			// 	// x.style.visibility = 'visible';
+			// 	x.classList.remove('hide-menu');
+			// });
 			setArrowToggle(false);
-			document.querySelector('.contentScroll').style.overflow = 'auto';
-			document.querySelector('.scrollbar').style.opacity = 1;
-			document.querySelector('.scrollbarHorizont').style.opacity = 1;
+			document.querySelector('.contentScroll').style.overflowY = 'auto';
+			document.querySelector('.track-vertical').style.opacity = 1;
+            document.querySelector('.track-horizontal').style.opacity = 1;
 			// document.querySelector('.warehouse-table .simplebar-content-wrapper').style.overflow = 'scroll';
 			setOpenMenu(false);
 			setPodlozhka(false);
+			setHideMenu(false);
 		}
 		if (index === 1) {
+			setHideMenu(true);
 			console.log('0');
 			resultRef.current.innerHTML = '< 0';
+			document.querySelector('.track-vertical').style.opacity = 0;
+			document.querySelector('.track-horizontal ').style.opacity = 0;
 			rangesData[0].select = false;
 			rangesData[1].select = true;
 		}
@@ -390,7 +408,7 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 			setOpenMenu(true);
 			setArrowToggle(true);
 			e.currentTarget.style.zIndex = '9999';
-			document.querySelector('.contentScroll').style.overflow = 'hidden';	
+			document.querySelector('.contentScroll').style.overflowY = 'hidden';	
 			// document.querySelector('.scrollbar').style.opacity = 0;
 			// document.querySelector('.scrollbarHorizont').style.opacity = 0;		
 		}
@@ -401,7 +419,7 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 		} else {
 			setOpenMenu(false);
 			e.currentTarget.style.zIndex = '1';
-			document.querySelector('.contentScroll').style.overflow = 'auto';
+			document.querySelector('.contentScroll').style.overflowY = 'auto';
 			// document.querySelector('.scrollbar').style.opacity = 1;
 			// document.querySelector('.scrollbarHorizont').style.opacity = 1;
 			if (activity) {
@@ -450,15 +468,16 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 		// } else if (!width21px && !switchMenu && !adaptive && !activity) {
 		// 	setWidth21px(false);
 		// }
+		setHideMenu(false);
 		if (arrowActive === 'down') {
 			setArrowActive('up');
 		} else if (arrowActive === 'up') {
 			setArrowActive('down');
 		}
 		setSortActive(!sortActive);
-		document.querySelector('.contentScroll').style.overflow = 'scroll';
-		document.querySelector('.scrollbar').style.opacity = 1;
-		document.querySelector('.scrollbarHorizont').style.opacity = 1;
+		document.querySelector('.contentScroll').style.overflowY = 'scroll';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
 
 		setTimeout(() => {
 			setActivity(true);
@@ -469,9 +488,9 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 				setArrowActive('down');
 			}
 		}, 0);
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.remove('hide-menu');
-		});
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.remove('hide-menu');
+		// });
 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
 			x.classList.remove('smallsort');
 		});
@@ -499,19 +518,19 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 		}
 		if (e.currentTarget.querySelector('.inputDataMin')){
-			tooltipBlock.innerHTML = translator.getTranslation('tooltipRangeValue', 'value' );
+			tooltipBlock.innerHTML = translator.getTranslation('tooltipRange', 'value' );
 			tooltipBlock.style.left = posElement.x - tooltipBlock.offsetWidth + 'px';
 			tooltipBlock.style.top = posElement.y + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 		}
 		if (e.currentTarget.querySelector('.inputDataMax')){
-			tooltipBlock.innerHTML = translator.getTranslation('tooltipRangeValue2', 'value' );
+			tooltipBlock.innerHTML = translator.getTranslation('tooltipRange', 'value2' );
 			tooltipBlock.style.left = posElement.x - tooltipBlock.offsetWidth + 'px';
 			tooltipBlock.style.top = posElement.y + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 		}
 		if (e.currentTarget.innerText === '< 0'){
-			tooltipBlock.innerHTML = translator.getTranslation('tooltipRange<0', '<0' );
+			tooltipBlock.innerHTML = translator.getTranslation('tooltipRange', '<0' );
 			tooltipBlock.style.left = posElement.x - tooltipBlock.offsetWidth + 'px';
 			tooltipBlock.style.top = posElement.y + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
@@ -541,8 +560,8 @@ const WarehouseDropRange = ({treugolka,setSortActive,sortActive, setPodlozhka, p
 				// className={`warehouse-dropmenu ranges`}
 				className={`warehouse-dropmenu ranges ${
 					arrowToggle ||
-					activity || !treugolka ? 'hide-arrow' : ''
-				}`}
+					activity || !treugolka && !podlozhka ? 'hide-arrow' : ''
+				} ${hideMenu && !openMenu ? 'hide-menu': ""}`}
 				ref={warehouse}
 			>
 				<div ref={resultRef} className="range-result">

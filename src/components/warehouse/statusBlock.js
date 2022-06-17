@@ -1,7 +1,7 @@
 import React from 'react';
 
-const StatusBlock = ({objProduct, index , setObjProduct}) => {
-    function switchBtn(e) {
+const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff }) => {
+	function switchBtn(e) {
 		e.stopPropagation();
 		if (e.target.className === 'status-all') {
 			let newobj = [...objProduct];
@@ -73,11 +73,25 @@ const StatusBlock = ({objProduct, index , setObjProduct}) => {
 				<input
 					type="checkbox"
 					className="status-crm"
-					onChange={switchBtn}
+					onChange={objProduct[index].lock ? () => { } : switchBtn}
 					// defaultChecked={objProduct[index].status.crm}
 					checked={objProduct[index].status.crm}
 				/>
-				<span className="slider round"></span>
+				<span className="slider round" onMouseEnter={objProduct[index].lock ? () => { } : (e) => {
+					tooltipOn(
+						e,
+						e.target.offsetParent.children[0].checked
+							? 'Заблокировать товар'
+							: 'Разблокировать товар'
+					);
+				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? () => { } : (e) => {
+					tooltipOn(
+						e,
+						e.target.offsetParent.children[0].checked
+							? 'Заблокирован'
+							: 'Разблокирован'
+					);
+				}}></span>
 			</label>
 
 			<label
@@ -87,11 +101,25 @@ const StatusBlock = ({objProduct, index , setObjProduct}) => {
 				<input
 					type="checkbox"
 					className="status-rozetka"
-					onChange={switchBtn}
+					onChange={objProduct[index].lock ? () => { } : switchBtn}
 					// defaultChecked={objProduct[index].status.rozetka}
 					checked={objProduct[index].status.rozetka}
 				/>
-				<span className="slider round"></span>
+				<span className="slider round" onMouseEnter={objProduct[index].lock ? () => { } : (e) => {
+					tooltipOn(
+						e,
+						e.target.offsetParent.children[0].checked
+							? 'Заблокировать товар'
+							: 'Разблокировать товар'
+					);
+				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? () => { } : (e) => {
+					tooltipOn(
+						e,
+						e.target.offsetParent.children[0].checked
+							? 'Заблокирован'
+							: 'Разблокирован'
+					);
+				}}></span>
 			</label>
 
 			<label
@@ -101,13 +129,27 @@ const StatusBlock = ({objProduct, index , setObjProduct}) => {
 				<input
 					type="checkbox"
 					className="status-prom"
-					onChange={switchBtn}
+					onChange={objProduct[index].lock ? () => { } : switchBtn}
 					// defaultChecked={objProduct[index].status.prom}
 					checked={objProduct[index].status.prom}
 				/>
-				<span className="slider round"></span>
+				<span className="slider round" onMouseEnter={objProduct[index].lock ? () => { } : (e) => {
+					tooltipOn(
+						e,
+						e.target.offsetParent.children[0].checked
+							? 'Заблокировать товар'
+							: 'Разблокировать товар'
+					);
+				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? () => { } : (e) => {
+					tooltipOn(
+						e,
+						e.target.offsetParent.children[0].checked
+							? 'Заблокирован'
+							: 'Разблокирован'
+					);
+				}}></span>
 			</label>
-            <div className="gradi"></div>
+			<div className="gradi"></div>
 		</>
 	);
 };

@@ -7,6 +7,8 @@ import Suppliers from './Suppliers';
 import AttributeBlock from './AttributeBlock';
 import ProductCard from './ProductCard';
 import translator from '../data/translator';
+import {dataAttribute} from '../data/dataAttribute';
+import {dataSuppliers} from '../data/dataSuppliers';
 // import { useFetch } from '../data/useFetch';
 // const WarehouseBlock = lazy(() => import('./WarehouseBlock'));
 const Warehouse = () => {
@@ -39,6 +41,8 @@ const Warehouse = () => {
 	// 	setObjProduct(dataWarehouse);
 	// }, 2000);
 	const [objProduct, setObjProduct] = useState(dataWarehouse);
+	const [objAttribute,setObjAttribute] = useState(dataAttribute);
+	const [objSuppliers,setObjSuppliers] = useState(dataSuppliers);
 	const [getIndex, setGetIndex] = useState(0);
 
 	
@@ -58,24 +62,43 @@ const Warehouse = () => {
 		});
 		setUl(obj);
 	}
+
+	// const ruBtn = useEffect(()=> {
+	// 	translator.setLang('RU');
+	// },[ul])
+	// const uaBtn = useEffect(()=> {
+	// 	translator.setLang('UA');
+	// },[ul])
+	const [lang,setLang] = useState(false);
 	function ruBtn() {
+
 		translator.setLang('RU');
+		console.log('sadasds')
+
+
 	}
 	function uaBtn () {
+
 		translator.setLang('UA');
+		console.log('sadasds')
+
+
 	}
-	const Preloaded = () => (
-		<svg id="" className="header-logo__svg-logo" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-                            <path className="logo-yellow" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
-    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
-    S758.6,32,500.2,32z"/>
-                            <path className="logo-red" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
-    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
-    S758.6,32,500.2,32z"/>
-                            <path className="logo-blue" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
-    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
-    S758.6,32,500.2,32z"/></svg>
-	)
+	// useEffect(()=> {
+
+	// },[ul])
+	// const Preloaded = () => (
+	// 	<svg id="" className="header-logo__svg-logo" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+    //                         <path className="logo-yellow" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    // S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    // S758.6,32,500.2,32z"/>
+    //                         <path className="logo-red" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    // S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    // S758.6,32,500.2,32z"/>
+    //                         <path className="logo-blue" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    // S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    // S758.6,32,500.2,32z"/></svg>
+	// )
 
 	return (
 		<div
@@ -145,8 +168,8 @@ const Warehouse = () => {
 					
 				}
 				{/* {error && <div style={{fontSize: 100}}>PIZDA {error}</div>} */}
-				{ul[1].select && <AttributeBlock translator={translator}/>}
-				{ul[2].select && <Suppliers translator={translator}/>}
+				{ul[1].select && <AttributeBlock setObjAttribute={setObjAttribute}  objAttribute={objAttribute} translator={translator}/>}
+				{ul[2].select && <Suppliers setObjSuppliers={setObjSuppliers}  objSuppliers={objSuppliers} translator={translator}/>}
 				{ul[3].select && <div />}
 
 				{toggleCard && (

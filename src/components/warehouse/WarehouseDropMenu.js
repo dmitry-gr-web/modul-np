@@ -19,6 +19,8 @@ const WarehouseDropMenu = ({
 	setSortActive,
 	labelForWidth,
 	setLabelForWidth,
+	hideMenu,
+	setHideMenu,
 	// toggleSort,
 	setWidth21px,
 	width21px,
@@ -38,7 +40,7 @@ const WarehouseDropMenu = ({
 					className="status-rozetka"
 					defaultChecked={true}
 				/>
-				<span className="slider round"></span>
+				<span style={{ pointerEvents: 'none' }} className="slider round"></span>
 			</label>
 		);
 	};
@@ -51,7 +53,7 @@ const WarehouseDropMenu = ({
 					className="status-rozetka"
 					defaultChecked={false}
 				/>
-				<span className="slider round"></span>
+				<span style={{ pointerEvents: 'none' }} className="slider round"></span>
 			</label>
 		);
 	};
@@ -67,6 +69,7 @@ const WarehouseDropMenu = ({
 			return { id: index + 1, attribute: x, select: false };
 		});
 		newarr = [{ id: 0, attribute: 'all', select: true }, ...newarr];
+		// console.log(newarr)
 	} else {
 		if (type === 'country') {
 			newarr = [
@@ -100,21 +103,22 @@ const WarehouseDropMenu = ({
 	const [value, setValue] = useState('');
 	function infinityClick(index, e) {
 		setPodlozhka(true);
-		document.querySelector('.contentScroll').style.overflow = 'hidden';
-		document.querySelector('.scrollbar').style.opacity = 0;
-		document.querySelector('.scrollbarHorizont').style.opacity = 0;
+		document.querySelector('.contentScroll').style.overflowY = 'hidden';
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal ').style.opacity = 0;
 		if (obj[index].attribute === 'all') {
 			obj.map((x) => (x.select = false));
 			obj[index].select = true;
 			setOpenMenu(false);
 			setPodlozhka(false);
 			setArrowToggle(false);
-			document.querySelector('.contentScroll').style.overflow = 'auto';
-			document.querySelector('.scrollbar').style.opacity = 1;
-			document.querySelector('.scrollbarHorizont').style.opacity = 1;
-			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-				x.classList.remove('hide-menu');
-			});
+			document.querySelector('.contentScroll').style.overflowY = 'auto';
+			document.querySelector('.track-vertical').style.opacity = 1;
+			document.querySelector('.track-horizontal ').style.opacity = 1;
+			// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+			// 	x.classList.remove('hide-menu');
+			// });
+			setHideMenu(false);
 		} else {
 			obj[index].select = !obj[index].select;
 			obj.map((x) => {
@@ -142,19 +146,21 @@ const WarehouseDropMenu = ({
 					}
 				});
 			}
-			document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-				x.classList.add('hide-menu');
-			});
-			e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+			// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+			// 	x.classList.add('hide-menu');
+			// });
+			// e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+			setHideMenu(true);
 		}
 		setObjCopy([...objCopy]);
 		setObj([...obj]);
 	}
 	function clickList(index, e) {
 		setPodlozhka(true);
-		document.querySelector('.contentScroll').style.overflow = 'hidden';
-		document.querySelector('.scrollbar').style.opacity = 0;
-		document.querySelector('.scrollbarHorizont').style.opacity = 0;
+		document.querySelector('.contentScroll').style.overflowY = 'hidden';
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal ').style.opacity = 0;
+		setHideMenu(true);
 		if (type === 'status') {
 			let newobj = obj.map((x, i) => {
 				if (i === index && x.attribute !== 'all') {
@@ -175,24 +181,25 @@ const WarehouseDropMenu = ({
 							setLabelForWidth(false); //menu width21px
 						}
 					}
-					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-						x.classList.add('hide-menu');
-					});
-					e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+					// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+					// 	x.classList.add('hide-menu');
+					// });
+					// e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 					return { ...x, select: !x.select };
 				} else {
 					return { ...x, select: false };
 				}
 			});
 			if (newobj.filter((x) => x.select === true).length === 0) {
-				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					x.classList.remove('hide-menu');
-				});
+				// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+				// 	x.classList.remove('hide-menu');
+				// });
+				setHideMenu(false);
 				setOpenMenu(false);
 				setPodlozhka(false);
-				document.querySelector('.contentScroll').style.overflow = 'auto';
-				document.querySelector('.scrollbar').style.opacity = 1;
-				document.querySelector('.scrollbarHorizont').style.opacity = 1;
+				document.querySelector('.contentScroll').style.overflowY = 'auto';
+				document.querySelector('.track-vertical').style.opacity = 1;
+				document.querySelector('.track-horizontal ').style.opacity = 1;
 				setArrowToggle(false);
 				newobj[0].select = true;
 				if (adaptive) {
@@ -212,27 +219,29 @@ const WarehouseDropMenu = ({
 		} else {
 			let newobj = obj.map((x, i) => {
 				if (i === index) {
-					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-						x.classList.add('hide-menu');
-					});
-					e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+					// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+					// 	x.classList.add('hide-menu');
+					// });
+					// e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 					return { ...x, select: !x.select };
 				} else if (index === 0 && i === 0) {
-					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-						x.classList.remove('hide-menu');
-						setArrowToggle(false);
-					});
+					// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+					// 	x.classList.remove('hide-menu');
+					// });
+					setHideMenu(false);
+					setArrowToggle(false);
 					return { ...x, select: true };
 				} else if (index === 0 && i !== 0) {
-					document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-						x.classList.remove('hide-menu');
-						setArrowToggle(false);
-					});
+					// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+					// 	x.classList.remove('hide-menu');
+					// });
+					setHideMenu(false);
+					setArrowToggle(false);
 					setOpenMenu(false);
 					setPodlozhka(false);
-					document.querySelector('.contentScroll').style.overflow = 'auto';
-					document.querySelector('.scrollbar').style.opacity = 1;
-					document.querySelector('.scrollbarHorizont').style.opacity = 1;
+					document.querySelector('.contentScroll').style.overflowY = 'auto';
+					document.querySelector('.track-vertical').style.opacity = 1;
+					document.querySelector('.track-horizontal ').style.opacity = 1;
 					return { ...x, select: false };
 				} else if (index !== 0 && i === 0) {
 					return { ...x, select: false };
@@ -241,15 +250,16 @@ const WarehouseDropMenu = ({
 				}
 			});
 			if (newobj.filter((x) => x.select === true).length === 0) {
-				document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-					x.classList.remove('hide-menu');
-				});
+				// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+				// 	x.classList.remove('hide-menu');
+				// });
+				setHideMenu(false);
 				setOpenMenu(false);
 				setPodlozhka(false);
 				setArrowToggle(false);
-				document.querySelector('.contentScroll').style.overflow = 'auto';
-				document.querySelector('.scrollbar').style.opacity = 1;
-				document.querySelector('.scrollbarHorizont').style.opacity = 1;
+				document.querySelector('.contentScroll').style.overflowY = 'auto';
+				document.querySelector('.track-vertical').style.opacity = 1;
+				document.querySelector('.track-horizontal ').style.opacity = 1;
 				newobj[0].select = true;
 			}
 			setObj(newobj);
@@ -257,16 +267,17 @@ const WarehouseDropMenu = ({
 	}
 	const ref = useRef();
 	function changeInput(e) {
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.add('hide-menu');
-		});
-		setValue(e.target.value);
-		e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
-		if (ref.current.value.length === 1) {
-			ref.current.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
-			setValue(e.target.value);
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.add('hide-menu');
+		// });
+		// setValue(e.target.value);
+		// setHideMenu(true);
+		// setValue(e.target.value);
+		// e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+		if (e.target.value.length >= 1) {
+			e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
 		}
-		if (type === 'name' || type === 'attribute') {
+		if (type === 'name' || type === 'attribute' || type ==='company' || type ==='contact') {
 			if (e.target.value !== '') {
 				const results = objCopy.filter((x) => {
 					return x.attribute.toLowerCase().includes(e.target.value.toLowerCase());
@@ -276,7 +287,9 @@ const WarehouseDropMenu = ({
 				setObj(objCopy);
 			}
 		}
+		setValue(e.target.value);
 		setPodlozhka(true);
+		setHideMenu(true);
 	}
 	const warehouse = useRef();
 	const [arrowToggle, setArrowToggle] = useState(false);
@@ -304,8 +317,10 @@ const WarehouseDropMenu = ({
 			// 	setArrowToggle(false);
 
 			// }
+			document.querySelector('.contentScroll').style.overflowY = 'hidden';	
+
 			// setArrowActive('')
-			if (type === 'name' || type === 'attribute') {
+			if (type === 'name' || type === 'attribute' || type ==='company' || type ==='contact') {
 				setObj(objCopy); //dlya infinity scroll
 				warehouse.current.querySelector('.scrollOff')?.scrollTo({ top: 0 });
 			}
@@ -346,6 +361,8 @@ const WarehouseDropMenu = ({
 			} else {
 				setArrowToggle(false);
 			}
+			document.querySelector('.contentScroll').style.overflowY = 'scroll';	
+
 			if (type !== 'status') {
 				setValue(
 					obj.filter((x) => x.select === true).length > 1
@@ -386,6 +403,7 @@ const WarehouseDropMenu = ({
 			}
 		}
 	}
+	
 	useEffect(() => {
 		if (podlozhka) {
 		} else {
@@ -440,7 +458,7 @@ const WarehouseDropMenu = ({
 					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'russia');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-					tooltipBlock.style.top = posElement.y + 'px';
+					tooltipBlock.style.top = posElement.y -2+ 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 				if (e.currentTarget.innerText === '🇹🇷') {
@@ -479,6 +497,19 @@ const WarehouseDropMenu = ({
 					tooltipBlock.style.top = posElement.y + 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
+			} else if (type === 'status') {
+		
+					// tooltipBlock.style.fontSize = '12px';
+					if(e.currentTarget.querySelector('input')?.defaultChecked){
+						tooltipBlock.innerText = `Разблокированый заказ`;
+					}else {
+						tooltipBlock.innerText = `Заблокированый заказ`;
+					}
+					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y -2+ 'px';
+					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+		
+				
 			}
 
 			if (e.currentTarget.className === 'countBlock') {
@@ -491,8 +522,12 @@ const WarehouseDropMenu = ({
 				tooltipBlock.innerHTML = `${translator.getTranslation(
 					'tooltipCount',
 					'attribute',
-					e.currentTarget.children[0].innerText,
-					e.currentTarget.children[1].innerText
+					e.currentTarget.children[0].innerText.toLocaleString('ru-RU', {
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 0,}),
+					e.currentTarget.children[1].innerText.toLocaleString('ru-RU', {
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 0,})
 				)}`;
 
 				tooltipBlock.style.left = posElement.x + 'px';
@@ -525,9 +560,10 @@ const WarehouseDropMenu = ({
 		setActivity(false);
 	}, [sortActive]);
 	function sortClickBtn(e) {
+		setHideMenu(false);
 		if (switchMenu && adaptive && setWidth21px) {
 			setWidth21px(true);
-		} else if (!width21px && !switchMenu && !adaptive && !activity) {
+		} else if (!width21px && !switchMenu && !adaptive && !activity && setWidth21px) {
 			setWidth21px(false);
 		}
 
@@ -537,9 +573,9 @@ const WarehouseDropMenu = ({
 			setArrowActive('down');
 		}
 		setSortActive(!sortActive);
-		document.querySelector('.contentScroll').style.overflow = 'scroll';
-		document.querySelector('.scrollbar').style.opacity = 1;
-		document.querySelector('.scrollbarHorizont').style.opacity = 1;
+		document.querySelector('.contentScroll').style.overflowY = 'scroll';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal ').style.opacity = 1;
 		setTimeout(() => {
 			setActivity(true);
 			setArrowToggle(true);
@@ -549,9 +585,9 @@ const WarehouseDropMenu = ({
 				setArrowActive('down');
 			}
 		}, 0);
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.remove('hide-menu');
-		});
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.remove('hide-menu');
+		// });
 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
 			x.classList.remove('smallsort');
 		});
@@ -583,19 +619,27 @@ const WarehouseDropMenu = ({
 	// 		x.classList.add('hide-arrow');
 	// 	});
 	// },[])
+	// const suka = useRef();
+	// useEffect(()=> {
+	// 	if(suka.current ){
+	// 		console.log(suka.current)
+	// 	}
+	// },[])
 	return (
 		<div
 			style={adaptive ? { width: 22, transition: 'width 0.3s', padding: '0 3px' } : zIndex ? { zIndex: 1 } : {}}
+			// style={adaptive ? { width: 22, transition: 'width 0.3s', padding: '0 3px' } : zIndex ? { zIndex: 1 } : !treugolka && !podlozhka ? {visibility:'hidden', opacity: 0}: {visibility: 'visible',opacity:1}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
 			className={`warehouse-dropmenu ${
 				arrowToggle ||
 				activity ||
 				(refStatusText.current?.innerHTML !== '' && adaptive) ||
-				(width21px === true && !switchMenu) || !treugolka
+				(width21px === true && !switchMenu) || !treugolka && !podlozhka
 					? 'hide-arrow'
 					: ''
-			} ${adaptive && 'adaptive'}`}
+			} ${adaptive ? 'adaptive' : ''} ${hideMenu && !openMenu ? 'hide-menu': ""}`}
+			// style={}
 			ref={warehouse}
 		>
 			{inputOn ? (
@@ -605,11 +649,13 @@ const WarehouseDropMenu = ({
 						type="text"
 						style={{ color: 'rgba(0, 0, 0, 0.65)' }}
 						value={value}
-						onChange={(e) => changeInput(e)}
+						onChange={changeInput}
 					/>
 					{openMenu ? (
 						<div onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className="countBlock">
-							(<span>{obj.filter((x) => x.attribute !== 'all').length}</span>/
+							(<span>{obj.filter((x) => x.attribute !== 'all').length.toLocaleString('ru-RU', {
+					minimumFractionDigits: 0,
+					maximumFractionDigits: 0,})}</span>/
 							<span>{obj.filter((x) => x.attribute !== 'all' && x.select).length}</span>)
 						</div>
 					) : (
@@ -684,7 +730,7 @@ const WarehouseDropMenu = ({
 			<span className="underline" style={adaptive && {left:'3px', width: 'calc(100% - 6px)' }}></span>
 			{/* {console.log(openMenu)} */}
 
-			{type === 'name' || type === 'attribute' ? (
+			{type === 'name' || type === 'attribute' ||  type ==='company' || type ==='contact' ? (
 				<div
 					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
 				>
@@ -692,6 +738,7 @@ const WarehouseDropMenu = ({
 						style={{ height: 90, overflowX: 'hidden' }}
 						// className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
 						autoHide={false}
+						scrollbarMinSize={20}
 					>
 						{({ scrollableNodeRef, contentNodeRef }) => {
 							return (
@@ -737,14 +784,15 @@ const WarehouseDropMenu = ({
 						style={{ height: 90 }}
 						autoHide={false}
 						forceVisible="x"
+						// ref={suka}
 						// className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
 					>
 						{openMenu &&
 							obj.map((x, index) => (
 								<div
 									key={index}
-									onMouseEnter={tooltipOn}
-									onMouseLeave={tooltipOff}
+									onMouseEnter={index === 0 ? null: tooltipOn}
+									onMouseLeave={index === 0 ? null: tooltipOff}
 									className={x.select ? 'select-btn list' : 'list'}
 									onClick={(e) => clickList(x.id, e)}
 									style={type === 'status' ? { overflow: 'visible' } : {}}

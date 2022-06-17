@@ -1,205 +1,526 @@
-import React,{useState} from 'react';
-import { rozetkaLogo, promLogo, crmLogo, SvGBtnPlus } from '../../img/svg-pack';
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
-import SuppliersList from './SuppliersList';
-const Suppliers = () => {
-    const [objKomp, setObjKomp] = useState([
-        {status:false,country: '🇺🇦',company: 'Мега ОПТ',contact:'Романова Марианна',tel:'+38 093 514 25 46',commentry:'Сковородки, кастрюли'}
-    ])
-	return (
-		<div className="warehouse-products">
-			<div className="warehouse-products-title">
-				Поставщики
-				<button>
-					<SvGBtnPlus />
-				</button>
-			</div>
-			<div className="shadow-right"></div>
-			<SimpleBar
-				className="warehouse-table"
-				style={{
-					display: 'flex',
-					maxHeight: 'calc(100vh - 149px)',
-					marginBottom: '10px',
-					maxWidth: 1150,
-					// overflow:'auto',
-					// height:'800px',
-					// height: rowHeight * visibleRows + 1,
-				}}
-				autoHide={false}
-				// ref={rootRef}
-			>
-				{/* {podlozhka && (
-					<div
-						className="warehouse-podlozhka"
-						style={{ width: '100%', height: '100%', position: 'fixed', zIndex: 3 }}
-						onClick={clickPodlozhka}
-					></div>
-				)} */}
-				{/* <div style={{ height: getTopHeight() }} /> */}
-				<table style={{ width: '100%', height: '100%', paddingLeft: 7, paddingRight: 10 }}>
-					<thead className="first-tab-header">
-						<tr>
-							{/* <th style={{position:'sticky',left:'7px'}}>
-<div className='hover'></div>
-</th> */}
-							<th className="statusBefore sticky-head">
-								<div className="sticky-block">
-									<div
-										// style={{ display: 'flex' }}
-										className="sticky-block-children"
-									>
-										<div
-											style={{
-												textAlign: 'left',
-												paddingLeft: 0,
-												minWidth: 51,
-												paddingRight: '10px',
-											}}
-										>
-											Статус
-										</div>
-										<div
-						
-										>
-											<img className="logo-mail" src={crmLogo} alt="" />
-											<img className="logo-mail" src={rozetkaLogo} alt="" />
-											<img className="logo-mail" src={promLogo} alt="" />
-										</div>
-									</div>
-
-									<div className="id-width" style={{ paddingRight: '10px' }}>
-										ID
-									</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>Страна</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>Компания</div>
-									<div className="name-width" style={{ paddingRight: '15px' }}>
-                                    Контакт
-									</div>
-									<div className="attribute-width" style={{ paddingRight: '3px' }}>
-                                    Телефон
-									</div>
-									<div className="shadow-left"></div>
-								</div>
-							</th>
-
-							<th style={{ paddingLeft: '12px', paddingRight: '15px' }} colSpan={4}>
-                            Комментарий
-							</th>
-
-						</tr>
-						<tr>
-
-							<th className="sticky-head">
-								<div className="sticky-block">
-									<div
-										className="sticky-block-children"
-										style={{ maxWidth: '156px' }}
-									>
-										<div style={{ width: '51px', paddingRight: '10px' }}>
-									
-										</div>
-										<div
-										
-										
-											className="block-3-btn"
-										>
-									
-
-											<div style={{ margin: '0 11px' }}>
-									
-											</div>
-
-									
-										</div>
-									</div>
-
-									<div className="id-width" style={{ paddingRight: '10px' }}>
-									</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>
-									
-									</div>
-									<div style={{ paddingRight: '10px', minWidth: 51 }}>
-								
-									</div>
-									<div className="name-width" style={{ paddingRight: '15px' }}>
-								
-									</div>
-									<div className="attribute-width" style={{ paddingRight: '3px' }}>
-									
-									</div>
-									<div className="shadow-left"></div>
-								</div>
-							</th>
-
-							<th style={{ paddingLeft: '12px', paddingRight: '3px' }} className="nal-ostatok">
-								<div style={{ textAlign: 'right', display: 'flex', justifyContent: 'end' }}>
-									<span style={{ paddingLeft: 3 }}>/</span>
-								</div>
-							</th>
-							<th className="nal-rezerv" style={{ paddingRight: '4px' }}>
-							</th>
-							<th className="nal-otpr" style={{ paddingRight: '4px' }}>
-								
-							</th>
-							<th className="nal-vozvrat" style={{ paddingRight: '15px' }}>
-							
-							</th>
-							<th style={{ textAlign: 'right', paddingRight: '15px' }}></th>
-							<th style={{ textAlign: 'right', paddingRight: '15px' }}></th>
-							<th style={{ textAlign: 'right', paddingRight: '15px' }}></th>
-							<th className="summa-suma1">
-								<div
-									style={{
-										textAlign: 'right',
-										display: 'flex',
-										justifyContent: 'end',
-										paddingRight: '3px',
-									}}
-								>
-							
-									<span style={{ paddingLeft: 3 }}>/</span>
-								</div>
-							</th>
-							<th className="summa-suma2">
-								<div style={{ paddingRight: '4px' }}></div>
-							</th>
-							<th className="summa-suma3">
-								<div style={{ paddingRight: '4px' }}></div>
-							</th>
-							<th className="summa-suma4">
-								<div></div>
-							</th>
-						</tr>
-						<tr>
-							<th className="shadow-vertical" colSpan={1}>
-								<div
-						
-								
-									style={{ width: '90px' }}
-								></div>
-							</th>
-							<th colSpan="17" className="shadow-vertical">
-								<div></div>
-							</th>
-						</tr>
-					</thead>
-					<tbody className="first-tab-body">
-                        {objKomp.map(x => <SuppliersList x={x}/>)}
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colSpan={18} style={{ height: 12 }}>
-								<div className="shadow-vertical-2"></div>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
-				{/* <div style={{ height: getBottomHeight() }} /> */}
-			</SimpleBar>
-		</div>
+import React,{useEffect,useLayoutEffect,useRef,useState,useMemo} from 'react'
+import {SvGBtnPlus,Preloaded} from '../../img/svg-pack';
+import _, { set } from 'lodash';
+import ScrollBox from './reactScroll';
+// import {dataAttribute} from '../data/dataAttribute';
+import WarehouseDropMenu from './WarehouseDropMenu';
+import WarehouseInput from './WarehouseInput';
+import { useFetch } from '../data/useFetch';
+import SwitchBtn from './SwitchBtn';
+import MaxaScroll from './MaxaScroll';
+let hover;
+const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
+	const {data,error,isLoading} = useFetch(
+	// 	'http://192.168.0.197:3005/goodAttributes', {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		'Accept': 'application/json',
+	// 		'Content-Type': 'application/json'
+	// 	},
+	// 	body: JSON.stringify({
+	// 		"query": {},
+	// 		// "start": 10,
+	// 		// "start": props.folder.at(-1)?.id,
+	// 		"end": 20
+	// 	})
+	// }
 	);
-};
+
+	console.log(data)
+	const [lastIndex, setLastIndex] = useState(0);
+	const [hideMenu, setHideMenu] = useState(false);
+
+
+	const [podlozhka, setPodlozhka] = useState(false);
+	const rootRef = useRef();
+	const [start, setStart] = useState(0);
+	let rowHeight = 18;
+	// if (start >= data.length + getStart()){
+
+	// }
+	const [visibleRows, setVisible] = useState(
+		Math.floor((document.body.clientHeight * 1.2 - 170) / rowHeight)
+	);
+	useEffect(() => {
+		setVisible(Math.floor((document.body.clientHeight * 1.2 - 170) / rowHeight));
+	}, [visibleRows]);
+	function getStart() {
+		let temp = start - Math.floor(document.body.clientHeight * 0.15) < 0 ? 0 : start - Math.floor(document.body.clientHeight * 0.15);
+		return Math.min(objSuppliers.length - visibleRows - 1, Math.floor(temp / rowHeight));
+	}
+
+	function getTopHeight() {
+		let temp =
+			start - Math.floor(document.body.clientHeight * 0.15) < 0
+				? 0
+				: start - Math.floor(document.body.clientHeight * 0.15);
+		return rowHeight * Math.min(objSuppliers.length - visibleRows - 1, Math.floor(temp / rowHeight));
+	}
+	function getBottomHeight() {
+		let temp =
+			start - Math.floor(document.body.clientHeight * 0.15) < 0
+				? 0
+				: start - Math.floor(document.body.clientHeight * 0.15);
+		return (
+			rowHeight *
+			(objSuppliers.length -
+				(Math.min(objSuppliers.length - visibleRows - 1, Math.floor(temp / rowHeight)) +
+					visibleRows +
+					1))
+		);
+	}
+	async function updateHover(e) {
+		clearTimeout(hover);
+		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
+			document.querySelector('.first-tab-body').classList.add('hoverOff');
+		}
+		
+		hover = setTimeout(() => {
+			document.querySelector('.first-tab-body').classList.remove('hoverOff');
+		}, 400);
+		document.getElementById('tooltipBtn').style.animation = '';
+	}
+	function clickPodlozhka() {
+		setPodlozhka(false);
+		setHideMenu(false);
+		// setFlagSwitchMenu(false);
+		// setSwitchMenu(false);
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
+		document.querySelector('.contentScroll').style.overflow = 'auto';
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.remove('hide-menu');
+		// });
+		// document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
+		// 	x.style.zIndex = 1;
+		// });
+		// document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
+		// 	x.style.width = '21px';
+		// });
+		// document.querySelectorAll('.nal-ostatok').forEach((x) => {
+		// 	x.classList.remove('showBtn');
+		// });
+		// document.querySelector('.width21px').style.maxWidth = '51px';
+		// let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
+		// if (input.value.length >= 4) {
+		// 	// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
+		// 	input.style.width = input.value.length * 7 + 3 + 'px';
+		// }
+		// if (input.value.length >= 7) {
+		// 	input.style.width = input.value.length * 7 + 7 + 'px';
+		// }
+		// if (input.value.length < 4) {
+		// 	input.style.width = input.value.length * 7 + 'px';
+		// }
+	}
+	const btnUp = useRef();
+	useEffect(() => {
+		if(btnUp.current){
+			if (start > 600) {
+				btnUp.current.style.visibility = 'visible';
+			} else {
+				btnUp.current.style.visibility = 'hidden';
+			}
+		}
+	
+	}, [start]);
+	function clickScrollUp() {
+		// rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
+		// rootRef.current.scrollTop = 0;
+		document.querySelector('.contentScroll').scrollTop = 0;
+	}
+	async function onScroll(e) {
+		e.stopPropagation();
+		setStart(e.target.scrollTop);
+		updateHover();
+		// setSwitchMenu(false);
+	}
+	
+	function clickTr(e,index) {
+		// e.preventDefault();
+		// e.stopPropagation();
+		// console.log(e.currentTarget)
+		if (e.currentTarget && !objSuppliers[index].lock) {
+			let newobj = [...objSuppliers];
+			if (e.ctrlKey || e.metaKey) {
+				e.preventDefault();
+				e.stopPropagation();
+				newobj[index].select = !newobj[index].select;
+			} else if (e.shiftKey) {
+				e.preventDefault();
+				e.stopPropagation();
+				newobj = newobj.map((x) => {
+					return { ...x, select: false };
+				});
+				if (lastIndex < index) {
+					newobj.slice(lastIndex, index+1).map((x, i) => {
+						if (x.lock) {
+							x.select = false;
+						} else {
+							x.select = true;
+						}
+					});
+				} else {
+					newobj.slice(index, lastIndex+1).map((x, i) => {
+						if (x.lock) {
+							x.select = false;
+						} else {
+							x.select = true;
+						}
+					});
+				}
+			} else {
+				// e.preventDefault();
+				setLastIndex(index);
+				e.stopPropagation();
+				newobj.map((x, i) => {
+					if (i !== index) {
+						x.select = false;
+					}
+				});
+				// if (newobj[index].select !== true) {
+				// 	newobj.map((x) => (x.select = !newobj[index].select));
+				// }
+				// if(newobj[index].select !== undefined)	
+				newobj[index].select = !newobj[index].select;
+				// else {}
+			
+			}
+			setObjSuppliers([...newobj]);
+		}
+	}
+	// const [percentScroll, setPercentScroll] = useState(0.87);
+
+	// useEffect(() => {
+		
+	// 		if(rootRef.current?.content.offsetHeight < 614) {
+	// 			setPercentScroll(0.81);
+	// 		}
+	// }, [objAttribute]);
+	function searchLine(text, value) {
+		if (value !== '') {
+			let re = new RegExp(value, 'gui');
+			let text_pr = text?.replace(re, (x) => '<span class="findUnderline">' + x + '</span>');
+
+			return text_pr;
+		} else {
+			return text;
+		}
+	}
+	// function showScrollbar () {
+	// 	document.querySelector('.scrollbar').style.opacity = 1;
+	// 	document.querySelector('.scrollbarHorizont').style.opacity = 1;
+	// }
+	// function hideScrollbar () {
+	// 	document.querySelector('.scrollbar').style.opacity = 0;
+	// 	document.querySelector('.scrollbarHorizont').style.opacity = 0;
+	// }
+	const [sortActive, setSortActive] = useState(false);
+	const [treugolka, setTreugolka] = useState(false);
+	// export default React.memo(SwitchBtn);
+	const [selectAll, setSelectAll] = useState(false);
+
+	useEffect(() => {
+		function clickDocument(e) {
+			if (!e.target.closest('.warehouse-table')) {
+				setSelectAll(false);
+				let newobj = [...objSuppliers];
+				newobj.map((x) => (x.select = false));
+				setObjSuppliers(newobj);
+			}
+		}
+		if (!selectAll) {
+			document.addEventListener('keydown', function (e) {
+				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+					e.preventDefault();
+					setSelectAll(true);
+					let newobj = [...objSuppliers];
+					newobj.map((x) => {
+						if (x.lock) {
+							return (x.select = false);
+						} else {
+							return (x.select = true);
+						}
+					});
+					setObjSuppliers(newobj);
+					// console.log('asdasdasd');
+				}
+			});
+		}
+		document.addEventListener('click', clickDocument);
+
+		return () => {
+			document.removeEventListener('click', clickDocument);
+		};
+	}, [selectAll]);
+	console.log(getStart())
+	return (
+		<>
+		{isLoading ? (<div className='loading'><Preloaded/></div>) : (
+			<div className="warehouse-products">
+					{/* <div className="warehouse-products-title">
+						Атрибуты
+						<button>
+							<SvGBtnPlus />
+						</button>
+					</div> */}
+					<div className="warehouse-products-title">
+						<hr/>
+						<span>Поставщики</span>
+						<button>
+							<SvGBtnPlus />
+						</button>
+					</div>
+					<div className="shadow-right"></div>
+
+					<div
+						style={{
+							position: 'relative',
+							// maxHeight: 'calc(100vh - 170px)',
+							// width: '100%',
+							height:  'calc(100vh - 216px)',
+							height:  'calc(100vh - 190px)',
+						}}
+						className='warehouseAttributeBlock'
+					>
+						{/* <ScrollBox
+							ref={rootRef}
+							// scrollVertMinus={0.07}
+							percent={percentScroll}
+							scroll={_.throttle(onScroll, 500)}
+							color="rgba(0, 0, 0, 0.3)"
+							setTreugolka={setTreugolka}
+						> */}
+							<MaxaScroll
+								setTreugolka={setTreugolka}
+								updateHover={updateHover}
+								podlozhka={podlozhka}
+								infiniteScroll={_.throttle(onScroll, 500)}
+			
+							>
+
+							<table
+								tabIndex={-1}
+						
+								// onMouseEnter={showScrollbar}
+								// onMouseLeave={hideScrollbar}
+								// style={{ width: '100%' }}
+								// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
+							>
+								<thead className="first-tab-header">
+									<tr>
+										{podlozhka && (
+											<td style={{ padding: '0px' }}>
+												<div
+													className="warehouse-podlozhka"
+													style={{
+														width: '100vw',
+														height: document.body.clientHeight + 'px',
+														position: 'absolute',
+														left: 0,
+														top: 0,
+														zIndex: 3,
+													}}
+													onClick={clickPodlozhka}
+												></div>
+											</td>
+										)}
+									</tr>
+
+									<tr>
+										<th></th>
+										<th style={{ paddingRight: '15px' }}>
+											Статус
+										</th>
+										<th style={{ paddingRight: '15px' }}>
+											Страна
+										</th>
+										<th style={{ paddingRight: '20px' }}>
+											Компания
+										</th>
+										<th style={{ paddingRight: '20px' }}>
+											Контакт
+										</th>
+										<th>
+											Телефон
+										</th>
+										<th>
+											Комментарий
+										</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th style={{paddingRight: '15px', minWidth:51}}>
+											<WarehouseDropMenu
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												// width21px={width21px}
+												// setWidth21px={setWidth21px}
+												// labelForWidth={labelForWidth}
+												// setLabelForWidth={setLabelForWidth}
+												type={'status'}
+												translator={translator}
+												objProduct={objSuppliers}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
+												// setSwitchMenu={setSwitchMenu}
+												// switchMenu={switchMenu}
+												// setFlagSwitchMenu={setFlagSwitchMenu}
+											/>
+										</th>
+										<th style={{paddingRight: '15px', position:'relative'}}>
+											<WarehouseDropMenu
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'country'}
+												translator={translator}
+												searchLine={searchLine}
+											
+												objProduct={objSuppliers}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
+											/>
+										</th>
+										<th style={{ paddingRight: '20px' }}>
+											{/* <WarehouseInput 
+												podlozhka={podlozhka} 
+												setPodlozhka={setPodlozhka} 
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												translator={translator}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
+											/> */}
+											<WarehouseDropMenu
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'company'}
+												translator={translator}
+												searchLine={searchLine}
+												inputOn={true}
+												objProduct={objSuppliers}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
+											/>
+										</th>
+										<th style={{ paddingRight: '20px' }}>
+											<WarehouseDropMenu
+												setPodlozhka={setPodlozhka}
+												podlozhka={podlozhka}
+												type={'contact'}
+												translator={translator}
+												searchLine={searchLine}
+												inputOn={true}
+												objProduct={objSuppliers}
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												treugolka={treugolka}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
+											/>
+										</th>
+										<th style={{ paddingRight: '20px' }}>
+											<WarehouseInput 
+												podlozhka={podlozhka} 
+												setPodlozhka={setPodlozhka} 
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												translator={translator}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
+											/>
+										</th>
+										<th>
+											<WarehouseInput 
+												podlozhka={podlozhka} 
+												setPodlozhka={setPodlozhka} 
+												sortActive={sortActive}
+												setSortActive={setSortActive}
+												translator={translator}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
+											/>
+										</th>
+									
+										
+									</tr>
+									<tr>
+										<th className="shadow-vertical" colSpan={19}>
+											<div />
+											<div />
+										</th>
+									</tr>
+								</thead>
+
+								<tbody className="first-tab-body">
+									<tr style={{ height: getTopHeight() }}></tr>
+									{objSuppliers.length > 0 &&
+										objSuppliers.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
+											<tr onClick={(e) => clickTr(e,(index + (getStart() < 0 ? 0 : getStart())))}
+											className={
+												objSuppliers[index + (getStart() < 0 ? 0 : getStart())].select
+													? 'select speed hoverAttributeBlock'
+													: objSuppliers[index + (getStart() < 0 ? 0 : getStart())].lock
+													? 'lockOrder speed hoverAttributeBlock'
+													: 'speed hoverAttributeBlock'
+											}
+											key={index+getStart()}>
+												<td><div className='stickyBeforeBody'></div></td>
+												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objSuppliers} setData={setObjSuppliers} getStart={getStart} index={index}/></td>
+												<td className='flags' style={{paddingRight:15, opacity: `${x.status ? '0.4)': ''}`,fontSize: '14px'}}>{x.country}</td>
+												<td style={{paddingRight:20,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.company}</td>
+												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,paddingRight:20}}>
+													{x.contact}
+												</td>
+												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,paddingRight:20}}>
+													<span className={x.iconNumber} style={{marginRight: 6, top: 1, position:'relative'}}></span>{x.number}
+												</td>
+												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`}}>
+													{x.commentary}
+												</td>
+											</tr>
+										))}
+
+									<tr colSpan={18} style={{ height: getBottomHeight() }}></tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colSpan={18} style={{ height: 18 }}>
+											<div className="shadow-vertical-footer"></div>
+											<div style={{position:'absolute',bottom:0,left:0,height:8,width:'100%',background:'white'}}></div>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+							</MaxaScroll>
+						{/* </ScrollBox> */}
+					</div>
+					<div ref={btnUp} onClick={clickScrollUp} className="btnUp">
+						<svg
+							height="20"
+							viewBox="0 0 12 12"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z"
+								fill="black"
+							></path>
+						</svg>
+					</div>
+			</div>)
+		}
+		</>
+  )
+}
 
 export default Suppliers;

@@ -3,6 +3,7 @@ export const useFetch = (url , param) => {
 	const [data, setData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState('');
+    // const [fetching,setFetching] = useState(false);
 	useEffect(() => {
         setTimeout(() => {
             try {

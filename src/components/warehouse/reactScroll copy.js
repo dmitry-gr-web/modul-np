@@ -30,7 +30,7 @@ class ScrollBox extends Component {
 		const { content, thumb, thumbHorizont, scrollbar, scrollbarHorizont } = this;
 		const { viewportHeight, ratio, ratioWidth, viewportWidth } = this;
 		// console.log(this.viewportHeight, this.contentHeight)
-		const thumbHeight = viewportHeight * ratio; // 0.93 tut - 7%
+		const thumbHeight =  Math.max(30,viewportHeight * ratio * this.props.percent); // 0.93 tut - 7%
 		// const thumbHeight = viewportHeight * ratio * this.props.percent; // 0.93 tut - 7%
 		const thumbWidth = viewportWidth * ratioWidth * 2;
 		// const scrollTop = content.scrollTop * this.props.percent;
@@ -66,7 +66,7 @@ class ScrollBox extends Component {
 		const { viewportHeight, ratio, ratioWidth, viewportWidth } = this;
 		// console.log(this.viewportHeight, this.contentHeight)
 		// const thumbHeight = viewportHeight * ratio * this.props.percent; // 0.93 - 7%
-		const thumbHeight = viewportHeight * ratio; // 0.93 - 7%
+		const thumbHeight =  Math.max(30,viewportHeight * ratio * this.props.percent); // 0.93 - 7%
 		const thumbWidth = viewportWidth * ratioWidth * 2;
 		// console.log(ratioWidth)
 		// const scrollTop = content.scrollTop * this.props.percent;
@@ -116,11 +116,11 @@ class ScrollBox extends Component {
 
 	handleScroll = (event) => {
 		const { content, thumb, thumbHorizont } = this;
-		const { viewportHeight, ratio, contentHeight, ratioWidth, viewportWidth,scrollbar } = this;
-		const thumbHeight = viewportHeight * ratio;
+		const { viewportHeight, ratio, contentHeight, ratioWidth, viewportWidth } = this;
+		const thumbHeight = Math.max(30,viewportHeight * ratio * this.props.percent);
 		// ThumbSize = TrackLength * ViewportSize / (Maximum – Minimum + ViewportSize)
 		// (scrollbar.height * scrollTop / content.height()
-		const scrollTop = content.scrollTop; // 7% tut
+		const scrollTop = content.scrollTop * this.props.percent; // 7% tut
 		const scrollLeft = content.scrollLeft;
 		// const scrollBarArea = viewportHeight - thumbHeight;
 		const thumbWidth = viewportWidth * ratioWidth * 2;
@@ -128,12 +128,12 @@ class ScrollBox extends Component {
 		// const thumbTop = (scrollTop - thumbHeight) * ratio;
 
 		// const thumbTop  = viewportHeight * scrollTop /contentHeight;
-		const thumbTop = scrollTop * ratio;
+		const thumbTop = Math.min(scrollTop * ratio,viewportHeight * this.props.percent - thumbHeight);
 		const thumbLeft = scrollLeft * ratioWidth;
 		this.props.scroll(event);
 		// console.log(scrollTop, thumbHeight, contentHeight, viewportHeight)
-		console.table('thumb',thumbHeight ,viewportHeight * ratio )
-		console.table('scrolltop',content.scrollTop)
+		console.table('thumb',thumbHeight ,viewportHeight * ratio * this.props.percent )
+		console.table('scrolltop',content.scrollTop , scrollTop)
 		console.table('content',contentHeight,viewportHeight)
 		console.table('ratio',ratio)
 		// console.log(scrollTop, (viewportHeight * ratio * this.props.percent), 30)
@@ -195,6 +195,7 @@ class ScrollBox extends Component {
 			document.querySelector('.scrollbarHorizont').style.opacity = 1;
 			this.props.setTreugolka(true);
 		}
+
 	}
 	hideScrollbar () {
 		if(!this.props.podlozhka){
@@ -231,7 +232,7 @@ class ScrollBox extends Component {
 				<div
 					className="scrollbar"
 					ref={(div) => (this.scrollbar = div)}
-					// style={{ height: `${this.props.percent * 100}%` }} //tut props percent 7%
+					style={{ height: `${this.props.percent * 100}%` }} //tut props percent 7%
 				>
 					<div
 						className="thumb"

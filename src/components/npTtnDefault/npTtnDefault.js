@@ -260,7 +260,7 @@ const NpTtnDefault = (props) => {
 														? 'Выключить'
 														: 'Включить'
 												);
-												console.log(e.target)
+												// console.log(e.target)
 											}}
 											onClick={(e) => {
 												props.toolTipOn(
@@ -271,7 +271,7 @@ const NpTtnDefault = (props) => {
 												);
 												props.offTimerTooltip();
 												// clickSwitch(e);
-												console.log(e.target.offsetParent.querySelector('input').checked)
+												// console.log(e.target.offsetParent.querySelector('input').checked)
 											}}
 											onMouseLeave={props.toolTipOff}
 								></span>

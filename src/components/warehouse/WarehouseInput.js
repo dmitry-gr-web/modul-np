@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 
-const WarehouseInput = ({setPodlozhka, podlozhka ,setSortActive,sortActive, translator}) => {
+const WarehouseInput = ({setPodlozhka, podlozhka ,setSortActive,sortActive, translator,hideMenu,setHideMenu}) => {
     const [inputID, setInputID] = useState('');
     const [activity, setActivity] = useState(false);
 	const [arrowToggle, setArrowToggle] = useState(false);
@@ -21,13 +21,14 @@ const WarehouseInput = ({setPodlozhka, podlozhka ,setSortActive,sortActive, tran
     function changeInput(e) {
         setPodlozhka(true);
         // setInputID(e.target.value.replace(/[^0-9]-/g, ''));
-        document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.add('hide-menu');
-		});
-        e.target.closest('.warehouse-input').classList.remove('hide-menu');
-        document.querySelector('.contentScroll').style.overflow = 'hidden';
-		document.querySelector('.scrollbar').style.opacity = 0;
-		document.querySelector('.scrollbarHorizont').style.opacity = 0;
+        // document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.add('hide-menu');
+		// });
+        // e.target.closest('.warehouse-input').classList.remove('hide-menu');
+		setHideMenu(true);
+        document.querySelector('.contentScroll').style.overflowY = 'hidden';
+		document.querySelector('.track-vertical').style.opacity = 0;
+		document.querySelector('.track-horizontal').style.opacity = 0;
         if (e.target.value.length === 1) {
             e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
             // setInputID(e.target.value);
@@ -38,13 +39,14 @@ const WarehouseInput = ({setPodlozhka, podlozhka ,setSortActive,sortActive, tran
 	}
     function enter(e) {
         if(e.key === "Enter") {
-            document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-                // x.style.visibility = 'visible';
-                x.classList.remove('hide-menu');
-            });
-            document.querySelector('.contentScroll').style.overflow = 'auto';
-			document.querySelector('.scrollbar').style.opacity = 1;
-			document.querySelector('.scrollbarHorizont').style.opacity = 1;
+            // document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+            //     // x.style.visibility = 'visible';
+            //     x.classList.remove('hide-menu');
+            // });
+			setHideMenu(false);
+            document.querySelector('.contentScroll').style.overflowY = 'auto';
+			document.querySelector('.track-vertical').style.opacity = 1;
+            document.querySelector('.track-horizontal').style.opacity = 1;
 
             setPodlozhka(false);
             e.currentTarget.blur();
@@ -75,9 +77,9 @@ const WarehouseInput = ({setPodlozhka, podlozhka ,setSortActive,sortActive, tran
 			setArrowActive('down');
 		}
 		setSortActive(!sortActive);
-		document.querySelector('.contentScroll').style.overflow = 'scroll';
-		document.querySelector('.scrollbar').style.opacity = 1;
-		document.querySelector('.scrollbarHorizont').style.opacity = 1;
+		document.querySelector('.contentScroll').style.overflowY = 'scroll';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
 
 		setTimeout(() => {
 			setActivity(true);
@@ -88,9 +90,10 @@ const WarehouseInput = ({setPodlozhka, podlozhka ,setSortActive,sortActive, tran
 				setArrowActive('down');
 			}
 		}, 0);
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.remove('hide-menu');
-		});
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.remove('hide-menu');
+		// });
+		setHideMenu(false);
 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
 			x.classList.remove('smallsort');
 		});
@@ -128,7 +131,7 @@ const WarehouseInput = ({setPodlozhka, podlozhka ,setSortActive,sortActive, tran
     <div
     onMouseLeave={warehouseInputOff}
     onMouseEnter={warehouseInputOn}
-    className="warehouse-input"
+    className={`warehouse-input ${hideMenu && !arrowToggle ? "hide-menu": ""}`}
     >
     <input
         onChange={changeInput}

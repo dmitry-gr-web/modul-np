@@ -1,1022 +1,1022 @@
 export let dataAttribute = [
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:true,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:true,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '21345-2312',
-        attribute: 'Green'
+        product: 'XXXX-',
+        id: '2312',
+        select:false,lock:false,attribute: 'Green'
     },
     {
         status:false,
-        product: 'xxxx-',
-        id: '999-2',
-        attribute: 'Black'
+        product: 'XXXX-',
+        id: '999',
+        select:false,lock:false,attribute: 'Black'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '45-2',
-        attribute: 'Голубой'
+        product: 'XXXX-',
+        id: '45',
+        select:false,lock:false,attribute: 'Голубой'
     },
     {
         status:false,
-        product: 'xxxx-',
+        product: 'XXXX-',
         id: '77',
-        attribute: 'Оранжевый'
+        select:false,lock:false,attribute: 'Оранжевый'
     },
     {
         status:true,
-        product: 'xxxx-',
-        id: '996755-23254.2325',
-        attribute: 'Голубой и синий и зеленый и чето там'
+        product: 'XXXX-',
+        id: '9966',
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
     },
 ] 

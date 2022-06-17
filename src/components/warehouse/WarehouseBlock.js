@@ -15,48 +15,75 @@ import ScrollBox from './reactScroll';
 import WarehouseDropRange from './WarehouseDropRange';
 import WarehouseDropInput from './WarehouseDropInput';
 import { useFetch } from '../data/useFetch';
+import MaxaScroll from './MaxaScroll';
 
 // let timer;
 let hover;
+let plusminus;
 
 const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex, translator }) => {
 	const [lastIndex, setLastIndex] = useState(0);
 	const [selectAll, setSelectAll] = useState(false);
 	// const [checked, setChecked] = useState(true);
-	const {data,error,isLoading} = useFetch('http://192.168.0.197:3005/folders', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				"query": {},
-				"start": 10,
-				// "start": props.folder.at(-1)?.id,
-				"end": 20
-			})
-		});
-	console.log(data)
+	// http://192.168.0.197:3005/folders
+	const {data,error,isLoading} = useFetch(''
+	// , {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Accept': 'application/json',
+	// 			'Content-Type': 'application/json'
+	// 		},
+	// 		body: JSON.stringify({
+	// 			"query": {},
+	// 			"start": 10,
+	// 			// "start": props.folder.at(-1)?.id,
+	// 			"end": 20
+	// 		})
+	// 	}
+		);
+	// console.log(data)
 	const [podlozhka, setPodlozhka] = useState(false);
 	const [switchMenu, setSwitchMenu] = useState(false);
+	const [hideMenu, setHideMenu] = useState(false);
 	// const [focusInput, setFocusInput] = useState(false);
 
 	// const [indexInput, setIndexInput] = useState(0);
 	// const [btnMenu, setBtnMenu] = useState(false);
+	// useEffect(()=> {
+	// 	let i = 0;
+	// 	document.addEventListener('contextmenu', function(e){
+	// 		e.preventDefault();
+	// 		console.log(e.pageX, e.pageY)
+	// 		let div = document.createElement('div');
+	// 		i++;
+	// 		div.innerHTML = `eblo tupoe`
+	// 		div.style.cssText = `
+	// 			position: absolute;
+	// 			top:${e.pageY}px;
+	// 			left:${e.pageX}px;
+	// 		`
+	// 		document.querySelector('#root').append(div);
+			
+	// 	})
+	// })
 	const [flagSwitchMenu, setFlagSwitchMenu] = useState(false);
 	// console.log('block')
 	function clickPodlozhka() {
 		setPodlozhka(false);
+		setHideMenu(false);
+		// hover = setTimeout(() => {
+		// 	setHideMenu(false)
+		// }, 400);
 		// setFocusInput(false);
 		setFlagSwitchMenu(false);
 		setSwitchMenu(false);
 
 		document.querySelector('.contentScroll').style.overflow = 'auto';
-		document.querySelector('.scrollbar').style.opacity = 1;
-		document.querySelector('.scrollbarHorizont').style.opacity = 1;
-		document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			x.classList.remove('hide-menu');
-		});
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
+		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
+		// 	x.classList.remove('hide-menu');
+		// });
 		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
 			x.style.zIndex = 1;
 		});
@@ -150,6 +177,244 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	// const [suma2 , setsuma2] = useState('');
 	// const [suma3 , setsuma3] = useState('');
 	// const [suma4 , setsuma4] = useState('');
+	function tooltipOn(e,html) {
+		let posElement = e.currentTarget.getBoundingClientRect();
+		const tooltipBlock = document.getElementById('tooltipBtn');
+		tooltipBlock.style.fontSize = '14px';
+		// if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
+		// 	plusminus = setTimeout(() => {
+		// 		tooltipBlock.innerText = e.target.innerText;
+		// 		tooltipBlock.style.left = posElement.x + 'px';
+		// 		tooltipBlock.style.top = posElement.y + 23 + 'px';
+		// 		tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+		// 	}, 250);
+		// } 
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'status')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'status');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === 'ID') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'id');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'country')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'country');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'currency')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'currency');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'name')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'name');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'attribute')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'attribute');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'available')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'available');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'purchase')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'purchase');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'sales')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'sales');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'margin')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'margin');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'total')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'total');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'nal-ostatok') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Итого в наличии: ' + e.target.innerText.replace('/','');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'nal-rezerv') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Итого зарезервированы: ' + e.target.innerText;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'nal-otpr') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Итого отправлены: ' + e.target.innerText;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'nal-vozvrat') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Итого ожидают получения/списания: ' + e.target.innerText;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'nal-marzha') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Средняя закупка по складу: ' + e.target.innerText;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'nal-zakupka') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Средняя закупка по складу: ' + e.target.innerText;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'nal-prodazha') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Средняя цена продажи: ' + e.target.innerText;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'summa-suma1') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Итого в наличии: ' + e.target.innerText.replace('/','');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'summa-suma2') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Итого зарезервированы: ' + e.target.innerText;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'summa-suma3') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+			const widthPlus = posElement.x + tooltipBlock.offsetWidth;
+			const viewportWidth = document.body.clientWidth;
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Итого отправлены: ' + e.target.innerText;
+				if (widthPlus > viewportWidth) {
+					tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 23 + 'px';
+				} else {
+					tooltipBlock.style.left = posElement.x + 'px';
+					tooltipBlock.style.top = posElement.y + 23 + 'px';
+				}
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.className === 'summa-suma4') {
+			// e.currentTarget.querySelector('.checkbox').checked
+			tooltipBlock.style.fontSize = '12px';
+			const widthPlus = posElement.x + tooltipBlock.offsetWidth;
+			const viewportWidth = document.body.clientWidth;
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerText = 'Итого ожидают получения/списания: ' + e.target.innerText;
+				if (widthPlus > viewportWidth) {
+					tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
+					tooltipBlock.style.top = posElement.y + 23 + 'px';
+				} else {
+					tooltipBlock.style.left = posElement.x + 'px';
+					tooltipBlock.style.top = posElement.y + 23 + 'px';
+				}
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+	
+
+	}
+
+	function tooltipOff() {
+		clearTimeout(plusminus);
+		document.getElementById('tooltipBtn').style.animation = '';
+	}
 	const [pereschetiHeaders, setPereschetiHeaders] = useState(null);
 	useLayoutEffect(()=> {
 		let ostatok = formatNumber2(objProduct.reduce((prev, curr) => {
@@ -200,8 +465,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			suma4:suma4,
 		});
 	},[objProduct])
-	
-	const rootRef = useRef();
+	const refScroll = useRef();
+	// const rootRef = useRef();
 	const [start, setStart] = useState(0);
 	let rowHeight = 18;
 	const [visibleRows, setVisible] = useState(
@@ -265,8 +530,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	function onMouseDown(e) {
 		// if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
 		isDown = true;
-		startX = e.pageX - rootRef.current.content.offsetLeft;
-		scrollLeft = rootRef.current.content.scrollLeft;
+		startX = e.pageX - refScroll.current?.querySelector('.contentScroll').offsetLeft;
+		scrollLeft = refScroll.current?.querySelector('.contentScroll').scrollLeft;
 		// } else {
 		// 	isDown = false;
 		// }
@@ -278,12 +543,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 
 	function onMouseMove(e) {
 		if (!isDown) return;
-
-		e.preventDefault();
+		updateHover();
+		// e.preventDefault();
 		_.throttle(() => {
-			const x = e.pageX - rootRef.current.content.offsetLeft;
+			const x = e.pageX - refScroll.current?.querySelector('.contentScroll').offsetLeft;
 			const walk = (x - startX) * 1.2; //scroll-fast
-			rootRef.current.content.scrollLeft = scrollLeft - walk;
+			refScroll.current.querySelector('.contentScroll').scrollLeft = scrollLeft - walk;
 		}, 100)();
 	}
 	async function updateHover(e) {
@@ -321,38 +586,36 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		updateHover();
 		setSwitchMenu(false);
 	}
-	const [percentScroll, setPercentScroll] = useState(0.87);
+	// const [percentScroll, setPercentScroll] = useState(0.87);
+	// const percentScroll = 0.87;
 
 	useEffect(() => {
-		// rootRef.current.el
-		// 	.querySelector('.simplebar-content-wrapper')
-		// 	.addEventListener('scroll', onScroll);
-	
-	
-		if(rootRef.current){
-			if(rootRef.current.content.offsetHeight < 614) {
-				setPercentScroll(0.81);
+		// console.log(refScroll.current.querySelector('.contentScroll'))
+		setTimeout(() => {
+			if(refScroll.current) {
+				refScroll.current.querySelector('.contentScroll').addEventListener('mousedown', onMouseDown);
+				refScroll.current.querySelector('.contentScroll').addEventListener('mouseleave', onMouseLeave);
+				refScroll.current.querySelector('.contentScroll').addEventListener('mouseup', onMouseLeave);
+				refScroll.current.querySelector('.contentScroll').addEventListener('mousemove', onMouseMove);
 			}
+		}, 500);
+	
+
 		
-				rootRef.current.content.addEventListener('mousedown', onMouseDown);
-				rootRef.current.content.addEventListener('mouseleave', onMouseLeave);
-				rootRef.current.content.addEventListener('mouseup', onMouseLeave);
-				rootRef.current.content.addEventListener('mousemove', onMouseMove);
-		
-		
-		}
+
+		// return ()=> {
+		// 	setTimeout(() => {
+		// 		refScroll.current.querySelector('.contentScroll').removeEventListener('mousedown', onMouseDown);
+		// 		refScroll.current.querySelector('.contentScroll').removeEventListener('mouseleave', onMouseLeave);
+		// 		refScroll.current.querySelector('.contentScroll').removeEventListener('mouseup', onMouseLeave);
+		// 		refScroll.current.querySelector('.contentScroll').removeEventListener('mousemove', onMouseMove);
+		// 	}, 500);
+
+		// }
 
 
-		return () => {
-			// rootRef.current.content.removeEventListener('mousedown', onMouseDown);
-			// rootRef.current.content.removeEventListener('mouseleave', onMouseLeave);
-			// rootRef.current.content.removeEventListener('mouseup', onMouseLeave);
-			// rootRef.current.content.removeEventListener('mousemove', onMouseMove);
-			// rootRef.current.el
-			// 	.querySelector('.simplebar-content-wrapper')
-			// 	.removeEventListener('scroll',  _.throttle(onScroll, 500));
-		};
-	}, [objProduct]);
+	}, []);
+	// console.log(percentScroll)
 
 	// const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
 
@@ -402,16 +665,17 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 				x.classList.add('show');
 			});
 		} else {
-			document.querySelectorAll('.animationFrame').forEach((x) => {
-				x.classList.remove('show');
-				x.style.overflow = 'hidden';
-			});
-			document.querySelectorAll('.block-3-btn').forEach((x) => {
-				x.classList.remove('show');
-			});
-			hover = setTimeout(() => {
-				setLoadedLabelBlock(false);
-			}, 400);
+				document.querySelectorAll('.animationFrame').forEach((x) => {
+					x.classList.remove('show');
+					x.style.overflow = 'hidden';
+				});
+				document.querySelectorAll('.block-3-btn').forEach((x) => {
+					x.classList.remove('show');
+				});
+				hover = setTimeout(() => {
+					setLoadedLabelBlock(false);
+				}, 400);
+		
 		}
 	}, [switchMenu, loadedLabelBlock]);
 	const [sortActive, setSortActive] = useState(false);
@@ -466,23 +730,20 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	// const tablescroll = useRef();
 
 	const [treugolka, setTreugolka]=useState(false);
-	function treugolnikEpptaOn () {
-		setTreugolka(true);
-		// document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
-		// 	x.classList.remove('hide-arrow');
-		// });
-	}
-	function treugolnikEpptaOff () {
-		setTreugolka(false);
-		// document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
-		// 	x.classList.add('hide-arrow');
-		// });
-	}
+	// function treugolnikEpptaOn () {
+	// 	setTreugolka(true);
+
+	// }
+	// function treugolnikEpptaOff () {
+	// 	setTreugolka(false);
+
+	// }
 	return (
 		<>
 		{isLoading ? <div className='loading'><Preloaded/></div> :<div className="warehouse-products">
 			<div className="warehouse-products-title">
-				{translator.getTranslation('warehouse', 'goods')}
+				<hr/>
+				<span>{translator.getTranslation('warehouse', 'goods')}</span>
 				<button>
 					<SvGBtnPlus />
 				</button>
@@ -497,15 +758,30 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					// height: 'calc(100vh - 216px)',
 					height: 'calc(100vh - 190px)',
 				}}
+				ref={refScroll}
 			>
-				<ScrollBox
+				{/* <ScrollBox
 					ref={rootRef}
 					// scrollVertMinus={0.07}
+		
+					setTreugolka={setTreugolka}
 					percent={percentScroll}
+					setPercentScroll={setPercentScroll}
+					podlozhka={podlozhka}
 					scroll={_.throttle(onScroll, 500)}
 					color="rgba(0, 0, 0, 0.3)"
+				> */}
+				<MaxaScroll
+					// ref={rootRef}
+					// scrollVertMinus={0.07}
+		
+					setTreugolka={setTreugolka}
+				
+					updateHover={updateHover}
+					podlozhka={podlozhka}
+					infiniteScroll={_.throttle(onScroll, 500)}
+			
 				>
-	
 
 					<table
 						tabIndex={-1}
@@ -515,7 +791,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 						// onMouseEnter={}
 						// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 					>
-						<thead onMouseEnter={treugolnikEpptaOn} onMouseLeave={treugolnikEpptaOff} className="first-tab-header">
+						<thead 
+						// onMouseEnter={treugolnikEpptaOn} onMouseLeave={treugolnikEpptaOff}
+						 className="first-tab-header">
 							<tr>
 								{podlozhka && (
 									<td style={{ padding: '0px' }}>
@@ -552,7 +830,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													paddingLeft: 0,
 													minWidth: 51,
 													paddingRight: '10px',
+													cursor:'help'
 												}}
+												onMouseEnter={tooltipOn}
+												onMouseLeave={tooltipOff}
 											>
 												{translator.getTranslation('warehouse', 'status')}
 											</div>
@@ -566,6 +847,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													// justifyContent: 'space-between',
 													display: 'flex',
 													height: 20,
+												
 													// height: '16px',
 												}}
 											>
@@ -576,13 +858,18 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											</div>
 										</div>
 
-										<div className="id-width" style={{ paddingRight: '10px' }}>
+										<div className="id-width" style={{ paddingRight: '10px',cursor:'help'}}
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
+										>
 											ID
 										</div>
-										<div style={{ paddingRight: '10px', minWidth: 51 }}>
+										<div 	onMouseEnter={tooltipOn}
+												onMouseLeave={tooltipOff} style={{cursor:'help', paddingRight: '10px', minWidth: 51 }}>
 											{translator.getTranslation('warehouse', 'country')}
 										</div>
-										<div style={{ paddingRight: '10px', minWidth: 51 }}>
+										<div 	onMouseEnter={tooltipOn}
+												onMouseLeave={tooltipOff} style={{cursor:'help', paddingRight: '10px', minWidth: 51 }}>
 											{translator.getTranslation('warehouse', 'currency')}
 										</div>
 										<div
@@ -591,9 +878,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												paddingRight: '15px',
 												justifyContent: 'center',
 												width: 200,
+												cursor:'help'
 												// width: widthColum.name - 15 + 'px',
 												// maxWidth: '172px',
 											}}
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
 										>
 											{translator.getTranslation('warehouse', 'name')}
 										</div>
@@ -603,8 +893,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												// paddingRight: '3px',
 												//  width: widthColum.attribute + 'px',
 												width: 150,
+												cursor:'help'
 												// whiteSpace:'pre'
 											}}
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
 										>
 											{translator.getTranslation('warehouse', 'attribute')}
 										</div>
@@ -612,19 +905,35 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 									</div>
 								</th>
 
-								<th style={{ paddingLeft: '12px', paddingRight: '10px' }} colSpan={4}>
+								<th 
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
+								style={{ paddingLeft: '12px', paddingRight: '10px',cursor:'help' }} colSpan={4}>
 									{translator.getTranslation('warehouse', 'available')}
 								</th>
-								<th style={{ paddingRight: '10px' }}>
+								<th 
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
+								style={{ paddingRight: '10px' ,cursor:'help'}}>
 									{translator.getTranslation('warehouse', 'purchase')}
 								</th>
-								<th style={{ paddingRight: '10px' }}>
+								<th 
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
+								style={{ paddingRight: '10px',cursor:'help' }}>
 									{translator.getTranslation('warehouse', 'sales')}
 								</th>
-								<th style={{ paddingRight: '10px' }}>
+								<th 
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
+								style={{ paddingRight: '10px',cursor:'help' }}>
 									{translator.getTranslation('warehouse', 'margin')}
 								</th>
-								<th colSpan={4}>{translator.getTranslation('warehouse', 'total')}</th>
+								<th 
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
+										style={{cursor:'help'}}
+								colSpan={4}>{translator.getTranslation('warehouse', 'total')}</th>
 							</tr>
 							<tr>
 								<th className="sticky-head" style={{ zIndex: 3 }}>
@@ -668,6 +977,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													switchMenu={switchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
 													treugolka={treugolka}
+													hideMenu={hideMenu}
+													setHideMenu={setHideMenu}
 												/>
 											</div>
 											<div
@@ -692,6 +1003,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
 														treugolka={treugolka}
+														hideMenu={hideMenu}
+														setHideMenu={setHideMenu}
 												
 													/>
 											
@@ -712,6 +1025,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
 														treugolka={treugolka}
+														hideMenu={hideMenu}
+														setHideMenu={setHideMenu}
 													/>
 											
 								
@@ -730,6 +1045,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
 														treugolka={treugolka}
+														hideMenu={hideMenu}
+														setHideMenu={setHideMenu}
 													/>
 											
 												{/* {console.log(document.querySelectorAll('.block-3-btn').children)} */}
@@ -755,6 +1072,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												translator={translator}
+												setHideMenu={setHideMenu}
+												hideMenu={hideMenu}
 												/>
 											</div>
 											<div style={{ paddingRight: '10px', minWidth: 51, zIndex: 5 }}>
@@ -771,6 +1090,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
 													treugolka={treugolka}
+													hideMenu={hideMenu}
+													setHideMenu={setHideMenu}
 													// setActivity={setActivity}
 													// activity={activity}
 												/>
@@ -789,6 +1110,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
 													treugolka={treugolka}
+													hideMenu={hideMenu}
+													setHideMenu={setHideMenu}
 													// setActivity={setActivity}
 													// activity={activity}
 												/>
@@ -817,6 +1140,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
 													treugolka={treugolka}
+													hideMenu={hideMenu}
+													setHideMenu={setHideMenu}
 												/>
 											</div>
 											<div
@@ -843,6 +1168,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
 													treugolka={treugolka}
+													hideMenu={hideMenu}
+													setHideMenu={setHideMenu}
 												/>
 											</div>
 										</div>
@@ -894,6 +1221,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												width={dimensions.width1-15}
 												setSortActive={setSortActive}
 												treugolka={treugolka}
+												hideMenu={hideMenu}
+												setHideMenu={setHideMenu}
 											/>
 										</div>
 										<div className='rezervBtn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
@@ -907,6 +1236,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												treugolka={treugolka}
+												hideMenu={hideMenu}
+												setHideMenu={setHideMenu}
 											/>
 										</div>
 										<div className='otprBtn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
@@ -920,6 +1251,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												treugolka={treugolka}
+												hideMenu={hideMenu}
+												setHideMenu={setHideMenu}
 											/>
 										</div>
 										<div className='vozvratBtn' style={{height: 20,display:'flex',position:'relative'}}>
@@ -933,6 +1266,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												treugolka={treugolka}
+												hideMenu={hideMenu}
+												setHideMenu={setHideMenu}
 											/>
 										</div></>}
 									</div>
@@ -952,6 +1287,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											sortActive={sortActive}
 											setSortActive={setSortActive}
 											treugolka={treugolka}
+											hideMenu={hideMenu}
+											setHideMenu={setHideMenu}
 										/>
 									</div>
 								</th>
@@ -969,6 +1306,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											sortActive={sortActive}
 											setSortActive={setSortActive}
 											treugolka={treugolka}
+											hideMenu={hideMenu}
+											setHideMenu={setHideMenu}
 										/>
 									</div>
 									
@@ -987,6 +1326,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											sortActive={sortActive}
 											setSortActive={setSortActive}
 											treugolka={treugolka}
+											hideMenu={hideMenu}
+											setHideMenu={setHideMenu}
 										/>
 									</div>
 									
@@ -1015,6 +1356,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												treugolka={treugolka}
+												hideMenu={hideMenu}
+												setHideMenu={setHideMenu}
 											/>
 										</div>
 										<div className='suma2Btn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
@@ -1028,6 +1371,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												treugolka={treugolka}
+												hideMenu={hideMenu}
+												setHideMenu={setHideMenu}
 											/>
 										</div>
 										<div className='suma3Btn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
@@ -1041,6 +1386,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												treugolka={treugolka}
+												hideMenu={hideMenu}
+												setHideMenu={setHideMenu}
 											/>
 										</div>
 										<div className='suma4Btn' style={{height: 20,display:'flex',position:'relative'}}>
@@ -1054,6 +1401,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												treugolka={treugolka}
+												hideMenu={hideMenu}
+												setHideMenu={setHideMenu}
 											/>
 										</div></>}
 									</div>
@@ -1061,7 +1410,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 							</tr>
 							<tr ref={queryWidthTr}>
 								<th style={{ position: 'sticky', left: 0, background: 'white', zIndex: 2 }}></th>
-								<th style={{ paddingLeft: '12px', paddingRight: '3px' }} className="nal-ostatok">
+								<th style={{ paddingLeft: '12px', paddingRight: '3px' }} className="nal-ostatok"
+									onMouseEnter={tooltipOn}
+									onMouseLeave={tooltipOff}
+								>
 									<div
 										style={{
 											textAlign: 'right',
@@ -1073,39 +1425,59 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										{pereschetiHeaders && pereschetiHeaders.ostatok}
 										{/* {formatNumber2(ostatok)} */}
 										{/* {ostatok} */}
-										<span style={{ paddingLeft: 3,zIndex:0 }}>/</span>
+										<span style={{ paddingLeft: 3,zIndex:0, pointerEvents: 'none' }}>/</span>
 									</div>
 								</th>
-								<th className="nal-rezerv" style={{ paddingRight: '4px' }}>
+								<th className="nal-rezerv" style={{ paddingRight: '4px' }}
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}>
 									<div style={{ color: 'rgba(0,0,0,0.7)' }}>
 										{/* {formatNumber2(rezerv)} */}
 										{pereschetiHeaders && pereschetiHeaders.rezerv}
 									</div>
-									<span></span>
+									<span style={{pointerEvents: 'none'}}></span>
 								</th>
-								<th className="nal-otpr" style={{ paddingRight: '4px' }}>
+								<th className="nal-otpr" style={{ paddingRight: '4px' }}
+										onMouseEnter={tooltipOn}
+										onMouseLeave={tooltipOff}
+								>
 									{/* <div style={{ color: 'rgba(0,0,0,0.7)'}}>{formatNumber2(otpr)}</div> */}
 									<div style={{ color: 'rgba(0,0,0,0.7)' }}>{pereschetiHeaders && pereschetiHeaders.otpr}</div>
-									<span></span>
+									<span style={{pointerEvents: 'none'}}></span>
 								</th>
-								<th className="nal-vozvrat" style={{ paddingRight: '10px' }}>
+								<th className="nal-vozvrat" style={{ paddingRight: '10px' }}
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
+								>
 									<div style={{ color: 'rgba(0,0,0,0.7)' }}>{pereschetiHeaders && pereschetiHeaders.vozvrat}</div>
 									{/* <div style={{ color: 'rgba(0,0,0,0.7)'}}>{formatNumber2(vozvrat)}</div> */}
-									<span></span>
+									<span style={{pointerEvents: 'none'}}></span>
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}>
+								<th className='nal-zakupka' style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}
+												onMouseEnter={tooltipOn}
+												onMouseLeave={tooltipOff}
+								>
 									<div>{pereschetiHeaders && pereschetiHeaders.zakupka}</div>
 									{/* <div>{formatNumber(zakupka)}</div> */}
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}>
+								<th style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}
+								className='nal-prodazha'
+								onMouseEnter={tooltipOn}
+								onMouseLeave={tooltipOff}>
 									{/* <div>{formatNumber(prodazha)}</div> */}
 									<div>{pereschetiHeaders && pereschetiHeaders.prodazha}</div>
 								</th>
-								<th style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}>
+								<th style={{ textAlign: 'right', paddingRight: '10px', color: 'rgba(0,0,0,0.9)' }}
+								className='nal-marzha'
+								onMouseEnter={tooltipOn}
+								onMouseLeave={tooltipOff}>
 									{/* <div>{formatNumber(marzha)}</div> */}
 									<div>{pereschetiHeaders && pereschetiHeaders.marzha}</div>
 								</th>
-								<th className="summa-suma1">
+								<th className="summa-suma1"
+									onMouseEnter={tooltipOn}
+									onMouseLeave={tooltipOff}
+									>
 									<div
 										style={{
 											textAlign: 'right',
@@ -1117,29 +1489,36 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 									>
 										{/* {formatNumber(suma1)} */}
 										{pereschetiHeaders && pereschetiHeaders.suma1}
-										<span style={{ paddingLeft: 3 }}>/</span>
+										<span style={{ paddingLeft: 3, pointerEvents: 'none' }}>/</span>
 									</div>
 								</th>
-								<th className="summa-suma2">
+								<th className="summa-suma2"
+									onMouseEnter={tooltipOn}
+									onMouseLeave={tooltipOff}>
 									<div style={{ paddingRight: '4px', color: 'rgba(0,0,0,0.7)' }}>
 										{/* {formatNumber(suma2)} */}
 										{pereschetiHeaders && pereschetiHeaders.suma2}
 									</div>
-									<span></span>
+									<span style={{pointerEvents: 'none'}}></span>
 								</th>
-								<th className="summa-suma3">
+								<th className="summa-suma3"
+									onMouseEnter={tooltipOn}
+									onMouseLeave={tooltipOff}>
 									<div style={{ paddingRight: '4px', color: 'rgba(0,0,0,0.7)' }}>
 										{/* {formatNumber(suma3)} */}
 										{pereschetiHeaders && pereschetiHeaders.suma3}
 									</div>
-									<span></span>
+									<span style={{pointerEvents: 'none'}}></span>
 								</th>
-								<th className="summa-suma4">
+								<th className="summa-suma4"
+								onMouseEnter={tooltipOn}
+								onMouseLeave={tooltipOff}
+								>
 									<div style={{ color: 'rgba(0,0,0,0.7)' }}>
 										{/* {formatNumber(suma4)} */}
 										{pereschetiHeaders && pereschetiHeaders.suma4}
 									</div>
-									<span></span>
+									<span style={{pointerEvents: 'none'}}></span>
 								</th>
 							</tr>
 							<tr>
@@ -1154,7 +1533,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 							<tr style={{ height: getTopHeight() }}></tr>
 
 							{objProduct.length > 0 &&
-								objProduct.slice(getStart(), getStart() + visibleRows).map((x, index, arr) => (
+								objProduct.slice(getStart(), getStart() + visibleRows +1).map((x, index, arr) => (
 									<WarehouseProductList
 										index={index + getStart()}
 										// rowHeight={rowHeight}
@@ -1164,7 +1543,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 										key={index + getStart()}
 										// start={getStart()}
 										// rowHeight={rowHeight}
-										// setChecked={setChecked}
+										// setChecked={setChecked}'
+										setHideMenu={setHideMenu}
+										hideMenu={hideMenu}
 										setLoadedLabelBlock={setLoadedLabelBlock}
 										loadedLabelBlock={loadedLabelBlock}
 										// checked={checked}
@@ -1207,8 +1588,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 						</tfoot>
 					</table>
 
-
-				</ScrollBox>
+				</MaxaScroll>
+				{/* </ScrollBox> */}
 			</div>
 
 			<div ref={btnUp} onClick={clickScrollUp} className="btnUp">
