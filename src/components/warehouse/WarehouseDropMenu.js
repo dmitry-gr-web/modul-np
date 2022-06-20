@@ -24,7 +24,8 @@ const WarehouseDropMenu = ({
 	// toggleSort,
 	setWidth21px,
 	width21px,
-	treugolka,
+	hideArrow,
+	adaptiveTelNum,
 	// activity,
 	// setActivity,
 	zIndex,
@@ -93,6 +94,16 @@ const WarehouseDropMenu = ({
 				{ id: 0, attribute: 'all', select: true },
 				{ id: 1, attribute: <LabelOn />, select: false },
 				{ id: 2, attribute: <LabelOff />, select: false },
+			];
+		}
+		if (type === 'telOperator') {
+			newarr = [
+				{ id: 0, attribute: 'all', select: true },
+				{ id: 1, attribute: 'icon-Vector-1', select: false },
+				{ id: 2, attribute: 'icon-Union', select: false },
+				{ id: 2, attribute: 'icon-Vector-3', select: false },
+				{ id: 2, attribute: 'icon-Union-1', select: false },
+				{ id: 2, attribute: 'icon-Union-18', select: false },
 			];
 		}
 	}
@@ -344,7 +355,24 @@ const WarehouseDropMenu = ({
 					}
 				}
 				e.currentTarget.style.width = '51px';
-				document.querySelector('.width21px').style.maxWidth = '21px';
+				if(document.querySelector('.width21px')) document.querySelector('.width21px').style.maxWidth = '21px';
+
+			}
+			if (adaptiveTelNum) {
+				if (refStatusText.current.innerHTML !== '') {
+					warehouse.current.classList.add('hide-arrow');
+				} else if (refStatusText.current.innerHTML !== '' && activity) {
+					warehouse.current.classList.add('hide-arrow');
+				} else {
+					if (activity) {
+						warehouse.current.classList.add('hide-arrow');
+					} else {
+						warehouse.current.classList.remove('hide-arrow');
+					}
+				}
+				e.currentTarget.style.minWidth = '51px';
+				// if(document.querySelector('.width21px')) document.querySelector('.width21px').style.maxWidth = '21px';
+
 			}
 			warehouse.current.querySelector('.simplebar-content-wrapper')?.scrollTo({
 				top: 0,
@@ -399,7 +427,26 @@ const WarehouseDropMenu = ({
 					}
 				}
 				e.currentTarget.style.width = '22px';
-				document.querySelector('.width21px').style.maxWidth = '51px';
+				// document.querySelector('.width21px').style.maxWidth = '51px';
+				if(document.querySelector('.width21px')) document.querySelector('.width21px').style.maxWidth = '51px';
+
+			}
+			if (adaptiveTelNum) {
+				if (refStatusText.current.innerHTML !== '') {
+					warehouse.current.classList.add('hide-arrow');
+				} else if (refStatusText.current.innerHTML !== '' && activity) {
+					warehouse.current.classList.add('hide-arrow');
+				} else {
+					if (activity) {
+						warehouse.current.classList.add('hide-arrow');
+					} else {
+						warehouse.current.classList.remove('hide-arrow');
+					}
+				}
+				e.currentTarget.style.minWidth = '22px';
+				// document.querySelector('.width21px').style.maxWidth = '51px';
+				// if(document.querySelector('.width21px')) document.querySelector('.width21px').style.maxWidth = '51px';
+
 			}
 		}
 	}
@@ -437,7 +484,7 @@ const WarehouseDropMenu = ({
 		tooltipBlock.style.fontSize = '10px';
 		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
 			// tooltipBlock.innerText = e.target.innerText;
-			if (type === 'country' || type === 'status') {
+			if (type === 'country' || type === 'status' || type === 'telOperator') {
 				// tooltipBlock.innerText = e.target.innerText;
 			} else {
 				tooltipBlock.innerHTML = searchLine(e.target.innerText, value);
@@ -501,9 +548,9 @@ const WarehouseDropMenu = ({
 		
 					// tooltipBlock.style.fontSize = '12px';
 					if(e.currentTarget.querySelector('input')?.defaultChecked){
-						tooltipBlock.innerText = `Разблокированый заказ`;
+						tooltipBlock.innerText = translator.getTranslation('tooltipSwitchBtn', 'switchOn');
 					}else {
-						tooltipBlock.innerText = `Заблокированый заказ`;
+						tooltipBlock.innerText = translator.getTranslation('tooltipSwitchBtn', 'switchOff');
 					}
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y -2+ 'px';
@@ -627,18 +674,18 @@ const WarehouseDropMenu = ({
 	// },[])
 	return (
 		<div
-			style={adaptive ? { width: 22, transition: 'width 0.3s', padding: '0 3px' } : zIndex ? { zIndex: 1 } : {}}
-			// style={adaptive ? { width: 22, transition: 'width 0.3s', padding: '0 3px' } : zIndex ? { zIndex: 1 } : !treugolka && !podlozhka ? {visibility:'hidden', opacity: 0}: {visibility: 'visible',opacity:1}}
+			style={adaptive ? { width: 22, transition: 'width 0.3s', padding: '0 3px' } : zIndex ? { zIndex: 1 } : adaptiveTelNum ? {minWidth: 22, width:22, transition: 'min-width 0.3s', paddingRight: '3px'} : {}}
+			// style={adaptive ? { width: 22, transition: 'width 0.3s', padding: '0 3px' } : zIndex ? { zIndex: 1 } : !hideArrow && !podlozhka ? {visibility:'hidden', opacity: 0}: {visibility: 'visible',opacity:1}}
 			onMouseEnter={menuOn}
 			onMouseLeave={menuOff}
 			className={`warehouse-dropmenu ${
 				arrowToggle ||
 				activity ||
 				(refStatusText.current?.innerHTML !== '' && adaptive) ||
-				(width21px === true && !switchMenu) || !treugolka && !podlozhka
+				(width21px === true && !switchMenu) || !hideArrow && !podlozhka
 					? 'hide-arrow'
 					: ''
-			} ${adaptive ? 'adaptive' : ''} ${hideMenu && !openMenu ? 'hide-menu': ""}`}
+			} ${adaptive || adaptiveTelNum ? 'adaptive' : ''} ${hideMenu && !openMenu ? 'hide-menu': ""}`}
 			// style={}
 			ref={warehouse}
 		>
@@ -664,7 +711,7 @@ const WarehouseDropMenu = ({
 
 					{/* <div style={{display: `${active ? 'block': 'none'}`,width: '100%', background: 'rgb(117, 117, 117)',position: 'absolute', left:0, top:`${upDown ? '0px' : '18px'}`,height: 2, borderRadius: '2px'}} className='border'/> */}
 				</>
-			) : type === 'status' ? (
+			) : type === 'status' || type === 'telOperator' ? (
 				<>
 					<div ref={refStatusText} className="status-result">
 						{(obj.filter((x) => x.select === true).length > 1)
@@ -727,7 +774,7 @@ const WarehouseDropMenu = ({
 					></path>
 				</svg>
 			</div>
-			<span className="underline" style={adaptive && {left:'3px', width: 'calc(100% - 6px)' }}></span>
+			<span className="underline" style={adaptive && {left:'3px', width: 'calc(100% - 6px)' } || adaptiveTelNum && { width: 'calc(100% - 3px)' }}></span>
 			{/* {console.log(openMenu)} */}
 
 			{type === 'name' || type === 'attribute' ||  type ==='company' || type ==='contact' ? (
@@ -776,8 +823,8 @@ const WarehouseDropMenu = ({
 				</div>
 			) : (
 				<div
-					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
-					style={adaptive && {width: 'calc(100% - 6px)'}}
+					className={openMenu ? `dropmenu ${adaptive || adaptiveTelNum ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+					style={adaptive && {width: 'calc(100% - 6px)'} || adaptiveTelNum && { width: 'calc(100% - 3px)' }}
 				>
 					<SimpleBar
 						// style={adaptive ? { transitionDelay: '0.1s' } : {}}
@@ -800,11 +847,12 @@ const WarehouseDropMenu = ({
 									<span
 										className={
 											index !== 0
-												? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : ''}`
+												? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : type === 'telOperator' ? x.attribute : ''}`
 												: ''
 										}
 									>
-										{translator.getTranslation('btnAll', x.attribute) ?? x.attribute}
+										{type !== 'telOperator' && (translator.getTranslation('btnAll', x.attribute) ?? x.attribute)}
+										{type === 'telOperator' && index === 0 && (translator.getTranslation('btnAll', x.attribute) ?? x.attribute)}
 									</span>
 								</div>
 							))}

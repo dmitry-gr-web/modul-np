@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import "./styles.css";
 
-export default function MaxaScroll({updateHover, children, infiniteScroll, setTreugolka, podlozhka }) {
+export default function MaxaScroll({updateHover, children, infiniteScroll, setHideArrow, podlozhka }) {
   let [heightScroll, setHeightScroll] = useState(0);
   let [widthScroll, setWidthScroll] = useState(0);
   let [top, setTop] = useState(true);
@@ -37,30 +37,6 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setTr
       setLeft(false);
     }
     window.addEventListener('resize',function(){
-      // let TrackHeight = document.querySelector(".track-vertical")
-      // .clientHeight;
-      // let content = document.querySelector('.contentScroll');
-      // let top = Math.floor(
-      // (TrackHeight -
-      //   document.querySelector(".track-vertical .bar").clientHeight) *
-      //   (content.scrollTop /
-      //     (content.scrollHeight - content.clientHeight))
-      // );
-      // let TrackWidth = document.querySelector(".track-horizontal")
-      // .clientWidth;
-
-      // let left = Math.floor(
-      // (TrackWidth -
-      //   document.querySelector(".track-horizontal .bar").clientWidth) *
-      //   (content.scrollLeft /
-      //     (content.scrollWidth - content.clientWidth))
-      // );
-      // document.querySelector(
-      // ".track-horizontal .bar"
-      // ).style.transform = `translate3d(${left}px, 0px, 0px)`;
-      // document.querySelector(
-      // ".track-vertical .bar"
-      // ).style.transform = `translate3d(0px, ${top}px, 0px)`;
 
       if (
         document.querySelector(".contentScroll").scrollHeight >
@@ -140,7 +116,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setTr
         if(document.querySelector('.scrollbox')){
             document.querySelector('.track-vertical').style.opacity = 1;
             document.querySelector('.track-horizontal').style.opacity = 1;
-            setTreugolka(true);
+            setHideArrow(true);
         }
 
     }
@@ -150,7 +126,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setTr
         if(document.querySelector('.scrollbox')) {
             document.querySelector('.track-vertical').style.opacity = 0;
             document.querySelector('.track-horizontal').style.opacity = 0;
-            setTreugolka(false);
+            setHideArrow(false);
         }
 
     }

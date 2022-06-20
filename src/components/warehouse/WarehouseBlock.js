@@ -282,7 +282,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			tooltipBlock.style.fontSize = '12px';
 
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Итого в наличии: ' + e.target.innerText.replace('/','');
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-available') + e.target.innerText.replace('/','');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -293,7 +293,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			tooltipBlock.style.fontSize = '12px';
 
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Итого зарезервированы: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-reserv') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -304,7 +304,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			tooltipBlock.style.fontSize = '12px';
 
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Итого отправлены: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-send') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -315,7 +315,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			tooltipBlock.style.fontSize = '12px';
 
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Итого ожидают получения/списания: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-crib') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -325,7 +325,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltipBlock.style.fontSize = '12px';
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Средняя закупка по складу: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-margin') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -335,7 +335,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltipBlock.style.fontSize = '12px';
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Средняя закупка по складу: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-purchase') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -345,7 +345,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltipBlock.style.fontSize = '12px';
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Средняя цена продажи: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-sale') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -356,7 +356,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			tooltipBlock.style.fontSize = '12px';
 
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Итого в наличии: ' + e.target.innerText.replace('/','');
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-available') + e.target.innerText.replace('/','');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -367,7 +367,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			tooltipBlock.style.fontSize = '12px';
 
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Итого зарезервированы: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-reserv') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -379,7 +379,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			const widthPlus = posElement.x + tooltipBlock.offsetWidth;
 			const viewportWidth = document.body.clientWidth;
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Итого отправлены: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-send') + e.target.innerText;
 				if (widthPlus > viewportWidth) {
 					tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -396,7 +396,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			const widthPlus = posElement.x + tooltipBlock.offsetWidth;
 			const viewportWidth = document.body.clientWidth;
 			plusminus = setTimeout(() => {
-				tooltipBlock.innerText = 'Итого ожидают получения/списания: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sumTotal-crib') + e.target.innerText;
 				if (widthPlus > viewportWidth) {
 					tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -729,13 +729,13 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	//adaptive scroll height dlya Valeri
 	// const tablescroll = useRef();
 
-	const [treugolka, setTreugolka]=useState(false);
+	const [hideArrow, setHideArrow]=useState(false);
 	// function treugolnikEpptaOn () {
-	// 	setTreugolka(true);
+	// 	setHideArrow(true);
 
 	// }
 	// function treugolnikEpptaOff () {
-	// 	setTreugolka(false);
+	// 	setHideArrow(false);
 
 	// }
 	return (
@@ -764,7 +764,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					ref={rootRef}
 					// scrollVertMinus={0.07}
 		
-					setTreugolka={setTreugolka}
+					setHideArrow={setHideArrow}
 					percent={percentScroll}
 					setPercentScroll={setPercentScroll}
 					podlozhka={podlozhka}
@@ -775,7 +775,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					// ref={rootRef}
 					// scrollVertMinus={0.07}
 		
-					setTreugolka={setTreugolka}
+					setHideArrow={setHideArrow}
 				
 					updateHover={updateHover}
 					podlozhka={podlozhka}
@@ -976,7 +976,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSwitchMenu={setSwitchMenu}
 													switchMenu={switchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
-													treugolka={treugolka}
+													hideArrow={hideArrow}
 													hideMenu={hideMenu}
 													setHideMenu={setHideMenu}
 												/>
@@ -1002,7 +1002,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setSortActive={setSortActive}
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
-														treugolka={treugolka}
+														hideArrow={hideArrow}
 														hideMenu={hideMenu}
 														setHideMenu={setHideMenu}
 												
@@ -1024,7 +1024,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setSortActive={setSortActive}
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
-														treugolka={treugolka}
+														hideArrow={hideArrow}
 														hideMenu={hideMenu}
 														setHideMenu={setHideMenu}
 													/>
@@ -1044,7 +1044,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setSortActive={setSortActive}
 														setLabelForWidth={setLabelForWidth}
 														setWidth21px={setWidth21px}
-														treugolka={treugolka}
+														hideArrow={hideArrow}
 														hideMenu={hideMenu}
 														setHideMenu={setHideMenu}
 													/>
@@ -1089,7 +1089,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSortActive={setSortActive}
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
-													treugolka={treugolka}
+													hideArrow={hideArrow}
 													hideMenu={hideMenu}
 													setHideMenu={setHideMenu}
 													// setActivity={setActivity}
@@ -1109,7 +1109,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSortActive={setSortActive}
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
-													treugolka={treugolka}
+													hideArrow={hideArrow}
 													hideMenu={hideMenu}
 													setHideMenu={setHideMenu}
 													// setActivity={setActivity}
@@ -1139,7 +1139,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSortActive={setSortActive}
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
-													treugolka={treugolka}
+													hideArrow={hideArrow}
 													hideMenu={hideMenu}
 													setHideMenu={setHideMenu}
 												/>
@@ -1167,7 +1167,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setSortActive={setSortActive}
 													setWidth21px={setWidth21px}
 													setLabelForWidth={setLabelForWidth}
-													treugolka={treugolka}
+													hideArrow={hideArrow}
 													hideMenu={hideMenu}
 													setHideMenu={setHideMenu}
 												/>
@@ -1220,7 +1220,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												adaptive={true}
 												width={dimensions.width1-15}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
 											/>
@@ -1235,7 +1235,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												width={dimensions.width2-4}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
 											/>
@@ -1250,7 +1250,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												adaptive={true}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
 											/>
@@ -1265,7 +1265,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												width={dimensions.width4-10}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
 											/>
@@ -1286,7 +1286,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											// adaptive={true}
 											sortActive={sortActive}
 											setSortActive={setSortActive}
-											treugolka={treugolka}
+											hideArrow={hideArrow}
 											hideMenu={hideMenu}
 											setHideMenu={setHideMenu}
 										/>
@@ -1305,7 +1305,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											// adaptive={true}
 											sortActive={sortActive}
 											setSortActive={setSortActive}
-											treugolka={treugolka}
+											hideArrow={hideArrow}
 											hideMenu={hideMenu}
 											setHideMenu={setHideMenu}
 										/>
@@ -1325,7 +1325,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											// adaptive={true}
 											sortActive={sortActive}
 											setSortActive={setSortActive}
-											treugolka={treugolka}
+											hideArrow={hideArrow}
 											hideMenu={hideMenu}
 											setHideMenu={setHideMenu}
 										/>
@@ -1355,7 +1355,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												width={dimensions.widthsuma1-3}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
 											/>
@@ -1370,7 +1370,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												width={dimensions.widthsuma2-4}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
 											/>
@@ -1385,7 +1385,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												adaptive={true}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
 											/>
@@ -1400,7 +1400,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												width={dimensions.widthsuma4}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
 											/>

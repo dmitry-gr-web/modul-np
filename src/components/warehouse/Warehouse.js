@@ -47,9 +47,9 @@ const Warehouse = () => {
 
 	
 	const [ul, setUl] = useState([
-		{ id: 0, name: "goods", select: true },
+		{ id: 0, name: "goods", select: false },
 		{ id: 1, name: "attributes", select: false },
-		{ id: 2, name: "suppliers", select: false },
+		{ id: 2, name: "suppliers", select: true },
 		{ id: 3, name: "movementOfGoods", select: false },
 	]);
 	function clickNav(i) {

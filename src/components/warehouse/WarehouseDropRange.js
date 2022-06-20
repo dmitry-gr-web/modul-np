@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from 'react';
 import './range.scss';
-const WarehouseDropRange = ({hideMenu,setHideMenu,treugolka,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
+const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
 	let arr = [
 		'0',
 		'1',
@@ -560,7 +560,7 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,treugolka,setSortActive,sortAc
 				// className={`warehouse-dropmenu ranges`}
 				className={`warehouse-dropmenu ranges ${
 					arrowToggle ||
-					activity || !treugolka && !podlozhka ? 'hide-arrow' : ''
+					activity || !hideArrow && !podlozhka ? 'hide-arrow' : ''
 				} ${hideMenu && !openMenu ? 'hide-menu': ""}`}
 				ref={warehouse}
 			>

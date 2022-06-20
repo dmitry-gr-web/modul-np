@@ -9,6 +9,8 @@ import { useFetch } from '../data/useFetch';
 import SwitchBtn from './SwitchBtn';
 import MaxaScroll from './MaxaScroll';
 let hover;
+let plusminus;
+let tooltip;
 const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 	const {data,error,isLoading} = useFetch(
 	// 	'http://192.168.0.197:3005/goodAttributes', {
@@ -215,8 +217,123 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 	// 	document.querySelector('.scrollbar').style.opacity = 0;
 	// 	document.querySelector('.scrollbarHorizont').style.opacity = 0;
 	// }
+	function tooltipOn(e, html) {
+		// e.stopPropagation();
+		// clearTimeout(plusminus);
+		// const tooltipBlock = document.getElementById('tooltipBtn');
+		// let posElement = e.currentTarget.getBoundingClientRect();
+		// // tooltipBlock.innerHTML = html;
+		// tooltipBlock.style.fontSize = '14px';
+		// console.log(e);
+		let posElement = e.currentTarget.getBoundingClientRect();
+		const tooltipBlock = document.getElementById('tooltipBtn');
+		tooltipBlock.style.fontSize = '12px';
+		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
+			// tooltipBlock.style.fontSize = '12px';
+			tooltip = setTimeout(() => {
+				// tooltipBlock.innerHTML = html;
+
+				tooltipBlock.innerText = e.target.innerText;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		} else {
+			// if (e.currentTarget.className === 'attribute-width') {
+			// 	// console.log(e.currentTarget.children[0].getAttribute('src'))
+			// 	const src = e.currentTarget.children[0].getAttribute('src');
+			// 	const memory = e.currentTarget.children[1].innerText;
+			// 	const img = `<img style='width:100%;height:100%;object-fit:cover;padding-bottom:3px' src="${src}"/>`;
+			// 	const heightPlus = posElement.y + tooltipBlock.offsetHeight;
+			// 	const viewportHeight = document.body.clientHeight;
+			// 	tooltip = setTimeout(() => {
+			// 		// tooltipBlock.innerHTML = html;
+			// 		if (heightPlus > viewportHeight) {
+			// 			tooltipBlock.innerHTML = `<div class="img-tooltip" style='display: flex; flex-direction: column-reverse;width:300px;height:300px'>${memory}${img}</div>`;
+			// 			tooltipBlock.style.left = posElement.x + 'px';
+			// 			tooltipBlock.style.top = posElement.y - tooltipBlock.offsetHeight - 5 + 'px';
+			// 		} else {
+			// 			tooltipBlock.innerHTML = `<div class="img-tooltip" style='display: flex; flex-direction: column;width:300px;height:300px'>${memory}${img}</div>`;
+			// 			tooltipBlock.style.left = posElement.x + 'px';
+			// 			tooltipBlock.style.top = posElement.y + 23 + 'px';
+			// 		}
+
+			// 		tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			// 	}, 250);
+			// }
+		}
+		if (e.currentTarget.innerText === '🇺🇦') {
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'ukraine');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === '🇷🇺') {
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'russia');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === '🇹🇷') {
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'turkey');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.children[0]?.className === 'icon-Vector-1') {
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'vodafone');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.children[0]?.className === 'icon-Union') {
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'unknownNumber');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.children[0]?.className === 'icon-Vector-3') {
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'lifecell');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.children[0]?.className === 'icon-Union-1') {
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'kyivstar');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.children[0]?.className === 'icon-Union-18') {
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'errorNumber');
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 23 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+	}
+
+	function tooltipOff() {
+		clearTimeout(tooltip);
+		document.getElementById('tooltipBtn').style.animation = '';
+	}
 	const [sortActive, setSortActive] = useState(false);
-	const [treugolka, setTreugolka] = useState(false);
+	const [hideArrow, setHideArrow] = useState(false);
 	// export default React.memo(SwitchBtn);
 	const [selectAll, setSelectAll] = useState(false);
 
@@ -253,7 +370,8 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 			document.removeEventListener('click', clickDocument);
 		};
 	}, [selectAll]);
-	console.log(getStart())
+	// console.log(getStart())
+	// const suka = {pidor: 'loh'}
 	return (
 		<>
 		{isLoading ? (<div className='loading'><Preloaded/></div>) : (
@@ -289,10 +407,10 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 							percent={percentScroll}
 							scroll={_.throttle(onScroll, 500)}
 							color="rgba(0, 0, 0, 0.3)"
-							setTreugolka={setTreugolka}
+							setHideArrow={setHideArrow}
 						> */}
 							<MaxaScroll
-								setTreugolka={setTreugolka}
+								setHideArrow={setHideArrow}
 								updateHover={updateHover}
 								podlozhka={podlozhka}
 								infiniteScroll={_.throttle(onScroll, 500)}
@@ -314,7 +432,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 												<div
 													className="warehouse-podlozhka"
 													style={{
-														width: '100vw',
+														width: document.querySelector('.contentScroll').offsetWidth + 'px',
 														height: document.body.clientHeight + 'px',
 														position: 'absolute',
 														left: 0,
@@ -341,7 +459,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 										<th style={{ paddingRight: '20px' }}>
 											Контакт
 										</th>
-										<th>
+										<th style={{ paddingRight: '20px' }}>
 											Телефон
 										</th>
 										<th>
@@ -363,7 +481,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 												objProduct={objSuppliers}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
 												// setSwitchMenu={setSwitchMenu}
@@ -382,7 +500,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 												objProduct={objSuppliers}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
 											/>
@@ -407,7 +525,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 												objProduct={objSuppliers}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
 											/>
@@ -423,21 +541,46 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 												objProduct={objSuppliers}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
 											/>
 										</th>
 										<th style={{ paddingRight: '20px' }}>
-											<WarehouseInput 
-												podlozhka={podlozhka} 
-												setPodlozhka={setPodlozhka} 
-												sortActive={sortActive}
-												setSortActive={setSortActive}
-												translator={translator}
-												setHideMenu={setHideMenu}
-												hideMenu={hideMenu}
-											/>
+											<div style={{display: 'flex'}}>
+												<WarehouseDropMenu
+															// adaptive={true}
+															// adaptive={}
+															// {...suka}
+															adaptiveTelNum={true}
+															setPodlozhka={setPodlozhka}
+															podlozhka={podlozhka}
+															type={'telOperator'}
+															objProduct={objSuppliers}
+															translator={translator}
+															// setSwitchMenu={setSwitchMenu}
+															// switchMenu={switchMenu}
+															// setFlagSwitchMenu={setFlagSwitchMenu}
+															sortActive={sortActive}
+															setSortActive={setSortActive}
+															// setLabelForWidth={setLabelForWidth}
+															// setWidth21px={setWidth21px}
+															hideArrow={hideArrow}
+															hideMenu={hideMenu}
+															setHideMenu={setHideMenu}
+													
+												/>
+												<WarehouseInput 
+													podlozhka={podlozhka} 
+													setPodlozhka={setPodlozhka} 
+													sortActive={sortActive}
+													setSortActive={setSortActive}
+													translator={translator}
+													setHideMenu={setHideMenu}
+													hideMenu={hideMenu}
+												/>
+											</div>
+											
 										</th>
 										<th>
 											<WarehouseInput 
@@ -473,18 +616,55 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 													? 'lockOrder speed hoverAttributeBlock'
 													: 'speed hoverAttributeBlock'
 											}
+											onMouseEnter={objSuppliers[index].lock ? (e) => {
+
+												let posElement = e.target.getBoundingClientRect();
+												const tooltipBlock = document.getElementById('tooltipBtn');
+												tooltipBlock.style.fontSize = '12px';
+												const widthPlus = e.pageX + tooltipBlock.offsetWidth;
+												const viewportWidth = document.body.clientWidth;
+												plusminus = setTimeout(() => {
+													const name = 'Олександр';
+													tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
+													// tooltipBlock.style.left = posElement.x + 'px';
+													// tooltipBlock.style.top = posElement.y + 23 + 'px';
+													if (widthPlus > viewportWidth) {
+														tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
+														tooltipBlock.style.top = posElement.y + 23 + 'px';
+													} else {
+														tooltipBlock.style.left = posElement.x + 'px';
+														tooltipBlock.style.top = posElement.y + 23 + 'px';
+													}
+													tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+												}, 250);
+						
+											} : () => { }}
+											onMouseLeave={objSuppliers[index].lock ? (e) => {
+												clearTimeout(plusminus);
+												document.getElementById('tooltipBtn').style.animation = '';
+											} : () => { }}
 											key={index+getStart()}>
 												<td><div className='stickyBeforeBody'></div></td>
 												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objSuppliers} setData={setObjSuppliers} getStart={getStart} index={index}/></td>
-												<td className='flags' style={{paddingRight:15, opacity: `${x.status ? '0.4)': ''}`,fontSize: '14px'}}>{x.country}</td>
+												<td style={{paddingRight:15,fontSize: '14px'}}>
+													<div className='flags' style={{ opacity: `${x.status ? '0.4': ''}`, paddingRight:0}}
+														onMouseLeave={objSuppliers[index].lock ? null : tooltipOff}
+														onMouseEnter={objSuppliers[index].lock ? null : tooltipOn}
+													>{x.country}</div>
+												</td>
 												<td style={{paddingRight:20,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.company}</td>
 												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,paddingRight:20}}>
 													{x.contact}
 												</td>
-												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,paddingRight:20}}>
+												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,paddingRight:20}}
+													onMouseLeave={objSuppliers[index].lock ? null : tooltipOff}
+													onMouseEnter={objSuppliers[index].lock ? null : tooltipOn}>
 													<span className={x.iconNumber} style={{marginRight: 6, top: 1, position:'relative'}}></span>{x.number}
 												</td>
-												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`}}>
+												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,maxWidth: 300, overflow: 'hidden',textOverflow: 'ellipsis'}}
+													onMouseLeave={objSuppliers[index].lock ? null : tooltipOff}
+													onMouseEnter={objSuppliers[index].lock ? null : tooltipOn}
+												>
 													{x.commentary}
 												</td>
 											</tr>

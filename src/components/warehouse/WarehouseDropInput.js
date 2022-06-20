@@ -1,6 +1,6 @@
 import React,{useState,useRef,useEffect} from 'react'
 
-const WarehouseDropInput = ({treugolka,setHideMenu, hideMenu,podlozhka,setPodlozhka,zIndex,sortActive,setSortActive,translator,width,adaptive}) => {
+const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodlozhka,zIndex,sortActive,setSortActive,translator,width,adaptive}) => {
     const [openMenu, setOpenMenu] = useState(false);
     const warehouse = useRef();
     const [arrowToggle, setArrowToggle] = useState(false);
@@ -255,7 +255,7 @@ const WarehouseDropInput = ({treugolka,setHideMenu, hideMenu,podlozhka,setPodloz
 				}
 				onMouseEnter={menuOn}
 				onMouseLeave={menuOff}
-				className={`warehouse-dropmenu ${arrowToggle || activity || !treugolka && !podlozhka ? 'hide-arrow' : ''} ${hideMenu && !openMenu ? 'hide-menu': ""}`}
+				className={`warehouse-dropmenu ${arrowToggle || activity || !hideArrow && !podlozhka ? 'hide-arrow' : ''} ${hideMenu && !openMenu ? 'hide-menu': ""}`}
 				ref={warehouse}
 			>
 				<div className="range-result">{!all && `${input1} - ${input2}`}</div>

@@ -1600,11 +1600,11 @@ body {
 				height: 14px;
 			}
 
-			tr:hover:not(.lockOrder, .hoverAttributeBlock) td {
+			tr:hover:not(.lockOrder, .hoverAttributeBlock, .hover-disabled) td {
 				background: #cacaca !important;
 			}
 
-			tr:hover:not(.lockOrder, .hoverAttributeBlock) .sticky-block {
+			tr:hover:not(.lockOrder, .hoverAttributeBlock,.hover-disabled) .sticky-block {
 
 				// background: #cacaca;
 				.animationFrame {
@@ -1639,7 +1639,7 @@ body {
 			// 	z-index: 2;
 			// 	position: relative;
 			// }
-			tr:not(.lockOrder):hover .shadow-left {
+			tr:not(.lockOrder,.hover-disabled):hover .shadow-left {
 				// display: none;
 				background: linear-gradient(90deg,
 						rgba(202, 202, 202, 1) 0%,
@@ -1677,7 +1677,7 @@ body {
 			// tr:hover .shadow {
 			// 	z-index: -1;
 			// }
-			tr:not(.lockOrder):hover .stickyBeforeBody:before {
+			tr:not(.lockOrder,.hover-disabled):hover .stickyBeforeBody:before {
 				content: '';
 				// display: block;
 			}
@@ -1817,7 +1817,10 @@ body {
 					// background-color: rgb(214, 211, 210) !important;
 					background-color: rgb(225, 222, 221) !important;
 				}
+				// .flags {
+				// 	background-color: rgb(225, 222, 221) !important;
 
+				// }
 				// .nal-ostatok button svg {
 				// 	opacity: 0.5 !important;
 				// }

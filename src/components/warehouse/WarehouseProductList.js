@@ -224,7 +224,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.className === 'wrap-nal-ostatok') {
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = 'В наличии: ' + memoryInput;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-available') + memoryInput;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -233,7 +233,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.className === 'nal-rezerv') {
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = 'Зарезервированы: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-reserv') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -242,7 +242,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.className === 'nal-otpr') {
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = 'Отправлены: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-send') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -251,7 +251,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.className === 'nal-vozvrat') {
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = 'Ожидающие получения/списания: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-crib') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -287,7 +287,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.className === 'summa-suma1') {
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = 'В наличии: ' + e.target.innerText.replace('/', '');
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-available') + e.target.innerText.replace('/', '');
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -296,7 +296,7 @@ const WarehouseProductList = ({
 		if (e.currentTarget.className === 'summa-suma2') {
 			// e.currentTarget.querySelector('.checkbox').checked
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = 'Зарезервированы: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-reserv') + e.target.innerText;
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -307,7 +307,7 @@ const WarehouseProductList = ({
 			const widthPlus = posElement.x + tooltipBlock.offsetWidth;
 			const viewportWidth = document.body.clientWidth;
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = 'Отправлены: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-send') + e.target.innerText;
 				if (widthPlus > viewportWidth) {
 					tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -323,7 +323,7 @@ const WarehouseProductList = ({
 			const widthPlus = posElement.x + tooltipBlock.offsetWidth;
 			const viewportWidth = document.body.clientWidth;
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = 'Ожидающие получения/списания: ' + e.target.innerText;
+				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-crib') + e.target.innerText;
 				if (widthPlus > viewportWidth) {
 					tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
 					tooltipBlock.style.top = posElement.y + 23 + 'px';
@@ -365,6 +365,7 @@ const WarehouseProductList = ({
 	const [kurs, setKurs] = useState('');
 	const [itogoZakupka, setItogoZakupka] = useState('');
 	const [pri4ina, setPri4ina] = useState('');
+	const linkTR = useRef();
 	function BtnMinus(e) {
 		e.stopPropagation();
 		setPodlozhka(true);
@@ -376,7 +377,7 @@ const WarehouseProductList = ({
 			// setMemoryCena(memoryCena - 1);
 		}
 
-
+		linkTR.current.classList.add('hover-disabled');
 		// console.log(memoryInput, memoryCena)
 		// if (memoryInput ==='0') {
 		// 	setMemoryCena(0)
@@ -436,6 +437,7 @@ const WarehouseProductList = ({
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal').style.opacity = 0;
 		document.getElementById('tooltipBtn').style.animation = '';
+		linkTR.current.classList.add('hover-disabled');
 		let newobj = [...objProduct];
 		let ostatok = newobj[index].ostatok;
 		// let zakupka = newobj[index].zakupka;
@@ -495,6 +497,7 @@ const WarehouseProductList = ({
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal').style.opacity = 0;
 		document.getElementById('tooltipBtn').style.animation = '';
+		linkTR.current.classList.add('hover-disabled');
 
 		let temp = e.target.value.replace(/[^0-9]/g, '');
 		e.target.value = temp.length === 0 ? ' ' : temp;
@@ -657,6 +660,7 @@ const WarehouseProductList = ({
 			// 	x.classList.remove('showBtn');
 			// });
 			// e.target.closest('.nal-ostatok').classList.add('showBtn')
+			linkTR.current.classList.remove('hover-disabled');
 			document.querySelector('.contentScroll').style.overflow = 'auto';
 			document.querySelector('.track-vertical').style.opacity = 1;
 			document.querySelector('.track-horizontal').style.opacity = 1;
@@ -665,6 +669,7 @@ const WarehouseProductList = ({
 			setCena('');
 			setItogoZakupka('');
 			setMemoryCena(0);
+			setPri4ina('');
 			setHideMenu(false);
 			setAddPrice(false);
 			setFlag(false);
@@ -674,6 +679,7 @@ const WarehouseProductList = ({
 		if (!podlozhka && flag) {
 			// setMemoryInput(memoryChange);
 			objProduct[index].ostatok = memoryChange;
+			linkTR.current.classList.remove('hover-disabled');
 			setObjProduct([...objProduct]);
 			setMemoryInput(memoryChange);
 			// let newobj = [...objProduct];
@@ -711,6 +717,7 @@ const WarehouseProductList = ({
 			setKurs('');
 			setCena('');
 			setItogoZakupka('');
+			setPri4ina('');
 			setMemoryCena(0);
 			setAddPrice(false);
 			setFlag(false);
@@ -747,7 +754,7 @@ const WarehouseProductList = ({
 
 		}
 	}, [memoryInput])
-	// const linkTR = useRef();
+
 
 	function clickTr(e) {
 		// e.preventDefault();
@@ -873,7 +880,7 @@ const WarehouseProductList = ({
 								: 'speed'
 					}
 					onClick={clickTr}
-					// ref={linkTR}
+					ref={linkTR}
 					// style={{height: rowHeight}}
 					// key={index}
 					onMouseEnter={objProduct[index].lock ? (e) => {
@@ -881,11 +888,20 @@ const WarehouseProductList = ({
 						let posElement = e.target.getBoundingClientRect();
 						const tooltipBlock = document.getElementById('tooltipBtn');
 						tooltipBlock.style.fontSize = '12px';
+						const widthPlus = e.pageX + tooltipBlock.offsetWidth;
+						const viewportWidth = document.body.clientWidth;
 						plusminus = setTimeout(() => {
 							const name = 'Олександр';
 							tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
-							tooltipBlock.style.left = posElement.x + 'px';
-							tooltipBlock.style.top = posElement.y + 23 + 'px';
+							// tooltipBlock.style.left = posElement.x + 'px';
+							// tooltipBlock.style.top = posElement.y + 23 + 'px';
+							if (widthPlus > viewportWidth) {
+								tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
+								tooltipBlock.style.top = posElement.y + 23 + 'px';
+							} else {
+								tooltipBlock.style.left = posElement.x + 'px';
+								tooltipBlock.style.top = posElement.y + 23 + 'px';
+							}
 							tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
 						}, 250);
 
@@ -1205,24 +1221,24 @@ const WarehouseProductList = ({
 								{addPrice && <div ref={focus} className='wrap' onMouseEnter={focusCena}>
 
 									<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
-										<span>{memoryCena >= 1 ? 'Добавлено' : 'Списать'}</span><span>{memoryCena} шт</span>
+										<span>{memoryCena >= 1 ? translator.getTranslation('menuAdd/CribProduct', 'add') : translator.getTranslation('menuAdd/CribProduct', 'crib')}</span><span>{memoryCena} шт</span>
 										{/* <div className='poloska'></div> */}
 									</div>
 									{memoryCena >= 1 ? <>
 										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between' }}>
-											<span>Закупка </span><input className='cenaInput' onChange={cenaChange} value={cena} />
+											<span>{translator.getTranslation('menuAdd/CribProduct', 'purchase')}</span><input className='cenaInput' onChange={cenaChange} value={cena} />
 											<div className='poloska'></div>
 										</div>
 										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between' }}>
-											<span>Курс валюты</span><input value={kurs} onChange={kursChange} />
+											<span>{translator.getTranslation('menuAdd/CribProduct', 'exchangeRates')}</span><input value={kurs} onChange={kursChange} />
 											<div className='poloska'></div>
 										</div>
 										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
-											<span>Итого </span><span>{itogoZakupka}</span>
+											<span>{translator.getTranslation('menuAdd/CribProduct', 'total')}</span><span>{itogoZakupka}</span>
 										</div>
 									</> :
 										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between' }}>
-											<span>Причина </span><input className='prichinaInput' onChange={pri4inaChange} value={pri4ina} />
+											<span>{translator.getTranslation('menuAdd/CribProduct', 'reason')}</span><input className='prichinaInput' onChange={pri4inaChange} value={pri4ina} />
 											<div className='poloska'></div>
 										</div>
 									}

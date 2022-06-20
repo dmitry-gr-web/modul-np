@@ -9,6 +9,7 @@ import { useFetch } from '../data/useFetch';
 import SwitchBtn from './SwitchBtn';
 import MaxaScroll from './MaxaScroll';
 let hover;
+let plusminus;
 const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 	const {data,error,isLoading} = useFetch(
 	// 	'http://192.168.0.197:3005/goodAttributes', {
@@ -218,7 +219,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 	// 	document.querySelector('.scrollbarHorizont').style.opacity = 0;
 	// }
 	const [sortActive, setSortActive] = useState(false);
-	const [treugolka, setTreugolka] = useState(false);
+	const [hideArrow, setHideArrow] = useState(false);
 	// export default React.memo(SwitchBtn);
 	const [selectAll, setSelectAll] = useState(false);
 
@@ -290,10 +291,10 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 							percent={percentScroll}
 							scroll={_.throttle(onScroll, 500)}
 							color="rgba(0, 0, 0, 0.3)"
-							setTreugolka={setTreugolka}
+							setHideArrow={setHideArrow}
 						> */}
 							<MaxaScroll
-								setTreugolka={setTreugolka}
+								setHideArrow={setHideArrow}
 								updateHover={updateHover}
 								podlozhka={podlozhka}
 								infiniteScroll={_.throttle(onScroll, 500)}
@@ -315,7 +316,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 												<div
 													className="warehouse-podlozhka"
 													style={{
-														width: '100vw',
+														width: document.querySelector('.contentScroll').offsetWidth + 'px',
 														height: document.body.clientHeight + 'px',
 														position: 'absolute',
 														left: 0,
@@ -358,7 +359,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 												objProduct={objAttribute}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
 												// setSwitchMenu={setSwitchMenu}
@@ -404,7 +405,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 															// switchMenu={switchMenu}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
-												treugolka={treugolka}
+												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
 															// setWidth21px={setWidth21px}
@@ -433,13 +434,40 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 													? 'lockOrder speed hoverAttributeBlock'
 													: 'speed hoverAttributeBlock'
 											}
+											onMouseEnter={objAttribute[index].lock ? (e) => {
+
+												let posElement = e.target.getBoundingClientRect();
+												const tooltipBlock = document.getElementById('tooltipBtn');
+												tooltipBlock.style.fontSize = '12px';
+												const widthPlus = e.pageX + tooltipBlock.offsetWidth;
+												const viewportWidth = document.body.clientWidth;
+												plusminus = setTimeout(() => {
+													const name = 'Олександр';
+													tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
+													// tooltipBlock.style.left = posElement.x + 'px';
+													// tooltipBlock.style.top = posElement.y + 23 + 'px';
+													if (widthPlus > viewportWidth) {
+														tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
+														tooltipBlock.style.top = posElement.y + 23 + 'px';
+													} else {
+														tooltipBlock.style.left = posElement.x + 'px';
+														tooltipBlock.style.top = posElement.y + 23 + 'px';
+													}
+													tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+												}, 250);
+						
+											} : () => { }}
+											onMouseLeave={objAttribute[index].lock ? (e) => {
+												clearTimeout(plusminus);
+												document.getElementById('tooltipBtn').style.animation = '';
+											} : () => { }}
 											key={index+getStart()}>
 												<td><div className='stickyBeforeBody'></div></td>
 												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objAttribute} setData={setObjAttribute} getStart={getStart} index={index}/></td>
 												<td style={{paddingRight:15, color: `rgba(0,0,0,0.4)`}}>{x.product}</td>
 												<td style={{paddingRight:20,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.id}</td>
 												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, maxWidth: 500, overflow: 'hidden',textOverflow:'ellipsis'}}>
-													<input style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`}} className='attributeInput' value={x.attribute}/>
+													<input style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`}} className='attributeInput' value={x.attribute} onChange={null}/>
 												</td>
 											</tr>
 										))}
