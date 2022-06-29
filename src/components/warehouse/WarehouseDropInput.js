@@ -15,6 +15,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
         setInput2('∞');
         setOpenMenu(false);
 		setPodlozhka(false);
+		setArrowToggle(false);
 		// if(openMenu) {
 		// }
 		setHideMenu(false);
@@ -288,7 +289,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
 				</div>
 				<span className="underline"></span>
 				<div className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}>
-					<div onClick={clickAll} className={`list ${all ? 'select-btn' : ''}`}>
+					{openMenu && <><div onClick={clickAll} className={`list ${all ? 'select-btn' : ''}`}>
 						{translator.getTranslation('btnAll', 'all' )}
 					</div>
 					<div style={{ position: 'absolute', bottom: 4, width: '100%' }}>
@@ -332,7 +333,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
 								value={input2}
 							/>
 						</div>
-					</div>
+					</div></>}
 				</div>
 			</div>
 		); 

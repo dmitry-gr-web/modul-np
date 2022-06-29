@@ -6,8 +6,11 @@ import ScrollBox from './reactScroll';
 import WarehouseDropMenu from './WarehouseDropMenu';
 import WarehouseInput from './WarehouseInput';
 import { useFetch } from '../data/useFetch';
+// import SimpleBar from 'simplebar-react';
 import SwitchBtn from './SwitchBtn';
 import MaxaScroll from './MaxaScroll';
+import WarehouseInputField from './WarehouseInputField';
+import AttributeList from './AttributeList';
 let hover;
 let plusminus;
 const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
@@ -31,9 +34,8 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 	const [lastIndex, setLastIndex] = useState(0);
 	const [hideMenu, setHideMenu] = useState(false);
 
-
+	const linkTR = useRef();
 	const [podlozhka, setPodlozhka] = useState(false);
-	const rootRef = useRef();
 	const [start, setStart] = useState(0);
 	let rowHeight = 18;
 	// if (start >= data.length + getStart()){
@@ -88,33 +90,16 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 		setHideMenu(false);
 		// setFlagSwitchMenu(false);
 		// setSwitchMenu(false);
+		setAddOneItem(false);
 		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.first-tab-body tr:nth-child(2) td:last-child').querySelector('span').style.width = '0%';
+		document.querySelector('.first-tab-body tr:nth-child(2) td:nth-child(4)').style.color = '';
+
+		// linkTR.current.classList.remove('hover-disabled');
+		// document.querySelector('.first-tab-body tr:nth-child(2)').classList.remove('hover-disabled');
 		document.querySelector('.track-horizontal').style.opacity = 1;
 		document.querySelector('.contentScroll').style.overflow = 'auto';
-		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-		// 	x.classList.remove('hide-menu');
-		// });
-		// document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
-		// 	x.style.zIndex = 1;
-		// });
-		// document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
-		// 	x.style.width = '21px';
-		// });
-		// document.querySelectorAll('.nal-ostatok').forEach((x) => {
-		// 	x.classList.remove('showBtn');
-		// });
-		// document.querySelector('.width21px').style.maxWidth = '51px';
-		// let input = document.querySelectorAll('.nal-ostatok input')[indexInput];
-		// if (input.value.length >= 4) {
-		// 	// input.style.width = input.value.length * 8 + (4 * parseInt(numRound((input.value.length / 4), 1.1))) + 'px';
-		// 	input.style.width = input.value.length * 7 + 3 + 'px';
-		// }
-		// if (input.value.length >= 7) {
-		// 	input.style.width = input.value.length * 7 + 7 + 'px';
-		// }
-		// if (input.value.length < 4) {
-		// 	input.style.width = input.value.length * 7 + 'px';
-		// }
+
 	}
 	const btnUp = useRef();
 	useEffect(() => {
@@ -223,13 +208,13 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 	// export default React.memo(SwitchBtn);
 	const [selectAll, setSelectAll] = useState(false);
 
+
 	useEffect(() => {
 		function clickDocument(e) {
 			if (!e.target.closest('.warehouse-table')) {
 				setSelectAll(false);
-				let newobj = [...objAttribute];
-				newobj.map((x) => (x.select = false));
-				setObjAttribute(newobj);
+				let newobj = objAttribute.map((x) => ({...x, select: false}));
+				setObjAttribute([...newobj]);
 			}
 		}
 		if (!selectAll) {
@@ -237,40 +222,67 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
 					e.preventDefault();
 					setSelectAll(true);
-					let newobj = [...objAttribute];
-					newobj.map((x) => {
+					// let newobj = [...objAttribute];
+					let arr = objAttribute.map((x) => {
 						if (x.lock) {
-							return (x.select = false);
+							return {...x , select: false};
 						} else {
-							return (x.select = true);
+							return {...x , select: true};
 						}
 					});
-					setObjAttribute(newobj);
-					// console.log('asdasdasd');
+					setObjAttribute([...arr]);
 				}
 			});
 		}
 		document.addEventListener('click', clickDocument);
-
 		return () => {
 			document.removeEventListener('click', clickDocument);
 		};
-	}, [selectAll]);
-	console.log(getStart())
+	}, [selectAll, objAttribute]);
+
+
+
+	const [addOneItem,setAddOneItem] = useState(false);
+	const [count,setCount]= useState(0);
+	let newAttribute = {
+		status:false,
+		product: 'XXXX-',
+		id: 'XXXX',
+		select:false,
+		lock:false,
+		attribute: ''
+	}
+	function addAttribute() {
+
+		// setCount(prev=> prev+1)
+		document.querySelector('.contentScroll').scrollTop = 0;
+		setPodlozhka(true);
+		setAddOneItem(true);
+		setHideMenu(true);
+		let arr = [newAttribute,...objAttribute];
+		setObjAttribute(arr);
+		// let arr = [newAttribute,...JSON.parse(JSON.stringify(objAttribute))];
+		// setObjAttribute([...arr]);
+		setTimeout(() => {
+			document.querySelector('.first-tab-body tr:nth-child(2) td:last-child input').focus()
+			document.querySelector('.first-tab-body tr:nth-child(2) td:last-child').style.zIndex = 99;
+			document.querySelector('.first-tab-body tr:nth-child(2) td:nth-child(4)').style.color = 'rgba(0,0,0,0.4)';
+			document.querySelector('.first-tab-body tr:nth-child(2) td:last-child').classList.add('hover-disabled');
+			document.querySelector('.first-tab-body tr:nth-child(2) td:last-child').querySelector('span').style.width = '100%';
+		}, 100);
+	}
+
+	// const memo = React.memo(AttributeBlock)
+
+	// console.log(objAttribute)
 	return (
 		<>
 		{isLoading ? (<div className='loading'><Preloaded/></div>) : (
 			<div className="warehouse-products">
-					{/* <div className="warehouse-products-title">
-						Атрибуты
-						<button>
-							<SvGBtnPlus />
-						</button>
-					</div> */}
 					<div className="warehouse-products-title">
 						<hr/>
 						<span>{translator.getTranslation('warehouse', 'attributes')}</span>
-						<button>
+						<button onClick={(e) => {addAttribute(); e.stopPropagation()}} disabled={addOneItem} className='btnAddItem'>
 							<SvGBtnPlus />
 						</button>
 					</div>
@@ -280,19 +292,12 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 							position: 'relative',
 							// maxHeight: 'calc(100vh - 170px)',
 							// width: '100%',
-							height:  'calc(100vh - 216px)',
-							height:  'calc(100vh - 190px)',
+							// height:  'calc(100vh - 216px)',
+							height:  'calc(100vh - 210px)',
 						}}
 						className='warehouseAttributeBlock'
 					>
-						{/* <ScrollBox
-							ref={rootRef}
-							// scrollVertMinus={0.07}
-							percent={percentScroll}
-							scroll={_.throttle(onScroll, 500)}
-							color="rgba(0, 0, 0, 0.3)"
-							setHideArrow={setHideArrow}
-						> */}
+			
 							<MaxaScroll
 								setHideArrow={setHideArrow}
 								updateHover={updateHover}
@@ -303,7 +308,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 
 							<table
 								tabIndex={-1}
-						
+								className='warehouse-table'
 								// onMouseEnter={showScrollbar}
 								// onMouseLeave={hideScrollbar}
 								// style={{ width: '100%' }}
@@ -425,17 +430,17 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 								<tbody className="first-tab-body">
 									<tr style={{ height: getTopHeight() }}></tr>
 									{objAttribute.length > 0 &&
-										objAttribute.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
+										objAttribute.slice( (getStart() < 0 ? 0 : getStart()),  (getStart() < 0 ? 0 : getStart()) + visibleRows + 1).map((x, index) => (
 											<tr onClick={(e) => clickTr(e,(index + (getStart() < 0 ? 0 : getStart())))}
 											className={
 												objAttribute[index + (getStart() < 0 ? 0 : getStart())].select
-													? 'select speed hoverAttributeBlock'
-													: objAttribute[index + (getStart() < 0 ? 0 : getStart())].lock
-													? 'lockOrder speed hoverAttributeBlock'
-													: 'speed hoverAttributeBlock'
+												? 'select speed hoverAttributeBlock'
+												: objAttribute[index + (getStart() < 0 ? 0 : getStart())].lock
+												? 'lockOrder speed hoverAttributeBlock'
+												: 'speed hoverAttributeBlock'
 											}
-											onMouseEnter={objAttribute[index].lock ? (e) => {
-
+											onMouseEnter={objAttribute[index+(getStart() < 0 ? 0 : getStart())].lock ? (e) => {
+												
 												let posElement = e.target.getBoundingClientRect();
 												const tooltipBlock = document.getElementById('tooltipBtn');
 												tooltipBlock.style.fontSize = '12px';
@@ -455,24 +460,52 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 													}
 													tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
 												}, 250);
-						
+												
 											} : () => { }}
-											onMouseLeave={objAttribute[index].lock ? (e) => {
+											onMouseLeave={objAttribute[index+(getStart() < 0 ? 0 : getStart())].lock ? (e) => {
 												clearTimeout(plusminus);
 												document.getElementById('tooltipBtn').style.animation = '';
 											} : () => { }}
-											key={index+getStart()}>
+											key={index+getStart()}
+											// index={index+getStart()}
+											>
+												{/* {console.log(objAttribute)} */}
 												<td><div className='stickyBeforeBody'></div></td>
-												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objAttribute} setData={setObjAttribute} getStart={getStart} index={index}/></td>
+												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objAttribute} setData={setObjAttribute} index={index+(getStart() < 0 ? 0 : getStart())}/></td>
 												<td style={{paddingRight:15, color: `rgba(0,0,0,0.4)`}}>{x.product}</td>
 												<td style={{paddingRight:20,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.id}</td>
-												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, maxWidth: 500, overflow: 'hidden',textOverflow:'ellipsis'}}>
-													<input style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`}} className='attributeInput' value={x.attribute} onChange={null}/>
+												<td style={{position: "relative",minWidth:300}}>
+													<WarehouseInputField 
+													setCount={setCount} 
+													type={'attribute'} 
+													addOneItem={addOneItem} 
+													setPodlozhka={setPodlozhka} 
+													podlozhka={podlozhka} 
+													data={objAttribute} 
+													// data={JSON.parse(JSON.stringify(objAttribute))} 
+													value={x.attribute} 
+													setData={setObjAttribute} 
+													index={index+(getStart() < 0 ? 0 : getStart())} 
+													setHideMenu={setHideMenu} 
+													setHideArrow={setHideArrow}/>
+													{/* <input onMouseEnter={(e) => inputOn(e, index + (getStart() < 0 ? 0 : getStart()))} onMouseLeave={e => inputOff(e,index + (getStart() < 0 ? 0 : getStart()))} style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`}} className='attributeInput' value={x.attribute} onChange={null}/> */}
 												</td>
 											</tr>
+											// <AttributeList 
+											// 	index={index+ (getStart() < 0 ? 0 : getStart())}
+											// 	key={index+ (getStart() < 0 ? 0 : getStart())}
+											// 	objAttribute={objAttribute}
+											// 	setObjAttribute={setObjAttribute}
+											// 	translator={translator}
+											// 	addOneItem={addOneItem}
+											// 	podlozhka={podlozhka}
+											// 	setPodlozhka={setPodlozhka}
+											// 	setHideArrow={setHideArrow}
+											// 	setHideMenu={setHideMenu}
+											// />
 										))}
 
-									<tr colSpan={18} style={{ height: getBottomHeight() }}></tr>
+									<tr style={{ height: getBottomHeight() }}></tr>
 								</tbody>
 								<tfoot>
 									<tr>
@@ -505,4 +538,4 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
   )
 }
 
-export default AttributeBlock
+export default AttributeBlock;

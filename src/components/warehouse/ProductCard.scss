@@ -96,7 +96,7 @@
 	td {
 		padding: 0;
 	}
-	table {
+	table:not(.warehouse-table) {
 		// tr {
 		// 	display: flex;
 		// 	// align-items:flex-end;

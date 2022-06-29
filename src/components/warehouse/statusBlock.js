@@ -73,18 +73,18 @@ const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff }
 				<input
 					type="checkbox"
 					className="status-crm"
-					onChange={objProduct[index].lock ? () => { } : switchBtn}
+					onChange={objProduct[index].lock ? () => {} : switchBtn}
 					// defaultChecked={objProduct[index].status.crm}
 					checked={objProduct[index].status.crm}
 				/>
-				<span className="slider round" onMouseEnter={objProduct[index].lock ? () => { } : (e) => {
+				<span className="slider round" onMouseEnter={objProduct[index].lock ? null : (e) => {
 					tooltipOn(
 						e,
 						e.target.offsetParent.children[0].checked
 							? 'Заблокировать товар'
 							: 'Разблокировать товар'
 					);
-				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? () => { } : (e) => {
+				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? null : (e) => {
 					tooltipOn(
 						e,
 						e.target.offsetParent.children[0].checked
@@ -105,14 +105,14 @@ const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff }
 					// defaultChecked={objProduct[index].status.rozetka}
 					checked={objProduct[index].status.rozetka}
 				/>
-				<span className="slider round" onMouseEnter={objProduct[index].lock ? () => { } : (e) => {
+				<span className="slider round" onMouseEnter={objProduct[index].lock ? null : (e) => {
 					tooltipOn(
 						e,
 						e.target.offsetParent.children[0].checked
 							? 'Заблокировать товар'
 							: 'Разблокировать товар'
 					);
-				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? () => { } : (e) => {
+				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? null : (e) => {
 					tooltipOn(
 						e,
 						e.target.offsetParent.children[0].checked
@@ -129,18 +129,18 @@ const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff }
 				<input
 					type="checkbox"
 					className="status-prom"
-					onChange={objProduct[index].lock ? () => { } : switchBtn}
+					onChange={objProduct[index].lock ? () => {} : switchBtn}
 					// defaultChecked={objProduct[index].status.prom}
 					checked={objProduct[index].status.prom}
 				/>
-				<span className="slider round" onMouseEnter={objProduct[index].lock ? () => { } : (e) => {
+				<span className="slider round" onMouseEnter={objProduct[index].lock ? null : (e) => {
 					tooltipOn(
 						e,
 						e.target.offsetParent.children[0].checked
 							? 'Заблокировать товар'
 							: 'Разблокировать товар'
 					);
-				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? () => { } : (e) => {
+				}} onMouseLeave={tooltipOff} onClick={objProduct[index].lock ? null : (e) => {
 					tooltipOn(
 						e,
 						e.target.offsetParent.children[0].checked

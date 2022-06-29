@@ -1,5 +1,5 @@
-import React,{useEffect,useLayoutEffect,useRef,useState,useMemo} from 'react'
-import {SvGBtnPlus,Preloaded} from '../../img/svg-pack';
+import React, { useEffect, useLayoutEffect, useRef, useState, useMemo } from 'react'
+import { SvGBtnPlus, Preloaded } from '../../img/svg-pack';
 import _, { set } from 'lodash';
 import ScrollBox from './reactScroll';
 // import {dataAttribute} from '../data/dataAttribute';
@@ -8,24 +8,26 @@ import WarehouseInput from './WarehouseInput';
 import { useFetch } from '../data/useFetch';
 import SwitchBtn from './SwitchBtn';
 import MaxaScroll from './MaxaScroll';
+import WarehouseInputField from './WarehouseInputField';
+import WarehouseCountryField from './WarehouseCountryField';
 let hover;
 let plusminus;
 let tooltip;
-const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
-	const {data,error,isLoading} = useFetch(
-	// 	'http://192.168.0.197:3005/goodAttributes', {
-	// 	method: 'POST',
-	// 	headers: {
-	// 		'Accept': 'application/json',
-	// 		'Content-Type': 'application/json'
-	// 	},
-	// 	body: JSON.stringify({
-	// 		"query": {},
-	// 		// "start": 10,
-	// 		// "start": props.folder.at(-1)?.id,
-	// 		"end": 20
-	// 	})
-	// }
+const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
+	const { data, error, isLoading } = useFetch(
+		// 	'http://192.168.0.197:3005/goodAttributes', {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Accept': 'application/json',
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+		// 		"query": {},
+		// 		// "start": 10,
+		// 		// "start": props.folder.at(-1)?.id,
+		// 		"end": 20
+		// 	})
+		// }
 	);
 
 	console.log(data)
@@ -76,7 +78,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
 			document.querySelector('.first-tab-body').classList.add('hoverOff');
 		}
-		
+
 		hover = setTimeout(() => {
 			document.querySelector('.first-tab-body').classList.remove('hoverOff');
 		}, 400);
@@ -90,6 +92,9 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 		document.querySelector('.track-vertical').style.opacity = 1;
 		document.querySelector('.track-horizontal').style.opacity = 1;
 		document.querySelector('.contentScroll').style.overflow = 'auto';
+		document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
+			x.style.minWidth = '22px';
+		});
 		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 		// 	x.classList.remove('hide-menu');
 		// });
@@ -117,14 +122,14 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 	}
 	const btnUp = useRef();
 	useEffect(() => {
-		if(btnUp.current){
+		if (btnUp.current) {
 			if (start > 600) {
 				btnUp.current.style.visibility = 'visible';
 			} else {
 				btnUp.current.style.visibility = 'hidden';
 			}
 		}
-	
+
 	}, [start]);
 	function clickScrollUp() {
 		// rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
@@ -137,8 +142,8 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 		updateHover();
 		// setSwitchMenu(false);
 	}
-	
-	function clickTr(e,index) {
+
+	function clickTr(e, index) {
 		// e.preventDefault();
 		// e.stopPropagation();
 		// console.log(e.currentTarget)
@@ -155,7 +160,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 					return { ...x, select: false };
 				});
 				if (lastIndex < index) {
-					newobj.slice(lastIndex, index+1).map((x, i) => {
+					newobj.slice(lastIndex, index + 1).map((x, i) => {
 						if (x.lock) {
 							x.select = false;
 						} else {
@@ -163,7 +168,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 						}
 					});
 				} else {
-					newobj.slice(index, lastIndex+1).map((x, i) => {
+					newobj.slice(index, lastIndex + 1).map((x, i) => {
 						if (x.lock) {
 							x.select = false;
 						} else {
@@ -186,7 +191,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 				// if(newobj[index].select !== undefined)	
 				newobj[index].select = !newobj[index].select;
 				// else {}
-			
+
 			}
 			setObjSuppliers([...newobj]);
 		}
@@ -194,7 +199,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 	// const [percentScroll, setPercentScroll] = useState(0.87);
 
 	// useEffect(() => {
-		
+
 	// 		if(rootRef.current?.content.offsetHeight < 614) {
 	// 			setPercentScroll(0.81);
 	// 		}
@@ -370,34 +375,48 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 			document.removeEventListener('click', clickDocument);
 		};
 	}, [selectAll]);
-	// console.log(getStart())
-	// const suka = {pidor: 'loh'}
+	const [addOneItem, setAddOneItem] = useState(false);
+	const [count, setCount] = useState(0);
+	function addSuppliers() {
+		let newSuppliers = {
+			status: false,
+			product: 'XXXX-',
+			id: '****',
+			select: false,
+			lock: false,
+			attribute: ''
+		}
+		document.querySelector('.contentScroll').scrollTop = 0;
+		setPodlozhka(true);
+		setAddOneItem(true);
+		setHideMenu(true);
+		let arr = [newSuppliers, ...objSuppliers];
+		setObjSuppliers([...arr]);
+		// setTimeout(() => {
+		// 	document.querySelector('.first-tab-body tr:nth-child(2) td:last-child input').focus()
+		// 	document.querySelector('.first-tab-body tr:nth-child(2) td:last-child').style.zIndex = 99;
+		// 	document.querySelector('.first-tab-body tr:nth-child(2)').classList.add('hover-disabled');
+		// }, 100);
+	}
 	return (
 		<>
-		{isLoading ? (<div className='loading'><Preloaded/></div>) : (
-			<div className="warehouse-products">
-					{/* <div className="warehouse-products-title">
-						Атрибуты
-						<button>
-							<SvGBtnPlus />
-						</button>
-					</div> */}
+			{isLoading ? (<div className='loading'><Preloaded /></div>) : (
+				<div className="warehouse-products">
 					<div className="warehouse-products-title">
-						<hr/>
+						<hr />
 						<span>Поставщики</span>
 						<button>
 							<SvGBtnPlus />
 						</button>
 					</div>
 					<div className="shadow-right"></div>
-
 					<div
 						style={{
 							position: 'relative',
 							// maxHeight: 'calc(100vh - 170px)',
 							// width: '100%',
-							height:  'calc(100vh - 216px)',
-							height:  'calc(100vh - 190px)',
+							// height:  'calc(100vh - 216px)',
+							height: 'calc(100vh - 210px)',
 						}}
 						className='warehouseAttributeBlock'
 					>
@@ -409,21 +428,21 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 							color="rgba(0, 0, 0, 0.3)"
 							setHideArrow={setHideArrow}
 						> */}
-							<MaxaScroll
-								setHideArrow={setHideArrow}
-								updateHover={updateHover}
-								podlozhka={podlozhka}
-								infiniteScroll={_.throttle(onScroll, 500)}
-			
-							>
+						<MaxaScroll
+							setHideArrow={setHideArrow}
+							updateHover={updateHover}
+							podlozhka={podlozhka}
+							infiniteScroll={_.throttle(onScroll, 500)}
+
+						>
 
 							<table
 								tabIndex={-1}
-						
-								// onMouseEnter={showScrollbar}
-								// onMouseLeave={hideScrollbar}
-								// style={{ width: '100%' }}
-								// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
+								className='warehouse-table'
+							// onMouseEnter={showScrollbar}
+							// onMouseLeave={hideScrollbar}
+							// style={{ width: '100%' }}
+							// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 							>
 								<thead className="first-tab-header">
 									<tr>
@@ -468,7 +487,7 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 									</tr>
 									<tr>
 										<th></th>
-										<th style={{paddingRight: '15px', minWidth:51}}>
+										<th style={{ paddingRight: '15px', minWidth: 51 }}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
@@ -484,19 +503,19 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
-												// setSwitchMenu={setSwitchMenu}
-												// switchMenu={switchMenu}
-												// setFlagSwitchMenu={setFlagSwitchMenu}
+											// setSwitchMenu={setSwitchMenu}
+											// switchMenu={switchMenu}
+											// setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</th>
-										<th style={{paddingRight: '15px', position:'relative'}}>
+										<th style={{ paddingRight: '15px', position: 'relative',minWidth: 51 }}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
 												type={'country'}
 												translator={translator}
 												searchLine={searchLine}
-											
+
 												objProduct={objSuppliers}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
@@ -547,32 +566,32 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 											/>
 										</th>
 										<th style={{ paddingRight: '20px' }}>
-											<div style={{display: 'flex'}}>
+											<div style={{ display: 'flex' }} className='telOperator'>
 												<WarehouseDropMenu
-															// adaptive={true}
-															// adaptive={}
-															// {...suka}
-															adaptiveTelNum={true}
-															setPodlozhka={setPodlozhka}
-															podlozhka={podlozhka}
-															type={'telOperator'}
-															objProduct={objSuppliers}
-															translator={translator}
-															// setSwitchMenu={setSwitchMenu}
-															// switchMenu={switchMenu}
-															// setFlagSwitchMenu={setFlagSwitchMenu}
-															sortActive={sortActive}
-															setSortActive={setSortActive}
-															// setLabelForWidth={setLabelForWidth}
-															// setWidth21px={setWidth21px}
-															hideArrow={hideArrow}
-															hideMenu={hideMenu}
-															setHideMenu={setHideMenu}
-													
+													// adaptive={true}
+													// adaptive={}
+													// {...suka}
+													adaptiveTelNum={true}
+													setPodlozhka={setPodlozhka}
+													podlozhka={podlozhka}
+													type={'telOperator'}
+													objProduct={objSuppliers}
+													translator={translator}
+													// setSwitchMenu={setSwitchMenu}
+													// switchMenu={switchMenu}
+													// setFlagSwitchMenu={setFlagSwitchMenu}
+													sortActive={sortActive}
+													setSortActive={setSortActive}
+													// setLabelForWidth={setLabelForWidth}
+													// setWidth21px={setWidth21px}
+													hideArrow={hideArrow}
+													hideMenu={hideMenu}
+													setHideMenu={setHideMenu}
+
 												/>
-												<WarehouseInput 
-													podlozhka={podlozhka} 
-													setPodlozhka={setPodlozhka} 
+												<WarehouseInput
+													podlozhka={podlozhka}
+													setPodlozhka={setPodlozhka}
 													sortActive={sortActive}
 													setSortActive={setSortActive}
 													translator={translator}
@@ -580,12 +599,12 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 													hideMenu={hideMenu}
 												/>
 											</div>
-											
+
 										</th>
 										<th>
-											<WarehouseInput 
-												podlozhka={podlozhka} 
-												setPodlozhka={setPodlozhka} 
+											<WarehouseInput
+												podlozhka={podlozhka}
+												setPodlozhka={setPodlozhka}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												translator={translator}
@@ -593,8 +612,8 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 												hideMenu={hideMenu}
 											/>
 										</th>
-									
-										
+
+
 									</tr>
 									<tr>
 										<th className="shadow-vertical" colSpan={19}>
@@ -603,86 +622,136 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 										</th>
 									</tr>
 								</thead>
-
 								<tbody className="first-tab-body">
 									<tr style={{ height: getTopHeight() }}></tr>
 									{objSuppliers.length > 0 &&
-										objSuppliers.slice(getStart(), getStart() + visibleRows + 1).map((x, index) => (
-											<tr onClick={(e) => clickTr(e,(index + (getStart() < 0 ? 0 : getStart())))}
-											className={
-												objSuppliers[index + (getStart() < 0 ? 0 : getStart())].select
-													? 'select speed hoverAttributeBlock'
-													: objSuppliers[index + (getStart() < 0 ? 0 : getStart())].lock
-													? 'lockOrder speed hoverAttributeBlock'
-													: 'speed hoverAttributeBlock'
-											}
-											onMouseEnter={objSuppliers[index].lock ? (e) => {
-
-												let posElement = e.target.getBoundingClientRect();
-												const tooltipBlock = document.getElementById('tooltipBtn');
-												tooltipBlock.style.fontSize = '12px';
-												const widthPlus = e.pageX + tooltipBlock.offsetWidth;
-												const viewportWidth = document.body.clientWidth;
-												plusminus = setTimeout(() => {
-													const name = 'Олександр';
-													tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
-													// tooltipBlock.style.left = posElement.x + 'px';
-													// tooltipBlock.style.top = posElement.y + 23 + 'px';
-													if (widthPlus > viewportWidth) {
-														tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
-														tooltipBlock.style.top = posElement.y + 23 + 'px';
-													} else {
-														tooltipBlock.style.left = posElement.x + 'px';
-														tooltipBlock.style.top = posElement.y + 23 + 'px';
-													}
-													tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
-												}, 250);
-						
-											} : () => { }}
-											onMouseLeave={objSuppliers[index].lock ? (e) => {
-												clearTimeout(plusminus);
-												document.getElementById('tooltipBtn').style.animation = '';
-											} : () => { }}
-											key={index+getStart()}>
+										objSuppliers.slice((getStart() < 0 ? 0 : getStart()), (getStart() < 0 ? 0 : getStart()) + visibleRows + 1).map((x, index) => (
+											<tr onClick={(e) => clickTr(e, (index + (getStart() < 0 ? 0 : getStart())))}
+												className={
+													objSuppliers[index + (getStart() < 0 ? 0 : getStart())].select
+														? 'select speed hoverAttributeBlock'
+														: objSuppliers[index + (getStart() < 0 ? 0 : getStart())].lock
+															? 'lockOrder speed hoverAttributeBlock'
+															: 'speed hoverAttributeBlock'
+												}
+												onMouseEnter={objSuppliers[index+(getStart() < 0 ? 0 : getStart())].lock ? (e) => {
+													let posElement = e.target.getBoundingClientRect();
+													const tooltipBlock = document.getElementById('tooltipBtn');
+													tooltipBlock.style.fontSize = '12px';
+													const widthPlus = e.pageX + tooltipBlock.offsetWidth;
+													const viewportWidth = document.body.clientWidth;
+													plusminus = setTimeout(() => {
+														const name = 'Олександр';
+														tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
+														if (widthPlus > viewportWidth) {
+															tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
+															tooltipBlock.style.top = posElement.y + 23 + 'px';
+														} else {
+															tooltipBlock.style.left = posElement.x + 'px';
+															tooltipBlock.style.top = posElement.y + 23 + 'px';
+														}
+														tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+													}, 250);
+												} : () => { }}
+												onMouseLeave={objSuppliers[index+(getStart() < 0 ? 0 : getStart())].lock ? (e) => {
+													clearTimeout(plusminus);
+													document.getElementById('tooltipBtn').style.animation = '';
+												} : () => { }}
+												key={index + getStart()}>
 												<td><div className='stickyBeforeBody'></div></td>
-												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objSuppliers} setData={setObjSuppliers} getStart={getStart} index={index}/></td>
-												<td style={{paddingRight:15,fontSize: '14px'}}>
-													<div className='flags' style={{ opacity: `${x.status ? '0.4': ''}`, paddingRight:0}}
-														onMouseLeave={objSuppliers[index].lock ? null : tooltipOff}
-														onMouseEnter={objSuppliers[index].lock ? null : tooltipOn}
-													>{x.country}</div>
+												<td style={{ paddingRight: 15 }}>
+													<SwitchBtn 
+													status={x.status}
+													data={objSuppliers} 
+													setData={setObjSuppliers} 
+													getStart={getStart} 
+													index={index} />
 												</td>
-												<td style={{paddingRight:20,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.company}</td>
-												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,paddingRight:20}}>
-													{x.contact}
+												<td style={{ paddingRight: 15, fontSize: '14px' }}>
+													<WarehouseCountryField 
+														country={x.country} 
+														podlozhka={podlozhka} 
+														setPodlozhka={setPodlozhka} 
+														data={objSuppliers} 
+														setData={setObjSuppliers}
+														setHideMenu={setHideMenu}
+														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														/>
 												</td>
-												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,paddingRight:20}}
-													onMouseLeave={objSuppliers[index].lock ? null : tooltipOff}
-													onMouseEnter={objSuppliers[index].lock ? null : tooltipOn}>
-													<span className={x.iconNumber} style={{marginRight: 6, top: 1, position:'relative'}}></span>{x.number}
+												<td style={{ paddingRight: 20, color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, minWidth: 40, lineHeight: '18px',minWidth:150,position: 'relative' }}>
+													<WarehouseInputField
+														type={'company'}
+														addOneItem={addOneItem}
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														data={objSuppliers}
+														value={x.company}
+														setData={setObjSuppliers}
+														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														setHideMenu={setHideMenu}
+														setHideArrow={setHideArrow} />
 												</td>
-												<td style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`,maxWidth: 300, overflow: 'hidden',textOverflow: 'ellipsis'}}
-													onMouseLeave={objSuppliers[index].lock ? null : tooltipOff}
-													onMouseEnter={objSuppliers[index].lock ? null : tooltipOn}
+												<td style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, paddingRight: 20, lineHeight: '18px', minWidth:150,position: 'relative' }}>
+													<WarehouseInputField
+														type={'contact'}
+														addOneItem={addOneItem}
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														data={objSuppliers}
+														value={x.contact}
+														setData={setObjSuppliers}
+														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														setHideMenu={setHideMenu} 
+														setHideArrow={setHideArrow}/>
+												</td>
+												<td style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, paddingRight: 20, position: 'relative', minWidth:120 }}
+													onMouseLeave={objSuppliers[index+(getStart() < 0 ? 0 : getStart() - count)].lock ? null : tooltipOff}
+													onMouseEnter={objSuppliers[index+(getStart() < 0 ? 0 : getStart() - count)].lock ? null : tooltipOn}
+													>
+													<WarehouseInputField
+														type={'number'}
+														iconOperator={true}
+														icon={x.iconNumber}
+														addOneItem={addOneItem}
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														data={objSuppliers}
+														value={x.number}
+														setData={setObjSuppliers}
+														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														setHideMenu={setHideMenu} 
+														setHideArrow={setHideArrow}/>
+												</td>
+												<td className='attributeCommentary' style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`,minWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: '18px',position:'relative' }}
+													// onMouseLeave={objSuppliers[index].lock ? null : tooltipOff}
+													// onMouseEnter={objSuppliers[index].lock ? null : tooltipOn}
 												>
-													{x.commentary}
+													<WarehouseInputField
+														type={'commentary'}
+														addOneItem={addOneItem}
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														data={objSuppliers}
+														value={x.commentary}
+														setData={setObjSuppliers}
+														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														setHideMenu={setHideMenu} 
+														setHideArrow={setHideArrow}/>
 												</td>
 											</tr>
 										))}
-
-									<tr colSpan={18} style={{ height: getBottomHeight() }}></tr>
+									<tr style={{ height: getBottomHeight() }}></tr>
 								</tbody>
 								<tfoot>
 									<tr>
 										<td colSpan={18} style={{ height: 18 }}>
 											<div className="shadow-vertical-footer"></div>
-											<div style={{position:'absolute',bottom:0,left:0,height:8,width:'100%',background:'white'}}></div>
+											<div style={{ position: 'absolute', bottom: 0, left: 0, height: 8, width: '100%', background: 'white' }}></div>
 										</td>
 									</tr>
 								</tfoot>
 							</table>
-							</MaxaScroll>
-						{/* </ScrollBox> */}
+						</MaxaScroll>
 					</div>
 					<div ref={btnUp} onClick={clickScrollUp} className="btnUp">
 						<svg
@@ -697,10 +766,10 @@ const Suppliers = ({translator,setObjSuppliers,objSuppliers}) => {
 							></path>
 						</svg>
 					</div>
-			</div>)
-		}
+				</div>)
+			}
 		</>
-  )
+	)
 }
 
 export default Suppliers;

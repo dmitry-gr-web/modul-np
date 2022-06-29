@@ -3,6 +3,8 @@ import StatusBlock from './statusBlock';
 // import ProductCard from '../warehouse/Warehouse';
 // import PodProductList from './PodProductList';
 // import useOutsideAlert from './outSideHook';
+// import WarehouseDropMenu from './WarehouseDropMenu'
+import SimpleDropMenu from './SimpleDropMenu'
 let tooltip;
 let plusminus;
 const WarehouseProductList = ({
@@ -205,7 +207,7 @@ const WarehouseProductList = ({
 		}
 		if (e.currentTarget.className === 'slider round') {
 			// e.currentTarget.querySelector('.checkbox').checked
-			console.log('asdasdass')
+			// console.log('asdasdass')
 			tooltip = setTimeout(() => {
 
 				if (e.target.offsetParent.children[0].checked) {
@@ -221,8 +223,9 @@ const WarehouseProductList = ({
 
 
 		}
-		if (e.currentTarget.className === 'wrap-nal-ostatok') {
+		if (e.currentTarget.className === 'wrap-nal-ostatok' && !addPrice) {
 			// e.currentTarget.querySelector('.checkbox').checked
+			//  console.log(e);
 			tooltip = setTimeout(() => {
 				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-available') + memoryInput;
 				tooltipBlock.style.left = posElement.x + 'px';
@@ -232,8 +235,11 @@ const WarehouseProductList = ({
 		}
 		if (e.currentTarget.className === 'nal-rezerv') {
 			// e.currentTarget.querySelector('.checkbox').checked
+			console.log(+e.target.innerText.replace(/\s/gu,''))
+			let res = +e.target.innerText.replace(/\s/gu,'') === +memoryInput.replace(/\s/gu,'') ? '': +e.target.innerText.replace(/\s/gu,'') - +memoryInput.replace(/\s/gu,'');
+			let newres  = res.toLocaleString('ru-RU', {minimumFractionDigits: 0,maximumFractionDigits: 0,});
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerText = translator.getTranslation('tooltipWarehouse', 'sum-reserv') + e.target.innerText;
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'sum-reserv') + e.target.innerText + (res === '' ? '' : `<br>Не хватает : ${newres}`);
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
@@ -366,6 +372,7 @@ const WarehouseProductList = ({
 	const [itogoZakupka, setItogoZakupka] = useState('');
 	const [pri4ina, setPri4ina] = useState('');
 	const linkTR = useRef();
+	const cenaBlock = useRef();
 	function BtnMinus(e) {
 		e.stopPropagation();
 		setPodlozhka(true);
@@ -514,10 +521,10 @@ const WarehouseProductList = ({
 	const focus = useRef();
 	function focusCena() {
 		if (focus.current) {
-			if(focus.current.querySelector('.cenaInput') !== null){
-				focus.current.querySelector('.cenaInput').focus();
+			// if(focus.current.querySelector('.cenaInput') !== null){
+			// 	focus.current.querySelector('.cenaInput').focus();
 
-			}
+			// }
 			if(focus.current.querySelector('.prichinaInput') !== null) {
 
 				focus.current.querySelector('.prichinaInput').focus();
@@ -525,7 +532,7 @@ const WarehouseProductList = ({
 		}
 	}
 	function cenaChange(e) {
-		e.target.value = e.target.value.replace(/[^0-9.]/g, '');
+		e.target.value = e.target.value.replace(',','.').match(/^\d+(?:[\.,]\d{0,2})?/);
 		setCena(e.target.value);
 	}
 	function pri4inaChange(e) {
@@ -533,11 +540,13 @@ const WarehouseProductList = ({
 		if (e.target.value.length >= 1) {
 			e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
 		}
-		e.target.value = e.target.value.replace(/\d/g, '');
+		// e.target.value = e.target.value.replace(/\d/g, '');
 		setPri4ina(e.target.value);
 	}
 	function kursChange(e) {
-		e.target.value = e.target.value.replace(/[^0-9.]/g, '');
+		// e.target.value = e.target.value.replace(/[^0-9.]/g, '');
+		e.target.value = e.target.value.replace(',','.').match(/^\d+(?:[\.,]\d{0,2})?/);
+
 		setKurs(e.target.value);
 	}
 	useEffect(() => {
@@ -665,6 +674,7 @@ const WarehouseProductList = ({
 			document.querySelector('.track-vertical').style.opacity = 1;
 			document.querySelector('.track-horizontal').style.opacity = 1;
 			// document.getElementById('tooltipBtn').style.animation = '';
+			setListenChangeSuppliers('');
 			setKurs('');
 			setCena('');
 			setItogoZakupka('');
@@ -714,6 +724,7 @@ const WarehouseProductList = ({
 			// 		}
 			// 	}
 			// }
+			setListenChangeSuppliers('');
 			setKurs('');
 			setCena('');
 			setItogoZakupka('');
@@ -810,7 +821,7 @@ const WarehouseProductList = ({
 	const inputRef = useRef();
 	// const btnRef = useRef();
 	function PlusMinusOpen(e) {
-		e.stopPropagation();
+		// e.stopPropagation();
 		document.querySelectorAll('.nal-ostatok').forEach((x) => {
 			x.classList.add('showBtn');
 		});
@@ -858,15 +869,34 @@ const WarehouseProductList = ({
 			document.querySelectorAll('.cena').forEach((x) => {
 				x.classList.add('visible');
 			});
+			let pos = cenaBlock.current.getBoundingClientRect();
+			// console.log(pos.y, cenaBlock.current.offsetHeight)
+			const heightPlus = pos.y + cenaBlock.current.offsetHeight;
+			const viewportHeight = document.body.clientHeight;
+			// console.log(viewportHeight , heightPlus)
+				if (heightPlus + 78 > viewportHeight) {
+					// tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
+					// tooltipBlock.style.top = posElement.y + 23 + 'px';
+					cenaBlock.current.style.bottom = '18px';
+				} else {
+					// cenaBlock.current.style.bottom = '-140px';
+					// tooltipBlock.style.left = posElement.x + 'px';
+					// tooltipBlock.style.top = posElement.y + 23 + 'px';
+				}
+
+		
 		} else {
 			document.querySelectorAll('.cena').forEach((x) => {
 				x.classList.remove('visible');
 			});
+			
+			
 			// setTimeout(() => {
 			// 	setAddPrice(false)
 			// }, 200);
 		}
 	}, [addPrice])
+	const [listenChangeSuppliers, setListenChangeSuppliers]= useState('');
 	return (
 		<>
 			{objProduct[index] && (
@@ -1105,13 +1135,15 @@ const WarehouseProductList = ({
 					>
 						<div
 							className="wrap-nal-ostatok"
-							onMouseEnter={objProduct[index].lock || addPrice ? () => { } : tooltipOn}
-							onMouseLeave={objProduct[index].lock || addPrice ? () => { } : tooltipOff}
+				
+							onMouseEnter={objProduct[index].lock || addPrice ? null : tooltipOn}
+							onMouseLeave={objProduct[index].lock || addPrice ? null : tooltipOff}
 						>
 							<button
 								onDoubleClick={(e) => e.stopPropagation()}
 								onClick={BtnMinus}
 								disabled={objProduct[index].lock ? true : false}
+					
 							>
 								<svg
 									width="9"
@@ -1138,9 +1170,10 @@ const WarehouseProductList = ({
 								// onKeyUp={enterInput}
 								maxLength={5}
 								onClick={(e) => {
-									setPodlozhka(true);
+									// setPodlozhka(true);
 									e.stopPropagation();
 								}}
+
 								// value={focusInput && inputFormat ? memoryInput : +memoryInput}
 								value={memoryInput}
 								onDoubleClick={(e) => e.stopPropagation()}
@@ -1158,6 +1191,8 @@ const WarehouseProductList = ({
 								onDoubleClick={(e) => e.stopPropagation()}
 								onClick={BtnPlus}
 								disabled={objProduct[index].lock ? true : false}
+	
+
 							>
 								<svg
 									width="15"
@@ -1217,14 +1252,107 @@ const WarehouseProductList = ({
 									></path>
 								</svg>
 							</button>
-							<div className='cena'>
+							<div ref={cenaBlock} className='cena'>
 								{addPrice && <div ref={focus} className='wrap' onMouseEnter={focusCena}>
 
 									<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
-										<span>{memoryCena >= 1 ? translator.getTranslation('menuAdd/CribProduct', 'add') : translator.getTranslation('menuAdd/CribProduct', 'crib')}</span><span>{memoryCena} шт</span>
-										{/* <div className='poloska'></div> */}
+										<span>{memoryCena >= 1 ? translator.getTranslation('menuAdd/CribProduct', 'add') : translator.getTranslation('menuAdd/CribProduct', 'crib')}</span>
+										<span style={{display:'flex',alignItems:'center'}}><button
+								// onDoubleClick={(e) => e.stopPropagation()}
+								onClick={BtnMinus}
+								style={{top:-1}}
+					
+							>
+								<svg
+									width="9"
+									height="7"
+									viewBox="0 0 9 7"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M1.26782 3.44748L8.08752 3.44747"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+								</svg>
+							</button>{memoryCena} шт<button
+								onClick={BtnPlus}
+								style={{top:-1}}
+							>
+								<svg
+									width="15"
+									height="15"
+									viewBox="3 2 15 15"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+									style={{ transform: 'rotate(45deg)',opacity: 0.7 }}
+								>
+									<path
+										d="M7.26655 8.03662L12.0888 12.8589"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 12.8589L12.0888 8.03659"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 8.03662L12.0888 12.8589"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 12.8589L12.0888 8.03659"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 8.03662L12.0888 12.8589"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+									<path
+										d="M7.26655 12.8589L12.0888 8.03659"
+										stroke="black"
+										strokeOpacity="0.7"
+										strokeWidth="1.09116"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>
+								</svg>
+							</button></span>
 									</div>
 									{memoryCena >= 1 ? <>
+										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
+											<span>Поставщик</span>
+											<div style={{minWidth: '100px',padding: 5,paddingLeft: 0,paddingRight: 11}}>
+												<SimpleDropMenu 
+												setListenChangeSuppliers={setListenChangeSuppliers} 
+												listenChangeSuppliers={listenChangeSuppliers}
+												addPrice={addPrice}
+												/>
+											</div>
+										</div>
 										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between' }}>
 											<span>{translator.getTranslation('menuAdd/CribProduct', 'purchase')}</span><input className='cenaInput' onChange={cenaChange} value={cena} />
 											<div className='poloska'></div>
@@ -1234,18 +1362,21 @@ const WarehouseProductList = ({
 											<div className='poloska'></div>
 										</div>
 										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
-											<span>{translator.getTranslation('menuAdd/CribProduct', 'total')}</span><span>{itogoZakupka}</span>
+											<span>{translator.getTranslation('menuAdd/CribProduct', 'total')}</span><span>{(+itogoZakupka).toFixed(2)}</span>
 										</div>
+									
 									</> :
 										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between' }}>
 											<span>{translator.getTranslation('menuAdd/CribProduct', 'reason')}</span><input className='prichinaInput' onChange={pri4inaChange} value={pri4ina} />
 											<div className='poloska'></div>
 										</div>
 									}
-
-
-
-									<button onClick={saveBtn} disabled={cena !== '' && memoryCena >= 1 || pri4ina !== '' && memoryCena < 1 ? false : true} className="save-btn">Сохранить</button>
+									<button 
+										onClick={saveBtn} 
+										disabled={cena !== '' && memoryCena >= 1 && listenChangeSuppliers !== ''  || pri4ina !== '' && memoryCena < 1 ? false : true} 
+										className="save-btn">
+										Сохранить
+									</button>
 									{/* <div className='poloska'></div> */}
 								</div>}
 							</div>

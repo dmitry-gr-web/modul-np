@@ -1,10 +1,10 @@
 import React from "react";
 let plusminus;
-export default function SwitchBtn ({status,index,data,setData,getStart}) {
+export default function SwitchBtn ({status,index,data,setData,addOneItem}) {
     function switchBtn(e) {
         e.stopPropagation();
-        let temp = (getStart() < 0 ? 0 : getStart());
-        data[index + temp].status = !data[index + temp].status
+        // let temp = (getStart() < 0 ? 0 : getStart());
+        data[index].status = !data[index].status
         setData([...data]);
     }
     function tooltipOn(e,html) {
@@ -31,7 +31,7 @@ export default function SwitchBtn ({status,index,data,setData,getStart}) {
                 onChange={data[index].lock ? () => { } : switchBtn}
                 checked={!status}
             />
-            <span className="slider round"
+            <span className={`slider round`}
             onMouseEnter={data[index].lock ? () => { } : (e) => {
                 tooltipOn(
                     e,
@@ -47,6 +47,7 @@ export default function SwitchBtn ({status,index,data,setData,getStart}) {
                         : 'Разблокирован'
                 );
             }}
+            
             ></span>
         </label>
     )

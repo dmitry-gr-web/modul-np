@@ -27,7 +27,7 @@ export let dataAttribute = [
         status:true,
         product: 'XXXX-',
         id: '9966',
-        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там'
+        select:false,lock:false,attribute: 'Голубой и синий и зеленый и чето там и еще чтото и жирафчик'
     },
     {
         status:false,
@@ -843,7 +843,7 @@ export let dataAttribute = [
         status:false,
         product: 'XXXX-',
         id: '2312',
-        select:false,lock:false,attribute: 'Green'
+        select:false,lock:true,attribute: 'Green'
     },
     {
         status:false,

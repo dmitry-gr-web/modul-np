@@ -7,7 +7,7 @@ import App from './app';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <App />
     <div id="tooltipBtn"></div>
   </React.StrictMode>,
   document.getElementById('root')

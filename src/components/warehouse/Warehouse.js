@@ -41,15 +41,18 @@ const Warehouse = () => {
 	// 	setObjProduct(dataWarehouse);
 	// }, 2000);
 	const [objProduct, setObjProduct] = useState(dataWarehouse);
-	const [objAttribute,setObjAttribute] = useState(dataAttribute);
-	const [objSuppliers,setObjSuppliers] = useState(dataSuppliers);
+	const [objAttribute,setObjAttribute] = useState(null);
+	const [objSuppliers,setObjSuppliers] = useState(null);
 	const [getIndex, setGetIndex] = useState(0);
-
+	useEffect(()=> {
+		setObjAttribute(dataAttribute)
+		setObjSuppliers(dataSuppliers)
+	},[])
 	
 	const [ul, setUl] = useState([
-		{ id: 0, name: "goods", select: false },
+		{ id: 0, name: "goods", select: true },
 		{ id: 1, name: "attributes", select: false },
-		{ id: 2, name: "suppliers", select: true },
+		{ id: 2, name: "suppliers", select: false },
 		{ id: 3, name: "movementOfGoods", select: false },
 	]);
 	function clickNav(i) {
@@ -125,20 +128,21 @@ const Warehouse = () => {
 
 			<div
 				style={{
-					marginLeft: 74,
+					// marginLeft: 74,
 					paddingTop: 28,
 					height: '100vh',
-					width: 'calc(100vw - 180px)',
+					// width: 'calc(100vw - 180px)',
 					background: 'white',
 					display: 'flex',
 					cursor: 'default',
-					justifyContent: 'space-between',
+					width: '100%'
+					// justifyContent: 'space-between',
 				}}
 			>
 				<div style={{position:'absolute', width: 54,height: 500, left: '100px',backdropFilter: 'blur(4px)',    boxShadow: '-4px 4px 4px rgb(0 0 0 / 25%)',background: 'rgba(81,81,81,.7)'}}>
 
 				</div>
-				<aside>
+				<aside style={{marginLeft: 74}}>
 					<div className="warehouse-title">{translator.getTranslation('warehouse', 'warehouse')}</div>
 					<nav className="warehouse-nav">
 						<ul>

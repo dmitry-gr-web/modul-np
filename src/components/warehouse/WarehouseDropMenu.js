@@ -101,9 +101,9 @@ const WarehouseDropMenu = ({
 				{ id: 0, attribute: 'all', select: true },
 				{ id: 1, attribute: 'icon-Vector-1', select: false },
 				{ id: 2, attribute: 'icon-Union', select: false },
-				{ id: 2, attribute: 'icon-Vector-3', select: false },
-				{ id: 2, attribute: 'icon-Union-1', select: false },
-				{ id: 2, attribute: 'icon-Union-18', select: false },
+				{ id: 3, attribute: 'icon-Vector-3', select: false },
+				{ id: 4, attribute: 'icon-Union-1', select: false },
+				{ id: 5, attribute: 'icon-Union-18', select: false },
 			];
 		}
 	}
@@ -228,6 +228,7 @@ const WarehouseDropMenu = ({
 			}
 			setObj(newobj);
 		} else {
+			console.log('ebat')
 			let newobj = obj.map((x, i) => {
 				if (i === index) {
 					// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
@@ -253,6 +254,10 @@ const WarehouseDropMenu = ({
 					document.querySelector('.contentScroll').style.overflowY = 'auto';
 					document.querySelector('.track-vertical').style.opacity = 1;
 					document.querySelector('.track-horizontal ').style.opacity = 1;
+					if (adaptiveTelNum) {
+
+						warehouse.current.style.minWidth = '22px';
+					}
 					return { ...x, select: false };
 				} else if (index !== 0 && i === 0) {
 					return { ...x, select: false };
@@ -272,6 +277,19 @@ const WarehouseDropMenu = ({
 				document.querySelector('.track-vertical').style.opacity = 1;
 				document.querySelector('.track-horizontal ').style.opacity = 1;
 				newobj[0].select = true;
+				if (adaptiveTelNum) {
+					// setTimeout(() => {
+					// 	let hui = [...document.querySelectorAll('.block-3-btn .status-result')].every(x => x.innerHTML === '');
+					// 	if(hui) {
+					// 		setLabelForWidth(false);
+					// 	}
+					// }, 0);
+					console.log('ebat')
+					// setFlagSwitchMenu(false);
+					// warehouse.current.classList.remove('smallsort');
+					warehouse.current.style.minWidth = '22px';
+					// document.querySelector('.width21px').style.maxWidth = '51px';
+				}
 			}
 			setObj(newobj);
 		}
@@ -306,6 +324,8 @@ const WarehouseDropMenu = ({
 	const [arrowToggle, setArrowToggle] = useState(false);
 	const [arrowActive, setArrowActive] = useState('down');
 	const [activity, setActivity] = useState(false);
+	const refStatusText = useRef();
+	const refTelOperator = useRef();
 	function menuOn(e) {
 		if (!podlozhka) {
 			// console.log('start');
@@ -359,9 +379,9 @@ const WarehouseDropMenu = ({
 
 			}
 			if (adaptiveTelNum) {
-				if (refStatusText.current.innerHTML !== '') {
+				if (refTelOperator.current.innerHTML !== '') {
 					warehouse.current.classList.add('hide-arrow');
-				} else if (refStatusText.current.innerHTML !== '' && activity) {
+				} else if (refTelOperator.current.innerHTML !== '' && activity) {
 					warehouse.current.classList.add('hide-arrow');
 				} else {
 					if (activity) {
@@ -432,9 +452,9 @@ const WarehouseDropMenu = ({
 
 			}
 			if (adaptiveTelNum) {
-				if (refStatusText.current.innerHTML !== '') {
+				if (refTelOperator.current.innerHTML !== '') {
 					warehouse.current.classList.add('hide-arrow');
-				} else if (refStatusText.current.innerHTML !== '' && activity) {
+				} else if (refTelOperator.current.innerHTML !== '' && activity) {
 					warehouse.current.classList.add('hide-arrow');
 				} else {
 					if (activity) {
@@ -557,6 +577,47 @@ const WarehouseDropMenu = ({
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 		
 				
+			} else if (type === 'telOperator') {
+				if (e.currentTarget.children[0]?.className === 'icon-Vector-1 icons') {
+
+						tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'vodafone');
+						tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+						tooltipBlock.style.top = posElement.y -2+ 'px';
+						tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+			
+				}
+				if (e.currentTarget.children[0]?.className === 'icon-Union icons') {
+			
+						tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'unknownNumber');
+						tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+						tooltipBlock.style.top = posElement.y -2+ 'px';
+						tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				
+				}
+				if (e.currentTarget.children[0]?.className === 'icon-Vector-3 icons') {
+			
+						tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'lifecell');
+						tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+						tooltipBlock.style.top = posElement.y -2+ 'px';
+						tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+			
+				}
+				if (e.currentTarget.children[0]?.className === 'icon-Union-1 icons') {
+			
+						tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'kyivstar');
+						tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+						tooltipBlock.style.top = posElement.y -2+ 'px';
+						tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+				
+				}
+				if (e.currentTarget.children[0]?.className === 'icon-Union-18 icons') {
+	
+						tooltipBlock.innerText = translator.getTranslation('tooltipOperator', 'errorNumber');
+						tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+						tooltipBlock.style.top = posElement.y -2+ 'px';
+						tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
+		
+				}
 			}
 
 			if (e.currentTarget.className === 'countBlock') {
@@ -644,7 +705,7 @@ const WarehouseDropMenu = ({
 		setOpenMenu(false);
 		setPodlozhka(false);
 	}
-	const refStatusText = useRef();
+
 	useEffect(() => {
 		if (activity && adaptive && refStatusText.current.innerHTML !== '') {
 			document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
@@ -660,6 +721,23 @@ const WarehouseDropMenu = ({
 				x.classList.remove('smallsort');
 			});
 		}
+		// if(type === 'telOperator') {
+		// 	if (activity && adaptive && refTelOperator.current.innerHTML !== '') {
+		// 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+		// 			x.classList.remove('smallsort');
+		// 		});
+		// 		warehouse.current.classList.add('smallsort');
+		// 	} else if (activity && adaptive && refTelOperator.current.innerHTML === '') {
+		// 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+		// 			x.classList.remove('smallsort');
+		// 		});
+		// 	} else if (activity && !adaptive) {
+		// 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
+		// 			x.classList.remove('smallsort');
+		// 		});
+		// 	}
+		
+		// }
 	}, [activity, sortActive]);
 	// useEffect(()=> {
 	// 	document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
@@ -681,7 +759,7 @@ const WarehouseDropMenu = ({
 			className={`warehouse-dropmenu ${
 				arrowToggle ||
 				activity ||
-				(refStatusText.current?.innerHTML !== '' && adaptive) ||
+				(refStatusText.current?.innerHTML !== '' && adaptive) || (refTelOperator.current?.innerHTML !== '' && adaptiveTelNum) ||
 				(width21px === true && !switchMenu) || !hideArrow && !podlozhka
 					? 'hide-arrow'
 					: ''
@@ -689,7 +767,7 @@ const WarehouseDropMenu = ({
 			// style={}
 			ref={warehouse}
 		>
-			{inputOn ? (
+			{inputOn && (
 				<>
 					<input
 						ref={ref}
@@ -711,7 +789,7 @@ const WarehouseDropMenu = ({
 
 					{/* <div style={{display: `${active ? 'block': 'none'}`,width: '100%', background: 'rgb(117, 117, 117)',position: 'absolute', left:0, top:`${upDown ? '0px' : '18px'}`,height: 2, borderRadius: '2px'}} className='border'/> */}
 				</>
-			) : type === 'status' || type === 'telOperator' ? (
+			)}{type === 'status' && (
 				<>
 					<div ref={refStatusText} className="status-result">
 						{(obj.filter((x) => x.select === true).length > 1)
@@ -725,7 +803,8 @@ const WarehouseDropMenu = ({
 
 					{/* <div style={{display: `${active ? 'block': 'none'}`,width: '100%', background: 'rgb(117, 117, 117)',position: 'absolute', left:0, top:`${upDown ? '0px' : '18px'}`,height: 2, borderRadius: '2px'}} className='border'/> */}
 				</>
-			) : (
+			)}
+			 {(type === 'country' || type === 'currency') && (
 				<>
 					<div className="text-result">
 						{obj.filter((x) => x.select === true).length > 1 ? (
@@ -735,6 +814,23 @@ const WarehouseDropMenu = ({
 						) : (
 							<span className={type === 'country' ? 'flags' : ''} style={{ paddingLeft: 10 }}>
 								{obj.filter((x) => x.select === true)[0].attribute}
+							</span>
+						)}
+					</div>
+
+					{/* <div style={{display: `${active ? 'block': 'none'}`,width: '100%', background: 'rgb(117, 117, 117)',position: 'absolute', left:0, top:`${upDown ? '0px' : '18px'}`,height: 2, borderRadius: '2px'}} className='border'/> */}
+				</>
+			)}
+			 {(type === 'telOperator') && (
+				<>
+					<div ref={refTelOperator} className="text-operator-result">
+						{obj.filter((x) => x.select === true).length > 1 ? (
+							translator.getTranslation('btnFiltr', 'filtr')
+						) : obj.filter((x) => x.select === true)[0].attribute.includes('all') ? (
+							''
+						) : (
+							<span className={type === 'telOperator' ? obj.filter((x) => x.select === true)[0].attribute + ' icons' : ''} style={{ paddingLeft: 10 }}>
+								{/* {obj.filter((x) => x.select === true)[0].attribute} */}
 							</span>
 						)}
 					</div>
@@ -777,7 +873,7 @@ const WarehouseDropMenu = ({
 			<span className="underline" style={adaptive && {left:'3px', width: 'calc(100% - 6px)' } || adaptiveTelNum && { width: 'calc(100% - 3px)' }}></span>
 			{/* {console.log(openMenu)} */}
 
-			{type === 'name' || type === 'attribute' ||  type ==='company' || type ==='contact' ? (
+			{(type === 'name' || type === 'attribute' ||  type ==='company' || type ==='contact') && (
 				<div
 					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
 				>
@@ -820,8 +916,48 @@ const WarehouseDropMenu = ({
 							);
 						}}
 					</SimpleBar>
+				</div>)
+ 			} 
+			{(type === 'country'  || type === 'status' || type === 'currency') && (
+				<div
+					className={openMenu ? `dropmenu ${adaptive || adaptiveTelNum ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+					style={adaptive && {width: 'calc(100% - 6px)'} || adaptiveTelNum && { width: 'calc(100% - 3px)' }}
+				>
+					<SimpleBar
+						// style={adaptive ? { transitionDelay: '0.1s' } : {}}
+						style={{ height: 90 }}
+						autoHide={false}
+						forceVisible="x"
+						scrollbarMinSize={20}
+						// ref={suka}
+						// className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
+					>
+						{openMenu &&
+							obj.map((x, index) => (
+								<div
+									key={index}
+									onMouseEnter={index === 0 ? null: tooltipOn}
+									onMouseLeave={index === 0 ? null: tooltipOff}
+									className={x.select ? 'select-btn list' : 'list'}
+									onClick={(e) => clickList(x.id, e)}
+									style={type === 'status' ? { overflow: 'visible' } : {}}
+								>
+									<span
+										className={
+											index !== 0
+												? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : ''}`
+												: ''
+										}
+									>
+										{translator.getTranslation('btnAll', x.attribute) ?? x.attribute}
+									</span>
+								</div>
+							))}
+						{/* )} */}
+					</SimpleBar>
 				</div>
-			) : (
+			)}
+			{(type === 'telOperator') && (
 				<div
 					className={openMenu ? `dropmenu ${adaptive || adaptiveTelNum ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
 					style={adaptive && {width: 'calc(100% - 6px)'} || adaptiveTelNum && { width: 'calc(100% - 3px)' }}
@@ -842,17 +978,17 @@ const WarehouseDropMenu = ({
 									onMouseLeave={index === 0 ? null: tooltipOff}
 									className={x.select ? 'select-btn list' : 'list'}
 									onClick={(e) => clickList(x.id, e)}
-									style={type === 'status' ? { overflow: 'visible' } : {}}
+									// style={type === 'status' ? { overflow: 'visible' } : {}}
 								>
 									<span
 										className={
 											index !== 0
-												? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : type === 'telOperator' ? x.attribute : ''}`
+												? `${type === 'telOperator' && x.attribute + ' icons'}`
 												: ''
 										}
 									>
-										{type !== 'telOperator' && (translator.getTranslation('btnAll', x.attribute) ?? x.attribute)}
-										{type === 'telOperator' && index === 0 && (translator.getTranslation('btnAll', x.attribute) ?? x.attribute)}
+										{/* {type !== 'telOperator' && (translator.getTranslation('btnAll', x.attribute) ?? x.attribute)} */}
+										{index === 0 && (translator.getTranslation('btnAll', x.attribute) ?? x.attribute)}
 									</span>
 								</div>
 							))}

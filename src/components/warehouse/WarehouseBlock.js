@@ -88,7 +88,10 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			x.style.zIndex = 1;
 		});
 		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
-			x.style.width = '21px';
+			x.style.width = '22px';
+		});
+		document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
+			x.style.minWidth = '22px';
 		});
 		document.querySelectorAll('.nal-ostatok').forEach((x) => {
 			x.classList.remove('showBtn');
@@ -738,6 +741,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	// 	setHideArrow(false);
 
 	// }
+
 	return (
 		<>
 		{isLoading ? <div className='loading'><Preloaded/></div> :<div className="warehouse-products">
@@ -756,7 +760,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					// maxHeight: 'calc(100vh - 170px)',
 					width: '100%',
 					// height: 'calc(100vh - 216px)',
-					height: 'calc(100vh - 190px)',
+					height: 'calc(100vh - 210px)',
 				}}
 				ref={refScroll}
 			>
@@ -787,7 +791,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 						tabIndex={-1}
 						style={{ width: '100%' }}
 				
-					
+						className='warehouse-table'
 						// onMouseEnter={}
 						// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 					>
