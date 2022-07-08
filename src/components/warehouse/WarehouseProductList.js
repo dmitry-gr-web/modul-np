@@ -4,6 +4,7 @@ import StatusBlock from './statusBlock';
 // import PodProductList from './PodProductList';
 // import useOutsideAlert from './outSideHook';
 // import WarehouseDropMenu from './WarehouseDropMenu'
+import { Minus, Plus } from '../../img/svg-pack';
 import SimpleDropMenu from './SimpleDropMenu'
 let tooltip;
 let plusminus;
@@ -35,7 +36,6 @@ const WarehouseProductList = ({
 	// hoverWidth,
 	// setHoverWidth,
 }) => {
-	const [memoryInput, setMemoryInput] = useState(objProduct[index]?.ostatok);
 	// const [inputFormat, setInputFormat] = useState(false);
 	// const [ref, isShow, setIsShow ] = useOutsideAlert(false);
 
@@ -233,11 +233,24 @@ const WarehouseProductList = ({
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
 			}, 250);
 		}
+		// if (e.currentTarget.className === 'memoryCena') {
+		// 	// e.currentTarget.querySelector('.checkbox').checked
+		// 	//  console.log(e);
+		// 	let block = focus.current.querySelector('.memoryCena').offsetWidth;
+		// 	// console.log(block)
+		// 	// tooltipBlock.style.fontSize = '10px';
+		// 	tooltip = setTimeout(() => {
+		// 		tooltipBlock.innerHTML = `Добавляется товаров: ${memoryCena}<br>Итого товаров на складе: ${memoryInput}`;
+		// 		tooltipBlock.style.left = posElement.x + block + 'px';
+		// 		tooltipBlock.style.top = posElement.y - 14 + 'px';
+		// 		tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+		// 	}, 250);
+		// }
 		if (e.currentTarget.className === 'nal-rezerv') {
 			// e.currentTarget.querySelector('.checkbox').checked
-			console.log(+e.target.innerText.replace(/\s/gu,''))
-			let res = +e.target.innerText.replace(/\s/gu,'') === +memoryInput.replace(/\s/gu,'') ? '': +e.target.innerText.replace(/\s/gu,'') - +memoryInput.replace(/\s/gu,'');
-			let newres  = res.toLocaleString('ru-RU', {minimumFractionDigits: 0,maximumFractionDigits: 0,});
+			// console.log(+e.target.innerText.replace(/\s/gu, ''))
+			let res = +e.target.innerText.replace(/\s/gu, '') === +memoryInput.replace(/\s/gu, '') ? '' : +e.target.innerText.replace(/\s/gu, '') - +memoryInput.replace(/\s/gu, '');
+			let newres = res.toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0, });
 			tooltip = setTimeout(() => {
 				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'sum-reserv') + e.target.innerText + (res === '' ? '' : `<br>Не хватает : ${newres}`);
 				tooltipBlock.style.left = posElement.x + 'px';
@@ -359,72 +372,123 @@ const WarehouseProductList = ({
 
 	function tooltipOff() {
 		clearTimeout(tooltip);
+		// const tooltipBlock = document.getElementById('tooltipBtn');
+		// tooltipBlock.style.fontSize = '12px';
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-	// console.log(objProduct[0].ostatok);
-	// let mem =  objProduct[0].ostatok;
-	// mem = +mem.replaceAll(' ','');
-	// console.log(mem)
-	const [addPrice, setAddPrice] = useState(false);
-	const [memoryCena, setMemoryCena] = useState(0);
-	const [cena, setCena] = useState('');
-	const [kurs, setKurs] = useState('');
-	const [itogoZakupka, setItogoZakupka] = useState('');
+	const [memoryInput, setMemoryInput] = useState(objProduct[index]?.ostatok); // input-+
+	const [addPrice, setAddPrice] = useState(false); // menu pri +
+	const [memoryCena, setMemoryCena] = useState(0); // input+- vnutri menu
+	const [cena, setCena] = useState(''); //cena zakupki
+	const [kurs, setKurs] = useState(''); // kurs
+	const [itogoZakupka, setItogoZakupka] = useState(''); // summa
 	const [pri4ina, setPri4ina] = useState('');
 	const linkTR = useRef();
 	const cenaBlock = useRef();
+	const [flagForZakupka, setFlagForZakupka] = useState(false);
+	const [memoryChange, setMemoryChange] = useState(objProduct[index]?.ostatok); // stariy input
+
+	// console.log(memoryCena)
 	function BtnMinus(e) {
-		e.stopPropagation();
-		setPodlozhka(true);
-		setAddPrice(true);
-		setFlag(true);
-		setHideMenu(true);
+		// let oldinput = +memoryChange.replace(/\s/gmu, '');
 		if (memoryInput !== '0') {
-			setMemoryCena(memoryCena == '1' ? memoryCena - 2 : memoryCena - 1);
-			// setMemoryCena(memoryCena - 1);
-		}
+			// e.stopPropagation();
+			setPodlozhka(true);
+			setAddPrice(true);
+			setFlag(true);
+			setHideMenu(true);
+			let inputFormat = +memoryInput.replace(/\s/gmu, '');
+			// let oldinput = +memoryChange.replace(/\s/gmu, '');
+			// let ostatok = newobj[index].ostatok;
+			if ((+memoryChange.replace(/\s/gmu, '')) < (+memoryInput.replace(/\s/gmu, ''))) {
+				let newMemoryCena = memoryCena === 1 && inputFormat !== 1 ? memoryCena - 2 : inputFormat === 1 ? memoryCena : memoryCena - 1;
+				setMemoryCena(newMemoryCena);
+				// input = input.toLocaleString('ru-RU', {
+				// 		minimumFractionDigits: 0,
+				// 		maximumFractionDigits: 0,
+				// 	});
+				let newinput = memoryCena === 1 && inputFormat !== 1 ? inputFormat - 2 : inputFormat === 1 ? inputFormat : inputFormat - 1;
+				setMemoryInput(newinput.toString());
 
-		linkTR.current.classList.add('hover-disabled');
-		// console.log(memoryInput, memoryCena)
-		// if (memoryInput ==='0') {
-		// 	setMemoryCena(0)
-		// }
-		document.querySelectorAll('.nal-ostatok').forEach((x) => {
-			x.classList.remove('showBtn');
-		});
-		e.target.closest('.nal-ostatok').classList.add('showBtn')
-		document.querySelector('.contentScroll').style.overflow = 'hidden';
-		document.querySelector('.track-vertical').style.opacity = 0;
-		document.querySelector('.track-horizontal').style.opacity = 0;
-
-		document.getElementById('tooltipBtn').style.animation = '';
-
-		let newobj = [...objProduct];
-		if (newobj[index].ostatok !== '0') {
-			let ostatok = newobj[index].ostatok;
-			// let zakupka = newobj[index].zakupka;
-			// zakupka = +zakupka.replaceAll(/\s/gmu, '');
-			ostatok = +ostatok.replaceAll(/\s/gmu, '');
-			ostatok = memoryCena == '1' && memoryInput !== '1' ? ostatok - 2 : ostatok - 1;
-			// zakupka = zakupka * ostatok;
-			ostatok = ostatok.toLocaleString('ru-RU', {
-				minimumFractionDigits: 0,
-				maximumFractionDigits: 0,
+				if (cena !== '') {
+					let text = +cena.replace(/\s/gmu, '');
+					let textKurs = +kurs.replace(/\s/gmu, '')
+					let text2 = newMemoryCena * (+text) === 0 ? text : newMemoryCena * (+text);
+					let text3 = newMemoryCena * (+text) * (+textKurs);
+					if (kurs === '') {
+						setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+					} else {
+						setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+					}
+				}
+				setTimeout(() => {
+					focus.current.querySelector('.input-search')?.focus();
+					// focus.current.querySelector('.prichinaInput').focus();
+					// focus.current.querySelector('.prichinaInput').nextSibling.style.width = '100%';
+				}, 300);
+			} else {
+				let newMemoryCena = memoryCena - 1;
+				setMemoryCena(newMemoryCena);
+				let newinput = inputFormat - 1;
+				setMemoryInput(newinput.toString());
+				// setTimeout(() => {
+				// 	// focus.current.querySelector('.input-search').focus();
+				// 	focus.current.querySelector('.prichinaInput')?.focus();
+				// 	focus.current.querySelector('.prichinaInput').nextSibling.style.width = '100%';
+				// }, 300);
+				setPrichinaFocus(true);
+				// if (cena !== '') {
+				// 	let text = +cena.replace(/\s/gmu, '');
+				// 	let textKurs = +kurs.replace(/\s/gmu, '')
+				// 	let text2 = newMemoryCena * (+text) === 0 ? text : newMemoryCena * (+text);
+				// 	let text3 = newMemoryCena * (+text) * (+textKurs);
+				// 	if (kurs === '') {
+				// 		setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+				// 	} else {
+				// 		setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+				// 	}
+				// }
+				console.log(newMemoryCena , newinput)
+			}
+			linkTR.current.classList.add('hover-disabled');
+			document.querySelectorAll('.nal-ostatok').forEach((x) => {
+				x.classList.remove('showBtn');
 			});
-			// zakupka = zakupka.toLocaleString('ru-RU', {
-			// 	minimumFractionDigits: 2,
-			// 	maximumFractionDigits: 2,
-			// }).replace(',', '.');
+			// setTimeout(() => {
+			// 	focus.current.querySelector('.input-search').focus();
+			// 	focus.current.querySelector('.prichinaInput').focus();
+			// 	focus.current.querySelector('.prichinaInput').nextSibling.style.width = '100%';
+			// }, 300);
+			focus.current?.closest('.nal-ostatok')?.classList.add('showBtn')
+			document.querySelector('.contentScroll').style.overflow = 'hidden';
+			document.querySelector('.track-vertical').style.opacity = 0;
+			document.querySelector('.track-horizontal').style.opacity = 0;
+			document.getElementById('tooltipBtn').style.animation = '';
 
-			newobj[index].ostatok = ostatok;
-			// newobj[index].suma1 = zakupka;
-			setObjProduct([...newobj]);
-			setMemoryInput(ostatok);
+
 		}
-		// if(memoryInput !== '0'){
-		// 	// let res = +memoryInput - 1;
-		// 	setMemoryInput(+memoryInput - 1)
+		// if (memoryChange === '0' && newMemoryCena === 0) {
+
+		// document.querySelector('.contentScroll').style.overflow = 'auto';
+		// document.querySelector('.track-vertical').style.opacity = 1;
+		// document.querySelector('.track-horizontal').style.opacity = 1;
+
+		// objProduct[index].ostatok = memoryChange;
+		// linkTR.current.classList.remove('hover-disabled');
+		// setObjProduct([...objProduct]);
+		// setMemoryInput(memoryChange);
+		// setListenChangeSuppliers('');
+		// setKurs('');
+		// setCena('');
+		// setItogoZakupka('');
+		// setPri4ina('');
+		// setMemoryCena(0);
+		// setAddPrice(false);
+		// setFlag(false);
+		// setPodlozhka(false);
+		// setHideMenu(false);
 		// }
+
 	}
 
 	function BtnPlus(e) {
@@ -434,8 +498,27 @@ const WarehouseProductList = ({
 		setFlag(true);
 		setHideMenu(true);
 		// setMemoryCena(memoryCena + 1);
-		setMemoryCena(memoryCena == '-1' ? memoryCena + 2 : memoryCena + 1);
-
+		let newMemoryCena = memoryCena === -1 ? memoryCena + 2 : memoryCena + 1;
+		setMemoryCena(newMemoryCena);
+		let inputFormat = +memoryInput.replace(/\s/gmu, '');
+		let newinput = memoryCena === -1 ? inputFormat + 2 : inputFormat + 1;
+		// input = input.toLocaleString('ru-RU', {
+		// 		minimumFractionDigits: 0,
+		// 		maximumFractionDigits: 0,
+		// 	});
+		setMemoryInput(newinput.toString());
+		console.log(newMemoryCena , newinput)
+		if (cena !== '') {
+			let text = +cena.replace(/\s/gmu, '');
+			let textKurs = +kurs.replace(/\s/gmu, '')
+			let text2 = newMemoryCena * (+text) === 0 ? text : newMemoryCena * (+text);
+			let text3 = newMemoryCena * (+text) * (+textKurs);
+			if (kurs === '') {
+				setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+			} else {
+				setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+			}
+		}
 		document.querySelectorAll('.nal-ostatok').forEach((x) => {
 			x.classList.remove('showBtn');
 		});
@@ -444,27 +527,21 @@ const WarehouseProductList = ({
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal').style.opacity = 0;
 		document.getElementById('tooltipBtn').style.animation = '';
+		setTimeout(() => {
+			focus.current?.querySelector('.input-search')?.focus();
+		}, 300);
 		linkTR.current.classList.add('hover-disabled');
-		let newobj = [...objProduct];
-		let ostatok = newobj[index].ostatok;
-		// let zakupka = newobj[index].zakupka;
-		// zakupka = +zakupka.replaceAll(/\s/gmu, '');
-		ostatok = +ostatok.replaceAll(/\s/gmu, '');
-		ostatok = memoryCena == '-1' ? ostatok + 2 : ostatok + 1;
-		// zakupka = zakupka * ostatok;
-		ostatok = ostatok.toLocaleString('ru-RU', {
-			minimumFractionDigits: 0,
-			maximumFractionDigits: 0,
-		});
-		// zakupka = zakupka.toLocaleString('ru-RU', {
-		// 	minimumFractionDigits: 2,
-		// 	maximumFractionDigits: 2,
-		// }).replace(',','.');
-
-		newobj[index].ostatok = ostatok;
-		// newobj[index].suma1 = zakupka;
-		setObjProduct([...newobj]);
-		setMemoryInput(ostatok);
+		// let newobj = [...objProduct];
+		// let ostatok = newobj[index].ostatok;
+		// ostatok = +ostatok.replaceAll(/\s/gmu, '');
+		// ostatok = memoryCena == '-1' ? ostatok + 2 : ostatok + 1;
+		// ostatok = ostatok.toLocaleString('ru-RU', {
+		// 	minimumFractionDigits: 0,
+		// 	maximumFractionDigits: 0,
+		// });
+		// newobj[index].ostatok = ostatok;
+		// setObjProduct([...newobj]);
+		// setMemoryInput(ostatok);
 	}
 
 	// function formatNumber(number) {
@@ -481,7 +558,6 @@ const WarehouseProductList = ({
 	// 	return newnum;
 	// }
 	const [flag, setFlag] = useState(false);
-	const [memoryChange, setMemoryChange] = useState(objProduct[index]?.ostatok);
 
 	function inputChange(e) {
 		// setFlag(true);
@@ -509,221 +585,234 @@ const WarehouseProductList = ({
 		let temp = e.target.value.replace(/[^0-9]/g, '');
 		e.target.value = temp.length === 0 ? ' ' : temp;
 		e.target.style.width = e.target.value.length * 7 + 'px';
-		setMemoryInput(e.target.value);
+		let value = e.target.value;
+		setMemoryInput(value);
+		// let res;
+		// if(memoryCena >= 0){
+		// } else {
+
+		// }
+		// let res;
+		// let res = (+value.replaceAll(/\s/gmu, '')) - (+memoryChange.replaceAll(/\s/gmu, ''))
+		// setMemoryCena(res);
+		// if(memoryCena <= -1){
+		// 	let old = (+memoryChange.replaceAll(/\s/gmu, ''));
+		// 	let newvalue = (+value.replaceAll(/\s/gmu, ''));
+		// 	if(old < newvalue){
+		// 		setMemoryCena(old);
+		// 		setMemoryInput(old.toString())
+		// 	}else {
+		// 		let res = old - newvalue;
+		// 		setMemoryCena(res);
+		// 	}
+
+		// } else {
+		// }
+		let res = (+value.replaceAll(/\s/gmu, '')) - (+memoryChange.replaceAll(/\s/gmu, ''))
+		setMemoryCena(res);
+		// let newMemoryCena = memoryCena;
+		if (cena !== '') {
+			let text = +cena.replace(/\s/gmu, '');
+			let textKurs = +kurs.replace(/\s/gmu, '')
+			let text2 = res * (+text) === 0 ? text : res * (+text);
+			let text3 = res * (+text) * (+textKurs);
+			if (kurs === '') {
+				setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+			} else {
+				setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+			}
+		}
 		// setMemoryCena(memoryInput - memoryInput);
 		// setMemoryCena(+memoryChange -  +memoryInput)
 		// setItogoZakupka(e.target.value);
 		// setMemoryChange(e.target.value);
 	}
+	function inputChangeMemoryCena(e) {
+		// setFlag(true);
+		// setPodlozhka(true);
+		// setHideMenu(true);
+		// document.querySelector('.contentScroll').style.overflow = 'hidden';
+		// document.querySelector('.track-vertical').style.opacity = 0;
+		// document.querySelector('.track-horizontal').style.opacity = 0;
+		// setMemoryChange(memoryInput);
+		// setPodlozhka(true);
+		// setAddPrice(true);
+		// setFlag(true);
+		// setHideMenu(true);
+		// setMemoryCena(memoryCena + 1);
+		// document.querySelectorAll('.nal-ostatok').forEach((x) => {
+		// 	x.classList.remove('showBtn');
+		// });
+		// e.target.closest('.nal-ostatok').classList.add('showBtn')
+		// document.querySelector('.contentScroll').style.overflow = 'hidden';
+		// document.querySelector('.track-vertical').style.opacity = 0;
+		// document.querySelector('.track-horizontal').style.opacity = 0;
+		// document.getElementById('tooltipBtn').style.animation = '';
+		// linkTR.current.classList.add('hover-disabled');
+		let temp = e.target.value.replace(/[^0-9]/g, '');
+		e.target.value = temp.length === 0 ? ' ' : temp;
+		e.target.style.width = e.target.value.length * 7 + 'px';
+		e.target.style.zIndex = 10001;
+		let value = e.target.value;
+		e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = 'none';
+		
+		setFlagForZakupka(true);
+		setMemoryCena(Number(value));
+		// let res = (+value.replaceAll(/\s/gmu, '')) + (+memoryChange.replaceAll(/\s/gmu, ''))
+		// setMemoryInput(res.toString());
+		// if (cena !== '') {
+		// 	let text = +cena.replace(/\s/gmu, '');
+		// 	let textKurs = +kurs.replace(/\s/gmu, '')
+		// 	let text2 = value * (+text) === 0 ? text : value * (+text);
+		// 	let text3 = value * (+text) * (+textKurs);
+		// 	if (kurs === '') {
+		// 		setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+		// 	} else {
+		// 		setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+		// 	}
+		// }
+		// setFlag(true);
+		// setCena(e.target.value);
+
+		// setMemoryCena(memoryInput - memoryInput);
+		// setMemoryCena(+memoryChange -  +memoryInput)
+		// setItogoZakupka(e.target.value);
+		// setMemoryChange(e.target.value);
+	}
+
 	// useEffect(()=> {
-	
+
 	// },[memoryInput])
 	const focus = useRef();
-	function focusCena() {
-		if (focus.current) {
-			// if(focus.current.querySelector('.cenaInput') !== null){
-			// 	focus.current.querySelector('.cenaInput').focus();
+	// function focusMemoryCena (e) {
+	// 	e.currentTarget.querySelector('input').select();
+	// }
+	// function focusCena() {
+	// 	if (focus.current) {
+	// 		// if(focus.current.querySelector('.cenaInput') !== null){
+	// 		// 	focus.current.querySelector('.cenaInput').focus();
 
-			// }
-			if(focus.current.querySelector('.prichinaInput') !== null) {
+	// 		// }
+	// 		if (focus.current.querySelector('.prichinaInput') !== null) {
 
-				focus.current.querySelector('.prichinaInput').focus();
-			}
-		}
-	}
+	// 			focus.current.querySelector('.prichinaInput').focus();
+	// 			focus.current.querySelector('.prichinaInput').nextSibling.style.width = '100%';
+	// 		}
+	// 	}
+	// }
 	function cenaChange(e) {
-		e.target.value = e.target.value.replace(',','.').match(/^\d+(?:[\.,]\d{0,2})?/);
+		e.target.value = e.target.value.replace(',', '.').match(/^\d+(?:[\.,]\d{0,2})?/);
+		// e.target.nextSibling.style.width = '100%';
+		e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = 'none';
+
+		e.target.style.zIndex = 10001;
 		setCena(e.target.value);
+		setFlagForZakupka(true);
 	}
 	function pri4inaChange(e) {
-	
+
 		if (e.target.value.length >= 1) {
 			e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
 		}
+		e.target.style.zIndex = 10001;
+		e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = 'none';
+
 		// e.target.value = e.target.value.replace(/\d/g, '');
 		setPri4ina(e.target.value);
+		setFlagForZakupka(true);
 	}
 	function kursChange(e) {
+		e.target.style.zIndex = 10001;
+		e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = 'none';
+
 		// e.target.value = e.target.value.replace(/[^0-9.]/g, '');
-		e.target.value = e.target.value.replace(',','.').match(/^\d+(?:[\.,]\d{0,2})?/);
+		e.target.value = e.target.value.replace(',', '.').match(/^\d+(?:[\.,]\d{0,2})?/);
 
 		setKurs(e.target.value);
+		setFlagForZakupka(true);
 	}
 	useEffect(() => {
-		if (kurs === '') {
-			setItogoZakupka(memoryCena * cena === 0 ? cena : memoryCena * cena);
-		} else {
-			let res = memoryCena * cena * kurs;
-			setItogoZakupka(res === 0 ? cena : res);
+		// let res = (+memoryInput.replaceAll(/\s/gmu, '')) - (+memoryChange.replaceAll(/\s/gmu, ''))
+		// setMemoryCena(res === '0.00' ? '' : res);
+		if (flagForZakupka && cena === '0.00') {
+
+			setCena('');
+
+
 		}
-		setMemoryCena(memoryInput - memoryChange);
-		// if(memoryInput == '0') {
-		// 	setMemoryCena(memoryCena - 2);
+		// if (itogoZakupka === '0.00') {
+		// 	setItogoZakupka('');
 		// }
-		// if(memoryCena == '0' && flag){
-		// 	console.log('pidar')
+		if (kurs === '0.00') {
+			setKurs('');
+		}
+		// console.log(memoryCena, cena, kurs)
+	}, [kurs, cena, memoryCena, memoryInput, flagForZakupka]);
 
-		// 	setMemoryInput(prev => prev - 1);
-		// 	setMemoryCena(memoryCena - 1);
-		// }
-		// if(memoryCena == '0'){
-		// 	console.log('pidar')
-		// 	setMemoryCena(memoryCena-2);
-		// }
-		// if(memoryCena == '1'){
-		// 	setMemoryCena(memoryCena - 2)
-		// }
-		// console.log(memoryCena)
-	}, [kurs, cena, memoryCena, itogoZakupka, memoryInput]);
-	function usePrevious(value) {
-		const ref = useRef();
-		useEffect(() => {
-			ref.current = value;
-		}, [value]);
-		return ref.current;
-	}
-	const prev = usePrevious(memoryInput);
-	// function enterInput(e) {
-	// 	if (e.key === 'Enter') {
-	// 		if (podlozhka && prev !== memoryInput) {
-	// 			if (e.target.value.length >= 4) {
-	// 				e.target.style.width = e.target.value.length * 7 + 3 + 'px';
-	// 			}
-	// 			if (e.target.value.length >= 7) {
-	// 				e.target.style.width = e.target.value.length * 7 + 7 + 'px';
-	// 			}
-	// 			if (e.target.value.length < 4) {
-	// 				e.target.style.width = e.target.value.length * 7 + 'px';
-	// 			}
-	// 			e.target.blur();
-	// 		}
-	// 		document.querySelector('.track-vertical').style.opacity = 1;
-	// 		document.querySelector('.track-horizontal').style.opacity = 1;
-	// 		setHideMenu(false);
-	// 		if (memoryInput.length === 0 || memoryInput === ' ') {
-	// 			setMemoryInput(0)
-	// 		}
-	// 		if (podlozhka && flag) {
-	// 			let newobj = [...objProduct];
-	// 			if (memoryInput.length !== 0 || memoryInput !== ' ') {
-	// 				let ostatok = memoryInput;
-	// 				let zakupka = newobj[index].zakupka;
-	// 				zakupka = +zakupka.replace(/\s/gmu, '');
-	// 				ostatok = +ostatok.replace(/\s/gmu, '');
-	// 				zakupka = zakupka * ostatok;
-	// 				ostatok = ostatok.toLocaleString('ru-RU', {
-	// 					minimumFractionDigits: 0,
-	// 					maximumFractionDigits: 0,
-	// 				});
-	// 				zakupka = zakupka.toLocaleString('ru-RU', {
-	// 					minimumFractionDigits: 2,
-	// 					maximumFractionDigits: 2,
-	// 				}).replace(',', '.');
 
-	// 				newobj[index].ostatok = ostatok;
-	// 				newobj[index].suma1 = zakupka;
-	// 				setMemoryInput(ostatok)
-	// 				setObjProduct([...newobj]);
-	// 			}
-	// 		}
-	// 		setFlag(false);
-	// 		setPodlozhka(false);
-	// 	}
-	// }
 	function saveBtn() {
-	
-			let newobj = [...objProduct];
-			if (memoryInput.length !== 0 || memoryInput !== ' ') {
-				let ostatok = memoryInput;
-				let zakupka = newobj[index].zakupka;
-				zakupka = +zakupka.replace(/\s/gmu, '');
-				ostatok = +ostatok.replace(/\s/gmu, '');
-				zakupka = zakupka * ostatok;
-				ostatok = ostatok.toLocaleString('ru-RU', {
-					minimumFractionDigits: 0,
-					maximumFractionDigits: 0,
-				});
-				zakupka = zakupka.toLocaleString('ru-RU', {
-					minimumFractionDigits: 2,
-					maximumFractionDigits: 2,
-				}).replace(',', '.');
 
-				newobj[index].ostatok = ostatok;
-				newobj[index].suma1 = zakupka;
-				setMemoryChange(ostatok);
-				setMemoryInput(ostatok);
-				setObjProduct([...newobj]);
-				if (inputRef.current.value) {
-					if (inputRef.current.value.length >= 4) {
-						inputRef.current.style.width = inputRef.current.value.length * 7 + 3 + 'px';
-					}
-					if (inputRef.current.value.length >= 7) {
-						inputRef.current.style.width = inputRef.current.value.length * 7 + 7 + 'px';
-					}
-					if (inputRef.current.value.length < 4) {
-						inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
-					}
+		let newobj = [...objProduct];
+		if (memoryInput.length !== 0 || memoryInput !== ' ') {
+			let ostatok = memoryInput;
+			let zakupka = newobj[index].zakupka;
+			zakupka = +zakupka.replace(/\s/gmu, '');
+			ostatok = +ostatok.replace(/\s/gmu, '');
+			zakupka = zakupka * ostatok;
+			ostatok = ostatok.toLocaleString('ru-RU', {
+				minimumFractionDigits: 0,
+				maximumFractionDigits: 0,
+			});
+			zakupka = zakupka.toLocaleString('ru-RU', {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			}).replace(',', '.');
+
+			newobj[index].ostatok = ostatok;
+			newobj[index].suma1 = zakupka;
+			setMemoryChange(ostatok);
+			setMemoryInput(ostatok);
+			setObjProduct([...newobj]);
+			if (inputRef.current.value) {
+				if (inputRef.current.value.length >= 4) {
+					inputRef.current.style.width = inputRef.current.value.length * 7 + 3 + 'px';
+				}
+				if (inputRef.current.value.length >= 7) {
+					inputRef.current.style.width = inputRef.current.value.length * 7 + 7 + 'px';
+				}
+				if (inputRef.current.value.length < 4) {
+					inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
 				}
 			}
-			// document.querySelectorAll('.nal-ostatok').forEach((x) => {
-			// 	x.classList.remove('showBtn');
-			// });
-			// e.target.closest('.nal-ostatok').classList.add('showBtn')
-			linkTR.current.classList.remove('hover-disabled');
-			document.querySelector('.contentScroll').style.overflow = 'auto';
-			document.querySelector('.track-vertical').style.opacity = 1;
-			document.querySelector('.track-horizontal').style.opacity = 1;
-			// document.getElementById('tooltipBtn').style.animation = '';
-			setListenChangeSuppliers('');
-			setKurs('');
-			setCena('');
-			setItogoZakupka('');
-			setMemoryCena(0);
-			setPri4ina('');
-			setHideMenu(false);
-			setAddPrice(false);
-			setFlag(false);
-			setPodlozhka(false);
+		}
+		// document.querySelectorAll('.nal-ostatok').forEach((x) => {
+		// 	x.classList.remove('showBtn');
+		// });
+		// e.target.closest('.nal-ostatok').classList.add('showBtn')
+		linkTR.current.classList.remove('hover-disabled');
+		inputRef.current.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
+
+		document.querySelector('.contentScroll').style.overflow = 'auto';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
+		// document.getElementById('tooltipBtn').style.animation = '';
+		setListenChangeSuppliers('');
+		setKurs('');
+		setCena('');
+		setItogoZakupka('');
+		setMemoryCena(0);
+		setPri4ina('');
+		setHideMenu(false);
+		setAddPrice(false);
+		setFlag(false);
+		setPodlozhka(false);
 	}
 	useEffect(() => {
 		if (!podlozhka && flag) {
-			// setMemoryInput(memoryChange);
 			objProduct[index].ostatok = memoryChange;
 			linkTR.current.classList.remove('hover-disabled');
 			setObjProduct([...objProduct]);
 			setMemoryInput(memoryChange);
-			// let newobj = [...objProduct];
-			// if (memoryInput.length !== 0 || memoryInput !== ' ') {
-			// 	let ostatok = memoryInput;
-			// 	let zakupka = newobj[index].zakupka;
-			// 	zakupka = +zakupka.replace(/\s/gmu, '');
-			// 	ostatok = +ostatok.replace(/\s/gmu, '');
-			// 	zakupka = zakupka * ostatok;
-			// 	ostatok = ostatok.toLocaleString('ru-RU', {
-			// 		minimumFractionDigits: 0,
-			// 		maximumFractionDigits: 0,
-			// 	});
-			// 	zakupka = zakupka.toLocaleString('ru-RU', {
-			// 		minimumFractionDigits: 2,
-			// 		maximumFractionDigits: 2,
-			// 	}).replace(',', '.');
-
-			// 	newobj[index].ostatok = ostatok;
-			// 	newobj[index].suma1 = zakupka;
-			// 	setMemoryInput(ostatok)
-			// 	setObjProduct([...newobj]);
-			// 	if (inputRef.current.value) {
-			// 		if (inputRef.current.value.length >= 4) {
-			// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 3 + 'px';
-			// 		}
-			// 		if (inputRef.current.value.length >= 7) {
-			// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 7 + 'px';
-			// 		}
-			// 		if (inputRef.current.value.length < 4) {
-			// 			inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
-			// 		}
-			// 	}
-			// }
 			setListenChangeSuppliers('');
 			setKurs('');
 			setCena('');
@@ -748,29 +837,18 @@ const WarehouseProductList = ({
 	// 		return input.replace(/\s/gmu, '').length * 7 + 'px';
 	// 	}
 	// }
+	const inputRefMemoryCena = useRef();
 	useEffect(() => {
 		if (inputRef.current.value) {
 			inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
-
-			// if (inputRef.current.value.length >= 4) {
-			// 	inputRef.current.style.width = inputRef.current.value.length * 7 - 5 + 'px';
-			// }
-			// if (inputRef.current.value.length >= 7) {
-			// 	inputRef.current.style.width = inputRef.current.value.length * 7 - 11 + 'px';
-			// }
-			// if (inputRef.current.value.length < 4) {
-			// 	inputRef.current.style.width = inputRef.current.value.length * 7 + 'px';
-			// }
-
-
 		}
-	}, [memoryInput])
+		if (addPrice) {
+			focus.current.querySelector('.memoryCena input').style.width = focus.current.querySelector('.memoryCena input').value.length * 7 + 'px';
+		}
+	}, [memoryInput, memoryCena])
 
 
 	function clickTr(e) {
-		// e.preventDefault();
-		// e.stopPropagation();
-		// console.log(e.currentTarget)
 		if (e.currentTarget && !objProduct[index].lock) {
 			let newobj = [...objProduct];
 			if (e.ctrlKey || e.metaKey) {
@@ -801,7 +879,6 @@ const WarehouseProductList = ({
 					});
 				}
 			} else {
-				// e.preventDefault();
 				setLastIndex(index);
 				e.stopPropagation();
 				newobj.map((x, i) => {
@@ -809,17 +886,12 @@ const WarehouseProductList = ({
 						x.select = false;
 					}
 				});
-				// if (newobj[index].select !== true) {
-				// 	newobj.map((x) => (x.select = !newobj[index].select));
-				// }
-
 				newobj[index].select = !newobj[index].select;
 			}
 			setObjProduct(newobj);
 		}
 	}
 	const inputRef = useRef();
-	// const btnRef = useRef();
 	function PlusMinusOpen(e) {
 		// e.stopPropagation();
 		document.querySelectorAll('.nal-ostatok').forEach((x) => {
@@ -833,7 +905,7 @@ const WarehouseProductList = ({
 		}, 150);
 	}
 	function PlusMinusClose(e) {
-		e.stopPropagation();
+		// e.stopPropagation();
 		if (!podlozhka) {
 			document.querySelectorAll('.nal-ostatok').forEach((x) => {
 				x.classList.remove('showBtn');
@@ -853,50 +925,164 @@ const WarehouseProductList = ({
 			setGetIndex(index);
 		}
 	}
-
-	// useEffect(() => {
-	// 	window.addEventListener(
-	// 		'resize',
-	// 		function (event) {
-	// 			setHoverWidth(document.querySelector('.warehouse-products')?.offsetWidth);
-	// 		},
-	// 		true
-	// 	);
-	// }, [objProduct.length]);
-	// console.log(objProduct[index] > 0,index)
 	useEffect(() => {
 		if (addPrice) {
 			document.querySelectorAll('.cena').forEach((x) => {
 				x.classList.add('visible');
 			});
 			let pos = cenaBlock.current.getBoundingClientRect();
-			// console.log(pos.y, cenaBlock.current.offsetHeight)
 			const heightPlus = pos.y + cenaBlock.current.offsetHeight;
 			const viewportHeight = document.body.clientHeight;
-			// console.log(viewportHeight , heightPlus)
-				if (heightPlus + 78 > viewportHeight) {
-					// tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
-					// tooltipBlock.style.top = posElement.y + 23 + 'px';
-					cenaBlock.current.style.bottom = '18px';
-				} else {
-					// cenaBlock.current.style.bottom = '-140px';
-					// tooltipBlock.style.left = posElement.x + 'px';
-					// tooltipBlock.style.top = posElement.y + 23 + 'px';
-				}
-
-		
+			if (heightPlus + 78 > viewportHeight) {
+				cenaBlock.current.style.bottom = '18px';
+			}
 		} else {
 			document.querySelectorAll('.cena').forEach((x) => {
 				x.classList.remove('visible');
 			});
-			
-			
-			// setTimeout(() => {
-			// 	setAddPrice(false)
-			// }, 200);
 		}
 	}, [addPrice])
-	const [listenChangeSuppliers, setListenChangeSuppliers]= useState('');
+	let obj = [
+		{ id: 0, company: 'Мега ОПТ', select: false },
+		{ id: 1, company: 'TrendOpt', select: false },
+		{ id: 2, company: 'Imperial Super Group', select: false },
+		{ id: 3, company: 'Интернет-магазин VlaRus', select: false },
+		{ id: 4, company: '7й километр', select: false },
+		{ id: 5, company: 'Концерн Denavi', select: false },
+	]
+	const [suppliers, setSuppliers] = useState(null);
+	useEffect(() => {
+		setSuppliers(obj)
+	}, [])
+	const [listenChangeSuppliers, setListenChangeSuppliers] = useState('');
+	// useEffect(() => {
+	// 	if (!flagForZakupka && addPrice) {
+	// 		if ((+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, ''))) {
+	// 			// let inputFormat = +memoryInput.replace(/\s/gmu, '');
+	// 			let newMemoryCena = Number(memoryCena) === 0 ? 1 : Number(memoryCena);
+	// 			let text = +cena.replace(/\s/gmu, '');
+	// 			let textKurs = +kurs.replace(/\s/gmu, '')
+	// 			let text2 = newMemoryCena * (+text) === 0 ? text : newMemoryCena * (+text);
+	// 			let text3 = newMemoryCena * (+text) * (+textKurs);
+	// 			// document.querySelector('.memoryCena inp')
+	// 			let res = (newMemoryCena) + (+memoryChange.replaceAll(/\s/gmu, ''))
+	// 			setMemoryInput(res.toString());
+	// 			setMemoryCena(newMemoryCena);
+	// 			document.querySelectorAll('.cenaInput, .kursInput, .prichinaInput, .memoryCena input').forEach(x => x.style.zIndex = '')
+	// 			if (kurs === '') {
+	// 				setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+	// 			} else {
+	// 				setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+	// 			}
+	// 			setKurs(textKurs.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+	// 			setCena(text.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+	// 		} else {
+	// 			// let value = e.target.value;
+	// 			let newMemoryCena = Number(memoryCena) === 0  ? -1 : Number(memoryCena) > (+memoryChange.replaceAll(/\s/gmu, '')) ? - 1 : Number(memoryCena);
+
+	// 			let res = -newMemoryCena + (+memoryChange.replaceAll(/\s/gmu, ''))
+	// 			setMemoryCena(-newMemoryCena);
+	// 			setMemoryInput(res.toString());
+	// 			// if (cena !== '') {
+	// 			// 	let text = +cena.replace(/\s/gmu, '');
+	// 			// 	let textKurs = +kurs.replace(/\s/gmu, '')
+	// 			// 	let text2 = -newMemoryCena * (+text) === 0 ? text : -newMemoryCena * (+text);
+	// 			// 	let text3 = -newMemoryCena * (+text) * (+textKurs);
+	// 			// 	if (kurs === '') {
+	// 			// 		setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+	// 			// 	} else {
+	// 			// 		setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+	// 			// 	}
+	// 			// }
+	// 		}
+	// 		// setFlag(false);
+	// 	}
+	// }, [flagForZakupka])
+	const refWrapOstatok = useRef();
+	function clickVirtualWrapper() {
+		// setOpenMenu(false);
+		setPodlozhka(false);
+		setHideMenu(false);
+		// console.log('srabotalo');
+		// setFlagSwitchMenu(false);
+		setSwitchMenu(false);
+		setFlag(false);
+		// setVirtualClick(false);
+		document.querySelector('.contentScroll').style.overflow = 'auto';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
+		inputRef.current.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
+		setFlagForZakupka(false);
+		// document.querySelector('.first-tab-body').classList.remove('hoverOff');
+		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
+			x.style.zIndex = 1;
+		});
+		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
+			x.style.width = '22px';
+		});
+		document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
+			x.style.minWidth = '22px';
+		});
+		document.querySelectorAll('.nal-ostatok').forEach((x) => {
+			x.classList.remove('showBtn');
+		});
+		document.querySelector('.width21px').style.maxWidth = '51px';
+	}
+	function handle(e) {
+		if (refWrapOstatok.current && !refWrapOstatok.current.contains(e.target)) {
+			clickVirtualWrapper()
+		}
+	}
+	useEffect(() => {
+		if (flag) {
+			document.addEventListener("click", handle, true);
+		}
+		return () => {
+			document.removeEventListener("click", handle, true);
+		};
+	}, [flag]);
+	useEffect(()=> {
+		if(focus.current){
+			let width = focus.current.querySelector('.memoryCena').offsetWidth;
+			focus.current.querySelector('.tooltip').style.left = width+'px';
+		}
+	},[memoryCena])
+	const [prichinaFocus,setPrichinaFocus]=useState(false);
+	useEffect(()=> {
+		if((+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, ''))){
+			setPri4ina('');
+			setPrichinaFocus(false);
+			// setMinusOrPlus(true)
+		}else {
+			// setPrichinaFocus(true);
+
+			// setMinusOrPlus(false)
+			setCena('');
+		}
+	},[memoryCena,memoryInput])
+	useEffect(()=> {
+		if(prichinaFocus){
+			if (focus.current) {
+				setTimeout(() => {
+					
+					focus.current.querySelector('.prichinaInput')?.focus();
+					focus.current.querySelector('.prichinaInput').nextSibling.style.width = '100%';
+				}, 100);
+			}
+		} 
+		else {
+			if (focus.current) {
+				setTimeout(() => {
+					focus.current.querySelector('.prichinaInput')?.blur();
+					if(focus.current.querySelector('.prichinaInput')?.nextSibling !== null){
+
+						focus.current.querySelector('.prichinaInput').nextSibling.style.width = '0%';
+					}
+				}, 100);
+			}
+		}
+	
+	},[prichinaFocus])
 	return (
 		<>
 			{objProduct[index] && (
@@ -998,14 +1184,7 @@ const WarehouseProductList = ({
 									className="animationFrame"
 									style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}
 								>
-									{/* <div  style={{width: 84, height: 18}}> */}
-									{/* const [ref, isShow, setIsShow ] = useOutsideAlert(false); */}
-
-									{
-										loadedLabelBlock ? <StatusBlock objProduct={objProduct} setObjProduct={setObjProduct} tooltipOn={tooltipOn} tooltipOff={tooltipOff} index={index} /> : ''
-									}
-									{/* <div className="gradi"></div> */}
-									{/* </div> */}
+									{loadedLabelBlock && <StatusBlock switchBtn={switchBtn} objProduct={objProduct} setObjProduct={setObjProduct} tooltipOn={tooltipOn} tooltipOff={tooltipOff} index={index} />}
 								</div>
 							</div>
 
@@ -1132,35 +1311,32 @@ const WarehouseProductList = ({
 						style={addPrice ? { zIndex: 99 } : {}}
 						onClick={addPrice ? (e) => e.stopPropagation() : null}
 						onDoubleClick={addPrice ? (e) => e.stopPropagation() : null}
+						ref={refWrapOstatok}
 					>
 						<div
 							className="wrap-nal-ostatok"
-				
-							onMouseEnter={objProduct[index].lock || addPrice ? null : tooltipOn}
-							onMouseLeave={objProduct[index].lock || addPrice ? null : tooltipOff}
+
+							onMouseEnter={addPrice ? (e)=> {
+
+								// inputRef.current.select()
+								// inputRef.current.focus()
+									e.stopPropagation()
+									inputRef.current.select()
+									inputRef.current.focus()
+								
+							} : null}
+							onMouseLeave={addPrice ? (e)=> {
+								e.stopPropagation()
+								inputRef.current.blur();
+							
+							}:null }
 						>
 							<button
 								onDoubleClick={(e) => e.stopPropagation()}
-								onClick={BtnMinus}
+								onClick={(e) => {BtnMinus();e.stopPropagation()}}
 								disabled={objProduct[index].lock ? true : false}
-					
 							>
-								<svg
-									width="9"
-									height="7"
-									viewBox="0 0 9 7"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M1.26782 3.44748L8.08752 3.44747"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-								</svg>
+								<Minus />
 							</button>
 
 							<input
@@ -1173,7 +1349,27 @@ const WarehouseProductList = ({
 									// setPodlozhka(true);
 									e.stopPropagation();
 								}}
+								// onMouseLeave={e => {
+								// 	if (addPrice) {
+								// 		let value = e.target.value;
+								// 		value = (+value.replaceAll(/\s/gmu, '')) === 0 ? 1 : (+value.replaceAll(/\s/gmu, ''))
+								// 		setMemoryInput(value.toString());
+								// 		let res = value - (+memoryChange.replaceAll(/\s/gmu, ''))
+								// 		setMemoryCena(res);
+								// 		if (cena !== '') {
+								// 			let text = +cena.replace(/\s/gmu, '');
+								// 			let textKurs = +kurs.replace(/\s/gmu, '')
+								// 			let text2 = value * (+text) === 0 ? text : value * (+text);
+								// 			let text3 = value * (+text) * (+textKurs);
+								// 			if (kurs === '') {
+								// 				setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+								// 			} else {
+								// 				setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+								// 			}
+								// 		}
+								// 	}
 
+								// }}
 								// value={focusInput && inputFormat ? memoryInput : +memoryInput}
 								value={memoryInput}
 								onDoubleClick={(e) => e.stopPropagation()}
@@ -1191,199 +1387,452 @@ const WarehouseProductList = ({
 								onDoubleClick={(e) => e.stopPropagation()}
 								onClick={BtnPlus}
 								disabled={objProduct[index].lock ? true : false}
-	
-
 							>
-								<svg
-									width="15"
-									height="15"
-									viewBox="3 2 15 15"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-									style={{ transform: 'rotate(45deg)' }}
-								>
-									<path
-										d="M7.26655 8.03662L12.0888 12.8589"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 12.8589L12.0888 8.03659"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 8.03662L12.0888 12.8589"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 12.8589L12.0888 8.03659"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 8.03662L12.0888 12.8589"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 12.8589L12.0888 8.03659"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-								</svg>
+								<Plus />
 							</button>
-							<div ref={cenaBlock} className='cena'>
-								{addPrice && <div ref={focus} className='wrap' onMouseEnter={focusCena}>
+							
 
-									<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
-										<span>{memoryCena >= 1 ? translator.getTranslation('menuAdd/CribProduct', 'add') : translator.getTranslation('menuAdd/CribProduct', 'crib')}</span>
-										<span style={{display:'flex',alignItems:'center'}}><button
-								// onDoubleClick={(e) => e.stopPropagation()}
-								onClick={BtnMinus}
-								style={{top:-1}}
-					
-							>
-								<svg
-									width="9"
-									height="7"
-									viewBox="0 0 9 7"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M1.26782 3.44748L8.08752 3.44747"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-								</svg>
-							</button>{memoryCena} шт<button
-								onClick={BtnPlus}
-								style={{top:-1}}
-							>
-								<svg
-									width="15"
-									height="15"
-									viewBox="3 2 15 15"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-									style={{ transform: 'rotate(45deg)',opacity: 0.7 }}
-								>
-									<path
-										d="M7.26655 8.03662L12.0888 12.8589"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 12.8589L12.0888 8.03659"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 8.03662L12.0888 12.8589"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 12.8589L12.0888 8.03659"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 8.03662L12.0888 12.8589"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-									<path
-										d="M7.26655 12.8589L12.0888 8.03659"
-										stroke="black"
-										strokeOpacity="0.7"
-										strokeWidth="1.09116"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									></path>
-								</svg>
-							</button></span>
-									</div>
-									{memoryCena >= 1 ? <>
-										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
-											<span>Поставщик</span>
-											<div style={{minWidth: '100px',padding: 5,paddingLeft: 0,paddingRight: 11}}>
-												<SimpleDropMenu 
-												setListenChangeSuppliers={setListenChangeSuppliers} 
-												listenChangeSuppliers={listenChangeSuppliers}
-												addPrice={addPrice}
-												/>
-											</div>
-										</div>
-										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between' }}>
-											<span>{translator.getTranslation('menuAdd/CribProduct', 'purchase')}</span><input className='cenaInput' onChange={cenaChange} value={cena} />
-											<div className='poloska'></div>
-										</div>
-										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between' }}>
-											<span>{translator.getTranslation('menuAdd/CribProduct', 'exchangeRates')}</span><input value={kurs} onChange={kursChange} />
-											<div className='poloska'></div>
-										</div>
-										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between', alignItems: 'center' }}>
-											<span>{translator.getTranslation('menuAdd/CribProduct', 'total')}</span><span>{(+itogoZakupka).toFixed(2)}</span>
-										</div>
-									
-									</> :
-										<div style={{ display: 'flex', position: 'relative', justifyContent: 'space-between' }}>
-											<span>{translator.getTranslation('menuAdd/CribProduct', 'reason')}</span><input className='prichinaInput' onChange={pri4inaChange} value={pri4ina} />
-											<div className='poloska'></div>
-										</div>
-									}
-									<button 
-										onClick={saveBtn} 
-										disabled={cena !== '' && memoryCena >= 1 && listenChangeSuppliers !== ''  || pri4ina !== '' && memoryCena < 1 ? false : true} 
+
+						</div>
+						<div ref={cenaBlock} className='cena'>
+								{addPrice && <div ref={focus} className='wrap' >
+									<table style={{ borderCollapse: 'collapse', margin: 10 }}>
+										<tbody>
+											{flagForZakupka && <tr style={{ position: 'absolute' }}>
+												<td style={{ height: 0, minHeight: 0 }} colSpan={2}>
+													<div onClick={e => {
+														// let text = cena;
+														// console.log( typeof cena)
+														// let text = +cena.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+														// setCena(text);
+														if ((+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, ''))) {
+															// let inputFormat = +memoryInput.replace(/\s/gmu, '');
+															let newMemoryCena = Number(memoryCena) === 0 ? 1 : Number(memoryCena);
+															let text = +cena.replace(/\s/gmu, '');
+															let textKurs = +kurs.replace(/\s/gmu, '')
+															let text2 = newMemoryCena * (+text) === 0 ? text : newMemoryCena * (+text);
+															let text3 = newMemoryCena * (+text) * (+textKurs);
+															// document.querySelector('.memoryCena inp')
+															let res = (newMemoryCena) + (+memoryChange.replaceAll(/\s/gmu, ''))
+															setMemoryInput(res.toString());
+															setMemoryCena(newMemoryCena);
+															e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
+															document.querySelectorAll('.cenaInput, .kursInput, .prichinaInput, .memoryCena input').forEach(x => x.style.zIndex = '')
+															if (kurs === '') {
+																setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+															} else {
+																setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+															}
+															setKurs(textKurs.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+															setCena(text.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+															console.log('++')
+														} else {
+															// let value = e.target.value;
+																let value = inputRefMemoryCena.current.value;
+																value = Math.abs(Number(value))
+																value = Number(value) === 0 ? -1 : Number(value) > (+memoryChange.replaceAll(/\s/gmu, '')) ? - 1 : Number(value);
+											
+																let res =  (+memoryChange.replaceAll(/\s/gmu, ''))-value;
+																e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
+																document.querySelectorAll('.cenaInput, .kursInput, .prichinaInput, .memoryCena input').forEach(x => x.style.zIndex = '')
+																
+																setMemoryCena(-value);
+																setMemoryInput(res.toString());
+																console.log('--')
+																console.log(value , res)
+														
+			
+															// if (cena !== '') {
+															// 	let text = +cena.replace(/\s/gmu, '');
+															// 	let textKurs = +kurs.replace(/\s/gmu, '')
+															// 	let text2 = -newMemoryCena * (+text) === 0 ? text : -newMemoryCena * (+text);
+															// 	let text3 = -newMemoryCena * (+text) * (+textKurs);
+															// 	if (kurs === '') {
+															// 		setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+															// 	} else {
+															// 		setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+															// 	}
+															// }
+														}
+														const block = e.currentTarget.closest('.cena').querySelector('.tooltip');																
+														block.style.animation = '';
+														// const block = e.currentTarget.querySelector('.tooltip');
+														// block.style.animation = '';
+														setFlagForZakupka(false);
+														document.querySelectorAll('.poloska').forEach(x => x.style.width = '0%')
+
+													}} style={{ height: '170px', width: '240px', position: 'absolute', left: -10, zIndex: 10000, top: -10 }}></div>
+												</td>
+											</tr>}
+											<tr>
+												<td>{(+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, '')) ? translator.getTranslation('menuAdd/CribProduct', 'add') : translator.getTranslation('menuAdd/CribProduct', 'crib')}</td>
+												<td
+
+												>
+													<div className="memoryCena"
+														onMouseEnter={e => {
+
+															// let posElement = e.currentTarget.getBoundingClientRect();
+															const block = e.currentTarget.querySelector('.tooltip');
+															const width = e.currentTarget.offsetWidth;
+															block.style.fontSize = '12px';
+															// block.innerHTML = `Добавляется товаров: ${memoryCena}<br>Итого товаров на складе: ${memoryInput}`;
+															block.style.left = width + 'px';
+															block.style.top = '-13px';
+															// block.style.animation = 'delay-btn 0.5s forwards';
+															// e.target.focus()
+															// setMinusOrPlus(true);
+															setPrichinaFocus(false);
+															// e.currentTarget.querySelector('input').select();
+															// e.currentTarget.querySelector('input').focus();
+															plusminus = setTimeout(() => {
+																if (!flagForZakupka) {
+
+																	inputRefMemoryCena?.current?.select();
+																}
+																inputRefMemoryCena?.current?.focus();
+															}, 150);
+														}}
+														onMouseLeave={e => {
+															// const block = e.currentTarget.querySelector('.tooltip');
+															// block.style.animation = '';
+															if (!flagForZakupka) {
+																const block = e.currentTarget.closest('.memoryCena').querySelector('.tooltip');																
+																block.style.animation = '';
+																// document.querySelectorAll('.poloska').forEach(x => x.style.width = '0%')
+																// e.currentTarget.querySelector('input').blur();
+																inputRefMemoryCena?.current?.blur();
+															}
+															clearTimeout(plusminus);
+
+														}}
+													>
+														<button
+															// onDoubleClick={(e) => e.stopPropagation()}
+															onClick={BtnMinus}
+															style={{ top: 0 }}
+															onMouseEnter={e => e.stopPropagation()}
+
+														>
+															<Minus />
+															{/* {console.log(memoryCena)} */}
+														</button>
+														{/* {Math.abs(memoryCena)} */}
+														<input
+															ref={inputRefMemoryCena}
+															value={memoryCena}
+															onChange={inputChangeMemoryCena}
+															maxLength={5}
+															style={{width: '7px',textAlign: 'center',padding: '0 1px'}}
+															onKeyDown={e => {
+																if (e.key === "Enter") {
+																	e.target.blur();
+																	// setFlag(false);
+																	e.target.style.zIndex = '';
+																	e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
+
+																	if ((+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, ''))) {
+																		let value = e.target.value;
+																		value = Number(value) === 0 ? 1 : Number(value);
+																		setMemoryCena(value);
+																		let res = (value) + (+memoryChange.replaceAll(/\s/gmu, ''))
+																		setMemoryInput(res.toString());
+																		if (cena !== '') {
+																			let text = +cena.replace(/\s/gmu, '');
+																			let textKurs = +kurs.replace(/\s/gmu, '')
+																			let text2 = value * (+text) === 0 ? text : value * (+text);
+																			let text3 = value * (+text) * (+textKurs);
+																			if (kurs === '') {
+																				setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																			} else {
+																				setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																			}
+																		}
+																	} else {
+																		let value = e.target.value;
+																		console.log(value, memoryChange)
+																		value = Number(value) === 0 ? -1 : Number(value) > (+memoryChange.replaceAll(/\s/gmu, '')) ? -1 : Number(value);
+																		let res = -value + (+memoryChange.replaceAll(/\s/gmu, ''));
+
+																		setMemoryCena(-value);
+																		setMemoryInput(res.toString());
+																		// value = Number(value) === 0 || Number(value) > (+memoryChange.replaceAll(/\s/gmu, '')) ? -1 : Number(value);
+																		// setMemoryCena(-value);
+																		// let res = (-value) + (+memoryChange.replaceAll(/\s/gmu, ''))
+																		// setMemoryInput(res.toString());
+																		// console.log(-value + (+memoryChange.replaceAll(/\s/gmu, '')))
+																		// if (cena !== '') {
+																		// 	let text = +cena.replace(/\s/gmu, '');
+																		// 	let textKurs = +kurs.replace(/\s/gmu, '')
+																		// 	let text2 = -value * (+text) === 0 ? text : -value * (+text);
+																		// 	let text3 = -value * (+text) * (+textKurs);
+																		// 	if (kurs === '') {
+																		// 		setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		// 	} else {
+																		// 		setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		// 	}
+																		// }
+																	}
+																	const block = e.currentTarget.closest('.memoryCena').querySelector('.tooltip');
+																	block.style.animation = '';
+																	setFlagForZakupka(false);
+
+																}
+															}}
+														/>
+														<button
+															onClick={BtnPlus}
+															style={{ top: 0 }}
+															onMouseEnter={e => e.stopPropagation()}
+														>
+															<Plus />
+														</button>
+														<div className='tooltip'>
+															{(+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, '')) 
+															? `Добавляется товаров: ${Math.abs(memoryCena)}` : `Списывается товаров: -${Math.abs(memoryCena)}`}
+															 <br />Итого товаров на складе: {(+memoryChange.replace(/\s/gmu, '')) < (+memoryInput.replace(/\s/gmu, '')) ? (+memoryCena)+ (+memoryChange.replace(/\s/gmu, '')): (+memoryChange.replace(/\s/gmu, ''))-(Math.abs(+memoryCena))}
+														</div>
+													</div>
+												</td>
+											</tr>
+											{(+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, '')) ? <>
+												<tr>
+													<td>{translator.getTranslation('menuAdd/CribProduct', 'suppliers')}</td>
+													<td>
+														<SimpleDropMenu
+															setListenChangeSuppliers={setListenChangeSuppliers}
+															listenChangeSuppliers={listenChangeSuppliers}
+															addPrice={addPrice}
+															data={suppliers}
+															setData={setSuppliers}
+															translator={translator}
+															setFlagForZakupka={setFlagForZakupka}
+															flagForZakupka={flagForZakupka}
+															setCena={setCena}
+															cena={cena}
+														/>
+													</td>
+												</tr>
+												<tr>
+													<td>{translator.getTranslation('menuAdd/CribProduct', 'purchase')}</td>
+													<td>
+														<input className='cenaInput' onChange={cenaChange} value={cena}
+															onKeyDown={e => {
+																if (e.key === "Enter") {
+																	e.target.nextSibling.style = '0%';
+																	e.target.blur();
+																	// let text = +e.target.value.replaceAll(/\s/gmu, '');
+																	// text = text.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.');
+																	// console.log(+cena.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))
+																	// setFlagForZakupka(false);
+																	// setCena(text);
+																	e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
+
+																	if ((+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, ''))) {
+																		// let inputFormat = +memoryInput.replace(/\s/gmu, '');
+																		let newMemoryCena = Number(memoryCena) === 0 ? 1 : Number(memoryCena);
+																		let text = +cena.replace(/\s/gmu, '');
+																		let textKurs = +kurs.replace(/\s/gmu, '')
+																		let text2 = newMemoryCena * (+text) === 0 ? text : newMemoryCena * (+text);
+																		let text3 = newMemoryCena * (+text) * (+textKurs);
+																		// document.querySelector('.memoryCena inp')
+																		let res = (newMemoryCena) + (+memoryChange.replaceAll(/\s/gmu, ''))
+																		setMemoryInput(res.toString());
+																		setMemoryCena(newMemoryCena);
+																		document.querySelectorAll('.cenaInput, .kursInput, .prichinaInput, .memoryCena input').forEach(x => x.style.zIndex = '')
+																		if (kurs === '') {
+																			setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		} else {
+																			setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		}
+																		setKurs(textKurs.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		setCena(text.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																	} else {
+																		// let value = e.target.value;
+																		let newMemoryCena = Number(memoryCena) === 0  ? -1 : Number(memoryCena) > (+memoryChange.replaceAll(/\s/gmu, '')) ? - 1 : Number(memoryCena);
+														
+																		let res = -newMemoryCena + (+memoryChange.replaceAll(/\s/gmu, ''))
+																		setMemoryCena(-newMemoryCena);
+																		setMemoryInput(res.toString());
+																		// if (cena !== '') {
+																		// 	let text = +cena.replace(/\s/gmu, '');
+																		// 	let textKurs = +kurs.replace(/\s/gmu, '')
+																		// 	let text2 = -newMemoryCena * (+text) === 0 ? text : -newMemoryCena * (+text);
+																		// 	let text3 = -newMemoryCena * (+text) * (+textKurs);
+																		// 	if (kurs === '') {
+																		// 		setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		// 	} else {
+																		// 		setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		// 	}
+																		// }
+																	}
+																	setFlagForZakupka(false);
+																	// console.log(text)
+																}
+															}}
+															style={{ height: 23, position: 'relative' }}
+															onMouseEnter={e => {
+																e.target.nextSibling.style.width = '100%';
+																e.target.focus()
+																e.target.select()
+															}}
+															onMouseLeave={e => {
+																if (!flagForZakupka) {
+																	document.querySelectorAll('.poloska').forEach(x => x.style.width = '0%')
+																	e.target.blur()
+																}
+															}}
+															onClick={e => {
+																setFlagForZakupka(true);
+																setCena(prev => prev.replaceAll(/\s/gmu, ''));
+															}}
+															maxLength={9}
+														/>
+														<div className='poloska'></div>
+													</td>
+												</tr>
+												<tr>
+													<td>{translator.getTranslation('menuAdd/CribProduct', 'exchangeRates')}</td>
+													<td>
+														<input className='kursInput' value={kurs} onChange={kursChange}
+															onKeyDown={e => {
+																if (e.key === "Enter") {
+																	e.target.nextSibling.style = '0%';
+																	e.target.blur();
+																	// let text = +e.target.value.replaceAll(/\s/gmu, '');
+																	// text = text.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.');
+																	// // console.log(+cena.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))
+																	// setKurs(text);
+																	e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
+
+																	if ((+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, ''))) {
+																		// let inputFormat = +memoryInput.replace(/\s/gmu, '');
+																		let newMemoryCena = Number(memoryCena) === 0 ? 1 : Number(memoryCena);
+																		let text = +cena.replace(/\s/gmu, '');
+																		let textKurs = +kurs.replace(/\s/gmu, '')
+																		let text2 = newMemoryCena * (+text) === 0 ? text : newMemoryCena * (+text);
+																		let text3 = newMemoryCena * (+text) * (+textKurs);
+																		// document.querySelector('.memoryCena inp')
+																		let res = (newMemoryCena) + (+memoryChange.replaceAll(/\s/gmu, ''))
+																		setMemoryInput(res.toString());
+																		setMemoryCena(newMemoryCena);
+																		document.querySelectorAll('.cenaInput, .kursInput, .prichinaInput, .memoryCena input').forEach(x => x.style.zIndex = '')
+																		if (kurs === '') {
+																			setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		} else {
+																			setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		}
+																		setKurs(textKurs.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		setCena(text.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																	} else {
+																		// let value = e.target.value;
+																		let newMemoryCena = Number(memoryCena) === 0  ? -1 : Number(memoryCena) > (+memoryChange.replaceAll(/\s/gmu, '')) ? - 1 : Number(memoryCena);
+														
+																		let res = -newMemoryCena + (+memoryChange.replaceAll(/\s/gmu, ''))
+																		setMemoryCena(-newMemoryCena);
+																		setMemoryInput(res.toString());
+																		// if (cena !== '') {
+																		// 	let text = +cena.replace(/\s/gmu, '');
+																		// 	let textKurs = +kurs.replace(/\s/gmu, '')
+																		// 	let text2 = -newMemoryCena * (+text) === 0 ? text : -newMemoryCena * (+text);
+																		// 	let text3 = -newMemoryCena * (+text) * (+textKurs);
+																		// 	if (kurs === '') {
+																		// 		setItogoZakupka(text2.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		// 	} else {
+																		// 		setItogoZakupka(text3.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.'));
+																		// 	}
+																		// }
+																	}
+																	setFlagForZakupka(false);
+																	// setFlagForZakupka(false);
+																	// console.log(text)
+																}
+															}}
+															onMouseEnter={e => {
+																e.target.nextSibling.style.width = '100%';
+																e.target.focus()
+																e.target.select()
+
+															}}
+															onMouseLeave={e => {
+																if (!flagForZakupka) {
+																	document.querySelectorAll('.poloska').forEach(x => x.style.width = '0%')
+																	e.target.blur()
+																}
+															}}
+															onClick={e => {
+																setFlagForZakupka(true);
+																setKurs(prev => prev.replaceAll(/\s/gmu, ''));
+															}}
+															maxLength={9}
+														/>
+														<div className='poloska'></div>
+													</td>
+												</tr>
+												<tr>
+													<td>{translator.getTranslation('menuAdd/CribProduct', 'total')}</td>
+													<td>{itogoZakupka}</td>
+												</tr>
+											</> :
+
+												<tr>
+													<td>{translator.getTranslation('menuAdd/CribProduct', 'reason')}</td>
+													<td>
+														<input className='prichinaInput' onChange={pri4inaChange} value={pri4ina}
+															onKeyDown={e => {
+																if (e.key === "Enter") {
+																	e.target.nextSibling.style = '0%';
+																	e.target.blur();
+																	e.target.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
+																	// if ((+memoryChange.replace(/\s/gmu, '')) <= (+memoryInput.replace(/\s/gmu, ''))) {
+																		
+																	// } else {
+																	// 	// let value = e.target.value;
+																	// 	let newMemoryCena = Number(memoryCena) === 0  ? -1 : Number(memoryCena) > (+memoryChange.replaceAll(/\s/gmu, '')) ? - 1 : Number(memoryCena);
+														
+																	// 	let res = -newMemoryCena + (+memoryChange.replaceAll(/\s/gmu, ''))
+																	// 	setMemoryCena(-newMemoryCena);
+																	// 	setMemoryInput(res.toString());
+															
+																	// }
+																	// let text = +e.target.value.replaceAll(/\s/gmu, '');
+																	// text = text.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.');
+																	// console.log(+cena.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))
+																	setFlagForZakupka(false);
+																	// setKurs(text);
+																	// console.log(text)
+																	setPri4ina(e.target.value)
+																}
+															}}
+															onMouseEnter={e => {
+																e.target.nextSibling.style.width = '100%';
+																e.target.focus()
+																e.target.select()
+
+															}}
+															onMouseLeave={e => {
+																if (!flagForZakupka) {
+																	document.querySelectorAll('.poloska').forEach(x => x.style.width = '0%')
+																	e.target.blur()
+																}
+															}}
+														/><div className='poloska'></div>
+													</td>
+												</tr>
+											}
+										</tbody>
+
+									</table>
+
+									<button
+										onClick={saveBtn}
+										disabled={cena !== '' ? false :  pri4ina !== '' ? false : true}
 										className="save-btn">
 										Сохранить
 									</button>
 									{/* <div className='poloska'></div> */}
 								</div>}
 							</div>
-
-
-						</div>
-
 
 						<span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)', position: 'absolute', right: 3, top: 3 }}>/</span>
 					</td>

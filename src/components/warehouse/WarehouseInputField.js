@@ -141,7 +141,76 @@ const WarehouseInputField = ({ data, setData, index, podlozhka, setPodlozhka, se
     useEffect(() => {
         setInput(value)
     }, [value])
-
+    const enter = (e) => {
+        if(e.key === 'Enter'){
+            if (type === 'attribute') {
+                if (input !== '') {
+                    data[index].attribute = input;
+                    console.log(data);
+                    setData([...data])
+                    // setInput(data[index].attribute);
+                    setMemoryInput(input)
+                } else {
+                    data[index].attribute = memoryInput;
+                    setData([...data])
+                    setInput(memoryInput);
+                }
+            } else if (type === 'commentary') {
+                if (input !== '') {
+                    data[index].commentary = input;
+                    setData([...data])
+                    setMemoryInput(input)
+                } else {
+                    data[index].commentary = memoryInput;
+                    setData([...data])
+                    setInput(memoryInput);
+                }
+            } else if (type === 'contact') {
+                if (input !== '') {
+                    data[index].contact = input;
+                    setData([...data])
+                    setMemoryInput(input)
+                } else {
+                    data[index].contact = memoryInput;
+                    setData([...data])
+                    setInput(memoryInput);
+                }
+            } else if (type === 'company') {
+                if (input !== '') {
+                    data[index].company = input;
+                    setData([...data])
+                    setMemoryInput(input)
+                } else {
+                    data[index].company = memoryInput;
+                    setData([...data])
+                    setInput(memoryInput);
+                }
+            }
+            else if (type === 'number') {
+                if (input !== '') {
+                    data[index].number = input;
+                    setData([...data])
+                    setMemoryInput(input)
+                } else {
+                    data[index].number = memoryInput;
+                    setData([...data])
+                    setInput(memoryInput);
+                }
+            }
+            setHideArrow(true);
+            setFlag(false);
+            setPodlozhka(false);
+            setHideMenu(false);
+            e.target.blur();
+            document.querySelector('.contentScroll').style.overflow = 'auto';
+            document.querySelector('.track-vertical').style.opacity = 1;
+            document.querySelector('.track-horizontal').style.opacity = 1;
+            refInput.current.closest('td').querySelector('span').style.width = '0%';
+            refInput.current.closest('td').style.zIndex = '';
+            refInput.current.closest('tr').classList.remove('hover-disabled');
+        }
+      
+    }
     // useEffect(() => {
     //     if (!podlozhka && flag) {
     //         if (input !== '') {
@@ -153,6 +222,51 @@ const WarehouseInputField = ({ data, setData, index, podlozhka, setPodlozhka, se
     //         }
     //     }
     // }, [podlozhka])
+    function clickVirtualWrapper () {
+		// setOpenMenu(false);
+		setPodlozhka(false);
+		setHideMenu(false);
+		// console.log('srabotalo');
+		// setFlagSwitchMenu(false);
+		// setSwitchMenu(false);
+		setFlag(false);
+		// setVirtualClick(false);
+		document.querySelector('.contentScroll').style.overflow = 'auto';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
+		// document.querySelector('.first-tab-body').classList.remove('hoverOff');
+		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
+			x.style.zIndex = 1;
+		});
+		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
+			x.style.width = '22px';
+		});
+		document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
+			x.style.minWidth = '22px';
+		});
+		document.querySelectorAll('.nal-ostatok').forEach((x) => {
+			x.classList.remove('showBtn');
+		});
+		document.querySelector('.width21px').style.maxWidth = '51px';
+	}
+	function handle(e) {
+        if (refInput.current && !refInput.current.contains(e.target)) {
+			clickVirtualWrapper()
+		}
+    }
+    // useEffect(()=> {
+    //     if(!vitrualClick){
+    //         addItem()
+    //     }
+    // }, [vitrualClick])
+    useEffect(() => {
+		if(flag){
+			document.addEventListener("click", handle, true);
+		}
+        return () => {
+            document.removeEventListener("click", handle, true);
+        };
+    }, [flag]);
     return (
         <>
             {iconOperator && <span className={recognizeOperator(input, 'UA')} style={{ marginRight: 6, top: 1, position: 'relative', marginLeft: 4, pointerEvents: 'none' }}></span>}
@@ -165,6 +279,7 @@ const WarehouseInputField = ({ data, setData, index, podlozhka, setPodlozhka, se
                 value={iconOperator ? formatPhone(input, 'UA') : input}
                 onChange={changeInput}
                 disabled={data[index].lock && true}
+                onKeyDown={enter}
                 ref={refInput}
             // style={{}}
             />

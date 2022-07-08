@@ -1,6 +1,6 @@
 import React,{useState,useRef,useEffect} from 'react'
 
-const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodlozhka,zIndex,sortActive,setSortActive,translator,width,adaptive}) => {
+const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMenu, hideMenu,podlozhka,setPodlozhka,zIndex,sortActive,setSortActive,translator,width,adaptive}) => {
     const [openMenu, setOpenMenu] = useState(false);
     const warehouse = useRef();
     const [arrowToggle, setArrowToggle] = useState(false);
@@ -9,6 +9,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
     const [input1, setInput1] = useState('0');
     const [input2, setInput2] = useState('∞');
     const [all,setAll] = useState(true);
+	const [vitrualClick, setVirtualClick] = useState(false);
     function clickAll (){
         setAll(true);
         setInput1('0');
@@ -16,6 +17,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
         setOpenMenu(false);
 		setPodlozhka(false);
 		setArrowToggle(false);
+		setVirtualClick(false);
 		// if(openMenu) {
 		// }
 		setHideMenu(false);
@@ -28,7 +30,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
     function inputChange (e) {
         setAll(false);
 		setHideMenu(true);
-
+		setVirtualClick(true);
         setPodlozhka(true);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal').style.opacity = 0;
@@ -45,6 +47,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
         setAll(false);
         setPodlozhka(true);
 		setHideMenu(true);
+		setVirtualClick(true);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal').style.opacity = 0;
         // document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
@@ -79,18 +82,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
 
 		}
 	}
-    // const [widthPrev, setWidthPrev] = useState(0);
-    // useEffect(()=> {
-    //     if(warehouse.current){
-    //         setTimeout(() => {
-    //             let width = warehouse.current.offsetWidth;
-    //             setWidthPrev(width);
-    //             // console.log(widthPrev)
-    //         }, 30);
-    //     }
-  
 
-    // },[])
     useEffect(()=> {
 		if(adaptive){
 			if(!openMenu) {
@@ -133,7 +125,7 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
 		// 	setWidth21px(false);
 		// }
 		setHideMenu(false);
-
+		setVirtualClick(false);
 		if (arrowActive === 'down') {
 			setArrowActive('up');
 		} else if (arrowActive === 'up') {
@@ -249,6 +241,50 @@ const WarehouseDropInput = ({hideArrow,setHideMenu, hideMenu,podlozhka,setPodloz
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
+	function clickVirtualWrapper () {
+		setOpenMenu(false);
+		setPodlozhka(false);
+		setHideMenu(false);
+		// console.log('srabotalo');
+		setFlagSwitchMenu(false);
+		setSwitchMenu(false);
+		setVirtualClick(false);
+		document.querySelector('.contentScroll').style.overflow = 'auto';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
+		// document.querySelector('.first-tab-body').classList.remove('hoverOff');
+		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
+			x.style.zIndex = 1;
+		});
+		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
+			x.style.width = '22px';
+		});
+		document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
+			x.style.minWidth = '22px';
+		});
+		document.querySelectorAll('.nal-ostatok').forEach((x) => {
+			x.classList.remove('showBtn');
+		});
+		document.querySelector('.width21px').style.maxWidth = '51px';
+	}
+	function handle(e) {
+        if (warehouse.current && !warehouse.current.contains(e.target)) {
+			clickVirtualWrapper()
+		}
+    }
+    // useEffect(()=> {
+    //     if(!vitrualClick){
+    //         addItem()
+    //     }
+    // }, [vitrualClick])
+    useEffect(() => {
+		if(vitrualClick){
+			document.addEventListener("click", handle, true);
+		}
+        return () => {
+            document.removeEventListener("click", handle, true);
+        };
+    }, [vitrualClick]);
     return (
 			<div
 				style={

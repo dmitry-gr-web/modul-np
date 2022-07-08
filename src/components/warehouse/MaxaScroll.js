@@ -116,7 +116,8 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
         if(document.querySelector('.scrollbox')){
             document.querySelector('.track-vertical').style.opacity = 1;
             document.querySelector('.track-horizontal').style.opacity = 1;
-            setHideArrow(true);
+            if(setHideArrow) setHideArrow(true);
+           
         }
 
     }
@@ -126,7 +127,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
         if(document.querySelector('.scrollbox')) {
             document.querySelector('.track-vertical').style.opacity = 0;
             document.querySelector('.track-horizontal').style.opacity = 0;
-            setHideArrow(false);
+            if(setHideArrow) setHideArrow(false);
         }
 
     }
@@ -164,7 +165,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
           document.querySelector(
             ".track-vertical .bar"
           ).style.transform = `translate3d(0px, ${top}px, 0px)`;
-          infiniteScroll(e);
+          if(infiniteScroll) infiniteScroll(e);
         }}
       >
         {children}

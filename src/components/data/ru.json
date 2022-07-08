@@ -55,8 +55,10 @@
 		"sortTooltip": "Сортировать данные"
 	},
 	"tooltipCount": {
-		"attribute": "Атрибутов в фильтре:<br>- найдено % <br>- выбрано %"
+		"attribute": "Атрибутов в фильтре:<br>- найдено % <br>- выбрано %",
+		"element": "Елементов в фильтре:<br> - найдено %"
 	},
+
 	"tooltipRange": {
 		"value": "Искать значения от:",
 		"value2": "Искать значения до:",
@@ -87,12 +89,13 @@
 		"sumTotal-sale": "Средняя цена продажи: "
 	},
 	"menuAdd/CribProduct": {
-		"add": "Добавлено",
-		"purchase": "Закупка",
-		"exchangeRates": "Курс валюты",
-		"total": "Сумма",
-		"crib": "Списать",
-		"reason": "Причина"
+		"add": "Добавить:",
+		"purchase": "Закупка:",
+		"exchangeRates": "Курс:",
+		"total": "Сумма:",
+		"crib": "Списать:",
+		"reason": "Причина:",
+		"suppliers": "Поставщик:"
 	},
 	"tooltipOperator": {
 		"kyivstar": "Киевстар",

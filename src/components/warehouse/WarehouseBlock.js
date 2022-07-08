@@ -811,7 +811,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												top: 0,
 												zIndex: 3,
 											}}
-											onClick={clickPodlozhka}
+											// onClick={clickPodlozhka}
 										></div>
 									</td>
 								)}
@@ -1078,6 +1078,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												translator={translator}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
+
 												/>
 											</div>
 											<div style={{ paddingRight: '10px', minWidth: 51, zIndex: 5 }}>
@@ -1096,6 +1099,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													hideArrow={hideArrow}
 													hideMenu={hideMenu}
 													setHideMenu={setHideMenu}
+													setFlagSwitchMenu={setFlagSwitchMenu}
+
 													// setActivity={setActivity}
 													// activity={activity}
 												/>
@@ -1116,6 +1121,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													hideArrow={hideArrow}
 													hideMenu={hideMenu}
 													setHideMenu={setHideMenu}
+													setFlagSwitchMenu={setFlagSwitchMenu}
+
 													// setActivity={setActivity}
 													// activity={activity}
 												/>
@@ -1138,6 +1145,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													searchLine={searchLine}
 													objProduct={objProduct}
 													setSwitchMenu={setSwitchMenu}
+													setFlagSwitchMenu={setFlagSwitchMenu}
+
 													switchMenu={switchMenu}
 													sortActive={sortActive}
 													setSortActive={setSortActive}
@@ -1166,6 +1175,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													inputOn={true}
 													objProduct={objProduct}
 													setSwitchMenu={setSwitchMenu}
+													setFlagSwitchMenu={setFlagSwitchMenu}
+
 													switchMenu={switchMenu}
 													sortActive={sortActive}
 													setSortActive={setSortActive}
@@ -1227,6 +1238,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
+
 											/>
 										</div>
 										<div className='rezervBtn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
@@ -1242,6 +1256,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</div>
 										<div className='otprBtn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
@@ -1257,6 +1273,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</div>
 										<div className='vozvratBtn' style={{height: 20,display:'flex',position:'relative'}}>
@@ -1272,6 +1290,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</div></>}
 									</div>
@@ -1293,6 +1313,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											hideArrow={hideArrow}
 											hideMenu={hideMenu}
 											setHideMenu={setHideMenu}
+											setSwitchMenu={setSwitchMenu}
+											setFlagSwitchMenu={setFlagSwitchMenu}
 										/>
 									</div>
 								</th>
@@ -1312,6 +1334,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											hideArrow={hideArrow}
 											hideMenu={hideMenu}
 											setHideMenu={setHideMenu}
+											setSwitchMenu={setSwitchMenu}
+											setFlagSwitchMenu={setFlagSwitchMenu}
 										/>
 									</div>
 									
@@ -1332,6 +1356,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 											hideArrow={hideArrow}
 											hideMenu={hideMenu}
 											setHideMenu={setHideMenu}
+											setSwitchMenu={setSwitchMenu}
+											setFlagSwitchMenu={setFlagSwitchMenu}
 										/>
 									</div>
 									
@@ -1362,6 +1388,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</div>
 										<div className='suma2Btn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
@@ -1377,6 +1405,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</div>
 										<div className='suma3Btn' style={{height: 20,paddingRight:4,display:'flex',position:'relative'}}>
@@ -1392,6 +1422,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</div>
 										<div className='suma4Btn' style={{height: 20,display:'flex',position:'relative'}}>
@@ -1407,6 +1439,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												hideArrow={hideArrow}
 												hideMenu={hideMenu}
 												setHideMenu={setHideMenu}
+												setSwitchMenu={setSwitchMenu}
+												setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</div></>}
 									</div>
@@ -1537,14 +1571,14 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 							<tr style={{ height: getTopHeight() }}></tr>
 
 							{objProduct.length > 0 &&
-								objProduct.slice(getStart(), getStart() + visibleRows +1).map((x, index, arr) => (
+								objProduct.slice((getStart() < 0 ? 0 : getStart()), (getStart() < 0 ? 0 : getStart()) + visibleRows +1).map((x, index, arr) => (
 									<WarehouseProductList
-										index={index + getStart()}
+										index={index + (getStart() < 0 ? 0 : getStart())}
 										// rowHeight={rowHeight}
 										// style={{ height: rowHeight }}
 										// indexParent={index}
 										// widthColum={widthColum}
-										key={index + getStart()}
+										key={index + (getStart() < 0 ? 0 : getStart())}
 										// start={getStart()}
 										// rowHeight={rowHeight}
 										// setChecked={setChecked}'

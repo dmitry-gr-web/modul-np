@@ -1,69 +1,7 @@
 import React from 'react';
 
-const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff }) => {
-	function switchBtn(e) {
-		e.stopPropagation();
-		if (e.target.className === 'status-all') {
-			let newobj = [...objProduct];
-			newobj[index].status.all = !newobj[index].status.all;
-			if (newobj[index].status.all === false) {
-				newobj[index].status.rozetka = false;
-				newobj[index].status.prom = false;
-				newobj[index].status.crm = false;
-			} else {
-				newobj[index].status.rozetka = true;
-				newobj[index].status.prom = true;
-				newobj[index].status.crm = true;
-			}
-			setObjProduct(newobj);
-			console.log(objProduct);
-		}
-		if (e.target.className === 'status-rozetka') {
-			let newobj = [...objProduct];
-			newobj[index].status.rozetka = !newobj[index].status.rozetka;
-			if (newobj[index].status.rozetka === true) {
-				newobj[index].status.all = true;
-			}
-			if (
-				newobj[index].status.rozetka === false &&
-				newobj[index].status.prom === false &&
-				newobj[index].status.crm === false
-			) {
-				newobj[index].status.all = false;
-			}
-			setObjProduct(newobj);
-		}
-		if (e.target.className === 'status-prom') {
-			let newobj = [...objProduct];
-			newobj[index].status.prom = !newobj[index].status.prom;
-			if (newobj[index].status.prom === true) {
-				newobj[index].status.all = true;
-			}
-			if (
-				newobj[index].status.rozetka === false &&
-				newobj[index].status.prom === false &&
-				newobj[index].status.crm === false
-			) {
-				newobj[index].status.all = false;
-			}
-			setObjProduct(newobj);
-		}
-		if (e.target.className === 'status-crm') {
-			let newobj = [...objProduct];
-			newobj[index].status.crm = !newobj[index].status.crm;
-			if (newobj[index].status.crm === true) {
-				newobj[index].status.all = true;
-			}
-			if (
-				newobj[index].status.rozetka === false &&
-				newobj[index].status.prom === false &&
-				newobj[index].status.crm === false
-			) {
-				newobj[index].status.all = false;
-			}
-			setObjProduct(newobj);
-		}
-	}
+const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff ,switchBtn}) => {
+
 	return (
 		<>
 			<label

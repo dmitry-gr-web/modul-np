@@ -21,6 +21,7 @@ const WarehouseDropMenu = ({
 	setLabelForWidth,
 	hideMenu,
 	setHideMenu,
+	setSwitchMenu,
 	// toggleSort,
 	setWidth21px,
 	width21px,
@@ -110,19 +111,23 @@ const WarehouseDropMenu = ({
 
 	const [obj, setObj] = useState(newarr);
 	const [objCopy, setObjCopy] = useState(newarr);
-
+	const [vitrualClick,setVirtualClick] = useState(false);
 	const [value, setValue] = useState('');
 	function infinityClick(index, e) {
 		setPodlozhka(true);
+		setVirtualClick(true);
 		document.querySelector('.contentScroll').style.overflowY = 'hidden';
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal ').style.opacity = 0;
+		// document.querySelector('.first-tab-body').classList.add('hoverOff');
 		if (obj[index].attribute === 'all') {
 			obj.map((x) => (x.select = false));
 			obj[index].select = true;
 			setOpenMenu(false);
 			setPodlozhka(false);
 			setArrowToggle(false);
+			setVirtualClick(false);
+			// document.querySelector('.first-tab-body').classList.remove('hoverOff');
 			document.querySelector('.contentScroll').style.overflowY = 'auto';
 			document.querySelector('.track-vertical').style.opacity = 1;
 			document.querySelector('.track-horizontal ').style.opacity = 1;
@@ -172,6 +177,8 @@ const WarehouseDropMenu = ({
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal ').style.opacity = 0;
 		setHideMenu(true);
+		setVirtualClick(true);
+		// document.querySelector('.first-tab-body').classList.add('hoverOff');
 		if (type === 'status') {
 			let newobj = obj.map((x, i) => {
 				if (i === index && x.attribute !== 'all') {
@@ -208,6 +215,8 @@ const WarehouseDropMenu = ({
 				setHideMenu(false);
 				setOpenMenu(false);
 				setPodlozhka(false);
+				setVirtualClick(false);
+				// document.querySelector('.first-tab-body').classList.remove('hoverOff');
 				document.querySelector('.contentScroll').style.overflowY = 'auto';
 				document.querySelector('.track-vertical').style.opacity = 1;
 				document.querySelector('.track-horizontal ').style.opacity = 1;
@@ -242,6 +251,8 @@ const WarehouseDropMenu = ({
 					// });
 					setHideMenu(false);
 					setArrowToggle(false);
+					// document.querySelector('.first-tab-body').classList.remove('hoverOff');
+					setVirtualClick(false);
 					return { ...x, select: true };
 				} else if (index === 0 && i !== 0) {
 					// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
@@ -251,6 +262,8 @@ const WarehouseDropMenu = ({
 					setArrowToggle(false);
 					setOpenMenu(false);
 					setPodlozhka(false);
+					setVirtualClick(false);
+					// document.querySelector('.first-tab-body').classList.remove('hoverOff');
 					document.querySelector('.contentScroll').style.overflowY = 'auto';
 					document.querySelector('.track-vertical').style.opacity = 1;
 					document.querySelector('.track-horizontal ').style.opacity = 1;
@@ -273,6 +286,8 @@ const WarehouseDropMenu = ({
 				setOpenMenu(false);
 				setPodlozhka(false);
 				setArrowToggle(false);
+				setVirtualClick(false);
+				// document.querySelector('.first-tab-body').classList.remove('hoverOff');
 				document.querySelector('.contentScroll').style.overflowY = 'auto';
 				document.querySelector('.track-vertical').style.opacity = 1;
 				document.querySelector('.track-horizontal ').style.opacity = 1;
@@ -302,6 +317,7 @@ const WarehouseDropMenu = ({
 		// setValue(e.target.value);
 		// setHideMenu(true);
 		// setValue(e.target.value);
+		setVirtualClick(true);
 		// e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		if (e.target.value.length >= 1) {
 			e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
@@ -704,6 +720,7 @@ const WarehouseDropMenu = ({
 		}
 		setOpenMenu(false);
 		setPodlozhka(false);
+		setVirtualClick(false);
 	}
 
 	useEffect(() => {
@@ -739,17 +756,51 @@ const WarehouseDropMenu = ({
 		
 		// }
 	}, [activity, sortActive]);
-	// useEffect(()=> {
-	// 	document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
-	// 		x.classList.add('hide-arrow');
-	// 	});
-	// },[])
-	// const suka = useRef();
-	// useEffect(()=> {
-	// 	if(suka.current ){
-	// 		console.log(suka.current)
-	// 	}
-	// },[])
+	function clickVirtualWrapper () {
+		setOpenMenu(false);
+		setPodlozhka(false);
+		setHideMenu(false);
+		// console.log('srabotalo');
+		setFlagSwitchMenu(false);
+		setSwitchMenu(false);
+		setVirtualClick(false);
+		document.querySelector('.contentScroll').style.overflow = 'auto';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
+		// document.querySelector('.first-tab-body').classList.remove('hoverOff');
+		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
+			x.style.zIndex = 1;
+		});
+		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
+			x.style.width = '22px';
+		});
+		document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
+			x.style.minWidth = '22px';
+		});
+		document.querySelectorAll('.nal-ostatok').forEach((x) => {
+			x.classList.remove('showBtn');
+		});
+		document.querySelector('.width21px').style.maxWidth = '51px';
+	}
+	function handle(e) {
+        if (warehouse.current && !warehouse.current.contains(e.target)) {
+			clickVirtualWrapper()
+		}
+    }
+    // useEffect(()=> {
+    //     if(!vitrualClick){
+    //         addItem()
+    //     }
+    // }, [vitrualClick])
+    useEffect(() => {
+		if(vitrualClick){
+			document.addEventListener("click", handle, true);
+		}
+        return () => {
+            document.removeEventListener("click", handle, true);
+        };
+    }, [vitrualClick]);
+
 	return (
 		<div
 			style={adaptive ? { width: 22, transition: 'width 0.3s', padding: '0 3px' } : zIndex ? { zIndex: 1 } : adaptiveTelNum ? {minWidth: 22, width:22, transition: 'min-width 0.3s', paddingRight: '3px'} : {}}

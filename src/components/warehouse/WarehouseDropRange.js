@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from 'react';
 import './range.scss';
-const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
+const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMenu,hideArrow,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
 	let arr = [
 		'0',
 		'1',
@@ -64,7 +64,7 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortAc
 	const [activity, setActivity] = useState(false);
 	const [arrowToggle, setArrowToggle] = useState(false);
 	const [arrowActive, setArrowActive] = useState('down');
-
+	const [vitrualClick,setVirtualClick] = useState(false);
 	const [rangesData, setRangesData] = useState([
 		{ name: 'all', select: true},
 		{ name: '< 0', select: false },
@@ -174,6 +174,7 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortAc
 		setDivInput2(false);
 		setPodlozhka(true);
 		setHideMenu(true);
+		setVirtualClick(true);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal ').style.opacity = 0;
 		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
@@ -262,6 +263,7 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortAc
 	}, [maxRange, minRange]);
 	function inputKeyUp(e) {
 		setPodlozhka(true);
+		setVirtualClick(true);
 		setHideMenu(true);
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
@@ -290,6 +292,7 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortAc
 	}
 	function inputKeyDown(e) {
 		setPodlozhka(true);
+		setVirtualClick(true);
 		setHideMenu(true);
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
@@ -320,6 +323,7 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortAc
 	const warehouse = useRef();
 	function rangesListClick(index, e) {
 		setPodlozhka(true);
+		setVirtualClick(true);
 		setDivInput(false);
 		setDivInput2(false);
 		setMinRange(min);
@@ -341,6 +345,8 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortAc
 			setOpenMenu(false);
 			setPodlozhka(false);
 			setHideMenu(false);
+			setVirtualClick(false);
+
 		}
 		if (index === 1) {
 			setHideMenu(true);
@@ -499,6 +505,7 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortAc
 		// }
 		setOpenMenu(false);
 		setPodlozhka(false);
+		setVirtualClick(false);
 
 	}
 	function tooltipOn(e) {
@@ -550,6 +557,50 @@ const WarehouseDropRange = ({hideMenu,setHideMenu,hideArrow,setSortActive,sortAc
 		}
 	
 	},[podlozhka])
+	function clickVirtualWrapper () {
+		setOpenMenu(false);
+		setPodlozhka(false);
+		setHideMenu(false);
+		// console.log('srabotalo');
+		setFlagSwitchMenu(false);
+		setSwitchMenu(false);
+		setVirtualClick(false);
+		document.querySelector('.contentScroll').style.overflow = 'auto';
+		document.querySelector('.track-vertical').style.opacity = 1;
+		document.querySelector('.track-horizontal').style.opacity = 1;
+		// document.querySelector('.first-tab-body').classList.remove('hoverOff');
+		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
+			x.style.zIndex = 1;
+		});
+		document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
+			x.style.width = '22px';
+		});
+		document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
+			x.style.minWidth = '22px';
+		});
+		document.querySelectorAll('.nal-ostatok').forEach((x) => {
+			x.classList.remove('showBtn');
+		});
+		document.querySelector('.width21px').style.maxWidth = '51px';
+	}
+	function handle(e) {
+        if (warehouse.current && !warehouse.current.contains(e.target)) {
+			clickVirtualWrapper()
+		}
+    }
+    // useEffect(()=> {
+    //     if(!vitrualClick){
+    //         addItem()
+    //     }
+    // }, [vitrualClick])
+    useEffect(() => {
+		if(vitrualClick){
+			document.addEventListener("click", handle, true);
+		}
+        return () => {
+            document.removeEventListener("click", handle, true);
+        };
+    }, [vitrualClick]);
 	// console.log(minInput, maxInput)
 	return (
 		<>

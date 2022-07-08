@@ -868,14 +868,14 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 
                                                         <img className="logo-mail" src={promLogo} alt="" />
                                                     </div>
-                                                    <div  style={{ paddingRight: '10px', cursor: 'help' ,width: 56}}
+                                                    <div  style={{ padding: '0 10px', cursor: 'help' ,width: 56}}
                                             
                                                     >
                                                         ID
                                                     </div>
                                                     <div onMouseEnter={tooltipOn}
                                                         onMouseLeave={tooltipOff} 
-                                                        style={{ cursor: 'help', paddingRight: '10px', minWidth: 51 }}>
+                                                        style={{ cursor: 'help', paddingRight: '10px', width: 150 }}>
                                                         {/* {translator.getTranslation('warehouse', 'country')} */}
                                                         Атрибут
                                                     </div>

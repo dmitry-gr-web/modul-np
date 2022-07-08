@@ -339,10 +339,10 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 										<th style={{ paddingRight: '15px' }}>
 											Статус
 										</th>
-										<th style={{ paddingRight: '15px' }}>
+										<th style={{ paddingRight: '5px' }}>
 											Товар
 										</th>
-										<th style={{ paddingRight: '20px' }}>
+										<th style={{ paddingRight: '15px' }}>
 											ID
 										</th>
 										<th>
@@ -372,10 +372,10 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 												// setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</th>
-										<th style={{paddingRight: '15px', position:'relative'}}>
+										<th style={{paddingRight: '5px', position:'relative'}}>
 											<div
 												style={{
-												width: 'calc(100% - 15px)',
+												width: 'calc(100% - 5px)',
 												background: '#9c9b9e',
 												height: 1,
 												bottom: 2,
@@ -386,7 +386,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 												}}
 											></div>
 										</th>
-										<th style={{ paddingRight: '20px' }}>
+										<th style={{ paddingRight: '15px' }}>
 											<WarehouseInput 
 												podlozhka={podlozhka} 
 												setPodlozhka={setPodlozhka} 
@@ -472,8 +472,8 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 												{/* {console.log(objAttribute)} */}
 												<td><div className='stickyBeforeBody'></div></td>
 												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objAttribute} setData={setObjAttribute} index={index+(getStart() < 0 ? 0 : getStart())}/></td>
-												<td style={{paddingRight:15, color: `rgba(0,0,0,0.4)`}}>{x.product}</td>
-												<td style={{paddingRight:20,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.id}</td>
+												<td style={{paddingRight:5, color: `rgba(0,0,0,0.4)`, textAlign: 'right'}}>{x.product}</td>
+												<td style={{paddingRight:15,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.id}</td>
 												<td style={{position: "relative",minWidth:300}}>
 													<WarehouseInputField 
 													setCount={setCount} 

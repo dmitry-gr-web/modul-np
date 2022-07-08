@@ -66,7 +66,7 @@ const WarehouseCountryField = ({ country, podlozhka, setPodlozhka, data, setData
             onMouseEnter={()=> sethidearrow(true)}
             onMouseLeave={()=> sethidearrow(false)}>
             <div style={{width:'100%',textAlign: 'center'}} >
-                <span className={'flags'}>
+                <span style={{color:'rgba(0,0,0,1)'}} className={'flags'}>
                     {result}
                 </span>
             </div>

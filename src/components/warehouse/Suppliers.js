@@ -472,13 +472,13 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 										<th style={{ paddingRight: '15px' }}>
 											Страна
 										</th>
-										<th style={{ paddingRight: '20px' }}>
+										<th style={{ paddingRight: '15px' }}>
 											Компания
 										</th>
-										<th style={{ paddingRight: '20px' }}>
+										<th style={{ paddingRight: '15px' }}>
 											Контакт
 										</th>
-										<th style={{ paddingRight: '20px' }}>
+										<th style={{ paddingRight: '15px' }}>
 											Телефон
 										</th>
 										<th>
@@ -524,7 +524,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 												hideMenu={hideMenu}
 											/>
 										</th>
-										<th style={{ paddingRight: '20px' }}>
+										<th style={{ paddingRight: '15px' }}>
 											{/* <WarehouseInput 
 												podlozhka={podlozhka} 
 												setPodlozhka={setPodlozhka} 
@@ -549,7 +549,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 												hideMenu={hideMenu}
 											/>
 										</th>
-										<th style={{ paddingRight: '20px' }}>
+										<th style={{ paddingRight: '15px' }}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
@@ -565,7 +565,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 												hideMenu={hideMenu}
 											/>
 										</th>
-										<th style={{ paddingRight: '20px' }}>
+										<th style={{ paddingRight: '15px' }}>
 											<div style={{ display: 'flex' }} className='telOperator'>
 												<WarehouseDropMenu
 													// adaptive={true}
@@ -678,7 +678,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 														index={index + (getStart() < 0 ? 0 : getStart() - count)}
 														/>
 												</td>
-												<td style={{ paddingRight: 20, color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, minWidth: 40, lineHeight: '18px',minWidth:150,position: 'relative' }}>
+												<td style={{ paddingRight: 15, color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, minWidth: 40, lineHeight: '18px',minWidth:150,position: 'relative' }}>
 													<WarehouseInputField
 														type={'company'}
 														addOneItem={addOneItem}
@@ -691,7 +691,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 														setHideMenu={setHideMenu}
 														setHideArrow={setHideArrow} />
 												</td>
-												<td style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, paddingRight: 20, lineHeight: '18px', minWidth:150,position: 'relative' }}>
+												<td style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, paddingRight: 15, lineHeight: '18px', minWidth:150,position: 'relative' }}>
 													<WarehouseInputField
 														type={'contact'}
 														addOneItem={addOneItem}
@@ -704,7 +704,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 														setHideMenu={setHideMenu} 
 														setHideArrow={setHideArrow}/>
 												</td>
-												<td style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, paddingRight: 20, position: 'relative', minWidth:120 }}
+												<td style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, paddingRight: 15, position: 'relative', minWidth:120 }}
 													onMouseLeave={objSuppliers[index+(getStart() < 0 ? 0 : getStart() - count)].lock ? null : tooltipOff}
 													onMouseEnter={objSuppliers[index+(getStart() < 0 ? 0 : getStart() - count)].lock ? null : tooltipOn}
 													>

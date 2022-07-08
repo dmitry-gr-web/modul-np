@@ -55,7 +55,8 @@
 		"sortTooltip":"Сортувати дані"
 	},
 	"tooltipCount": {
-		"attribute": "Атрибутів у фільтрі:<br>- знайдено % <br>- обрано %"
+		"attribute": "Атрибутів у фільтрі:<br>- знайдено % <br>- обрано %",
+		"element": "Елементів у фільтрі:<br> - знайдено %"
 	},
 	"tooltipRange": {
 		"value": "Шукати значення вид:",
@@ -87,12 +88,13 @@
 		"sumTotal-sale": "Середня ціна продажу: "
 	},
 	"menuAdd/CribProduct": {
-		"add": "Додано",
-		"purchase": "Закупівля",
-		"exchangeRates": "Курс валюти",
-		"total": "Сума",
-		"crib": "Списати",
-		"reason": "Причина"
+		"add": "Додано:",
+		"purchase": "Закупівля:",
+		"exchangeRates": "Курс:",
+		"total": "Сума:",
+		"crib": "Списати:",
+		"reason": "Причина:",
+		"suppliers": "Постачальник:"
 	},
 	"tooltipOperator": {
 		"kyivstar": "Київстар",
