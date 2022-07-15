@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Minus, Plus } from '../../img/svg-pack';
 import SimpleDropMenu from './SimpleDropMenu';
 let plusminus;
-const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, podlozhka, setPodlozhka, hideMenu, setHideMenu, index, tooltipOn, tooltipOff }) => {
+const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, podlozhka, setPodlozhka, setHideMenu, index, tooltipOn, tooltipOff ,style}) => {
     const [memoryInput, setMemoryInput] = useState(objProduct[index]?.ostatok); // input-+
     const [addPrice, setAddPrice] = useState(false); // menu pri +
     const [memoryCena, setMemoryCena] = useState(0); // input+- vnutri menu
@@ -18,7 +18,7 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
             setPodlozhka(true);
             setAddPrice(true);
             setFlag(true);
-            setHideMenu(true);
+            if(setHideMenu) setHideMenu(true);
             let inputFormat = +memoryInput.replace(/\s/gmu, '');
             if ((+memoryChange.replace(/\s/gmu, '')) < (+memoryInput.replace(/\s/gmu, ''))) {
                 let newMemoryCena = memoryCena === 1 && inputFormat !== 1 ? memoryCena - 2 : inputFormat === 1 ? memoryCena : memoryCena - 1;
@@ -63,7 +63,7 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
         setPodlozhka(true);
         setAddPrice(true);
         setFlag(true);
-        setHideMenu(true);
+        if(setHideMenu) setHideMenu(true);
         let newMemoryCena = memoryCena === -1 ? memoryCena + 2 : memoryCena + 1;
         setMemoryCena(newMemoryCena);
         let inputFormat = +memoryInput.replace(/\s/gmu, '');
@@ -102,7 +102,7 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
         setPodlozhka(true);
         setAddPrice(true);
         setFlag(true);
-        setHideMenu(true);
+        if(setHideMenu) setHideMenu(true);
         document.querySelectorAll('.nal-ostatok').forEach((x) => {
             x.classList.remove('showBtn');
         });
@@ -221,7 +221,7 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
         setItogoZakupka('');
         setMemoryCena(0);
         setPri4ina('');
-        setHideMenu(false);
+        if(setHideMenu) setHideMenu(false);
         setAddPrice(false);
         setFlag(false);
         setPodlozhka(false);
@@ -338,8 +338,8 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
     const refWrapOstatok = useRef();
     function clickVirtualWrapper() {
         setPodlozhka(false);
-        setHideMenu(false);
-        setSwitchMenu(false);
+        if(setHideMenu) setHideMenu(false);
+        if (setSwitchMenu) setSwitchMenu(false);
         setFlag(false);
         document.querySelector('.contentScroll').style.overflow = 'auto';
         document.querySelector('.track-vertical').style.opacity = 1;
@@ -411,7 +411,7 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
             onMouseLeave={addPrice ? null : PlusMinusClose}
             onMouseEnter={addPrice ? null : PlusMinusOpen}
             className={`nal-ostatok ${addPrice ? 'showBtn' : ''}`}
-            style={addPrice ? { zIndex: 99 } : {}}
+            style={addPrice ? { zIndex: 99 ,paddingLeft:12,paddingRight:3, ...style} : {paddingLeft:12,paddingRight:3,...style}}
             onClick={addPrice ? (e) => e.stopPropagation() : null}
             onDoubleClick={addPrice ? (e) => e.stopPropagation() : null}
             ref={refWrapOstatok}
@@ -447,7 +447,7 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
                     value={memoryInput}
                     onDoubleClick={(e) => e.stopPropagation()}
                     style={{
-                        color: `${!objProduct[index].status.all ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.7)'}`,
+                        color: `${!objProduct[index].status?.all ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.7)'}`,
                         lineHeight: '18px',
                     }}
                     readOnly={objProduct[index].lock ? true : false}

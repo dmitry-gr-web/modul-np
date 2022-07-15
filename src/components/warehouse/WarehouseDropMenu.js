@@ -541,7 +541,7 @@ const WarehouseDropMenu = ({
 					// tooltipBlock.style.fontSize = '12px';
 					tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'russia');
 					tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-					tooltipBlock.style.top = posElement.y -2+ 'px';
+					tooltipBlock.style.top = posElement.y + 'px';
 					tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 				}
 				if (e.currentTarget.innerText === '🇹🇷') {
@@ -637,12 +637,6 @@ const WarehouseDropMenu = ({
 			}
 
 			if (e.currentTarget.className === 'countBlock') {
-				// tooltipBlock.style.fontSize = '12px';
-				// tooltipBlock.innerHTML = `${
-				// 	type === 'attribute' ? 'Атрибутов' : 'Товаров'
-				// } в фильтре:<br>- найдено ${e.currentTarget.children[0].innerText}<br>- выбрано ${
-				// 	e.currentTarget.children[1].innerText
-				// }`;
 				tooltipBlock.innerHTML = `${translator.getTranslation(
 					'tooltipCount',
 					'attribute',

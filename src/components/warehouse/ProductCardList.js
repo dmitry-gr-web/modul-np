@@ -1,10 +1,16 @@
-import React from 'react'
+import React,{useState} from 'react'
 import SwitchBtn from './SwitchBtn';
 import SwitchBtnSmall from './SwitchBtnSmall';
-import styles from './Warehouse.scss';
-const ProductCardList = () => {
+// import styles from './Warehouse.scss';
+import PlusMinusBlock from './PlusMinusBlock';
+import { SvgDeleteBtn } from '../../img/svg-pack';
+import LoadImg from './LoadImg';
+const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,tooltipOn,translator, podlozhka,setPodlozhka}) => {
+    const [data, setData] = useState([
+        {ostatok: '1'}
+    ])
     return (
-        <tr className='hover-disabled'>
+        <tr>
             <td className="sticky-body">
                 <div className="sticky-block">
                     <div
@@ -18,55 +24,69 @@ const ProductCardList = () => {
                     >
                         <SwitchBtn status={true} data={'objAttribute'} setData={'setObjAttribute'} index={1} />
                     </div>
-                    <div style={{ width: 26, display: 'flex',justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={{ width: 28, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <SwitchBtnSmall status={true} data={'objAttribute'} setData={'setObjAttribute'} index={1} />
                     </div>
-                    <div style={{ width: 26 , display: 'flex',justifyContent: 'center', alignItems: 'center'}}>
+                    <div style={{ width: 28, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <SwitchBtnSmall status={true} data={'objAttribute'} setData={'setObjAttribute'} index={1} />
                     </div>
-                    <div style={{ width: 26 , display: 'flex',justifyContent: 'center', alignItems: 'center'}}>
+                    <div style={{ width: 28, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <SwitchBtnSmall status={true} data={'objAttribute'} setData={'setObjAttribute'} index={1} />
                     </div>
                     <div
-                        style={
-                            { textAlign: 'left', padding: '0px 10px', width: 56, lineHeight: '18px', height: '100%', overflow:'hidden',textOverflow: 'ellipsis' }
-                        }
+                    onMouseEnter={tooltipOn}
+                    onMouseLeave={tooltipOff}
+                        style={{ textAlign: 'left', padding: '0px 10px',paddingLeft:7, width: 56, lineHeight: '18px', height: '100%', overflow: 'hidden', textOverflow: 'ellipsis' }}
                     >
-                        34352
+                        5649-{sortedArr?.filter((x) => x.select === true).map(x=> x?.idNumber).join('.')}
                     </div>
-                    <div style={{width: 150, paddingRight: 10}}>
-                        32 Гб
+                    <div style={{ width: 150, paddingRight: 10,height:18 ,lineHeight:'18px',display: 'flex'}}>
+                        <LoadImg style={{marginRight: 6}}/>
+                        <div 
+                            onMouseEnter={tooltipOn}
+                            onMouseLeave={tooltipOff}
+                            className="btn-product-menu2" 
+                            onClick={(e) => onClick('attribute', e.currentTarget)}>
+                            {sortedArr?.filter((x) => x.select === true).map(x=> x?.name).join(', ')}                            
+                        </div>
                     </div>
                     <div className="shadow-left"></div>
                 </div>
             </td>
-            <td style={{paddingLeft:12}}>
+            <td style={{ paddingLeft:12, paddingRight:10}}>
                 0.343
             </td>
-            <td className={styles.pidar}>
+            <td>
                 34х23х55
             </td>
 
-            <td
-            // onMouseLeave={PlusMinusClose}
-            // onMouseEnter={PlusMinusOpen}
-            // className={`nal-ostatok ${addPrice ? 'showBtn' : ''}`}
-            // style={addPrice ? { zIndex: 99 } : {}}
-            // onClick={addPrice ? (e) => e.stopPropagation() : null}
-            // onDoubleClick={addPrice ? (e) => e.stopPropagation() : null}
-            >
-                <div
-                    className="wrap-nal-ostatok"
-                >
-
-
-
-                    + -
-                </div>
-
-
-                <span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)', position: 'absolute', right: 3, top: 3 }}>/</span>
-            </td>
+            <PlusMinusBlock
+                translator={translator}
+                objProduct={data}
+                setObjProduct={setData}
+                // setSwitchMenu={setSwitchMenu}
+                podlozhka={podlozhka}
+                setPodlozhka={setPodlozhka}
+                // hideMenu={hideMenu}
+                style={{paddingLeft: '5px'}}
+                // setHideMenu={setHideMenu}
+                index={0}
+                tooltipOn={tooltipOn}
+                tooltipOff={tooltipOff}
+            />
+            {/* <PlusMinusBlock
+							translator={translator}
+							objProduct={objProduct}
+							setObjProduct={setObjProduct}
+							setSwitchMenu={setSwitchMenu}
+							podlozhka={podlozhka}
+							setPodlozhka={setPodlozhka}
+							hideMenu={hideMenu}
+							setHideMenu={setHideMenu}
+							index={index}
+							tooltipOn={tooltipOn}
+							tooltipOff={tooltipOff}
+						/> */}
             <td
                 className="nal-rezerv"
                 style={{
@@ -192,10 +212,22 @@ const ProductCardList = () => {
                 className="summa-suma4"
                 style={{
                     color: 'rgba(0, 0, 0, 0.5)',
+                    paddingRight: 12
                 }}
             >
                 655.00
-                <span style={{ pointerEvents: 'none' }}></span>
+                <span style={{ pointerEvents: 'none', width: 'calc(100% - 12px)' }}></span>
+            </td>
+            <td className='delete'
+                onMouseEnter={e => {
+                    e.currentTarget.closest('tr').style.opacity = 0.5;
+                }} 
+                onMouseLeave={e => {
+                    e.currentTarget.closest('tr').style.opacity = '';
+                }}>
+                <button>
+                    <SvgDeleteBtn />
+                </button>
             </td>
         </tr>
     )

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import ModulNp from './ModulNp';
+import ModulNp from './components/modul-np/ModulNp';
 import Warehouse from './components/warehouse/Warehouse';
 
 const App = () => {

@@ -29,7 +29,7 @@ const Warehouse = () => {
 	// });
 	// console.log(data)
 	// console.log(data)
-	const [toggleCard, setToggleCard] = useState(false);
+	const [toggleCard, setToggleCard] = useState(true);
 	// console.log(dataWarehouse)
 	// const obj = [...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse]
 	// console.log(obj)

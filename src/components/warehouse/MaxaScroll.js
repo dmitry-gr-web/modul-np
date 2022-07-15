@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import "./styles.css";
 
-export default function MaxaScroll({updateHover, children, infiniteScroll, setHideArrow, podlozhka }) {
+export default function MaxaScroll({ updateHover, children, infiniteScroll, setHideArrow, podlozhka }) {
   let [heightScroll, setHeightScroll] = useState(0);
   let [widthScroll, setWidthScroll] = useState(0);
   let [top, setTop] = useState(true);
@@ -36,7 +36,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
     } else {
       setLeft(false);
     }
-    window.addEventListener('resize',function(){
+    window.addEventListener('resize', function () {
 
       if (
         document.querySelector(".contentScroll").scrollHeight >
@@ -46,7 +46,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
       } else {
         setTop(false);
       }
-  
+
       if (
         document.querySelector(".contentScroll").scrollWidth >
         document.querySelector(".contentScroll").clientWidth
@@ -55,8 +55,8 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
       } else {
         setLeft(false);
       }
-      })
-      
+    })
+
   }, []);
 
   let scroll = (event) => {
@@ -95,7 +95,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
     const thumbLeft = thumbRects.left + window.pageXOffset;
     const shiftX = event.pageX - thumbLeft;
     const max = track.offsetWidth - bar.offsetWidth + 1;
-  
+
     document.onmousemove = (event) => {
       let left = event.pageX - shiftX - scrollbarLeft;
 
@@ -104,40 +104,40 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
       content.scrollLeft =
         (left * (content.scrollWidth - content.clientWidth)) /
         (track.clientWidth - bar.clientWidth);
-        updateHover(event);
+      updateHover(event);
     };
 
     document.onmouseup = () => {
       document.onmousemove = document.onmouseup = null;
     };
   };
-    function showScrollbar () {
+  function showScrollbar() {
     if (!podlozhka) {
-        if(document.querySelector('.scrollbox')){
-            document.querySelector('.track-vertical').style.opacity = 1;
-            document.querySelector('.track-horizontal').style.opacity = 1;
-            if(setHideArrow) setHideArrow(true);
-           
-        }
+      if (document.querySelector('.scrollbox')) {
+        document.querySelector('.track-vertical').style.opacity = 1;
+        document.querySelector('.track-horizontal').style.opacity = 1;
+        if (setHideArrow) setHideArrow(true);
+
+      }
 
     }
-    }
-    function hideScrollbar () {
-    if(!podlozhka){
-        if(document.querySelector('.scrollbox')) {
-            document.querySelector('.track-vertical').style.opacity = 0;
-            document.querySelector('.track-horizontal').style.opacity = 0;
-            if(setHideArrow) setHideArrow(false);
-        }
+  }
+  function hideScrollbar() {
+    if (!podlozhka) {
+      if (document.querySelector('.scrollbox')) {
+        document.querySelector('.track-vertical').style.opacity = 0;
+        document.querySelector('.track-horizontal').style.opacity = 0;
+        if (setHideArrow) setHideArrow(false);
+      }
 
     }
 
-    }
+  }
   return (
     <div className="scrollbox"
-        onMouseEnter={showScrollbar}
-        onMouseLeave={hideScrollbar}
-        style={!top ? {height:'max-content'} : {height:'100%'}}
+      onMouseEnter={showScrollbar}
+      onMouseLeave={hideScrollbar}
+      style={!top ? { height: 'max-content' } : { height: '100%' }}
     >
       <div
         className="contentScroll"
@@ -147,8 +147,8 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
           let top = Math.floor(
             (TrackHeight -
               document.querySelector(".track-vertical .bar").clientHeight) *
-              (e.target.scrollTop /
-                (e.target.scrollHeight - e.target.clientHeight))
+            (e.target.scrollTop /
+              (e.target.scrollHeight - e.target.clientHeight))
           );
           let TrackWidth = document.querySelector(".track-horizontal")
             .clientWidth;
@@ -156,8 +156,8 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
           let left = Math.floor(
             (TrackWidth -
               document.querySelector(".track-horizontal .bar").clientWidth) *
-              (e.target.scrollLeft /
-                (e.target.scrollWidth - e.target.clientWidth))
+            (e.target.scrollLeft /
+              (e.target.scrollWidth - e.target.clientWidth))
           );
           document.querySelector(
             ".track-horizontal .bar"
@@ -165,7 +165,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
           document.querySelector(
             ".track-vertical .bar"
           ).style.transform = `translate3d(0px, ${top}px, 0px)`;
-          if(infiniteScroll) infiniteScroll(e);
+          if (infiniteScroll) infiniteScroll(e);
         }}
       >
         {children}
@@ -192,7 +192,7 @@ export default function MaxaScroll({updateHover, children, infiniteScroll, setHi
           onMouseDown={scrollLeft}
         ></div>
       </div>
-     
+
     </div>
   );
 }

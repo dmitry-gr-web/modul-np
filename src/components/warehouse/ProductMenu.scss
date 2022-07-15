@@ -111,7 +111,7 @@
 			font-weight: 300;
 			border: none;
 		}
-		div {
+		.count {
 			display: inline-block;
 			right: 2px;
 			// padding-top: 2px;
@@ -119,6 +119,15 @@
 			padding-left: 3px;
 			padding-right: 3px;
 			color: rgba(0, 0, 0, 0.5);
+		}
+		.countBlock {
+			position: relative;
+			right: 2px;
+			color: rgba(0, 0, 0, 0.5);
+
+			span:last-child {
+				font-weight: 500;
+			}
 		}
 	}
 	.btn-menu-input.toggle {
@@ -197,6 +206,22 @@
 		opacity: 0;
 		z-index: 22;
 		overflow-x: hidden;
+		input {
+			height: 22px;
+			line-height: 22px;
+			width: calc(100% - 25px);
+			padding: 0;
+			// padding-left: 0;
+			// padding-right: 0;
+			padding-left: 15px;
+			padding-right: 10px;
+			text-align: left;
+			outline: none;
+			border:none;
+			margin-top: 5px;
+			font-weight: 300;
+			color: rgba(0, 0, 0, 0.7) !important;
+		}
 		.simplebar-track.simplebar-vertical {
 			background-color: rgba(0, 0, 0, 0.1);
 			width: 3px;
@@ -222,10 +247,11 @@
 			padding: 0;
 		}
 	}
+
 	.block-menu-toggle {
 		visibility: visible;
 		opacity: 1;
-		top: 22px;
+		top: 24px;
 		transition: 0.3s;
 	}
 	.block-menu-another-toggle {
@@ -233,6 +259,18 @@
 		opacity: 1;
 		top: 34px;
 		transition: 0.3s;
+	}
+	// .count {
+	// 	color: rgba(0,0,0,.5);
+	// 	cursor: default;
+	// 	display: inline-block;
+	// 	padding-left: 3px;
+	// 	padding-right: 3px;
+	// 	padding-top: 5px;
+	// 	right: 2px;
+	// }
+	input:hover::placeholder {
+		opacity: 0;
 	}
 	.menu-list {
 		position: relative;

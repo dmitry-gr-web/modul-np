@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-import NpTtnDefault from './components/npTtnDefault/npTtnDefault';
+import NpTtnDefault from './npTtnDefault/npTtnDefault';
 import './ModulNp.scss';
 // import React from 'react';
-import { SvGBtnPlus, SvgLogoNV } from './img/svg-pack';
-import DropMenu from './components/dropMenu/dropMenu';
-import DropMenu2 from './components/dropMenu/dropMenu2';
-import NpAutoOrderBack from './components/npAutoOrderBack/npAutoOrderBack';
-import NpAutoChangeStatus from './components/npAutoChangeStatus/npAutoChangeStatus';
-import DropMenuAdaptive from './components/dropMenuAdaptive/dropMenuAdaptive';
+import { SvGBtnPlus, SvgLogoNV } from '../../img/svg-pack';
+import DropMenu from './dropMenu/dropMenu';
+import DropMenu2 from './dropMenu/dropMenu2';
+import NpAutoOrderBack from './npAutoOrderBack/npAutoOrderBack';
+import NpAutoChangeStatus from './npAutoChangeStatus/npAutoChangeStatus';
+import DropMenuAdaptive from './dropMenuAdaptive/dropMenuAdaptive';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
-import { json } from './components/data/regions';
+import { json } from '../data/regions';
 let time;
 let time2;
 

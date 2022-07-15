@@ -789,7 +789,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 
 					<table
 						tabIndex={-1}
-						style={{ width: '100%' }}
+						// style={{ width: '100%' }}
 				
 						className='warehouse-table'
 						// onMouseEnter={}

@@ -141,7 +141,7 @@ const SvgDeleteBtn = () => {
 };
 const SvGBtnPlus = () => {
 	return (
-		<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg style={{opacity:0.65}} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
 				d="M12 14.6666H4.00004C2.53337 14.6666 1.33337 13.4666 1.33337 11.9999V3.99992C1.33337 2.53325 2.53337 1.33325 4.00004 1.33325H12C13.4667 1.33325 14.6667 2.53325 14.6667 3.99992V11.9999C14.6667 13.4666 13.4667 14.6666 12 14.6666Z"
 				stroke="black"
