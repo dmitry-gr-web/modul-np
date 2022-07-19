@@ -33,7 +33,7 @@ export default function SwitchBtnSmall({ status, index, data, setData, addOneIte
                 className="status-crm"
                 onChange={data[index].lock ? () => { } : switchBtn}
                 // defaultChecked={objProduct[index].status.crm}
-                checked={!status}
+                checked={status}
             />
             <span className="slider round" onMouseEnter={data[index].lock ? null : (e) => {
                 tooltipOn(

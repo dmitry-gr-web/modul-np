@@ -617,7 +617,7 @@
 	
 			tfoot {
 				position: sticky;
-				z-index: 2;
+				z-index: 1;
 				bottom: 0;
 	
 				td {
@@ -1114,7 +1114,23 @@
 				}
 	
 			}
-	
+			.weight {
+				position: relative;
+				input {
+					outline: none;
+					border: none;
+					font-weight: 300;
+					padding: 0;
+					position: relative;
+					// text-overflow: ellipsis;
+					// height: 20px;
+					// width: calc(100% - 10px);
+					width: 40px;
+					box-sizing: border-box;
+					color:rgb(0, 0, 0, 0.7);
+					// padding-right: 18px;
+				}
+			}
 			.nal-rezerv,
 			.nal-otpr,
 			.nal-vozvrat {
@@ -1614,7 +1630,7 @@
 		}
 		.delete {
 			position: sticky;
-			right:0;
+			right:-1px;
 			height: 18px;
 			max-height: 18px;
 			width: 15px;

@@ -202,7 +202,7 @@ const ModulNp = () => {
 			setIndexTr(dataChange.data.day.length - 1);
 			setMultiselect(false);
 			setCarouselDrop({menu : 2, carousel : true});
-			console.log(carouselDrop)
+			console.log(dataChange)
 			setTimeout(() => {
 				let targetBlock = document.querySelectorAll('.targetBlock')[dataChange.data.day.length - 1];
 				openAdaptiveMenu('day', targetBlock);
@@ -613,6 +613,7 @@ const ModulNp = () => {
 
 	const [openApiKey, setApiKey] = useState(false);
 	// console.log(openApiKey);
+	// console.log('pidar')
 	return (
 		<div className="modul-np">
 			{podlozhkaToggle && (

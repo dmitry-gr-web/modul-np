@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect,useMemo } from 'react';
 import DropMenu from '../modul-np/dropMenu/dropMenu';
 import './ProductCard.scss';
 import ProductCardMenu from './ProductCardMenu';
@@ -18,6 +18,7 @@ import ProductCardList from './ProductCardList';
 // import MaxaScroll from './MaxaScroll';
 import ScrollBar from './ScrollBar';
 import LoadImg from './LoadImg';
+// import { json } from 'express';
 let plusminus;
 let hover;
 const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, getIndex, translator }) => {
@@ -27,17 +28,18 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     const [search, setSearch] = useState(false);
     const [multiselect,setMultiSelect] = useState(false);
     const [createAttr,setCreateAttr] = useState(false);
-    // const inputRef = useRef();
-    function searchLine(text, value) {
-        if (value !== '') {
-            let re = new RegExp(value, 'gui');
-            let text_pr = text.replace(re, (x) => '<span class="findUnderline">' + x + '</span>');
+    const [indexTr,setIndexTr]=useState(0);
 
-            return text_pr;
-        } else {
-            return text;
-        }
-    }
+    // const inputRef = useRef();
+    // function searchLine(text, value) {
+    //     if (value !== '') {
+    //         let re = new RegExp(value, 'gui');
+    //         let text_pr = text.replace(re, (x) => '<span class="findUnderline">' + x + '</span>');
+    //         return text_pr;
+    //     } else {
+    //         return text;
+    //     }
+    // }
 
     // const [countryArr, setCountryArr] = useState([
     // 	// { id: 0, name: 'Все', select: true },
@@ -45,7 +47,17 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     // 	{ id: 1, name: '🇺🇦', nameCountry: 'Украина', select: false },
     // 	{ id: 2, name: '🇹🇷', nameCountry: 'Турция', select: false },
     // ]);
-    const [data, setData] = useState({
+    // const objAttribute =  [
+    //     { id: 0, name: '32гб', select: false, idNumber:9 },
+    //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
+    //     { id: 2, name: '42 размер', select: false ,idNumber:43},
+    //     { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
+    //     { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
+    //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
+    //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
+    // ];
+
+    const [data,setData] = useState({
         flags: [
             { id: 0, name: '🇷🇺', secondName: 'russia', select: false },
             { id: 1, name: '🇺🇦', secondName: 'ukraine', select: false },
@@ -80,31 +92,63 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         vidPlatformi: [
             { id: 0, name: rozetkaLogo, secondName: 'rozetka', select: true },
             { id: 1, name: promLogo, secondName: 'prom', select: false },
-            { id: 3, name: crmLogo, secondName: 'lpcrm', select: false },
+            { id: 2, name: crmLogo, secondName: 'lpcrm', select: false },
         ],
         description: [
             { id: 0, name: 'Флешкарта', select: true },
             { id: 1, name: 'Флешкарта-1', select: false },
-            { id: 3, name: 'Флешкарта-2', select: false },
+            { id: 2, name: 'Флешкарта-2', select: false },
         ],
         attribute: [
             { id: 0, name: '32гб', select: true, idNumber:9 },
             { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
-            { id: 3, name: '42 размер', select: false ,idNumber:43},
-            { id: 4, name: 'Синий 42 размер', select: false ,idNumber:94},
-            { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
-            { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
-            { id: 7, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
+            { id: 2, name: '42 размер', select: false ,idNumber:43},
+            { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
+            { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
+            { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
+            { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
         ],
         delivery: [
-            { id: 1, name: 'icon-Union-3 icons', secondName: 'novapochta', select: true },
-            { id: 2, name: 'icon-Vector-2 icons', secondName: 'justin', select: false },
-            { id: 3, name: 'icon-ukrposhta icons', secondName: 'ukrpochta', select: false },
-            { id: 4, name: 'icon-Union-4 icons', secondName: 'samovivoz', select: false },
+            { id: 0, name: 'icon-Union-3 icons', secondName: 'novapochta', select: true },
+            { id: 1, name: 'icon-Vector-2 icons', secondName: 'justin', select: false },
+            { id: 2, name: 'icon-ukrposhta icons', secondName: 'ukrpochta', select: false },
+            { id: 3, name: 'icon-Union-4 icons', secondName: 'samovivoz', select: false },
         ],
         // { id: 0, name: 'Все', select: true },
     });
+    // const [attribute,setAttribute] = useState([[
+    //     { id: 0, name: '32гб', select: true, idNumber:9 },
+    //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
+    //     { id: 2, name: '42 размер', select: false ,idNumber:43},
+    //     { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
+    //     { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
+    //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
+    //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
+    // ]])
+    // console.log(objProduct)
+    // console.log(getIndex)
+    const [dataFromWarehouse,setDataFromWarehouse] = useState([]);
+    // console.log(dataFromWarehouse)
+    const obj ={ show: false, array: [
+        { id: 0, name: '32гб', select: true, idNumber:9 },
+        { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
+        { id: 2, name: '42 размер', select: false ,idNumber:43},
+        { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
+        { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
+        { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
+        { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
+    ] }
+    const [objAttribute,setObjAttribute] = useState([]);
+    useEffect(()=> {
+        setDataFromWarehouse([objProduct[getIndex]])
+        setObjAttribute([{...obj}])
+    },[])
     const [sortedArr, setSortedArr] = useState([]);
+    // useEffect(()=> {
+    //     setIndexTr(dataFromWarehouse.length-1);
+    // },[dataFromWarehouse.length])
+    // console.log(objAttribute)
+    // console.log(indexTr)
     // console.log(data['flags'])
     // const [currency, setCurrency] = useState([
     // 	// { id: 0, attribute: 'Все', select: true },
@@ -123,27 +167,21 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                     return { ...x, select: true };
                 } else if (x.name === objProduct[getIndex].currency) {
                     return { ...x, select: true };
-                } else if (x.name === objProduct[getIndex].attribute) {
+                } 
+                // else if (x.name === objProduct[getIndex].attribute) {
                
-                    return { ...x, select: true };
-                } else {
+                //     return { ...x, select: true };
+                // } 
+                else {
                     return { ...x };
                 }
             }))
         );
-        setSortedArr([...sortedArr, { ...data.attribute[0], select: true }])
-        console.log(obj1)
-        // let obj = [...data.flags];
+        // setSortedArr([...sortedArr, { ...data.attribute[0], select: true }])
 
-        // obj = obj.map((x) => {
-        // 	if (x.name === objProduct[getIndex].country) {
-        // 		return  {...x, select: true };
-        // 	} else {
-        // 		return { ...x };
-        // 	}
-        // })
         setData({ ...obj1 });
     }, []);
+    // console.log("sortedarr:", sortedArr)
     // setData({
     // 	...data.currency.map((x) => {
     // 		if (x.name === objProduct[getIndex].country) {
@@ -187,17 +225,17 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         // console.log(type);
         setSearch(false);
         setMultiSelect(false);
-        setCreateAttr(false);
+        // setCreateAttr(false);
         if (type === 'flags') {
             setTypeData('flags');
         }
         if (type === 'attribute') {
+            adapEl.style.width = '128px';
+            adapEl.style.top = posEl?.y - block.y -2 + 'px';
             setTypeData('attribute');
             setSearch(true);
             setCreateAttr(true);
             setMultiSelect(true);
-            adapEl.style.width = '128px';
-            adapEl.style.top = posEl?.y - block.y -2 + 'px';
         }
         if (type === 'currency') {
             setTypeData('currency');
@@ -244,78 +282,10 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         // 	inputRef.current.focus();
         // }, 100);
     }
-    // function loadImg(e) {
-    // 	if (this.files[0]) {
-    // 		var fr = new FileReader();
+ 
+    // function onFocus(){
 
-    // 		fr.addEventListener(
-    // 			'load',
-    // 			function () {
-    // 				document.querySelector('label').style.backgroundImage = 'url(' + fr.result + ')';
-    // 			},
-    // 			false
-    // 		);
-
-    // 		fr.readAsDataURL(this.files[0]);
-    // 	}
     // }
-    // function zoomImg(e) {
-    //     if (e.target.className === 'clear') {
-    //     } else {
-    //         e.target.style.transform = 'scale(3)';
-    //     }
-    // }
-    // function zoomOutImg(e) {
-    //     e.target.style.transform = 'scale(1)';
-    // }
-
-    // function loadImg(e) {
-    //     const fileSize = e.target.files[0].size; // in MiB
-    //     // const MB = 500000;
-    //     if (fileSize > 500000) {
-    //         alert('Файл больше 500кб');
-    //         // $(file).val(''); //for clearing with Jquery
-    //     } else {
-    //         // Proceed further
-    //         if (e.target.files[0]) {
-    //             var fr = new FileReader();
-    //             fr.addEventListener(
-    //                 'load',
-    //                 function () {
-    //                     e.target.previousSibling.src = fr.result;
-    //                     e.target.previousSibling.classList.remove('clear');
-    //                 },
-    //                 false
-    //             );
-    //             fr.readAsDataURL(e.target.files[0]);
-    //         }
-    //     }
-    // }
-    // useEffect(()=> {
-    // 	document.getElementById("pct").addEventListener("change", function () {
-    // 		if (this.files[0]) {
-    // 		  var fr = new FileReader();
-
-    // 		  fr.addEventListener("load", function () {
-    // 			// document.getElementById("labelImg").style.backgroundImage = "url(" + fr.result + ")";
-    // 			document.getElementById("imgID").src = fr.result;
-    // 		  }, false);
-
-    // 		  fr.readAsDataURL(this.files[0]);
-    // 		}
-    // 	});
-    // })
-
-    // 	useEffect(() => {
-    // 	let newarr = [...countryArr];
-    // 	newarr.filter((x) => {
-    // 		if (x.name === document.getElementById('strana').innerText) {
-    // 			x.select = true;
-    // 		}
-    // 	});
-    // 	setCountryArr(newarr);
-    // }, []);
-    // console.log(objProduct[getIndex].country , countryArr.filter(x => x.name === '🇷🇺'))
     function tooltipOn(e, html) {
         let posElement = e.currentTarget.getBoundingClientRect();
         const tooltipBlock = document.getElementById('tooltipBtn');
@@ -714,6 +684,10 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         }, 400);
         document.getElementById('tooltipBtn').style.animation = '';
     }
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+      const [carouselDrop,setCarouselDrop] = useState({menu:1,carousel:false});
     return (
         <>
             <div className="bg"></div>
@@ -732,6 +706,38 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                             onClick={() => {
                                 setOpenCardMenu(false);
                                 setPodlozhka(false);
+
+                                // if(carouselDrop.carousel && carouselDrop.menu === 1){
+                                //     setTimeout(() => {
+                                //         const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[document.querySelectorAll('.product-card .first-tab-body .weight input').length -1]
+                                //         targetBlock.focus();
+                                //         console.log(targetBlock)
+                                //         // onClick('attribute', targetBlock);
+                                //     }, 150);
+                                //     // const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[document.querySelectorAll('.product-card .first-tab-body .weight input').length -1]
+                                //     setPodlozhka(true);
+
+                                //     setCarouselDrop({menu:2,carousel:true});
+                                
+                                // } 
+                                // if(carouselDrop.carousel && carouselDrop.menu === 2){
+                                
+                                //     const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[document.querySelectorAll('.product-card .first-tab-body .weight input').length -1]
+
+                                //     if(targetBlock.value !== ''){
+                                //         dataFromWarehouse[document.querySelectorAll('.product-card .first-tab-body .weight input').length -1].weight = targetBlock.value;
+                                //         setDataFromWarehouse([...dataFromWarehouse])
+                                //         setPodlozhka(false);
+                                //         setCarouselDrop({menu:2,carousel:false});
+                                //     }else {
+                                //         // setPodlozhka(false);
+                                //         // setPodlozhka(false);
+                                //         setCarouselDrop({menu:2,carousel:false});
+                                //         setDataFromWarehouse(prev => prev.filter((x,i) => i !== document.querySelectorAll('.product-card .first-tab-body .weight input').length -1))
+                                //         // setPodlozhka(false);
+                                //     }
+                           
+                                // } 
                             }}
                         ></div>
                     )}
@@ -1015,7 +1021,47 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 
                         <div className="attr-block">
                             <div className="header-text" style={{ marginBottom: 24 }}>Атрибут
-                                <button>
+                                <button onClick={e => {
+                                    let obj = {
+                                        status:{all:true,rozetka:true,prom:true,crm:true},
+                                        id:'XXXX-',
+                                        country:'🇺🇦',
+                                        currency:'₴',
+                                        name:'',
+                                        attribute:'dff',
+                                        images: '',
+                                        ostatok:'1',
+                                        rezerv:'',
+                                        otpr:'',
+                                        vozvrat:'',
+                                        zakupka:'',
+                                        prodazha:'',
+                                        marzha:'',
+                                        suma1:'',
+                                        suma2:'',
+                                        suma3:'',
+                                        suma4:'',
+                                        select:false,
+                                        lock:false,
+                                        podProduct:0,
+                                        weight: '',
+                                        size: ''
+                                    }
+                                    // setSortedArr([...sortedArr,[{...objAttribute}]]);
+                                    // sortedArr.push([]);
+                                    // setSortedArr(sortedArr);
+                                    // data.attribute.push([...objAttribute]);
+                                    // setData(data)
+                                    // setPodlozhka(true);
+                                    // setCarouselDrop({menu:1,carousel:true});
+                                    setDataFromWarehouse([...dataFromWarehouse,obj])
+                                    // setTimeout(() => {
+                                    //     const targetBlock = document.querySelectorAll('.product-card .first-tab-body .btn-product-menu2')[dataFromWarehouse.length]
+                                    //     onClick('attribute', targetBlock)
+                                    // }, 100);
+                                 
+                                    // let arr = [...dataFromWarehouse,obj ]
+                                }}>
                                     <SvGBtnPlus />
                                 </button>
                             </div>
@@ -1157,55 +1203,31 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                     </thead>
 
                                     <tbody className="first-tab-body">
-                                        <ProductCardList
-                                              setSortedArr={setSortedArr}
-                                              sortedArr={sortedArr}
-                                        data2={data} onClick={onClick} tooltipOn={tooltipOn} tooltipOff={tooltipOff} translator={translator} podlozhka={podlozhka} setPodlozhka={setPodlozhka}/>
-                                        {/* <tr style={{ height: getTopHeight() }}></tr> */}
-
-                                        {/* {objProduct.length > 0 &&
-								objProduct.slice(getStart(), getStart() + visibleRows +1).map((x, index, arr) => (
-									<WarehouseProductList
-										index={index + getStart()}
-										// rowHeight={rowHeight}
-										// style={{ height: rowHeight }}
-										// indexParent={index}
-										// widthColum={widthColum}
-										key={index + getStart()}
-										// start={getStart()}
-										// rowHeight={rowHeight}
-										// setChecked={setChecked}'
-										setHideMenu={setHideMenu}
-										hideMenu={hideMenu}
-										setLoadedLabelBlock={setLoadedLabelBlock}
-										loadedLabelBlock={loadedLabelBlock}
-										// checked={checked}
-										setGetIndex={setGetIndex}
-										objProduct={objProduct}
-										setObjProduct={setObjProduct}
-										switchMenu={switchMenu}
-										setSwitchMenu={setSwitchMenu}
-										podlozhka={podlozhka}
-										setPodlozhka={setPodlozhka}
-										// focusInput={focusInput}
-										// setFocusInput={setFocusInput}
-										// setIndexInput={setIndexInput}
-										setLastIndex={setLastIndex}
-										lastIndex={lastIndex}
-										// setBtnMenu={setBtnMenu}
-										// btnMenu={btnMenu}
-										setToggleCard={setToggleCard}
-										// selectAll={selectAll}
-										translator={translator}
-										// setHoverWidth={setHoverWidth}
-										// hoverWidth={hoverWidth}
-										// setSelectAll={setSelectAll}
-										flagSwitchMenu={flagSwitchMenu}
-									/>
-								))} */}
-
-                                        {/* <tr colSpan={18} style={{ height: getBottomHeight() }}>
-							</tr> */}
+                                        { dataFromWarehouse?.map((x,i) =>  (<ProductCardList
+                                            setSortedArr={setSortedArr}
+                                            sortedArr={JSON.parse(JSON.stringify(sortedArr))}
+                                            data2={data} 
+                                            item={x}
+                                            index={i}
+                                            // key={getRandomArbitrary(1,1000)}
+                                            key={getRandomArbitrary(1,100000)}
+                                            arr={dataFromWarehouse}
+                                            setArr={setDataFromWarehouse}
+                                            onClick={onClick} 
+                                            tooltipOn={tooltipOn} 
+                                            tooltipOff={tooltipOff} 
+                                            translator={translator}
+                                            podlozhka={podlozhka} 
+                                            // addNewTr={addNewTr}
+                                            carouselDrop={carouselDrop}
+                                            setPodlozhka={setPodlozhka}
+                                            objAttribute={objAttribute}
+                                            setObjAttribute={setObjAttribute}
+                                            />
+                                        ))
+                                        }
+                                       
+                                        
                                     </tbody>
 
                                     <tfoot>
@@ -1226,7 +1248,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                     </div>
                     <ProductCardMenu
                                 openCardMenu={openCardMenu}
-                                searchLine={searchLine}
+                                // searchLine={searchLine}
                                 // inputRef={inputRef}
                                 multiselect={multiselect}
                                 inputOn={search}
@@ -1238,10 +1260,11 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                 setPodlozhka={setPodlozhka}
                                 setOpenCardMenu={setOpenCardMenu}
                                 translator={translator}
-                                createAttr={createAttr}
+                                // createAttr={createAttr}
                                 setSortedArr={setSortedArr}
                                 sortedArr={sortedArr}
-
+                                carouselDrop={carouselDrop}
+                                onClick={onClick}
                             />
                 </div>
         

@@ -83,13 +83,9 @@ const OrderBackList = (props) => {
 					onMouseLeave={props.toolTipOff}
 					onClick={(e) => {
 						props.setMultiselect(true);
-
-				
 						props.openAdaptiveMenu('status', e.target);
 						props.setIndexTr(props.indexTr);
-						{
-							console.log(e);
-						}
+					
 					}}
 					className={'big-btn targetBlock'}
 				>

@@ -29,7 +29,7 @@ const Warehouse = () => {
 	// });
 	// console.log(data)
 	// console.log(data)
-	const [toggleCard, setToggleCard] = useState(true);
+	const [toggleCard, setToggleCard] = useState(false);
 	// console.log(dataWarehouse)
 	// const obj = [...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse]
 	// console.log(obj)
@@ -40,15 +40,16 @@ const Warehouse = () => {
 	// 	// Сортировать данные
 	// 	setObjProduct(dataWarehouse);
 	// }, 2000);
-	const [objProduct, setObjProduct] = useState(dataWarehouse);
+	const [objProduct, setObjProduct] = useState(null);
 	const [objAttribute,setObjAttribute] = useState(null);
 	const [objSuppliers,setObjSuppliers] = useState(null);
 	const [getIndex, setGetIndex] = useState(0);
 	useEffect(()=> {
 		setObjAttribute(dataAttribute)
 		setObjSuppliers(dataSuppliers)
+		setObjProduct(dataWarehouse)
 	},[])
-	
+	// console.log('pidor');
 	const [ul, setUl] = useState([
 		{ id: 0, name: "goods", select: true },
 		{ id: 1, name: "attributes", select: false },
@@ -123,7 +124,7 @@ const Warehouse = () => {
 				<button onClick={uaBtn}>UA</button>
 			</div>
 			<div style={{ position: 'absolute', top: 0, right: 0 }}>
-				Выбрано {parseInt(objProduct.filter((x) => x.select === true).length)}
+				Выбрано {parseInt(objProduct?.filter((x) => x.select === true).length)}
 			</div>
 
 			<div

@@ -3,12 +3,12 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import './ProductMenu.scss';
 let plusminus;
-const ProductCardMenu = ({
-	openCardMenu,
-	typeData,
-	setOpenCardMenu,
+const ProductCardListMenu = ({
+	// openCardMenu,
+	// typeData,
+	// setOpenCardMenu,
 	// inputRef,
-	dataCurrent,
+	// dataCurrent,
 	// searchLine,
 	inputOn,
 	data,
@@ -18,10 +18,13 @@ const ProductCardMenu = ({
 	multiselect,
 	podlozhka,
 	createAttr,
-	setSortedArr,
-	sortedArr,
-	carouselDrop,
-	onClick
+    currentData,
+    index,
+	// setSortedArr,
+	// sortedArr,
+	// carouselDrop,
+	// onClick
+    // ...props
 }) => {
 	const [value, setValue] = useState('');
 	const inputRef = useRef();
@@ -29,6 +32,8 @@ const ProductCardMenu = ({
 	// if (type === 'country') {
 
 	// }
+    console.log(data[index].show)
+    const [openCardMenu,setOpenCardMenu]= useState(data[index]?.show);
 	function searchLine(text, value) {
 		if (value !== '') {
 			let re = new RegExp(value, 'gui');
@@ -39,6 +44,9 @@ const ProductCardMenu = ({
 			return text;
 		}
 	}
+    // useEffect(()=> {
+        
+    // },[])
 	function tooltipOn(e, html) {
 		let posElement = e.currentTarget.getBoundingClientRect();
 		const tooltipBlock = document.getElementById('tooltipBtn');
@@ -119,11 +127,20 @@ const ProductCardMenu = ({
 		}
 	}, [openCardMenu])
 
-	useEffect(()=> {
-		if(carouselDrop.carousel){
-			setOpenCardMenu(true);
-		}
-	},[carouselDrop.carousel])
+	// useEffect(()=> {
+	// 	if(carouselDrop.carousel){
+	// 		setOpenCardMenu(true);
+	// 	}
+	// },[carouselDrop.carousel])
+    const [sortArr,setSortArr] = useState([]);
+    // useEffect(()=> {
+    //     // console.log("data", data)
+    //     // console.log("sort", sortArr)
+    //     let arr = data.filter(x => x.select);
+    //     // console.log(arr)
+    //     setSortArr([...arr])
+    //     // data.filter(x => x.select)
+    // },[])
 	function selectFunc(id) {
 		// let newarr = [...countryArr];
 		// newarr.map((x) => {
@@ -132,23 +149,27 @@ const ProductCardMenu = ({
 		// });
 		// if(type === '')
 
-		let newarr = data.map((x) => {
+		let newarr = data[index].map((x) => {
 			if (!multiselect) {
 				if (x.id === id) {
 					setOpenCardMenu(false);
 					setPodlozhka(false);
-			
 					return { ...x, select: true };
 				} else return { ...x, select: false };
 			} else {
 				if (x.id === id){
-					if(typeData ==='attribute'){
-						if(!x.select){
-							setSortedArr([...sortedArr, { ...x, select: true }])
-						} else {
-							setSortedArr(prev => prev.filter(x => x.id !== id))
-						}
-					}
+					// if(typeData ==='attribute'){
+					// 	if(!x.select){
+					// 		setSortedArr([...sortedArr, { ...x, select: true }])
+					// 	} else {
+					// 		setSortedArr(prev => prev.filter(x => x.id !== id))
+					// 	}
+					// }
+                    if (!x.select) {
+                        setSortArr([...sortArr, { ...x, select: true }])
+                    } else {
+                        setSortArr(prev => prev.filter(x => x.id !== id))
+                    }
 					return { ...x, select: !x.select };
 				} else {
 				 	return { ...x };
@@ -156,6 +177,7 @@ const ProductCardMenu = ({
 			}
 
 		});
+        // console.log(sortArr)
 		// if(carouselDrop.carousel && carouselDrop.menu === 1 ){
 		// 	setTimeout(() => {
 		// 		const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight')[document.querySelectorAll('.product-card .first-tab-body .weight').length -1]
@@ -163,8 +185,12 @@ const ProductCardMenu = ({
 		// 		// onClick('attribute', targetBlock);
 		// 	}, 70);
 		// }
+        // console.log(openCardMenu)
 		// setData(newarr);
-		setData({ ...dataCurrent, [typeData]: [...newarr] });
+        console.log(openCardMenu)
+        data[index] = [...newarr];
+        setData([...data])
+		// setData({ ...dataCurrent, [typeData]: [...newarr] });
 		// setOpenCardMenu(false);
 		// setPodlozhka(false);
 	}
@@ -173,14 +199,14 @@ const ProductCardMenu = ({
 	// console.log('sortedArr')
 	function addItem(e) {
         let obj = {id:0, name: attributeInput, select: true,idNumber:232};
-		sortedArr = sortedArr.map(x => ({...x, id: x.id + 1}));
-        let obj2 = {id: 0, name: attributeInput, select: true,idNumber:232};
+		// sortedArr = sortedArr.map(x => ({...x, id: x.id + 1}));
+        // let obj2 = {id: 0, name: attributeInput, select: true,idNumber:232};
         let newdata = data.map(x => ({...x, id: x.id + 1}));
-        let arr = [obj, ...newdata];
+        // let arr = [obj, ...newdata];
         // setSuppliersInput('');
         // setData([...arr]);
-		setSortedArr([...sortedArr, obj2])
-		setData({ ...dataCurrent, [typeData]: [...arr] });
+		// setSortedArr([...sortedArr, obj2])
+		setData([obj, ...newdata]);
         // setFlag(false);
         // setOpenMenu(false);
 		setValue('');
@@ -227,6 +253,7 @@ const ProductCardMenu = ({
 	useEffect(()=> {
 		if(!podlozhka){
 			setFlag(false);
+            setOpenCardMenu(false);
 			// if(carouselDrop.carousel && carouselDrop.menu === 1 ){
 			// 	setTimeout(() => {
 			// 		const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight')[document.querySelectorAll('.product-card .first-tab-body .weight').length -1]
@@ -244,20 +271,49 @@ const ProductCardMenu = ({
             addItem(e);
         }   
     }
+	function handle2(e) {
+        if (productMenu.current && !productMenu.current.contains(e.target)) {
+            // addItem(e);
+            setOpenCardMenu(false);
+            productMenu.current.closest('td').style.zIndex = '';
+        }   
+    }
     useEffect(() => {
         if(flag){
             document.addEventListener("click", handle, true);
         }
+        // if(openCardMenu){
+            document.addEventListener("click", handle2, true);
+        // }
         return () => {
             document.removeEventListener("click", handle, true);
+            document.removeEventListener("click", handle2, true);
+
         };
     }, [flag,attributeInput]);
+    // useEffect(()=> {
+    //     if(!podlozhka) setOpenCardMenu(false)
+    // },[podlozhka])
 	return (
 		<div
-			className="productMenu"
-			style={openCardMenu ? { visibility: 'visible' } : { visibility: 'hidden' }}
+			className="productMenu2"
+            style={{visibility:'visible', marginLeft:20}}
+			// style={openCardMenu ? { visibility: 'visible' } : { visibility: 'hidden' }}
 			ref={productMenu}
-		>
+            // {...props}
+            
+		>   
+            <div className='result' onClick={e => {
+                // setOpenCardMenu();
+                console.log(data)
+                data[index].show = true;
+                setData([...data]);
+                productMenu.current.closest('td').style.zIndex = '5';
+            }}>
+                {/* {data?.filter(x=>x.select)[0].name} */}
+                {data[index].array?.filter((x) => x.select === true).map(x=> x?.name).join(', ')}    
+
+            </div>
 			<div style={flag ? {pointerEvents: 'none'}: {}} className={inputOn && openCardMenu ? 'btn-menu-input toggle' : 'btn-menu-input'}>
 				<input
 					onMouseEnter={e => e.target.focus()}
@@ -274,11 +330,11 @@ const ProductCardMenu = ({
 				/>
 				{multiselect ? (
 					<div onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className="countBlock">
-						(<span>{data?.filter((x) => x.name.toLowerCase().includes(value.toLowerCase()))?.length.toLocaleString('ru-RU', {
+						(<span>{data[index].array?.filter((x) => x.name.toLowerCase().includes(value.toLowerCase()))?.length.toLocaleString('ru-RU', {
 							minimumFractionDigits: 0,
 							maximumFractionDigits: 0,
 						})}</span>/
-						<span>{data?.filter((x) => x.select).length}</span>)
+						<span>{data[index].array?.filter((x) => x.select).length}</span>)
 					</div>
 				) :
 					(<div
@@ -287,8 +343,8 @@ const ProductCardMenu = ({
 						onMouseLeave={tooltipOff}
 					>
 						(
-						{data?.length > 0 &&
-							data?.filter((x) =>
+						{data[index].array?.length > 0 &&
+							data[index].array?.filter((x) =>
 								x.name.toLowerCase().includes(value.toLowerCase())
 							)?.length}
 						)
@@ -342,7 +398,7 @@ const ProductCardMenu = ({
 					}}
 						// {...props}
 				/> : ''}
-				{data
+				{data[index].array
 					?.filter((x) => x.name.toLowerCase().includes(value.toLowerCase()))
 					.map((x, index) => (
 						<li
@@ -354,17 +410,13 @@ const ProductCardMenu = ({
 							style={flag ?{opacity:0.4,pointerEvents:'none' }: {}}
 
 						>
-							{typeData === 'flags' ? <><span className={'flags'}>{x.name}</span><div style={{ marginLeft: '5px' }}>{translator?.getTranslation(`tooltipCountries`, x.secondName)}</div></> : ''}
-							{typeData === 'currency' ? <><span className=''>{x.name}</span><div style={{ marginLeft: '5px' }}>{translator?.getTranslation(`tooltipCurrency`, x.secondName)}</div></> : ''}
-							{typeData === 'vidPlatformi' ? <><img src={x.name} alt={x.secondName} /><div style={{ marginLeft: '5px' }}>{translator?.getTranslation(`tooltipPlatform`, x.secondName)}</div></> : ''}
-							{typeData === 'delivery' ? 	<><span className={x.name}></span><div style={{ marginLeft: '5px' }}>{translator?.getTranslation(`tooltipDelivery`, x.secondName)}</div></> : ''}
-							{typeData === 'otdel' || typeData === 'tip' || typeData === 'category' || typeData === 'attribute' || typeData === 'description' ? 	<><span 
+                            <><span 
 								dangerouslySetInnerHTML={{
 									__html: searchLine(x.name, value),
 								}}
 								onMouseEnter={tooltipOn}
 								onMouseLeave={tooltipOff}
-							></span></> : ''}
+							></span></>
 						</li>
 					))}
 			</SimpleBar>
@@ -372,4 +424,4 @@ const ProductCardMenu = ({
 	);
 };
 
-export default ProductCardMenu;
+export default ProductCardListMenu;

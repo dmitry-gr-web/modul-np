@@ -1,14 +1,63 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import SwitchBtn from './SwitchBtn';
 import SwitchBtnSmall from './SwitchBtnSmall';
 // import styles from './Warehouse.scss';
 import PlusMinusBlock from './PlusMinusBlock';
 import { SvgDeleteBtn } from '../../img/svg-pack';
 import LoadImg from './LoadImg';
-const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,tooltipOn,translator, podlozhka,setPodlozhka}) => {
-    const [data, setData] = useState([
-        {ostatok: '1'}
-    ])
+import ProductCardListMenu from './ProductCardListMenu';
+const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,setSortedArr,sortedArr,data2,onClick,tooltipOff,tooltipOn,translator, podlozhka,setPodlozhka}) => {
+    // const [data, setData] = useState([
+    //     {ostatok: '1'}
+    // ])
+    // let [obj, setObj] = useState(JSON.parse(JSON.stringify(sortedArr)));
+    // console.log(obj);
+    // useEffect(() => {
+    //     let obj = { ...obj };
+    //     let obj1 = {};
+    //     Object.keys(obj).map(
+    //         (x) =>
+    //         (obj1[x] = obj[x].map((x) => {
+    //             if (x.name === objProduct[getIndex].country) {
+    //                 return { ...x, select: true };
+    //             } else if (x.name === objProduct[getIndex].currency) {
+    //                 return { ...x, select: true };
+    //             } else if (x.name === objProduct[getIndex].attribute) {
+               
+    //                 return { ...x, select: true };
+    //             } else {
+    //                 return { ...x };
+    //             }
+    //         }))
+    //     );
+    //     setSortedArr([...sortedArr, { ...data2.attribute[0], select: true }])
+
+    //     setData({ ...obj1 });
+    // }, []);
+    // const [objAttribute,setObjAttribute] =  useState([
+    //     { id: 0, name: '32гб', select: true, idNumber:9 },
+    //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
+    //     { id: 2, name: '42 размер', select: false ,idNumber:43},
+    //     { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
+    //     { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
+    //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
+    //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
+    // ]);
+    const [valueWeigth,setValueWeight] = useState(item.weight);
+    // useEffect(()=> {
+    //     // if(!podlozhka) {
+            
+    //     //         if(valueWeigth !==''){
+    //     //             arr[index].weight=valueWeigth;
+    //     //             setArr([...arr ])
+    //     //         }
+               
+              
+    //     // }
+    // },[podlozhka])
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+      }
     return (
         <tr>
             <td className="sticky-body">
@@ -22,25 +71,26 @@ const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,toolti
                             alignItems: 'center',
                         }}
                     >
-                        <SwitchBtn status={true} data={'objAttribute'} setData={'setObjAttribute'} index={1} />
+                        <SwitchBtn status={item.status.all} data={arr} setData={setArr} index={index} />
                     </div>
                     <div style={{ width: 28, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <SwitchBtnSmall status={true} data={'objAttribute'} setData={'setObjAttribute'} index={1} />
+                        <SwitchBtnSmall status={item.status.crm} data={arr} setData={setArr} index={index} />
                     </div>
                     <div style={{ width: 28, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <SwitchBtnSmall status={true} data={'objAttribute'} setData={'setObjAttribute'} index={1} />
+                        <SwitchBtnSmall status={item.status.rozetka} data={arr} setData={setArr} index={index} />
                     </div>
                     <div style={{ width: 28, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <SwitchBtnSmall status={true} data={'objAttribute'} setData={'setObjAttribute'} index={1} />
+                        <SwitchBtnSmall status={item.status.prom} data={arr} setData={setArr} index={index} />
                     </div>
                     <div
                     onMouseEnter={tooltipOn}
                     onMouseLeave={tooltipOff}
                         style={{ textAlign: 'left', padding: '0px 10px',paddingLeft:7, width: 56, lineHeight: '18px', height: '100%', overflow: 'hidden', textOverflow: 'ellipsis' }}
                     >
-                        5649-{sortedArr?.filter((x) => x.select === true).map(x=> x?.idNumber).join('.')}
+                        5649-
+                        {/* {sortedArr[0]?.filter((x) => x.select === true).map(x=> x?.idNumber).join('.')} */}
                     </div>
-                    <div style={{ width: 150, paddingRight: 10,height:18 ,lineHeight:'18px',display: 'flex'}}>
+                    <div style={{ width: 150, paddingRight: 10,height:18 ,lineHeight:'18px',display: 'flex',position:'relative'}}>
                         <LoadImg style={{marginRight: 6}}/>
                         <div 
                             onMouseEnter={tooltipOn}
@@ -49,21 +99,52 @@ const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,toolti
                             onClick={(e) => onClick('attribute', e.currentTarget)}>
                             {sortedArr?.filter((x) => x.select === true).map(x=> x?.name).join(', ')}                            
                         </div>
+                        {/* <ProductCardListMenu 
+                            // openCardMenu={openCardMenu}
+                            // searchLine={searchLine}
+                            // inputRef={inputRef}
+                            // style={{marginLeft: 20}}
+                            multiselect={true}
+                            inputOn={true}
+                            data={objAttribute}
+                            // dataCurrent={data}
+                            // typeData={typeData}
+                            setData={setObjAttribute}
+                            podlozhka={podlozhka}
+                            setPodlozhka={setPodlozhka}
+                            // setOpenCardMenu={setOpenCardMenu}
+                            translator={translator}
+                            createAttr={true}
+                            setSortedArr={setSortedArr}
+                            sortedArr={sortedArr}
+                            // currentData={objAttribute}
+                            index={index}
+                            // carouselDrop={carouselDrop}
+                            // onClick={onClick}
+                        /> */}
                     </div>
                     <div className="shadow-left"></div>
                 </div>
             </td>
-            <td style={{ paddingLeft:12, paddingRight:10}}>
-                0.343
+            <td className='weight' style={{ paddingLeft:12, paddingRight:10}}>
+                {/* {item.weight} */}
+                <input value={valueWeigth} onChange={e => {
+                    
+                // console.log(arr)
+                // console.log(arr)
+                // arr[index].weight=e.target.value;
+                // setArr([...arr ])
+                setValueWeight(e.target.value)
+                }}/>
             </td>
             <td>
-                34х23х55
+                {item.size}
             </td>
 
             <PlusMinusBlock
                 translator={translator}
-                objProduct={data}
-                setObjProduct={setData}
+                objProduct={arr}
+                setObjProduct={setArr}
                 // setSwitchMenu={setSwitchMenu}
                 podlozhka={podlozhka}
                 setPodlozhka={setPodlozhka}
@@ -151,20 +232,23 @@ const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,toolti
             >
                 {/* {objProduct[index].zakupka} */}
                 {/* {formatNumber(objProduct[index].zakupka)} */}
-                565.00
+                {/* 565.00 */}
+                {item.zakupka}
             </td>
             <td
                 className="nal-prodazha"
             >
                 {/* {objProduct[index].prodazha} */}
-                1 000.00
+                {/* 1 000.00 */}
+                {item.prodazha}
                 {/* {formatNumber(objProduct[index].prodazha)} */}
             </td>
             <td
                 className="nal-marzha"
             >
                 {/* {formatNumber(objProduct[index].marzha)} */}
-                667
+                {/* 667 */}
+                {item.marzha}
             </td>
             <td
                 className="summa-suma1"
@@ -177,7 +261,8 @@ const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,toolti
             // onMouseEnter={objProduct[index].lock ? () => { } : tooltipOn}
             // onMouseLeave={objProduct[index].lock ? () => { } : tooltipOff}
             >
-                1 570.00
+                {/* 1 570.00 */}
+                {item.suma1}
                 {/* {objProduct[index].suma1} */}
 
                 <span style={{ paddingLeft: 3, color: 'rgba(0,0,0,0.5)', pointerEvents: 'none' }}>/</span>
@@ -194,7 +279,8 @@ const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,toolti
             >
 
                 {/* {objProduct[index].suma2} */}
-                17 925.00
+                {item.suma2}
+
                 <span style={{ pointerEvents: 'none' }}></span>
             </td>
             <td
@@ -205,7 +291,8 @@ const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,toolti
                 }}
 
             >
-                2 924.00
+                         {item.suma3}
+
                 <span style={{ pointerEvents: 'none' }}></span>
             </td>
             <td
@@ -215,7 +302,8 @@ const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,toolti
                     paddingRight: 12
                 }}
             >
-                655.00
+                        {item.suma4}
+
                 <span style={{ pointerEvents: 'none', width: 'calc(100% - 12px)' }}></span>
             </td>
             <td className='delete'
@@ -225,7 +313,13 @@ const ProductCardList = ({setSortedArr,sortedArr,data2,onClick,tooltipOff,toolti
                 onMouseLeave={e => {
                     e.currentTarget.closest('tr').style.opacity = '';
                 }}>
-                <button>
+                <button onClick={e => {
+                    // console.log(arr[index]);
+                    // arr.splice(index,1)
+                    console.log(arr)
+                    console.log(arr[index])
+                    setArr(prev => prev.filter((x,i)=> i !== index))
+                }}>
                     <SvgDeleteBtn />
                 </button>
             </td>

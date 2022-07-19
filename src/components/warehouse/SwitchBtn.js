@@ -29,7 +29,7 @@ export default function SwitchBtn ({status,index,data,setData,addOneItem}) {
                 type="checkbox"
                 className="status-all"
                 onChange={data[index].lock ? () => { } : switchBtn}
-                checked={!status}
+                checked={status}
             />
             <span className={`slider round`}
             onMouseEnter={data[index].lock ? () => { } : (e) => {

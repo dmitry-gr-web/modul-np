@@ -119,43 +119,43 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			return text;
 		}
 	}
-	useEffect(() => {
-		function clickDocument(e) {
-			if (!e.target.closest('.warehouse-table')) {
-				setSelectAll(false);
-				let newobj = [...objProduct];
-				newobj.map((x) => (x.select = false));
-				setObjProduct(newobj);
-			}
-		}
-		if (!selectAll) {
-			document.addEventListener('keydown', function (e) {
-				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
-					e.preventDefault();
-					setSelectAll(true);
-					let newobj = [...objProduct];
-					newobj.map((x) => {
-						if (x.lock) {
-							return (x.select = false);
-						} else {
-							return (x.select = true);
-						}
-					});
-					setObjProduct(newobj);
-					console.log('asdasdasd');
-				}
-			});
-		}
-		document.addEventListener('click', clickDocument);
+	// useEffect(() => {
+	// 	function clickDocument(e) {
+	// 		if (!e.target.closest('.warehouse-table')) {
+	// 			setSelectAll(false);
+	// 			let newobj = [...objProduct];
+	// 			newobj.map((x) => (x.select = false));
+	// 			setObjProduct(newobj);
+	// 		}
+	// 	}
+	// 	if (!selectAll) {
+	// 		document.addEventListener('keydown', function (e) {
+	// 			if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+	// 				e.preventDefault();
+	// 				setSelectAll(true);
+	// 				let newobj = [...objProduct];
+	// 				newobj.map((x) => {
+	// 					if (x.lock) {
+	// 						return (x.select = false);
+	// 					} else {
+	// 						return (x.select = true);
+	// 					}
+	// 				});
+	// 				setObjProduct(newobj);
+	// 				console.log('asdasdasd');
+	// 			}
+	// 		});
+	// 	}
+	// 	document.addEventListener('click', clickDocument);
 
-		return () => {
-			document.removeEventListener('click', clickDocument);
-		};
-	}, [selectAll]);
+	// 	return () => {
+	// 		document.removeEventListener('click', clickDocument);
+	// 	};
+	// }, [selectAll]);
 	// console.log(objProduct.length);
 
 	function formatNumber2(number) {
-		let newnum = number.toLocaleString('ru-RU', {
+		let newnum = number?.toLocaleString('ru-RU', {
 			minimumFractionDigits: 0,
 			maximumFractionDigits: 0,
 		});
@@ -163,7 +163,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	}
 	function formatNumber(number) {
 		let newnum = number
-			.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+			?.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 			.replace(',', '.');
 		return newnum;
 	}
@@ -420,37 +420,37 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	}
 	const [pereschetiHeaders, setPereschetiHeaders] = useState(null);
 	useLayoutEffect(()=> {
-		let ostatok = formatNumber2(objProduct.reduce((prev, curr) => {
+		let ostatok = formatNumber2(objProduct?.reduce((prev, curr) => {
 			return prev + (+curr.ostatok.replace(/\s/gmu,''))
 		}, 0))
-		let rezerv = formatNumber2(objProduct.reduce((prev, curr) => {
+		let rezerv = formatNumber2(objProduct?.reduce((prev, curr) => {
 			return prev + (+curr.rezerv.replace(/\s/gmu,''))
 		}, 0))
-		let otpr = formatNumber2(objProduct.reduce((prev, curr) => {
+		let otpr = formatNumber2(objProduct?.reduce((prev, curr) => {
 			return prev + (+curr.otpr.replace(/\s/gmu,''))
 		}, 0))
-		let vozvrat = formatNumber2(objProduct.reduce((prev, curr) => {
+		let vozvrat = formatNumber2(objProduct?.reduce((prev, curr) => {
 			return prev + (+curr.vozvrat.replace(/\s/gmu,''))
 		}, 0))
-		let zakupka = formatNumber(objProduct.reduce((prev, curr,_,array) => {
+		let zakupka = formatNumber(objProduct?.reduce((prev, curr,_,array) => {
 			return prev + (+curr.zakupka.replace(/\s/gmu,'')) / array.length;
 		}, 0))
-		let prodazha = formatNumber(objProduct.reduce((prev, curr,_,array) => {
+		let prodazha = formatNumber(objProduct?.reduce((prev, curr,_,array) => {
 			return prev + (+curr.prodazha.replace(/\s/gmu,'')) / array.length;
 		}, 0))
-		let marzha = formatNumber(objProduct.reduce((prev, curr,_,array) => {
+		let marzha = formatNumber(objProduct?.reduce((prev, curr,_,array) => {
 			return prev + (+curr.marzha.replace(/\s/gmu,'')) / array.length;
 		}, 0))
-		let suma1 = formatNumber(objProduct.reduce((prev, curr) => {
+		let suma1 = formatNumber(objProduct?.reduce((prev, curr) => {
 			return prev + (+curr.suma1.replace(/\s/gmu,''))
 		}, 0))
-		let suma2 = formatNumber(objProduct.reduce((prev, curr) => {
+		let suma2 = formatNumber(objProduct?.reduce((prev, curr) => {
 			return prev + (+curr.suma2.replace(/\s/gmu,''))
 		}, 0))
-		let suma3 = formatNumber(objProduct.reduce((prev, curr) => {
+		let suma3 = formatNumber(objProduct?.reduce((prev, curr) => {
 			return prev + (+curr.suma3.replace(/\s/gmu,''))
 		}, 0))
-		let suma4 = formatNumber(objProduct.reduce((prev, curr) => {
+		let suma4 = formatNumber(objProduct?.reduce((prev, curr) => {
 			return prev + (+curr.suma4.replace(/\s/gmu,''))
 		}, 0))
 	
