@@ -1,12 +1,12 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import SwitchBtn from './SwitchBtn';
 import SwitchBtnSmall from './SwitchBtnSmall';
 // import styles from './Warehouse.scss';
 import PlusMinusBlock from './PlusMinusBlock';
 import { SvgDeleteBtn } from '../../img/svg-pack';
 import LoadImg from './LoadImg';
-import ProductCardListMenu from './ProductCardListMenu';
-const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,setSortedArr,sortedArr,data2,onClick,tooltipOff,tooltipOn,translator, podlozhka,setPodlozhka}) => {
+// import ProductCardListMenu from './ProductCardListMenu';
+const ProductCardList = ({carouselDrop,setCarouselDrop,setIndexTr, attributeData, setAttributeData, index, arr, setArr, item, data2, onClick, tooltipOff, tooltipOn, translator, podlozhka, setPodlozhka }) => {
     // const [data, setData] = useState([
     //     {ostatok: '1'}
     // ])
@@ -23,7 +23,7 @@ const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,set
     //             } else if (x.name === objProduct[getIndex].currency) {
     //                 return { ...x, select: true };
     //             } else if (x.name === objProduct[getIndex].attribute) {
-               
+
     //                 return { ...x, select: true };
     //             } else {
     //                 return { ...x };
@@ -43,21 +43,54 @@ const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,set
     //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
     //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
     // ]);
-    const [valueWeigth,setValueWeight] = useState(item.weight);
+    const [valueWeigth, setValueWeight] = useState(item.weight);
     // useEffect(()=> {
     //     // if(!podlozhka) {
-            
+
     //     //         if(valueWeigth !==''){
     //     //             arr[index].weight=valueWeigth;
     //     //             setArr([...arr ])
     //     //         }
-               
-              
+
+
     //     // }
     // },[podlozhka])
-    function getRandomArbitrary(min, max) {
-        return Math.random() * (max - min) + min;
-      }
+    const [flag,setFlag] = useState(false);
+    const inputRef = useRef();
+    function handle(e) {
+        if (inputRef.current && !inputRef.current.contains(e.target)) {
+            // addItem(e);
+			// console.log('pidar');
+			setFlag(false);
+			// setOpenCardMenu(false);
+			// setPodlozhka(false);
+			// let selectOrNot = attributeData.array[indexTr].some(x => x.select);
+			if (valueWeigth !== '') {
+				// setTimeout(() => {	
+				// 	const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[index];
+				// 	targetBlock.focus();
+				// }, 100);
+				setPodlozhka(false);
+			} else {
+				let obj = JSON.parse(JSON.stringify(attributeData));
+                obj.sort.splice(index, 1);
+                obj.array.splice(index, 1);
+                setAttributeData(obj)
+                arr = arr.filter((x, i) => i !== index)
+                setArr([...arr])
+				setPodlozhka(false);
+			}
+
+        }   
+    }
+    useEffect(() => {
+        if(flag){
+            document.addEventListener("click", handle, true);
+        }
+        return () => {
+            document.removeEventListener("click", handle, true);
+        };
+    }, [flag,valueWeigth]);
     return (
         <tr>
             <td className="sticky-body">
@@ -83,21 +116,24 @@ const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,set
                         <SwitchBtnSmall status={item.status.prom} data={arr} setData={setArr} index={index} />
                     </div>
                     <div
-                    onMouseEnter={tooltipOn}
-                    onMouseLeave={tooltipOff}
-                        style={{ textAlign: 'left', padding: '0px 10px',paddingLeft:7, width: 56, lineHeight: '18px', height: '100%', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                        onMouseEnter={tooltipOn}
+                        onMouseLeave={tooltipOff}
+                        style={{ textAlign: 'left', padding: '0px 10px', paddingLeft: 7, width: 56, lineHeight: '18px', height: '100%', overflow: 'hidden', textOverflow: 'ellipsis' }}
                     >
-                        5649-
+                        {/* 5649- */}
+                        {item.id}
                         {/* {sortedArr[0]?.filter((x) => x.select === true).map(x=> x?.idNumber).join('.')} */}
                     </div>
-                    <div style={{ width: 150, paddingRight: 10,height:18 ,lineHeight:'18px',display: 'flex',position:'relative'}}>
-                        <LoadImg style={{marginRight: 6}}/>
-                        <div 
+                    <div style={{ width: 150, paddingRight: 10, height: 18, lineHeight: '18px', display: 'flex', position: 'relative' }}>
+                        <LoadImg style={{ marginRight: 6 }} />
+                        <div
                             onMouseEnter={tooltipOn}
                             onMouseLeave={tooltipOff}
-                            className="btn-product-menu2" 
-                            onClick={(e) => onClick('attribute', e.currentTarget)}>
-                            {sortedArr?.filter((x) => x.select === true).map(x=> x?.name).join(', ')}                            
+                            className="btn-product-menu2"
+                            onClick={(e) => {
+                                setCarouselDrop({...carouselDrop,carousel: false});
+                                onClick('attribute', e.currentTarget, index)}}>
+                            {attributeData.sort[index]?.filter((x) => x.select === true).map(x => x?.name).join(', ')}
                         </div>
                         {/* <ProductCardListMenu 
                             // openCardMenu={openCardMenu}
@@ -126,16 +162,18 @@ const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,set
                     <div className="shadow-left"></div>
                 </div>
             </td>
-            <td className='weight' style={{ paddingLeft:12, paddingRight:10}}>
+            <td className='weight' style={{ paddingLeft: 12, paddingRight: 10 }}>
                 {/* {item.weight} */}
-                <input value={valueWeigth} onChange={e => {
-                    
-                // console.log(arr)
-                // console.log(arr)
-                // arr[index].weight=e.target.value;
-                // setArr([...arr ])
-                setValueWeight(e.target.value)
-                }}/>
+                <input ref={inputRef} value={valueWeigth} onChange={e => {
+
+                    // console.log(arr)
+                    // console.log(arr)
+                    // arr[index].weight=e.target.value;
+                    // setArr([...arr ])
+                    setFlag(true);
+                    setValueWeight(e.target.value)
+
+                }} />
             </td>
             <td>
                 {item.size}
@@ -149,7 +187,7 @@ const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,set
                 podlozhka={podlozhka}
                 setPodlozhka={setPodlozhka}
                 // hideMenu={hideMenu}
-                style={{paddingLeft: '5px'}}
+                style={{ paddingLeft: '5px' }}
                 // setHideMenu={setHideMenu}
                 index={0}
                 tooltipOn={tooltipOn}
@@ -291,7 +329,7 @@ const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,set
                 }}
 
             >
-                         {item.suma3}
+                {item.suma3}
 
                 <span style={{ pointerEvents: 'none' }}></span>
             </td>
@@ -302,23 +340,42 @@ const ProductCardList = ({objAttribute,setObjAttribute,index,arr,setArr,item,set
                     paddingRight: 12
                 }}
             >
-                        {item.suma4}
+                {item.suma4}
 
                 <span style={{ pointerEvents: 'none', width: 'calc(100% - 12px)' }}></span>
             </td>
             <td className='delete'
                 onMouseEnter={e => {
                     e.currentTarget.closest('tr').style.opacity = 0.5;
-                }} 
+                }}
                 onMouseLeave={e => {
                     e.currentTarget.closest('tr').style.opacity = '';
                 }}>
                 <button onClick={e => {
                     // console.log(arr[index]);
                     // arr.splice(index,1)
-                    console.log(arr)
-                    console.log(arr[index])
-                    setArr(prev => prev.filter((x,i)=> i !== index))
+                    // console.log(arr)
+                  
+                    // console.log(arr[index])
+                    // console.log(attributeData.sort)
+                    // console.log(attributeData.array.filter((x,i) => i !== index))
+                    // console.log(attributeData.sort.filter((x,i) => i !== index))
+                    // console.log(index)
+                    // attributeData.sort[index] = attributeData.sort[index].filter((x,i) =>  x.id !== index)
+
+                    // attributeData.array[index] = attributeData.array[index].filter((x,i) =>  x.id !== index)
+                    // let obj = {...attributeData};
+                    let obj = JSON.parse(JSON.stringify(attributeData));
+                    obj.sort.splice(index, 1);
+                    obj.array.splice(index, 1);
+
+                    setAttributeData(obj)
+                    // console.log(arr)
+                    setIndexTr(index);
+                    arr = arr.filter((x, i) => i !== index)
+                    setArr([...arr])
+                    // console.log(attributeData.sort)
+                    console.log(attributeData.array)
                 }}>
                     <SvgDeleteBtn />
                 </button>

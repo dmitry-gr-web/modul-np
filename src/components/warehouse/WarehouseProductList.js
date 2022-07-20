@@ -207,7 +207,7 @@ const WarehouseProductList = ({
 			let res = +e.target.innerText.replace(/\s/gu, '') === +memoryInput.replace(/\s/gu, '') ? '' : +e.target.innerText.replace(/\s/gu, '') - +memoryInput.replace(/\s/gu, '');
 			let newres = res.toLocaleString('ru-RU', { minimumFractionDigits: 0, maximumFractionDigits: 0, });
 			tooltip = setTimeout(() => {
-				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'sum-reserv') + e.target.innerText + (res === '' ? '' : `<br>Не хватает : ${newres}`);
+				tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'sum-reserv') + e.target.innerText + (res === '' ? '' : `<br>Недостаёт по выбранным фильтрам: : ${newres}`);
 				tooltipBlock.style.left = posElement.x + 'px';
 				tooltipBlock.style.top = posElement.y + 23 + 'px';
 				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';

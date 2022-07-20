@@ -9,7 +9,7 @@ const ProductCardMenu = ({
 	setOpenCardMenu,
 	// inputRef,
 	dataCurrent,
-	// searchLine,
+	searchLine,
 	inputOn,
 	data,
 	setData,
@@ -18,9 +18,15 @@ const ProductCardMenu = ({
 	multiselect,
 	podlozhka,
 	createAttr,
-	setSortedArr,
-	sortedArr,
+	attributeData,
+	setAttributeData,
+	arr,
+	setArr,
+	// setSortedArr,
+	// sortedArr,
+	indexTr,
 	carouselDrop,
+	setCarouselDrop,
 	onClick
 }) => {
 	const [value, setValue] = useState('');
@@ -58,7 +64,6 @@ const ProductCardMenu = ({
 					maximumFractionDigits: 0,
 				}).replace('(', '').replace(')', '')
 			)}`;
-
 			tooltipBlock.style.left = posElement.x + 'px';
 			tooltipBlock.style.top = posElement.y + 25 + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
@@ -76,37 +81,16 @@ const ProductCardMenu = ({
 					maximumFractionDigits: 0,
 				})
 			)}`;
-
 			tooltipBlock.style.left = posElement.x + 'px';
 			tooltipBlock.style.top = posElement.y + 25 + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 		}
-		// if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'status')) {
-		//     plusminus = setTimeout(() => {
-		//         tooltipBlock.innerHTML = translator.getTranslation('tooltipWarehouse', 'status');
-		//         tooltipBlock.style.left = posElement.x + 'px';
-		//         tooltipBlock.style.top = posElement.y + 40 + 'px';
-		//         tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
-		//     }, 250);
-		// }
-
-
-
 	}
 
 	function tooltipOff() {
 		clearTimeout(plusminus);
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
-	// useEffect(() => {
-	// 	let newarr = [...countryArr];
-	// 	newarr.filter((x) => {
-	// 		if (x.name === document.getElementById('strana').innerText) {
-	// 			x.select = true;
-	// 		}
-	// 	});
-	// 	setCountryArr(newarr);
-	// }, []);
 	useEffect(() => {
 		if (openCardMenu && inputRef.current) {
 			setValue('');
@@ -125,69 +109,80 @@ const ProductCardMenu = ({
 		}
 	},[carouselDrop.carousel])
 	function selectFunc(id) {
-		// let newarr = [...countryArr];
-		// newarr.map((x) => {
-		// 	if (x.id === id) return { ...x, select: true };
-		// 	else return { ...x, select: false };
-		// });
-		// if(type === '')
-
-		let newarr = data.map((x) => {
-			if (!multiselect) {
-				if (x.id === id) {
-					setOpenCardMenu(false);
-					setPodlozhka(false);
-			
-					return { ...x, select: true };
-				} else return { ...x, select: false };
-			} else {
-				if (x.id === id){
-					if(typeData ==='attribute'){
-						if(!x.select){
-							setSortedArr([...sortedArr, { ...x, select: true }])
-						} else {
-							setSortedArr(prev => prev.filter(x => x.id !== id))
-						}
-					}
-					return { ...x, select: !x.select };
+		if(typeData !== 'attribute') {
+			let newarr = data.map((x) => {
+				if (!multiselect) {
+					if (x.id === id) {
+						setOpenCardMenu(false);
+						setPodlozhka(false);
+						return { ...x, select: true };
+					} else return { ...x, select: false };
 				} else {
-				 	return { ...x };
+					if (x.id === id){
+						// if(typeData ==='attribute'){
+						// 	if(!x.select){
+						// 		setSortedArr([...sortedArr, { ...x, select: true }])
+						// 	} else {
+						// 		setSortedArr(prev => prev.filter(x => x.id !== id))
+						// 	}
+						// }
+						return { ...x, select: !x.select };
+					} else {
+						 return { ...x };
+					}
 				}
-			}
-
-		});
-		// if(carouselDrop.carousel && carouselDrop.menu === 1 ){
-		// 	setTimeout(() => {
-		// 		const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight')[document.querySelectorAll('.product-card .first-tab-body .weight').length -1]
-		// 		targetBlock.focus();
-		// 		// onClick('attribute', targetBlock);
-		// 	}, 70);
-		// }
-		// setData(newarr);
-		setData({ ...dataCurrent, [typeData]: [...newarr] });
-		// setOpenCardMenu(false);
-		// setPodlozhka(false);
+	
+			});
+			setData({ ...dataCurrent, [typeData]: [...newarr] });
+		} else {
+			let newarr = data.map((x) => {
+					if (x.id === id){
+						// if(typeData ==='attribute'){
+							if(!x.select){
+								console.log(attributeData.sort)
+								attributeData.sort[indexTr] = [...attributeData.sort[indexTr] , { ...x, select: true }]
+								// setSortedArr([...sortedArr, { ...x, select: true }])
+								setAttributeData({...attributeData})
+							} else {
+								console.log(attributeData.sort)
+								attributeData.sort[indexTr] = attributeData.sort[indexTr].filter(x => x.id !== id)
+								setAttributeData({...attributeData})
+								// setSortedArr(prev => prev.filter(x => x.id !== id))
+							}
+						// }
+						return { ...x, select: !x.select };
+					} else {
+						 return { ...x };
+					}
+			});
+			attributeData.array[indexTr] = [...newarr];
+			setAttributeData({...attributeData});
+		}
+		
 	}
 	const [attributeInput,setAttributeInput]= useState('');
 	// console.log(data)
 	// console.log('sortedArr')
 	function addItem(e) {
-        let obj = {id:0, name: attributeInput, select: true,idNumber:232};
-		sortedArr = sortedArr.map(x => ({...x, id: x.id + 1}));
-        let obj2 = {id: 0, name: attributeInput, select: true,idNumber:232};
-        let newdata = data.map(x => ({...x, id: x.id + 1}));
-        let arr = [obj, ...newdata];
-        // setSuppliersInput('');
-        // setData([...arr]);
-		setSortedArr([...sortedArr, obj2])
-		setData({ ...dataCurrent, [typeData]: [...arr] });
-        // setFlag(false);
-        // setOpenMenu(false);
-		setValue('');
-		setAttributeInput('');
-		setOpenCardMenu(false);
-		setPodlozhka(false);
-		setFlag(false);
+		if(typeData !== 'attribute'){
+			let obj = {id:0, name: attributeInput, select: true,idNumber:232};
+			// sortedArr = sortedArr.map(x => ({...x, id: x.id + 1}));
+			// let obj2 = {id: 0, name: attributeInput, select: true,idNumber:232};
+			let newdata = data.map(x => ({...x, id: x.id + 1}));
+			let arr1 = [obj, ...newdata];
+			// setSuppliersInput('');
+			// setData([...arr]);
+			// setSortedArr([...sortedArr, obj2])
+			setData({ ...dataCurrent, [typeData]: [...arr1] });
+			// setFlag(false);
+			// setOpenMenu(false);
+			setValue('');
+			setAttributeInput('');
+			setOpenCardMenu(false);
+			setPodlozhka(false);
+			setFlag(false);
+		}
+        
         // setListenChangeSuppliers(data.filter(x => x.select)[0]?.company);
     
         // setCena('');
@@ -226,7 +221,7 @@ const ProductCardMenu = ({
     }, [flag])
 	useEffect(()=> {
 		if(!podlozhka){
-			setFlag(false);
+			// setFlag(false);
 			// if(carouselDrop.carousel && carouselDrop.menu === 1 ){
 			// 	setTimeout(() => {
 			// 		const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight')[document.querySelectorAll('.product-card .first-tab-body .weight').length -1]
@@ -234,24 +229,94 @@ const ProductCardMenu = ({
 			// 		// onClick('attribute', targetBlock);
 			// 	}, 70);
 			// }
+	
+			// setPodlozhka(true)
+			// setOpenCardMenu(false);
+			// setPodlozhka(false);
 			
 		}
 	},[podlozhka])
 
 	const refInput = useRef();
+	
 	function handle(e) {
         if (refInput.current && !refInput.current.contains(e.target)) {
             addItem(e);
+        }   
+    }
+	function handle2(e) {
+        if (productMenu.current && !productMenu.current.contains(e.target)) {
+            // addItem(e);
+			// console.log('pidar');
+			setFlag(false);
+			setOpenCardMenu(false);
+			// setPodlozhka(false);
+			let selectOrNot = attributeData.array[indexTr].some(x => x.select);
+			// if(carouselDrop.carousel){
+			// 	if(selectOrNot) {
+
+			// 	}
+			// }
+			// if(carouselDrop.carousel && selectOrNot){
+			// 	setTimeout(() => {	
+			// 		const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[indexTr]
+			// 		targetBlock.focus();
+			// 		setPodlozhka(true);
+			// 	}, 100);
+			// }
+			// if(!selectOrNot)
+			// carouselDrop.carousel = false;
+			// setCarouselDrop({...carouselDrop})
+			// console.log(selectOrNot)
+			if (selectOrNot && carouselDrop.carousel) {
+				// setPodlozhka(false);
+				setTimeout(() => {	
+					const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[indexTr]
+					targetBlock.focus();
+					setPodlozhka(true);
+				}, 100);
+			console.log('vibrani','carousel true')
+
+
+			} else if (!carouselDrop.carousel){
+				// if(!carouselDrop.carousel){
+
+				// }
+				// carouselDrop.carousel = false;
+				// setCarouselDrop({...carouselDrop})
+				// let obj = JSON.parse(JSON.stringify(attributeData));
+                // obj.sort.splice(indexTr, 1);
+                // obj.array.splice(indexTr, 1);
+                // setAttributeData(obj)
+                // arr = arr.filter((x, i) => i !== indexTr)
+                // setArr([...arr])
+				setPodlozhka(false);
+				console.log('carousel false')
+
+			} else if (carouselDrop.carousel && !selectOrNot ){
+				let obj = JSON.parse(JSON.stringify(attributeData));
+                obj.sort.splice(indexTr, 1);
+                obj.array.splice(indexTr, 1);
+                setAttributeData(obj)
+                arr = arr.filter((x, i) => i !== indexTr)
+                setArr([...arr])
+				setPodlozhka(false);
+				console.log('carousel true','nevibrani')
+			}
         }   
     }
     useEffect(() => {
         if(flag){
             document.addEventListener("click", handle, true);
         }
+		if(openCardMenu){
+			document.addEventListener("click", handle2, true);
+		}
         return () => {
             document.removeEventListener("click", handle, true);
+            document.removeEventListener("click", handle2, true);
         };
-    }, [flag,attributeInput]);
+    }, [flag,attributeInput,openCardMenu]);
 	return (
 		<div
 			className="productMenu"

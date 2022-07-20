@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect,useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import DropMenu from '../modul-np/dropMenu/dropMenu';
 import './ProductCard.scss';
 import ProductCardMenu from './ProductCardMenu';
@@ -26,9 +26,9 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     const [podlozhka, setPodlozhka] = useState(false);
     const [typeData, setTypeData] = useState('');
     const [search, setSearch] = useState(false);
-    const [multiselect,setMultiSelect] = useState(false);
-    const [createAttr,setCreateAttr] = useState(false);
-    const [indexTr,setIndexTr]=useState(0);
+    const [multiselect, setMultiSelect] = useState(false);
+    const [createAttr, setCreateAttr] = useState(false);
+    const [indexTr, setIndexTr] = useState(0);
 
     // const inputRef = useRef();
     // function searchLine(text, value) {
@@ -57,7 +57,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
     // ];
 
-    const [data,setData] = useState({
+    const [data, setData] = useState({
         flags: [
             { id: 0, name: '🇷🇺', secondName: 'russia', select: false },
             { id: 1, name: '🇺🇦', secondName: 'ukraine', select: false },
@@ -99,15 +99,18 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
             { id: 1, name: 'Флешкарта-1', select: false },
             { id: 2, name: 'Флешкарта-2', select: false },
         ],
-        attribute: [
-            { id: 0, name: '32гб', select: true, idNumber:9 },
-            { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
-            { id: 2, name: '42 размер', select: false ,idNumber:43},
-            { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
-            { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
-            { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
-            { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
-        ],
+        // attribute: {
+        //     sort: [],
+        //     array: [[
+        //         { id: 0, name: '32гб', select: true, idNumber:9 },
+        //         { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
+        //         { id: 2, name: '42 размер', select: false ,idNumber:43},
+        //         { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
+        //         { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
+        //         { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
+        //         { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
+        //     ]]
+        // },
         delivery: [
             { id: 0, name: 'icon-Union-3 icons', secondName: 'novapochta', select: true },
             { id: 1, name: 'icon-Vector-2 icons', secondName: 'justin', select: false },
@@ -116,6 +119,27 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         ],
         // { id: 0, name: 'Все', select: true },
     });
+    let atr = [
+        { id: 0, name: '32гб', select: false, idNumber: 9 },
+        { id: 1, name: 'Синняя Красная', select: false, idNumber: 9 },
+        { id: 2, name: '42 размер', select: false, idNumber: 43 },
+        { id: 3, name: 'Синий 42 размер', select: false, idNumber: 94 },
+        { id: 4, name: 'Размер ыв ыв ы  ыв', select: false, idNumber: 99 },
+        { id: 5, name: 'Размер ыв ыв ы  ыв', select: false, idNumber: 36 },
+        { id: 6, name: 'Размер ыв ыв ы  ыв', select: false, idNumber: 7 },
+    ]
+    const [attributeData, setAttributeData] = useState({
+        sort: [[]],
+        array: [[
+            { id: 0, name: '32гб', select: false, idNumber: 9 },
+            { id: 1, name: 'Синняя Красная', select: false, idNumber: 9 },
+            { id: 2, name: '42 размер', select: false, idNumber: 43 },
+            { id: 3, name: 'Синий 42 размер', select: false, idNumber: 94 },
+            { id: 4, name: 'Размер ыв ыв ы  ыв', select: false, idNumber: 99 },
+            { id: 5, name: 'Размер ыв ыв ы  ыв', select: false, idNumber: 36 },
+            { id: 6, name: 'Размер ыв ыв ы  ыв', select: false, idNumber: 7 },
+        ]]
+    })
     // const [attribute,setAttribute] = useState([[
     //     { id: 0, name: '32гб', select: true, idNumber:9 },
     //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
@@ -127,23 +151,23 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     // ]])
     // console.log(objProduct)
     // console.log(getIndex)
-    const [dataFromWarehouse,setDataFromWarehouse] = useState([]);
+    const [dataFromWarehouse, setDataFromWarehouse] = useState([]);
     // console.log(dataFromWarehouse)
-    const obj ={ show: false, array: [
-        { id: 0, name: '32гб', select: true, idNumber:9 },
-        { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
-        { id: 2, name: '42 размер', select: false ,idNumber:43},
-        { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
-        { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
-        { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
-        { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
-    ] }
-    const [objAttribute,setObjAttribute] = useState([]);
-    useEffect(()=> {
+    // const obj = { show: false, array: [
+    //     { id: 0, name: '32гб', select: true, idNumber:9 },
+    //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
+    //     { id: 2, name: '42 размер', select: false ,idNumber:43},
+    //     { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
+    //     { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
+    //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
+    //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
+    // ] }
+    const [objAttribute, setObjAttribute] = useState([]);
+    useEffect(() => {
         setDataFromWarehouse([objProduct[getIndex]])
-        setObjAttribute([{...obj}])
-    },[])
-    const [sortedArr, setSortedArr] = useState([]);
+        // setObjAttribute([{...obj}])
+    }, [])
+    // const [sortedArr, setSortedArr] = useState([]);
     // useEffect(()=> {
     //     setIndexTr(dataFromWarehouse.length-1);
     // },[dataFromWarehouse.length])
@@ -167,9 +191,9 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                     return { ...x, select: true };
                 } else if (x.name === objProduct[getIndex].currency) {
                     return { ...x, select: true };
-                } 
+                }
                 // else if (x.name === objProduct[getIndex].attribute) {
-               
+
                 //     return { ...x, select: true };
                 // } 
                 else {
@@ -177,10 +201,25 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                 }
             }))
         );
-        // setSortedArr([...sortedArr, { ...data.attribute[0], select: true }])
 
+        // setSortedArr([...sortedArr, { ...data.attribute[0], select: true }])
+        // attributeData.
+        // let object = JSON.parse(JSON.stringify(attributeData));
+        // object.array = object.array.map(x => x.map(x => {
+        //     if (x.name === objProduct[getIndex].attribute) {
+                
+        //         return { ...x, select: true }
+        //     } else {
+        //         return { ...x }
+        //     }
+        // }
+        // ))
+        // setAttributeData({...object})
+
+        // object.sort = object.sort.map(x => x.map(x => ))
         setData({ ...obj1 });
     }, []);
+    console.log(dataFromWarehouse)
     // console.log("sortedarr:", sortedArr)
     // setData({
     // 	...data.currency.map((x) => {
@@ -210,7 +249,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     // 	}),
     // ]);
     // }, []);
-    function onClick(type, targetBlock) {
+    function onClick(type, targetBlock, index) {
         let posEl = targetBlock?.getBoundingClientRect();
         let adapEl = document.querySelector('.productMenu');
         let block = document.querySelector('.product-card').getBoundingClientRect();
@@ -220,22 +259,28 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         // adapEl.style.top = posEl?.y - block.y + 'px';
         // adapEl.style.left = '115px';
         // adapEl.style.width = '202px';
+        // carouselDrop.carousel = fa/lse;
+        // setCarouselDrop({...carouselDrop,carousel:false});
         setOpenCardMenu(true);
         setPodlozhka(true);
         // console.log(type);
         setSearch(false);
         setMultiSelect(false);
-        // setCreateAttr(false);
+        setCreateAttr(false);
         if (type === 'flags') {
             setTypeData('flags');
         }
         if (type === 'attribute') {
             adapEl.style.width = '128px';
-            adapEl.style.top = posEl?.y - block.y -2 + 'px';
+            adapEl.style.top = posEl?.y - block.y - 2 + 'px';
+            setIndexTr(index);
             setTypeData('attribute');
             setSearch(true);
             setCreateAttr(true);
             setMultiSelect(true);
+            // setCarouselDrop({...carouselDrop,carousel: true});
+            // console.log(indexTr)
+            // console.log(attributeData.array)
         }
         if (type === 'currency') {
             setTypeData('currency');
@@ -244,6 +289,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
             setTypeData('otdel');
             setSearch(true);
             setMultiSelect(true);
+            // console.log(data.otdel)
         }
         if (type === 'category') {
             setTypeData('category');
@@ -282,59 +328,57 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         // 	inputRef.current.focus();
         // }, 100);
     }
- 
-    // function onFocus(){
 
-    // }
+
     function tooltipOn(e, html) {
         let posElement = e.currentTarget.getBoundingClientRect();
         const tooltipBlock = document.getElementById('tooltipBtn');
         tooltipBlock.style.fontSize = '14px';
         if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
             tooltipBlock.style.fontSize = '12px';
-        	plusminus = setTimeout(() => {
-        		tooltipBlock.innerText = e.target.innerText;
-        		tooltipBlock.style.left = posElement.x + 'px';
-        		tooltipBlock.style.top = posElement.y + 28 + 'px';
-        		tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
-        	}, 250);
-        } 
+            plusminus = setTimeout(() => {
+                tooltipBlock.innerText = e.target.innerText;
+                tooltipBlock.style.left = posElement.x + 'px';
+                tooltipBlock.style.top = posElement.y + 28 + 'px';
+                tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+            }, 250);
+        }
         if (e.currentTarget.className === 'dataChange') {
             tooltipBlock.style.fontSize = '12px';
-        	// plusminus = setTimeout(() => {
-        		tooltipBlock.innerText = 'Дата изменения заказа';
-        		tooltipBlock.style.left = posElement.x + 'px';
-        		tooltipBlock.style.top = posElement.y + 23 + 'px';
-        		tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
-        	// }, 250);
-        } 
+            // plusminus = setTimeout(() => {
+            tooltipBlock.innerText = 'Дата изменения заказа';
+            tooltipBlock.style.left = posElement.x + 'px';
+            tooltipBlock.style.top = posElement.y + 23 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+            // }, 250);
+        }
         if (e.currentTarget.className === 'dataChangeTime') {
             tooltipBlock.style.fontSize = '12px';
-        	// plusminus = setTimeout(() => {
-        		tooltipBlock.innerText = 'Время изменения заказа';
-        		tooltipBlock.style.left = posElement.x + 'px';
-        		tooltipBlock.style.top = posElement.y + 21 + 'px';
-        		tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
-        	// }, 250);
-        } 
+            // plusminus = setTimeout(() => {
+            tooltipBlock.innerText = 'Время изменения заказа';
+            tooltipBlock.style.left = posElement.x + 'px';
+            tooltipBlock.style.top = posElement.y + 21 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+            // }, 250);
+        }
         if (e.currentTarget.className === 'dataCreate') {
             tooltipBlock.style.fontSize = '12px';
-        	// plusminus = setTimeout(() => {
-        		tooltipBlock.innerText = 'Дата создания заказа';
-        		tooltipBlock.style.left = posElement.x + 'px';
-        		tooltipBlock.style.top = posElement.y + 23 + 'px';
-        		tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
-        	// }, 250);
-        } 
+            // plusminus = setTimeout(() => {
+            tooltipBlock.innerText = 'Дата создания заказа';
+            tooltipBlock.style.left = posElement.x + 'px';
+            tooltipBlock.style.top = posElement.y + 23 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+            // }, 250);
+        }
         if (e.currentTarget.className === 'dataCreateTime') {
             tooltipBlock.style.fontSize = '12px';
-        	// plusminus = setTimeout(() => {
-        		tooltipBlock.innerText = 'Время создания заказа';
-        		tooltipBlock.style.left = posElement.x + 'px';
-        		tooltipBlock.style.top = posElement.y + 21 + 'px';
-        		tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
-        	// }, 250);
-        } 
+            // plusminus = setTimeout(() => {
+            tooltipBlock.innerText = 'Время создания заказа';
+            tooltipBlock.style.left = posElement.x + 'px';
+            tooltipBlock.style.top = posElement.y + 21 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+            // }, 250);
+        }
         // if (e.currentTarget.children[0]?.className === 'flags') {
         //     tooltipBlock.style.fontSize = '12px';
         // 	plusminus = setTimeout(() => {
@@ -348,21 +392,21 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
             tooltipBlock.style.fontSize = '12px';
             tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'ukraine');
             tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-            tooltipBlock.style.top = posElement.y +1+ 'px';
+            tooltipBlock.style.top = posElement.y + 1 + 'px';
             tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
         }
         if (e.currentTarget.innerText === '🇷🇺') {
             tooltipBlock.style.fontSize = '12px';
             tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'russia');
             tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-            tooltipBlock.style.top = posElement.y +1+'px';
+            tooltipBlock.style.top = posElement.y + 1 + 'px';
             tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
         }
         if (e.currentTarget.innerText === '🇹🇷') {
             tooltipBlock.style.fontSize = '12px';
             tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'turkey');
             tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-            tooltipBlock.style.top = posElement.y + 1+'px';
+            tooltipBlock.style.top = posElement.y + 1 + 'px';
             tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
         }
         if (e.currentTarget?.innerText === '$') {
@@ -370,81 +414,85 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
             // console.log('pidar')
             tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'dollar');
             tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-            tooltipBlock.style.top = posElement.y + 2+'px';
-            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';        }
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+        }
         if (e.currentTarget.innerText === '€') {
             tooltipBlock.style.fontSize = '12px';
             tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'eur');
             tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-            tooltipBlock.style.top = posElement.y + 2+'px';
-            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';        }
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+        }
         if (e.currentTarget.innerText === '₴') {
             tooltipBlock.style.fontSize = '12px';
             tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'uah');
             tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-            tooltipBlock.style.top = posElement.y +2+ 'px';
-            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';        }
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+        }
         if (e.currentTarget.innerText === '₽') {
             tooltipBlock.style.fontSize = '12px';
             tooltipBlock.innerText = translator.getTranslation('tooltipCurrency', 'rub');
             tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-            tooltipBlock.style.top = posElement.y + 2+'px';
-            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';        }
-            if (e.currentTarget.children[0]?.className === 'icon-Union-3 icons') {
-                tooltipBlock.style.fontSize = '12px';
-                tooltipBlock.innerText = 'Новая почта';
-                tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-                tooltipBlock.style.top = posElement.y +2+ 'px';
-                tooltipBlock.style.animation = 'delay-btn 0.5s forwards'; 
-    
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+        }
+        if (e.currentTarget.children[0]?.className === 'icon-Union-3 icons') {
+            tooltipBlock.style.fontSize = '12px';
+            tooltipBlock.innerText = 'Новая почта';
+            tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+
         }
         if (e.currentTarget.children[0]?.className === 'icon-Vector-2 icons') {
-                tooltipBlock.style.fontSize = '12px';
-                tooltipBlock.innerText = 'Justin';
-                tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-                tooltipBlock.style.top = posElement.y +2+ 'px';
-                tooltipBlock.style.animation = 'delay-btn 0.5s forwards'; 
-        
+            tooltipBlock.style.fontSize = '12px';
+            tooltipBlock.innerText = 'Justin';
+            tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+
         }
         if (e.currentTarget.children[0]?.className === 'icon-ukrposhta icons') {
-                tooltipBlock.style.fontSize = '12px';
-                tooltipBlock.innerText = 'Укрпочта';
-                tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-                tooltipBlock.style.top = posElement.y +2+ 'px';
-                tooltipBlock.style.animation = 'delay-btn 0.5s forwards'; 
-    
+            tooltipBlock.style.fontSize = '12px';
+            tooltipBlock.innerText = 'Укрпочта';
+            tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+
         }
         if (e.currentTarget.children[0]?.className === 'icon-Union-4 icons') {
-                tooltipBlock.style.fontSize = '12px';
-                tooltipBlock.innerText = 'Самовывоз';
-                tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-                tooltipBlock.style.top = posElement.y +2+ 'px';
-                tooltipBlock.style.animation = 'delay-btn 0.5s forwards'; 
-        
+            tooltipBlock.style.fontSize = '12px';
+            tooltipBlock.innerText = 'Самовывоз';
+            tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+
         }
         if (e.currentTarget.children[0]?.getAttribute('alt') === 'rozetka') {
-                tooltipBlock.style.fontSize = '12px';
-                tooltipBlock.innerText = 'Rozetka';
-                tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-                tooltipBlock.style.top = posElement.y +2+ 'px';
-                tooltipBlock.style.animation = 'delay-btn 0.5s forwards'; 
-        
+            tooltipBlock.style.fontSize = '12px';
+            tooltipBlock.innerText = 'Rozetka';
+            tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+
         }
         if (e.currentTarget.children[0]?.getAttribute('alt') === 'prom') {
-                tooltipBlock.style.fontSize = '12px';
-                tooltipBlock.innerText = 'Prom';
-                tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-                tooltipBlock.style.top = posElement.y +2+ 'px';
-                tooltipBlock.style.animation = 'delay-btn 0.5s forwards'; 
-        
+            tooltipBlock.style.fontSize = '12px';
+            tooltipBlock.innerText = 'Prom';
+            tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+
         }
         if (e.currentTarget.children[0]?.getAttribute('alt') === 'lpcrm') {
-                tooltipBlock.style.fontSize = '12px';
-                tooltipBlock.innerText = 'Lp-crm';
-                tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
-                tooltipBlock.style.top = posElement.y +2+ 'px';
-                tooltipBlock.style.animation = 'delay-btn 0.5s forwards'; 
-        
+            tooltipBlock.style.fontSize = '12px';
+            tooltipBlock.innerText = 'Lp-crm';
+            tooltipBlock.style.left = posElement.x + e.currentTarget.offsetWidth + 'px';
+            tooltipBlock.style.top = posElement.y + 2 + 'px';
+            tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+
         }
 
         if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'status')) {
@@ -686,8 +734,8 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     }
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
-      }
-      const [carouselDrop,setCarouselDrop] = useState({menu:1,carousel:false});
+    }
+    const [carouselDrop, setCarouselDrop] = useState({ menu: 1, carousel: false });
     return (
         <>
             <div className="bg"></div>
@@ -704,8 +752,8 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                         <div
                             className="product-card-podlozhka"
                             onClick={() => {
-                                setOpenCardMenu(false);
-                                setPodlozhka(false);
+                                // setOpenCardMenu(false);
+                                // setPodlozhka(false);
 
                                 // if(carouselDrop.carousel && carouselDrop.menu === 1){
                                 //     setTimeout(() => {
@@ -718,10 +766,10 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                 //     setPodlozhka(true);
 
                                 //     setCarouselDrop({menu:2,carousel:true});
-                                
+
                                 // } 
                                 // if(carouselDrop.carousel && carouselDrop.menu === 2){
-                                
+
                                 //     const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[document.querySelectorAll('.product-card .first-tab-body .weight input').length -1]
 
                                 //     if(targetBlock.value !== ''){
@@ -736,7 +784,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                 //         setDataFromWarehouse(prev => prev.filter((x,i) => i !== document.querySelectorAll('.product-card .first-tab-body .weight input').length -1))
                                 //         // setPodlozhka(false);
                                 //     }
-                           
+
                                 // } 
                             }}
                         ></div>
@@ -755,13 +803,13 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                 <div>Название:</div>
                                             </td>
                                             <td>
-                                             
+
                                                 <div className='text-ellipsis'
                                                     onMouseEnter={tooltipOn}
                                                     onMouseLeave={tooltipOff}
                                                 >{objProduct[getIndex].name}</div>
-                                               
-                                            
+
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -773,7 +821,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                     onMouseEnter={tooltipOn}
                                                     onMouseLeave={tooltipOff}
                                                 >
-                                                    {data.otdel?.filter((x) => x.select === true).map(x=> x?.name).join(', ')}
+                                                    {data.otdel?.filter((x) => x.select === true).map(x => x?.name).join(', ')}
                                                     {/* {data['currency']?.filter((x) => x.select === true)[0]?.name} */}
                                                 </div>
                                             </td>
@@ -812,7 +860,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                             </div>
                             <SimpleBar
                                 className="platform-block"
-                                style={{ marginTop: '20px', maxHeight: '138px',overflowX: 'hidden' }}
+                                style={{ marginTop: '20px', maxHeight: '138px', overflowX: 'hidden' }}
                                 autoHide={false}
                             >
                                 <div className="header-text">Платформа</div>
@@ -827,7 +875,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                     onMouseEnter={tooltipOn}
                                                     onMouseLeave={tooltipOff}
                                                 >
-                                                    <img src={data.vidPlatformi?.filter((x) => x.select === true)[0]?.name} alt={data.vidPlatformi?.filter((x) => x.select === true)[0]?.secondName}/>
+                                                    <img src={data.vidPlatformi?.filter((x) => x.select === true)[0]?.name} alt={data.vidPlatformi?.filter((x) => x.select === true)[0]?.secondName} />
                                                 </div>
                                             </td>
                                         </tr>
@@ -840,11 +888,11 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
 													alt=""
 												/> */}
                                                 <div style={{ display: 'flex', alignItems: 'center', height: '24px' }}>
-                                                    <LoadImg style={{marginRight: 6}}/>
-                                                    <LoadImg style={{marginRight: 6}}/>
-                                                    <LoadImg style={{marginRight: 6}}/>
-                                                    <LoadImg style={{marginRight: 6}}/>
-                                              
+                                                    <LoadImg style={{ marginRight: 6 }} />
+                                                    <LoadImg style={{ marginRight: 6 }} />
+                                                    <LoadImg style={{ marginRight: 6 }} />
+                                                    <LoadImg style={{ marginRight: 6 }} />
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -883,20 +931,20 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                         <tr>
                                             <td>Слова:</td>
                                             <td>
-                                                <div 
+                                                <div
                                                     className='text-ellipsis'
-                                                     onMouseEnter={tooltipOn}
-                                                     onMouseLeave={tooltipOff}
+                                                    onMouseEnter={tooltipOn}
+                                                    onMouseLeave={tooltipOff}
                                                 >Флешкарта, usb</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Произ-тель:</td>
                                             <td>
-                                                <div 
-                                                className='text-ellipsis'
-                                                onMouseEnter={tooltipOn}
-                                                onMouseLeave={tooltipOff}
+                                                <div
+                                                    className='text-ellipsis'
+                                                    onMouseEnter={tooltipOn}
+                                                    onMouseLeave={tooltipOff}
                                                 >Китай</div>
                                             </td>
                                         </tr>
@@ -904,8 +952,8 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                             <td>Гарантия:</td>
                                             <td>
                                                 <div className='text-ellipsis'
-                                                onMouseEnter={tooltipOn}
-                                                onMouseLeave={tooltipOff}
+                                                    onMouseEnter={tooltipOn}
+                                                    onMouseLeave={tooltipOff}
                                                 >3 Года</div>
                                             </td>
                                         </tr>
@@ -973,7 +1021,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                     <SvgCalendar />
                                                 </div>
                                                 <div className='data'>
-                                                    <span className='dataCreate'onMouseEnter={tooltipOn} onMouseLeave={tooltipOff}>14.01.2021 </span><span onMouseEnter={tooltipOn} onMouseLeave={tooltipOff}className='dataCreateTime' style={{ opacity: 0.5, fontSize: '10px' }}>19:54:12</span>
+                                                    <span className='dataCreate' onMouseEnter={tooltipOn} onMouseLeave={tooltipOff}>14.01.2021 </span><span onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='dataCreateTime' style={{ opacity: 0.5, fontSize: '10px' }}>19:54:12</span>
                                                 </div>
                                                 <div className='user' onMouseEnter={tooltipOn} onMouseLeave={tooltipOff}>
                                                     Завхоз склада Михаил Пронск  Михаил Пронск
@@ -1004,10 +1052,10 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                 </div>
                                                 <div className='data'>
                                                     <span className='dataChange'
-                                                    onMouseEnter={tooltipOn} onMouseLeave={tooltipOff}>14.01.2021 </span><span
-                                                    onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='dataChangeTime' style={{ opacity: 0.5, fontSize: '10px' }}>19:54:12</span>
+                                                        onMouseEnter={tooltipOn} onMouseLeave={tooltipOff}>14.01.2021 </span><span
+                                                            onMouseEnter={tooltipOn} onMouseLeave={tooltipOff} className='dataChangeTime' style={{ opacity: 0.5, fontSize: '10px' }}>19:54:12</span>
                                                 </div>
-                                                <div className='user'  onMouseEnter={tooltipOn} onMouseLeave={tooltipOff}>
+                                                <div className='user' onMouseEnter={tooltipOn} onMouseLeave={tooltipOff}>
                                                     Михаил Стерненко
                                                 </div>
 
@@ -1016,34 +1064,34 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                     </tbody>
                                 </table>
                             </div>
-                    
+
                         </div>
 
                         <div className="attr-block">
                             <div className="header-text" style={{ marginBottom: 24 }}>Атрибут
                                 <button onClick={e => {
                                     let obj = {
-                                        status:{all:true,rozetka:true,prom:true,crm:true},
-                                        id:'XXXX-',
-                                        country:'🇺🇦',
-                                        currency:'₴',
-                                        name:'',
-                                        attribute:'dff',
+                                        status: { all: true, rozetka: true, prom: true, crm: true },
+                                        id: 'XXXX-',
+                                        country: '🇺🇦',
+                                        currency: '₴',
+                                        name: '',
+                                        attribute: 'dff',
                                         images: '',
-                                        ostatok:'1',
-                                        rezerv:'',
-                                        otpr:'',
-                                        vozvrat:'',
-                                        zakupka:'',
-                                        prodazha:'',
-                                        marzha:'',
-                                        suma1:'',
-                                        suma2:'',
-                                        suma3:'',
-                                        suma4:'',
-                                        select:false,
-                                        lock:false,
-                                        podProduct:0,
+                                        ostatok: '1',
+                                        rezerv: '',
+                                        otpr: '',
+                                        vozvrat: '',
+                                        zakupka: '',
+                                        prodazha: '',
+                                        marzha: '',
+                                        suma1: '',
+                                        suma2: '',
+                                        suma3: '',
+                                        suma4: '',
+                                        select: false,
+                                        lock: false,
+                                        podProduct: 0,
                                         weight: '',
                                         size: ''
                                     }
@@ -1053,13 +1101,20 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                     // data.attribute.push([...objAttribute]);
                                     // setData(data)
                                     // setPodlozhka(true);
-                                    // setCarouselDrop({menu:1,carousel:true});
-                                    setDataFromWarehouse([...dataFromWarehouse,obj])
-                                    // setTimeout(() => {
-                                    //     const targetBlock = document.querySelectorAll('.product-card .first-tab-body .btn-product-menu2')[dataFromWarehouse.length]
-                                    //     onClick('attribute', targetBlock)
-                                    // }, 100);
-                                 
+                           
+                                    attributeData.array.push(JSON.parse(JSON.stringify(atr)));
+                                    attributeData.sort.push([]);
+                                    setAttributeData({ ...attributeData });
+                                    setDataFromWarehouse([...dataFromWarehouse, obj])
+                                    setIndexTr(dataFromWarehouse.length);
+                                    // carouselDrop.carousel = true;
+                                    // setCarouselDrop({...carouselDrop});
+                                    setTimeout(() => {
+                                        setCarouselDrop({...carouselDrop,carousel: true});
+                                        const targetBlock = document.querySelectorAll('.product-card .first-tab-body .btn-product-menu2')[dataFromWarehouse.length]
+                                        onClick('attribute', targetBlock, dataFromWarehouse.length)
+                                    }, 100);
+                                    console.log(carouselDrop.carousel)
                                     // let arr = [...dataFromWarehouse,obj ]
                                 }}>
                                     <SvGBtnPlus />
@@ -1127,16 +1182,16 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                         Статус
                                                         {/* {translator.getTranslation('warehouse', 'status')} */}
                                                     </div>
-                                                    <div style={{ width: 28,display:'flex' }}>
-                                                        <img style={{margin:'auto'}} className="logo-mail" src={crmLogo} alt="" />
+                                                    <div style={{ width: 28, display: 'flex' }}>
+                                                        <img style={{ margin: 'auto' }} className="logo-mail" src={crmLogo} alt="" />
                                                     </div>
-                                                    <div style={{ width: 28,display:'flex'  }}>
+                                                    <div style={{ width: 28, display: 'flex' }}>
 
-                                                        <img style={{margin:'auto'}}className="logo-mail" src={rozetkaLogo} alt="" />
+                                                        <img style={{ margin: 'auto' }} className="logo-mail" src={rozetkaLogo} alt="" />
                                                     </div>
-                                                    <div style={{ width: 28 ,display:'flex' }}>
+                                                    <div style={{ width: 28, display: 'flex' }}>
 
-                                                        <img style={{margin:'auto'}}className="logo-mail" src={promLogo} alt="" />
+                                                        <img style={{ margin: 'auto' }} className="logo-mail" src={promLogo} alt="" />
                                                     </div>
                                                     <div style={{ padding: '0 10px', cursor: 'help', width: 56 }}
 
@@ -1144,7 +1199,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                         ID
                                                     </div>
                                                     <div
-                                                         onMouseEnter={tooltipOn}
+                                                        onMouseEnter={tooltipOn}
                                                         onMouseLeave={tooltipOff}
                                                         style={{ cursor: 'help', paddingRight: '10px', width: 150 }}>
                                                         {/* {translator.getTranslation('warehouse', 'country')} */}
@@ -1159,7 +1214,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                 Вес
                                             </th>
                                             <th
-                                                style={{  cursor: 'help' }}>
+                                                style={{ cursor: 'help' }}>
                                                 Размер
                                             </th>
                                             <th
@@ -1175,7 +1230,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                 Закупка
                                             </th>
                                             <th
-                                                style={{  paddingRight: '10px',cursor: 'help' }}
+                                                style={{ paddingRight: '10px', cursor: 'help' }}
                                             >
                                                 Продажа
                                             </th>
@@ -1203,31 +1258,35 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                     </thead>
 
                                     <tbody className="first-tab-body">
-                                        { dataFromWarehouse?.map((x,i) =>  (<ProductCardList
-                                            setSortedArr={setSortedArr}
-                                            sortedArr={JSON.parse(JSON.stringify(sortedArr))}
-                                            data2={data} 
+                                        {dataFromWarehouse?.map((x, i) => (<ProductCardList
+                                            // setSortedArr={setSortedArr}
+                                            // sortedArr={JSON.parse(JSON.stringify(sortedArr))}
+                                            data2={data}
                                             item={x}
                                             index={i}
                                             // key={getRandomArbitrary(1,1000)}
-                                            key={getRandomArbitrary(1,100000)}
+                                            key={getRandomArbitrary(1, 100000)}
                                             arr={dataFromWarehouse}
                                             setArr={setDataFromWarehouse}
-                                            onClick={onClick} 
-                                            tooltipOn={tooltipOn} 
-                                            tooltipOff={tooltipOff} 
+                                            onClick={onClick}
+                                            tooltipOn={tooltipOn}
+                                            tooltipOff={tooltipOff}
                                             translator={translator}
-                                            podlozhka={podlozhka} 
+                                            podlozhka={podlozhka}
                                             // addNewTr={addNewTr}
+                                            setIndexTr={setIndexTr}
+                                            attributeData={attributeData}
+                                            setAttributeData={setAttributeData}
                                             carouselDrop={carouselDrop}
+                                            setCarouselDrop={setCarouselDrop}
                                             setPodlozhka={setPodlozhka}
-                                            objAttribute={objAttribute}
-                                            setObjAttribute={setObjAttribute}
-                                            />
+                                        // objAttribute={objAttribute}
+                                        // setObjAttribute={setObjAttribute}
+                                        />
                                         ))
                                         }
-                                       
-                                        
+
+
                                     </tbody>
 
                                     <tfoot>
@@ -1247,27 +1306,33 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                         <button className="save-btn">Сохранить и закрыть</button>
                     </div>
                     <ProductCardMenu
-                                openCardMenu={openCardMenu}
-                                // searchLine={searchLine}
-                                // inputRef={inputRef}
-                                multiselect={multiselect}
-                                inputOn={search}
-                                data={data[typeData]}
-                                dataCurrent={data}
-                                typeData={typeData}
-                                setData={setData}
-                                podlozhka={podlozhka}
-                                setPodlozhka={setPodlozhka}
-                                setOpenCardMenu={setOpenCardMenu}
-                                translator={translator}
-                                // createAttr={createAttr}
-                                setSortedArr={setSortedArr}
-                                sortedArr={sortedArr}
-                                carouselDrop={carouselDrop}
-                                onClick={onClick}
-                            />
+                        openCardMenu={openCardMenu}
+                        // searchLine={searchLine}
+                        // inputRef={inputRef}
+                        multiselect={multiselect}
+                        inputOn={search}
+                        data={typeData === 'attribute' ? attributeData.array[indexTr] : data[typeData]}
+                        dataCurrent={data}
+                        typeData={typeData}
+                        setData={typeData === 'attribute' ? attributeData.array[indexTr] : setData}
+                        podlozhka={podlozhka}
+                        setPodlozhka={setPodlozhka}
+                        setOpenCardMenu={setOpenCardMenu}
+                        translator={translator}
+                        createAttr={createAttr}
+                        attributeData={attributeData}
+                        setAttributeData={setAttributeData}
+                        indexTr={indexTr}
+                        arr={dataFromWarehouse}
+                        setArr={setDataFromWarehouse}
+                        // setSortedArr={setSortedArr}
+                        // sortedArr={sortedArr}
+                        carouselDrop={carouselDrop}
+                        setCarouselDrop={setCarouselDrop}
+                        onClick={onClick}
+                    />
                 </div>
-        
+
             </div>
         </>
     );
