@@ -1,11 +1,14 @@
-import React from "react";
+import React,{useState} from "react";
 let plusminus;
 export default function SwitchBtnSmall({ status, index, data, setData, addOneItem }) {
+    const [btn,setBtn] = useState(status);
+
     function switchBtn(e) {
         e.stopPropagation();
         // let temp = (getStart() < 0 ? 0 : getStart());
         data[index].status = !data[index].status
         setData([...data]);
+        setBtn( data[index].status);
     }
     function tooltipOn(e, html) {
         let posElement = e.currentTarget.getBoundingClientRect();
@@ -33,7 +36,7 @@ export default function SwitchBtnSmall({ status, index, data, setData, addOneIte
                 className="status-crm"
                 onChange={data[index].lock ? () => { } : switchBtn}
                 // defaultChecked={objProduct[index].status.crm}
-                checked={status}
+                checked={btn}
             />
             <span className="slider round" onMouseEnter={data[index].lock ? null : (e) => {
                 tooltipOn(

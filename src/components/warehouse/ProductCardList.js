@@ -6,44 +6,21 @@ import PlusMinusBlock from './PlusMinusBlock';
 import { SvgDeleteBtn } from '../../img/svg-pack';
 import LoadImg from './LoadImg';
 // import ProductCardListMenu from './ProductCardListMenu';
-const ProductCardList = ({carouselDrop,setCarouselDrop,setIndexTr, attributeData, setAttributeData, index, arr, setArr, item, data2, onClick, tooltipOff, tooltipOn, translator, podlozhka, setPodlozhka }) => {
-    // const [data, setData] = useState([
-    //     {ostatok: '1'}
-    // ])
-    // let [obj, setObj] = useState(JSON.parse(JSON.stringify(sortedArr)));
-    // console.log(obj);
-    // useEffect(() => {
-    //     let obj = { ...obj };
-    //     let obj1 = {};
-    //     Object.keys(obj).map(
-    //         (x) =>
-    //         (obj1[x] = obj[x].map((x) => {
-    //             if (x.name === objProduct[getIndex].country) {
-    //                 return { ...x, select: true };
-    //             } else if (x.name === objProduct[getIndex].currency) {
-    //                 return { ...x, select: true };
-    //             } else if (x.name === objProduct[getIndex].attribute) {
+const ProductCardList = ({podlozhkaTable,setPodlozhkaTable,carouselDrop,setCarouselDrop,setIndexTr, attributeData, setAttributeData, index, arr, setArr, item, data2, onClick, tooltipOff, tooltipOn, translator, podlozhka, setPodlozhka }) => {
 
-    //                 return { ...x, select: true };
-    //             } else {
-    //                 return { ...x };
-    //             }
-    //         }))
-    //     );
-    //     setSortedArr([...sortedArr, { ...data2.attribute[0], select: true }])
-
-    //     setData({ ...obj1 });
-    // }, []);
-    // const [objAttribute,setObjAttribute] =  useState([
-    //     { id: 0, name: '32гб', select: true, idNumber:9 },
-    //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
-    //     { id: 2, name: '42 размер', select: false ,idNumber:43},
-    //     { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
-    //     { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
-    //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
-    //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
-    // ]);
     const [valueWeigth, setValueWeight] = useState(item.weight);
+    const [valueSize, setValueSize] = useState(item.size);
+    const [valueZakupka, setValueZakupka] = useState(item.zakupka);
+    const [valueProdazha, setValueProdazha] = useState(item.prodazha);
+    const [flagWeight,setFlagWeight] = useState(false);
+    const [flagSize,setFlagSize] = useState(false);
+    const [flagZakupka,setFlagZakupka] = useState(false);
+    const [flagProdazha,setFlagProdazha] = useState(false);
+    // const [visibleRow,setVisibleRow] = useState(carouselDrop);
+    const inputRefWeight = useRef();
+    const inputRefSize = useRef();
+    const inputRefZakupka = useRef();
+    const inputRefProdazha = useRef();
     // useEffect(()=> {
     //     // if(!podlozhka) {
 
@@ -55,42 +32,382 @@ const ProductCardList = ({carouselDrop,setCarouselDrop,setIndexTr, attributeData
 
     //     // }
     // },[podlozhka])
-    const [flag,setFlag] = useState(false);
-    const inputRef = useRef();
-    function handle(e) {
-        if (inputRef.current && !inputRef.current.contains(e.target)) {
-            // addItem(e);
-			// console.log('pidar');
-			setFlag(false);
-			// setOpenCardMenu(false);
-			// setPodlozhka(false);
-			// let selectOrNot = attributeData.array[indexTr].some(x => x.select);
-			if (valueWeigth !== '') {
-				// setTimeout(() => {	
-				// 	const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[index];
-				// 	targetBlock.focus();
-				// }, 100);
-				setPodlozhka(false);
-			} else {
-				let obj = JSON.parse(JSON.stringify(attributeData));
+    // useEffect(()=> {
+    //     document.querySelectorAll('.product-card .nal-ostatok,.product-card .nal-rezerv,.product-card .nal-otpr,.product-card .nal-vozvrat').forEach(x=> x.style.visibility = 'visible');
+
+    // },[])
+    useEffect(()=> {
+        if(inputRefWeight.current){
+            inputRefWeight.current.style.width = inputRefWeight.current.value.length * 7 + 'px';
+            inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+            inputRefZakupka.current.style.width = inputRefZakupka.current.value.length * 7 + 'px';
+            inputRefProdazha.current.style.width = inputRefProdazha.current.value.length * 7 + 'px';
+        }
+    },[])
+ 
+    // console.log(carouselDrop)
+    // useEffect(()=> {
+    //     if(flagWeight && inputRefWeight.current){
+    //         inputRefWeight.current.closest('.weight').style.zIndex = '999';
+    //         // inputRefWeight.current.
+    //         // setPodlozhkaTable(true);
+    //     } else {
+    //         inputRefWeight.current.closest('.weight').style.zIndex = '';
+
+    //     }
+    // },[flagWeight])
+    // useEffect(()=> {
+    //     if(flagWeight){
+    //         setPodlozhkaTable(true);
+    //     }
+    // })
+    function changeInputWeight (e) {
+        e.target.closest('.weight').style.zIndex = 999;
+        e.target.style.width = e.target.value.length * 7 + 'px';
+        e.target.value = e.target.value.replace(/[^0-9.,]/g, (x) => (x = '')).replace(/,/g, (x) => '.').replace(/(\.)(?=\1)/g, (x) => '').replace(/\.(?=.*\..*)/g, (x) => '')
+        setFlagWeight(true);
+        setPodlozhkaTable(true);
+        setValueWeight(e.target.value)
+    }
+    
+    function changeInputSize (e) {
+        e.target.closest('.size').style.zIndex = 999;
+        setFlagSize(true);
+        setPodlozhkaTable(true);
+        e.target.style.width = e.target.value.length * 7 + 'px';
+        let format = (text,size=text.replace(/\D+/g,'x').replace(/^\D/g,'')) => size.match(/^\d+x\d+x\d+/)?.toString() ?? size;
+        setValueSize(format(e.target.value))
+    }
+    function changeInputZakupka (e) {
+        e.target.closest('.nal-zakupka').style.zIndex = 999;
+        setFlagZakupka(true);
+        setPodlozhkaTable(true);
+        e.target.style.width = e.target.value.length * 7 + 'px';
+        e.target.value = e.target.value.replace(/[^0-9.,]/g, (x) => (x = '')).replace(/,/g, (x) => '.').replace(/(\.)(?=\1)/g, (x) => '').replace(/\.(?=.*\..*)/g, (x) => '')
+        setValueZakupka(e.target.value)
+    }
+    function changeInputProdazha (e) {
+        e.target.closest('.nal-prodazha').style.zIndex = 999;
+        setFlagProdazha(true);
+        setPodlozhkaTable(true);
+        e.target.style.width = e.target.value.length * 7 + 'px';
+        e.target.value = e.target.value.replace(/[^0-9.,]/g, (x) => (x = '')).replace(/,/g, (x) => '.').replace(/(\.)(?=\1)/g, (x) => '').replace(/\.(?=.*\..*)/g, (x) => '')
+        setValueProdazha(e.target.value)
+    }
+
+    function handleWeight(e) {
+        if (inputRefWeight.current && !inputRefWeight.current.contains(e.target)) {
+			setFlagWeight(false);
+            // setPodlozhkaTable(false);
+            if (carouselDrop === true ) {
+                let text = Math.round(((+valueWeigth)) * 1000) / 1000;
+                let lenghtText = text.toString().indexOf('.') + 1;
+                if(lenghtText > 3){
+                    arr[index].weight = '99';
+                    setValueWeight('99');
+                }else if(lenghtText === 0 && valueWeigth.length  >= 3) {
+                    arr[index].weight = '99';
+                    setValueWeight('99');
+                } else if(valueWeigth ==='') {
+                    arr[index].weight = '0.1';
+                    setValueWeight('0.1');
+                    setArr([...arr ])
+                } else {
+                    
+                    arr[index].weight = text.toString();
+                    setValueWeight(text.toString());
+                }
+                document.querySelectorAll('.weight,.size,.nal-prodazha,.nal-zakupka').forEach(x=> x.style.zIndex = '');
+                document.querySelectorAll('.poloska').forEach(x=> x.style.width = '0%')        
+                setArr([...arr ])
+                setFlagSize(true);
+                let sizeBlock = document.querySelectorAll('.size')[index];
+                let sizeInput = document.querySelectorAll('.size input')[index];
+                let sizePoloska = document.querySelectorAll('.size .poloska')[index];
+                sizeBlock.style.zIndex = 999;
+                sizeInput.focus()
+                sizePoloska.style.width = '100%';
+                // setCarouselDrop(false)
+			} else if (carouselDrop === false){
+                let text = Math.round(((+valueWeigth)) * 1000) / 1000;
+                let lenghtText = text.toString().indexOf('.') + 1;
+                if(lenghtText > 3){
+                    arr[index].weight = '99';
+                    setValueWeight('99');
+                    setArr([...arr ])
+                }else if(lenghtText === 0 && valueWeigth.length  >= 3) {
+                    arr[index].weight = '99';
+                    setValueWeight('99');
+                    setArr([...arr ])
+                }else if(valueWeigth ==='') {
+                    arr[index].weight = '0.1';
+                    setValueWeight('0.1');
+                    setArr([...arr ])
+                } else {
+                    arr[index].weight = text.toString();
+                    setValueWeight(text.toString());
+                    setArr([...arr ])
+                }
+                document.querySelectorAll('.weight,.size,.nal-prodazha,.nal-zakupka').forEach(x=> x.style.zIndex = '');
+                document.querySelectorAll('.poloska').forEach(x=> x.style.width = '0%')        
+         
+                setPodlozhkaTable(false);
+                setCarouselDrop(false);
+				// setPodlozhka(false);
+			} 
+            // else if (carouselDrop === true && valueWeigth === '' ){
+			// 	let obj = JSON.parse(JSON.stringify(attributeData));
+			// 	setCarouselDrop(false)
+            //     obj.sort.splice(index, 1);
+            //     obj.array.splice(index, 1);
+            //     setAttributeData(obj)
+            //     arr = arr.filter((x, i) => i !== index)
+            //     setArr([...arr])
+            //     setPodlozhkaTable(false);
+            //     setCarouselDrop(false);
+			// 	// setPodlozhka(false);
+			// 	console.log('carousel true','nevibrani')
+			// }
+        }   
+    }
+    function handleSize(e) {
+        if (inputRefSize.current && !inputRefSize.current.contains(e.target)) {
+			setFlagSize(false);
+      
+            if (carouselDrop === true) {
+                // arr[index].weight = valueWeigth;
+                // setArr([...arr ])
+				// setPodlozhka(false);
+                // setCarouselDrop({...carouselDrop, carousel: false})
+                if(valueSize.match(/x/g)?.length == undefined && valueSize !== ''){
+                    arr[index].size = valueSize + 'x1x1';
+                    setArr([...arr ])
+                    setValueSize(valueSize + 'x1x1')
+                    inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+                } else if (valueSize.match(/x/g)?.length === 1 && valueSize[valueSize.length-1] !== 'x') {
+                    arr[index].size = valueSize + 'x1';
+                    setValueSize(valueSize + 'x1')
+                    setArr([...arr ])
+                    inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+
+                } else if (valueSize[valueSize.length-1] === 'x' && valueSize.match(/x/g)?.length === 1) {
+                    arr[index].size = valueSize + '1x1';
+                    setValueSize(valueSize + '1x1')
+                    setArr([...arr ])
+                    inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+                } else if(valueSize[valueSize.length-1] === 'x' && valueSize.match(/x/g)?.length === 2) {
+                    arr[index].size = valueSize + '1';
+                    setValueSize(valueSize + '1')
+                    setArr([...arr ])
+                    inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+                }  else if (valueSize === ''){
+                    arr[index].size = '1x1x1';
+                    setValueSize('1x1x1')
+                    setArr([...arr ])
+                } else {
+                    arr[index].size = valueSize;
+                    setValueSize(valueSize)
+                    setArr([...arr ])
+                }
+                setFlagZakupka(true);
+                document.querySelectorAll('.weight,.size,.nal-zakupka,.nal-prodazha').forEach(x=> x.style.zIndex = '');
+                document.querySelectorAll('.poloska').forEach(x=> x.style.width = '0%') 
+                let zakupkaBlock = document.querySelectorAll('.product-card .nal-zakupka')[index];
+                let zakupkaInput = document.querySelectorAll('.product-card .nal-zakupka input')[index];
+                let zakupkaPoloska = document.querySelectorAll('.product-card .nal-zakupka .poloska')[index];
+                zakupkaBlock.style.zIndex = 999;
+                zakupkaInput.focus()
+                zakupkaPoloska.style.width = 'calc(100% - 10px)';
+                // setCarouselDrop(false)
+                // setPodlozhkaTable(false);
+         
+			} else if (carouselDrop === false){
+                // let text = Math.round(((+valueWeigth)) * 1000) / 1000;
+                // // console.log(text.toString())
+                // let lenghtText = text.toString().indexOf('.') + 1;
+                // // console.log(text.toString().indexOf('.'))
+                // console.log(lenghtText)
+                // if(lenghtText > 3){
+                //     arr[index].weight = '99';
+                // }else if(lenghtText === 0 && valueWeigth.length  >= 3) {
+                //     arr[index].weight = '99';
+                // } else {
+                // console.log(valueSize.match(/x/g)?.length)
+                // console.log( valueSize.match(/x/g)?.length)
+                if(valueSize.match(/x/g)?.length == undefined && valueSize !== ''){
+                    arr[index].size = valueSize + 'x1x1';
+                    setArr([...arr ])
+                    setValueSize(valueSize + 'x1x1')
+                    inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+                } else if (valueSize.match(/x/g)?.length === 1 && valueSize[valueSize.length-1] !== 'x') {
+                    arr[index].size = valueSize + 'x1';
+                    setValueSize(valueSize + 'x1')
+                    setArr([...arr ])
+                    inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+
+                } else if (valueSize[valueSize.length-1] === 'x' && valueSize.match(/x/g)?.length === 1) {
+                    arr[index].size = valueSize + '1x1';
+                    setValueSize(valueSize + '1x1')
+                    setArr([...arr ])
+                    inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+                } else if(valueSize[valueSize.length-1] === 'x' && valueSize.match(/x/g)?.length === 2) {
+                    arr[index].size = valueSize + '1';
+                    setValueSize(valueSize + '1')
+                    setArr([...arr ])
+                    inputRefSize.current.style.width = inputRefSize.current.value.length * 7 + 'px';
+                }  else if (valueSize === ''){
+                    arr[index].size = '1x1x1';
+                    setValueSize('1x1x1')
+                    setArr([...arr ])
+                } else {
+                    arr[index].size = valueSize;
+                    setValueSize(valueSize)
+                    setArr([...arr ])
+                }
+              
+                // }
+                // console.log(valueWeigth.length)
+                // // arr[index].weight = text.toString();
+                setCarouselDrop(false);
+                setPodlozhkaTable(false);
+                // setCarouselDrop(false);
+                // setPodlozhkaTable(false);
+                document.querySelectorAll('.weight,.size,.nal-zakupka,.nal-prodazha').forEach(x=> x.style.zIndex = '');
+                document.querySelectorAll('.poloska').forEach(x=> x.style.width = '0%')  
+			} 
+            // else if (carouselDrop === true && valueWeigth === '' ){
+            //     let obj = JSON.parse(JSON.stringify(attributeData));
+			// 	setCarouselDrop(false)
+            //     obj.sort.splice(index, 1);
+            //     obj.array.splice(index, 1);
+            //     setAttributeData(obj)
+            //     arr = arr.filter((x, i) => i !== index)
+            //     setArr([...arr])
+			// }
+        }   
+    }
+    function handleZakupka(e) {
+        if (inputRefZakupka.current && !inputRefZakupka.current.contains(e.target)) {
+			setFlagZakupka(false);
+        
+            if (carouselDrop === true && valueZakupka !== '') {
+       
+                let value = (+valueZakupka).toLocaleString('ru-RU', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                }).replace(',', '.')
+                inputRefZakupka.current.style.width = value.length * 7 + 'px';
+
+                setValueZakupka(value)
+                setFlagProdazha(true);
+                document.querySelectorAll('.weight,.size,.nal-zakupka,.nal-prodazha').forEach(x=> x.style.zIndex = '');
+                document.querySelectorAll('.poloska').forEach(x=> x.style.width = '0%') 
+                let prodazhaBlock = document.querySelectorAll('.product-card .nal-prodazha')[index];
+                let prodazhaInput = document.querySelectorAll('.product-card .nal-prodazha input')[index];
+                let prodazhaPoloska = document.querySelectorAll('.product-card .nal-prodazha .poloska')[index];
+                prodazhaBlock.style.zIndex = 999;
+                prodazhaInput.focus()
+                prodazhaPoloska.style.width = 'calc(100% - 10px)';
+
+                // setCarouselDrop(false)
+			} else if (carouselDrop === false){
+    
+                let value = (+valueZakupka).toLocaleString('ru-RU', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                }).replace(',', '.')
+                inputRefZakupka.current.style.width = value.length * 7 + 'px';
+
+                setValueZakupka(value)
+  
+                // console.log(valueWeigth.length)
+                // // arr[index].weight = text.toString();
+                setPodlozhkaTable(false);
+                setCarouselDrop(false);
+                // setCarouselDrop(false);
+                // setPodlozhkaTable(false);
+                document.querySelectorAll('.weight,.size,.nal-zakupka,.nal-prodazha').forEach(x=> x.style.zIndex = '');
+                document.querySelectorAll('.poloska').forEach(x=> x.style.width = '0%')  
+			} 
+            else if (carouselDrop === true && valueZakupka === '' ){
+                let obj = JSON.parse(JSON.stringify(attributeData));
+				setCarouselDrop(false)
+                setPodlozhkaTable(false);
                 obj.sort.splice(index, 1);
                 obj.array.splice(index, 1);
                 setAttributeData(obj)
                 arr = arr.filter((x, i) => i !== index)
                 setArr([...arr])
-				setPodlozhka(false);
 			}
-
         }   
     }
+    function handleProdazha(e) {
+        if (inputRefProdazha.current && !inputRefProdazha.current.contains(e.target)) {
+			setFlagProdazha(false);
+            setPodlozhkaTable(false);
+            setCarouselDrop(false);
+            if (carouselDrop === true && valueProdazha !== '') {
+       
+                let value = (+valueProdazha).toLocaleString('ru-RU', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                }).replace(',', '.')
+                inputRefProdazha.current.style.width = value.length * 7 + 'px';
+
+                setValueProdazha(value)
+                document.querySelectorAll('.weight,.size,.nal-zakupka,.nal-prodazha').forEach(x=> x.style.zIndex = '');
+                document.querySelectorAll('.poloska').forEach(x=> x.style.width = '0%') 
+                // setCarouselDrop(false)
+			} else if (carouselDrop === false){
+    
+                let value = (+valueProdazha).toLocaleString('ru-RU', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                }).replace(',', '.')
+                inputRefProdazha.current.style.width = value.length * 7 + 'px';
+
+                setValueProdazha(value)
+  
+                // console.log(valueWeigth.length)
+                // // arr[index].weight = text.toString();
+           
+                // setCarouselDrop(false);
+                // setPodlozhkaTable(false);
+                document.querySelectorAll('.weight,.size,.nal-zakupka, .nal-prodazha').forEach(x=> x.style.zIndex = '');
+                document.querySelectorAll('.poloska').forEach(x=> x.style.width = '0%')  
+			} 
+            else if (carouselDrop === true && valueZakupka === '' ){
+                let obj = JSON.parse(JSON.stringify(attributeData));
+				setCarouselDrop(false)
+                obj.sort.splice(index, 1);
+                obj.array.splice(index, 1);
+                setAttributeData(obj)
+                arr = arr.filter((x, i) => i !== index)
+                setArr([...arr])
+			}
+        }   
+    }
+
     useEffect(() => {
-        if(flag){
-            document.addEventListener("click", handle, true);
+        if(flagWeight){
+            document.addEventListener("click", handleWeight, true);
+        }
+        if(flagSize){
+            document.addEventListener("click", handleSize, true);
+        }
+        if(flagZakupka){
+            document.addEventListener("click", handleZakupka, true);
+        }
+        if(flagProdazha){
+            document.addEventListener("click", handleProdazha, true);
         }
         return () => {
-            document.removeEventListener("click", handle, true);
+            document.removeEventListener("click", handleZakupka, true);
+            document.removeEventListener("click", handleWeight, true);
+            document.removeEventListener("click", handleSize, true);
+            document.removeEventListener("click", handleProdazha, true);
         };
-    }, [flag,valueWeigth]);
+    }, [flagWeight,valueWeigth,flagSize,valueSize,flagZakupka,valueZakupka,flagProdazha,valueProdazha]);
     return (
         <tr>
             <td className="sticky-body">
@@ -124,14 +441,14 @@ const ProductCardList = ({carouselDrop,setCarouselDrop,setIndexTr, attributeData
                         {item.id}
                         {/* {sortedArr[0]?.filter((x) => x.select === true).map(x=> x?.idNumber).join('.')} */}
                     </div>
-                    <div style={{ width: 150, paddingRight: 10, height: 18, lineHeight: '18px', display: 'flex', position: 'relative' }}>
+                    <div style={{   height: 18, lineHeight: '18px', display: 'flex', position: 'relative' }} className="atr">
                         <LoadImg style={{ marginRight: 6 }} />
                         <div
                             onMouseEnter={tooltipOn}
                             onMouseLeave={tooltipOff}
                             className="btn-product-menu2"
                             onClick={(e) => {
-                                setCarouselDrop({...carouselDrop,carousel: false});
+                                setCarouselDrop(false);
                                 onClick('attribute', e.currentTarget, index)}}>
                             {attributeData.sort[index]?.filter((x) => x.select === true).map(x => x?.name).join(', ')}
                         </div>
@@ -162,34 +479,63 @@ const ProductCardList = ({carouselDrop,setCarouselDrop,setIndexTr, attributeData
                     <div className="shadow-left"></div>
                 </div>
             </td>
-            <td className='weight' style={{ paddingLeft: 12, paddingRight: 10 }}>
-                {/* {item.weight} */}
-                <input ref={inputRef} value={valueWeigth} onChange={e => {
+            <td className='weight' style={{ paddingLeft: 12, paddingRight: 10 }}
+                onMouseEnter={e => {
+                    e.currentTarget.querySelector('.poloska').style.width = 'calc(100% - 22px)';
 
-                    // console.log(arr)
-                    // console.log(arr)
-                    // arr[index].weight=e.target.value;
-                    // setArr([...arr ])
-                    setFlag(true);
-                    setValueWeight(e.target.value)
+                    if (!flagWeight) e.currentTarget.querySelector('input').select()
+                     e.currentTarget.querySelector('input').focus()
+                }}
+                onMouseLeave={e => {
+                    if(!flagWeight)  {
+                        e.currentTarget.querySelector('.poloska').style.width = '0%'
+                        e.currentTarget.querySelector('input').blur()
+                    };
+                }}
+            >
+                {/* {item.weight} */}
+                <input maxLength={6} ref={inputRefWeight} value={valueWeigth} onChange={changeInputWeight} onClick={e=> {
+                    setFlagWeight(true);
+                    setPodlozhkaTable(true);
 
                 }} />
+                <div className="poloska" style={{width: '0%'}}></div>
             </td>
-            <td>
-                {item.size}
+            <td className='size'
+                onMouseEnter={e => {
+                    e.currentTarget.querySelector('.poloska').style.width = '100%';
+                    // e.currentTarget.querySelector('input').focus()
+                    if (!flagSize) e.currentTarget.querySelector('input').select()
+                    e.currentTarget.querySelector('input').focus()
+
+                }}
+                onMouseLeave={e => {
+                    if(!flagSize) {
+                    e.currentTarget.querySelector('.poloska').style.width = '0%';
+                    e.currentTarget.querySelector('input').blur()
+                    };
+                }}
+            >
+                <input maxLength={14} ref={inputRefSize} value={valueSize} onChange={changeInputSize} onClick={e=> {
+                    setFlagSize(true);
+                    // setPodlozhkaTable(true);
+       
+                }} />
+                <div className="poloska" style={{width: '0%'}}></div>
             </td>
 
             <PlusMinusBlock
                 translator={translator}
                 objProduct={arr}
                 setObjProduct={setArr}
+                item={item.size}
                 // setSwitchMenu={setSwitchMenu}
                 podlozhka={podlozhka}
                 setPodlozhka={setPodlozhka}
                 // hideMenu={hideMenu}
                 style={{ paddingLeft: '5px' }}
                 // setHideMenu={setHideMenu}
-                index={0}
+                index={index}
                 tooltipOn={tooltipOn}
                 tooltipOff={tooltipOff}
             />
@@ -211,28 +557,22 @@ const ProductCardList = ({carouselDrop,setCarouselDrop,setIndexTr, attributeData
                 style={{
 
                     paddingRight: '4px',
+                    visibility:`${item.size === '' ? 'hidden': 'visible'}`
+
+          
                 }}
 
             >
-                {/* <div
-            style={{
-                opacity: `${!objProduct[index].status.all ? 0.4 : ''}`,
-                color: 'rgba(0,0,0,0.5)',
-                paddingRight: '4px',
-                height: '18px',
-                lineHeight: '18px',
-            }}
-        >
-        </div> */}
-                {/* {formatNumber2(objProduct[index].rezerv)} */}
-                1 239
-                {/* {objProduct[index].rezerv} */}
+                
+                {item.rezerv}
                 <span style={{ pointerEvents: 'none' }}></span>
             </td>
             <td
                 className="nal-otpr"
                 style={{
                     paddingRight: '4px',
+                    // visibility:`hidden`
+                    visibility:`${item.size === '' ? 'hidden': 'visible'}`
                 }}
             >
                 {/* <div
@@ -246,13 +586,14 @@ const ProductCardList = ({carouselDrop,setCarouselDrop,setIndexTr, attributeData
         >
         </div> */}
                 {/* {formatNumber2(objProduct[index].otpr)} */}
-                2 932
+                {item.otpr}
                 <span style={{ pointerEvents: 'none' }}></span>
             </td>
             <td
                 className="nal-vozvrat"
                 style={{
                     paddingRight: '10px',
+                    visibility:`${item.size === '' ? 'hidden': 'visible'}`
                 }}
 
             >
@@ -262,23 +603,62 @@ const ProductCardList = ({carouselDrop,setCarouselDrop,setIndexTr, attributeData
         </div> */}
                 {/* {formatNumber2(objProduct[index].vozvrat)} */}
                 {/* {objProduct[index].vozvrat} */}
-                655
+                {item.vozvrat}
                 <span style={{ pointerEvents: 'none' }}></span>
             </td>
             <td
                 className="nal-zakupka"
+                onMouseEnter={e => {
+                    e.currentTarget.querySelector('.poloska').style.width = 'calc(100% - 10px)';
+                    // e.currentTarget.querySelector('input').focus()
+                    if (!flagZakupka) e.currentTarget.querySelector('input').select()
+                    e.currentTarget.querySelector('input').focus()
+
+                }}
+                onMouseLeave={e => {
+                    if(!flagZakupka) {
+                    e.currentTarget.querySelector('.poloska').style.width = '0%';
+                    e.currentTarget.querySelector('input').blur()
+                    };
+                }}
             >
                 {/* {objProduct[index].zakupka} */}
                 {/* {formatNumber(objProduct[index].zakupka)} */}
                 {/* 565.00 */}
-                {item.zakupka}
+                {/* {item.zakupka} */}
+                <input maxLength={9} ref={inputRefZakupka} value={valueZakupka} onChange={changeInputZakupka} onClick={e=> {
+                    setFlagZakupka(true);
+                    // setPodlozhkaTable(true);
+       
+                }} />
+                <div className="poloska" style={{width: '0%'}}></div>
+
             </td>
             <td
                 className="nal-prodazha"
+                onMouseEnter={e => {
+                    e.currentTarget.querySelector('.poloska').style.width = 'calc(100% - 10px)';
+                    // e.currentTarget.querySelector('input').focus()
+                    if (!flagProdazha) e.currentTarget.querySelector('input').select()
+                    e.currentTarget.querySelector('input').focus()
+
+                }}
+                onMouseLeave={e => {
+                    if(!flagProdazha) {
+                    e.currentTarget.querySelector('.poloska').style.width = '0%';
+                    e.currentTarget.querySelector('input').blur()
+                    };
+                }}
             >
                 {/* {objProduct[index].prodazha} */}
                 {/* 1 000.00 */}
-                {item.prodazha}
+                {/* {item.prodazha} */}
+                <input maxLength={9} ref={inputRefProdazha} value={valueProdazha} onChange={changeInputProdazha} onClick={e=> {
+                    setFlagProdazha(true);
+                    // setPodlozhkaTable(true);
+       
+                }} />
+                <div className="poloska" style={{width: '0%'}}></div>
                 {/* {formatNumber(objProduct[index].prodazha)} */}
             </td>
             <td

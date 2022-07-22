@@ -736,6 +736,38 @@
 					position: relative;
 					line-height: 14px;
 					height: 14px;
+					input {
+						outline: none;
+						border: none;
+						font-weight: 300;
+						padding: 0;
+						height: 18px;
+						position: relative;
+						text-align: right;
+						float:right;
+						// text-overflow: ellipsis;
+						// height: 20px;
+						// width: calc(100% - 10px);
+						// width: 70px;
+						min-width: 49px !important;
+						box-sizing: border-box;
+						color:rgb(0, 0, 0, 0.7);
+						// padding-right: 18px;
+					}
+					input::selection {
+						background-color: #afafb3;
+					}
+					.poloska {
+						width: 0%;
+						background: rgb(156, 155, 158);
+						height: 1px;
+						bottom: 0px;
+						// right: 11px;
+						position: absolute;
+						// opacity: 1;
+						transition: width 0.2s;
+						// transition: opacity 0.2s ease 0s;
+					}
 				}
 	
 				// tr:hover:not(.lockOrder, .hoverAttributeBlock, .hover-disabled,.cena table tr) td {
@@ -1116,19 +1148,77 @@
 			}
 			.weight {
 				position: relative;
+				// display: flex;
+				// justify-content: flex-end;
 				input {
 					outline: none;
 					border: none;
 					font-weight: 300;
 					padding: 0;
 					position: relative;
+					height: 18px;
+					text-align: right;
+					float: right;
 					// text-overflow: ellipsis;
 					// height: 20px;
 					// width: calc(100% - 10px);
-					width: 40px;
+					// width: 36px;
+					width:max-content;
+					min-width: 23px !important;
 					box-sizing: border-box;
 					color:rgb(0, 0, 0, 0.7);
 					// padding-right: 18px;
+				}
+				input::selection {
+					background-color: #afafb3;
+				}
+				.poloska {
+					width: 0%;
+					background: rgb(156, 155, 158);
+					height: 1px;
+					bottom: 0px;
+					// right: 11px;
+					position: absolute;
+					// opacity: 1;
+					transition: width 0.2s;
+					// transition: opacity 0.2s ease 0s;
+				}
+			}
+			.size {
+				position: relative;
+				// 	display: flex;
+				// justify-content: flex-end;
+				input {
+					outline: none;
+					border: none;
+					font-weight: 300;
+					padding: 0;
+					height: 18px;
+					position: relative;
+					text-align: right;
+					float:right;
+					// text-overflow: ellipsis;
+					// height: 20px;
+					// width: calc(100% - 10px);
+					// width: 70px;
+					min-width: 49px !important;
+					box-sizing: border-box;
+					color:rgb(0, 0, 0, 0.7);
+					// padding-right: 18px;
+				}
+				input::selection {
+					background-color: #afafb3;
+				}
+				.poloska {
+					width: 0%;
+					background: rgb(156, 155, 158);
+					height: 1px;
+					bottom: 0px;
+					// right: 11px;
+					position: absolute;
+					// opacity: 1;
+					transition: width 0.2s;
+					// transition: opacity 0.2s ease 0s;
 				}
 			}
 			.nal-rezerv,
@@ -1630,7 +1720,7 @@
 		}
 		.delete {
 			position: sticky;
-			right:-1px;
+			right:0px;
 			height: 18px;
 			max-height: 18px;
 			width: 15px;
@@ -1730,7 +1820,7 @@
 	.text-ellipsis {
 		position: relative;
 		width: max-content;
-		padding-right: 16px;
+		// padding-right: 16px;
 		height: 24px;
 		overflow: hidden;
 		max-width: 200px;
@@ -1781,7 +1871,7 @@
 		padding-right: 16px;
 		height: 18px;
 		overflow: hidden;
-		max-width: 184px;
+		max-width: 112px;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		line-height: 18px;

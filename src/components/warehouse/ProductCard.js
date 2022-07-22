@@ -24,11 +24,13 @@ let hover;
 const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, getIndex, translator }) => {
     const [openCardMenu, setOpenCardMenu] = useState(false);
     const [podlozhka, setPodlozhka] = useState(false);
+    const [podlozhkaTable, setPodlozhkaTable] = useState(false);
     const [typeData, setTypeData] = useState('');
     const [search, setSearch] = useState(false);
     const [multiselect, setMultiSelect] = useState(false);
     const [createAttr, setCreateAttr] = useState(false);
     const [indexTr, setIndexTr] = useState(0);
+    // const [hideRow,setHideRow] = useState(false);
 
     // const inputRef = useRef();
     // function searchLine(text, value) {
@@ -129,9 +131,9 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         { id: 6, name: 'Размер ыв ыв ы  ыв', select: false, idNumber: 7 },
     ]
     const [attributeData, setAttributeData] = useState({
-        sort: [[]],
+        sort: [[{ id: 0, name: '32гб', select: true, idNumber: 9 },]],
         array: [[
-            { id: 0, name: '32гб', select: false, idNumber: 9 },
+            { id: 0, name: '32гб', select: true, idNumber: 9 },
             { id: 1, name: 'Синняя Красная', select: false, idNumber: 9 },
             { id: 2, name: '42 размер', select: false, idNumber: 43 },
             { id: 3, name: 'Синий 42 размер', select: false, idNumber: 94 },
@@ -162,9 +164,9 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
     //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
     // ] }
-    const [objAttribute, setObjAttribute] = useState([]);
+    // const [objAttribute, setObjAttribute] = useState([]);
     useEffect(() => {
-        setDataFromWarehouse([objProduct[getIndex]])
+        setDataFromWarehouse([JSON.parse(JSON.stringify(objProduct[getIndex]))])
         // setObjAttribute([{...obj}])
     }, [])
     // const [sortedArr, setSortedArr] = useState([]);
@@ -207,7 +209,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         // let object = JSON.parse(JSON.stringify(attributeData));
         // object.array = object.array.map(x => x.map(x => {
         //     if (x.name === objProduct[getIndex].attribute) {
-                
+
         //         return { ...x, select: true }
         //     } else {
         //         return { ...x }
@@ -219,7 +221,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         // object.sort = object.sort.map(x => x.map(x => ))
         setData({ ...obj1 });
     }, []);
-    console.log(dataFromWarehouse)
+    // console.log(dataFromWarehouse)
     // console.log("sortedarr:", sortedArr)
     // setData({
     // 	...data.currency.map((x) => {
@@ -261,6 +263,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         // adapEl.style.width = '202px';
         // carouselDrop.carousel = fa/lse;
         // setCarouselDrop({...carouselDrop,carousel:false});
+        console.log(posEl)
         setOpenCardMenu(true);
         setPodlozhka(true);
         // console.log(type);
@@ -271,6 +274,9 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
             setTypeData('flags');
         }
         if (type === 'attribute') {
+            console.log(targetBlock)
+            // targetBlock.style.width = '112px';
+            document.querySelectorAll('.product-card .atr').forEach(x=>x.style.width = '150px')
             adapEl.style.width = '128px';
             adapEl.style.top = posEl?.y - block.y - 2 + 'px';
             setIndexTr(index);
@@ -735,7 +741,37 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
     }
-    const [carouselDrop, setCarouselDrop] = useState({ menu: 1, carousel: false });
+    const [carouselDrop, setCarouselDrop] = useState(false);
+    // useEffect(()=> {
+    //     if(dataFromWarehouse.length>0){
+    //         document.querySelectorAll('.product-card .nal-ostatok')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
+    //         document.querySelectorAll('.product-card .nal-rezerv')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
+    //         document.querySelectorAll('.product-card .nal-otpr')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
+    //         document.querySelectorAll('.product-card .nal-vozvrat')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
+    //     }
+
+    // },[])
+
+    // useEffect(() => {
+    //     // setVisibleRow(carouselDrop)
+    //     if (dataFromWarehouse.length > 0) {
+    //         console.log(dataFromWarehouse[dataFromWarehouse.length - 1].size)
+    //         if (carouselDrop) {
+    //             if (dataFromWarehouse[dataFromWarehouse.length - 1].size === '') {
+    //                 document.querySelectorAll('.product-card .nal-ostatok')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
+    //                 document.querySelectorAll('.product-card .nal-rezerv')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
+    //                 document.querySelectorAll('.product-card .nal-otpr')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
+    //                 document.querySelectorAll('.product-card .nal-vozvrat')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
+    //             } else {
+    //                 document.querySelectorAll('.product-card .nal-ostatok')[dataFromWarehouse?.length - 1].style.visibility = 'visible';
+    //                 document.querySelectorAll('.product-card .nal-rezerv')[dataFromWarehouse?.length - 1].style.visibility = 'visible';
+    //                 document.querySelectorAll('.product-card .nal-otpr')[dataFromWarehouse?.length - 1].style.visibility = 'visible';
+    //                 document.querySelectorAll('.product-card .nal-vozvrat')[dataFromWarehouse?.length - 1].style.visibility = 'visible';
+    //             }
+
+    //         }
+    //     }
+    // }, [carouselDrop, dataFromWarehouse])
     return (
         <>
             <div className="bg"></div>
@@ -1076,46 +1112,38 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                         country: '🇺🇦',
                                         currency: '₴',
                                         name: '',
-                                        attribute: 'dff',
+                                        attribute: '',
                                         images: '',
-                                        ostatok: '1',
-                                        rezerv: '',
-                                        otpr: '',
-                                        vozvrat: '',
+                                        ostatok: '0',
+                                        rezerv: '0',
+                                        otpr: '0',
+                                        vozvrat: '0',
                                         zakupka: '',
                                         prodazha: '',
                                         marzha: '',
-                                        suma1: '',
-                                        suma2: '',
-                                        suma3: '',
-                                        suma4: '',
+                                        suma1: '0.00',
+                                        suma2: '0.00',
+                                        suma3: '0.00',
+                                        suma4: '0.00',
                                         select: false,
                                         lock: false,
                                         podProduct: 0,
                                         weight: '',
                                         size: ''
                                     }
-                                    // setSortedArr([...sortedArr,[{...objAttribute}]]);
-                                    // sortedArr.push([]);
-                                    // setSortedArr(sortedArr);
-                                    // data.attribute.push([...objAttribute]);
-                                    // setData(data)
-                                    // setPodlozhka(true);
-                           
-                                    attributeData.array.push(JSON.parse(JSON.stringify(atr)));
+
+
+                                    attributeData.array.push(atr);
                                     attributeData.sort.push([]);
                                     setAttributeData({ ...attributeData });
                                     setDataFromWarehouse([...dataFromWarehouse, obj])
                                     setIndexTr(dataFromWarehouse.length);
-                                    // carouselDrop.carousel = true;
-                                    // setCarouselDrop({...carouselDrop});
+                                    // setHideRow(true);
                                     setTimeout(() => {
-                                        setCarouselDrop({...carouselDrop,carousel: true});
+                                        setCarouselDrop(true);
                                         const targetBlock = document.querySelectorAll('.product-card .first-tab-body .btn-product-menu2')[dataFromWarehouse.length]
                                         onClick('attribute', targetBlock, dataFromWarehouse.length)
                                     }, 100);
-                                    console.log(carouselDrop.carousel)
-                                    // let arr = [...dataFromWarehouse,obj ]
                                 }}>
                                     <SvGBtnPlus />
                                 </button>
@@ -1145,24 +1173,24 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                     <thead
                                         // onMouseEnter={treugolnikEpptaOn} onMouseLeave={treugolnikEpptaOff}
                                         className="first-tab-header">
-                                        {/* <tr>
-								{podlozhka && (
-									<td style={{ padding: '0px' }}>
-										<div
-											className="warehouse-podlozhka"
-											style={{
-												width: '100%',
-												height: document.body.clientHeight + 'px',
-												position: 'absolute',
-												left: 0,
-												top: 0,
-												zIndex: 3,
-											}}
-											onClick={clickPodlozhka}
-										></div>
-									</td>
-								)}
-							</tr> */}
+                                        <tr>
+                                            {podlozhkaTable && (
+                                                <td style={{ padding: '0px' }}>
+                                                    <div
+                                                        className="warehouse-podlozhka"
+                                                        style={{
+                                                            width: '100%',
+                                                            height: document.body.clientHeight + 'px',
+                                                            position: 'absolute',
+                                                            left: 0,
+                                                            top: 0,
+                                                            zIndex: 3,
+                                                        }}
+
+                                                    ></div>
+                                                </td>
+                                            )}
+                                        </tr>
 
                                         <tr>
 
@@ -1201,7 +1229,10 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                     <div
                                                         onMouseEnter={tooltipOn}
                                                         onMouseLeave={tooltipOff}
-                                                        style={{ cursor: 'help', paddingRight: '10px', width: 150 }}>
+                                                        style={{ cursor: 'help'}}
+                                                        className="atr"
+                                                    >
+                                                            
                                                         {/* {translator.getTranslation('warehouse', 'country')} */}
                                                         Атрибут
                                                     </div>
@@ -1221,7 +1252,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                                 style={{ paddingRight: '10px', cursor: 'help' }}
                                                 colSpan={4}
                                             >
-                                                Наличие
+                                                <span style={{ marginLeft: 25 }}>Наличие</span>
                                             </th>
                                             <th
                                                 // onMouseEnter={tooltipOn}
@@ -1265,7 +1296,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                             item={x}
                                             index={i}
                                             // key={getRandomArbitrary(1,1000)}
-                                            key={getRandomArbitrary(1, 100000)}
+                                            key={`item ${i}`}
                                             arr={dataFromWarehouse}
                                             setArr={setDataFromWarehouse}
                                             onClick={onClick}
@@ -1273,6 +1304,8 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                             tooltipOff={tooltipOff}
                                             translator={translator}
                                             podlozhka={podlozhka}
+                                            podlozhkaTable={podlozhkaTable}
+                                            setPodlozhkaTable={setPodlozhkaTable}
                                             // addNewTr={addNewTr}
                                             setIndexTr={setIndexTr}
                                             attributeData={attributeData}
@@ -1280,6 +1313,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                             carouselDrop={carouselDrop}
                                             setCarouselDrop={setCarouselDrop}
                                             setPodlozhka={setPodlozhka}
+                                            // hideRow={hideRow}
                                         // objAttribute={objAttribute}
                                         // setObjAttribute={setObjAttribute}
                                         />

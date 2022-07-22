@@ -12,6 +12,7 @@ import {dataSuppliers} from '../data/dataSuppliers';
 // import { useFetch } from '../data/useFetch';
 // const WarehouseBlock = lazy(() => import('./WarehouseBlock'));
 const Warehouse = () => {
+	
 	// let newarr = [...dataWarehouse, ...dataWarehouse];
 	// const ProductCard = React.createContext();
 	// const {data,error,isLoading} = useFetch('http://192.168.0.197:3005/folders', {

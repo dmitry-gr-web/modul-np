@@ -103,11 +103,11 @@ const ProductCardMenu = ({
 		}
 	}, [openCardMenu])
 
-	useEffect(()=> {
-		if(carouselDrop.carousel){
-			setOpenCardMenu(true);
-		}
-	},[carouselDrop.carousel])
+	// useEffect(()=> {
+	// 	if(carouselDrop.carousel){
+	// 		setOpenCardMenu(true);
+	// 	}
+	// },[carouselDrop.carousel])
 	function selectFunc(id) {
 		if(typeData !== 'attribute') {
 			let newarr = data.map((x) => {
@@ -219,23 +219,23 @@ const ProductCardMenu = ({
             `;
         }
     }, [flag])
-	useEffect(()=> {
-		if(!podlozhka){
-			// setFlag(false);
-			// if(carouselDrop.carousel && carouselDrop.menu === 1 ){
-			// 	setTimeout(() => {
-			// 		const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight')[document.querySelectorAll('.product-card .first-tab-body .weight').length -1]
-			// 		targetBlock.focus();
-			// 		// onClick('attribute', targetBlock);
-			// 	}, 70);
-			// }
+	// useEffect(()=> {
+	// 	if(!podlozhka){
+	// 		// setFlag(false);
+	// 		// if(carouselDrop.carousel && carouselDrop.menu === 1 ){
+	// 		// 	setTimeout(() => {
+	// 		// 		const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight')[document.querySelectorAll('.product-card .first-tab-body .weight').length -1]
+	// 		// 		targetBlock.focus();
+	// 		// 		// onClick('attribute', targetBlock);
+	// 		// 	}, 70);
+	// 		// }
 	
-			// setPodlozhka(true)
-			// setOpenCardMenu(false);
-			// setPodlozhka(false);
+	// 		// setPodlozhka(true)
+	// 		// setOpenCardMenu(false);
+	// 		// setPodlozhka(false);
 			
-		}
-	},[podlozhka])
+	// 	}
+	// },[podlozhka])
 
 	const refInput = useRef();
 	
@@ -250,8 +250,8 @@ const ProductCardMenu = ({
 			// console.log('pidar');
 			setFlag(false);
 			setOpenCardMenu(false);
-			// setPodlozhka(false);
-			let selectOrNot = attributeData.array[indexTr].some(x => x.select);
+			setPodlozhka(false);
+			let selectOrNot = attributeData.array[indexTr]?.some(x => x.select);
 			// if(carouselDrop.carousel){
 			// 	if(selectOrNot) {
 
@@ -268,17 +268,23 @@ const ProductCardMenu = ({
 			// carouselDrop.carousel = false;
 			// setCarouselDrop({...carouselDrop})
 			// console.log(selectOrNot)
-			if (selectOrNot && carouselDrop.carousel) {
+			if (selectOrNot && carouselDrop === true) {
 				// setPodlozhka(false);
 				setTimeout(() => {	
+					// setCarouselDrop({...carouselDrop, trigger: true})
 					const targetBlock = document.querySelectorAll('.product-card .first-tab-body .weight input')[indexTr]
+					// const weight = document.querySelectorAll('.product-card .first-tab-body .weight')[indexTr]
+					const poloska = document.querySelectorAll('.product-card .first-tab-body .weight .poloska')[indexTr]
+					targetBlock.click();
 					targetBlock.focus();
-					setPodlozhka(true);
+					// weight.style.zIndex = 4;
+					poloska.style.width = 'calc(100% - 22px)';
+					// setPodlozhka(true);
 				}, 100);
 			console.log('vibrani','carousel true')
 
 
-			} else if (!carouselDrop.carousel){
+			} else if (carouselDrop === false){
 				// if(!carouselDrop.carousel){
 
 				// }
@@ -290,17 +296,19 @@ const ProductCardMenu = ({
                 // setAttributeData(obj)
                 // arr = arr.filter((x, i) => i !== indexTr)
                 // setArr([...arr])
-				setPodlozhka(false);
+				// setCarouselDrop({...carouselDrop, carousel: false})
+				// setPodlozhka(false);
 				console.log('carousel false')
 
-			} else if (carouselDrop.carousel && !selectOrNot ){
+			} else if (carouselDrop === true && !selectOrNot ){
 				let obj = JSON.parse(JSON.stringify(attributeData));
+				setCarouselDrop(false)
                 obj.sort.splice(indexTr, 1);
                 obj.array.splice(indexTr, 1);
                 setAttributeData(obj)
                 arr = arr.filter((x, i) => i !== indexTr)
                 setArr([...arr])
-				setPodlozhka(false);
+				// setPodlozhka(false);
 				console.log('carousel true','nevibrani')
 			}
         }   

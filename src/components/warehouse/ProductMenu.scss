@@ -6,6 +6,7 @@
 	font-weight: 300;
 	width: 190px;
 	visibility: hidden;
+	min-width: 128px !important;
 	// height: 26px;
 	height: 114px;
 	.menu-select-filter:before {
@@ -349,6 +350,7 @@
 	visibility: hidden;
 	// height: 26px;
 	// top:-3px;
+	
 	height: 114px;
 	z-index: 2;
 	.result {

@@ -1,12 +1,21 @@
-import React from "react";
+import React,{useState} from "react";
 let plusminus;
 export default function SwitchBtn ({status,index,data,setData,addOneItem}) {
+    const [btn,setBtn] = useState(status);
     function switchBtn(e) {
         e.stopPropagation();
         // let temp = (getStart() < 0 ? 0 : getStart());
-        data[index].status = !data[index].status
+
+        // data[index].status = btn;
+        // setData([...data]);
+        data[index].status =  !data[index].status;
         setData([...data]);
+        setBtn( data[index].status);
     }
+    // useEffect(()=> {
+    //     data[index].status = btn;
+    //     setData([...data]);
+    // },[btn])
     function tooltipOn(e,html) {
 		let posElement = e.currentTarget.getBoundingClientRect();
 		const tooltipBlock = document.getElementById('tooltipBtn');
@@ -29,7 +38,7 @@ export default function SwitchBtn ({status,index,data,setData,addOneItem}) {
                 type="checkbox"
                 className="status-all"
                 onChange={data[index].lock ? () => { } : switchBtn}
-                checked={status}
+                checked={btn}
             />
             <span className={`slider round`}
             onMouseEnter={data[index].lock ? () => { } : (e) => {

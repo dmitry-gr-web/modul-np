@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Minus, Plus } from '../../img/svg-pack';
 import SimpleDropMenu from './SimpleDropMenu';
 let plusminus;
-const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, podlozhka, setPodlozhka, setHideMenu, index, tooltipOn, tooltipOff ,style}) => {
+const PlusMinusBlock = ({item, translator, objProduct, setObjProduct, setSwitchMenu, podlozhka, setPodlozhka, setHideMenu, index, tooltipOn, tooltipOff ,style}) => {
     const [memoryInput, setMemoryInput] = useState(objProduct[index]?.ostatok); // input-+
     const [addPrice, setAddPrice] = useState(false); // menu pri +
     const [memoryCena, setMemoryCena] = useState(0); // input+- vnutri menu
@@ -411,7 +411,7 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
             onMouseLeave={addPrice ? null : PlusMinusClose}
             onMouseEnter={addPrice ? null : PlusMinusOpen}
             className={`nal-ostatok ${addPrice ? 'showBtn' : ''}`}
-            style={addPrice ? { zIndex: 99 ,paddingLeft:12,paddingRight:3, ...style} : {paddingLeft:12,paddingRight:3,...style}}
+            style={addPrice ? { zIndex: 99 ,paddingLeft:12,paddingRight:3, ...style} : {paddingLeft:12,paddingRight:3,...style, visibility:`${item === '' ? 'hidden': 'visible'}`}}
             onClick={addPrice ? (e) => e.stopPropagation() : null}
             onDoubleClick={addPrice ? (e) => e.stopPropagation() : null}
             ref={refWrapOstatok}
@@ -427,6 +427,7 @@ const PlusMinusBlock = ({ translator, objProduct, setObjProduct, setSwitchMenu, 
                     e.stopPropagation()
                     inputRef.current.blur();
                 } : e => tooltipOff(e)}
+         
             >
                 <button
                     onDoubleClick={(e) => e.stopPropagation()}
