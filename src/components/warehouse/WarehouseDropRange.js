@@ -58,7 +58,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 	];
 	const min = 0;
 	const max = arr.length - 1;
-	// console.log(max)
 	const [minRange, setMinRange] = useState(min);
 	const [maxRange, setMaxRange] = useState(max);
 	const [activity, setActivity] = useState(false);
@@ -72,9 +71,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
     const [openMenu, setOpenMenu] = useState(false);
 
 	function incMouseEnter(e) {
-		// this.setState({ self: e.target })
-		// document.addEventListener('keydown', inputKeyUp, false)
-		// inputKeyUp(e);
 		tooltipOn(e);
 		e.currentTarget.querySelector('input').select();
 		e.currentTarget.querySelector('.arrowsInc').style.opacity = 1;
@@ -84,15 +80,11 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 	function incMouseLeave(e) {
 		tooltipOff(e);
 		e.currentTarget.querySelector('input').blur();
-		// document.removeEventListener('keydown', inputKeyUp)
 		e.currentTarget.querySelector('.arrowsInc').style.opacity = 0;
 		e.target.closest('.rangeslider')?.querySelector('.min').classList.remove('inputThumbColor');
 	}
 
 	function decMouseEnter(e) {
-		// this.setState({ self: e.target })
-		// document.addEventListener('keydown', this.inputKeyDown, false)
-		// e.target.focus();
 		tooltipOn(e);
 		e.currentTarget.querySelector('input').select();
 		e.currentTarget.querySelector('.arrowsDec').style.opacity = 1;
@@ -101,7 +93,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 
 	function decMouseLeave(e) {
 		tooltipOff(e);
-		// document.removeEventListener('keydown', this.inputKeyDown)
 		e.currentTarget.querySelector('input').blur();
 		e.currentTarget.querySelector('.arrowsDec').style.opacity = 0;
 		e.target.closest('.rangeslider')?.querySelector('.max').classList.remove('inputThumbColor');
@@ -115,29 +106,18 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		setHideMenu(true);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal ').style.opacity = 0;
-			// e.target.value = e.target.value.replace(/[^0-9]/g, '');
 			let temp = e.target.value.replace(/[^0-9]/g, '');
 			e.target.value = temp.length === 0 ? ' ' : temp;
 			e.target.style.width = e.target.value.length * 7 + 'px';
 			setMinInput(e.target.value);
-	
-
 		setMinRange(min);
 		setMaxRange(max);
 		
 		if(!divInput2){
-			// if(maxRange === max){
-
-			// 	setMaxInput('∞');
-			// } else {
-			// }
 			setMaxInput(maxRange);
 		}
-		// setDivInput2(true);
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
-		// setMaxInput(e.target.value);
-		// e.target.closest('.rangeslider').querySelector('.minBG, .maxBG').style.width = 0;
 		warehouse.current.querySelector('.minBG').style.width = '0px';
 		warehouse.current.querySelector('.maxBG').style.width = '0px';
 	}
@@ -149,14 +129,9 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		let temp = e.target.value.replace(/[^0-9]/g, '');
 		e.target.value = temp.length === 0 ? ' ' : temp;
 		e.target.style.width = e.target.value.length * 7 + 'px';
-
-
 		setMaxInput(e.target.value);
-	
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
-
-
 		if(!divInput){
 			setMinInput(minRange);
 		}
@@ -164,7 +139,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		setMaxRange(max);
 		warehouse.current.querySelector('.minBG').style.width = '0px';
 		warehouse.current.querySelector('.maxBG').style.width = '0px';
-		// e.target.closest('.rangeslider').querySelector('.minBG, .maxBG').style.width = 0;
 	}
 	function click (e) {
 		e.currentTarget.querySelector('input').focus();
@@ -177,28 +151,19 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		setVirtualClick(true);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal ').style.opacity = 0;
-		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-		// 	x.classList.add('hide-menu');
-		// });
 		e.currentTarget.querySelector('input').style.width = e.currentTarget.querySelector('input').value.length * 7 + 'px';
 		e.currentTarget.querySelector('input').focus();
-		// e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		let wDelta = e.deltaY > 0 ? 'down' : 'up';
 		if (e.target.classList.contains('range_min') && wDelta === 'down' && minRange < maxRange && minRange !== max - 1 ) {
 			e.target.offsetParent.querySelector('.minBG').style.width =
 				Math.round(minRange / (max / 100), 2) + '%';
 			setMinRange((prev) => {
-				// console.log('down');
-
 				return prev + 1;
 			});
-			// console.log('down')
 		} else if (e.target.classList.contains('range_min') && wDelta === 'up' && minRange - 1 >= 0) {
 			e.target.offsetParent.querySelector('.minBG').style.width =
 				Math.round(minRange / (max / 100), 2) + '%';
 			setMinRange((prev) => {
-				// console.log('up');
-
 				return prev - 1;
 			});
 		} else if (e.target.classList.contains('range_max') && wDelta === 'down' && maxRange + 1 <= max) {
@@ -210,8 +175,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 				100 - Math.round(maxRange / (max / 100), 2) + '%';
 			setMaxRange((prev) => prev - 1);
 		}
-
-		// console.log(maxRange, minRange);
 		rangesData.map((x) => (x.select = false));
 		setRangesData(rangesData);
 	}
@@ -248,17 +211,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			}
 			warehouse.current.querySelector('.inputDataMin').style.width = warehouse.current.querySelector('.inputDataMin').value.length * 7 + 'px'
 			warehouse.current.querySelector('.inputDataMax').style.width = warehouse.current.querySelector('.inputDataMax').value.length * 7 + 'px'
-			// if(maxRange === 52 && minRange === 0){
-			// 	if(rangesData[1].select) {
-			// 		rangesData[1].select = true
-			// 		rangesData[0].select = false
-			// 	}else if(rangesData[0].select) {
-			// 		rangesData[0].select = true
-			// 		rangesData[1].select = false
-			// 	}
-			// 	rangesData[0].select = true;
-			// 	setRangesData([...rangesData]);
-			// }
 		}
 	}, [maxRange, minRange]);
 	function inputKeyUp(e) {
@@ -269,10 +221,7 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		setRangesData(rangesData);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal ').style.opacity = 0;
-		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-		// 	x.classList.add('hide-menu');
-		// });
-		// e.currentTarget.closest('.warehouse-dropmenu').classList.remove('hide-menu');
+
 		if (38 === e.keyCode) {
 			e.preventDefault();
 			setDivInput(false);
@@ -298,10 +247,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		setRangesData(rangesData);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal ').style.opacity = 0;
-		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-		// 	x.classList.add('hide-menu');
-		// });
-		// e.currentTarget.closest('.warehouse-dropmenu').classList.remove('hide-menu');
 		if (38 === e.keyCode) {
 			e.preventDefault();
 			setDivInput2(false);
@@ -333,20 +278,14 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			rangesData[0].select = true;
 			rangesData[1].select = false;
 			resultRef.current.innerHTML = '';
-			// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			// 	// x.style.visibility = 'visible';
-			// 	x.classList.remove('hide-menu');
-			// });
 			setArrowToggle(false);
 			document.querySelector('.contentScroll').style.overflowY = 'auto';
 			document.querySelector('.track-vertical').style.opacity = 1;
             document.querySelector('.track-horizontal').style.opacity = 1;
-			// document.querySelector('.warehouse-table .simplebar-content-wrapper').style.overflow = 'scroll';
 			setOpenMenu(false);
 			setPodlozhka(false);
 			setHideMenu(false);
 			setVirtualClick(false);
-
 		}
 		if (index === 1) {
 			setHideMenu(true);
@@ -360,26 +299,18 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		
 		warehouse.current.querySelector('.inputDataMin').style.width = '7px'
 		warehouse.current.querySelector('.inputDataMax').style.width = '7px'
-	
 		e.target.closest('.rangeslider').querySelector('.minBG').style.width = 0;
 		e.target.closest('.rangeslider').querySelector('.maxBG').style.width = 0;
-	
 		setRangesData([...rangesData]);
 	}
-	// function lenghtInput(e) {
-	// 	e.currentTarget.querySelector('input').style.width =
-	// 		e.currentTarget.querySelector('input').value.length * 7 + 'px';
-	// }
+
 	//ZAPOMNIT PRI VHODE ZNACHENIYA
 	useEffect(()=> {
 		if (warehouse?.current !== null && warehouse.current.querySelector('.inputDataMin') !== null && warehouse.current.querySelector('.inputDataMax') !== null){
 			warehouse.current.querySelector('.inputDataMin').style.width = warehouse.current.querySelector('.inputDataMin').value.length * 7 + 'px'
 			warehouse.current.querySelector('.inputDataMax').style.width = warehouse.current.querySelector('.inputDataMax').value.length * 7 + 'px'
-			// console.log(warehouse.current.querySelector('.inputDataMin').value.length)
 			warehouse.current.querySelector('.minBG').style.width = Math.round(minRange / (max / 100), 2) + '%';
 			warehouse.current.querySelector('.maxBG').style.width = 100 - Math.round(maxRange / (max / 100), 2) + '%';
-
-
 			warehouse.current.querySelector('.arrowsInc .arrowUp').style.top = '1px';
 			warehouse.current.querySelector('.arrowsInc .arrowUp').style.opacity = 0.8;
 			warehouse.current.querySelector('.arrowsInc .arrowDown').style.opacity = 0.8;
@@ -399,7 +330,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 				warehouse.current.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
 				warehouse.current.querySelector('.arrowsDec .arrowUp').style.top = '1px';
 				warehouse.current.querySelector('.arrowsDec .arrowDown').style.opacity = 0;
-				// document.querySelector('.arrowsDec .arrowUp').style.top = '5px';
 			} else if (maxRange !== max) {
 				warehouse.current.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
 				warehouse.current.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
@@ -414,9 +344,7 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			setOpenMenu(true);
 			setArrowToggle(true);
 			e.currentTarget.style.zIndex = '9999';
-			document.querySelector('.contentScroll').style.overflowY = 'hidden';	
-			// document.querySelector('.scrollbar').style.opacity = 0;
-			// document.querySelector('.scrollbarHorizont').style.opacity = 0;		
+			document.querySelector('.contentScroll').style.overflowY = 'hidden';		
 		}
 	}
 	function menuOff(e) {
@@ -426,8 +354,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			setOpenMenu(false);
 			e.currentTarget.style.zIndex = '1';
 			document.querySelector('.contentScroll').style.overflowY = 'auto';
-			// document.querySelector('.scrollbar').style.opacity = 1;
-			// document.querySelector('.scrollbarHorizont').style.opacity = 1;
 			if (activity) {
 				setArrowToggle(true);
 			} else {
@@ -452,28 +378,13 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		if(maxInput.length === 0 || maxInput === ' '){
 			setMaxInput('∞');
 		}
-		// const [minInput, setMinInput] = useState('');
-		// const [maxInput, setMaxInput] = useState('');
 	}, [podlozhka]);
-	// useEffect(() => {
-	// 	if (!podlozhka && !activity) {
-	// 		setArrowActive('down');
-	// 		setArrowToggle(false);
-	// 		setActivity(false);
-	// 	}
-	// }, [podlozhka]);
-    // const [clickSort, setClickSort] = useState(true);
 	useEffect(() => {
 		setArrowActive('down');
 		setArrowToggle(false);
 		setActivity(false);
 	}, [sortActive]);
 	function sortClickBtn(e) {
-		// if (switchMenu && adaptive && setWidth21px) {
-		// 	setWidth21px(true);
-		// } else if (!width21px && !switchMenu && !adaptive && !activity) {
-		// 	setWidth21px(false);
-		// }
 		setHideMenu(false);
 		if (arrowActive === 'down') {
 			setArrowActive('up');
@@ -494,31 +405,18 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 				setArrowActive('down');
 			}
 		}, 0);
-		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-		// 	x.classList.remove('hide-menu');
-		// });
 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
 			x.classList.remove('smallsort');
 		});
-		// if (adaptive) {
-		// 	setFlagSwitchMenu(false);
-		// }
 		setOpenMenu(false);
 		setPodlozhka(false);
 		setVirtualClick(false);
-
 	}
 	function tooltipOn(e) {
 		const tooltipBlock = document.getElementById('tooltipBtn');
 		let posElement = e.currentTarget.getBoundingClientRect();
 		tooltipBlock.style.fontSize = '10px';
-		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
-			// tooltipBlock.innerText = e.target.innerText;
-		
-		} 
 		if (e.currentTarget.closest('.sortBtn')) {
-			// tooltipBlock.style.fontSize = '12px';
-			// console.log('asdsadas')
 			tooltipBlock.innerHTML = `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
 			tooltipBlock.style.left = posElement.x + 'px';
 			tooltipBlock.style.top = posElement.y + 25 + 'px';
@@ -542,7 +440,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			tooltipBlock.style.top = posElement.y + 'px';
 			tooltipBlock.style.animation = 'delay-btn 0.3s forwards';
 		}
-		
 	}
 	function tooltipOff() {
 		document.getElementById('tooltipBtn').style.animation = '';
@@ -553,9 +450,7 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 				const newNumber = +minInput + 1;
 				setMaxInput(newNumber)
 			}
-			// if(divInput ){}
 		}
-	
 	},[podlozhka])
 	function clickVirtualWrapper () {
 		setOpenMenu(false);
@@ -568,7 +463,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		document.querySelector('.contentScroll').style.overflow = 'auto';
 		document.querySelector('.track-vertical').style.opacity = 1;
 		document.querySelector('.track-horizontal').style.opacity = 1;
-		// document.querySelector('.first-tab-body').classList.remove('hoverOff');
 		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
 			x.style.zIndex = 1;
 		});
@@ -588,11 +482,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			clickVirtualWrapper()
 		}
     }
-    // useEffect(()=> {
-    //     if(!vitrualClick){
-    //         addItem()
-    //     }
-    // }, [vitrualClick])
     useEffect(() => {
 		if(vitrualClick){
 			document.addEventListener("click", handle, true);
@@ -601,14 +490,12 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
             document.removeEventListener("click", handle, true);
         };
     }, [vitrualClick]);
-	// console.log(minInput, maxInput)
 	return (
 		<>
 			<div
 				style={zIndex ? { zIndex: 1 ,width: width+'px'} : {width: width+'px'}}
 				onMouseEnter={menuOn}
 				onMouseLeave={menuOff}
-				// className={`warehouse-dropmenu ranges`}
 				className={`warehouse-dropmenu ranges ${
 					arrowToggle ||
 					activity || !hideArrow && !podlozhka ? 'hide-arrow' : ''
@@ -622,10 +509,8 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 						: rangesData[1].select ? '< 0' : ''}
 				</div>
 				<div
-					// style={{ display: `${openMenu || active ? 'block' : 'none'}` }}
 					onMouseEnter={tooltipOn}
 					onMouseLeave={tooltipOff}
-					// className="sortBtn"
 					className={`sortBtn ${
 						arrowToggle || activity || (arrowToggle && activity)
 							? 'on'
@@ -634,7 +519,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 					onClick={sortClickBtn}
 				>
 					<svg
-					// onClick={sortClickBtn}
 					width="10"
 					height="10"
 					viewBox="0 0 12 12"
@@ -697,19 +581,13 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 							</div>
 							<div
 								className="range_min inc"
-								// onClick={divCLick}
 								tabIndex="0"
 								style={{ outline: 'none' }}
 								onKeyDown={inputKeyUp}
-								// onKeyUp={lenghtInput}
 								onWheel={onWheel}
 								onClick={click}
-
-								// onScroll={e => {e.stopPropagation();e.preventDefault()}}
 								onMouseEnter={incMouseEnter}
 								onMouseLeave={incMouseLeave}
-								// onMouseEnter={(e) => {decMouseEnter(e); tooltipOn(e)}}
-								// onMouseLeave={(e) => {decMouseLeave(e); tooltipOff(e)}}
 							>
 								<div className="arrowsInc" style={{ pointerEvents: 'none', zIndex: 2 }}>
 									<span className="arrowUp"></span>
@@ -721,28 +599,16 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 									value={divInput ? minInput : arr[minRange]}
 									className="inputDataMin"
 								/>
-								{/* <span style={{ lineHeight: '18px', pointerEvents: 'none', paddingLeft: 3 }}>
-									{' '}
-									шт
-								</span> */}
 							</div>
 							<div
 								className="range_max dec"
-								// onClick={divCLick}
 								tabIndex="0"
 								style={{ outline: 'none' }}
 								onKeyDown={inputKeyDown}
 								onWheel={onWheel}
 								onClick={click}
-								// onMouseEnter={tooltipOn}
-								// onMouseDown={tooltipOff}
 								onMouseEnter={decMouseEnter}
 								onMouseLeave={decMouseLeave}
-								// onKeyUp={lenghtInput}
-								// onScroll={e => {e.stopPropagation();e.preventDefault()}}
-
-								// onMouseEnter={(e) => {decMouseEnter(e); tooltipOn(e)}}
-								// onMouseLeave={(e) => {decMouseLeave(e); tooltipOff(e)}}
 							>
 								<div className="arrowsDec" style={{ pointerEvents: 'none', zIndex: 2 }}>
 									<span className="arrowUp"></span>
@@ -755,10 +621,6 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 									className="inputDataMax"
 
 								/>
-								{/* <span style={{ lineHeight: '18px', pointerEvents: 'none', paddingLeft: 3 }}>
-									{' '}
-									шт
-								</span> */}
 							</div>
 						</div>
 					)}

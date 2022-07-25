@@ -144,7 +144,7 @@ const Warehouse = () => {
 				<div style={{position:'absolute', width: 54,height: 500, left: '100px',backdropFilter: 'blur(4px)',    boxShadow: '-4px 4px 4px rgb(0 0 0 / 25%)',background: 'rgba(81,81,81,.7)'}}>
 
 				</div>
-				<aside style={{marginLeft: 74}}>
+				<aside style={{marginLeft: 74,height: 'max-content'}}>
 					<div className="warehouse-title">{translator.getTranslation('warehouse', 'warehouse')}</div>
 					<nav className="warehouse-nav">
 						<ul>

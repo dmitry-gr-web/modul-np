@@ -29,7 +29,7 @@ const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff ,
 							? 'Заблокирован'
 							: 'Разблокирован'
 					);
-				}}></span>
+				}} onDoubleClick={e => e.stopPropagation()}></span>
 			</label>
 
 			<label
@@ -57,7 +57,7 @@ const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff ,
 							? 'Заблокирован'
 							: 'Разблокирован'
 					);
-				}}></span>
+				}} onDoubleClick={e => e.stopPropagation()}></span>
 			</label>
 
 			<label
@@ -85,7 +85,7 @@ const StatusBlock = ({ objProduct, index, setObjProduct, tooltipOn, tooltipOff ,
 							? 'Заблокирован'
 							: 'Разблокирован'
 					);
-				}}></span>
+				}} onDoubleClick={e => e.stopPropagation()}></span>
 			</label>
 			<div className="gradi"></div>
 		</>

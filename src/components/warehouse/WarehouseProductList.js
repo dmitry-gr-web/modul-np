@@ -1,25 +1,17 @@
 import React from 'react';
 import StatusBlock from './statusBlock';
-// import ProductCard from '../warehouse/Warehouse';
-// import PodProductList from './PodProductList';
-// import useOutsideAlert from './outSideHook';
-// import WarehouseDropMenu from './WarehouseDropMenu'
-// import { Minus, Plus } from '../../img/svg-pack';
-// import SimpleDropMenu from './SimpleDropMenu';
 import PlusMinusBlock from './PlusMinusBlock';
 let tooltip;
 let plusminus;
 const WarehouseProductList = ({
 	objProduct,
 	setSwitchMenu,
-	switchMenu,
 	index,
 	setObjProduct,
 	podlozhka,
 	setPodlozhka,
 	lastIndex,
 	setLastIndex,
-	setLoadedLabelBlock,
 	loadedLabelBlock,
 	flagSwitchMenu,
 	translator,
@@ -412,7 +404,8 @@ const WarehouseProductList = ({
 													? 'Заблокирован'
 													: 'Разблокирован'
 											);
-										}}></span>
+									
+										}} onDoubleClick={e => e.stopPropagation()}></span>
 									</label>
 								</div>
 								<div

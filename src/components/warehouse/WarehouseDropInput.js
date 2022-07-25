@@ -18,10 +18,7 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 		setPodlozhka(false);
 		setArrowToggle(false);
 		setVirtualClick(false);
-		// if(openMenu) {
-		// }
 		setHideMenu(false);
-		// setHideMenu(false);
 		document.querySelector('.track-vertical').style.opacity = 1;
 		document.querySelector('.track-horizontal').style.opacity = 1;
     }
@@ -34,10 +31,6 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
         setPodlozhka(true);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal').style.opacity = 0;
-        // document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-        //     x.classList.add('hide-menu');
-        // });
-        // e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
         let temp = e.target.value.replace(/[^0-9]/g, '');
         e.target.value = temp.length === 0 ? ' ' : temp;
         e.target.style.width = e.target.value.length * 7 + 'px';
@@ -50,10 +43,6 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 		setVirtualClick(true);
 		document.querySelector('.track-vertical').style.opacity = 0;
 		document.querySelector('.track-horizontal').style.opacity = 0;
-        // document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-        //     x.classList.remove('hide-menu');
-        // });
-        // e.target.closest('.warehouse-dropmenu').classList.remove('hide-menu');
         let temp = e.target.value.replace(/[^0-9]/g, '');
         e.target.value = temp.length === 0 ? ' ' : temp;
         e.target.style.width = e.target.value.length * 7 + 'px';
@@ -64,22 +53,10 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
     function menuOn(e) {
 		if (!podlozhka) {
 			console.log('start');
-			// setValue('');
-			// setHideMenu(false);
 			setArrowToggle(true);
 			setOpenMenu(true);
             e.currentTarget.style.zIndex = '9999';
-        
             document.querySelector('.contentScroll').style.overflowY = 'hidden';	
-			// document.querySelector('.scrollbar').style.opacity = 0;
-			// document.querySelector('.scrollbarHorizont').style.opacity = 0;
-            // if (!podlozhka) {
-            //     setOpenMenu(true);
-            //     setArrowToggle(true);
-            //     e.currentTarget.style.zIndex = '9999';
-            //     document.querySelector('.contentScroll').style.overflow = 'hidden';			
-            // }
-
 		}
 	}
 
@@ -105,11 +82,6 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 			setOpenMenu(false);
             e.currentTarget.style.zIndex = '1';
             document.querySelector('.contentScroll').style.overflowY = 'auto';
-			// document.querySelector('.scrollbar').style.opacity = 1;
-			// document.querySelector('.scrollbarHorizont').style.opacity = 1;
-            // if(e.currentTarget.offsetWidth === 51) {
-            //     e.currentTarget.style.width = width+'px';
-            // }
 			if (activity) {
 				setArrowToggle(true);
 			} else {
@@ -119,11 +91,6 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 		}
 	}
     function sortClickBtn(e) {
-		// if (switchMenu && adaptive && setWidth21px) {
-		// 	setWidth21px(true);
-		// } else if (!width21px && !switchMenu && !adaptive && !activity) {
-		// 	setWidth21px(false);
-		// }
 		setHideMenu(false);
 		setVirtualClick(false);
 		if (arrowActive === 'down') {
@@ -145,15 +112,9 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 				setArrowActive('down');
 			}
 		}, 0);
-		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-		// 	x.classList.remove('hide-menu');
-		// });
 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
 			x.classList.remove('smallsort');
 		});
-		// if (adaptive) {
-		// 	setFlagSwitchMenu(false);
-		// }
 		setOpenMenu(false);
 		setPodlozhka(false);
     }
@@ -162,19 +123,12 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 		if (podlozhka) {
 		} else {
 			setOpenMenu(false);
-			// setHideMenu(false);
 		}
 		if (!podlozhka && !activity) {
 			setArrowActive('down');
 			setArrowToggle(false);
 			setActivity(false);
 		}
-		// if(input1.length === 0 || input1 === ' '){
-		// 	setInput1(0);
-		// }
-		// if(input2.length === 0 || input2 === ' '){
-		// 	setInput2('∞');
-		// }
 	}, [podlozhka])
     useEffect(() => {
 		setArrowActive('down');
@@ -183,7 +137,6 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 	}, [sortActive]);
     useEffect(()=> {
         if(openMenu) {
-            // let width = warehouse.current.offsetWidth;
             warehouse.current.querySelector('.inputFirst').style.width = warehouse.current.querySelector('.inputFirst').value.length * 7 + 'px'
 			warehouse.current.querySelector('.inputSecond').style.width = warehouse.current.querySelector('.inputSecond').value.length * 7 + 'px'
         }
@@ -205,21 +158,13 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 				const newNumber = +input1 + 1;
 				setInput2(newNumber)
 			}
-			// if(divInput ){}
 		}
-	
 	},[podlozhka])
     function tooltipOn(e) {
 		const tooltipBlock = document.getElementById('tooltipBtn');
 		let posElement = e.currentTarget.getBoundingClientRect();
 		tooltipBlock.style.fontSize = '10px';
-		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
-			// tooltipBlock.innerText = e.target.innerText;
-		
-		} 
 		if (e.currentTarget.closest('.sortBtn')) {
-			// tooltipBlock.style.fontSize = '12px';
-			// console.log('asdsadas')
 			tooltipBlock.innerHTML = `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
 			tooltipBlock.style.left = posElement.x + 'px';
 			tooltipBlock.style.top = posElement.y + 25 + 'px';
@@ -272,11 +217,7 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 			clickVirtualWrapper()
 		}
     }
-    // useEffect(()=> {
-    //     if(!vitrualClick){
-    //         addItem()
-    //     }
-    // }, [vitrualClick])
+
     useEffect(() => {
 		if(vitrualClick){
 			document.addEventListener("click", handle, true);
@@ -300,7 +241,6 @@ const WarehouseDropInput = ({setFlagSwitchMenu,setSwitchMenu,hideArrow,setHideMe
 					onMouseEnter={tooltipOn}
 					onMouseLeave={tooltipOff}
 					className={`sortBtn ${arrowToggle || activity || (arrowToggle && activity) ? 'on' : ''}`}
-					// onClick={sortClickBtn}
 				>
 					<svg
 						onClick={sortClickBtn}

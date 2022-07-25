@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import DropMenu from '../modul-np/dropMenu/dropMenu';
+// import DropMenu from '../modul-np/dropMenu/dropMenu';
 import './ProductCard.scss';
 import ProductCardMenu from './ProductCardMenu';
 import SimpleBar from 'simplebar-react';
@@ -13,12 +13,10 @@ import {
     SvgCalendar,
     SvGBtnPlus
 } from '../../img/svg-pack';
-// import ProductCardList from './'
 import ProductCardList from './ProductCardList';
 // import MaxaScroll from './MaxaScroll';
 import ScrollBar from './ScrollBar';
 import LoadImg from './LoadImg';
-// import { json } from 'express';
 let plusminus;
 let hover;
 const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, getIndex, translator }) => {
@@ -30,7 +28,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     const [multiselect, setMultiSelect] = useState(false);
     const [createAttr, setCreateAttr] = useState(false);
     const [indexTr, setIndexTr] = useState(0);
-    // const [hideRow,setHideRow] = useState(false);
+
 
     // const inputRef = useRef();
     // function searchLine(text, value) {
@@ -43,21 +41,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
     //     }
     // }
 
-    // const [countryArr, setCountryArr] = useState([
-    // 	// { id: 0, name: 'Все', select: true },
-    // 	{ id: 0, name: '🇷🇺', nameCountry: 'Россия', select: false },
-    // 	{ id: 1, name: '🇺🇦', nameCountry: 'Украина', select: false },
-    // 	{ id: 2, name: '🇹🇷', nameCountry: 'Турция', select: false },
-    // ]);
-    // const objAttribute =  [
-    //     { id: 0, name: '32гб', select: false, idNumber:9 },
-    //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
-    //     { id: 2, name: '42 размер', select: false ,idNumber:43},
-    //     { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
-    //     { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
-    //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
-    //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
-    // ];
+
 
     const [data, setData] = useState({
         flags: [
@@ -119,7 +103,6 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
             { id: 2, name: 'icon-ukrposhta icons', secondName: 'ukrpochta', select: false },
             { id: 3, name: 'icon-Union-4 icons', secondName: 'samovivoz', select: false },
         ],
-        // { id: 0, name: 'Все', select: true },
     });
     let atr = [
         { id: 0, name: '32гб', select: false, idNumber: 9 },
@@ -142,47 +125,15 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
             { id: 6, name: 'Размер ыв ыв ы  ыв', select: false, idNumber: 7 },
         ]]
     })
-    // const [attribute,setAttribute] = useState([[
-    //     { id: 0, name: '32гб', select: true, idNumber:9 },
-    //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
-    //     { id: 2, name: '42 размер', select: false ,idNumber:43},
-    //     { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
-    //     { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
-    //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
-    //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
-    // ]])
-    // console.log(objProduct)
-    // console.log(getIndex)
     const [dataFromWarehouse, setDataFromWarehouse] = useState([]);
-    // console.log(dataFromWarehouse)
-    // const obj = { show: false, array: [
-    //     { id: 0, name: '32гб', select: true, idNumber:9 },
-    //     { id: 1, name: 'Синняя Красная', select: false ,idNumber:9},
-    //     { id: 2, name: '42 размер', select: false ,idNumber:43},
-    //     { id: 3, name: 'Синий 42 размер', select: false ,idNumber:94},
-    //     { id: 4, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:99},
-    //     { id: 5, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:36},
-    //     { id: 6, name: 'Размер ыв ыв ы  ыв', select: false ,idNumber:7},
-    // ] }
-    // const [objAttribute, setObjAttribute] = useState([]);
     useEffect(() => {
         setDataFromWarehouse([JSON.parse(JSON.stringify(objProduct[getIndex]))])
-        // setObjAttribute([{...obj}])
     }, [])
     // const [sortedArr, setSortedArr] = useState([]);
     // useEffect(()=> {
     //     setIndexTr(dataFromWarehouse.length-1);
     // },[dataFromWarehouse.length])
-    // console.log(objAttribute)
-    // console.log(indexTr)
-    // console.log(data['flags'])
-    // const [currency, setCurrency] = useState([
-    // 	// { id: 0, attribute: 'Все', select: true },
-    // 	{ id: 0, name: '$', select: false },
-    // 	{ id: 1, name: '€', select: false },
-    // 	{ id: 2, name: '₴', select: false },
-    // 	{ id: 3, name: '₽', select: false },
-    // ]);
+  
     useEffect(() => {
         let obj = { ...data };
         let obj1 = {};
@@ -203,54 +154,8 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                 }
             }))
         );
-
-        // setSortedArr([...sortedArr, { ...data.attribute[0], select: true }])
-        // attributeData.
-        // let object = JSON.parse(JSON.stringify(attributeData));
-        // object.array = object.array.map(x => x.map(x => {
-        //     if (x.name === objProduct[getIndex].attribute) {
-
-        //         return { ...x, select: true }
-        //     } else {
-        //         return { ...x }
-        //     }
-        // }
-        // ))
-        // setAttributeData({...object})
-
-        // object.sort = object.sort.map(x => x.map(x => ))
         setData({ ...obj1 });
     }, []);
-    // console.log(dataFromWarehouse)
-    // console.log("sortedarr:", sortedArr)
-    // setData({
-    // 	...data.currency.map((x) => {
-    // 		if (x.name === objProduct[getIndex].country) {
-    // 			return { ...x, select: true };
-    // 		} else {
-    // 			return { ...x };
-    // 		}
-    // 	})
-    // });
-    // setCountryArr([
-    // 	...countryArr.map((x) => {
-    // 		if (x.name === objProduct[getIndex].country) {
-    // 			return { ...x, select: true };
-    // 		} else {
-    // 			return { ...x };
-    // 		}
-    // 	}),
-    // ]);
-    // setCurrency([
-    // 	...currency.map((x) => {
-    // 		if (x.name === objProduct[getIndex].currency) {
-    // 			return { ...x, select: true };
-    // 		} else {
-    // 			return { ...x };
-    // 		}
-    // 	}),
-    // ]);
-    // }, []);
     function onClick(type, targetBlock, index) {
         let posEl = targetBlock?.getBoundingClientRect();
         let adapEl = document.querySelector('.productMenu');
@@ -258,11 +163,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         adapEl.style.top = posEl?.y - block.y + 'px';
         adapEl.style.left = posEl?.x - block.x - 1 + 'px';
         adapEl.style.width = '202px';
-        // adapEl.style.top = posEl?.y - block.y + 'px';
-        // adapEl.style.left = '115px';
-        // adapEl.style.width = '202px';
-        // carouselDrop.carousel = fa/lse;
-        // setCarouselDrop({...carouselDrop,carousel:false});
+
         console.log(posEl)
         setOpenCardMenu(true);
         setPodlozhka(true);
@@ -313,29 +214,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         if (type === 'delivery') {
             setTypeData('delivery');
         }
-        // console.log(posEl.y - block.y);
-
-        // if (types === 'statusAccept') {
-        // 	setType('statusAccept');
-        // 	adapEl.style.top = posEl?.y - block.y + 'px';
-        // 	adapEl.style.left = '424px';
-        // 	adapEl.style.width = '288px';
-        // }
-        // document.querySelectorAll('.block-menu .simplebar-content-wrapper').forEach((x) =>
-        // 	x.scrollTo({
-        // 		top: 0,
-        // 	})
-        // );
-        // setValueAdaptiveMenu('');
-        // setOpenMenu(!openMenu);
-        // setPodlozhka(true);
-        // setTimeout(() => {
-        // 	inputRef.current.value = '';
-        // 	inputRef.current.focus();
-        // }, 100);
     }
-
-
     function tooltipOn(e, html) {
         let posElement = e.currentTarget.getBoundingClientRect();
         const tooltipBlock = document.getElementById('tooltipBtn');
@@ -742,36 +621,6 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
         return Math.random() * (max - min) + min;
     }
     const [carouselDrop, setCarouselDrop] = useState(false);
-    // useEffect(()=> {
-    //     if(dataFromWarehouse.length>0){
-    //         document.querySelectorAll('.product-card .nal-ostatok')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
-    //         document.querySelectorAll('.product-card .nal-rezerv')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
-    //         document.querySelectorAll('.product-card .nal-otpr')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
-    //         document.querySelectorAll('.product-card .nal-vozvrat')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
-    //     }
-
-    // },[])
-
-    // useEffect(() => {
-    //     // setVisibleRow(carouselDrop)
-    //     if (dataFromWarehouse.length > 0) {
-    //         console.log(dataFromWarehouse[dataFromWarehouse.length - 1].size)
-    //         if (carouselDrop) {
-    //             if (dataFromWarehouse[dataFromWarehouse.length - 1].size === '') {
-    //                 document.querySelectorAll('.product-card .nal-ostatok')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
-    //                 document.querySelectorAll('.product-card .nal-rezerv')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
-    //                 document.querySelectorAll('.product-card .nal-otpr')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
-    //                 document.querySelectorAll('.product-card .nal-vozvrat')[dataFromWarehouse?.length - 1].style.visibility = 'hidden';
-    //             } else {
-    //                 document.querySelectorAll('.product-card .nal-ostatok')[dataFromWarehouse?.length - 1].style.visibility = 'visible';
-    //                 document.querySelectorAll('.product-card .nal-rezerv')[dataFromWarehouse?.length - 1].style.visibility = 'visible';
-    //                 document.querySelectorAll('.product-card .nal-otpr')[dataFromWarehouse?.length - 1].style.visibility = 'visible';
-    //                 document.querySelectorAll('.product-card .nal-vozvrat')[dataFromWarehouse?.length - 1].style.visibility = 'visible';
-    //             }
-
-    //         }
-    //     }
-    // }, [carouselDrop, dataFromWarehouse])
     return (
         <>
             <div className="bg"></div>
@@ -1139,6 +988,7 @@ const ProductCard = ({ toggleCard, setToggleCard, setObjProduct, objProduct, get
                                     setDataFromWarehouse([...dataFromWarehouse, obj])
                                     setIndexTr(dataFromWarehouse.length);
                                     // setHideRow(true);
+                                    e.target.closest('.attr-block').querySelector('.wrapper-scroll .scroll').scrollLeft = 0;
                                     setTimeout(() => {
                                         setCarouselDrop(true);
                                         const targetBlock = document.querySelectorAll('.product-card .first-tab-body .btn-product-menu2')[dataFromWarehouse.length]

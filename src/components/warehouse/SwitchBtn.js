@@ -1,21 +1,17 @@
 import React,{useState} from "react";
 let plusminus;
-export default function SwitchBtn ({status,index,data,setData,addOneItem}) {
+export default function SwitchBtn ({type,status,index,data,setData,addOneItem}) {
     const [btn,setBtn] = useState(status);
     function switchBtn(e) {
         e.stopPropagation();
-        // let temp = (getStart() < 0 ? 0 : getStart());
-
-        // data[index].status = btn;
-        // setData([...data]);
-        data[index].status =  !data[index].status;
+        if(type === 'card'){
+            data[index].status.all =  !data[index].status.all;
+        } else {
+            data[index].status = !data[index].status;
+        }
         setData([...data]);
-        setBtn( data[index].status);
+        setBtn( !btn);
     }
-    // useEffect(()=> {
-    //     data[index].status = btn;
-    //     setData([...data]);
-    // },[btn])
     function tooltipOn(e,html) {
 		let posElement = e.currentTarget.getBoundingClientRect();
 		const tooltipBlock = document.getElementById('tooltipBtn');

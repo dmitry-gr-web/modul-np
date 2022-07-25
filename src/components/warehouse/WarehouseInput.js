@@ -12,21 +12,14 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 		setArrowToggle(true);
 	}
 	function warehouseInputOff(e) {
-		if (podlozhka) {
-			// setArrowToggle(true);
-		} else {
+		if (!podlozhka) {
 			e.currentTarget.querySelector('input').blur();
 			setArrowToggle(false);
-		}
+		} 
 	}
 	function changeInput(e) {
 		setPodlozhka(true);
 		setVirtualClick(true);
-		// setInputID(e.target.value.replace(/[^0-9]-/g, ''));
-		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-		// 	x.classList.add('hide-menu');
-		// });
-		// e.target.closest('.warehouse-input').classList.remove('hide-menu');
 		setHideMenu(true);
 		document.querySelector('.contentScroll').style.overflowY = 'hidden';
 		document.querySelector('.track-vertical').style.opacity = 0;
@@ -36,21 +29,15 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 			// setInputID(e.target.value);
 		}
 		e.target.value = e.target.value.replace(/[^0-9-.]/g, '');
-
 		setInputID(e.target.value);
 	}
 	function enter(e) {
 		if (e.key === "Enter") {
-			// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-			//     // x.style.visibility = 'visible';
-			//     x.classList.remove('hide-menu');
-			// });
 			setVirtualClick(false);
 			setHideMenu(false);
 			document.querySelector('.contentScroll').style.overflowY = 'auto';
 			document.querySelector('.track-vertical').style.opacity = 1;
 			document.querySelector('.track-horizontal').style.opacity = 1;
-
 			setPodlozhka(false);
 			e.currentTarget.blur();
 		}
@@ -69,11 +56,6 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 	}, [sortActive]);
 
 	function sortClickBtn(e) {
-		// if (switchMenu && adaptive && setWidth21px) {
-		// 	setWidth21px(true);
-		// } else if (!width21px && !switchMenu && !adaptive && !activity) {
-		// 	setWidth21px(false);
-		// }
 		if (arrowActive === 'down') {
 			setArrowActive('up');
 		} else if (arrowActive === 'up') {
@@ -97,10 +79,6 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 		document.querySelectorAll('.warehouse-dropmenu').forEach((x) => {
 			x.classList.remove('smallsort');
 		});
-		// if (adaptive) {
-		// 	setFlagSwitchMenu(false);
-		// }
-		// setOpenMenu(false);
 		setPodlozhka(false);
 
 	}
@@ -110,13 +88,12 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 		const tooltipBlock = document.getElementById('tooltipBtn');
 		let posElement = e.currentTarget.getBoundingClientRect();
 		tooltipBlock.style.fontSize = '12px';
-		if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
-			// tooltipBlock.innerText = e.target.innerText;
+		// if (e.currentTarget.scrollWidth > e.currentTarget.offsetWidth) {
+		// 	// tooltipBlock.innerText = e.target.innerText;
 
-		}
+		// }
 		if (e.currentTarget.closest('.sortBtn')) {
 			tooltipBlock.style.fontSize = '12px';
-			// console.log('asdsadas')
 			tooltipBlock.innerHTML = `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
 			tooltipBlock.style.left = posElement.x + 'px';
 			tooltipBlock.style.top = posElement.y + 25 + 'px';
@@ -129,17 +106,14 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 	}
 	const warehouse = useRef();
 	function clickVirtualWrapper() {
-		// setOpenMenu(false);
 		setPodlozhka(false);
 		setHideMenu(false);
-		// console.log('srabotalo');
 		setFlagSwitchMenu(false);
 		setSwitchMenu(false);
 		setVirtualClick(false);
 		document.querySelector('.contentScroll').style.overflow = 'auto';
 		document.querySelector('.track-vertical').style.opacity = 1;
 		document.querySelector('.track-horizontal').style.opacity = 1;
-		// document.querySelector('.first-tab-body').classList.remove('hoverOff');
 		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
 			x.style.zIndex = 1;
 		});
@@ -159,7 +133,6 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 			clickVirtualWrapper()
 		}
 	}
-
 	useEffect(() => {
 		if (vitrualClick) {
 			document.addEventListener("click", handle, true);
@@ -183,10 +156,8 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 				style={{ color: 'rgba(0, 0, 0, 0.65)' }}
 			/>
 			<div
-				// style={{ display: `${openMenu || active ? 'block' : 'none'}` }}
 				onMouseEnter={tooltipOn}
 				onMouseLeave={tooltipOff}
-				// className="sortBtn"
 				className={`sortBtn ${arrowToggle || activity || (arrowToggle && activity)
 						? 'on'
 						: ''
@@ -194,7 +165,6 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 				onClick={sortClickBtn}
 			>
 				<svg
-					// onClick={sortClickBtn}
 					width="10"
 					height="10"
 					viewBox="0 0 12 12"
