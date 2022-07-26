@@ -52,9 +52,12 @@ const PlusMinusBlock = ({item, translator, objProduct, setObjProduct, setSwitchM
                 x.classList.remove('showBtn');
             });
             focus.current?.closest('.nal-ostatok')?.classList.add('showBtn')
-            document.querySelector('.contentScroll').style.overflow = 'hidden';
-            document.querySelector('.track-vertical').style.opacity = 0;
-            document.querySelector('.track-horizontal').style.opacity = 0;
+
+            refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+
+            refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 0;
+            refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 0;
+
             document.getElementById('tooltipBtn').style.animation = '';
         }
     }
@@ -85,9 +88,13 @@ const PlusMinusBlock = ({item, translator, objProduct, setObjProduct, setSwitchM
             x.classList.remove('showBtn');
         });
         e.target.closest('.nal-ostatok').classList.add('showBtn')
-        document.querySelector('.contentScroll').style.overflow = 'hidden';
-        document.querySelector('.track-vertical').style.opacity = 0;
-        document.querySelector('.track-horizontal').style.opacity = 0;
+
+
+        refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+
+		refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 0;
+		refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 0;
+
         document.getElementById('tooltipBtn').style.animation = '';
         setTimeout(() => {
             focus.current?.querySelector('.input-search')?.focus();
@@ -107,9 +114,13 @@ const PlusMinusBlock = ({item, translator, objProduct, setObjProduct, setSwitchM
             x.classList.remove('showBtn');
         });
         e.target.closest('.nal-ostatok').classList.add('showBtn')
-        document.querySelector('.contentScroll').style.overflow = 'hidden';
-        document.querySelector('.track-vertical').style.opacity = 0;
-        document.querySelector('.track-horizontal').style.opacity = 0;
+
+
+        refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+
+		refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 0;
+		refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 0;
+
         document.getElementById('tooltipBtn').style.animation = '';
         refWrapOstatok.current.closest('tr').classList.add('hover-disabled');
 
@@ -212,9 +223,18 @@ const PlusMinusBlock = ({item, translator, objProduct, setObjProduct, setSwitchM
         }
         refWrapOstatok.current.closest('tr').classList.remove('hover-disabled');
         inputRef.current.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
-        document.querySelector('.contentScroll').style.overflow = 'auto';
-        document.querySelector('.track-vertical').style.opacity = 1;
-        document.querySelector('.track-horizontal').style.opacity = 1;
+
+
+        // refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+        if((objProduct.length) * 18 < (	refWrapOstatok.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+            refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+        }else {
+            refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+        }
+        
+
+		refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 1;
+		refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 1;
         setListenChangeSuppliers('');
         setKurs('');
         setCena('');
@@ -341,9 +361,17 @@ const PlusMinusBlock = ({item, translator, objProduct, setObjProduct, setSwitchM
         if(setHideMenu) setHideMenu(false);
         if (setSwitchMenu) setSwitchMenu(false);
         setFlag(false);
-        document.querySelector('.contentScroll').style.overflow = 'auto';
-        document.querySelector('.track-vertical').style.opacity = 1;
-        document.querySelector('.track-horizontal').style.opacity = 1;
+
+
+        // refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+        if((objProduct.length) * 18 < (	refWrapOstatok.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+            refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+        }else {
+            refWrapOstatok.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+        }
+
+		refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 1;
+		refWrapOstatok.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 1;
         inputRef.current.closest('.nal-ostatok').querySelector('.wrap-nal-ostatok').style.pointerEvents = '';
         setFlagForZakupka(false);
         document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {

@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-// import styles from "./scroll.module.scss";
 import "./scroll.scss";
-// import _ from "lodash";
-
-export default function Scroll({ children, draggeble, onScroll, height, style, className, horizontal = false, setT, vertical = false, hideBar = true }) {
+export default function Scroll({parentClass,podlozhka,setHideArrow, children, draggeble, onScroll, height, style, className, horizontal = false, setT, vertical = false, hideBar = true }) {
     let [heightScroll, setHeightScroll] = useState(0);
     let [widthScroll, setWidthScroll] = useState(0);
     let [top, setTop] = useState(true);
@@ -23,7 +20,8 @@ export default function Scroll({ children, draggeble, onScroll, height, style, c
     }, [ref.current?.querySelector('.scroll')?.scrollHeight]);
 
     useEffect(() => {
-
+        // console.log(ref.current.querySelector('.scroll').scrollHeight)
+        // console.log(ref.current.querySelector('.scroll').clientHeight )
         if (
             (ref.current.querySelector('.scroll').scrollHeight >
                 ref.current.querySelector('.scroll').clientHeight && ref.current.querySelector('.scroll').style.overflow !== 'hidden')
@@ -97,14 +95,45 @@ export default function Scroll({ children, draggeble, onScroll, height, style, c
     };
 
 
+    function showScrollbar() {
+        if (!podlozhka) {
+          if (ref.current) {
+            ref.current.querySelector('.track-vertical').style.opacity = 1;
+            ref.current.querySelector('.track-horizontal').style.opacity = 1;
+            if (setHideArrow) setHideArrow(true);
+    
+          }
+    
+        }
+      }
+      function hideScrollbar() {
+        if (!podlozhka) {
+          if (ref.current) {
+            ref.current.querySelector('.track-vertical').style.opacity = 0;
+            ref.current.querySelector('.track-horizontal').style.opacity = 0;
+            if (setHideArrow) setHideArrow(false);
+          }
+    
+        }
+    
+      }
+    // useEffect(()=> {
+    //     if((!top || height === 0 || vertical) && hideBar) {
+    //         ref.current.querySelector('.scroll').style.overflowY = 'hidden'
+    //     } else {
+    //         ref.current.querySelector('.scroll').style.overflowY = ''
 
-
+    //     }
+    // },[hideArrow])
     return (
-        <div className={`wrapper-scroll`}
+        <div className={`wrapper-scroll ` + parentClass}
             ref={ref}
+            onMouseEnter={showScrollbar}
+            onMouseLeave={hideScrollbar}
         >
             <div
-                style={{ ...{ height: height, transition: '0.2s' }, ...style }}
+                style={{ ...{ height: height, transition: '0.2s', overflowY: `${(ref.current?.querySelectorAll('.first-tab-body tr').length- 2) * 18 < ref.current?.offsetHeight - 75 ? 'hidden': ''}` }, ...style }}
+                // style={(!top || height === 0 || vertical) && hideBar ? { display: "none" } : {}}
                 className={"scroll " + className}
                 onScroll={(e) => {
                     if (onScroll)

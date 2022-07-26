@@ -9,6 +9,7 @@ import WarehouseDropRange from './WarehouseDropRange';
 import WarehouseDropInput from './WarehouseDropInput';
 import { useFetch } from '../data/useFetch';
 import MaxaScroll from './MaxaScroll';
+import ScrollBar from './ScrollBar';
 
 let hover;
 let plusminus;
@@ -18,7 +19,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	const [switchMenu, setSwitchMenu] = useState(false);
 	const [hideMenu, setHideMenu] = useState(false);
 	const [flagSwitchMenu, setFlagSwitchMenu] = useState(false);
-	// const [selectAll, setSelectAll] = useState(false);
 	// http://192.168.0.197:3005/folders
 	const { data, error, isLoading } = useFetch(''
 		// , {
@@ -53,34 +53,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 
 	// 	})
 	// })
+
 	
-	// function clickPodlozhka() {
-	// 	setPodlozhka(false);
-	// 	setHideMenu(false);
-	// 	setFlagSwitchMenu(false);
-	// 	setSwitchMenu(false);
-
-	// 	document.querySelector('.contentScroll').style.overflow = 'auto';
-	// 	document.querySelector('.track-vertical').style.opacity = 1;
-	// 	document.querySelector('.track-horizontal').style.opacity = 1;
-	// 	// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
-	// 	// 	x.classList.remove('hide-menu');
-	// 	// });
-	// 	document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
-	// 		x.style.zIndex = 1;
-	// 	});
-	// 	document.querySelectorAll('.block-3-btn .warehouse-dropmenu').forEach((x) => {
-	// 		x.style.width = '22px';
-	// 	});
-	// 	document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
-	// 		x.style.minWidth = '22px';
-	// 	});
-	// 	document.querySelectorAll('.nal-ostatok').forEach((x) => {
-	// 		x.classList.remove('showBtn');
-	// 	});
-	// 	document.querySelector('.width21px').style.maxWidth = '51px';
-
-	// }
 	function searchLine(text, value) {
 		if (value !== '') {
 			let re = new RegExp(value, 'gui');
@@ -91,23 +65,14 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			return text;
 		}
 	}
-	// function clickDocument(e) {
-	// 	if (!e.target.closest('.warehouse-table')) {
-	// 		setSelectAll(false);
-	// 		let newobj = [...objProduct];
-	// 		newobj.map((x) => {
-	// 			return {...x, select:false}
-	// 		});
-	// 		setObjProduct(newobj);
-	// 	}
-	// }
+
 	useEffect(() => {
 		if (objProduct?.length > 0) {
 			document.addEventListener('click', clickDocument, true);
-			document.addEventListener('keydown',ctrlAclickShift, true);
+			document.addEventListener('keydown', ctrlAclickShift, true);
 			return () => {
 				document.removeEventListener('click', clickDocument, true);
-				document.removeEventListener('keydown',ctrlAclickShift, true);
+				document.removeEventListener('keydown', ctrlAclickShift, true);
 
 				// document.removeEventListener('keydown', clickDocument, true);
 			};
@@ -116,19 +81,19 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	function clickDocument(e) {
 		if (refScroll.current && !refScroll.current.contains(e.target)) {
 			// clickVirtualWrapper()
-			let newobj = JSON.parse(JSON.stringify(objProduct));
-			console.log(newobj)
+			let newobj = [...objProduct];
+		
 			newobj = newobj.map((x) => {
 				return { ...x, select: false }
 			});
 			setObjProduct(newobj);
 		}
 	}
-	function ctrlAclickShift (e){
+	function ctrlAclickShift(e) {
 		if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
 			e.preventDefault();
 			// setSelectAll(true);
-			let newobj = JSON.parse(JSON.stringify(objProduct));
+			let newobj =  [...objProduct];
 			newobj = newobj.map((x) => {
 				if (x.lock) {
 					return { ...x, select: false };
@@ -137,17 +102,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 				}
 			});
 			setObjProduct(newobj);
-			console.log('asdasdasd');
+
 		}
 	}
-	// useEffect(() => {
-
-	// 	if (!selectAll) {
-
-	// 	}
-
-	// }, [selectAll]);
-
 
 	function formatNumber2(number) {
 		let newnum = number?.toLocaleString('ru-RU', {
@@ -467,8 +424,8 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	function onMouseDown(e) {
 		// if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
 		isDown = true;
-		startX = e.pageX - refScroll.current?.querySelector('.contentScroll').offsetLeft;
-		scrollLeft = refScroll.current?.querySelector('.contentScroll').scrollLeft;
+		startX = e.pageX - refScroll.current?.querySelector('.wrapper-scroll .scroll').offsetLeft;
+		scrollLeft = refScroll.current?.querySelector('.wrapper-scroll .scroll').scrollLeft;
 		// } else {
 		// 	isDown = false;
 		// }
@@ -483,9 +440,9 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 		updateHover();
 		// e.preventDefault();
 		_.throttle(() => {
-			const x = e.pageX - refScroll.current?.querySelector('.contentScroll').offsetLeft;
+			const x = e.pageX - refScroll.current?.querySelector('.wrapper-scroll .scroll').offsetLeft;
 			const walk = (x - startX) * 1.2; //scroll-fast
-			refScroll.current.querySelector('.contentScroll').scrollLeft = scrollLeft - walk;
+			refScroll.current.querySelector('.wrapper-scroll .scroll').scrollLeft = scrollLeft - walk;
 		}, 100)();
 	}
 	async function updateHover(e) {
@@ -513,7 +470,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	function clickScrollUp() {
 		// rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
 		// rootRef.current.scrollTop = 0;
-		document.querySelector('.contentScroll').scrollTop = 0;
+		document.querySelector('.scroll').scrollTop = 0;
 	}
 	async function onScroll(e) {
 		e.stopPropagation();
@@ -524,40 +481,20 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	useEffect(() => {
 		setTimeout(() => {
 			if (refScroll.current) {
-				refScroll.current.querySelector('.contentScroll').addEventListener('mousedown', onMouseDown);
-				refScroll.current.querySelector('.contentScroll').addEventListener('mouseleave', onMouseLeave);
-				refScroll.current.querySelector('.contentScroll').addEventListener('mouseup', onMouseLeave);
-				refScroll.current.querySelector('.contentScroll').addEventListener('mousemove', onMouseMove);
+				refScroll.current.querySelector('.scroll').addEventListener('mousedown', onMouseDown);
+				refScroll.current.querySelector('.scroll').addEventListener('mouseleave', onMouseLeave);
+				refScroll.current.querySelector('.scroll').addEventListener('mouseup', onMouseLeave);
+				refScroll.current.querySelector('.scroll').addEventListener('mousemove', onMouseMove);
 			}
 		}, 500);
-		return () => {
-			refScroll.current.querySelector('.contentScroll').removeEventListener('mousedown', onMouseDown);
-			refScroll.current.querySelector('.contentScroll').removeEventListener('mouseleave', onMouseLeave);
-			refScroll.current.querySelector('.contentScroll').removeEventListener('mouseup', onMouseLeave);
-			refScroll.current.querySelector('.contentScroll').removeEventListener('mousemove', onMouseMove);
-		}
+		// return () => {
+		// 	refScroll.current.querySelector('.scroll').removeEventListener('mousedown', onMouseDown);
+		// 	refScroll.current.querySelector('.scroll').removeEventListener('mouseleave', onMouseLeave);
+		// 	refScroll.current.querySelector('.scroll').removeEventListener('mouseup', onMouseLeave);
+		// 	refScroll.current.querySelector('.scroll').removeEventListener('mousemove', onMouseMove);
+		// }
 	}, []);
-	// console.log(percentScroll)
 
-	// const [widthColum, setWidthColum] = useState({ id: '', name: '', attribute: '' });
-
-	// async function width() {
-	// 	let arr2 = [];
-	// 	document.querySelectorAll('.name-width').forEach((x) => {
-	// 		arr2.push(x.offsetWidth);
-	// 	});
-	// 	let maxwidth2 = Math.max(...arr2);
-	// 	let arr3 = [];
-
-	// 		document.querySelectorAll('.attribute-width').forEach((x) => {
-	// 			arr3.push(x.offsetWidth);
-	// 		});
-	// 		let maxwidth3 = Math.max(...arr3);
-	// 		console.log(arr3)
-	// 		widthColum.name = maxwidth2;
-	// 		widthColum.attribute = maxwidth3;
-	// 		setWidthColum(widthColum);
-	// }
 
 
 	const [loadedLabelBlock, setLoadedLabelBlock] = useState(true);
@@ -644,11 +581,18 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					}}
 					ref={refScroll}
 				>
-					<MaxaScroll
+					{/* {console.log((refScroll.current?.offsetHeight - 75))}
+					{console.log(objProduct.length)} */}
+					<ScrollBar
+						vertical={true}
+						horizontal={true}
+						onScroll={_.throttle(onScroll, 500)}
+						className={'scroll-warehouse'}
 						setHideArrow={setHideArrow}
-						updateHover={updateHover}
 						podlozhka={podlozhka}
-						infiniteScroll={_.throttle(onScroll, 500)}
+						hideBar={((objProduct.length ) * 18 < (refScroll.current?.offsetHeight - 75)) ? true : false}
+						parentClass={'warehouse-scroll'}
+						// hideArrow={hideArrow}
 					>
 
 						<table
@@ -914,6 +858,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														hideMenu={hideMenu}
 														setSwitchMenu={setSwitchMenu}
 														setFlagSwitchMenu={setFlagSwitchMenu}
+														objProduct={objProduct}
 
 													/>
 												</div>
@@ -1029,6 +974,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setHideMenu={setHideMenu}
 													setSwitchMenu={setSwitchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
+													objProduct={objProduct}
 												/>
 											</div>
 												<div className='rezervBtn' style={{ height: 20, paddingRight: 4, display: 'flex', position: 'relative' }}>
@@ -1046,6 +992,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setHideMenu={setHideMenu}
 														setSwitchMenu={setSwitchMenu}
 														setFlagSwitchMenu={setFlagSwitchMenu}
+														objProduct={objProduct}
 													/>
 												</div>
 												<div className='otprBtn' style={{ height: 20, paddingRight: 4, display: 'flex', position: 'relative' }}>
@@ -1063,6 +1010,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setHideMenu={setHideMenu}
 														setSwitchMenu={setSwitchMenu}
 														setFlagSwitchMenu={setFlagSwitchMenu}
+														objProduct={objProduct}
 													/>
 												</div>
 												<div className='vozvratBtn' style={{ height: 20, display: 'flex', position: 'relative' }}>
@@ -1080,6 +1028,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setHideMenu={setHideMenu}
 														setSwitchMenu={setSwitchMenu}
 														setFlagSwitchMenu={setFlagSwitchMenu}
+														objProduct={objProduct}
 													/>
 												</div></>}
 										</div>
@@ -1099,6 +1048,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												setHideMenu={setHideMenu}
 												setSwitchMenu={setSwitchMenu}
 												setFlagSwitchMenu={setFlagSwitchMenu}
+												objProduct={objProduct}
 											/>
 										</div>
 									</th>
@@ -1117,6 +1067,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												setHideMenu={setHideMenu}
 												setSwitchMenu={setSwitchMenu}
 												setFlagSwitchMenu={setFlagSwitchMenu}
+												objProduct={objProduct}
 											/>
 										</div>
 
@@ -1136,6 +1087,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 												setHideMenu={setHideMenu}
 												setSwitchMenu={setSwitchMenu}
 												setFlagSwitchMenu={setFlagSwitchMenu}
+												objProduct={objProduct}
 											/>
 										</div>
 
@@ -1157,6 +1109,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 													setHideMenu={setHideMenu}
 													setSwitchMenu={setSwitchMenu}
 													setFlagSwitchMenu={setFlagSwitchMenu}
+													objProduct={objProduct}
 												/>
 											</div>
 												<div className='suma2Btn' style={{ height: 20, paddingRight: 4, display: 'flex', position: 'relative' }}>
@@ -1174,6 +1127,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setHideMenu={setHideMenu}
 														setSwitchMenu={setSwitchMenu}
 														setFlagSwitchMenu={setFlagSwitchMenu}
+																objProduct={objProduct}
 													/>
 												</div>
 												<div className='suma3Btn' style={{ height: 20, paddingRight: 4, display: 'flex', position: 'relative' }}>
@@ -1191,6 +1145,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setHideMenu={setHideMenu}
 														setSwitchMenu={setSwitchMenu}
 														setFlagSwitchMenu={setFlagSwitchMenu}
+														objProduct={objProduct}
 													/>
 												</div>
 												<div className='suma4Btn' style={{ height: 20, display: 'flex', position: 'relative' }}>
@@ -1208,6 +1163,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														setHideMenu={setHideMenu}
 														setSwitchMenu={setSwitchMenu}
 														setFlagSwitchMenu={setFlagSwitchMenu}
+														objProduct={objProduct}
 													/>
 												</div></>}
 										</div>
@@ -1362,8 +1318,17 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 								</tr>
 							</tfoot>
 						</table>
+					</ScrollBar>
+					{/* <MaxaScroll
+						setHideArrow={setHideArrow}
+						updateHover={updateHover}
+						podlozhka={podlozhka}
+						infiniteScroll={_.throttle(onScroll, 500)}
+					>
 
-					</MaxaScroll>
+						
+
+					</MaxaScroll> */}
 				</div>
 				<div ref={btnUp} onClick={clickScrollUp} className="btnUp">
 					<svg

@@ -155,72 +155,72 @@ body {
 	}
 }
 
-.scrollbox {
-	position: relative;
-	overflow: hidden;
-	height: 100%;
-	width: 100%;
+// .scrollbox {
+// 	position: relative;
+// 	overflow: hidden;
+// 	height: 100%;
+// 	width: 100%;
 
-	.contentScroll {
-		width: calc(100% - 20px);
-		height: 100%;
-		overflow: auto;
-		will-change: transform, scroll-position;
+// 	.contentScroll {
+// 		width: calc(100% - 20px);
+// 		height: 100%;
+// 		overflow: auto;
+// 		will-change: transform, scroll-position;
 
-		&::-webkit-scrollbar {
-			display: none;
-		}
+// 		&::-webkit-scrollbar {
+// 			display: none;
+// 		}
 
-		scrollbar-width: none;
+// 		scrollbar-width: none;
 
 
-	}
+// 	}
 
-	.track-vertical {
-		height: calc(100% - 100px);
-		background-color: rgba(0, 0, 0, 0.1);
-		border-radius: 6px;
-		width: 6px;
-		position: absolute;
-		top: 78px;
-		right: 10px;
-		opacity: 0;
-		transition: opacity 0.2s;
+// 	.track-vertical {
+// 		height: calc(100% - 100px);
+// 		background-color: rgba(0, 0, 0, 0.1);
+// 		border-radius: 6px;
+// 		width: 6px;
+// 		position: absolute;
+// 		top: 78px;
+// 		right: 10px;
+// 		opacity: 0;
+// 		transition: opacity 0.2s;
 
-	}
+// 	}
 
-	.track-vertical .bar {
-		height: 20px;
-		width: 6px;
-		// right: 0;
-		border-radius: 6px;
-		background-color: rgba(0, 0, 0, 0.3);
-		position: absolute;
-		transition: transform 0.3s;
-	}
+// 	.track-vertical .bar {
+// 		height: 20px;
+// 		width: 6px;
+// 		// right: 0;
+// 		border-radius: 6px;
+// 		background-color: rgba(0, 0, 0, 0.3);
+// 		position: absolute;
+// 		transition: transform 0.3s;
+// 	}
 
-	.track-horizontal {
-		width: 50%;
-		background-color: rgba(0, 0, 0, 0.1);
-		border-radius: 6px;
-		height: 6px;
-		position: absolute;
-		right: 30px;
-		bottom: 0px;
-		opacity: 0;
-		transition: opacity 0.2s;
+// 	.track-horizontal {
+// 		width: 50%;
+// 		background-color: rgba(0, 0, 0, 0.1);
+// 		border-radius: 6px;
+// 		height: 6px;
+// 		position: absolute;
+// 		right: 30px;
+// 		bottom: 0px;
+// 		opacity: 0;
+// 		transition: opacity 0.2s;
 
-	}
+// 	}
 
-	.track-horizontal .bar {
-		width: 20px;
-		height: 6px;
-		border-radius: 6px;
-		background-color: rgba(0, 0, 0, 0.3);
-		position: absolute;
-	}
+// 	.track-horizontal .bar {
+// 		width: 20px;
+// 		height: 6px;
+// 		border-radius: 6px;
+// 		background-color: rgba(0, 0, 0, 0.3);
+// 		position: absolute;
+// 	}
 
-}
+// }
 
 .warehouseAttributeBlock .track-vertical {
 	height: calc(100% - 82px);

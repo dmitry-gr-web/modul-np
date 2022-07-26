@@ -1,4 +1,4 @@
-import React, { useState, useEffect,lazy, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Warehouse.scss';
 import 'simplebar/dist/simplebar.min.css';
 import { dataWarehouse } from '../data/dataWarehouse';
@@ -9,12 +9,8 @@ import ProductCard from './ProductCard';
 import translator from '../data/translator';
 import {dataAttribute} from '../data/dataAttribute';
 import {dataSuppliers} from '../data/dataSuppliers';
-// import { useFetch } from '../data/useFetch';
-// const WarehouseBlock = lazy(() => import('./WarehouseBlock'));
 const Warehouse = () => {
-	
-	// let newarr = [...dataWarehouse, ...dataWarehouse];
-	// const ProductCard = React.createContext();
+
 	// const {data,error,isLoading} = useFetch('http://192.168.0.197:3005/folders', {
 	// 	method: 'POST',
 	// 	headers: {
@@ -31,16 +27,6 @@ const Warehouse = () => {
 	// console.log(data)
 	// console.log(data)
 	const [toggleCard, setToggleCard] = useState(false);
-	// console.log(dataWarehouse)
-	// const obj = [...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse,...dataWarehouse]
-	// console.log(obj)
-	// const obj1 = JSON.parse(JSON.stringify(dataWarehouse));
-	// // console.log(obj.length)
-	// const obj = [...dataWarehouse, ...obj1]
-	// setTimeout(() => {
-	// 	// Сортировать данные
-	// 	setObjProduct(dataWarehouse);
-	// }, 2000);
 	const [objProduct, setObjProduct] = useState(null);
 	const [objAttribute,setObjAttribute] = useState(null);
 	const [objSuppliers,setObjSuppliers] = useState(null);
@@ -50,7 +36,6 @@ const Warehouse = () => {
 		setObjSuppliers(dataSuppliers)
 		setObjProduct(dataWarehouse)
 	},[])
-	// console.log('pidor');
 	const [ul, setUl] = useState([
 		{ id: 0, name: "goods", select: true },
 		{ id: 1, name: "attributes", select: false },
@@ -67,44 +52,12 @@ const Warehouse = () => {
 		});
 		setUl(obj);
 	}
-
-	// const ruBtn = useEffect(()=> {
-	// 	translator.setLang('RU');
-	// },[ul])
-	// const uaBtn = useEffect(()=> {
-	// 	translator.setLang('UA');
-	// },[ul])
-	const [lang,setLang] = useState(false);
 	function ruBtn() {
-
 		translator.setLang('RU');
-		console.log('sadasds')
-
-
 	}
 	function uaBtn () {
-
 		translator.setLang('UA');
-		console.log('sadasds')
-
-
 	}
-	// useEffect(()=> {
-
-	// },[ul])
-	// const Preloaded = () => (
-	// 	<svg id="" className="header-logo__svg-logo" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-    //                         <path className="logo-yellow" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
-    // S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
-    // S758.6,32,500.2,32z"/>
-    //                         <path className="logo-red" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
-    // S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
-    // S758.6,32,500.2,32z"/>
-    //                         <path className="logo-blue" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
-    // S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
-    // S758.6,32,500.2,32z"/></svg>
-	// )
-
 	return (
 		<div
 			style={{
@@ -114,12 +67,6 @@ const Warehouse = () => {
 				background: 'white',
 			}}
 		>
-			{/* <Preloaded/> */}
-			{/* {isLoading ? (<div className='loading'><Preloaded/></div>) : 
-				<div style={{position: 'absolute'}}>
-					{data?.map(x=> <div>{x.title}</div>)}
-				</div>
-			} */}
 			<div style={{ position: 'absolute', top: 0, left: '200px' }}>
 				<button onClick={ruBtn}>RU</button>
 				<button onClick={uaBtn}>UA</button>
@@ -130,15 +77,12 @@ const Warehouse = () => {
 
 			<div
 				style={{
-					// marginLeft: 74,
 					paddingTop: 28,
 					height: '100vh',
-					// width: 'calc(100vw - 180px)',
 					background: 'white',
 					display: 'flex',
 					cursor: 'default',
 					width: '100%'
-					// justifyContent: 'space-between',
 				}}
 			>
 				<div style={{position:'absolute', width: 54,height: 500, left: '100px',backdropFilter: 'blur(4px)',    boxShadow: '-4px 4px 4px rgb(0 0 0 / 25%)',background: 'rgba(81,81,81,.7)'}}>
@@ -162,7 +106,6 @@ const Warehouse = () => {
 				</aside>
 				{
 					ul[0].select && 
-						// <Suspense fallback={<div>Loading</div>}>
 							<WarehouseBlock
 							setToggleCard={setToggleCard}
 							setGetIndex={setGetIndex}
@@ -170,14 +113,11 @@ const Warehouse = () => {
 							objProduct={objProduct}
 							translator={translator}
 							/>
-						// {/* </Suspense> */}
 					
 				}
-				{/* {error && <div style={{fontSize: 100}}>PIZDA {error}</div>} */}
 				{ul[1].select && <AttributeBlock setObjAttribute={setObjAttribute}  objAttribute={objAttribute} translator={translator}/>}
 				{ul[2].select && <Suppliers setObjSuppliers={setObjSuppliers}  objSuppliers={objSuppliers} translator={translator}/>}
 				{ul[3].select && <div />}
-
 				{toggleCard && (
 					<ProductCard
 						getIndex={getIndex}

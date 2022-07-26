@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from 'react';
 import './range.scss';
-const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMenu,hideArrow,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
+const WarehouseDropRange = ({objProduct,setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMenu,hideArrow,setSortActive,sortActive, setPodlozhka, podlozhka, zIndex, translator,width }) => {
 	let arr = [
 		'0',
 		'1',
@@ -279,9 +279,13 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			rangesData[1].select = false;
 			resultRef.current.innerHTML = '';
 			setArrowToggle(false);
-			document.querySelector('.contentScroll').style.overflowY = 'auto';
-			document.querySelector('.track-vertical').style.opacity = 1;
-            document.querySelector('.track-horizontal').style.opacity = 1;
+			if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+				warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+			}else {
+				warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+			}
+			warehouse.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 1;
+			warehouse.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 1;
 			setOpenMenu(false);
 			setPodlozhka(false);
 			setHideMenu(false);
@@ -344,7 +348,8 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			setOpenMenu(true);
 			setArrowToggle(true);
 			e.currentTarget.style.zIndex = '9999';
-			document.querySelector('.contentScroll').style.overflowY = 'hidden';		
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+	
 		}
 	}
 	function menuOff(e) {
@@ -353,7 +358,12 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		} else {
 			setOpenMenu(false);
 			e.currentTarget.style.zIndex = '1';
-			document.querySelector('.contentScroll').style.overflowY = 'auto';
+			if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+				warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+			}else {
+				warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+			}
+
 			if (activity) {
 				setArrowToggle(true);
 			} else {
@@ -392,9 +402,13 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 			setArrowActive('down');
 		}
 		setSortActive(!sortActive);
-		document.querySelector('.contentScroll').style.overflowY = 'scroll';
-		document.querySelector('.track-vertical').style.opacity = 1;
-		document.querySelector('.track-horizontal').style.opacity = 1;
+		if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+		}else {
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+		}
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 1;
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 1;
 
 		setTimeout(() => {
 			setActivity(true);
@@ -460,9 +474,13 @@ const WarehouseDropRange = ({setFlagSwitchMenu,setSwitchMenu, hideMenu,setHideMe
 		setFlagSwitchMenu(false);
 		setSwitchMenu(false);
 		setVirtualClick(false);
-		document.querySelector('.contentScroll').style.overflow = 'auto';
-		document.querySelector('.track-vertical').style.opacity = 1;
-		document.querySelector('.track-horizontal').style.opacity = 1;
+		if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+		}else {
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+		}
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 1;
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 1;
 		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
 			x.style.zIndex = 1;
 		});

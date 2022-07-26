@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podlozhka, setSortActive, sortActive, translator, hideMenu, setHideMenu }) => {
+const WarehouseInput = ({ objProduct,setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podlozhka, setSortActive, sortActive, translator, hideMenu, setHideMenu }) => {
 	const [inputID, setInputID] = useState('');
 	const [activity, setActivity] = useState(false);
 	const [arrowToggle, setArrowToggle] = useState(false);
@@ -21,9 +21,10 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 		setPodlozhka(true);
 		setVirtualClick(true);
 		setHideMenu(true);
-		document.querySelector('.contentScroll').style.overflowY = 'hidden';
-		document.querySelector('.track-vertical').style.opacity = 0;
-		document.querySelector('.track-horizontal').style.opacity = 0;
+		warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 0;
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 0;
 		if (e.target.value.length === 1) {
 			e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
 			// setInputID(e.target.value);
@@ -35,9 +36,14 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 		if (e.key === "Enter") {
 			setVirtualClick(false);
 			setHideMenu(false);
-			document.querySelector('.contentScroll').style.overflowY = 'auto';
-			document.querySelector('.track-vertical').style.opacity = 1;
-			document.querySelector('.track-horizontal').style.opacity = 1;
+			if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+				warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+			}else {
+				warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+			}
+
+			warehouse.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 1;
+			warehouse.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 1;
 			setPodlozhka(false);
 			e.currentTarget.blur();
 		}
@@ -62,9 +68,15 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 			setArrowActive('down');
 		}
 		setSortActive(!sortActive);
-		document.querySelector('.contentScroll').style.overflowY = 'scroll';
-		document.querySelector('.track-vertical').style.opacity = 1;
-		document.querySelector('.track-horizontal').style.opacity = 1;
+
+		if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+		}else {
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+		}
+
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 1;
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 1;
 
 		setTimeout(() => {
 			setActivity(true);
@@ -111,9 +123,14 @@ const WarehouseInput = ({ setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podloz
 		setFlagSwitchMenu(false);
 		setSwitchMenu(false);
 		setVirtualClick(false);
-		document.querySelector('.contentScroll').style.overflow = 'auto';
-		document.querySelector('.track-vertical').style.opacity = 1;
-		document.querySelector('.track-horizontal').style.opacity = 1;
+		if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
+		}else {
+			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
+		}
+
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-vertical').style.opacity = 1;
+		warehouse.current.closest('.wrapper-scroll').querySelector('.track-horizontal').style.opacity = 1;
 		document.querySelectorAll('.warehouse-dropmenu.ranges').forEach((x) => {
 			x.style.zIndex = 1;
 		});
