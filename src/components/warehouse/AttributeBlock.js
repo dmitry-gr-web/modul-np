@@ -1,46 +1,40 @@
-import React,{useEffect,useLayoutEffect,useRef,useState,useMemo} from 'react'
-import {SvGBtnPlus,Preloaded} from '../../img/svg-pack';
-import _, { set } from 'lodash';
-import ScrollBox from './reactScroll';
-// import {dataAttribute} from '../data/dataAttribute';
+import React, { useEffect, useRef, useState } from 'react'
+import { SvGBtnPlus, Preloaded } from '../../img/svg-pack';
+import _ from 'lodash';
 import WarehouseDropMenu from './WarehouseDropMenu';
 import WarehouseInput from './WarehouseInput';
 import { useFetch } from '../data/useFetch';
-// import SimpleBar from 'simplebar-react';
 import SwitchBtn from './SwitchBtn';
-import MaxaScroll from './MaxaScroll';
 import WarehouseInputField from './WarehouseInputField';
-import AttributeList from './AttributeList';
+import ScrollBar from './ScrollBar';
 let hover;
 let plusminus;
-const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
-	const {data,error,isLoading} = useFetch(
-	// 	'http://192.168.0.197:3005/goodAttributes', {
-	// 	method: 'POST',
-	// 	headers: {
-	// 		'Accept': 'application/json',
-	// 		'Content-Type': 'application/json'
-	// 	},
-	// 	body: JSON.stringify({
-	// 		"query": {},
-	// 		// "start": 10,
-	// 		// "start": props.folder.at(-1)?.id,
-	// 		"end": 20
-	// 	})
-	// }
+const AttributeBlock = ({ translator, setObjAttribute, objAttribute }) => {
+	const { data, error, isLoading } = useFetch(
+		// 	'http://192.168.0.197:3005/goodAttributes', {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Accept': 'application/json',
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+		// 		"query": {},
+		// 		// "start": 10,
+		// 		// "start": props.folder.at(-1)?.id,
+		// 		"end": 20
+		// 	})
+		// }
 	);
-
-	console.log(data)
+	// objAttribute = [{}]
 	const [lastIndex, setLastIndex] = useState(0);
 	const [hideMenu, setHideMenu] = useState(false);
-
-	const linkTR = useRef();
 	const [podlozhka, setPodlozhka] = useState(false);
+	const [addOneItem, setAddOneItem] = useState(false);
+	const [sortActive, setSortActive] = useState(false);
+	const [hideArrow, setHideArrow] = useState(false);
+	const refScroll = useRef();
 	const [start, setStart] = useState(0);
 	let rowHeight = 18;
-	// if (start >= data.length + getStart()){
-
-	// }
 	const [visibleRows, setVisible] = useState(
 		Math.floor((document.body.clientHeight * 1.2 - 170) / rowHeight)
 	);
@@ -49,8 +43,8 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 	}, [visibleRows]);
 	function getStart() {
 		let temp = start - Math.floor(document.body.clientHeight * 0.15) < 0
-				? 0
-				: start - Math.floor(document.body.clientHeight * 0.15);
+			? 0
+			: start - Math.floor(document.body.clientHeight * 0.15);
 		return Math.min(objAttribute.length - visibleRows - 1, Math.floor(temp / rowHeight));
 	}
 
@@ -79,7 +73,6 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 		if (!document.querySelector('.first-tab-body').classList.contains('hoverOff')) {
 			document.querySelector('.first-tab-body').classList.add('hoverOff');
 		}
-		
 		hover = setTimeout(() => {
 			document.querySelector('.first-tab-body').classList.remove('hoverOff');
 		}, 400);
@@ -88,46 +81,30 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 	function clickPodlozhka() {
 		setPodlozhka(false);
 		setHideMenu(false);
-		// setFlagSwitchMenu(false);
-		// setSwitchMenu(false);
 		setAddOneItem(false);
-		document.querySelector('.track-vertical').style.opacity = 1;
 		document.querySelector('.first-tab-body tr:nth-child(2) td:last-child').querySelector('span').style.width = '0%';
 		document.querySelector('.first-tab-body tr:nth-child(2) td:nth-child(4)').style.color = '';
-
-		// linkTR.current.classList.remove('hover-disabled');
-		// document.querySelector('.first-tab-body tr:nth-child(2)').classList.remove('hover-disabled');
-		document.querySelector('.track-horizontal').style.opacity = 1;
-		document.querySelector('.contentScroll').style.overflow = 'auto';
-
 	}
 	const btnUp = useRef();
 	useEffect(() => {
-		if(btnUp.current){
+		if (btnUp.current) {
 			if (start > 600) {
 				btnUp.current.style.visibility = 'visible';
 			} else {
 				btnUp.current.style.visibility = 'hidden';
 			}
 		}
-	
+
 	}, [start]);
 	function clickScrollUp() {
-		// rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
-		// rootRef.current.scrollTop = 0;
-		document.querySelector('.contentScroll').scrollTop = 0;
+		refScroll.current.querySelector('.scroll').scrollTop = 0;
 	}
 	async function onScroll(e) {
 		e.stopPropagation();
 		setStart(e.target.scrollTop);
 		updateHover();
-		// setSwitchMenu(false);
 	}
-	
-	function clickTr(e,index) {
-		// e.preventDefault();
-		// e.stopPropagation();
-		// console.log(e.currentTarget)
+	function clickTr(e, index) {
 		if (e.currentTarget && !objAttribute[index].lock) {
 			let newobj = [...objAttribute];
 			if (e.ctrlKey || e.metaKey) {
@@ -141,7 +118,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 					return { ...x, select: false };
 				});
 				if (lastIndex < index) {
-					newobj.slice(lastIndex , index + 1).map((x, i) => {
+					newobj.slice(lastIndex, index + 1).map((x, i) => {
 						if (x.lock) {
 							x.select = false;
 						} else {
@@ -149,7 +126,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 						}
 					});
 				} else {
-					newobj.slice(index , lastIndex + 1).map((x, i) => {
+					newobj.slice(index, lastIndex + 1).map((x, i) => {
 						if (x.lock) {
 							x.select = false;
 						} else {
@@ -158,111 +135,122 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 					});
 				}
 			} else {
-				// e.preventDefault();
 				setLastIndex(index);
 				e.stopPropagation();
 				newobj.map((x, i) => {
 					if (i !== index) {
 						x.select = false;
 					}
-				});
-				// if (newobj[index].select !== true) {
-				// 	newobj.map((x) => (x.select = !newobj[index].select));
-				// }
-				// if(newobj[index].select !== undefined)	
+				});	
 				newobj[index].select = !newobj[index].select;
-				// else {}
-			
 			}
 			setObjAttribute([...newobj]);
 		}
 	}
-	// const [percentScroll, setPercentScroll] = useState(0.87);
+	function tooltipOn(e, html) {
+		let posElement = e.currentTarget.getBoundingClientRect();
+		const tooltipBlock = document.getElementById('tooltipBtn');
+		tooltipBlock.style.fontSize = '14px';
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'status')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = `Статус атрибута<br><span class='text-tooltip'>Активирует/деактивирует атрибут в CRM</span>`;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === 'ID') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = `Идентификатор/код атрибута<br><span class='text-tooltip'>Используется для поиска, передачи и добавления атрибута</span>`;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
 
-	// useEffect(() => {
-		
-	// 		if(rootRef.current?.content.offsetHeight < 614) {
-	// 			setPercentScroll(0.81);
-	// 		}
-	// }, [objAttribute]);
+		if (e.currentTarget.innerText === translator.getTranslation('warehouse', 'name')) {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = `Название атрибута<br><span class='text-tooltip'>Используется для присвоения товарам уникальных признаков</span>`;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === 'Товар') {
+			plusminus = setTimeout(() => {
+				tooltipBlock.innerHTML = 'Предполагаемый ID товара';
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+	
+
+	
+	}
+
+	function tooltipOff() {
+		clearTimeout(plusminus);
+		document.getElementById('tooltipBtn').style.animation = '';
+	}
 	function searchLine(text, value) {
 		if (value !== '') {
 			let re = new RegExp(value, 'gui');
 			let text_pr = text?.replace(re, (x) => '<span class="findUnderline">' + x + '</span>');
-
 			return text_pr;
 		} else {
 			return text;
 		}
 	}
-	// function showScrollbar () {
-	// 	document.querySelector('.scrollbar').style.opacity = 1;
-	// 	document.querySelector('.scrollbarHorizont').style.opacity = 1;
-	// }
-	// function hideScrollbar () {
-	// 	document.querySelector('.scrollbar').style.opacity = 0;
-	// 	document.querySelector('.scrollbarHorizont').style.opacity = 0;
-	// }
-	const [sortActive, setSortActive] = useState(false);
-	const [hideArrow, setHideArrow] = useState(false);
-	// export default React.memo(SwitchBtn);
-	const [selectAll, setSelectAll] = useState(false);
-
-
 	useEffect(() => {
-		function clickDocument(e) {
-			if (!e.target.closest('.warehouse-table')) {
-				setSelectAll(false);
-				let newobj = objAttribute.map((x) => ({...x, select: false}));
-				setObjAttribute([...newobj]);
-			}
+		if (objAttribute?.length > 0) {
+			document.addEventListener('click', clickDocument, true);
+			document.addEventListener('keydown', ctrlAclickShift, true);
+			return () => {
+				document.removeEventListener('click', clickDocument, true);
+				document.removeEventListener('keydown', ctrlAclickShift, true);
+			};
 		}
-		if (!selectAll) {
-			document.addEventListener('keydown', function (e) {
-				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
-					e.preventDefault();
-					setSelectAll(true);
-					// let newobj = [...objAttribute];
-					let arr = objAttribute.map((x) => {
-						if (x.lock) {
-							return {...x , select: false};
-						} else {
-							return {...x , select: true};
-						}
-					});
-					setObjAttribute([...arr]);
+	}, [objAttribute?.length])
+	function clickDocument(e) {
+		if (refScroll.current && !refScroll.current.contains(e.target)) {
+			let newobj = [...objAttribute];
+			newobj = newobj.map((x) => {
+				return { ...x, select: false }
+			});
+			setObjAttribute(newobj);
+		}
+	}
+	function ctrlAclickShift(e) {
+		if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+			e.preventDefault();
+			let newobj =  [...objAttribute];
+			newobj = newobj.map((x) => {
+				if (x.lock) {
+					return { ...x, select: false };
+				} else {
+					return { ...x, select: true };
 				}
 			});
+			setObjAttribute(newobj);
+
 		}
-		document.addEventListener('click', clickDocument);
-		return () => {
-			document.removeEventListener('click', clickDocument);
-		};
-	}, [selectAll, objAttribute]);
-
-
-
-	const [addOneItem,setAddOneItem] = useState(false);
-	const [count,setCount]= useState(0);
+	}
 	let newAttribute = {
-		status:false,
+		status: true,
 		product: 'XXXX-',
 		id: 'XXXX',
-		select:false,
-		lock:false,
+		select: false,
+		lock: false,
 		attribute: ''
 	}
 	function addAttribute() {
-
-		// setCount(prev=> prev+1)
-		document.querySelector('.contentScroll').scrollTop = 0;
+		refScroll.current.querySelector('.scroll').scrollTop = 0;
 		setPodlozhka(true);
 		setAddOneItem(true);
 		setHideMenu(true);
-		let arr = [newAttribute,...objAttribute];
+		let arr = [newAttribute, ...objAttribute];
 		setObjAttribute(arr);
-		// let arr = [newAttribute,...JSON.parse(JSON.stringify(objAttribute))];
-		// setObjAttribute([...arr]);
 		setTimeout(() => {
 			document.querySelector('.first-tab-body tr:nth-child(2) td:last-child input').focus()
 			document.querySelector('.first-tab-body tr:nth-child(2) td:last-child').style.zIndex = 99;
@@ -271,18 +259,14 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 			document.querySelector('.first-tab-body tr:nth-child(2) td:last-child').querySelector('span').style.width = '100%';
 		}, 100);
 	}
-
-	// const memo = React.memo(AttributeBlock)
-
-	// console.log(objAttribute)
 	return (
 		<>
-		{isLoading ? (<div className='loading'><Preloaded/></div>) : (
-			<div className="warehouse-products">
+			{isLoading ? (<div className='loading'><Preloaded /></div>) : (
+				<div className="warehouse-products">
 					<div className="warehouse-products-title">
-						<hr/>
+						<hr />
 						<span>{translator.getTranslation('warehouse', 'attributes')}</span>
-						<button onClick={(e) => {addAttribute(); e.stopPropagation()}} disabled={addOneItem} className='btnAddItem'>
+						<button onClick={(e) => { addAttribute(); e.stopPropagation() }} disabled={addOneItem} className='btnAddItem'>
 							<SvGBtnPlus />
 						</button>
 					</div>
@@ -290,29 +274,24 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 					<div
 						style={{
 							position: 'relative',
-							// maxHeight: 'calc(100vh - 170px)',
-							// width: '100%',
-							// height:  'calc(100vh - 216px)',
-							height:  'calc(100vh - 210px)',
+							height: 'calc(100vh - 210px)',
 						}}
 						className='warehouseAttributeBlock'
+						ref={refScroll}
 					>
-			
-							<MaxaScroll
-								setHideArrow={setHideArrow}
-								updateHover={updateHover}
-								podlozhka={podlozhka}
-								infiniteScroll={_.throttle(onScroll, 500)}
-			
-							>
-
+						<ScrollBar
+							vertical={true}
+							horizontal={true}
+							onScroll={_.throttle(onScroll, 500)}
+							className={'scroll-warehouse'}
+							setHideArrow={setHideArrow}
+							podlozhka={podlozhka}
+							hideBar={((objAttribute.length) * 18 < (refScroll.current?.offsetHeight - 75)) ? true : false}
+							parentClass={'warehouse-scroll-attribute'}
+						>
 							<table
 								tabIndex={-1}
 								className='warehouse-table'
-								// onMouseEnter={showScrollbar}
-								// onMouseLeave={hideScrollbar}
-								// style={{ width: '100%' }}
-								// style={{ width: '100%', height: '100%', paddingLeft: 13, paddingRight: 10 }}
 							>
 								<thead className="first-tab-header">
 									<tr>
@@ -321,7 +300,7 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 												<div
 													className="warehouse-podlozhka"
 													style={{
-														width: document.querySelector('.contentScroll').offsetWidth + 'px',
+														width: refScroll.current?.querySelector('.scroll').offsetWidth + 'px',
 														height: document.body.clientHeight + 'px',
 														position: 'absolute',
 														left: 0,
@@ -336,29 +315,39 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 
 									<tr>
 										<th></th>
-										<th style={{ paddingRight: '15px' }}>
-											Статус
+										<th style={{ paddingRight: '15px',cursor: 'help' }}
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
+										>
+											{translator.getTranslation('warehouse', 'status')}
 										</th>
-										<th style={{ paddingRight: '5px' }}>
+										<th style={{ paddingRight: '5px',cursor: 'help' }}
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
+										>
+											
 											Товар
 										</th>
-										<th style={{ paddingRight: '15px' }}>
+										<th style={{ paddingRight: '15px',cursor: 'help' }}
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
+										>
 											ID
 										</th>
-										<th>
-											Название
+										<th
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
+											style={{cursor: 'help'}}
+										>
+											{translator.getTranslation('warehouse', 'name')}
 										</th>
 									</tr>
 									<tr>
 										<th></th>
-										<th style={{paddingRight: '15px', minWidth:51}}>
+										<th style={{ paddingRight: '15px', minWidth: 51 }}>
 											<WarehouseDropMenu
 												setPodlozhka={setPodlozhka}
 												podlozhka={podlozhka}
-												// width21px={width21px}
-												// setWidth21px={setWidth21px}
-												// labelForWidth={labelForWidth}
-												// setLabelForWidth={setLabelForWidth}
 												type={'status'}
 												translator={translator}
 												objProduct={objAttribute}
@@ -367,34 +356,32 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
-												// setSwitchMenu={setSwitchMenu}
-												// switchMenu={switchMenu}
-												// setFlagSwitchMenu={setFlagSwitchMenu}
 											/>
 										</th>
-										<th style={{paddingRight: '5px', position:'relative'}}>
+										<th style={{ paddingRight: '5px', position: 'relative' }}>
 											<div
 												style={{
-												width: 'calc(100% - 5px)',
-												background: '#9c9b9e',
-												height: 1,
-												bottom: 2,
-												left: 0,
-												position: 'absolute',
-												opacity: `${!hideMenu ? '1': '0'}`,
-												transition: 'opacity 0.2s'
+													width: 'calc(100% - 5px)',
+													background: '#9c9b9e',
+													height: 1,
+													bottom: 2,
+													left: 0,
+													position: 'absolute',
+													opacity: `${!hideMenu ? '1' : '0'}`,
+													transition: 'opacity 0.2s'
 												}}
 											></div>
 										</th>
 										<th style={{ paddingRight: '15px' }}>
-											<WarehouseInput 
-												podlozhka={podlozhka} 
-												setPodlozhka={setPodlozhka} 
+											<WarehouseInput
+												podlozhka={podlozhka}
+												setPodlozhka={setPodlozhka}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												translator={translator}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
+												data={objAttribute}
 											/>
 										</th>
 										<th>
@@ -406,18 +393,14 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 												searchLine={searchLine}
 												inputOn={true}
 												objProduct={objAttribute}
-															// setSwitchMenu={setSwitchMenu}
-															// switchMenu={switchMenu}
 												sortActive={sortActive}
 												setSortActive={setSortActive}
 												hideArrow={hideArrow}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
-															// setWidth21px={setWidth21px}
-															// setLabelForWidth={setLabelForWidth}
 											/>
 										</th>
-										
+
 									</tr>
 									<tr>
 										<th className="shadow-vertical" colSpan={19}>
@@ -430,79 +413,61 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 								<tbody className="first-tab-body">
 									<tr style={{ height: getTopHeight() }}></tr>
 									{objAttribute.length > 0 &&
-										objAttribute.slice( (getStart() < 0 ? 0 : getStart()),  (getStart() < 0 ? 0 : getStart()) + visibleRows + 1).map((x, index) => (
-											<tr onClick={(e) => clickTr(e,(index + (getStart() < 0 ? 0 : getStart())))}
-											className={
-												objAttribute[index + (getStart() < 0 ? 0 : getStart())].select
-												? 'select speed hoverAttributeBlock'
-												: objAttribute[index + (getStart() < 0 ? 0 : getStart())].lock
-												? 'lockOrder speed hoverAttributeBlock'
-												: 'speed hoverAttributeBlock'
-											}
-											onMouseEnter={objAttribute[index+(getStart() < 0 ? 0 : getStart())].lock ? (e) => {
-												
-												let posElement = e.target.getBoundingClientRect();
-												const tooltipBlock = document.getElementById('tooltipBtn');
-												tooltipBlock.style.fontSize = '12px';
-												const widthPlus = e.pageX + tooltipBlock.offsetWidth;
-												const viewportWidth = document.body.clientWidth;
-												plusminus = setTimeout(() => {
-													const name = 'Олександр';
-													tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
-													// tooltipBlock.style.left = posElement.x + 'px';
-													// tooltipBlock.style.top = posElement.y + 23 + 'px';
-													if (widthPlus > viewportWidth) {
-														tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
-														tooltipBlock.style.top = posElement.y + 23 + 'px';
-													} else {
-														tooltipBlock.style.left = posElement.x + 'px';
-														tooltipBlock.style.top = posElement.y + 23 + 'px';
-													}
-													tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
-												}, 250);
-												
-											} : () => { }}
-											onMouseLeave={objAttribute[index+(getStart() < 0 ? 0 : getStart())].lock ? (e) => {
-												clearTimeout(plusminus);
-												document.getElementById('tooltipBtn').style.animation = '';
-											} : () => { }}
-											key={index+getStart()}
-											// index={index+getStart()}
+										objAttribute.slice((getStart() < 0 ? 0 : getStart()), (getStart() < 0 ? 0 : getStart()) + visibleRows + 1).map((x, index) => (
+											<tr onClick={(e) => clickTr(e, (index + (getStart() < 0 ? 0 : getStart())))}
+												className={
+													objAttribute[index + (getStart() < 0 ? 0 : getStart())].select
+														? 'select speed hoverAttributeBlock'
+														: objAttribute[index + (getStart() < 0 ? 0 : getStart())].lock
+															? 'lockOrder speed hoverAttributeBlock'
+															: 'speed hoverAttributeBlock'
+												}
+												onMouseEnter={objAttribute[index + (getStart() < 0 ? 0 : getStart())].lock ? (e) => {
+													let posElement = e.target.getBoundingClientRect();
+													const tooltipBlock = document.getElementById('tooltipBtn');
+													tooltipBlock.style.fontSize = '12px';
+													const widthPlus = e.pageX + tooltipBlock.offsetWidth;
+													const viewportWidth = document.body.clientWidth;
+													plusminus = setTimeout(() => {
+														const name = 'Олександр';
+														tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
+														if (widthPlus > viewportWidth) {
+															tooltipBlock.style.left = posElement.x + e.target.offsetWidth - tooltipBlock.offsetWidth + 'px';
+															tooltipBlock.style.top = posElement.y + 23 + 'px';
+														} else {
+															tooltipBlock.style.left = posElement.x + 'px';
+															tooltipBlock.style.top = posElement.y + 23 + 'px';
+														}
+														tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+													}, 250);
+
+												} : () => { }}
+												onMouseLeave={objAttribute[index + (getStart() < 0 ? 0 : getStart())].lock ? (e) => {
+													clearTimeout(plusminus);
+													document.getElementById('tooltipBtn').style.animation = '';
+												} : () => { }}
+												key={index + getStart()}
 											>
-												{/* {console.log(objAttribute)} */}
 												<td><div className='stickyBeforeBody'></div></td>
-												<td style={{paddingRight:15}}><SwitchBtn status={x.status} data={objAttribute} setData={setObjAttribute} index={index+(getStart() < 0 ? 0 : getStart())}/></td>
-												<td style={{paddingRight:5, color: `rgba(0,0,0,0.4)`, textAlign: 'right'}}>{x.product}</td>
-												<td style={{paddingRight:15,color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`, minWidth: 40}}>{x.id}</td>
-												<td style={{position: "relative",minWidth:300}}>
-													<WarehouseInputField 
-													setCount={setCount} 
-													type={'attribute'} 
-													addOneItem={addOneItem} 
-													setPodlozhka={setPodlozhka} 
-													podlozhka={podlozhka} 
-													data={objAttribute} 
-													// data={JSON.parse(JSON.stringify(objAttribute))} 
-													value={x.attribute} 
-													setData={setObjAttribute} 
-													index={index+(getStart() < 0 ? 0 : getStart())} 
-													setHideMenu={setHideMenu} 
-													setHideArrow={setHideArrow}/>
-													{/* <input onMouseEnter={(e) => inputOn(e, index + (getStart() < 0 ? 0 : getStart()))} onMouseLeave={e => inputOff(e,index + (getStart() < 0 ? 0 : getStart()))} style={{color: `${x.status ? 'rgba(0,0,0,0.4)': ''}`}} className='attributeInput' value={x.attribute} onChange={null}/> */}
+												<td style={{ paddingRight: 15 }}><SwitchBtn status={x.status} data={objAttribute} setData={setObjAttribute} index={index + (getStart() < 0 ? 0 : getStart())} /></td>
+												<td style={{ paddingRight: 5, color: `rgba(0,0,0,0.4)`, textAlign: 'right' }}>{x.product}</td>
+												<td style={{ paddingRight: 15, color: `${!x.status ? 'rgba(0,0,0,0.4)' : ''}`, minWidth: 40 }}>{x.id}</td>
+												<td style={{ position: "relative", minWidth: 300 }}>
+													<WarehouseInputField
+														type={'attribute'}
+														addOneItem={addOneItem}
+														setPodlozhka={setPodlozhka}
+														podlozhka={podlozhka}
+														data={objAttribute}
+														value={x.attribute}
+														setData={setObjAttribute}
+														index={index + (getStart() < 0 ? 0 : getStart())}
+														setHideMenu={setHideMenu}
+														setHideArrow={setHideArrow}
+														setAddOneItem={setAddOneItem} 
+													/>
 												</td>
 											</tr>
-											// <AttributeList 
-											// 	index={index+ (getStart() < 0 ? 0 : getStart())}
-											// 	key={index+ (getStart() < 0 ? 0 : getStart())}
-											// 	objAttribute={objAttribute}
-											// 	setObjAttribute={setObjAttribute}
-											// 	translator={translator}
-											// 	addOneItem={addOneItem}
-											// 	podlozhka={podlozhka}
-											// 	setPodlozhka={setPodlozhka}
-											// 	setHideArrow={setHideArrow}
-											// 	setHideMenu={setHideMenu}
-											// />
 										))}
 
 									<tr style={{ height: getBottomHeight() }}></tr>
@@ -511,13 +476,12 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 									<tr>
 										<td colSpan={18} style={{ height: 18 }}>
 											<div className="shadow-vertical-footer"></div>
-											<div style={{position:'absolute',bottom:0,left:0,height:8,width:'100%',background:'white'}}></div>
+											<div style={{ position: 'absolute', bottom: 0, left: 0, height: 8, width: '100%', background: 'white' }}></div>
 										</td>
 									</tr>
 								</tfoot>
 							</table>
-							</MaxaScroll>
-						{/* </ScrollBox> */}
+						</ScrollBar>
 					</div>
 					<div ref={btnUp} onClick={clickScrollUp} className="btnUp">
 						<svg
@@ -532,10 +496,10 @@ const AttributeBlock = ({translator,setObjAttribute,objAttribute}) => {
 							></path>
 						</svg>
 					</div>
-			</div>)
-		}
+				</div>)
+			}
 		</>
-  )
+	)
 }
 
 export default AttributeBlock;

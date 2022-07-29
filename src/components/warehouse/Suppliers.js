@@ -10,10 +10,12 @@ import SwitchBtn from './SwitchBtn';
 import MaxaScroll from './MaxaScroll';
 import WarehouseInputField from './WarehouseInputField';
 import WarehouseCountryField from './WarehouseCountryField';
+import ScrollBar from './ScrollBar';
 let hover;
 let plusminus;
 let tooltip;
 const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
+	// console.log(objSuppliers)
 	const { data, error, isLoading } = useFetch(
 		// 	'http://192.168.0.197:3005/goodAttributes', {
 		// 	method: 'POST',
@@ -30,7 +32,6 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 		// }
 	);
 
-	console.log(data)
 	const [lastIndex, setLastIndex] = useState(0);
 	const [hideMenu, setHideMenu] = useState(false);
 
@@ -85,16 +86,19 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 		document.getElementById('tooltipBtn').style.animation = '';
 	}
 	function clickPodlozhka() {
-		setPodlozhka(false);
-		setHideMenu(false);
+		// if(carouselDrop ===false){
+
+		// 	setPodlozhka(false);
+		// }
+		// setHideMenu(false);
 		// setFlagSwitchMenu(false);
 		// setSwitchMenu(false);
-		document.querySelector('.track-vertical').style.opacity = 1;
-		document.querySelector('.track-horizontal').style.opacity = 1;
-		document.querySelector('.contentScroll').style.overflow = 'auto';
-		document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
-			x.style.minWidth = '22px';
-		});
+		// document.querySelector('.track-vertical').style.opacity = 1;
+		// document.querySelector('.track-horizontal').style.opacity = 1;
+		// document.querySelector('.contentScroll').style.overflow = 'auto';
+		// document.querySelectorAll('.telOperator .warehouse-dropmenu').forEach((x) => {
+		// 	x.style.minWidth = '22px';
+		// });
 		// document.querySelectorAll('.warehouse-dropmenu , .warehouse-input').forEach((x) => {
 		// 	x.classList.remove('hide-menu');
 		// });
@@ -132,9 +136,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 
 	}, [start]);
 	function clickScrollUp() {
-		// rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
-		// rootRef.current.scrollTop = 0;
-		document.querySelector('.contentScroll').scrollTop = 0;
+		refScroll.current.querySelector('.scroll').scrollTop = 0;
 	}
 	async function onScroll(e) {
 		e.stopPropagation();
@@ -267,6 +269,33 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 			// 	}, 250);
 			// }
 		}
+		if (e.currentTarget.innerText === "Статус") {
+			tooltipBlock.style.fontSize = '14px';
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerHTML = `Статус поставщика<br><span class='text-tooltip'>Активирует/деактивирует поставщика в CRM</span>`;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === "Страна") {
+			tooltipBlock.style.fontSize = '14px';
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerHTML = `Страна в которой работает поставщик<br><span class='text-tooltip'>Используется для ориентации при работе с поставщиками</span>`;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
+		if (e.currentTarget.innerText === "Компания") {
+			tooltipBlock.style.fontSize = '14px';
+			tooltip = setTimeout(() => {
+				tooltipBlock.innerHTML = `Название компании<br><span class='text-tooltip'>Используется при добавлении/списании товара</span>`;
+				tooltipBlock.style.left = posElement.x + 'px';
+				tooltipBlock.style.top = posElement.y + 40 + 'px';
+				tooltipBlock.style.animation = 'delay-btn 0.5s forwards';
+			}, 250);
+		}
 		if (e.currentTarget.innerText === '🇺🇦') {
 			tooltip = setTimeout(() => {
 				tooltipBlock.innerText = translator.getTranslation('tooltipCountries', 'ukraine');
@@ -339,56 +368,60 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 	}
 	const [sortActive, setSortActive] = useState(false);
 	const [hideArrow, setHideArrow] = useState(false);
-	// export default React.memo(SwitchBtn);
-	const [selectAll, setSelectAll] = useState(false);
-
 	useEffect(() => {
-		function clickDocument(e) {
-			if (!e.target.closest('.warehouse-table')) {
-				setSelectAll(false);
-				let newobj = [...objSuppliers];
-				newobj.map((x) => (x.select = false));
-				setObjSuppliers(newobj);
-			}
+		if (objSuppliers?.length > 0) {
+			document.addEventListener('click', clickDocument, true);
+			document.addEventListener('keydown', ctrlAclickShift, true);
+			return () => {
+				document.removeEventListener('click', clickDocument, true);
+				document.removeEventListener('keydown', ctrlAclickShift, true);
+			};
 		}
-		if (!selectAll) {
-			document.addEventListener('keydown', function (e) {
-				if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
-					e.preventDefault();
-					setSelectAll(true);
-					let newobj = [...objSuppliers];
-					newobj.map((x) => {
-						if (x.lock) {
-							return (x.select = false);
-						} else {
-							return (x.select = true);
-						}
-					});
-					setObjSuppliers(newobj);
-					// console.log('asdasdasd');
+	}, [objSuppliers?.length])
+	function clickDocument(e) {
+		if (refScroll.current && !refScroll.current.contains(e.target)) {
+			let newobj = [...objSuppliers];
+			newobj = newobj.map((x) => {
+				return { ...x, select: false }
+			});
+			setObjSuppliers(newobj);
+		}
+	}
+	function ctrlAclickShift(e) {
+		if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+			e.preventDefault();
+			let newobj =  [...objSuppliers];
+			newobj = newobj.map((x) => {
+				if (x.lock) {
+					return { ...x, select: false };
+				} else {
+					return { ...x, select: true };
 				}
 			});
-		}
-		document.addEventListener('click', clickDocument);
+			setObjSuppliers(newobj);
 
-		return () => {
-			document.removeEventListener('click', clickDocument);
-		};
-	}, [selectAll]);
+		}
+	}
 	const [addOneItem, setAddOneItem] = useState(false);
-	const [count, setCount] = useState(0);
+	// const [count, setCount] = useState(0);
+	const [carouselDrop,setCarouselDrop] = useState({carousel:false,query:0});
 	function addSuppliers() {
 		let newSuppliers = {
-			status: false,
-			product: 'XXXX-',
-			id: '****',
-			select: false,
-			lock: false,
-			attribute: ''
+			status:true,
+			country: '',
+			company: '',
+			contact: '',
+			number: '',
+			iconNumber: '',
+			commentary: '',
+			select: false, 
+			lock: false
 		}
-		document.querySelector('.contentScroll').scrollTop = 0;
+		refScroll.current.querySelector('.scroll').scrollTop = 0;
+		setCarouselDrop({...carouselDrop,carousel: true});
 		setPodlozhka(true);
-		setAddOneItem(true);
+		refScroll.current?.querySelectorAll('.first-tab-body tr .warehouse-dropmenu')[0].click();
+		// setAddOneItem(true);
 		setHideMenu(true);
 		let arr = [newSuppliers, ...objSuppliers];
 		setObjSuppliers([...arr]);
@@ -398,6 +431,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 		// 	document.querySelector('.first-tab-body tr:nth-child(2)').classList.add('hover-disabled');
 		// }, 100);
 	}
+	const refScroll = useRef();
 	return (
 		<>
 			{isLoading ? (<div className='loading'><Preloaded /></div>) : (
@@ -405,7 +439,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 					<div className="warehouse-products-title">
 						<hr />
 						<span>Поставщики</span>
-						<button>
+						<button onClick={addSuppliers} disabled={carouselDrop.carousel ? true : false}>
 							<SvGBtnPlus />
 						</button>
 					</div>
@@ -413,29 +447,21 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 					<div
 						style={{
 							position: 'relative',
-							// maxHeight: 'calc(100vh - 170px)',
-							// width: '100%',
-							// height:  'calc(100vh - 216px)',
 							height: 'calc(100vh - 210px)',
 						}}
-						className='warehouseAttributeBlock'
+						ref={refScroll}
+						// className='warehouseAttributeBlock'
 					>
-						{/* <ScrollBox
-							ref={rootRef}
-							// scrollVertMinus={0.07}
-							percent={percentScroll}
-							scroll={_.throttle(onScroll, 500)}
-							color="rgba(0, 0, 0, 0.3)"
+						<ScrollBar
+							vertical={true}
+							horizontal={true}
+							onScroll={_.throttle(onScroll, 500)}
+							className={'scroll-warehouse'}
 							setHideArrow={setHideArrow}
-						> */}
-						<MaxaScroll
-							setHideArrow={setHideArrow}
-							updateHover={updateHover}
 							podlozhka={podlozhka}
-							infiniteScroll={_.throttle(onScroll, 500)}
-
+							hideBar={((objSuppliers.length) * 18 < (refScroll.current?.offsetHeight - 75)) ? true : false}
+							parentClass={'warehouse-scroll-attribute'}
 						>
-
 							<table
 								tabIndex={-1}
 								className='warehouse-table'
@@ -451,7 +477,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 												<div
 													className="warehouse-podlozhka"
 													style={{
-														width: document.querySelector('.contentScroll').offsetWidth + 'px',
+														width: refScroll.current?.querySelector('.scroll').offsetWidth + 'px',
 														height: document.body.clientHeight + 'px',
 														position: 'absolute',
 														left: 0,
@@ -466,13 +492,22 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 
 									<tr>
 										<th></th>
-										<th style={{ paddingRight: '15px' }}>
+										<th style={{ paddingRight: '15px', cursor: 'help' }}
+											onMouseEnter={tooltipOn}
+											onMouseLeave={tooltipOff}
+										>
 											Статус
 										</th>
-										<th style={{ paddingRight: '15px' }}>
+										<th style={{ paddingRight: '15px' , cursor: 'help' }}
+												onMouseEnter={tooltipOn}
+												onMouseLeave={tooltipOff}
+										>
 											Страна
 										</th>
-										<th style={{ paddingRight: '15px' }}>
+										<th style={{ paddingRight: '15px' , cursor: 'help' }}
+												onMouseEnter={tooltipOn}
+												onMouseLeave={tooltipOff}
+										>
 											Компания
 										</th>
 										<th style={{ paddingRight: '15px' }}>
@@ -597,6 +632,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 													translator={translator}
 													setHideMenu={setHideMenu}
 													hideMenu={hideMenu}
+													data={objSuppliers}
 												/>
 											</div>
 
@@ -610,6 +646,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 												translator={translator}
 												setHideMenu={setHideMenu}
 												hideMenu={hideMenu}
+												data={objSuppliers}
 											/>
 										</th>
 
@@ -640,7 +677,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 													tooltipBlock.style.fontSize = '12px';
 													const widthPlus = e.pageX + tooltipBlock.offsetWidth;
 													const viewportWidth = document.body.clientWidth;
-													plusminus = setTimeout(() => {
+													tooltip = setTimeout(() => {
 														const name = 'Олександр';
 														tooltipBlock.innerText = translator.getTranslation('lockOrder', 'lock') + ' ' + name;
 														if (widthPlus > viewportWidth) {
@@ -654,10 +691,10 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 													}, 250);
 												} : () => { }}
 												onMouseLeave={objSuppliers[index+(getStart() < 0 ? 0 : getStart())].lock ? (e) => {
-													clearTimeout(plusminus);
+													clearTimeout(tooltip);
 													document.getElementById('tooltipBtn').style.animation = '';
 												} : () => { }}
-												key={index + getStart()}>
+												key={x.id}>
 												<td><div className='stickyBeforeBody'></div></td>
 												<td style={{ paddingRight: 15 }}>
 													<SwitchBtn 
@@ -667,7 +704,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 													getStart={getStart} 
 													index={index} />
 												</td>
-												<td style={{ paddingRight: 15, fontSize: '14px' }}>
+												<td style={{ paddingRight: 15, fontSize: '14px'}}>
 													<WarehouseCountryField 
 														country={x.country} 
 														podlozhka={podlozhka} 
@@ -675,7 +712,10 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 														data={objSuppliers} 
 														setData={setObjSuppliers}
 														setHideMenu={setHideMenu}
-														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														index={index + (getStart() < 0 ? 0 : getStart())}
+														setAddOneItem={setAddOneItem} 
+														carouselDrop={carouselDrop}
+														setCarouselDrop={setCarouselDrop}
 														/>
 												</td>
 												<td style={{ paddingRight: 15, color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, minWidth: 40, lineHeight: '18px',minWidth:150,position: 'relative' }}>
@@ -687,9 +727,14 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 														data={objSuppliers}
 														value={x.company}
 														setData={setObjSuppliers}
-														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														index={index + (getStart() < 0 ? 0 : getStart())}
 														setHideMenu={setHideMenu}
-														setHideArrow={setHideArrow} />
+														setHideArrow={setHideArrow} 
+														setAddOneItem={setAddOneItem} 
+														carouselDrop={carouselDrop}
+														setCarouselDrop={setCarouselDrop}
+														
+														/>
 												</td>
 												<td style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, paddingRight: 15, lineHeight: '18px', minWidth:150,position: 'relative' }}>
 													<WarehouseInputField
@@ -700,13 +745,17 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 														data={objSuppliers}
 														value={x.contact}
 														setData={setObjSuppliers}
-														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														index={index + (getStart() < 0 ? 0 : getStart())}
 														setHideMenu={setHideMenu} 
-														setHideArrow={setHideArrow}/>
+														setHideArrow={setHideArrow}
+														setAddOneItem={setAddOneItem} 
+														carouselDrop={carouselDrop}
+														setCarouselDrop={setCarouselDrop}
+														/>
 												</td>
 												<td style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`, paddingRight: 15, position: 'relative', minWidth:120 }}
-													onMouseLeave={objSuppliers[index+(getStart() < 0 ? 0 : getStart() - count)].lock ? null : tooltipOff}
-													onMouseEnter={objSuppliers[index+(getStart() < 0 ? 0 : getStart() - count)].lock ? null : tooltipOn}
+													onMouseLeave={objSuppliers[index+(getStart() < 0 ? 0 : getStart())].lock ? null : tooltipOff}
+													onMouseEnter={objSuppliers[index+(getStart() < 0 ? 0 : getStart())].lock ? null : tooltipOn}
 													>
 													<WarehouseInputField
 														type={'number'}
@@ -718,9 +767,13 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 														data={objSuppliers}
 														value={x.number}
 														setData={setObjSuppliers}
-														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														index={index + (getStart() < 0 ? 0 : getStart())}
 														setHideMenu={setHideMenu} 
-														setHideArrow={setHideArrow}/>
+														setHideArrow={setHideArrow}
+														setAddOneItem={setAddOneItem} 
+														carouselDrop={carouselDrop}
+														setCarouselDrop={setCarouselDrop}
+														/>
 												</td>
 												<td className='attributeCommentary' style={{ color: `${x.status ? 'rgba(0,0,0,0.4)' : ''}`,minWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: '18px',position:'relative' }}
 													// onMouseLeave={objSuppliers[index].lock ? null : tooltipOff}
@@ -734,9 +787,13 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 														data={objSuppliers}
 														value={x.commentary}
 														setData={setObjSuppliers}
-														index={index + (getStart() < 0 ? 0 : getStart() - count)}
+														index={index + (getStart() < 0 ? 0 : getStart())}
 														setHideMenu={setHideMenu} 
-														setHideArrow={setHideArrow}/>
+														setHideArrow={setHideArrow}
+														setAddOneItem={setAddOneItem} 
+														carouselDrop={carouselDrop}
+														setCarouselDrop={setCarouselDrop}
+														/>
 												</td>
 											</tr>
 										))}
@@ -751,7 +808,7 @@ const Suppliers = ({ translator, setObjSuppliers, objSuppliers }) => {
 									</tr>
 								</tfoot>
 							</table>
-						</MaxaScroll>
+						</ScrollBar>
 					</div>
 					<div ref={btnUp} onClick={clickScrollUp} className="btnUp">
 						<svg

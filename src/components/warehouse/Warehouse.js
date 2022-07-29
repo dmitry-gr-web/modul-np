@@ -9,6 +9,8 @@ import ProductCard from './ProductCard';
 import translator from '../data/translator';
 import {dataAttribute} from '../data/dataAttribute';
 import {dataSuppliers} from '../data/dataSuppliers';
+import { dataMovement } from '../data/dataMovement';
+import GoodsMovement from './GoodsMovement';
 const Warehouse = () => {
 
 	// const {data,error,isLoading} = useFetch('http://192.168.0.197:3005/folders', {
@@ -30,17 +32,19 @@ const Warehouse = () => {
 	const [objProduct, setObjProduct] = useState(null);
 	const [objAttribute,setObjAttribute] = useState(null);
 	const [objSuppliers,setObjSuppliers] = useState(null);
+	const [objMovement,setObjMovement] = useState(null);
 	const [getIndex, setGetIndex] = useState(0);
 	useEffect(()=> {
 		setObjAttribute(dataAttribute)
-		setObjSuppliers(dataSuppliers)
+		setObjSuppliers(dataSuppliers.map((x,i) => ({...x, id: i})))
 		setObjProduct(dataWarehouse)
+		setObjMovement(dataMovement)
 	},[])
 	const [ul, setUl] = useState([
-		{ id: 0, name: "goods", select: true },
+		{ id: 0, name: "goods", select: false },
 		{ id: 1, name: "attributes", select: false },
 		{ id: 2, name: "suppliers", select: false },
-		{ id: 3, name: "movementOfGoods", select: false },
+		{ id: 3, name: "movementOfGoods", select: true },
 	]);
 	function clickNav(i) {
 		let obj = ul.map((x, index) => {
@@ -117,7 +121,7 @@ const Warehouse = () => {
 				}
 				{ul[1].select && <AttributeBlock setObjAttribute={setObjAttribute}  objAttribute={objAttribute} translator={translator}/>}
 				{ul[2].select && <Suppliers setObjSuppliers={setObjSuppliers}  objSuppliers={objSuppliers} translator={translator}/>}
-				{ul[3].select && <div />}
+				{ul[3].select && <GoodsMovement setObjMovement={setObjMovement}  objMovement={objMovement} translator={translator}/>}
 				{toggleCard && (
 					<ProductCard
 						getIndex={getIndex}

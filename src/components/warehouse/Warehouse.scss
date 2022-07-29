@@ -716,7 +716,12 @@ body {
 			opacity: 1;
 			transition: transform 0.3s, opacity 0.3s;
 		}
-
+		.country-toggle {
+			transform: translateY(0px) !important;
+			visibility: visible;
+			opacity: 1;
+			transition: transform 0.3s, opacity 0.3s;
+		}
 		.toggle2 {
 			transform: translateY(24px);
 			visibility: visible;
@@ -724,7 +729,7 @@ body {
 			transition: transform 0.3s, opacity 0.3s;
 		}
 		.toggleUp {
-			transform: translateY(-90px);
+			transform: translateY(-70px)!important;
 			visibility: visible;
 			opacity: 1;
 			transition: transform 0.3s, opacity 0.3s;
@@ -1639,13 +1644,42 @@ body {
 				border-radius: 2px;
 			}
 		}
+		.izStatusa,
+		.vStatus,
+		.defaultGray {
+			padding: 0 2px;
+			position: relative;
+			min-width: 59px;
+			max-width: 59px;
+			height: 18px;
+			line-height: 18px;
+			text-align: left;
+			overflow: hidden;
+			text-overflow: ellipsis;
 
+			span {
+				position: absolute;
+				width: calc(100% - 4px);
+				left: 0;
+				height: 2px;
+				bottom: 1px;
+				border-radius: 2px;
+			}
+		}
+		.defaultGray {
+			text-align: right;
+		}
+		.defaultGray span {
+			background: rgba(0, 0, 0, 0.2);
+			width: calc(100% - 10px);
+		}
 		.nal-rezerv span {
 			background: rgba(0, 0, 0, 0.2);
 		}
 
 		.nal-otpr span {
 			background: rgba(0, 146, 70, 0.75);
+			// background: #91d100;
 		}
 
 		.nal-vozvrat span {

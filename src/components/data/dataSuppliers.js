@@ -1,16 +1,17 @@
 export let dataSuppliers = [
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
         number: '+38 093 514 25 46',
         iconNumber: 'icon-Vector-3',
         commentary: 'Сковородки, кастрюли',
-        select: false, lock: false
+        select: false, lock: false,
+        
     },
     {
-        status:false,
+         status:false,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -30,7 +31,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -40,7 +41,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -50,7 +51,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+        status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -60,7 +61,7 @@ export let dataSuppliers = [
         select: false, lock: true
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -70,7 +71,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -80,7 +81,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -100,7 +101,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -110,7 +111,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -120,7 +121,7 @@ export let dataSuppliers = [
         select: false, lock: true
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -130,7 +131,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -140,7 +141,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -150,7 +151,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -160,7 +161,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -170,7 +171,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -180,7 +181,7 @@ export let dataSuppliers = [
         select: false, lock: true
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -190,7 +191,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -200,7 +201,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -210,7 +211,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -220,7 +221,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -230,7 +231,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -240,7 +241,7 @@ export let dataSuppliers = [
         select: false, lock: true
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -250,7 +251,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -260,7 +261,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -270,7 +271,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -280,7 +281,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -290,7 +291,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -300,7 +301,7 @@ export let dataSuppliers = [
         select: false, lock: true
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -310,7 +311,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -320,7 +321,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -330,7 +331,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -340,7 +341,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -350,7 +351,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -360,7 +361,7 @@ export let dataSuppliers = [
         select: false, lock: true
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -370,7 +371,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -380,7 +381,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -390,7 +391,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -400,7 +401,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -410,7 +411,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -420,7 +421,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -430,7 +431,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -440,7 +441,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -450,7 +451,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -460,7 +461,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -470,7 +471,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -480,7 +481,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -490,7 +491,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -500,7 +501,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -510,7 +511,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -520,7 +521,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -530,7 +531,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -540,7 +541,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -550,7 +551,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -560,7 +561,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -570,7 +571,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -580,7 +581,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -590,7 +591,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -600,7 +601,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -610,7 +611,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -620,7 +621,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -630,7 +631,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -640,7 +641,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -650,7 +651,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -660,7 +661,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -670,7 +671,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -680,7 +681,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -690,7 +691,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -700,7 +701,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -710,7 +711,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -720,7 +721,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -730,7 +731,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -740,7 +741,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -750,7 +751,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -760,7 +761,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -770,7 +771,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -780,7 +781,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -790,7 +791,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -800,7 +801,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -810,7 +811,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -820,7 +821,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -830,7 +831,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -840,7 +841,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -850,7 +851,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -860,7 +861,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -870,7 +871,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -880,7 +881,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -890,7 +891,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -900,7 +901,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -910,7 +911,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -920,7 +921,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -930,7 +931,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -940,7 +941,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -950,7 +951,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -960,7 +961,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -970,7 +971,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -980,7 +981,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -990,7 +991,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -1000,7 +1001,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -1010,7 +1011,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -1020,7 +1021,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -1030,7 +1031,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',
@@ -1040,7 +1041,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'Мега ОПТ',
         contact: 'Романова Марианна',
@@ -1050,7 +1051,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇺🇦',
         company: 'TrendOpt',
         contact: 'Михаил Черёмуха',
@@ -1060,7 +1061,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇷🇺',
         company: 'Imperial Super Group',
         contact: 'Давыдов Мирон',
@@ -1070,7 +1071,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Интернет-магазин VlaRus',
         contact: 'Снежанна',
@@ -1080,7 +1081,7 @@ export let dataSuppliers = [
         select: false, lock: false
     },
     {
-        status:false,
+         status:true,
         country: '🇹🇷',
         company: 'Концерн Denavi',
         contact: 'Менеджер',

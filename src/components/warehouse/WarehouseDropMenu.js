@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import { FixedSizeList as List } from 'react-window';
+import ScrollBar from './ScrollBar';
 // import './range.scss';
 
 const WarehouseDropMenu = ({
@@ -22,13 +23,10 @@ const WarehouseDropMenu = ({
 	hideMenu,
 	setHideMenu,
 	setSwitchMenu,
-	// toggleSort,
 	setWidth21px,
 	width21px,
 	hideArrow,
 	adaptiveTelNum,
-	// activity,
-	// setActivity,
 	zIndex,
 }) => {
 	const [openMenu, setOpenMenu] = useState(false);
@@ -88,6 +86,9 @@ const WarehouseDropMenu = ({
 				{ id: 2, attribute: '€', select: false },
 				{ id: 3, attribute: '₴', select: false },
 				{ id: 4, attribute: '₽', select: false },
+				{ id: 5, attribute: '₽', select: false },
+				{ id: 6, attribute: '₽', select: false },
+				{ id: 7, attribute: '₽', select: false },
 			];
 		}
 		if (type === 'status') {
@@ -291,7 +292,7 @@ const WarehouseDropMenu = ({
 		if (e.target.value.length >= 1) {
 			e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
 		}
-		if (type === 'name' || type === 'attribute' || type ==='company' || type ==='contact') {
+		if (type === 'name' || type === 'attribute' || type ==='company' || type ==='contact' || type === 'employee' || type === 'goods'|| type === 'suppliers') {
 			if (e.target.value !== '') {
 				const results = objCopy.filter((x) => {
 					return x.attribute.toLowerCase().includes(e.target.value.toLowerCase());
@@ -321,7 +322,7 @@ const WarehouseDropMenu = ({
 			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
 
 	
-			if (type === 'name' || type === 'attribute' || type ==='company' || type ==='contact') {
+			if (type === 'name' || type === 'attribute' || type ==='company' || type ==='contact' || type === 'employee' || type === 'goods') {
 				setObj(objCopy); //dlya infinity scroll
 				warehouse.current.querySelector('.scrollOff')?.scrollTo({ top: 0 });
 			}
@@ -691,8 +692,8 @@ const WarehouseDropMenu = ({
 		setOpenMenu(false);
 		setPodlozhka(false);
 		setHideMenu(false);
-		setFlagSwitchMenu(false);
-		setSwitchMenu(false);
+		if(setFlagSwitchMenu)setFlagSwitchMenu(false);
+		if(setSwitchMenu)setSwitchMenu(false);
 		setVirtualClick(false);
 
 		// warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'auto';
@@ -716,7 +717,7 @@ const WarehouseDropMenu = ({
 		document.querySelectorAll('.nal-ostatok').forEach((x) => {
 			x.classList.remove('showBtn');
 		});
-		document.querySelector('.width21px').style.maxWidth = '51px';
+		if(setFlagSwitchMenu) document.querySelector('.width21px').style.maxWidth = '51px';
 	}
 	function handle(e) {
         if (warehouse.current && !warehouse.current.contains(e.target)) {
@@ -841,7 +842,7 @@ const WarehouseDropMenu = ({
 				</svg>
 			</div>
 			<span className="underline" style={adaptive && {left:'3px', width: 'calc(100% - 6px)' } || adaptiveTelNum && { width: 'calc(100% - 3px)' }}></span>
-			{(type === 'name' || type === 'attribute' ||  type ==='company' || type ==='contact') && (
+			{(type === 'name' || type === 'attribute' ||  type ==='company' || type ==='contact' || type ==='employee' || type ==='goods' || type === 'suppliers') && (
 				<div
 					className={openMenu ? `dropmenu ${adaptive ? 'toggleAdaptive' : 'toggle'}` : 'dropmenu'}
 				>
@@ -896,7 +897,7 @@ const WarehouseDropMenu = ({
 						forceVisible="x"
 						scrollbarMinSize={20}
 					>
-						{openMenu &&
+							{openMenu &&
 							obj.map((x, index) => (
 								<div
 									key={index}
@@ -918,6 +919,35 @@ const WarehouseDropMenu = ({
 								</div>
 							))}
 					</SimpleBar>
+					{/* <ScrollBar 		
+						vertical={true}
+						height={90} 
+						parentClass='warehouse-dropdown' 
+						dropdown={true}
+						hideBar={false}
+					>
+						{openMenu &&
+							obj.map((x, index) => (
+								<div
+									key={index}
+									onMouseEnter={index === 0 ? null: tooltipOn}
+									onMouseLeave={index === 0 ? null: tooltipOff}
+									className={x.select ? 'select-btn list' : 'list'}
+									onClick={(e) => clickList(x.id, e)}
+									style={type === 'status' ? { overflow: 'visible' } : {}}
+								>
+									<span
+										className={
+											index !== 0
+												? `${type === 'country' ? 'flags' : type === 'status' ? 'status' : ''}`
+												: ''
+										}
+									>
+										{translator.getTranslation('btnAll', x.attribute) ?? x.attribute}
+									</span>
+								</div>
+							))}
+					</ScrollBar> */}
 				</div>
 			)}
 			{(type === 'telOperator') && (

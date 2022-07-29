@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-const WarehouseInput = ({ objProduct,setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podlozhka, setSortActive, sortActive, translator, hideMenu, setHideMenu }) => {
+const WarehouseInput = ({ data,setFlagSwitchMenu, setSwitchMenu, setPodlozhka, podlozhka, setSortActive, sortActive, translator, hideMenu, setHideMenu }) => {
 	const [inputID, setInputID] = useState('');
 	const [activity, setActivity] = useState(false);
 	const [arrowToggle, setArrowToggle] = useState(false);
 	const [arrowActive, setArrowActive] = useState('down');
 	const [vitrualClick, setVirtualClick] = useState(false);
 	function warehouseInputOn(e) {
+		e.currentTarget.querySelector('input').style.paddingRight = '18px';
 		e.currentTarget.querySelector('input').focus();
 		e.currentTarget.querySelector('input').select();
 		setArrowToggle(true);
@@ -14,6 +15,9 @@ const WarehouseInput = ({ objProduct,setFlagSwitchMenu, setSwitchMenu, setPodloz
 	function warehouseInputOff(e) {
 		if (!podlozhka) {
 			e.currentTarget.querySelector('input').blur();
+			e.currentTarget.querySelector('input').style.paddingRight = 0;
+			if(activity) e.currentTarget.querySelector('input').style.paddingRight = '18px';
+
 			setArrowToggle(false);
 		} 
 	}
@@ -36,7 +40,7 @@ const WarehouseInput = ({ objProduct,setFlagSwitchMenu, setSwitchMenu, setPodloz
 		if (e.key === "Enter") {
 			setVirtualClick(false);
 			setHideMenu(false);
-			if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+			if((data.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
 				warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
 			}else {
 				warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
@@ -62,6 +66,7 @@ const WarehouseInput = ({ objProduct,setFlagSwitchMenu, setSwitchMenu, setPodloz
 	}, [sortActive]);
 
 	function sortClickBtn(e) {
+		// warehouse.current.querySelector('input').style.paddingRight = '18px';
 		if (arrowActive === 'down') {
 			setArrowActive('up');
 		} else if (arrowActive === 'up') {
@@ -69,7 +74,7 @@ const WarehouseInput = ({ objProduct,setFlagSwitchMenu, setSwitchMenu, setPodloz
 		}
 		setSortActive(!sortActive);
 
-		if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+		if((data.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
 			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
 		}else {
 			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
@@ -120,10 +125,11 @@ const WarehouseInput = ({ objProduct,setFlagSwitchMenu, setSwitchMenu, setPodloz
 	function clickVirtualWrapper() {
 		setPodlozhka(false);
 		setHideMenu(false);
-		setFlagSwitchMenu(false);
-		setSwitchMenu(false);
+		if(setFlagSwitchMenu)setFlagSwitchMenu(false);
+		if(setSwitchMenu)setSwitchMenu(false);
 		setVirtualClick(false);
-		if((objProduct.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
+		warehouse.current.querySelector('input').style.paddingRight = 0;
+		if((data.length) * 18 < (	warehouse.current.closest('.wrapper-scroll .scroll').offsetHeight - 75)) {
 			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'hidden';
 		}else {
 			warehouse.current.closest('.wrapper-scroll .scroll').style.overflowY = 'scroll';
@@ -143,7 +149,7 @@ const WarehouseInput = ({ objProduct,setFlagSwitchMenu, setSwitchMenu, setPodloz
 		document.querySelectorAll('.nal-ostatok').forEach((x) => {
 			x.classList.remove('showBtn');
 		});
-		document.querySelector('.width21px').style.maxWidth = '51px';
+		if(setSwitchMenu)document.querySelector('.width21px').style.maxWidth = '51px';
 	}
 	function handle(e) {
 		if (warehouse.current && !warehouse.current.contains(e.target)) {

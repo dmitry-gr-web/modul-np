@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./scroll.scss";
-export default function Scroll({parentClass,podlozhka,setHideArrow, children, draggeble, onScroll, height, style, className, horizontal = false, setT, vertical = false, hideBar = true }) {
+export default function Scroll({dropdown = false,parentClass,podlozhka,setHideArrow, children, draggeble, onScroll, height, style, className, horizontal = false, setT, vertical = false, hideBar = true }) {
     let [heightScroll, setHeightScroll] = useState(0);
     let [widthScroll, setWidthScroll] = useState(0);
     let [top, setTop] = useState(true);
@@ -94,8 +94,7 @@ export default function Scroll({parentClass,podlozhka,setHideArrow, children, dr
         };
     };
 
-
-    function showScrollbar() {
+    function showScrollbar(e) {
         if (!podlozhka) {
           if (ref.current) {
             ref.current.querySelector('.track-vertical').style.opacity = 1;
@@ -106,17 +105,16 @@ export default function Scroll({parentClass,podlozhka,setHideArrow, children, dr
     
         }
       }
-      function hideScrollbar() {
+      function hideScrollbar(e) {
         if (!podlozhka) {
           if (ref.current) {
             ref.current.querySelector('.track-vertical').style.opacity = 0;
             ref.current.querySelector('.track-horizontal').style.opacity = 0;
             if (setHideArrow) setHideArrow(false);
           }
-    
         }
-    
       }
+
     // useEffect(()=> {
     //     if((!top || height === 0 || vertical) && hideBar) {
     //         ref.current.querySelector('.scroll').style.overflowY = 'hidden'
@@ -128,11 +126,13 @@ export default function Scroll({parentClass,podlozhka,setHideArrow, children, dr
     return (
         <div className={`wrapper-scroll ` + parentClass}
             ref={ref}
+            // onMouseEnter={dropdown ? null : showScrollbar}
+            // onMouseLeave={dropdown ? null : hideScrollbar}
             onMouseEnter={showScrollbar}
             onMouseLeave={hideScrollbar}
         >
             <div
-                style={{ ...{ height: height, transition: '0.2s', overflowY: `${(ref.current?.querySelectorAll('.first-tab-body tr').length- 2) * 18 < ref.current?.offsetHeight - 75 ? 'hidden': ''}` }, ...style }}
+                style={{ ...{ height: height, transition: '0.2s', overflowY: `${(ref.current?.querySelectorAll('.first-tab-body tr').length- 2) * 18 < ref.current?.offsetHeight - 75 && dropdown === false? 'hidden': ''}` }, ...style }}
                 // style={(!top || height === 0 || vertical) && hideBar ? { display: "none" } : {}}
                 className={"scroll " + className}
                 onScroll={(e) => {

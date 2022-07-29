@@ -8,7 +8,6 @@ import _ from 'lodash';
 import WarehouseDropRange from './WarehouseDropRange';
 import WarehouseDropInput from './WarehouseDropInput';
 import { useFetch } from '../data/useFetch';
-import MaxaScroll from './MaxaScroll';
 import ScrollBar from './ScrollBar';
 
 let hover;
@@ -73,16 +72,12 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 			return () => {
 				document.removeEventListener('click', clickDocument, true);
 				document.removeEventListener('keydown', ctrlAclickShift, true);
-
-				// document.removeEventListener('keydown', clickDocument, true);
 			};
 		}
 	}, [objProduct?.length])
 	function clickDocument(e) {
 		if (refScroll.current && !refScroll.current.contains(e.target)) {
-			// clickVirtualWrapper()
 			let newobj = [...objProduct];
-		
 			newobj = newobj.map((x) => {
 				return { ...x, select: false }
 			});
@@ -92,7 +87,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	function ctrlAclickShift(e) {
 		if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
 			e.preventDefault();
-			// setSelectAll(true);
 			let newobj =  [...objProduct];
 			newobj = newobj.map((x) => {
 				if (x.lock) {
@@ -468,8 +462,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 
 	}, [start]);
 	function clickScrollUp() {
-		// rootRef.current.el.querySelector('.simplebar-content-wrapper').scrollTop = 0;
-		// rootRef.current.scrollTop = 0;
 		document.querySelector('.scroll').scrollTop = 0;
 	}
 	async function onScroll(e) {
@@ -500,7 +492,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	const [loadedLabelBlock, setLoadedLabelBlock] = useState(true);
 	useEffect(() => {
 		if (switchMenu) {
-			// requestAnimationFrame(() => {
 			clearTimeout(hover);
 			setLoadedLabelBlock(true);
 			document.querySelectorAll('.animationFrame').forEach((x) => {
@@ -527,7 +518,6 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 	const [sortActive, setSortActive] = useState(false);
 	const [width21px, setWidth21px] = useState(false);
 	const [labelForWidth, setLabelForWidth] = useState(false);
-	//adaptive scroll height dlya Valeri
 	const queryWidthTr = useRef();
 	const [dimensions, setDimensions] = useState(null);
 	useLayoutEffect(() => {
@@ -581,8 +571,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 					}}
 					ref={refScroll}
 				>
-					{/* {console.log((refScroll.current?.offsetHeight - 75))}
-					{console.log(objProduct.length)} */}
+
 					<ScrollBar
 						vertical={true}
 						horizontal={true}
@@ -592,12 +581,11 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 						podlozhka={podlozhka}
 						hideBar={((objProduct.length ) * 18 < (refScroll.current?.offsetHeight - 75)) ? true : false}
 						parentClass={'warehouse-scroll'}
-						// hideArrow={hideArrow}
+						
 					>
 
 						<table
 							tabIndex={-1}
-							// style={{ width: '100%' }}
 							className='warehouse-table'
 						>
 							<thead
@@ -858,7 +846,7 @@ const WarehouseBlock = ({ objProduct, setObjProduct, setToggleCard, setGetIndex,
 														hideMenu={hideMenu}
 														setSwitchMenu={setSwitchMenu}
 														setFlagSwitchMenu={setFlagSwitchMenu}
-														objProduct={objProduct}
+														data={objProduct}
 
 													/>
 												</div>
