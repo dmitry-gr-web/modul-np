@@ -267,7 +267,7 @@ const WarehouseInputField = ({carouselDrop,setCarouselDrop,setAddOneItem, data, 
             console.log('carousel input pusto')
         }
 	}
-    console.log(carouselDrop.carousel)
+    // console.log(carouselDrop.carousel)
 	function handle(e) {
         if (refInput.current && !refInput.current.contains(e.target)) {
 			clickVirtualWrapper()

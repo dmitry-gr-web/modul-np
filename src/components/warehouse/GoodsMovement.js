@@ -9,10 +9,41 @@ import _ from 'lodash';
 import WarehouseDropInput from './WarehouseDropInput';
 import { useFetch } from '../data/useFetch';
 import ScrollBar from './ScrollBar';
+import Calendar from './Calendar';
+// import 'react-date-ranges/dist/styles.css';
+// import 'react-date-ranges/dist/theme/default.css';
+// import { addDays, format } from 'date-fns';
+// import ru from './../data/ru';
 
 
 let hover;
 let plusminus;
+const Yoyo = React.memo(() => {
+    const [hover, setHover] = useState(false);
+    useEffect(() => {
+
+    }, [])
+    return (
+        <th colSpan={5} style={{ position: 'relative' }}>
+            <div className='colum' style={{ display: 'flex', position: 'absolute', top: 0, left: 0, width: 'calc(100% - 7px)' }}>
+                <div onMouseEnter={e => {
+                    e.target.style.width = '51px';
+                    setHover(true);
+                }}
+                    onMouseLeave={e => {
+                        setHover(false);
+                        e.target.style.width = '10px';
+                    }}
+                    style={{ height: 18, width: 10, transition: 'width 0.2s', background: 'pink' }}></div>
+                <div style={{ height: 18, width: `${hover ? 10 : 51}px`, transition: 'width 0.2s', background: 'yellow', position: 'relative' }}></div>
+                <div style={{ height: 18, width: 63, background: 'green' }}></div>
+                <div style={{ height: 18, width: 63, background: 'blue' }}></div>
+                <div style={{ height: 18, width: 63, background: 'black' }}></div>
+
+            </div>
+        </th>
+    )
+})
 const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex, translator }) => {
     const [lastIndex, setLastIndex] = useState(0);
     const [podlozhka, setPodlozhka] = useState(false);
@@ -35,7 +66,16 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
         // 		})
         // 	}
     );
-
+    // const [calendaryState,setCalendaryState] = useState({
+    //     menu: null,
+    //     stats: [{
+    //         startDate: null,
+    //         endDate: null,
+    //         key: 'selection'
+    //     }],
+    //     open: true,
+    //     select: true
+    // })
     // useEffect(()=> {
     // 	let i = 0;
     // 	document.addEventListener('contextmenu', function(e){
@@ -330,7 +370,7 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
         // let writeOff = formatNumber2(objMovement?.filter(x => !x.plusMinus).reduce((prev, curr) => {
         //     return prev + (+curr.count.replace(/\s/gmu, ''))
         // }, 0))
-       // let add = formatNumber2(objMovement?.filter(x => x.plusMinus).reduce((prev, curr) => {
+        // let add = formatNumber2(objMovement?.filter(x => x.plusMinus).reduce((prev, curr) => {
         //     return prev + (+curr.count.replace(/\s/gmu, ''))
         // }, 0))
         const result = { "true": 0, "false": 0 };
@@ -338,7 +378,7 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
             result[row.plusMinus] += (+row.count.replace(/\s/gmu, ''));
         }
         const { "true": add, "false": writeOff } = result;
- 
+
         let total = formatNumber2(objMovement?.reduce((prev, curr) => {
             return prev + (+curr.ostatok.replace(/\s/gmu, ''))
         }, 0))
@@ -533,31 +573,7 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
     //     }, 600);
     // }, []);
     const [hideArrow, setHideArrow] = useState(false);
-    const Yoyo = React.memo(() => {
-        const [hover,setHover] = useState(false);
-        useEffect(()=> {
-
-        },[])
-        return (
-            <th colSpan={5} style={{ position: 'relative' }}>
-            <div className='colum' style={{display:'flex',position: 'absolute',top:0,left:0,width:'calc(100% - 7px)'}}>
-                     <div onMouseEnter={e => 
-                    {e.target.style.width = '51px';
-                        setHover(true);
-                    }} 
-                    onMouseLeave={e => {setHover(false);
-                     e.target.style.width = '10px';
-                    }}
-                    style={{height:18,width:10, transition: 'width 0.2s', background: 'pink'}}></div>
-                     <div style={{height:18,width:`${hover ? 10 : 51}px`,transition: 'width 0.2s',  background: 'yellow',position:'relative'}}></div>
-                     <div style={{height:18,width:63, background: 'green'}}></div>
-                     <div style={{height:18,width:63, background: 'blue'}}></div>
-                     <div style={{height:18,width:63, background: 'black'}}></div>
-             
-            </div>
-         </th>
-        )
-    })
+    
     return (
         <>
             {isLoading ? <div className='loading'><Preloaded /></div> : <div className="warehouse-products">
@@ -747,23 +763,33 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
 
                                                 />
                                             </div>
-                                            <div style={{ paddingRight: '10px', minWidth: 106, zIndex: 5 }}>
-                                                {/* <WarehouseDropMenu
-                                                    setPodlozhka={setPodlozhka}
-                                                    podlozhka={podlozhka}
-                                                    type={'country'}
-                                                    objProduct={objMovement}
-                                                    setSwitchMenu={setSwitchMenu}
-                                                    switchMenu={switchMenu}
-                                                    translator={translator}
-                                                    sortActive={sortActive}
+                                            <div style={{ paddingRight: '10px', width: 101, zIndex: 5,position:'relative' }}>
+                                                <Calendar 
                                                     setSortActive={setSortActive}
-                                                    setWidth21px={setWidth21px}
-                                                    setLabelForWidth={setLabelForWidth}
-                                                    hideArrow={hideArrow}
-                                                    hideMenu={hideMenu}
+                                                    sortActive={sortActive}
+                                                    // width={'100%'}  
+                                                    onWrapper={setPodlozhka} 
+                                                    wrapper={podlozhka} 
                                                     setHideMenu={setHideMenu}
-                                                    setFlagSwitchMenu={setFlagSwitchMenu}
+                                                    hideMenu={hideMenu}
+                                                />
+                                                {/* <DateRangePicker
+                                                    onChange={item => {
+                                                        setCalendaryState({
+                                                            stats: [item.selection]
+                                                        })
+                                                        // this.props.search[this.props.keys] = format(item.selection.startDate, 'dd.MM.yyyy') + '-' + format(item.selection.endDate, 'dd.MM.yyyy')
+                                                    }}
+                                                    months={1}
+                                                    locale={ru}
+                                                    weekStartsOn={1}
+                                                    menu={calendaryState.menu}
+                                                    changeMenu={e => setCalendaryState({ menu: e })}
+                                                    minDate={addDays(new Date(), -1827)}
+                                                    maxDate={addDays(new Date(), 0)}
+                                                    direction="vertical"
+                                                    scroll={{ enabled: true }}
+                                                    ranges={calendaryState.stats}
                                                 /> */}
                                             </div>
                                             <div style={{ width: 120 }}>
@@ -787,7 +813,7 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
                                                     searchLine={searchLine}
                                                 />
                                             </div>
-                                         
+
                                             <div className="shadow-left" style={{ height: 40 }}></div>
                                         </div>
                                     </th>
@@ -850,8 +876,8 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
                                         />
 
                                     </th>
-                                    <Yoyo/>
-                                    <th style={{ position: 'relative' ,paddingRight:10}}>
+                                    <Yoyo />
+                                    <th style={{ position: 'relative', paddingRight: 10 }}>
 
                                         <WarehouseDropInput
                                             setPodlozhka={setPodlozhka}
@@ -870,8 +896,8 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
                                             objProduct={objMovement}
                                         />
                                     </th>
-                                    <th style={{ position: 'relative',paddingRight:10 }}>
-                                    <WarehouseDropMenu
+                                    <th style={{ position: 'relative', paddingRight: 10 }}>
+                                        <WarehouseDropMenu
                                             setPodlozhka={setPodlozhka}
                                             podlozhka={podlozhka}
                                             inputOn={true}
@@ -914,20 +940,20 @@ const GoodsMovement = ({ objMovement, setObjMovement, setToggleCard, setGetIndex
                                     <th colSpan={5}></th>
                                     <th className='defaultGray' style={{ paddingRight: 4 }}>
                                         - {recalc.writeOff}
-                                        <span style={{ pointerEvents: 'none' , width: 'calc(100% - 4px)'}}></span>
+                                        <span style={{ pointerEvents: 'none', width: 'calc(100% - 4px)' }}></span>
                                     </th>
                                     <th className='defaultGray' style={{ paddingRight: 4 }}>
                                         + {recalc.add}
-                                        <span style={{ pointerEvents: 'none' , width: 'calc(100% - 4px)'}}></span>
+                                        <span style={{ pointerEvents: 'none', width: 'calc(100% - 4px)' }}></span>
                                     </th>
                                     <th className='defaultGray' style={{ paddingRight: 10 }} >
                                         {recalc.total}
                                         <span style={{ pointerEvents: 'none' }}></span>
                                     </th>
-                                    <th style={{ paddingRight:10,textAlign:'right' }}>{recalc.sum}</th>
+                                    <th style={{ paddingRight: 10, textAlign: 'right' }}>{recalc.sum}</th>
                                     <th colSpan={2}></th>
 
-                                 
+
                                 </tr>
                                 <tr>
                                     <th className="shadow-vertical" colSpan={19}>

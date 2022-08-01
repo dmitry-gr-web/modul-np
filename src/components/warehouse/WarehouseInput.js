@@ -110,7 +110,7 @@ const WarehouseInput = ({ data,setFlagSwitchMenu, setSwitchMenu, setPodlozhka, p
 
 		// }
 		if (e.currentTarget.closest('.sortBtn')) {
-			tooltipBlock.style.fontSize = '12px';
+			tooltipBlock.style.fontSize = '10px';
 			tooltipBlock.innerHTML = `${translator.getTranslation('sortData', 'sortTooltip')} ↑↓`;
 			tooltipBlock.style.left = posElement.x + 'px';
 			tooltipBlock.style.top = posElement.y + 25 + 'px';

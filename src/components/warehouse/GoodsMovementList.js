@@ -183,7 +183,7 @@ const GoodsMovementList = ({
                             <div
                                 // onMouseLeave={data[index].lock ? () => { } : tooltipOff}
                                 // onMouseEnter={data[index].lock ? () => { } : tooltipOn}
-                                style={{ width: 106, paddingRight: '10px', height: 18, lineHeight: '18px' }}
+                                style={{ width: 101, paddingRight: '10px', height: 18, lineHeight: '18px' }}
                             >
                                 {dateFormat}<span style={{ fontSize: '10px', color: 'rgba(0,0,0,0.5)' }}>{timeFormat}</span>
                             </div>
